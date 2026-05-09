@@ -1,0 +1,46 @@
+@theme {
+  --color-ui-background: hsl(var(--ui-background));
+  --color-ui-foreground: hsl(var(--ui-foreground));
+  --color-ui-primary: hsl(var(--ui-primary));
+  --color-ui-primary-foreground: hsl(var(--ui-primary-foreground));
+  --color-ui-secondary: hsl(var(--ui-secondary));
+  --color-ui-secondary-foreground: hsl(var(--ui-secondary-foreground));
+  --color-ui-destructive: hsl(var(--ui-destructive));
+  --color-ui-destructive-foreground: hsl(var(--ui-destructive-foreground));
+  --color-ui-muted: hsl(var(--ui-muted));
+  --color-ui-muted-foreground: hsl(var(--ui-muted-foreground));
+  --color-ui-accent: hsl(var(--ui-accent));
+  --color-ui-accent-foreground: hsl(var(--ui-accent-foreground));
+  --color-ui-border: hsl(var(--ui-border));
+  --color-ui-input: hsl(var(--ui-input));
+  --color-ui-ring: hsl(var(--ui-ring));
+}
+
+:root {
+  --ui-background: 0 0% 100%;
+  --ui-foreground: 222.2 84% 4.9%;
+  --ui-primary: 222.2 47.4% 11.2%;
+  --ui-primary-foreground: 210 40% 98%;
+  --ui-secondary: 210 40% 96.1%;
+  --ui-secondary-foreground: 222.2 47.4% 11.2%;
+  --ui-destructive: 0 84.2% 60.2%;
+  --ui-destructive-foreground: 210 40% 98%;
+  --ui-muted: 210 40% 96.1%;
+  --ui-muted-foreground: 215.4 16.3% 46.9%;
+  --ui-accent: 210 40% 96.1%;
+  --ui-accent-foreground: 222.2 47.4% 11.2%;
+  --ui-border: 214.3 31.8% 91.4%;
+  --ui-input: 214.3 31.8% 91.4%;
+  --ui-ring: 222.2 84% 4.9%;
+  --ui-radius: 0.5rem;
+}
+
+[data-scope=toast][data-part=root] {
+  translate: var(--x) var(--y);
+  scale: var(--scale);
+  z-index: var(--z-index);
+  height: var(--height);
+  opacity: var(--opacity);
+  will-change: translate, opacity, scale;
+  transition: translate 400ms, scale 400ms, opacity 400ms, height 400ms;
+}
