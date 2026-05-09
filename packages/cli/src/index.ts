@@ -1,0 +1,18 @@
+#!/usr/bin/env node
+import { Command } from 'commander'
+
+const program = new Command()
+  .name('ui')
+  .description('Add UI components to your Solid.js project')
+  .version('0.1.0')
+
+program
+  .command('add')
+  .argument('<component>', 'Component name to add')
+  .option('-o, --output <path>', 'Output directory', './src/components/ui')
+  .action(async (component, options) => {
+    const { addComponent } = await import('./commands/add')
+    await addComponent(component, options.output)
+  })
+
+program.parse()
