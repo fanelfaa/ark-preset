@@ -1,0 +1,16 @@
+{
+  "name": "solid-ark-ui",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Solid.js component library built on Ark UI",
+  "scripts": {
+    "build": "pnpm -r run build",
+    "dev": "pnpm -r run dev",
+    "lint": "pnpm -r run lint",
+    "typecheck": "pnpm -r run typecheck"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "pnpm@9.0.0"
+}
