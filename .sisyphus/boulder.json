@@ -1,94 +1,32 @@
 {
-  "active_plan": "/home/fandi/Lab/Js/ui/.sisyphus/plans/solid-ark-ui-phase1.md",
-  "started_at": "2026-05-10T00:00:00.000Z",
+  "active_plan": "/home/fandi/Lab/Js/ui/.sisyphus/plans/component-height-standardization.md",
+  "started_at": "2026-05-10T00:44:40.652Z",
   "session_ids": [
-    "ses_1f115f9bbffeQ3AyC6OHscPwYV"
+    "ses_1f0a8150dffeRVb2rO5WSTToNs"
   ],
-  "plan_name": "solid-ark-ui-phase1",
   "session_origins": {
-    "ses_1f115f9bbffeQ3AyC6OHscPwYV": "direct"
+    "ses_1f0a8150dffeRVb2rO5WSTToNs": "direct"
   },
+  "plan_name": "component-height-standardization",
+  "agent": "atlas",
   "task_sessions": {
     "todo:1": {
       "task_key": "todo:1",
       "task_label": "1",
-      "task_title": "Root monorepo scaffold",
-      "session_id": "ses_1f1106477ffej1xjF7rPeeTEoQ",
+      "task_title": "Adjust Button component heights (button.tsx)",
+      "session_id": "ses_1f0a7de8cffehFCTbt3tNcASXr",
       "agent": "Sisyphus-Junior",
       "category": "quick",
-      "updated_at": "2026-05-09T22:51:18.443Z"
+      "updated_at": "2026-05-10T00:45:10.799Z"
     },
-    "todo:2": {
-      "task_key": "todo:2",
-      "task_label": "2",
-      "task_title": "packages/ui setup",
-      "session_id": "ses_1f10fa5feffeHs2eHDzwgPYPAz",
+    "final-wave:f1": {
+      "task_key": "final-wave:f1",
+      "task_label": "F1",
+      "task_title": "**Plan Compliance Audit** — `oracle`",
+      "session_id": "ses_1f0a4ccc7ffeb79Qn3gSKm7qva",
       "agent": "Sisyphus-Junior",
       "category": "quick",
-      "updated_at": "2026-05-09T22:52:30.828Z"
-    },
-    "todo:3": {
-      "task_key": "todo:3",
-      "task_label": "3",
-      "task_title": "Custom tv instance (createTV)",
-      "session_id": "ses_1f10e9864ffeQEU3LrzG7WB0jQ",
-      "agent": "Sisyphus-Junior",
-      "category": "quick",
-      "updated_at": "2026-05-09T22:53:05.995Z"
-    },
-    "todo:4": {
-      "task_key": "todo:4",
-      "task_label": "4",
-      "task_title": "Theme CSS (CSS custom properties)",
-      "session_id": "ses_1f10e149fffeZm6SMDEBZc5oJP",
-      "agent": "Sisyphus-Junior",
-      "category": "quick",
-      "updated_at": "2026-05-09T22:53:32.155Z"
-    },
-    "todo:5": {
-      "task_key": "todo:5",
-      "task_label": "5",
-      "task_title": "apps/docs setup",
-      "session_id": "ses_1f10dae78ffe6s3bkBVFq9OOxs",
-      "agent": "Sisyphus-Junior",
-      "category": "unspecified-high",
-      "updated_at": "2026-05-09T22:55:11.958Z"
-    },
-    "todo:6": {
-      "task_key": "todo:6",
-      "task_label": "6",
-      "task_title": "Button component",
-      "session_id": "ses_1f10c1a6cffeivXb4rniy9vSDi",
-      "agent": "Sisyphus-Junior",
-      "category": "quick",
-      "updated_at": "2026-05-09T22:56:07.379Z"
-    },
-    "todo:7": {
-      "task_key": "todo:7",
-      "task_label": "7",
-      "task_title": "Input/Field component",
-      "session_id": "ses_1f1081308ffepySshlNjqhyf2E",
-      "agent": "Sisyphus-Junior",
-      "category": "unspecified-high",
-      "updated_at": "2026-05-09T23:01:15.283Z"
-    },
-    "todo:11": {
-      "task_key": "todo:11",
-      "task_label": "11",
-      "task_title": "packages/cli setup (CLI tool)",
-      "session_id": "ses_1f1066f5cffe6133yKmnAwexEb",
-      "agent": "Sisyphus-Junior",
-      "category": "unspecified-high",
-      "updated_at": "2026-05-09T23:02:14.172Z"
-    },
-    "todo:12": {
-      "task_key": "todo:12",
-      "task_label": "12",
-      "task_title": "Component demos in apps/docs",
-      "session_id": "ses_1f105c083ffe6wmNhLNBxKcvUr",
-      "agent": "Sisyphus-Junior",
-      "category": "visual-engineering",
-      "updated_at": "2026-05-09T23:13:08.334Z"
+      "updated_at": "2026-05-10T00:48:56.329Z"
     }
   }
 }
