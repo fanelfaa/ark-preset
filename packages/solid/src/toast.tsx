@@ -1,6 +1,6 @@
 import { Toast, Toaster as ArkToaster, createToaster, type CreateToasterReturn } from '@ark-ui/solid/toast'
 import { splitProps, type Component } from 'solid-js'
-import { toastVariants } from '@ui/core'
+import { toastVariants, type ToastVariants } from '@ui/core'
 
 type ToasterProps = {
   toaster: CreateToasterReturn
@@ -12,7 +12,7 @@ const Toaster: Component<ToasterProps> = (props) => {
   return (
     <ArkToaster class={local.class} {...others}>
       {(toast) => {
-        const styles = toastVariants({ variant: (toast().type as any) || 'default' })
+        const styles = toastVariants({ variant: (toast().type as ToastVariants['variant']) || 'default' })
         return (
           <Toast.Root class={styles.root()}>
             <div class="grid gap-1">

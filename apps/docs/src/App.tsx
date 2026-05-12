@@ -1,5 +1,5 @@
 import { Component, createSignal } from 'solid-js'
-import { Button } from '@ui/solid'
+import { Button, RadioGroupIndicator } from '@ui/solid'
 import { Input } from '@ui/solid'
 import {
   DialogRoot,
@@ -270,7 +270,7 @@ const App: Component = () => {
                 toaster.create({
                   title: 'Error',
                   description: 'Something went wrong!',
-                  type: 'destructive',
+                  type: 'error',
                 })
               }
             >
