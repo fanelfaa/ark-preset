@@ -4,6 +4,8 @@
 
 | Path | Rules |
 |---|---|
+| `packages/*` | `.agents/rules/moon/**/*.md` |
+| `apps/*` | `.agents/rules/moon/**/*.md` |
 | `packages/solid/*` | `.agents/rules/solid/**/*.md` |
 | `apps/docs/*` | `.agents/rules/solid/**/*.md` |
 
