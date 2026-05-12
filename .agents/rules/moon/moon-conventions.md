@@ -31,12 +31,6 @@ moon run docs:dev
 
 Moon automatically orders dependencies. Do NOT manually run deps before `moon run` — let moon handle it.
 
-## Node Version
-
-- Defined in `.moon/toolchains.yml` under `node.version`
-- Supports semver ranges: `>=23`, `~23`, `^23`
-- Current constraint: `>=23` (Node 23+ required for vite 6)
-
 ## Common Patterns
 
 ### Adding a new project
