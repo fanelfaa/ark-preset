@@ -66,13 +66,13 @@ const App: Component = () => {
   const toaster = createToaster({ placement: 'bottom-end' })
 
   return (
-    <div class="min-h-screen bg-ui-background text-ui-foreground">
+    <div class="min-h-screen bg-background text-foreground">
       {/* Header */}
-      <header class="border-b border-ui-border bg-ui-background">
+      <header class="border-b border-border bg-background">
         <div class="mx-auto max-w-5xl px-6 py-8">
           <h1 class="text-3xl font-bold">Solid UI</h1>
-          <p class="mt-1.5 text-ui-muted-foreground">
-            Component demos for <code class="text-sm bg-ui-muted px-1.5 py-0.5 rounded">@ui/solid</code>
+          <p class="mt-1.5 text-muted-foreground">
+            Component demos for <code class="text-sm bg-muted px-1.5 py-0.5 rounded">@ui/solid</code>
           </p>
         </div>
       </header>
@@ -84,7 +84,7 @@ const App: Component = () => {
         <section id="button">
           <div class="mb-8">
             <h2 class="text-2xl font-semibold">Button</h2>
-            <p class="mt-1 text-ui-muted-foreground">
+            <p class="mt-1 text-muted-foreground">
               All 6 variants across sizes, plus disabled state.
             </p>
           </div>
@@ -92,7 +92,7 @@ const App: Component = () => {
           <div class="space-y-10">
             {/* Variants */}
             <div>
-              <h3 class="text-xs font-medium text-ui-muted-foreground mb-3 uppercase tracking-widest">
+              <h3 class="text-xs font-medium text-muted-foreground mb-3 uppercase tracking-widest">
                 Variants
               </h3>
               <div class="flex flex-wrap gap-3">
@@ -107,7 +107,7 @@ const App: Component = () => {
 
             {/* Sizes */}
             <div>
-              <h3 class="text-xs font-medium text-ui-muted-foreground mb-3 uppercase tracking-widest">
+              <h3 class="text-xs font-medium text-muted-foreground mb-3 uppercase tracking-widest">
                 Sizes (sm, md, lg, icon)
               </h3>
               <div class="flex flex-wrap items-center gap-3">
@@ -130,7 +130,7 @@ const App: Component = () => {
 
             {/* Disabled */}
             <div>
-              <h3 class="text-xs font-medium text-ui-muted-foreground mb-3 uppercase tracking-widest">
+              <h3 class="text-xs font-medium text-muted-foreground mb-3 uppercase tracking-widest">
                 Disabled
               </h3>
               <div class="flex flex-wrap gap-3">
@@ -149,7 +149,7 @@ const App: Component = () => {
         <section id="input">
           <div class="mb-8">
             <h2 class="text-2xl font-semibold">Input</h2>
-            <p class="mt-1 text-ui-muted-foreground">
+            <p class="mt-1 text-muted-foreground">
               Form field with label, description, and error state.
             </p>
           </div>
@@ -176,7 +176,7 @@ const App: Component = () => {
         <section id="dialog">
           <div class="mb-8">
             <h2 class="text-2xl font-semibold">Dialog</h2>
-            <p class="mt-1 text-ui-muted-foreground">
+            <p class="mt-1 text-muted-foreground">
               Modal dialog with backdrop, header, body, and footer.
             </p>
           </div>
@@ -195,7 +195,7 @@ const App: Component = () => {
                   Are you sure you want to proceed? This action cannot be undone.
                 </DialogDescription>
               </DialogHeader>
-              <div class="py-4 text-sm text-ui-foreground">
+              <div class="py-4 text-sm text-foreground">
                 <p>
                   This is the dialog body. You can place any content here —
                   form fields, additional info, or custom layouts.
@@ -217,7 +217,7 @@ const App: Component = () => {
         <section id="select">
           <div class="mb-8">
             <h2 class="text-2xl font-semibold">Select</h2>
-            <p class="mt-1 text-ui-muted-foreground">
+            <p class="mt-1 text-muted-foreground">
               Dropdown select with collection API — pick a framework.
             </p>
           </div>
@@ -237,8 +237,8 @@ const App: Component = () => {
               <SelectContent items={frameworks.items} />
             </SelectRoot>
             {selectedValue().length > 0 && (
-              <p class="mt-2 text-xs text-ui-muted-foreground">
-                Selected: <span class="font-medium text-ui-foreground">{selectedValue()[0]}</span>
+              <p class="mt-2 text-xs text-muted-foreground">
+                Selected: <span class="font-medium text-foreground">{selectedValue()[0]}</span>
               </p>
             )}
           </div>
@@ -248,7 +248,7 @@ const App: Component = () => {
         <section id="toast">
           <div class="mb-8">
             <h2 class="text-2xl font-semibold">Toast</h2>
-            <p class="mt-1 text-ui-muted-foreground">
+            <p class="mt-1 text-muted-foreground">
               Click a button to trigger a notification.
             </p>
           </div>
@@ -308,7 +308,7 @@ const App: Component = () => {
         <section id="switch">
           <div class="mb-8">
             <h2 class="text-2xl font-semibold">Switch</h2>
-            <p class="mt-1 text-ui-muted-foreground">
+            <p class="mt-1 text-muted-foreground">
               Toggle control with label and disabled state.
             </p>
           </div>
@@ -316,7 +316,7 @@ const App: Component = () => {
           <div class="space-y-6">
             {/* Basic */}
             <div>
-              <h3 class="text-xs font-medium text-ui-muted-foreground mb-3 uppercase tracking-widest">
+              <h3 class="text-xs font-medium text-muted-foreground mb-3 uppercase tracking-widest">
                 Basic
               </h3>
               <Switch />
@@ -324,7 +324,7 @@ const App: Component = () => {
 
             {/* With Label */}
             <div>
-              <h3 class="text-xs font-medium text-ui-muted-foreground mb-3 uppercase tracking-widest">
+              <h3 class="text-xs font-medium text-muted-foreground mb-3 uppercase tracking-widest">
                 With Label
               </h3>
               <Switch>
@@ -334,7 +334,7 @@ const App: Component = () => {
 
             {/* Default Checked */}
             <div>
-              <h3 class="text-xs font-medium text-ui-muted-foreground mb-3 uppercase tracking-widest">
+              <h3 class="text-xs font-medium text-muted-foreground mb-3 uppercase tracking-widest">
                 Default Checked
               </h3>
               <Switch defaultChecked>
@@ -344,7 +344,7 @@ const App: Component = () => {
 
             {/* Disabled */}
             <div>
-              <h3 class="text-xs font-medium text-ui-muted-foreground mb-3 uppercase tracking-widest">
+              <h3 class="text-xs font-medium text-muted-foreground mb-3 uppercase tracking-widest">
                 Disabled
               </h3>
               <div class="flex items-start gap-6">
@@ -363,7 +363,7 @@ const App: Component = () => {
         <section id="checkbox">
           <div class="mb-8">
             <h2 class="text-2xl font-semibold">Checkbox</h2>
-            <p class="mt-1 text-ui-muted-foreground">
+            <p class="mt-1 text-muted-foreground">
               Checkbox with label, disabled, and indeterminate state.
             </p>
           </div>
@@ -371,7 +371,7 @@ const App: Component = () => {
           <div class="space-y-6">
             {/* Basic */}
             <div>
-              <h3 class="text-xs font-medium text-ui-muted-foreground mb-3 uppercase tracking-widest">
+              <h3 class="text-xs font-medium text-muted-foreground mb-3 uppercase tracking-widest">
                 Basic
               </h3>
               <Checkbox />
@@ -379,7 +379,7 @@ const App: Component = () => {
 
             {/* With Label */}
             <div>
-              <h3 class="text-xs font-medium text-ui-muted-foreground mb-3 uppercase tracking-widest">
+              <h3 class="text-xs font-medium text-muted-foreground mb-3 uppercase tracking-widest">
                 With Label
               </h3>
               <Checkbox>
@@ -389,7 +389,7 @@ const App: Component = () => {
 
             {/* Default Checked */}
             <div>
-              <h3 class="text-xs font-medium text-ui-muted-foreground mb-3 uppercase tracking-widest">
+              <h3 class="text-xs font-medium text-muted-foreground mb-3 uppercase tracking-widest">
                 Default Checked
               </h3>
               <Checkbox defaultChecked>
@@ -399,7 +399,7 @@ const App: Component = () => {
 
             {/* Disabled */}
             <div>
-              <h3 class="text-xs font-medium text-ui-muted-foreground mb-3 uppercase tracking-widest">
+              <h3 class="text-xs font-medium text-muted-foreground mb-3 uppercase tracking-widest">
                 Disabled
               </h3>
               <div class="flex items-start gap-6">
@@ -418,7 +418,7 @@ const App: Component = () => {
         <section id="tabs">
           <div class="mb-8">
             <h2 class="text-2xl font-semibold">Tabs</h2>
-            <p class="mt-1 text-ui-muted-foreground">
+            <p class="mt-1 text-muted-foreground">
               Tabbed interface with animated indicator.
             </p>
           </div>
@@ -432,33 +432,33 @@ const App: Component = () => {
                 <TabsTrigger value="faq">FAQ</TabsTrigger>
               </TabsList>
               <TabsContent value="overview">
-                <div class="rounded-lg border border-ui-border p-6">
+                <div class="rounded-lg border border-border p-6">
                   <h3 class="text-lg font-medium mb-2">Overview</h3>
-                  <p class="text-sm text-ui-muted-foreground">
+                  <p class="text-sm text-muted-foreground">
                     This is the overview tab content. It contains a brief introduction to the product.
                   </p>
                 </div>
               </TabsContent>
               <TabsContent value="features">
-                <div class="rounded-lg border border-ui-border p-6">
+                <div class="rounded-lg border border-border p-6">
                   <h3 class="text-lg font-medium mb-2">Features</h3>
-                  <p class="text-sm text-ui-muted-foreground">
+                  <p class="text-sm text-muted-foreground">
                     This is the features tab content. It highlights the key capabilities of the product.
                   </p>
                 </div>
               </TabsContent>
               <TabsContent value="pricing">
-                <div class="rounded-lg border border-ui-border p-6">
+                <div class="rounded-lg border border-border p-6">
                   <h3 class="text-lg font-medium mb-2">Pricing</h3>
-                  <p class="text-sm text-ui-muted-foreground">
+                  <p class="text-sm text-muted-foreground">
                     This is the pricing tab content. It shows the available plans and pricing options.
                   </p>
                 </div>
               </TabsContent>
               <TabsContent value="faq">
-                <div class="rounded-lg border border-ui-border p-6">
+                <div class="rounded-lg border border-border p-6">
                   <h3 class="text-lg font-medium mb-2">FAQ</h3>
-                  <p class="text-sm text-ui-muted-foreground">
+                  <p class="text-sm text-muted-foreground">
                     This is the FAQ tab content. It answers common questions about the product.
                   </p>
                 </div>
@@ -471,7 +471,7 @@ const App: Component = () => {
         <section id="accordion">
           <div class="mb-8">
             <h2 class="text-2xl font-semibold">Accordion</h2>
-            <p class="mt-1 text-ui-muted-foreground">
+            <p class="mt-1 text-muted-foreground">
               Expandable sections with animated open/close.
             </p>
           </div>
@@ -498,7 +498,7 @@ const App: Component = () => {
                   </AccordionItemIndicator>
                 </AccordionItemTrigger>
                 <AccordionItemContent>
-                  <div class="pb-4 text-sm text-ui-foreground">
+                  <div class="pb-4 text-sm text-foreground">
                     Ark UI is a headless component library for building accessible web apps with any framework.
                   </div>
                 </AccordionItemContent>
@@ -523,7 +523,7 @@ const App: Component = () => {
                   </AccordionItemIndicator>
                 </AccordionItemTrigger>
                 <AccordionItemContent>
-                  <div class="pb-4 text-sm text-ui-foreground">
+                  <div class="pb-4 text-sm text-foreground">
                     Install the package and import the components you need. No additional setup required.
                   </div>
                 </AccordionItemContent>
@@ -548,7 +548,7 @@ const App: Component = () => {
                   </AccordionItemIndicator>
                 </AccordionItemTrigger>
                 <AccordionItemContent>
-                  <div class="pb-4 text-sm text-ui-foreground">
+                  <div class="pb-4 text-sm text-foreground">
                     Ark UI is maintained by the Chakra UI team and a growing community of contributors.
                   </div>
                 </AccordionItemContent>
@@ -573,7 +573,7 @@ const App: Component = () => {
                   </AccordionItemIndicator>
                 </AccordionItemTrigger>
                 <AccordionItemContent>
-                  <div class="pb-4 text-sm text-ui-foreground">
+                  <div class="pb-4 text-sm text-foreground">
                     This content is not accessible.
                   </div>
                 </AccordionItemContent>
@@ -586,14 +586,14 @@ const App: Component = () => {
         <section id="radio-group">
           <div class="mb-8">
             <h2 class="text-2xl font-semibold">RadioGroup</h2>
-            <p class="mt-1 text-ui-muted-foreground">
+            <p class="mt-1 text-muted-foreground">
               Radio button group for single selection.
             </p>
           </div>
 
           <div class="space-y-8">
             <div>
-              <h3 class="text-xs font-medium text-ui-muted-foreground mb-3 uppercase tracking-widest">
+              <h3 class="text-xs font-medium text-muted-foreground mb-3 uppercase tracking-widest">
                 Basic
               </h3>
               <RadioGroup defaultValue="react">
@@ -617,7 +617,7 @@ const App: Component = () => {
             </div>
 
             <div>
-              <h3 class="text-xs font-medium text-ui-muted-foreground mb-3 uppercase tracking-widest">
+              <h3 class="text-xs font-medium text-muted-foreground mb-3 uppercase tracking-widest">
                 Disabled
               </h3>
               <RadioGroup defaultValue="react" disabled>
@@ -641,19 +641,19 @@ const App: Component = () => {
         <section id="tooltip">
           <div class="mb-8">
             <h2 class="text-2xl font-semibold">Tooltip</h2>
-            <p class="mt-1 text-ui-muted-foreground">
+            <p class="mt-1 text-muted-foreground">
               Floating content on hover with positioning.
             </p>
           </div>
 
           <div class="flex flex-wrap gap-4">
             <Tooltip>
-              <TooltipTrigger class="inline-flex items-center justify-center rounded-md border border-ui-input bg-transparent px-4 py-2 text-sm font-medium text-ui-foreground ring-offset-ui-background transition-colors hover:bg-ui-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ui-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
+              <TooltipTrigger class="inline-flex items-center justify-center rounded-md border border-input bg-transparent px-4 py-2 text-sm font-medium text-foreground ring-offset-background transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
                 Hover Me
               </TooltipTrigger>
               <Portal>
                 <TooltipPositioner>
-                  <TooltipContent class="z-50 overflow-hidden rounded-md border border-ui-border bg-ui-popover px-3 py-1.5 text-xs text-ui-popover-foreground shadow-md">
+                  <TooltipContent class="z-50 overflow-hidden rounded-md border border-border bg-popover px-3 py-1.5 text-xs text-popover-foreground shadow-md">
                     Simple tooltip
                   </TooltipContent>
                 </TooltipPositioner>
@@ -661,12 +661,12 @@ const App: Component = () => {
             </Tooltip>
 
             <Tooltip positioning={{ placement: 'top' }}>
-              <TooltipTrigger class="inline-flex items-center justify-center rounded-md border border-ui-input bg-transparent px-4 py-2 text-sm font-medium text-ui-foreground ring-offset-ui-background transition-colors hover:bg-ui-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ui-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
+              <TooltipTrigger class="inline-flex items-center justify-center rounded-md border border-input bg-transparent px-4 py-2 text-sm font-medium text-foreground ring-offset-background transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
                 Top Tooltip
               </TooltipTrigger>
               <Portal>
                 <TooltipPositioner>
-                  <TooltipContent class="z-50 overflow-hidden rounded-md border border-ui-border bg-ui-popover px-3 py-1.5 text-xs text-ui-popover-foreground shadow-md">
+                  <TooltipContent class="z-50 overflow-hidden rounded-md border border-border bg-popover px-3 py-1.5 text-xs text-popover-foreground shadow-md">
                     Tooltip on top
                   </TooltipContent>
                 </TooltipPositioner>
@@ -674,12 +674,12 @@ const App: Component = () => {
             </Tooltip>
 
             <Tooltip closeDelay={0} openDelay={0}>
-              <TooltipTrigger class="inline-flex items-center justify-center rounded-md border border-ui-input bg-transparent px-4 py-2 text-sm font-medium text-ui-foreground ring-offset-ui-background transition-colors hover:bg-ui-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ui-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
+              <TooltipTrigger class="inline-flex items-center justify-center rounded-md border border-input bg-transparent px-4 py-2 text-sm font-medium text-foreground ring-offset-background transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
                 Fast Tooltip
               </TooltipTrigger>
               <Portal>
                 <TooltipPositioner>
-                  <TooltipContent class="z-50 overflow-hidden rounded-md border border-ui-border bg-ui-popover px-3 py-1.5 text-xs text-ui-popover-foreground shadow-md">
+                  <TooltipContent class="z-50 overflow-hidden rounded-md border border-border bg-popover px-3 py-1.5 text-xs text-popover-foreground shadow-md">
                     No delay
                   </TooltipContent>
                 </TooltipPositioner>
@@ -692,7 +692,7 @@ const App: Component = () => {
         <section id="date-picker">
           <div class="mb-8">
             <h2 class="text-2xl font-semibold">DatePicker</h2>
-            <p class="mt-1 text-ui-muted-foreground">
+            <p class="mt-1 text-muted-foreground">
               Calendar date picker with day, month, and year views.
             </p>
           </div>

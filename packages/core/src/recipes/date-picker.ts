@@ -6,20 +6,20 @@ export const datePickerVariants = tv({
     root: 'w-full',
     control: "inline-flex items-center gap-1",
     input: [
-      "h-9 w-full rounded-md border border-border bg-ui-background px-3 py-1 text-sm shadow-sm",
+      "h-9 w-full rounded-md border border-border bg-background px-3 py-1 text-sm shadow-sm",
       "transition-shadow placeholder:text-muted-foreground",
       "focus-visible:outline-none focus-visible:ring-[1.5px] focus-visible:ring-ring",
       "disabled:cursor-not-allowed disabled:opacity-50",
     ],
     trigger: [
-      "flex min-h-9 min-w-9 items-center justify-center rounded-md border border-border bg-ui-background",
+      "flex min-h-9 min-w-9 items-center justify-center rounded-md border border-border bg-background",
       "transition-[box-shadow,background-color] hover:bg-accent/50",
       "focus-visible:outline-none focus-visible:ring-[1.5px] focus-visible:ring-ring",
       "disabled:cursor-not-allowed disabled:opacity-50",
       "[&>svg]:size-4",
     ],
     content: [
-      "z-50 rounded-md border bg-ui-background p-3 text-popover-foreground shadow-md outline-none",
+      "z-50 rounded-md border bg-background p-3 text-popover-foreground shadow-md outline-none",
       "data-[state=open]:animate-in data-[state=closed]:animate-out",
       "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
       "data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
@@ -55,8 +55,8 @@ export const datePickerVariants = tv({
   variants: {
     error: {
       true: {
-        control: 'border-ui-destructive focus-within:ring-ui-destructive',
-        label: 'text-ui-destructive',
+        control: 'border-destructive focus-within:ring-destructive',
+        label: 'text-destructive',
       },
     },
   },

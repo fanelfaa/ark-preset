@@ -1,21 +1,131 @@
 {
-  "active_plan": "/home/fandi/Lab/Js/ui/.sisyphus/plans/datepicker-month-year-views.md",
-  "started_at": "2026-05-12T01:30:01.577Z",
+  "active_plan": "/home/fandi/Lab/Js/ui/.sisyphus/plans/theme-css-remove-ui-prefix.md",
+  "started_at": "2026-05-12T03:13:20.440Z",
   "session_ids": [
-    "ses_1e631d828ffe4KKUFAGSYM3Nzr"
+    "ses_1e5da92e8ffeePG0CwxURulRCY"
   ],
-  "plan_name": "datepicker-month-year-views",
   "session_origins": {
-    "ses_1e631d828ffe4KKUFAGSYM3Nzr": "direct"
+    "ses_1e5da92e8ffeePG0CwxURulRCY": "direct"
   },
+  "plan_name": "theme-css-remove-ui-prefix",
+  "agent": "atlas",
   "task_sessions": {
     "todo:1": {
       "task_key": "todo:1",
       "task_label": "1",
-      "task_title": "Update DatePickerContent with shared ViewControl + 3 view blocks",
-      "session_id": "ses_1e62f88ddffernvfTI6o7X1okY",
-      "agent": "librarian",
-      "updated_at": "2026-05-12T02:01:42.867Z"
+      "task_title": "Update `packages/core/src/theme.css`",
+      "session_id": "ses_1e5d1515effe06w516g936pMkA",
+      "agent": "Sisyphus-Junior",
+      "category": "quick",
+      "updated_at": "2026-05-12T03:16:29.193Z"
+    },
+    "todo:4": {
+      "task_key": "todo:4",
+      "task_label": "4",
+      "task_title": "Update `packages/core/src/recipes/input.ts`",
+      "session_id": "ses_1e5cfdb4dffeEznqaxPrevg3mH",
+      "agent": "Sisyphus-Junior",
+      "category": "quick",
+      "updated_at": "2026-05-12T03:17:22.598Z"
+    },
+    "todo:5": {
+      "task_key": "todo:5",
+      "task_label": "5",
+      "task_title": "Update `packages/core/src/recipes/dialog.ts`",
+      "session_id": "ses_1e5cf6829ffeNBCNVdYiVkvbaz",
+      "agent": "Sisyphus-Junior",
+      "category": "quick",
+      "updated_at": "2026-05-12T03:18:08.187Z"
+    },
+    "todo:6": {
+      "task_key": "todo:6",
+      "task_label": "6",
+      "task_title": "Update `packages/core/src/recipes/select.ts`",
+      "session_id": "ses_1e5cea9ffffejpmvmhVm3hZvD3",
+      "agent": "Sisyphus-Junior",
+      "category": "quick",
+      "updated_at": "2026-05-12T03:19:08.972Z"
+    },
+    "todo:7": {
+      "task_key": "todo:7",
+      "task_label": "7",
+      "task_title": "Update `packages/core/src/recipes/accordion.ts`",
+      "session_id": "ses_1e5cdc0fbffeawco6nJabZQ4EJ",
+      "agent": "Sisyphus-Junior",
+      "category": "quick",
+      "updated_at": "2026-05-12T03:19:51.426Z"
+    },
+    "todo:8": {
+      "task_key": "todo:8",
+      "task_label": "8",
+      "task_title": "Update `packages/core/src/recipes/checkbox.ts`",
+      "session_id": "ses_1e5cd1da1ffeJqRhcseGZePvtf",
+      "agent": "Sisyphus-Junior",
+      "category": "quick",
+      "updated_at": "2026-05-12T03:20:47.397Z"
+    },
+    "todo:9": {
+      "task_key": "todo:9",
+      "task_label": "9",
+      "task_title": "Update `packages/core/src/recipes/radio-group.ts`",
+      "session_id": "ses_1e5cc35d7ffeejPp7CW9QXA5en",
+      "agent": "Sisyphus-Junior",
+      "category": "quick",
+      "updated_at": "2026-05-12T03:21:59.761Z"
+    },
+    "todo:10": {
+      "task_key": "todo:10",
+      "task_label": "10",
+      "task_title": "Update `packages/core/src/recipes/switch.ts`",
+      "session_id": "ses_1e5cb1190ffe0yovXx78vKHKPD",
+      "agent": "Sisyphus-Junior",
+      "category": "quick",
+      "updated_at": "2026-05-12T03:23:05.419Z"
+    },
+    "todo:11": {
+      "task_key": "todo:11",
+      "task_label": "11",
+      "task_title": "Update `packages/core/src/recipes/tabs.ts`",
+      "session_id": "ses_1e5ca2bddffe6VaXEXZjnhuX12",
+      "agent": "Sisyphus-Junior",
+      "category": "quick",
+      "updated_at": "2026-05-12T03:23:59.337Z"
+    },
+    "todo:12": {
+      "task_key": "todo:12",
+      "task_label": "12",
+      "task_title": "Update `packages/core/src/recipes/toast.ts`",
+      "session_id": "ses_1e5c947f7ffe6u2RbrKRCCxC0S",
+      "agent": "Sisyphus-Junior",
+      "category": "quick",
+      "updated_at": "2026-05-12T03:24:49.580Z"
+    },
+    "todo:13": {
+      "task_key": "todo:13",
+      "task_label": "13",
+      "task_title": "Update `packages/core/src/recipes/tooltip.ts`",
+      "session_id": "ses_1e5c876a6ffeqAx9MypLcPhy49",
+      "agent": "Sisyphus-Junior",
+      "category": "quick",
+      "updated_at": "2026-05-12T03:25:43.216Z"
+    },
+    "todo:14": {
+      "task_key": "todo:14",
+      "task_label": "14",
+      "task_title": "Update `packages/core/src/recipes/date-picker.ts`",
+      "session_id": "ses_1e5c79ceeffewn8XoPumPifacQ",
+      "agent": "Sisyphus-Junior",
+      "category": "quick",
+      "updated_at": "2026-05-12T03:26:24.874Z"
+    },
+    "todo:15": {
+      "task_key": "todo:15",
+      "task_label": "15",
+      "task_title": "Update `apps/docs/src/App.tsx`",
+      "session_id": "ses_1e5c72097ffejQKzrBO1ETCGes",
+      "agent": "Sisyphus-Junior",
+      "category": "quick",
+      "updated_at": "2026-05-12T03:28:00.057Z"
     }
   }
 }
