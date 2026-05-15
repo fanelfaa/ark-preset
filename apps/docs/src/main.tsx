@@ -1,5 +1,18 @@
+/* @refresh reload */
 import { render } from 'solid-js/web'
-import App from './App'
+import { RouterProvider, createRouter } from '@tanstack/solid-router'
+import { routeTree } from './routeTree.gen'
+
+const router = createRouter({ routeTree })
+
+declare module '@tanstack/solid-router' {
+  interface Register {
+    router: typeof router
+  }
+}
+
 import './index.css'
 
-render(() => <App />, document.getElementById('root')!)
+const rootElement = document.getElementById('root')!
+
+render(() => <RouterProvider router={router} />, rootElement)

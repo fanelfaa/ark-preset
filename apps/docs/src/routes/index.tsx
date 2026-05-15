@@ -1,3 +1,4 @@
+import { createFileRoute } from '@tanstack/solid-router'
 import { Component, createSignal, Index } from 'solid-js'
 import { Portal } from 'solid-js/web'
 import {
@@ -1104,4 +1105,4 @@ const App: Component = () => {
   )
 }
 
-export default App
+export const Route = createFileRoute('/')({ component: App })
