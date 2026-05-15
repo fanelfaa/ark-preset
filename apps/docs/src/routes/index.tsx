@@ -120,10 +120,17 @@ const App: Component = () => {
       {/* Header */}
       <header class="border-b border-border bg-background">
         <div class="mx-auto max-w-5xl px-6 py-8">
-          <h1 class="text-3xl font-bold">Solid UI</h1>
-          <p class="mt-1.5 text-muted-foreground">
-            Component demos for <code class="text-sm bg-muted px-1.5 py-0.5 rounded">@ui/solid</code>
-          </p>
+          <div class="flex items-center justify-between">
+            <div>
+              <h1 class="text-3xl font-bold">Solid UI</h1>
+              <p class="mt-1.5 text-muted-foreground">
+                Component demos for <code class="text-sm bg-muted px-1.5 py-0.5 rounded">@ui/solid</code>
+              </p>
+            </div>
+            <nav class="flex items-center gap-4 text-sm">
+              <a href="/docs" class="text-muted-foreground hover:text-foreground transition-colors">Docs</a>
+            </nav>
+          </div>
         </div>
       </header>
 
