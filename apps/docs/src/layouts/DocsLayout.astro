@@ -1,5 +1,34 @@
 ---
 import "../styles/global.css";
+
+const sidebarLinks = [
+	{ href: "/docs/components/accordion", label: "Accordion" },
+	{ href: "/docs/components/button", label: "Button" },
+	{ href: "/docs/components/checkbox", label: "Checkbox" },
+	{ href: "/docs/components/collapsible", label: "Collapsible" },
+	{ href: "/docs/components/date-picker", label: "Date Picker" },
+	{ href: "/docs/components/dialog", label: "Dialog" },
+	{ href: "/docs/components/drawer", label: "Drawer" },
+	{ href: "/docs/components/input", label: "Input" },
+	{ href: "/docs/components/menu", label: "Menu" },
+	{ href: "/docs/components/number-input", label: "Number Input" },
+	{ href: "/docs/components/popover", label: "Popover" },
+	{ href: "/docs/components/radio-group", label: "Radio Group" },
+	{ href: "/docs/components/select", label: "Select" },
+	{ href: "/docs/components/slider", label: "Slider" },
+	{ href: "/docs/components/switch", label: "Switch" },
+	{ href: "/docs/components/tabs", label: "Tabs" },
+	{ href: "/docs/components/toast", label: "Toast" },
+	{ href: "/docs/components/tooltip", label: "Tooltip" },
+];
+
+function getLinkClass(href: string, currentPath: string): string {
+	const isActive = currentPath === href;
+	const base = "block rounded-md px-3 py-1.5 text-sm transition-colors";
+	return isActive
+		? `${base} text-foreground font-medium bg-muted/80`
+		: `${base} text-muted-foreground hover:text-foreground hover:bg-muted`;
+}
 ---
 
 <!doctype html>
@@ -51,132 +80,21 @@ import "../styles/global.css";
 							UI
 						</h4>
 						<ul class="space-y-0.5">
-							<li>
-								<a
-									href="/docs/components/accordion"
-									class="block rounded-md px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-									>Accordion</a
-								>
-							</li>
-							<li>
-								<a
-									href="/docs/components/button"
-									class="block rounded-md px-3 py-1.5 text-sm text-foreground font-medium bg-muted/60"
-									>Button</a
-								>
-							</li>
-							<li>
-								<a
-									href="/docs/components/checkbox"
-									class="block rounded-md px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-									>Checkbox</a
-								>
-							</li>
-							<li>
-								<a
-									href="/docs/components/collapsible"
-									class="block rounded-md px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-									>Collapsible</a
-								>
-							</li>
-							<li>
-								<a
-									href="/docs/components/date-picker"
-									class="block rounded-md px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-									>Date Picker</a
-								>
-							</li>
-							<li>
-								<a
-									href="/docs/components/dialog"
-									class="block rounded-md px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-									>Dialog</a
-								>
-							</li>
-							<li>
-								<a
-									href="/docs/components/drawer"
-									class="block rounded-md px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-									>Drawer</a
-								>
-							</li>
-							<li>
-								<a
-									href="/docs/components/input"
-									class="block rounded-md px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-									>Input</a
-								>
-							</li>
-							<li>
-								<a
-									href="/docs/components/menu"
-									class="block rounded-md px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-									>Menu</a
-								>
-							</li>
-							<li>
-								<a
-									href="/docs/components/number-input"
-									class="block rounded-md px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-									>Number Input</a
-								>
-							</li>
-							<li>
-								<a
-									href="/docs/components/popover"
-									class="block rounded-md px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-									>Popover</a
-								>
-							</li>
-							<li>
-								<a
-									href="/docs/components/radio-group"
-									class="block rounded-md px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-									>Radio Group</a
-								>
-							</li>
-							<li>
-								<a
-									href="/docs/components/select"
-									class="block rounded-md px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-									>Select</a
-								>
-							</li>
-							<li>
-								<a
-									href="/docs/components/slider"
-									class="block rounded-md px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-									>Slider</a
-								>
-							</li>
-							<li>
-								<a
-									href="/docs/components/switch"
-									class="block rounded-md px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-									>Switch</a
-								>
-							</li>
-							<li>
-								<a
-									href="/docs/components/tabs"
-									class="block rounded-md px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-									>Tabs</a
-								>
-							</li>
-							<li>
-								<a
-									href="/docs/components/toast"
-									class="block rounded-md px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-									>Toast</a
-								>
-							</li>
-							<li>
-								<a
-									href="/docs/components/tooltip"
-									class="block rounded-md px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-									>Tooltip</a
-								>
-							</li>
+							{
+								sidebarLinks.map((link) => (
+									<li>
+										<a
+											href={link.href}
+											class={getLinkClass(
+												link.href,
+												Astro.url.pathname,
+											)}
+										>
+											{link.label}
+										</a>
+									</li>
+								))
+							}
 						</ul>
 					</div>
 				</nav>
