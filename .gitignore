@@ -9,7 +9,6 @@ dist
 .env.*.local
 *.log
 .DS_Store
-.vscode
 .idea
 coverage
 *.tsbuildinfo
