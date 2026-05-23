@@ -5,30 +5,57 @@ category: Form & Input
 updatedDate: 2026-05-18
 ---
 
-import SelectBasicDemo from '@components/select-demo/SelectBasicDemo.tsx'
+import SelectBasicDemo from "@components/select-demo/SelectBasicDemo.tsx";
 
 # Select
 
 A dropdown component that allows users to select one or more options from a list.
 
-<a href="https://ark-ui.com/docs/components/select" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors">
-  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+<a
+  href="https://ark-ui.com/docs/components/select"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="inline-flex items-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="14"
+    height="14"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+    <polyline points="15 3 21 3 21 9" />
+    <line x1="10" x2="21" y1="14" y2="3" />
+  </svg>
   Docs
 </a>
 
 <SelectBasicDemo client:load />
 
 ```tsx
-import { Select, SelectLabel, SelectControl, SelectTrigger, SelectValueText, SelectContent, createListCollection } from "~/components/select"
+import {
+  Select,
+  SelectLabel,
+  SelectControl,
+  SelectTrigger,
+  SelectValueText,
+  SelectContent,
+  createListCollection,
+} from "~/components/select";
 
 const frameworks = createListCollection({
   items: [
-    { label: 'React', value: 'react' },
-    { label: 'Solid.js', value: 'solid' },
-    { label: 'Vue', value: 'vue' },
-    { label: 'Svelte', value: 'svelte' },
+    { label: "React", value: "react" },
+    { label: "Solid.js", value: "solid" },
+    { label: "Vue", value: "vue" },
+    { label: "Svelte", value: "svelte" },
   ],
-})
+});
 
 export function SelectDemo() {
   return (
@@ -41,19 +68,22 @@ export function SelectDemo() {
       </SelectControl>
       <SelectContent items={frameworks.items} />
     </Select>
-  )
+  );
 }
 ```
 
 ## Installation
 
 ### CLI
+
 Run the following command to add the component to your project:
+
 ```bash
 npx solidui-cli@latest add select
 ```
 
 ### Manual
+
 <div class="space-y-3">
 Install the dependency:
 ```bash
@@ -67,30 +97,32 @@ import { tv, type VariantProps } from 'tailwind-variants'
 
 export const selectVariants = tv({
   slots: {
-    root: 'grid gap-1.5 w-full',
-    label: 'text-sm font-medium text-foreground',
-    control: 'flex h-8 w-full items-center justify-between rounded-md border border-input bg-background px-2.5 py-1.5 text-sm ring-offset-background focus-within:outline-none focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2',
-    trigger: 'flex flex-1 items-center justify-start size-4 [&[data-state=open]>svg]:rotate-180',
-    valueText: 'text-sm data-[placeholder-shown]:text-muted-foreground',
-    indicator: 'size-4 transition-transform text-muted-foreground',
-    positioner: 'z-50',
-    content: 'z-50 min-w-[8rem] max-h-60 overflow-y-auto rounded-md border border-border bg-background p-1 shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
-    item: 'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground',
-    itemText: 'flex-1',
-    itemIndicator: 'absolute right-2 flex size-4 items-center justify-center',
+    root: "grid gap-1.5 w-full",
+    label: "text-sm font-medium text-foreground",
+    control:
+      "flex h-8 w-full items-center justify-between rounded-md border border-input bg-background px-2.5 py-1.5 text-sm ring-offset-background focus-within:outline-none focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2",
+    trigger: "flex flex-1 items-center justify-start size-4 [&[data-state=open]>svg]:rotate-180",
+    valueText: "text-sm data-[placeholder-shown]:text-muted-foreground",
+    indicator: "size-4 transition-transform text-muted-foreground",
+    positioner: "z-50",
+    content:
+      "z-50 min-w-[8rem] max-h-60 overflow-y-auto rounded-md border border-border bg-background p-1 shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+    item: "relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground",
+    itemText: "flex-1",
+    itemIndicator: "absolute right-2 flex size-4 items-center justify-center",
   },
   variants: {
     error: {
       true: {
-        control: 'border-destructive focus-within:ring-destructive',
-        label: 'text-destructive',
+        control: "border-destructive focus-within:ring-destructive",
+        label: "text-destructive",
       },
     },
   },
   defaultVariants: {
     error: false,
   },
-})
+});
 
 export type SelectVariants = VariantProps<typeof selectVariants>
 ```
@@ -109,85 +141,88 @@ const styles = selectVariants()
 type SelectRootProps = ArkSelect.RootProps<{ label: string; value: string }> & { class?: string; error?: boolean }
 
 const SelectRoot: Component<SelectRootProps> = (props) => {
-  const [local, others] = splitProps(props, ['class', 'error'])
-  // If error param needed, create local styles with params
-  const localStyles = selectVariants({ error: !!local.error })
-  const rootClass = createMemo(() => localStyles.root({ class: local.class }))
-  return (
-    <ArkSelect.Root class={rootClass()} {...others} />
-  )
+const [local, others] = splitProps(props, ['class', 'error'])
+// If error param needed, create local styles with params
+const localStyles = selectVariants({ error: !!local.error })
+const rootClass = createMemo(() => localStyles.root({ class: local.class }))
+return (
+
+<ArkSelect.Root class={rootClass()} {...others} />
+)
 }
 
 const SelectLabel: Component<ArkSelect.LabelProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const labelClass = createMemo(() => styles.label({ class: local.class }))
-  return <ArkSelect.Label class={labelClass()} {...others} />
+const [local, others] = splitProps(props, ['class'])
+const labelClass = createMemo(() => styles.label({ class: local.class }))
+return <ArkSelect.Label class={labelClass()} {...others} />
 }
 
 const SelectControl: Component<ArkSelect.ControlProps & { class?: string; children?: JSX.Element }> = (props) => {
-  const [local, others] = splitProps(props, ['class', 'children'])
-  const controlClass = createMemo(() => styles.control({ class: local.class }))
-  return (
-    <ArkSelect.Control class={controlClass()} {...others}>
-      {local.children}
-      <ArkSelect.Indicator class={styles.indicator()}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4"><path d="m6 9 6 6 6-6"/></svg>
-      </ArkSelect.Indicator>
-    </ArkSelect.Control>
-  )
+const [local, others] = splitProps(props, ['class', 'children'])
+const controlClass = createMemo(() => styles.control({ class: local.class }))
+return (
+
+<ArkSelect.Control class={controlClass()} {...others}>
+{local.children}
+<ArkSelect.Indicator class={styles.indicator()}>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4"><path d="m6 9 6 6 6-6"/></svg>
+</ArkSelect.Indicator>
+</ArkSelect.Control>
+)
 }
 
 const SelectTrigger: Component<ArkSelect.TriggerProps> = (props) => {
-  const triggerClass = createMemo(() => styles.trigger({ class: props.class }))
-  return <ArkSelect.Trigger class={triggerClass()} {...props} />
+const triggerClass = createMemo(() => styles.trigger({ class: props.class }))
+return <ArkSelect.Trigger class={triggerClass()} {...props} />
 }
 
 const SelectValueText: Component<ArkSelect.ValueTextProps> = (props) => {
-  const valueTextClass = createMemo(() => styles.valueText({ class: props.class }))
-  return <ArkSelect.ValueText class={valueTextClass()} {...props} />
+const valueTextClass = createMemo(() => styles.valueText({ class: props.class }))
+return <ArkSelect.ValueText class={valueTextClass()} {...props} />
 }
 
 type SelectContentProps = ArkSelect.ContentProps & {
-  class?: string
-  items: ListCollection<{ label: string; value: string }>['items']
+class?: string
+items: ListCollection<{ label: string; value: string }>['items']
 }
 
 const SelectContent: Component<SelectContentProps> = (props) => {
-  const [local, others] = splitProps(props, ['class', 'items'])
-  const contentClass = createMemo(() => styles.content({ class: local.class }))
-  return (
-    <Portal>
-      <ArkSelect.Positioner class={styles.positioner()}>
-        <ArkSelect.Content class={contentClass()} {...others}>
-          <Index each={local.items}>
-            {(item) => (
-              <ArkSelect.Item class={styles.item()} item={item()}>
-                <ArkSelect.ItemText class={styles.itemText()}>{item().label}</ArkSelect.ItemText>
-                <ArkSelect.ItemIndicator class={styles.itemIndicator()}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4"><path d="M20 6 9 17l-5-5"/></svg>
-                </ArkSelect.ItemIndicator>
-              </ArkSelect.Item>
-            )}
-          </Index>
-        </ArkSelect.Content>
-      </ArkSelect.Positioner>
-    </Portal>
-  )
+const [local, others] = splitProps(props, ['class', 'items'])
+const contentClass = createMemo(() => styles.content({ class: local.class }))
+return (
+
+<Portal>
+<ArkSelect.Positioner class={styles.positioner()}>
+<ArkSelect.Content class={contentClass()} {...others}>
+<Index each={local.items}>
+{(item) => (
+<ArkSelect.Item class={styles.item()} item={item()}>
+<ArkSelect.ItemText class={styles.itemText()}>{item().label}</ArkSelect.ItemText>
+<ArkSelect.ItemIndicator class={styles.itemIndicator()}>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4"><path d="M20 6 9 17l-5-5"/></svg>
+</ArkSelect.ItemIndicator>
+</ArkSelect.Item>
+)}
+</Index>
+</ArkSelect.Content>
+</ArkSelect.Positioner>
+</Portal>
+)
 }
 
 const SelectItem: Component<ArkSelect.ItemProps> = (props) => {
-  const itemClass = createMemo(() => styles.item({ class: props.class }))
-  return <ArkSelect.Item class={itemClass()} {...props} />
+const itemClass = createMemo(() => styles.item({ class: props.class }))
+return <ArkSelect.Item class={itemClass()} {...props} />
 }
 
 const SelectItemText: Component<ArkSelect.ItemTextProps> = (props) => {
-  const itemTextClass = createMemo(() => styles.itemText({ class: props.class }))
-  return <ArkSelect.ItemText class={itemTextClass()} {...props} />
+const itemTextClass = createMemo(() => styles.itemText({ class: props.class }))
+return <ArkSelect.ItemText class={itemTextClass()} {...props} />
 }
 
 const SelectItemIndicator: Component<ArkSelect.ItemIndicatorProps> = (props) => {
-  const itemIndicatorClass = createMemo(() => styles.itemIndicator({ class: props.class }))
-  return <ArkSelect.ItemIndicator class={itemIndicatorClass()} {...props} />
+const itemIndicatorClass = createMemo(() => styles.itemIndicator({ class: props.class }))
+return <ArkSelect.ItemIndicator class={itemIndicatorClass()} {...props} />
 }
 
 export { createListCollection }
@@ -201,7 +236,15 @@ export { SelectRoot as Select, SelectLabel, SelectControl, SelectTrigger, Select
 Import the components:
 
 ```tsx
-import { Select, SelectLabel, SelectControl, SelectTrigger, SelectValueText, SelectContent, createListCollection } from "~/components/select"
+import {
+  Select,
+  SelectLabel,
+  SelectControl,
+  SelectTrigger,
+  SelectValueText,
+  SelectContent,
+  createListCollection,
+} from "~/components/select";
 ```
 
 Basic usage:
@@ -261,63 +304,63 @@ Use the `error` prop to show an error state.
 
 ### Select (Root)
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| collection | `ListCollection` | — | Collection of items. **Required.** |
-| value | `string[]` | — | Controlled selected values. |
-| onValueChange | `(details: { value: string[] }) => void` | — | Callback when selection changes. |
-| multiple | `boolean` | `false` | Allow multiple selections. |
-| disabled | `boolean` | `false` | Whether the select is disabled. |
-| class | `string` | — | Custom CSS class. |
-| error | `boolean` | `false` | Show error state styling. |
+| Prop          | Type                                     | Default | Description                        |
+| ------------- | ---------------------------------------- | ------- | ---------------------------------- |
+| collection    | `ListCollection`                         | —       | Collection of items. **Required.** |
+| value         | `string[]`                               | —       | Controlled selected values.        |
+| onValueChange | `(details: { value: string[] }) => void` | —       | Callback when selection changes.   |
+| multiple      | `boolean`                                | `false` | Allow multiple selections.         |
+| disabled      | `boolean`                                | `false` | Whether the select is disabled.    |
+| class         | `string`                                 | —       | Custom CSS class.                  |
+| error         | `boolean`                                | `false` | Show error state styling.          |
 
 ### SelectLabel
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| class | `string` | — | Custom CSS class. |
+| Prop  | Type     | Default | Description       |
+| ----- | -------- | ------- | ----------------- |
+| class | `string` | —       | Custom CSS class. |
 
 ### SelectControl
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| class | `string` | — | Custom CSS class. |
+| Prop  | Type     | Default | Description       |
+| ----- | -------- | ------- | ----------------- |
+| class | `string` | —       | Custom CSS class. |
 
 ### SelectTrigger
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| class | `string` | — | Custom CSS class. |
+| Prop  | Type     | Default | Description       |
+| ----- | -------- | ------- | ----------------- |
+| class | `string` | —       | Custom CSS class. |
 
 ### SelectValueText
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| placeholder | `string` | — | Placeholder text when empty. |
-| class | `string` | — | Custom CSS class. |
+| Prop        | Type     | Default | Description                  |
+| ----------- | -------- | ------- | ---------------------------- |
+| placeholder | `string` | —       | Placeholder text when empty. |
+| class       | `string` | —       | Custom CSS class.            |
 
 ### SelectContent
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| items | `array` | — | Items to display. **Required.** |
-| class | `string` | — | Custom CSS class. |
+| Prop  | Type     | Default | Description                     |
+| ----- | -------- | ------- | ------------------------------- |
+| items | `array`  | —       | Items to display. **Required.** |
+| class | `string` | —       | Custom CSS class.               |
 
 ### SelectItem
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| item | `object` | — | Item data. **Required.** |
-| class | `string` | — | Custom CSS class. |
+| Prop  | Type     | Default | Description              |
+| ----- | -------- | ------- | ------------------------ |
+| item  | `object` | —       | Item data. **Required.** |
+| class | `string` | —       | Custom CSS class.        |
 
 ### SelectItemText
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| class | `string` | — | Custom CSS class. |
+| Prop  | Type     | Default | Description       |
+| ----- | -------- | ------- | ----------------- |
+| class | `string` | —       | Custom CSS class. |
 
 ### SelectItemIndicator
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| class | `string` | — | Custom CSS class. |
+| Prop  | Type     | Default | Description       |
+| ----- | -------- | ------- | ----------------- |
+| class | `string` | —       | Custom CSS class. |

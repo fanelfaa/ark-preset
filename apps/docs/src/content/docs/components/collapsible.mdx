@@ -5,21 +5,45 @@ category: Navigation
 updatedDate: 2026-05-18
 ---
 
-import CollapsibleBasicDemo from '@components/collapsible-demo/CollapsibleBasicDemo.tsx'
+import CollapsibleBasicDemo from "@components/collapsible-demo/CollapsibleBasicDemo.tsx";
 
 # Collapsible
 
 A component that allows users to expand or collapse content sections.
 
-<a href="https://ark-ui.com/docs/components/collapsible" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors">
-  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+<a
+  href="https://ark-ui.com/docs/components/collapsible"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="inline-flex items-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="14"
+    height="14"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+    <polyline points="15 3 21 3 21 9" />
+    <line x1="10" x2="21" y1="14" y2="3" />
+  </svg>
   Docs
 </a>
 
 <CollapsibleBasicDemo client:load />
 
 ```tsx
-import { Collapsible, CollapsibleTrigger, CollapsibleContent, CollapsibleIndicator } from "~/components/collapsible"
+import {
+  Collapsible,
+  CollapsibleTrigger,
+  CollapsibleContent,
+  CollapsibleIndicator,
+} from "~/components/collapsible";
 
 export function CollapsibleDemo() {
   return (
@@ -31,24 +55,25 @@ export function CollapsibleDemo() {
         </CollapsibleIndicator>
       </CollapsibleTrigger>
       <CollapsibleContent>
-        <div class="pt-4 text-sm">
-          This is the collapsible content.
-        </div>
+        <div class="pt-4 text-sm">This is the collapsible content.</div>
       </CollapsibleContent>
     </Collapsible>
-  )
+  );
 }
 ```
 
 ## Installation
 
 ### CLI
+
 Run the following command to add the component to your project:
+
 ```bash
 npx solidui-cli@latest add collapsible
 ```
 
 ### Manual
+
 <div class="space-y-3">
 Install the dependency:
 ```bash
@@ -62,15 +87,14 @@ import { tv, type VariantProps } from 'tailwind-variants'
 
 export const collapsibleVariants = tv({
   slots: {
-    root: 'w-full',
+    root: "w-full",
     trigger:
-      'flex items-center justify-between gap-3 w-full p-2.5 text-sm font-medium border border-neutral-200 rounded-lg bg-transparent cursor-pointer hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring data-[disabled]:opacity-50 data-[disabled]:cursor-not-allowed',
+      "flex items-center justify-between gap-3 w-full p-2.5 text-sm font-medium border border-neutral-200 rounded-lg bg-transparent cursor-pointer hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring data-[disabled]:opacity-50 data-[disabled]:cursor-not-allowed",
     content:
-      'overflow-hidden data-enter:animate-collapsible-down data-end:animate-collapsible-up duration-500',
-    indicator:
-      'size-4 shrink-0 transition-transform duration-200 data-[state=open]:rotate-90',
+      "overflow-hidden data-enter:animate-collapsible-down data-end:animate-collapsible-up duration-500",
+    indicator: "size-4 shrink-0 transition-transform duration-200 data-[state=open]:rotate-90",
   },
-})
+});
 
 export type CollapsibleVariants = VariantProps<typeof collapsibleVariants>
 ```
@@ -86,27 +110,27 @@ import { collapsibleVariants } from './recipes/collapsible'
 const styles = collapsibleVariants()
 
 const CollapsibleRoot: Component<ArkCollapsible.RootProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const rootClass = createMemo(() => styles.root({ class: local.class }))
-  return <ArkCollapsible.Root class={rootClass()} {...others} />
+const [local, others] = splitProps(props, ['class'])
+const rootClass = createMemo(() => styles.root({ class: local.class }))
+return <ArkCollapsible.Root class={rootClass()} {...others} />
 }
 
 const CollapsibleTrigger: Component<ArkCollapsible.TriggerProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const triggerClass = createMemo(() => styles.trigger({ class: local.class }))
-  return <ArkCollapsible.Trigger class={triggerClass()} {...others} />
+const [local, others] = splitProps(props, ['class'])
+const triggerClass = createMemo(() => styles.trigger({ class: local.class }))
+return <ArkCollapsible.Trigger class={triggerClass()} {...others} />
 }
 
 const CollapsibleContent: Component<ArkCollapsible.ContentProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const contentClass = createMemo(() => styles.content({ class: local.class }))
-  return <ArkCollapsible.Content class={contentClass()} {...others} />
+const [local, others] = splitProps(props, ['class'])
+const contentClass = createMemo(() => styles.content({ class: local.class }))
+return <ArkCollapsible.Content class={contentClass()} {...others} />
 }
 
 const CollapsibleIndicator: Component<ArkCollapsible.IndicatorProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const indicatorClass = createMemo(() => styles.indicator({ class: local.class }))
-  return <ArkCollapsible.Indicator class={indicatorClass()} {...others} />
+const [local, others] = splitProps(props, ['class'])
+const indicatorClass = createMemo(() => styles.indicator({ class: local.class }))
+return <ArkCollapsible.Indicator class={indicatorClass()} {...others} />
 }
 
 export {
@@ -125,7 +149,12 @@ export {
 Import the components:
 
 ```tsx
-import { Collapsible, CollapsibleTrigger, CollapsibleContent, CollapsibleIndicator } from "~/components/collapsible"
+import {
+  Collapsible,
+  CollapsibleTrigger,
+  CollapsibleContent,
+  CollapsibleIndicator,
+} from "~/components/collapsible";
 ```
 
 Basic usage:
@@ -157,9 +186,7 @@ The indicator rotates when the content is expanded. Use the `data-[state=open]` 
     </CollapsibleIndicator>
   </CollapsibleTrigger>
   <CollapsibleContent>
-    <div class="pt-4 text-sm">
-      The indicator automatically rotates when expanded.
-    </div>
+    <div class="pt-4 text-sm">The indicator automatically rotates when expanded.</div>
   </CollapsibleContent>
 </Collapsible>
 ```
@@ -168,27 +195,27 @@ The indicator rotates when the content is expanded. Use the `data-[state=open]` 
 
 ### Collapsible (Root)
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| defaultOpen | `boolean` | `false` | Initial open state. Use when uncontrolled. |
-| open | `boolean` | — | Controlled open state. |
-| onOpenChange | `(open: boolean) => void` | — | Callback when open state changes. |
-| class | `string` | — | Custom CSS class. |
+| Prop         | Type                      | Default | Description                                |
+| ------------ | ------------------------- | ------- | ------------------------------------------ |
+| defaultOpen  | `boolean`                 | `false` | Initial open state. Use when uncontrolled. |
+| open         | `boolean`                 | —       | Controlled open state.                     |
+| onOpenChange | `(open: boolean) => void` | —       | Callback when open state changes.          |
+| class        | `string`                  | —       | Custom CSS class.                          |
 
 ### CollapsibleTrigger
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| class | `string` | — | Custom CSS class. |
+| Prop  | Type     | Default | Description       |
+| ----- | -------- | ------- | ----------------- |
+| class | `string` | —       | Custom CSS class. |
 
 ### CollapsibleContent
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| class | `string` | — | Custom CSS class. |
+| Prop  | Type     | Default | Description       |
+| ----- | -------- | ------- | ----------------- |
+| class | `string` | —       | Custom CSS class. |
 
 ### CollapsibleIndicator
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| class | `string` | — | Custom CSS class. |
+| Prop  | Type     | Default | Description       |
+| ----- | -------- | ------- | ----------------- |
+| class | `string` | —       | Custom CSS class. |

@@ -5,6 +5,7 @@
 > **Quick Summary**: Fix all gaps in tsconfig.json and vite.config.ts to match the proven dependency wiring pattern from imigrasi (web-client → shared-ui), ensuring consistent TypeScript project references and build-time dependency resolution across the monorepo.
 >
 > **Deliverables**:
+>
 > - 3 tsconfig.json files updated (core, solid, react) with `composite: true` + references
 > - 1 vite.config.ts updated (docs) with `vite-tsconfig-paths` plugin + `optimizeDeps.exclude`
 > - 1 package.json updated (docs) with `vite-tsconfig-paths` devDependency
@@ -18,21 +19,27 @@
 ## Context
 
 ### Original Request
+
 > "Learn this project ~/Work/Zero/Projects/imigrasi about how the configured dependents using moon.yml and tsconfig and package json. the web-client is depend on shared-ui so lets only focus on that. and after that implement to this project."
 
 ### Interview Summary
+
 **Key Discussions**:
-- Analyzed imigrasi's 3-layer dependency pattern: package.json (workspace:* + exports), moon.yml (dependsOn), tsconfig (composite + references), vite (tsconfigPaths + optimizeDeps.exclude)
+
+- Analyzed imigrasi's 3-layer dependency pattern: package.json (workspace:\* + exports), moon.yml (dependsOn), tsconfig (composite + references), vite (tsconfigPaths + optimizeDeps.exclude)
 - User chose "Fix ALL gaps" to fully align with imigrasi's pattern
 
 **Research Findings**:
+
 - imigrasi/shared-ui uses `composite: true`, `declaration: true` in tsconfig for project reference chain
 - imigrasi/web-client uses `vite-tsconfig-paths()` + `optimizeDeps.exclude: ['@repo/shared-ui']`
 - Current project already has correct moon.yml and package.json deps — only tsconfig + vite config gaps remain
 - `.moon/toolchains.yml` has `syncProjectReferences: true` which auto-syncs tsconfig refs
 
 ### Metis Review
+
 **Addressed Gaps**:
+
 - **Q: Are these gaps actually causing real problems?** → No runtime errors yet, but inconsistency breaks the project reference chain. solid has references, react doesn't — creates maintenance burden and means `tsc --noEmit` in react doesn't use the proper reference mechanism.
 - **Q: composite + noEmit compatibility?** → Verified: `composite: true` is compatible with `noEmit: true` for type-checking workflows. tsup handles actual builds.
 - **Q: syncProjectReferences conflict?** → `syncProjectReferences: true` works alongside manual references — it ensures consistency, doesn't override them.
@@ -42,9 +49,11 @@
 ## Work Objectives
 
 ### Core Objective
+
 Align all config files (tsconfig.json, vite.config.ts) in this monorepo to match imigrasi's dependency wiring pattern.
 
 ### Concrete Deliverables
+
 - `packages/core/tsconfig.json` — add `composite: true`
 - `packages/solid/tsconfig.json` — add `composite: true`
 - `packages/react/tsconfig.json` — add `composite: true + references: [core]`
@@ -52,18 +61,21 @@ Align all config files (tsconfig.json, vite.config.ts) in this monorepo to match
 - `apps/docs/package.json` — add `vite-tsconfig-paths` devDependency
 
 ### Definition of Done
+
 - [ ] `moon run core:typecheck` passes
 - [ ] `moon run solid:typecheck` passes
 - [ ] `moon run react:typecheck` passes
 - [ ] `moon run docs:build` (or `vite build`) passes
 
 ### Must Have
+
 - All 3 library packages (core, solid, react) have `composite: true` in tsconfig
 - react/tsconfig.json has `references` pointing to core
 - docs/vite.config.ts excludes workspace packages from optimization
 - docs app can build successfully with all changes
 
 ### Must NOT Have (Guardrails)
+
 - No changes to package.json name/version/exports (only devDependencies in docs)
 - No changes to moon.yml files (already correct)
 - No changes to source code (.tsx, .ts files)
@@ -76,12 +88,15 @@ Align all config files (tsconfig.json, vite.config.ts) in this monorepo to match
 > **ZERO HUMAN INTERVENTION** — ALL verification is agent-executed.
 
 ### Test Decision
+
 - **Infrastructure exists**: YES (moon + tsc + vite)
 - **Automated tests**: N/A (config-only changes)
 - **Agent-Executed QA**: Check typecheck + build pass
 
 ### QA Policy
+
 Every task includes agent-executed QA verification:
+
 - Run `moon run <project>:typecheck` to verify TypeScript compilation
 - Run `moon run docs:build` to verify full build chain
 
@@ -109,6 +124,7 @@ Wave FINAL (Verification):
 ```
 
 ### Agent Dispatch Summary
+
 - **Wave 1**: 4 parallel `quick` tasks
 - **Wave 2**: 1 `quick` task
 - **Final**: 4 parallel verification commands
@@ -144,6 +160,7 @@ Wave FINAL (Verification):
   - [ ] `moon run core:typecheck` passes
 
   **QA Scenarios**:
+
   ```
   Scenario: TypeScript compilation still works
     Tool: Bash
@@ -182,6 +199,7 @@ Wave FINAL (Verification):
   - [ ] `moon run solid:typecheck` passes
 
   **QA Scenarios**:
+
   ```
   Scenario: TypeScript compilation still works
     Tool: Bash
@@ -226,6 +244,7 @@ Wave FINAL (Verification):
   - [ ] tsconfig.json has `references: [{ path: "../core" }]`
 
   **QA Scenarios**:
+
   ```
   Scenario: TypeScript compilation still works
     Tool: Bash
@@ -266,6 +285,7 @@ Wave FINAL (Verification):
   - [ ] `vite-tsconfig-paths` is present in node_modules
 
   **QA Scenarios**:
+
   ```
   Scenario: Dependency installed correctly
     Tool: Bash
@@ -290,21 +310,22 @@ Wave FINAL (Verification):
   - Add `optimizeDeps: { exclude: ['@ui/solid', '@ui/core'] }` to the config object
 
   The final config should look like:
+
   ```ts
-  import { defineConfig } from 'vite'
-  import solid from 'vite-plugin-solid'
-  import tailwindcss from '@tailwindcss/vite'
-  import tsconfigPaths from 'vite-tsconfig-paths'
+  import { defineConfig } from "vite";
+  import solid from "vite-plugin-solid";
+  import tailwindcss from "@tailwindcss/vite";
+  import tsconfigPaths from "vite-tsconfig-paths";
 
   export default defineConfig({
     plugins: [tailwindcss(), solid(), tsconfigPaths()],
     resolve: {
-      conditions: ['development', 'module', 'import', 'resolve'],
+      conditions: ["development", "module", "import", "resolve"],
     },
     optimizeDeps: {
-      exclude: ['@ui/solid', '@ui/core'],
+      exclude: ["@ui/solid", "@ui/core"],
     },
-  })
+  });
   ```
 
   **Must NOT do**:
@@ -328,6 +349,7 @@ Wave FINAL (Verification):
   - [ ] optimizeDeps.exclude includes `@ui/solid` and `@ui/core`
 
   **QA Scenarios**:
+
   ```
   Scenario: Vite build works with new config
     Tool: Bash
@@ -346,7 +368,7 @@ Wave FINAL (Verification):
 ## Final Verification Wave
 
 - [x] F1. **Plan Compliance Audit** — `quick`
-  Read each changed file and verify against plan:
+      Read each changed file and verify against plan:
   - core/tsconfig.json has `composite: true`
   - solid/tsconfig.json has `composite: true`
   - react/tsconfig.json has `composite: true` + `references` to core
@@ -354,26 +376,26 @@ Wave FINAL (Verification):
   - docs/vite.config.ts uses `tsconfigPaths()` + `optimizeDeps.exclude`
   - moon.yml files are unchanged
   - No source code was modified
-  Output: All Must Have [5/5] | Must NOT Have [5/5] | VERDICT: APPROVE/REJECT
+    Output: All Must Have [5/5] | Must NOT Have [5/5] | VERDICT: APPROVE/REJECT
 
 - [x] F2. **TypeScript Compilation Check** — `quick`
-  Run typecheck on all affected packages:
+      Run typecheck on all affected packages:
   - `moon run core:typecheck`
   - `moon run solid:typecheck`
   - `moon run react:typecheck`
-  Output: core [PASS/FAIL] | solid [PASS/FAIL] | react [PASS/FAIL] | VERDICT
+    Output: core [PASS/FAIL] | solid [PASS/FAIL] | react [PASS/FAIL] | VERDICT
 
 - [x] F3. **Build Verification** — `quick`
-  Run build on docs app and verify it completes:
+      Run build on docs app and verify it completes:
   - `moon run docs:build`
-  Output: Build [PASS/FAIL] | VERDICT
+    Output: Build [PASS/FAIL] | VERDICT
 
 - [x] F4. **Scope Fidelity Check** — `quick`
-  Compare `git diff` against plan scope:
+      Compare `git diff` against plan scope:
   - Only the 5 specified files changed
   - No source code (.tsx, .ts) modified
   - No moon.yml files modified
-  Output: Files [5/5] | Scope [CLEAN] | VERDICT: APPROVE/REJECT
+    Output: Files [5/5] | Scope [CLEAN] | VERDICT: APPROVE/REJECT
 
 ---
 
@@ -395,6 +417,7 @@ Wave FINAL (Verification):
 ## Success Criteria
 
 ### Verification Commands
+
 ```bash
 moon run core:typecheck    # Expected: PASS
 moon run solid:typecheck   # Expected: PASS
@@ -403,6 +426,7 @@ moon run docs:build        # Expected: Build succeeds
 ```
 
 ### Final Checklist
+
 - [ ] All 3 library packages have `composite: true` in tsconfig
 - [ ] react/tsconfig.json references core
 - [ ] docs/vite.config.ts has tsconfigPaths + optimizeDeps.exclude

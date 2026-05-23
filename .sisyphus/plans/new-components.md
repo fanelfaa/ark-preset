@@ -5,6 +5,7 @@
 > **Quick Summary**: Create two new Ark UI Solid components (Popover + Slider) following established patterns — core recipe (`tv()` with slots) in `packages/core`, Solid wrapper (`splitProps` + `createMemo` + class merge) in `packages/solid`, with full exports and build verification.
 
 > **Deliverables**:
+>
 > - `packages/core/src/recipes/popover.ts` — Popover variant recipe (10 slots)
 > - `packages/core/src/recipes/slider.ts` — Slider variant recipe (10 slots)
 > - `packages/solid/src/popover.tsx` — Popover component wrapper (10 sub-components)
@@ -20,22 +21,28 @@
 ## Context
 
 ### Original Request
+
 User asked to check `COMPONENT_TODOS.md` and create "a few components" — selected **popover** and **slider** from the High Priority list.
 
 ### Interview Summary
+
 **Key Discussions**:
+
 - **Components**: Popover (floating card, click-triggered) + Slider (range slider)
 - **Testing**: No tests needed (no test infra exists)
 - **Styling**: Match existing shadcn-like patterns (same design tokens, no new variants)
 - **Scope**: Just these 2 components — no backdrop for popover, horizontal-only for slider v1, no hover trigger
 
 ### Metis Review
+
 **Identified Gaps** (addressed):
+
 - **Edge cases**: Popover viewport overflow handled by Ark, slider `disabled` state via tv slot classes
 - **Guardrails**: No tests, no new dependencies, no orientation variants for slider v1, single arrow style for popover
 - **Assumptions validated**: Ark UI slot names confirmed via examples, Portal pattern matches dialog/select
 
 ### Research Findings
+
 - Ark UI Popover slots: Root, Trigger, Positioner, Content, Title, Description, CloseTrigger, Arrow, ArrowTip, Indicator, Anchor
 - Ark UI Slider slots: Root, Label, ValueText, Control, Track, Range, Thumb, HiddenInput, DraggingIndicator, MarkerGroup, Marker
 - Both follow same Portal/Positioner pattern as existing Dialog and Select
@@ -45,20 +52,24 @@ User asked to check `COMPONENT_TODOS.md` and create "a few components" — selec
 ## Work Objectives
 
 ### Core Objective
+
 Build Popover and Slider components matching the exact patterns of existing 12 components.
 
 ### Concrete Deliverables
+
 - 2 core recipes → `packages/core/src/recipes/popover.ts`, `slider.ts`
 - 2 solid wrappers → `packages/solid/src/popover.tsx`, `slider.tsx`
 - Updated `tsup.config.ts`, `package.json`, `index.ts` for both packages
 
 ### Definition of Done
+
 - [ ] `moon run core:build` and `moon run solid:build` pass with no errors
 - [ ] `moon run solid:typecheck` passes with no errors
 - [ ] All sub-components exported and importable from `@ui/solid`
 - [ ] Recipe exports importable from `@ui/core` and `@ui/core/recipes/popover`, `@ui/core/recipes/slider`
 
 ### Must Have
+
 - Popover: Root, Trigger, Positioner, Content, Title, Description, CloseTrigger, Arrow, ArrowTip, Indicator
 - Slider: Root, Label, ValueText, Control, Track, Range, Thumb, HiddenInput
 - Slider extras: DraggingIndicator, MarkerGroup, Marker (if Ark UI supports)
@@ -66,6 +77,7 @@ Build Popover and Slider components matching the exact patterns of existing 12 c
 - All components use `@ui/core` variants for styling
 
 ### Must NOT Have (Guardrails)
+
 - No test files or test infrastructure
 - No new dependencies beyond `@ark-ui/solid`, `solid-js`, `@ui/core`
 - No popover backdrop/overlay (dialog is the modal pattern)
@@ -82,12 +94,15 @@ Build Popover and Slider components matching the exact patterns of existing 12 c
 > No test infrastructure exists; verification via build + typecheck + browser QA.
 
 ### Test Decision
+
 - **Infrastructure exists**: NO
 - **Automated tests**: None (user opted out)
 - **QA**: Agent-executed verification via ark docs / browser interaction
 
 ### QA Policy
+
 Every task includes agent-executed QA scenarios:
+
 - **Build verification**: `moon run core:build && moon run solid:build`
 - **Type verification**: `moon run solid:typecheck`
 - **Export verification**: Check each named export is present in compiled output/index
@@ -159,6 +174,7 @@ Wave FINAL (Build verification):
   - [ ] All slots have appropriate Tailwind classes using `bg-popover`, `text-popover-foreground`, `border` tokens
 
   **QA Scenarios**:
+
   ```
   Scenario: Recipe file exists and has correct structure
     Tool: Bash
@@ -229,6 +245,7 @@ Wave FINAL (Build verification):
   - [ ] All slots reference existing shadcn tokens (`bg-primary`, `bg-muted`, `border-primary`, etc.)
 
   **QA Scenarios**:
+
   ```
   Scenario: Recipe file exists and has correct structure
     Tool: Bash
@@ -288,6 +305,7 @@ Wave FINAL (Build verification):
   - [ ] `package.json` has 2 new recipe export entries matching existing format
 
   **QA Scenarios**:
+
   ```
   Scenario: tsup entries added correctly
     Tool: Bash
@@ -330,22 +348,23 @@ Wave FINAL (Build verification):
   **PopoverTrigger** — `splitProps(props, ['class'])` → `createMemo(() => styles.trigger({ class: local.class }))` → `<ArkPopover.Trigger class={triggerClass()} {...others} />`
   **PopoverPositioner** — Same pattern, `styles.positioner()`
   **PopoverContent** — Same pattern with Portal wrapper (like DialogContent):
-    ```
-    <Portal>
-      <ArkPopover.Positioner class={positionerClass()}>
-        <ArkPopover.Content class={contentClass()} {...others}>
-          {local.children}
-        </ArkPopover.Content>
-      </ArkPopover.Positioner>
-    </Portal>
-    ```
+
+  ```
+  <Portal>
+    <ArkPopover.Positioner class={positionerClass()}>
+      <ArkPopover.Content class={contentClass()} {...others}>
+        {local.children}
+      </ArkPopover.Content>
+    </ArkPopover.Positioner>
+  </Portal>
+  ```
+
   **PopoverTitle** — `styles.title()` (like DialogTitle)
   **PopoverDescription** — `styles.description()` (like DialogDescription)
   **PopoverCloseTrigger** — `styles.closeTrigger()`, include X SVG icon (same as dialog)
   **PopoverArrow** — `styles.arrow()`
   **PopoverArrowTip** — `styles.arrowTip()`
   **PopoverIndicator** — `styles.indicator()`, include chevron-down SVG icon
-
   - Static variants (no reactive props) → call `popoverVariants()` directly, no createMemo needed for the base styles object. Only slot class merging needs createMemo.
   - Export all sub-components and `popoverVariants`
   - PopoverRoot should be re-exported as `PopoverRoot` (not renamed)
@@ -377,6 +396,7 @@ Wave FINAL (Build verification):
   - [ ] All slots use proper class merging pattern
 
   **QA Scenarios**:
+
   ```
   Scenario: Popover file exists with all exports
     Tool: Bash
@@ -433,7 +453,6 @@ Wave FINAL (Build verification):
   **SliderDraggingIndicator** — `styles.draggingIndicator()`
   **SliderMarkerGroup** — `styles.markerGroup()`
   **SliderMarker** — `styles.marker()` with value prop
-
   - The basic usage creates Root wrapping: Label + ValueText in a flex row, Control wrapping Track > Range + Thumb
   - Static variants → call `sliderVariants()` directly
   - Export all sub-components and `sliderVariants`
@@ -466,6 +485,7 @@ Wave FINAL (Build verification):
   - [ ] Marker has `value` prop forwarded to ArkSlider.Marker
 
   **QA Scenarios**:
+
   ```
   Scenario: Slider file exists with all exports
     Tool: Bash
@@ -507,10 +527,10 @@ Wave FINAL (Build verification):
   **What to do**:
   - Add to `packages/core/src/index.ts`:
     ```ts
-    export { popoverVariants } from './recipes/popover'
-    export type { PopoverVariants } from './recipes/popover'
-    export { sliderVariants } from './recipes/slider'
-    export type { SliderVariants } from './recipes/slider'
+    export { popoverVariants } from "./recipes/popover";
+    export type { PopoverVariants } from "./recipes/popover";
+    export { sliderVariants } from "./recipes/slider";
+    export type { SliderVariants } from "./recipes/slider";
     ```
   - Place after existing recipe exports (alphabetical order — after `inputVariants`, before `selectVariants`)
 
@@ -534,6 +554,7 @@ Wave FINAL (Build verification):
   - [ ] No duplicate import errors
 
   **QA Scenarios**:
+
   ```
   Scenario: Core index exports both new variants
     Tool: Bash
@@ -560,6 +581,7 @@ Wave FINAL (Build verification):
 
   **What to do**:
   - Add to `packages/solid/src/index.ts`:
+
     ```ts
     export {
       PopoverRoot,
@@ -573,7 +595,7 @@ Wave FINAL (Build verification):
       PopoverArrowTip,
       PopoverIndicator,
       popoverVariants,
-    } from './popover'
+    } from "./popover";
 
     export {
       SliderRoot,
@@ -588,8 +610,9 @@ Wave FINAL (Build verification):
       SliderMarkerGroup,
       SliderMarker,
       sliderVariants,
-    } from './slider'
+    } from "./slider";
     ```
+
   - Place after existing exports (after `datePickerVariants` closing line, before EOF)
 
   **Must NOT do**:
@@ -612,6 +635,7 @@ Wave FINAL (Build verification):
   - [ ] No lint errors from unused exports
 
   **QA Scenarios**:
+
   ```
   Scenario: Solid index exports popover components
     Tool: Bash
@@ -673,6 +697,7 @@ Wave FINAL (Build verification):
   - [ ] COMPONENT_TODOS.md updated with popover + slider as done
 
   **QA Scenarios**:
+
   ```
   Scenario: Core builds successfully
     Tool: Bash
@@ -721,20 +746,20 @@ Wave FINAL (Build verification):
 ---
 
 - [x] F1. **Plan Compliance Audit** — `oracle`
-  Read plan end-to-end. Verify all 10 Popover + 10 Slider subcomponents exist. Check guardrails: no tests created, no new deps, no popover backdrop, no vertical slider. Check evidence files.
-  Output: `Must Have [10/10 popover + 11/11 slider verified] | Must NOT Have [4/4 guardrails] | Tasks [8/8] | VERDICT: APPROVE`
+      Read plan end-to-end. Verify all 10 Popover + 10 Slider subcomponents exist. Check guardrails: no tests created, no new deps, no popover backdrop, no vertical slider. Check evidence files.
+      Output: `Must Have [10/10 popover + 11/11 slider verified] | Must NOT Have [4/4 guardrails] | Tasks [8/8] | VERDICT: APPROVE`
 
 - [x] F2. **Code Quality Review** — `unspecified-high`
-  Run `moon run core:build && moon run solid:build && moon run solid:typecheck`. Review all changed files for: `as any`, empty catches, `console.log`, unused imports. Check AI slop: over-commented code, over-abstraction.
-  Output: `Build [PASS] | Typecheck [PASS] | Files [8 clean/0 issues] | VERDICT: APPROVE`
+      Run `moon run core:build && moon run solid:build && moon run solid:typecheck`. Review all changed files for: `as any`, empty catches, `console.log`, unused imports. Check AI slop: over-commented code, over-abstraction.
+      Output: `Build [PASS] | Typecheck [PASS] | Files [8 clean/0 issues] | VERDICT: APPROVE`
 
 - [x] F3. **Real Manual QA** — `unspecified-high`
-  Start from clean state. Verify each component can be imported and used. Check cross-task integration (components build together). Verify COMPONENT_TODOS.md reflects new components.
-  Output: `Components [2/2 verified] | Exports [23/23] | Build [PASS] | VERDICT: APPROVE`
+      Start from clean state. Verify each component can be imported and used. Check cross-task integration (components build together). Verify COMPONENT_TODOS.md reflects new components.
+      Output: `Components [2/2 verified] | Exports [23/23] | Build [PASS] | VERDICT: APPROVE`
 
 - [x] F4. **Scope Fidelity Check** — `deep`
-  For each task: read "What to do", read actual diff. Verify 1:1 compliance — nothing missing, nothing beyond scope. Check "Must NOT do" for forbidden patterns. Detect cross-contamination.
-  Output: `Tasks [8/8 compliant] | Contamination [CLEAN] | Unaccounted [CLEAN] | VERDICT: APPROVE`
+      For each task: read "What to do", read actual diff. Verify 1:1 compliance — nothing missing, nothing beyond scope. Check "Must NOT do" for forbidden patterns. Detect cross-contamination.
+      Output: `Tasks [8/8 compliant] | Contamination [CLEAN] | Unaccounted [CLEAN] | VERDICT: APPROVE`
 
 ---
 
@@ -750,9 +775,10 @@ Wave FINAL (Build verification):
 ## Success Criteria
 
 ### Verification Commands
+
 ```bash
 moon run core:build           # Expected: exit 0, dist/ updated
-moon run solid:build          # Expected: exit 0, dist/ updated  
+moon run solid:build          # Expected: exit 0, dist/ updated
 moon run solid:typecheck      # Expected: exit 0, no type errors
 ls packages/solid/src/popover.tsx  # Expected: file exists
 ls packages/solid/src/slider.tsx   # Expected: file exists
@@ -761,6 +787,7 @@ ls packages/core/src/recipes/slider.ts   # Expected: file exists
 ```
 
 ### Final Checklist
+
 - [ ] All 2 components built and exported
 - [ ] Core recipes importable from `@ui/core`
 - [ ] Solid components importable from `@ui/solid`

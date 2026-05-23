@@ -1,4 +1,4 @@
-import { Tabs, TabsList, TabsTrigger, TabsContent, TabsIndicator } from '@ui/solid'
+import { Tabs, TabsList, TabsTrigger, TabsContent, TabsIndicator } from "@ui/solid";
 
 export default function TabsBasicDemo() {
   return (
@@ -21,5 +21,5 @@ export default function TabsBasicDemo() {
         </TabsContent>
       </Tabs>
     </div>
-  )
+  );
 }

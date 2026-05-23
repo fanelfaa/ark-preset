@@ -1,33 +1,33 @@
-import { Collapsible as ArkCollapsible } from '@ark-ui/solid/collapsible'
-import { createMemo, splitProps, type Component } from 'solid-js'
-import { collapsibleVariants } from '@ui/core'
+import { Collapsible as ArkCollapsible } from "@ark-ui/solid/collapsible";
+import { createMemo, splitProps, type Component } from "solid-js";
+import { collapsibleVariants } from "@ui/core";
 
 // Global variant instance (no params consumed)
-const styles = collapsibleVariants()
+const styles = collapsibleVariants();
 
 const CollapsibleRoot: Component<ArkCollapsible.RootProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const rootClass = createMemo(() => styles.root({ class: local.class }))
-  return <ArkCollapsible.Root class={rootClass()} {...others} />
-}
+  const [local, others] = splitProps(props, ["class"]);
+  const rootClass = createMemo(() => styles.root({ class: local.class }));
+  return <ArkCollapsible.Root class={rootClass()} {...others} />;
+};
 
 const CollapsibleTrigger: Component<ArkCollapsible.TriggerProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const triggerClass = createMemo(() => styles.trigger({ class: local.class }))
-  return <ArkCollapsible.Trigger class={triggerClass()} {...others} />
-}
+  const [local, others] = splitProps(props, ["class"]);
+  const triggerClass = createMemo(() => styles.trigger({ class: local.class }));
+  return <ArkCollapsible.Trigger class={triggerClass()} {...others} />;
+};
 
 const CollapsibleContent: Component<ArkCollapsible.ContentProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const contentClass = createMemo(() => styles.content({ class: local.class }))
-  return <ArkCollapsible.Content class={contentClass()} {...others} />
-}
+  const [local, others] = splitProps(props, ["class"]);
+  const contentClass = createMemo(() => styles.content({ class: local.class }));
+  return <ArkCollapsible.Content class={contentClass()} {...others} />;
+};
 
 const CollapsibleIndicator: Component<ArkCollapsible.IndicatorProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const indicatorClass = createMemo(() => styles.indicator({ class: local.class }))
-  return <ArkCollapsible.Indicator class={indicatorClass()} {...others} />
-}
+  const [local, others] = splitProps(props, ["class"]);
+  const indicatorClass = createMemo(() => styles.indicator({ class: local.class }));
+  return <ArkCollapsible.Indicator class={indicatorClass()} {...others} />;
+};
 
 export {
   CollapsibleRoot as Collapsible,
@@ -35,4 +35,4 @@ export {
   CollapsibleContent,
   CollapsibleIndicator,
   collapsibleVariants,
-}
+};

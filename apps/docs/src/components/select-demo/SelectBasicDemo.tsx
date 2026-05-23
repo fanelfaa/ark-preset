@@ -1,13 +1,21 @@
-import { SelectRoot, SelectLabel, SelectControl, SelectTrigger, SelectValue, SelectContent, SelectItem, SelectItemText, SelectItemIndicator, createListCollection } from '@ui/solid'
+import {
+  SelectRoot,
+  SelectLabel,
+  SelectControl,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  createListCollection,
+} from "@ui/solid";
 
 const frameworks = createListCollection({
   items: [
-    { label: 'React', value: 'react' },
-    { label: 'Solid.js', value: 'solid' },
-    { label: 'Vue', value: 'vue' },
-    { label: 'Svelte', value: 'svelte' },
+    { label: "React", value: "react" },
+    { label: "Solid.js", value: "solid" },
+    { label: "Vue", value: "vue" },
+    { label: "Svelte", value: "svelte" },
   ],
-})
+});
 
 export default function SelectBasicDemo() {
   return (
@@ -22,5 +30,5 @@ export default function SelectBasicDemo() {
         <SelectContent items={frameworks.items} />
       </SelectRoot>
     </div>
-  )
+  );
 }

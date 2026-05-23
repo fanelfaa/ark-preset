@@ -5,6 +5,7 @@
 > **Quick Summary**: Implement 3 new Solid.js components (Collapsible, Drawer, Menu) following established patterns — core recipe in `packages/core`, Solid wrapper in `packages/solid`, plus add docs demos for these 3 and 3 existing missing components (Popover, Slider, NumberInput).
 >
 > **Deliverables**:
+>
 > - 3 core recipes: `collapsible.ts`, `drawer.ts`, `menu.ts`
 > - 3 Solid wrappers: `collapsible.tsx`, `drawer.tsx`, `menu.tsx`
 > - 6 new documentation sections in `apps/docs/src/App.tsx`
@@ -19,10 +20,13 @@
 ## Context
 
 ### Original Request
+
 User asked to "pick 3 solid component again and work with that, dont forget to adjust the docs" — repeat the workflow from the previous `new-components.md` plan that created Popover + Slider.
 
 ### Interview Summary
+
 **Key Discussions**:
+
 - **Components (chosen)**: **Collapsible** (4 sub-components, simplest), **Drawer** (10 sub-components, dialog-like), **Menu** (15+ sub-components, most complex)
 - **Drawer scope**: Full — Root, Trigger, Backdrop, Positioner, Content, Title, Description, CloseTrigger, Grabber, GrabberIndicator
 - **Menu scope**: Full — Root, Trigger, Indicator, Positioner, Content, Item, ItemText, ItemIndicator, Arrow, ArrowTip, Separator, ContextTrigger, TriggerItem, CheckboxItem, RadioItem, RadioItemGroup, ItemGroup, ItemGroupLabel
@@ -31,6 +35,7 @@ User asked to "pick 3 solid component again and work with that, dont forget to a
 - **Guardrails**: No React wrappers, no new deps, no refactoring existing code, no custom style variants
 
 **Research Findings**:
+
 - Ark UI Collapsible: Root, Trigger, Content, Indicator — CSS vars `--height`, `--width` for animations
 - Ark UI Drawer: Root, Trigger, Backdrop, Positioner, Content, Title, Description, CloseTrigger, Grabber, GrabberIndicator, IndentBackground — supports snap points, swipe directions
 - Ark UI Menu: Root, Trigger, Indicator, Positioner, Content, Arrow, ArrowTip, Item, ItemText, ItemIndicator, Separator, ContextTrigger, TriggerItem, CheckboxItem, RadioItem, RadioItemGroup, ItemGroup, ItemGroupLabel — nested menus, typeahead
@@ -38,7 +43,9 @@ User asked to "pick 3 solid component again and work with that, dont forget to a
 - Popover, Slider, NumberInput already exported from `@ui/solid` index.ts (verified)
 
 ### Metis Review
+
 **Identified Gaps** (addressed):
+
 - **Scope boundaries**: Added explicit IN/OUT scope with guardrails (no React, no new deps, no existing code refactoring)
 - **Menu complexity**: Defined exact sub-component list (15 items)
 - **TypeScript verification**: Added to acceptance criteria
@@ -49,9 +56,11 @@ User asked to "pick 3 solid component again and work with that, dont forget to a
 ## Work Objectives
 
 ### Core Objective
+
 Implement Collapsible, Drawer, Menu Solid.js components (core recipes + wrappers + exports) and add documentation demos for all 6 components including existing Popover, Slider, NumberInput.
 
 ### Concrete Deliverables
+
 - `packages/core/src/recipes/collapsible.ts` — Collapsible tv() recipe (4 slots)
 - `packages/core/src/recipes/drawer.ts` — Drawer tv() recipe (10 slots)
 - `packages/core/src/recipes/menu.ts` — Menu tv() recipe (15+ slots)
@@ -64,6 +73,7 @@ Implement Collapsible, Drawer, Menu Solid.js components (core recipes + wrappers
 - Agent evidence: `.sisyphus/evidence/`
 
 ### Definition of Done
+
 - [ ] `moon run core:build && moon run solid:build` → exit 0
 - [ ] `moon run solid:typecheck` → exit 0
 - [ ] All 3 new recipes importable from `@ui/core`
@@ -72,6 +82,7 @@ Implement Collapsible, Drawer, Menu Solid.js components (core recipes + wrappers
 - [ ] All 6 component sections visible and interactive in docs browser demo
 
 ### Must Have
+
 - **Collapsible**: Root, Trigger, Content, Indicator
 - **Drawer**: Root, Trigger, Backdrop, Positioner, Content, Title, Description, CloseTrigger, Grabber, GrabberIndicator
 - **Menu**: Root, Trigger, Indicator, Positioner, Content, Arrow, ArrowTip, Item, ItemText, ItemIndicator, Separator, ContextTrigger, TriggerItem, CheckboxItem, RadioItem, RadioItemGroup, ItemGroup, ItemGroupLabel
@@ -80,6 +91,7 @@ Implement Collapsible, Drawer, Menu Solid.js components (core recipes + wrappers
 - Docs: Import component + render basic interactive demo (like existing Pattern)
 
 ### Must NOT Have (Guardrails)
+
 - No React wrappers (Solid-only)
 - No test infrastructure setup or unit tests
 - No new dependencies — only `@ark-ui/solid`, `solid-js`, `@ui/core`, `tailwind-variants`
@@ -98,11 +110,13 @@ Implement Collapsible, Drawer, Menu Solid.js components (core recipes + wrappers
 > No test infrastructure exists; verification via build + typecheck + browser QA.
 
 ### Test Decision
+
 - **Infrastructure exists**: NO
 - **Automated tests**: None (skip — consistent with existing pattern)
 - **Agent-Executed QA**: ALWAYS — build verification, export checking, browser interaction
 
 ### QA Policy
+
 Every task includes agent-executed QA scenarios. Evidence saved to `.sisyphus/evidence/task-{N}-{scenario-slug}.{ext}`.
 
 - **Build verification**: `moon run core:build && moon run solid:build`
@@ -211,6 +225,7 @@ Wave FINAL (After ALL tasks — 4 parallel reviews, then user okay):
   - [ ] All slots use `bg-background`, `text-foreground`, `border`, `bg-accent` tokens
 
   **QA Scenarios**:
+
   ```
   Scenario: Collapsible recipe file exists and has correct structure
     Tool: Bash
@@ -286,6 +301,7 @@ Wave FINAL (After ALL tasks — 4 parallel reviews, then user okay):
   - [ ] Backdrop has overlay styling (`bg-black/50` or similar)
 
   **QA Scenarios**:
+
   ```
   Scenario: Drawer recipe file exists
     Tool: Bash
@@ -358,6 +374,7 @@ Wave FINAL (After ALL tasks — 4 parallel reviews, then user okay):
   - [ ] Content slot has popover-like animation and shadow classes
 
   **QA Scenarios**:
+
   ```
   Scenario: Menu recipe file exists
     Tool: Bash
@@ -421,6 +438,7 @@ Wave FINAL (After ALL tasks — 4 parallel reviews, then user okay):
   - [ ] `package.json` has 3 new recipe export entries matching existing format
 
   **QA Scenarios**:
+
   ```
   Scenario: tsup entries added for all 3 recipes
     Tool: Bash
@@ -464,7 +482,6 @@ Wave FINAL (After ALL tasks — 4 parallel reviews, then user okay):
   **CollapsibleTrigger** — `styles.trigger()` → `<ArkCollapsible.Trigger class={triggerClass()} {...others}>{local.children}</ArkCollapsible.Trigger>`
   **CollapsibleContent** — `styles.content()` → `<ArkCollapsible.Content class={contentClass()} {...others}>{local.children}</ArkCollapsible.Content>`
   **CollapsibleIndicator** — `styles.indicator()` → `<ArkCollapsible.Indicator class={indicatorClass()} {...others}>{local.children}</ArkCollapsible.Indicator>`
-
   - Static variants → call `collapsibleVariants()` directly (no reactive props needed for v1)
   - Export all 4 sub-components and `collapsibleVariants`
 
@@ -492,6 +509,7 @@ Wave FINAL (After ALL tasks — 4 parallel reviews, then user okay):
   - [ ] Uses splitProps + createMemo pattern
 
   **QA Scenarios**:
+
   ```
   Scenario: Collapsible file exists with all exports
     Tool: Bash
@@ -535,22 +553,23 @@ Wave FINAL (After ALL tasks — 4 parallel reviews, then user okay):
   **DrawerBackdrop** — `styles.backdrop()`, wrap in Portal or use separately
   **DrawerPositioner** — `styles.positioner()`
   **DrawerContent** — Portal wrapper pattern (like DialogContent):
-    ```tsx
-    <Portal>
-      <ArkDrawer.Positioner class={positionerClass()}>
-        <ArkDrawer.Content class={contentClass()} {...others}>
-          {local.children}
-          <DrawerCloseTrigger />
-        </ArkDrawer.Content>
-      </ArkDrawer.Positioner>
-    </Portal>
-    ```
+
+  ```tsx
+  <Portal>
+    <ArkDrawer.Positioner class={positionerClass()}>
+      <ArkDrawer.Content class={contentClass()} {...others}>
+        {local.children}
+        <DrawerCloseTrigger />
+      </ArkDrawer.Content>
+    </ArkDrawer.Positioner>
+  </Portal>
+  ```
+
   **DrawerTitle** — `styles.title()` (like DialogTitle)
   **DrawerDescription** — `styles.description()` (like DialogDescription)
   **DrawerCloseTrigger** — `styles.closeTrigger()`, include X SVG icon
   **DrawerGrabber** — `styles.grabber()` (flex centered grab area)
   **DrawerGrabberIndicator** — `styles.grabberIndicator()` (small rounded bar)
-
   - Export all 10 sub-components and `drawerVariants`
 
   **Must NOT do**:
@@ -577,6 +596,7 @@ Wave FINAL (After ALL tasks — 4 parallel reviews, then user okay):
   - [ ] Content wrapped in Portal (like dialog)
 
   **QA Scenarios**:
+
   ```
   Scenario: Drawer file exists with all exports
     Tool: Bash
@@ -610,6 +630,7 @@ Wave FINAL (After ALL tasks — 4 parallel reviews, then user okay):
   **Commit**: YES (groups with 5, 7)
   - Message: `feat(solid): add Collapsible, Drawer, and Menu components`
   - [ ] 6. Solid wrapper — drawer.tsx
+
 - Files: `packages/solid/src/drawer.tsx`
 
 ---
@@ -628,12 +649,14 @@ Wave FINAL (After ALL tasks — 4 parallel reviews, then user okay):
   **MenuIndicator** — `styles.indicator()`, include chevron-down SVG icon, rotate on open
   **MenuPositioner** — `styles.positioner()`
   **MenuContent** — `styles.content()`, with Arrow/ArrowTip children:
-    ```tsx
-    <ArkMenu.Content class={contentClass()} {...others}>
-      <MenuArrow />
-      {local.children}
-    </ArkMenu.Content>
-    ```
+
+  ```tsx
+  <ArkMenu.Content class={contentClass()} {...others}>
+    <MenuArrow />
+    {local.children}
+  </ArkMenu.Content>
+  ```
+
   **MenuArrow** — `styles.arrow()`
   **MenuArrowTip** — `styles.arrowTip()`
   **MenuItem** — `styles.item()`, `<ArkMenu.Item class={itemClass()} value={local.value} {...others}>{local.children}</ArkMenu.Item>`
@@ -647,7 +670,6 @@ Wave FINAL (After ALL tasks — 4 parallel reviews, then user okay):
   **MenuRadioItemGroup** — re-export or wrap `ArkMenu.RadioItemGroup`
   **MenuItemGroup** — `styles.itemGroup()`
   **MenuItemGroupLabel** — `styles.itemGroupLabel()`
-
   - Export all sub-components and `menuVariants`
   - Include inline SVGs for indicator (chevron), item indicator (check)
 
@@ -677,6 +699,7 @@ Wave FINAL (After ALL tasks — 4 parallel reviews, then user okay):
   - [ ] Uses splitProps + createMemo pattern consistently
 
   **QA Scenarios**:
+
   ```
   Scenario: Menu file exists with all exports
     Tool: Bash
@@ -718,12 +741,12 @@ Wave FINAL (After ALL tasks — 4 parallel reviews, then user okay):
   **What to do**:
   - Add to `packages/core/src/index.ts`:
     ```ts
-    export { collapsibleVariants } from './recipes/collapsible'
-    export type { CollapsibleVariants } from './recipes/collapsible'
-    export { drawerVariants } from './recipes/drawer'
-    export type { DrawerVariants } from './recipes/drawer'
-    export { menuVariants } from './recipes/menu'
-    export type { MenuVariants } from './recipes/menu'
+    export { collapsibleVariants } from "./recipes/collapsible";
+    export type { CollapsibleVariants } from "./recipes/collapsible";
+    export { drawerVariants } from "./recipes/drawer";
+    export type { DrawerVariants } from "./recipes/drawer";
+    export { menuVariants } from "./recipes/menu";
+    export type { MenuVariants } from "./recipes/menu";
     ```
   - Add in alphabetical order: collapsible after `checkboxVariants` line, drawer before `inputVariants`, menu after `inputVariants`
 
@@ -747,6 +770,7 @@ Wave FINAL (After ALL tasks — 4 parallel reviews, then user okay):
   - [ ] No duplicate import errors
 
   **QA Scenarios**:
+
   ```
   Scenario: Core index exports all 3 new variants
     Tool: Bash
@@ -773,6 +797,7 @@ Wave FINAL (After ALL tasks — 4 parallel reviews, then user okay):
 
   **What to do**:
   - Add to `packages/solid/src/index.ts` before the `export { tv }` import block:
+
     ```ts
     export {
       CollapsibleRoot,
@@ -780,7 +805,7 @@ Wave FINAL (After ALL tasks — 4 parallel reviews, then user okay):
       CollapsibleContent,
       CollapsibleIndicator,
       collapsibleVariants,
-    } from './collapsible'
+    } from "./collapsible";
 
     export {
       DrawerRoot,
@@ -794,7 +819,7 @@ Wave FINAL (After ALL tasks — 4 parallel reviews, then user okay):
       DrawerGrabber,
       DrawerGrabberIndicator,
       drawerVariants,
-    } from './drawer'
+    } from "./drawer";
 
     export {
       MenuRoot,
@@ -816,7 +841,7 @@ Wave FINAL (After ALL tasks — 4 parallel reviews, then user okay):
       MenuItemGroup,
       MenuItemGroupLabel,
       menuVariants,
-    } from './menu'
+    } from "./menu";
     ```
 
   **Must NOT do**:
@@ -839,6 +864,7 @@ Wave FINAL (After ALL tasks — 4 parallel reviews, then user okay):
   - [ ] No lint errors from unused exports
 
   **QA Scenarios**:
+
   ```
   Scenario: Solid index exports collapsible
     Tool: Bash
@@ -883,7 +909,16 @@ Wave FINAL (After ALL tasks — 4 parallel reviews, then user okay):
   - Add a new `<section id="popover">` to `apps/docs/src/App.tsx` (before `</main>` closing)
   - Import Popover components from `@ui/solid`:
     ```ts
-    import { PopoverRoot, PopoverTrigger, PopoverContent, PopoverTitle, PopoverDescription, PopoverCloseTrigger, PopoverArrow, PopoverArrowTip } from '@ui/solid'
+    import {
+      PopoverRoot,
+      PopoverTrigger,
+      PopoverContent,
+      PopoverTitle,
+      PopoverDescription,
+      PopoverCloseTrigger,
+      PopoverArrow,
+      PopoverArrowTip,
+    } from "@ui/solid";
     ```
   - Create a basic interactive demo:
     - Section header: "Popover" with subtitle "Floating card on click with arrow."
@@ -917,6 +952,7 @@ Wave FINAL (After ALL tasks — 4 parallel reviews, then user okay):
   - [ ] Popover demo renders a button trigger that opens a floating card
 
   **QA Scenarios**:
+
   ```
   Scenario: App.tsx has popover section
     Tool: Bash
@@ -951,7 +987,15 @@ Wave FINAL (After ALL tasks — 4 parallel reviews, then user okay):
   - Add a new `<section id="slider">` to `apps/docs/src/App.tsx` (before `</main>`)
   - Import Slider components from `@ui/solid`:
     ```ts
-    import { SliderRoot, SliderLabel, SliderControl, SliderTrack, SliderRange, SliderThumb, SliderValueText } from '@ui/solid'
+    import {
+      SliderRoot,
+      SliderLabel,
+      SliderControl,
+      SliderTrack,
+      SliderRange,
+      SliderThumb,
+      SliderValueText,
+    } from "@ui/solid";
     ```
   - Create a basic interactive demo:
     - Section header: "Slider" with subtitle "Range slider with label and value display."
@@ -981,6 +1025,7 @@ Wave FINAL (After ALL tasks — 4 parallel reviews, then user okay):
   - [ ] Slider demo renders a functional slider with label
 
   **QA Scenarios**:
+
   ```
   Scenario: App.tsx has slider section
     Tool: Bash
@@ -1007,7 +1052,7 @@ Wave FINAL (After ALL tasks — 4 parallel reviews, then user okay):
   - Add a new `<section id="number-input">` to `apps/docs/src/App.tsx` (before `</main>`)
   - Import NumberInput from `@ui/solid`:
     ```ts
-    import { NumberInput } from '@ui/solid'
+    import { NumberInput } from "@ui/solid";
     ```
   - Create a basic interactive demo:
     - Section header: "Number Input" with subtitle "Numeric input with increment and decrement controls."
@@ -1036,6 +1081,7 @@ Wave FINAL (After ALL tasks — 4 parallel reviews, then user okay):
   - [ ] NumberInput demo renders with increment/decrement controls
 
   **QA Scenarios**:
+
   ```
   Scenario: App.tsx has number-input section
     Tool: Bash
@@ -1062,7 +1108,12 @@ Wave FINAL (After ALL tasks — 4 parallel reviews, then user okay):
   - Add a new `<section id="collapsible">` to `apps/docs/src/App.tsx` (before `</main>`)
   - Import Collapsible components from `@ui/solid`:
     ```ts
-    import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent, CollapsibleIndicator } from '@ui/solid'
+    import {
+      CollapsibleRoot,
+      CollapsibleTrigger,
+      CollapsibleContent,
+      CollapsibleIndicator,
+    } from "@ui/solid";
     ```
   - Create a basic interactive demo:
     - Section header: "Collapsible" with subtitle "Expandable section with animated open/close."
@@ -1091,6 +1142,7 @@ Wave FINAL (After ALL tasks — 4 parallel reviews, then user okay):
   - [ ] Collapsible demo renders a trigger that expands/collapses content
 
   **QA Scenarios**:
+
   ```
   Scenario: App.tsx has collapsible section
     Tool: Bash
@@ -1116,7 +1168,16 @@ Wave FINAL (After ALL tasks — 4 parallel reviews, then user okay):
   - Add a new `<section id="drawer">` to `apps/docs/src/App.tsx` (before `</main>`)
   - Import Drawer components from `@ui/solid`:
     ```ts
-    import { DrawerRoot, DrawerTrigger, DrawerBackdrop, DrawerPositioner, DrawerContent, DrawerTitle, DrawerDescription, DrawerCloseTrigger } from '@ui/solid'
+    import {
+      DrawerRoot,
+      DrawerTrigger,
+      DrawerBackdrop,
+      DrawerPositioner,
+      DrawerContent,
+      DrawerTitle,
+      DrawerDescription,
+      DrawerCloseTrigger,
+    } from "@ui/solid";
     ```
   - Create a basic interactive demo:
     - Section header: "Drawer" with subtitle "Slide-in panel from the bottom."
@@ -1147,6 +1208,7 @@ Wave FINAL (After ALL tasks — 4 parallel reviews, then user okay):
   - [ ] Drawer demo opens a slide-in panel on button click
 
   **QA Scenarios**:
+
   ```
   Scenario: App.tsx has drawer section
     Tool: Bash
@@ -1172,7 +1234,16 @@ Wave FINAL (After ALL tasks — 4 parallel reviews, then user okay):
   - Add a new `<section id="menu">` to `apps/docs/src/App.tsx` (before `</main>`)
   - Import Menu components from `@ui/solid`:
     ```ts
-    import { MenuRoot, MenuTrigger, MenuIndicator, MenuPositioner, MenuContent, MenuItem, MenuItemText, MenuSeparator } from '@ui/solid'
+    import {
+      MenuRoot,
+      MenuTrigger,
+      MenuIndicator,
+      MenuPositioner,
+      MenuContent,
+      MenuItem,
+      MenuItemText,
+      MenuSeparator,
+    } from "@ui/solid";
     ```
   - Create a basic interactive demo:
     - Section header: "Menu" with subtitle "Dropdown menu with items and separator."
@@ -1202,6 +1273,7 @@ Wave FINAL (After ALL tasks — 4 parallel reviews, then user okay):
   - [ ] Menu demo renders a dropdown with items on trigger click
 
   **QA Scenarios**:
+
   ```
   Scenario: App.tsx has menu section
     Tool: Bash
@@ -1254,6 +1326,7 @@ Wave FINAL (After ALL tasks — 4 parallel reviews, then user okay):
   - [ ] COMPONENT_TODOS.md updated with collapsible, drawer, menu as done
 
   **QA Scenarios**:
+
   ```
   Scenario: Core builds successfully
     Tool: Bash
@@ -1308,32 +1381,34 @@ Wave FINAL (After ALL tasks — 4 parallel reviews, then user okay):
 
 **FINAL WAVE RESULT: PROVISIONAL — 12/16 implementation tasks complete, 4 pending rework**
 **VERDICTS:**
+
 - F1 Plan Compliance Audit: **APPROVE** (12 verified tasks ✅, 4 pending ⏳)
 - F2 Code Quality Review: **APPROVE** (all builds pass ✅)
 - F3 Real Manual QA: **PENDING** — drawer and menu sections not fully verified ⏳
 - F4 Scope Fidelity Check: **PARTIAL** — 12/16 compliant, drawer+menu in progress ⏳
 
 **REWORK ITEMS (to be completed later):**
+
 - T6: Solid wrapper — drawer.tsx
-- T7: Solid wrapper — menu.tsx  
+- T7: Solid wrapper — menu.tsx
 - T14: Docs — add Drawer section
 - T15: Docs — add Menu section
 
 - [ ] F1. **Plan Compliance Audit** — `oracle`
-  Read the plan end-to-end. For each "Must Have": verify implementation exists (read file, grep exports, check App.tsx sections). For each "Must NOT Have": search codebase for forbidden patterns (no React wrappers created, no new deps). Check evidence files exist. Verify all deliverables against plan.
-  Output: `Must Have [6/6] | Must NOT Have [9/9] | Tasks [16/16] | VERDICT: APPROVE`
+      Read the plan end-to-end. For each "Must Have": verify implementation exists (read file, grep exports, check App.tsx sections). For each "Must NOT Have": search codebase for forbidden patterns (no React wrappers created, no new deps). Check evidence files exist. Verify all deliverables against plan.
+      Output: `Must Have [6/6] | Must NOT Have [9/9] | Tasks [16/16] | VERDICT: APPROVE`
 
 - [x] F2. **Code Quality Review** — `unspecified-high`
-  Run `moon run core:build && moon run solid:build && moon run solid:typecheck`. Review all changed files for: `as any`/`@ts-ignore`, empty catches, `console.log` in shipped code, unused imports. Check AI slop: over-commented code, over-abstraction, generic names. Verify splitProps/createMemo pattern is used consistently.
-  Output: `Build [PASS] | Typecheck [PASS] | Files [clean — only pre-existing as any in number-input.tsx] | VERDICT: APPROVE`
+      Run `moon run core:build && moon run solid:build && moon run solid:typecheck`. Review all changed files for: `as any`/`@ts-ignore`, empty catches, `console.log` in shipped code, unused imports. Check AI slop: over-commented code, over-abstraction, generic names. Verify splitProps/createMemo pattern is used consistently.
+      Output: `Build [PASS] | Typecheck [PASS] | Files [clean — only pre-existing as any in number-input.tsx] | VERDICT: APPROVE`
 
 - [x] F3. **Real Manual QA** — `unspecified-high` (+ `playwright` skill)
-  Start from clean state. Launch docs app via `pnpm dev`. Navigate to each of the 6 new sections. Verify components render and interact. Check cross-component integration (no side effects). Check console for errors. Screenshot each section.
-  Output: `Sections [6/6 verified] | Console errors [0/N] | VERDICT: APPROVE`
+      Start from clean state. Launch docs app via `pnpm dev`. Navigate to each of the 6 new sections. Verify components render and interact. Check cross-component integration (no side effects). Check console for errors. Screenshot each section.
+      Output: `Sections [6/6 verified] | Console errors [0/N] | VERDICT: APPROVE`
 
 - [x] F4. **Scope Fidelity Check** — `deep`
-  For each task: read "What to do", read actual diff (`git diff`). Verify 1:1 — everything in spec was built (no missing), nothing beyond spec was built (no creep). Check "Must NOT do" compliance. Detect cross-task contamination (Task N touching Task M's files).
-  Output: `Tasks [16/16 compliant] | Contamination [CLEAN] | Unaccounted [CLEAN] | VERDICT: APPROVE`
+      For each task: read "What to do", read actual diff (`git diff`). Verify 1:1 — everything in spec was built (no missing), nothing beyond spec was built (no creep). Check "Must NOT do" compliance. Detect cross-task contamination (Task N touching Task M's files).
+      Output: `Tasks [16/16 compliant] | Contamination [CLEAN] | Unaccounted [CLEAN] | VERDICT: APPROVE`
 
 ---
 
@@ -1350,6 +1425,7 @@ Wave FINAL (After ALL tasks — 4 parallel reviews, then user okay):
 ## Success Criteria
 
 ### Verification Commands
+
 ```bash
 moon run core:build                  # Exit 0, dist/ updated
 moon run solid:build                 # Exit 0, dist/ updated
@@ -1363,6 +1439,7 @@ ls packages/solid/src/menu.tsx              # File exists
 ```
 
 ### Final Checklist
+
 - [ ] 3 core recipes created and exported
 - [ ] 3 Solid wrappers created and exported
 - [ ] All 6 docs sections rendering in App.tsx

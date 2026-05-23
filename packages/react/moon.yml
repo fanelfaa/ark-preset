@@ -3,18 +3,18 @@ layer: library
 stack: frontend
 
 dependsOn:
-  - 'core'
+  - "core"
 
 tasks:
   build:
     command: tsup
     deps:
-      - 'core:build'
+      - "core:build"
 
   dev:
     command: tsup --watch
     deps:
-      - 'core:dev'
+      - "core:dev"
 
   typecheck:
     command: tsc --noEmit

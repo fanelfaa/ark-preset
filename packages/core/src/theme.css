@@ -36,22 +36,26 @@
 
   /* Radius */
   --radius: 0.625rem;
-  --radius-xs: .125rem;
-  --radius-sm: calc(var(--radius)*.6);
-  --radius-md: calc(var(--radius)*.8);
+  --radius-xs: 0.125rem;
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius)*1.4);
-  --radius-2xl: calc(var(--radius)*1.8);
-  --radius-3xl: calc(var(--radius)*2.2);
-  --radius-4xl: calc(var(--radius)*2.6);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-[data-scope=toast][data-part=root] {
+[data-scope="toast"][data-part="root"] {
   translate: var(--x) var(--y);
   scale: var(--scale);
   z-index: var(--z-index);
   height: var(--height);
   opacity: var(--opacity);
   will-change: translate, opacity, scale;
-  transition: translate 400ms, scale 400ms, opacity 400ms, height 400ms;
+  transition:
+    translate 400ms,
+    scale 400ms,
+    opacity 400ms,
+    height 400ms;
 }

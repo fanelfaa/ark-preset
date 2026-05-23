@@ -5,6 +5,7 @@
 > **Quick Summary**: Upgrade the existing Solid DatePicker component to match solid-ui's rich styling quality — range selection visuals, date state styling (today/selected/disabled), animation classes, and buttonVariants-based triggers — while preserving the project's tv + createMemo + splitProps conventions.
 >
 > **Deliverables**:
+>
 > - Enriched `packages/core/src/recipes/date-picker.ts` (tv slot styles)
 > - Rewritten `packages/solid/src/date-picker.tsx` (reactive variants + buttonVariants)
 >
@@ -17,23 +18,29 @@
 ## Context
 
 ### Original Request
+
 User created a DatePicker solid component but feels it is "not as good as I want." They provided a solid-ui reference implementation with rich date state styling (range selection, today/selected/disabled visuals), animation classes, and buttonVariants-powered navigation triggers. They want to match that quality while keeping their existing tv variant conventions.
 
 ### Interview Summary
+
 **Key Discussions**:
+
 - Scoped import `@ark-ui/solid/date-picker` kept (matching Dialog, Select, etc.)
 - Error variant support added (error prop → red borders on control/label)
 - `buttonVariants` imported for PrevTrigger/NextTrigger (not inlining)
 - No tests needed (no test infra in project)
 
 **Research Findings**:
+
 - All components follow: `splitProps` + `createMemo` + tv slot `{ class: local.class }`
 - Button recipe exists at `packages/core/src/recipes/button.ts` with `variant`/`size` variants
 - Existing `datePickerVariants` already has slots for all sub-components but missing rich data-attribute styling
 - App.tsx already has a DatePicker demo section using all sub-components
 
 ### Metis Review
+
 **Identified Gaps** (self-resolved):
+
 - Error prop type: boolean (matches existing recipe defaultVariants)
 - Range styling: Include all Ark UI built-in data attributes (`data-[range-start/end/in-range/outside-range]`, `data-[today/selected/disabled]`)
 - Animation: Add CSS animation classes to content (matching solid-ui)
@@ -46,17 +53,21 @@ User created a DatePicker solid component but feels it is "not as good as I want
 ## Work Objectives
 
 ### Core Objective
+
 Upgrade DatePicker to solid-ui quality while preserving project conventions.
 
 ### Concrete Deliverables
+
 - `packages/core/src/recipes/date-picker.ts` — enriched slot styles
 - `packages/solid/src/date-picker.tsx` — rewritten with reactive variants + buttonVariants
 
 ### Definition of Done
+
 - [x] `bun run build` passes in both packages
 - [x] App.tsx DatePicker demo renders correctly with rich styling
 
 ### Must Have
+
 - Table cells show range start/end/in-range visual distinction
 - Table cell triggers show today/selected/disabled visual states
 - Prev/Next triggers use buttonVariants outline styling
@@ -65,6 +76,7 @@ Upgrade DatePicker to solid-ui quality while preserving project conventions.
 - All existing sub-components still exported from index
 
 ### Must NOT Have (Guardrails)
+
 - No switch to `cn()` — keep tv slot pattern
 - No new dependencies beyond existing tv/tailwind-variants/buttonVariants
 - No test files
@@ -80,11 +92,13 @@ Upgrade DatePicker to solid-ui quality while preserving project conventions.
 > **ZERO HUMAN INTERVENTION** — ALL verification is agent-executed. No exceptions.
 
 ### Test Decision
+
 - **Infrastructure exists**: NO
 - **Automated tests**: NONE
 - **Agent-Executed QA**: Build verification + browser inspection of App.tsx demo
 
 ### QA Policy
+
 Every task MUST include agent-executed QA scenarios. Evidence saved to `.sisyphus/evidence/task-{N}-{scenario-slug}.{ext}`.
 
 - **Build**: Run `bun run build` in both packages
@@ -109,6 +123,7 @@ Wave FINAL:
 ```
 
 ### Dependency Matrix
+
 - **Task 1**: None (can start immediately) — blocks Task 2
 - **Task 2**: Depends on Task 1 — blocks Final Verification
 - **F1-F4**: Depend on Task 2 — parallel
@@ -211,31 +226,41 @@ Wave FINAL:
   - For `DatePickerInput`: accept `error` prop (boolean), split it, use reactive styles
   - For `DatePickerPrevTrigger` and `DatePickerNextTrigger`: use `buttonVariants({ variant: "outline" })` for base styling, merged via class override:
     ```tsx
-    const prevTriggerClass = createMemo(() => styles.prevTrigger({ class: local.class }))
+    const prevTriggerClass = createMemo(() => styles.prevTrigger({ class: local.class }));
     ```
     The recipe slot already contains the button-like styling
   - Actually, import `buttonVariants` and use it:
+
     ```tsx
-    import { buttonVariants } from '@ui/core'
+    import { buttonVariants } from "@ui/core";
     // In component:
-    const btnClass = createMemo(() => buttonVariants({ variant: 'outline', class: styles.prevTrigger({ class: local.class }) }))
+    const btnClass = createMemo(() =>
+      buttonVariants({ variant: "outline", class: styles.prevTrigger({ class: local.class }) }),
+    );
     ```
+
     Wait — that would double-apply. Better approach: have the recipe handle the button-like styling and just use the slot class directly. The recipe prevTrigger/nextTrigger slots already have button-styled classes. So keep the current pattern but with enriched classes from the recipe.
 
     Actually, looking at solid-ui more carefully, they use `buttonVariants` as a base and override with custom classes. In our pattern, the tv slot already contains all the classes. So we DON'T need to import buttonVariants in the component — the recipe slot classes replace the need for it. The recipe already has prevTrigger/nextTrigger styled like buttons.
 
     BUT the user explicitly chose "Import buttonVariants" in the question. So let me import it and compose:
+
     ```tsx
-    import { buttonVariants } from '@ui/core'
-    const prevTriggerClass = createMemo(() => buttonVariants({ variant: 'outline', class: styles().prevTrigger({ class: local.class }) }))
+    import { buttonVariants } from "@ui/core";
+    const prevTriggerClass = createMemo(() =>
+      buttonVariants({ variant: "outline", class: styles().prevTrigger({ class: local.class }) }),
+    );
     ```
 
-    Actually this creates a conflict — `buttonVariants` returns classes that might conflict with slot classes. The better approach: 
+    Actually this creates a conflict — `buttonVariants` returns classes that might conflict with slot classes. The better approach:
+
     ```tsx
-    import { buttonVariants } from '@ui/core'
+    import { buttonVariants } from "@ui/core";
     // ... in component:
-    const btnClass = createMemo(() => buttonVariants({ variant: 'outline', size: 'icon' }))
-    const prevTriggerClass = createMemo(() => styles().prevTrigger({ class: `${btnClass()} ${local.class || ''}` }))
+    const btnClass = createMemo(() => buttonVariants({ variant: "outline", size: "icon" }));
+    const prevTriggerClass = createMemo(() =>
+      styles().prevTrigger({ class: `${btnClass()} ${local.class || ""}` }),
+    );
     ```
 
     Hmm that's getting complex. Let me think about this differently. The recipe prevTrigger/nextTrigger slots should NOT include the button base since buttonVariants provides it. Instead the component composes them together.
@@ -245,15 +270,20 @@ Wave FINAL:
     Actually the cleanest approach following our conventions: make the recipe slot minimal (just custom overrides) and use buttonVariants in the component as the base. This is similar to how solid-ui does it with cn() — but we use tv slot + buttonVariants.
 
     Let me use this approach:
+
     ```tsx
     const DatePickerPrevTrigger: Component<DatePickerPrimitive.PrevTriggerProps> = (props) => {
-      const [local, others] = splitProps(props, ['class', 'children'])
-      const styles = datePickerVariants()
-      const prevTriggerClass = createMemo(() => 
-        buttonVariants({ variant: 'outline', size: 'icon', class: styles().prevTrigger({ class: local.class }) })
-      )
+      const [local, others] = splitProps(props, ["class", "children"]);
+      const styles = datePickerVariants();
+      const prevTriggerClass = createMemo(() =>
+        buttonVariants({
+          variant: "outline",
+          size: "icon",
+          class: styles().prevTrigger({ class: local.class }),
+        }),
+      );
       // rest...
-    }
+    };
     ```
 
     This composes: buttonVariants base (outline, icon) → tv slot overrides (custom sizing, opacity) → user class override.
@@ -261,7 +291,7 @@ Wave FINAL:
     The recipe prevTrigger/nextTrigger slots should have only override classes (buttonVariants provides the base):
     - `prevTrigger`: `size-7 bg-transparent p-0 opacity-50 hover:opacity-100`
     - `nextTrigger`: `size-7 bg-transparent p-0 opacity-50 hover:opacity-100`
-    Note: `[&>svg]:size-4` is already provided by buttonVariants' `[&_svg]:size-4`
+      Note: `[&>svg]:size-4` is already provided by buttonVariants' `[&_svg]:size-4`
 
   - Keep `children()` + `Show` pattern for Trigger, PrevTrigger, NextTrigger (with SVG fallbacks)
   - Keep same SVG icons (current lucide-style paths are fine)
@@ -357,20 +387,20 @@ Wave FINAL:
 ## Final Verification Wave
 
 - [x] F1. **Plan Compliance Audit** — `oracle`
-  Read the plan end-to-end. For each "Must Have": verify implementation exists (read file, run build). For each "Must NOT Have": search for forbidden patterns. Check evidence files exist. Compare deliverables against plan.
-  Output: `Must Have [N/N] | Must NOT Have [N/N] | Tasks [N/N] | VERDICT: APPROVE/REJECT`
+      Read the plan end-to-end. For each "Must Have": verify implementation exists (read file, run build). For each "Must NOT Have": search for forbidden patterns. Check evidence files exist. Compare deliverables against plan.
+      Output: `Must Have [N/N] | Must NOT Have [N/N] | Tasks [N/N] | VERDICT: APPROVE/REJECT`
 
 - [x] F2. **Build Verification** — `unspecified-high`
-  Run `bun run build` in both packages. Check for TypeScript errors, lint issues.
-  Output: `Build [PASS/FAIL] | Verdict`
+      Run `bun run build` in both packages. Check for TypeScript errors, lint issues.
+      Output: `Build [PASS/FAIL] | Verdict`
 
 - [x] F3. **Real Manual QA** — `unspecified-high` (+ `playwright` skill)
-  From clean state, execute ALL QA scenarios from ALL tasks. Test cross-task integration. Save to `.sisyphus/evidence/final-qa/`.
-  Output: `Scenarios [N/N pass] | VERDICT`
+      From clean state, execute ALL QA scenarios from ALL tasks. Test cross-task integration. Save to `.sisyphus/evidence/final-qa/`.
+      Output: `Scenarios [N/N pass] | VERDICT`
 
 - [x] F4. **Scope Fidelity Check** — `deep`
-  For each task: read "What to do", read actual diff. Verify 1:1 — everything in spec was built, nothing beyond spec was built. Check "Must NOT do" compliance.
-  Output: `Tasks [N/N compliant] | VERDICT`
+      For each task: read "What to do", read actual diff. Verify 1:1 — everything in spec was built, nothing beyond spec was built. Check "Must NOT do" compliance.
+      Output: `Tasks [N/N compliant] | VERDICT`
 
 ---
 
@@ -386,12 +416,14 @@ Wave FINAL:
 ## Success Criteria
 
 ### Verification Commands
+
 ```bash
 cd packages/core && bun run build    # Expected: exit 0
 cd packages/solid && bun run build   # Expected: exit 0
 ```
 
 ### Final Checklist
+
 - [x] Core recipe enriched with rich data-attribute styling
 - [x] Solid component rewritten with reactive error variant + buttonVariants for triggers
 - [x] All existing exports preserved

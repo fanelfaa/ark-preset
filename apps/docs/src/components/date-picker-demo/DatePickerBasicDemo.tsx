@@ -1,4 +1,4 @@
-import type { DateValue } from '@internationalized/date'
+import type { DateValue } from "@internationalized/date";
 import {
   DatePicker,
   DatePickerLabel,
@@ -22,9 +22,9 @@ import {
   DatePickerTableHeader,
   DatePickerTableCell,
   DatePickerTableCellTrigger,
-} from '@ui/solid'
-import type { UseDatePickerContext } from '@ark-ui/solid/date-picker'
-import { Portal } from 'solid-js/web'
+} from "@ui/solid";
+import type { UseDatePickerContext } from "@ark-ui/solid/date-picker";
+import { Portal } from "solid-js/web";
 
 export default function DatePickerBasicDemo() {
   return (
@@ -112,9 +112,7 @@ export default function DatePickerBasicDemo() {
                             <DatePickerTableRow key={id}>
                               {week.map((day: DateValue, id: number) => (
                                 <DatePickerTableCell key={id} value={day}>
-                                  <DatePickerTableCellTrigger>
-                                    {day.day}
-                                  </DatePickerTableCellTrigger>
+                                  <DatePickerTableCellTrigger>{day.day}</DatePickerTableCellTrigger>
                                 </DatePickerTableCell>
                               ))}
                             </DatePickerTableRow>
@@ -166,17 +164,21 @@ export default function DatePickerBasicDemo() {
                       </DatePickerViewControl>
                       <DatePickerTable>
                         <DatePickerTableBody>
-                          {datePicker().getMonthsGrid({ columns: 4, format: 'short' }).map((months: { value: number; label: string }[], id: number) => (
-                            <DatePickerTableRow key={id}>
-                              {months.map((month: { value: number; label: string }, id: number) => (
-                                <DatePickerTableCell key={id} value={month.value}>
-                                  <DatePickerTableCellTrigger>
-                                    {month.label}
-                                  </DatePickerTableCellTrigger>
-                                </DatePickerTableCell>
-                              ))}
-                            </DatePickerTableRow>
-                          ))}
+                          {datePicker()
+                            .getMonthsGrid({ columns: 4, format: "short" })
+                            .map((months: { value: number; label: string }[], id: number) => (
+                              <DatePickerTableRow key={id}>
+                                {months.map(
+                                  (month: { value: number; label: string }, id: number) => (
+                                    <DatePickerTableCell key={id} value={month.value}>
+                                      <DatePickerTableCellTrigger>
+                                        {month.label}
+                                      </DatePickerTableCellTrigger>
+                                    </DatePickerTableCell>
+                                  ),
+                                )}
+                              </DatePickerTableRow>
+                            ))}
                         </DatePickerTableBody>
                       </DatePickerTable>
                     </>
@@ -224,17 +226,19 @@ export default function DatePickerBasicDemo() {
                       </DatePickerViewControl>
                       <DatePickerTable>
                         <DatePickerTableBody>
-                          {datePicker().getYearsGrid({ columns: 4 }).map((years: { value: number; label: string }[], id: number) => (
-                            <DatePickerTableRow key={id}>
-                              {years.map((year: { value: number; label: string }, id: number) => (
-                                <DatePickerTableCell key={id} value={year.value}>
-                                  <DatePickerTableCellTrigger>
-                                    {year.label}
-                                  </DatePickerTableCellTrigger>
-                                </DatePickerTableCell>
-                              ))}
-                            </DatePickerTableRow>
-                          ))}
+                          {datePicker()
+                            .getYearsGrid({ columns: 4 })
+                            .map((years: { value: number; label: string }[], id: number) => (
+                              <DatePickerTableRow key={id}>
+                                {years.map((year: { value: number; label: string }, id: number) => (
+                                  <DatePickerTableCell key={id} value={year.value}>
+                                    <DatePickerTableCellTrigger>
+                                      {year.label}
+                                    </DatePickerTableCellTrigger>
+                                  </DatePickerTableCell>
+                                ))}
+                              </DatePickerTableRow>
+                            ))}
                         </DatePickerTableBody>
                       </DatePickerTable>
                     </>
@@ -246,5 +250,5 @@ export default function DatePickerBasicDemo() {
         </Portal>
       </DatePicker>
     </div>
-  )
+  );
 }

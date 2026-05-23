@@ -5,22 +5,47 @@ category: Overlay
 updatedDate: 2026-05-18
 ---
 
-import PopoverBasicDemo from '@components/popover-demo/PopoverBasicDemo.tsx'
+import PopoverBasicDemo from "@components/popover-demo/PopoverBasicDemo.tsx";
 
 # Popover
 
 A floating panel that displays content when triggered by a user action, typically a button click.
 
-<a href="https://ark-ui.com/docs/components/popover" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors">
-  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+<a
+  href="https://ark-ui.com/docs/components/popover"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="inline-flex items-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="14"
+    height="14"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+    <polyline points="15 3 21 3 21 9" />
+    <line x1="10" x2="21" y1="14" y2="3" />
+  </svg>
   Docs
 </a>
 
 <PopoverBasicDemo client:load />
 
 ```tsx
-import { Popover, PopoverTrigger, PopoverContent, PopoverTitle, PopoverDescription } from "~/components/popover"
-import { Button } from "~/components/button"
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverTitle,
+  PopoverDescription,
+} from "~/components/popover";
+import { Button } from "~/components/button";
 
 export function PopoverDemo() {
   return (
@@ -33,19 +58,22 @@ export function PopoverDemo() {
         </PopoverDescription>
       </PopoverContent>
     </Popover>
-  )
+  );
 }
 ```
 
 ## Installation
 
 ### CLI
+
 Run the following command to add the component to your project:
+
 ```bash
 npx solidui-cli@latest add popover
 ```
 
 ### Manual
+
 <div class="space-y-3">
 Install the dependency:
 ```bash
@@ -59,21 +87,20 @@ import { tv, type VariantProps } from 'tailwind-variants'
 
 export const popoverVariants = tv({
   slots: {
-    root: 'relative inline-flex',
-    trigger: 'inline-flex',
-    positioner: 'fixed z-50',
+    root: "relative inline-flex",
+    trigger: "inline-flex",
+    positioner: "fixed z-50",
     content:
-      'z-50 w-72 rounded-lg border border-border bg-popover p-4 text-popover-foreground shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
-    title: 'text-lg font-semibold leading-none tracking-tight',
-    description: 'text-sm text-muted-foreground',
+      "z-50 w-72 rounded-lg border border-border bg-popover p-4 text-popover-foreground shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
+    title: "text-lg font-semibold leading-none tracking-tight",
+    description: "text-sm text-muted-foreground",
     closeTrigger:
-      'absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none',
-    arrow: '',
-    arrowTip:
-      'h-2 w-2 rotate-45 border-b border-l border-border bg-popover',
-    indicator: 'h-4 w-4',
+      "absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none",
+    arrow: "",
+    arrowTip: "h-2 w-2 rotate-45 border-b border-l border-border bg-popover",
+    indicator: "h-4 w-4",
   },
-})
+});
 
 export type PopoverVariants = VariantProps<typeof popoverVariants>
 ```
@@ -89,68 +116,71 @@ import { popoverVariants } from './recipes/popover'
 // Global variant instance (no params consumed)
 const styles = popoverVariants()
 
-export const PopoverRoot = ArkPopover.Root
-export const PopoverTrigger = ArkPopover.Trigger
+export const PopoverRoot = ArkPopover.Root;
+export const PopoverTrigger = ArkPopover.Trigger;
 
 type PopoverContentProps = ArkPopover.ContentProps & { class?: string; children?: JSX.Element }
 
 const PopoverContent: Component<PopoverContentProps> = (props) => {
-  const [local, others] = splitProps(props, ['class', 'children'])
-  // uses global `styles`
-  const contentClass = createMemo(() => styles.content({ class: local.class }))
-  return (
-    <Portal>
-      <ArkPopover.Positioner class={styles.positioner()}>
-        <ArkPopover.Content class={contentClass()} {...others}>
-          {local.children}
-        </ArkPopover.Content>
-      </ArkPopover.Positioner>
-    </Portal>
-  )
+const [local, others] = splitProps(props, ['class', 'children'])
+// uses global `styles`
+const contentClass = createMemo(() => styles.content({ class: local.class }))
+return (
+
+<Portal>
+<ArkPopover.Positioner class={styles.positioner()}>
+<ArkPopover.Content class={contentClass()} {...others}>
+{local.children}
+</ArkPopover.Content>
+</ArkPopover.Positioner>
+</Portal>
+)
 }
 
 const PopoverTitle: Component<ArkPopover.TitleProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const titleClass = createMemo(() => styles.title({ class: local.class }))
-  return <ArkPopover.Title class={titleClass()} {...others} />
+const [local, others] = splitProps(props, ['class'])
+const titleClass = createMemo(() => styles.title({ class: local.class }))
+return <ArkPopover.Title class={titleClass()} {...others} />
 }
 
 const PopoverDescription: Component<ArkPopover.DescriptionProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const descriptionClass = createMemo(() => styles.description({ class: local.class }))
-  return <ArkPopover.Description class={descriptionClass()} {...others} />
+const [local, others] = splitProps(props, ['class'])
+const descriptionClass = createMemo(() => styles.description({ class: local.class }))
+return <ArkPopover.Description class={descriptionClass()} {...others} />
 }
 
 const PopoverCloseTrigger: Component<ArkPopover.CloseTriggerProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const closeClass = createMemo(() => styles.closeTrigger({ class: local.class }))
-  return (
-    <ArkPopover.CloseTrigger class={closeClass()} {...others}>
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="size-4"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
-    </ArkPopover.CloseTrigger>
-  )
+const [local, others] = splitProps(props, ['class'])
+const closeClass = createMemo(() => styles.closeTrigger({ class: local.class }))
+return (
+
+<ArkPopover.CloseTrigger class={closeClass()} {...others}>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="size-4"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+</ArkPopover.CloseTrigger>
+)
 }
 
 const PopoverArrow: Component<ArkPopover.ArrowProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const arrowClass = createMemo(() => styles.arrow({ class: local.class }))
-  return <ArkPopover.Arrow class={arrowClass()} {...others} />
+const [local, others] = splitProps(props, ['class'])
+const arrowClass = createMemo(() => styles.arrow({ class: local.class }))
+return <ArkPopover.Arrow class={arrowClass()} {...others} />
 }
 
 const PopoverArrowTip: Component<ArkPopover.ArrowTipProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const arrowTipClass = createMemo(() => styles.arrowTip({ class: local.class }))
-  return <ArkPopover.ArrowTip class={arrowTipClass()} {...others} />
+const [local, others] = splitProps(props, ['class'])
+const arrowTipClass = createMemo(() => styles.arrowTip({ class: local.class }))
+return <ArkPopover.ArrowTip class={arrowTipClass()} {...others} />
 }
 
 const PopoverIndicator: Component<ArkPopover.IndicatorProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const indicatorClass = createMemo(() => styles.indicator({ class: local.class }))
-  return (
-    <ArkPopover.Indicator class={indicatorClass()} {...others}>
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="size-4"><path d="m6 9 6 6 6-6"/></svg>
-    </ArkPopover.Indicator>
-  )
+const [local, others] = splitProps(props, ['class'])
+const indicatorClass = createMemo(() => styles.indicator({ class: local.class }))
+return (
+
+<ArkPopover.Indicator class={indicatorClass()} {...others}>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="size-4"><path d="m6 9 6 6 6-6"/></svg>
+</ArkPopover.Indicator>
+)
 }
 
 export {
@@ -174,7 +204,13 @@ export {
 Import the components:
 
 ```tsx
-import { Popover, PopoverTrigger, PopoverContent, PopoverTitle, PopoverDescription } from "~/components/popover"
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverTitle,
+  PopoverDescription,
+} from "~/components/popover";
 ```
 
 Basic usage:
@@ -225,60 +261,60 @@ Add an arrow to visually connect the popover to its trigger.
 
 ### Popover (Root)
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| open | `boolean` | — | Controlled open state. |
-| onOpenChange | `(open: boolean) => void` | — | Callback when open state changes. |
-| positioning | `object` | — | Positioning options for the popover. |
-| class | `string` | — | Custom CSS class. |
+| Prop         | Type                      | Default | Description                          |
+| ------------ | ------------------------- | ------- | ------------------------------------ |
+| open         | `boolean`                 | —       | Controlled open state.               |
+| onOpenChange | `(open: boolean) => void` | —       | Callback when open state changes.    |
+| positioning  | `object`                  | —       | Positioning options for the popover. |
+| class        | `string`                  | —       | Custom CSS class.                    |
 
 ### PopoverTrigger
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| asChild | `boolean` | — | Whether to merge props with child element. |
-| class | `string` | — | Custom CSS class. |
+| Prop    | Type      | Default | Description                                |
+| ------- | --------- | ------- | ------------------------------------------ |
+| asChild | `boolean` | —       | Whether to merge props with child element. |
+| class   | `string`  | —       | Custom CSS class.                          |
 
 ### PopoverContent
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| class | `string` | — | Custom CSS class. |
-| portalled | `boolean` | — | Whether to portal the content. |
-| forceMount | `boolean` | — | Force mount the content. |
+| Prop       | Type      | Default | Description                    |
+| ---------- | --------- | ------- | ------------------------------ |
+| class      | `string`  | —       | Custom CSS class.              |
+| portalled  | `boolean` | —       | Whether to portal the content. |
+| forceMount | `boolean` | —       | Force mount the content.       |
 
 ### PopoverTitle
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| class | `string` | — | Custom CSS class. |
+| Prop  | Type     | Default | Description       |
+| ----- | -------- | ------- | ----------------- |
+| class | `string` | —       | Custom CSS class. |
 
 ### PopoverDescription
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| class | `string` | — | Custom CSS class. |
+| Prop  | Type     | Default | Description       |
+| ----- | -------- | ------- | ----------------- |
+| class | `string` | —       | Custom CSS class. |
 
 ### PopoverCloseTrigger
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| class | `string` | — | Custom CSS class. |
+| Prop  | Type     | Default | Description       |
+| ----- | -------- | ------- | ----------------- |
+| class | `string` | —       | Custom CSS class. |
 
 ### PopoverArrow
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| class | `string` | — | Custom CSS class. |
+| Prop  | Type     | Default | Description       |
+| ----- | -------- | ------- | ----------------- |
+| class | `string` | —       | Custom CSS class. |
 
 ### PopoverArrowTip
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| class | `string` | — | Custom CSS class. |
+| Prop  | Type     | Default | Description       |
+| ----- | -------- | ------- | ----------------- |
+| class | `string` | —       | Custom CSS class. |
 
 ### PopoverIndicator
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| class | `string` | — | Custom CSS class. |
+| Prop  | Type     | Default | Description       |
+| ----- | -------- | ------- | ----------------- |
+| class | `string` | —       | Custom CSS class. |

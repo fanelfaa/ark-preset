@@ -6,16 +6,16 @@ dependsOn:
 
 tasks:
   build:
-    command: 'pnpm run build'
+    command: "pnpm run build"
     deps:
-      - 'core:build'
+      - "core:build"
     inputs:
-      - 'src/**'
+      - "src/**"
     outputs:
-      - 'dist/**'
+      - "dist/**"
   dev:
-    command: 'pnpm run dev'
+    command: "pnpm run dev"
     deps:
-      - 'core:build'
+      - "core:build"
   typecheck:
-    command: 'tsc --noEmit'
+    command: "tsc --noEmit"

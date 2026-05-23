@@ -1,9 +1,8 @@
-import { forwardRef, type ButtonHTMLAttributes } from 'react'
-import { buttonVariants } from '@ui/core/recipes/button'
-import type { VariantProps } from 'tailwind-variants'
+import { forwardRef, type ButtonHTMLAttributes } from "react";
+import { buttonVariants } from "@ui/core/recipes/button";
+import type { VariantProps } from "tailwind-variants";
 
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
-  VariantProps<typeof buttonVariants>
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & VariantProps<typeof buttonVariants>;
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, ...props }, ref) => {
@@ -13,10 +12,10 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         className={buttonVariants({ variant, size, class: className })}
         {...props}
       />
-    )
-  }
-)
-Button.displayName = 'Button'
+    );
+  },
+);
+Button.displayName = "Button";
 
-export { Button, buttonVariants }
-export type { ButtonProps }
+export { Button, buttonVariants };
+export type { ButtonProps };

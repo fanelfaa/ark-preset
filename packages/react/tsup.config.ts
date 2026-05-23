@@ -1,13 +1,13 @@
-import { defineConfig } from 'tsup'
+import { defineConfig } from "tsup";
 export default defineConfig({
-  entry: ['src/index.ts'],
-  format: ['esm', 'cjs'],
+  entry: ["src/index.ts"],
+  format: ["esm", "cjs"],
   dts: true,
   sourcemap: true,
   clean: true,
-  external: ['react', 'react-dom', '@ark-ui/react', '@ui/core', 'tailwind-variants'],
+  external: ["react", "react-dom", "@ark-ui/react", "@ui/core", "tailwind-variants"],
   esbuildOptions(options) {
-    options.jsx = 'automatic'
-    options.jsxImportSource = 'react'
+    options.jsx = "automatic";
+    options.jsxImportSource = "react";
   },
-})
+});

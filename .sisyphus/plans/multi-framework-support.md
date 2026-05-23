@@ -5,6 +5,7 @@
 > **Quick Summary**: Extract shared styling recipes into a new `@ui/core` package, refactor existing Solid components to consume from core, and create a new `@ui/react` package with React equivalents of all 5 components — all while keeping the public API of `@ui/solid` unchanged.
 >
 > **Deliverables**:
+>
 > - `packages/core/` — `@ui/core` with tv.ts, theme.css, and 5 recipe files
 > - `packages/ui/` — `@ui/solid` refactored (internal imports changed, public API identical)
 > - `packages/react/` — `@ui/react` with 5 React components
@@ -19,10 +20,13 @@
 ## Context
 
 ### Original Request
+
 "Currently the tsup.config only supports Solid JSX. If I want the UI to also include another UI library like React, what should I do?"
 
 ### Interview Summary
+
 **Key Decisions**:
+
 - Add React support (only — not Vue/Svelte for now)
 - Architecture: **Shared Core + Wrappers** (extract recipes into `@ui/core`, each framework has thin wrappers)
 - All 5 existing components get React versions: Button, Input, Dialog, Select, Toast
@@ -31,6 +35,7 @@
 - Docs site updates are explicitly out of scope
 
 **Metis Review Findings**:
+
 - `tv.ts` is already a framework-agnostic `createTV` wrapper — can extract as-is
 - Two variant patterns exist: **flat** (Button) and **multi-slot** (Input, Dialog, Select, Toast)
 - Multi-slot pattern: `styles = theVariants()` called in component body — in React this needs `useMemo` for optimal perf
@@ -42,9 +47,11 @@
 ## Work Objectives
 
 ### Core Objective
+
 Transform the single-framework Solid library into a multi-framework UI library with shared styling core, without breaking existing Solid consumers.
 
 ### Concrete Deliverables
+
 - `packages/core/src/tv.ts` — tailwind-variants wrapper (moved from ui/)
 - `packages/core/src/theme.css` — CSS variables (moved from ui/)
 - `packages/core/src/recipes/*.ts` — 5 recipe files extracted from components
@@ -53,6 +60,7 @@ Transform the single-framework Solid library into a multi-framework UI library w
 - `packages/cli/src/commands/add.ts` — updated with `--framework` flag
 
 ### Definition of Done
+
 - [x] `pnpm build` succeeds for all 3 packages (core, solid, react)
 - [x] `@ui/solid` public API unchanged (same exports from index.ts)
 - [x] `@ui/react` exports same component API as `@ui/solid` (same prop names, same behavior)
@@ -61,12 +69,14 @@ Transform the single-framework Solid library into a multi-framework UI library w
 - [x] All QA scenarios pass for both framework packages
 
 ### Must Have
+
 - All `@ui/solid` exports must remain available (backward compat)
 - `@ui/react` must have feature parity with `@ui/solid` for the 5 components
 - Both packages must produce correct JSX output (no Solid JSX in React build, no React JSX in Solid build)
 - CLI must accept `--framework` with values `solid` or `react`
 
 ### Must NOT Have (Guardrails)
+
 - No changes to existing `@ui/solid` public API (no renaming exports, no removing features)
 - No framework-specific code leaking into core (core must be pure TS, no JSX, no framework imports)
 - No changes to docs app
@@ -81,11 +91,13 @@ Transform the single-framework Solid library into a multi-framework UI library w
 > Acceptance criteria requiring "user manually tests/confirms" are FORBIDDEN.
 
 ### Test Decision
+
 - **Infrastructure exists**: NO
 - **Automated tests**: NONE (as requested)
 - **Agent-Executed QA**: ALWAYS — Each task includes Playwright/curl/interactive_bash scenarios
 
 ### QA Policy
+
 Every task MUST include agent-executed QA scenarios. Evidence saved to `.sisyphus/evidence/task-{N}-{scenario-slug}.{ext}`.
 
 - **Core recipes** (pure functions): Bash REPL — import recipe, call with args, verify output string
@@ -163,7 +175,7 @@ Final Verification Wave:
   - Update the moved `theme.css` — confirm it has no Solid-specific references (it shouldn't, it's pure CSS)
   - Add `packages/core/src/types.ts` re-exporting `VariantProps` from `tailwind-variants`:
     ```ts
-    export type { VariantProps } from 'tailwind-variants'
+    export type { VariantProps } from "tailwind-variants";
     ```
 
   **Must NOT do**:
@@ -192,6 +204,7 @@ Final Verification Wave:
   **Acceptance Criteria**:
 
   **QA Scenarios (MANDATORY)**:
+
   ```
   Scenario: Core package builds and exports tv
     Tool: Bash
@@ -255,6 +268,7 @@ Final Verification Wave:
   **Acceptance Criteria**:
 
   **QA Scenarios**:
+
   ```
   Scenario: Button recipe produces correct class string
     Tool: Bash
@@ -339,6 +353,7 @@ Final Verification Wave:
   **References**: `packages/ui/src/select.tsx:6-31`
 
   **QA Scenarios** (follows same pattern as T2):
+
   ```
   Scenario: Select recipe produces correct class string
     Tool: Bash
@@ -373,6 +388,7 @@ Final Verification Wave:
   **References**: `packages/ui/src/toast.tsx:5-28`
 
   **QA Scenarios** (follows same pattern as T2):
+
   ```
   Scenario: Toast recipe produces default variant classes
     Tool: Bash
@@ -400,18 +416,18 @@ Final Verification Wave:
   **What to do**:
   - Create `packages/core/src/index.ts` that re-exports everything:
     ```ts
-    export { tv } from './tv'
-    export type { VariantProps } from './tv'  // or from './types'
-    export { buttonVariants } from './recipes/button'
-    export type { ButtonVariants } from './recipes/button'
-    export { inputVariants } from './recipes/input'
-    export type { InputVariants } from './recipes/input'
-    export { dialogVariants } from './recipes/dialog'
-    export type { DialogVariants } from './recipes/dialog'
-    export { selectVariants } from './recipes/select'
-    export type { SelectVariants } from './recipes/select'
-    export { toastVariants } from './recipes/toast'
-    export type { ToastVariants } from './recipes/toast'
+    export { tv } from "./tv";
+    export type { VariantProps } from "./tv"; // or from './types'
+    export { buttonVariants } from "./recipes/button";
+    export type { ButtonVariants } from "./recipes/button";
+    export { inputVariants } from "./recipes/input";
+    export type { InputVariants } from "./recipes/input";
+    export { dialogVariants } from "./recipes/dialog";
+    export type { DialogVariants } from "./recipes/dialog";
+    export { selectVariants } from "./recipes/select";
+    export type { SelectVariants } from "./recipes/select";
+    export { toastVariants } from "./recipes/toast";
+    export type { ToastVariants } from "./recipes/toast";
     ```
   - Run `pnpm --filter @ui/core build` and verify it succeeds
   - Update root `package.json` if needed (pnpm-workspace.yaml already auto-discovers)
@@ -419,6 +435,7 @@ Final Verification Wave:
   **Parallelization**: Blocked by T2-T6
 
   **QA Scenarios**:
+
   ```
   Scenario: Core package builds successfully
     Tool: Bash
@@ -477,6 +494,7 @@ Final Verification Wave:
   - `packages/ui/tsup.config.ts` — Add external
 
   **QA Scenarios**:
+
   ```
   Scenario: Solid Button builds and typechecks
     Tool: Bash
@@ -609,19 +627,19 @@ Final Verification Wave:
     - Override compilerOptions: `"jsx": "react-jsx"`, `"jsxImportSource": "react"`
   - Create `packages/react/tsup.config.ts`:
     ```ts
-    import { defineConfig } from 'tsup'
+    import { defineConfig } from "tsup";
     export default defineConfig({
-      entry: ['src/index.ts'],
-      format: ['esm', 'cjs'],
+      entry: ["src/index.ts"],
+      format: ["esm", "cjs"],
       dts: true,
       sourcemap: true,
       clean: true,
-      external: ['react', 'react-dom', '@ark-ui/react', '@ui/core', 'tailwind-variants'],
+      external: ["react", "react-dom", "@ark-ui/react", "@ui/core", "tailwind-variants"],
       esbuildOptions(options) {
-        options.jsx = 'automatic'
-        options.jsxImportSource = 'react'
+        options.jsx = "automatic";
+        options.jsxImportSource = "react";
       },
-    })
+    });
     ```
   - Create empty `packages/react/src/index.ts` (filled by T19)
   - Install deps: `pnpm install`
@@ -645,6 +663,7 @@ Final Verification Wave:
   - `packages/ui/tsup.config.ts` — Reference for tsup config pattern
 
   **QA Scenarios**:
+
   ```
   Scenario: React package config correct
     Tool: Bash
@@ -671,13 +690,14 @@ Final Verification Wave:
 
   **What to do**:
   - Create `packages/react/src/button.tsx`:
+
     ```tsx
-    import { forwardRef, type ButtonHTMLAttributes } from 'react'
-    import { buttonVariants } from '@ui/core/recipes/button'
-    import type { VariantProps } from '@ui/core'
+    import { forwardRef, type ButtonHTMLAttributes } from "react";
+    import { buttonVariants } from "@ui/core/recipes/button";
+    import type { VariantProps } from "@ui/core";
 
     type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
-      VariantProps<typeof buttonVariants>
+      VariantProps<typeof buttonVariants>;
 
     const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       ({ className, variant, size, ...props }, ref) => {
@@ -687,13 +707,13 @@ Final Verification Wave:
             className={buttonVariants({ variant, size, class: className })}
             {...props}
           />
-        )
-      }
-    )
-    Button.displayName = 'Button'
+        );
+      },
+    );
+    Button.displayName = "Button";
 
-    export { Button, buttonVariants }
-    export type { ButtonProps }
+    export { Button, buttonVariants };
+    export type { ButtonProps };
     ```
 
   **Must NOT do**:
@@ -710,6 +730,7 @@ Final Verification Wave:
   - **Blocked By**: Task 13 (React infra), Task 7 (recipes ready)
 
   **QA Scenarios**:
+
   ```
   Scenario: React Button builds and typechecks
     Tool: Bash
@@ -737,21 +758,22 @@ Final Verification Wave:
 
   **What to do**:
   - Create `packages/react/src/input.tsx`:
+
     ```tsx
-    import { forwardRef, type InputHTMLAttributes } from 'react'
-    import { Field } from '@ark-ui/react/field'
-    import { inputVariants } from '@ui/core/recipes/input'
+    import { forwardRef, type InputHTMLAttributes } from "react";
+    import { Field } from "@ark-ui/react/field";
+    import { inputVariants } from "@ui/core/recipes/input";
 
     type InputProps = {
-      label?: string
-      description?: string
-      error?: string
-      className?: string
-    } & InputHTMLAttributes<HTMLInputElement>
+      label?: string;
+      description?: string;
+      error?: string;
+      className?: string;
+    } & InputHTMLAttributes<HTMLInputElement>;
 
     const Input = forwardRef<HTMLInputElement, InputProps>(
       ({ label, description, error, className, ...props }, ref) => {
-        const styles = inputVariants({ error: !!error })
+        const styles = inputVariants({ error: !!error });
         return (
           <Field.Root className={styles.root({ class: className })} invalid={!!error}>
             {label && <Field.Label className={styles.label()}>{label}</Field.Label>}
@@ -761,13 +783,13 @@ Final Verification Wave:
             )}
             <Field.ErrorText className={styles.error()}>{error}</Field.ErrorText>
           </Field.Root>
-        )
-      }
-    )
-    Input.displayName = 'Input'
+        );
+      },
+    );
+    Input.displayName = "Input";
 
-    export { Input, inputVariants }
-    export type { InputProps }
+    export { Input, inputVariants };
+    export type { InputProps };
     ```
 
   **Key difference from Solid**: React uses `forwardRef` and `className` instead of `class`.
@@ -813,18 +835,20 @@ Final Verification Wave:
   - Apply `selectVariants` from `@ui/core/recipes/select`
 
   **Key patterns for React**:
-    - `ArkSelect.Root`, `ArkSelect.Label`, `ArkSelect.Control`, etc.
-    - Items mapped with `.map()`:
-      ```tsx
-      {items.map((item) => (
+  - `ArkSelect.Root`, `ArkSelect.Label`, `ArkSelect.Control`, etc.
+  - Items mapped with `.map()`:
+    ```tsx
+    {
+      items.map((item) => (
         <ArkSelect.Item key={item.value} item={item} className={styles.item()}>
           <ArkSelect.ItemText>{item.label}</ArkSelect.ItemText>
           <ArkSelect.ItemIndicator className={styles.itemIndicator()}>
             <svg>...</svg>
           </ArkSelect.ItemIndicator>
         </ArkSelect.Item>
-      ))}
-      ```
+      ));
+    }
+    ```
 
   **Parallelization**: Same as T14
 
@@ -860,13 +884,34 @@ Final Verification Wave:
   **What to do**:
   - Create `packages/react/src/index.ts`:
     ```tsx
-    export { Button, buttonVariants } from './button'
-    export type { ButtonProps } from './button'
-    export { Input, inputVariants } from './input'
-    export type { InputProps } from './input'
-    export { DialogRoot, DialogTrigger, DialogContent, DialogHeader, DialogFooter, DialogTitle, DialogDescription, dialogVariants } from './dialog'
-    export { SelectRoot, SelectLabel, SelectControl, SelectTrigger, SelectValue, SelectContent, SelectItem, SelectItemText, SelectItemIndicator, selectVariants, createListCollection } from './select'
-    export { createToaster, Toaster, toastVariants } from './toast'
+    export { Button, buttonVariants } from "./button";
+    export type { ButtonProps } from "./button";
+    export { Input, inputVariants } from "./input";
+    export type { InputProps } from "./input";
+    export {
+      DialogRoot,
+      DialogTrigger,
+      DialogContent,
+      DialogHeader,
+      DialogFooter,
+      DialogTitle,
+      DialogDescription,
+      dialogVariants,
+    } from "./dialog";
+    export {
+      SelectRoot,
+      SelectLabel,
+      SelectControl,
+      SelectTrigger,
+      SelectValue,
+      SelectContent,
+      SelectItem,
+      SelectItemText,
+      SelectItemIndicator,
+      selectVariants,
+      createListCollection,
+    } from "./select";
+    export { createToaster, Toaster, toastVariants } from "./toast";
     ```
   - Run `pnpm --filter @ui/react build` and fix any build issues
   - Run `pnpm --filter @ui/react typecheck` and fix any type errors
@@ -877,6 +922,7 @@ Final Verification Wave:
   **Parallelization**: Blocked by T14-T18
 
   **QA Scenarios**:
+
   ```
   Scenario: React package builds with all components
     Tool: Bash
@@ -926,6 +972,7 @@ Final Verification Wave:
   - `packages/cli/src/commands/add.ts` — Update source path logic
 
   **QA Scenarios**:
+
   ```
   Scenario: CLI --framework react copies React version
     Tool: Bash
@@ -968,6 +1015,7 @@ Final Verification Wave:
   **Parallelization**: Blocked by T20
 
   **QA Scenarios**:
+
   ```
   Scenario: Full workspace build succeeds
     Tool: Bash
@@ -995,20 +1043,20 @@ Final Verification Wave:
 ## Final Verification Wave (MANDATORY — after ALL implementation tasks)
 
 - [x] F1. **Plan Compliance Audit** — `oracle`
-  Read the plan end-to-end. For each "Must Have": verify implementation exists (read file, run build, check exports). For each "Must NOT Have": search for forbidden patterns (Solid JSX in React pkg, React imports in core, etc.) — reject with file:line if found. Check evidence files exist.
-  Output: `Must Have [N/N] | Must NOT Have [N/N] | Tasks [N/N] | VERDICT: APPROVE/REJECT`
+      Read the plan end-to-end. For each "Must Have": verify implementation exists (read file, run build, check exports). For each "Must NOT Have": search for forbidden patterns (Solid JSX in React pkg, React imports in core, etc.) — reject with file:line if found. Check evidence files exist.
+      Output: `Must Have [N/N] | Must NOT Have [N/N] | Tasks [N/N] | VERDICT: APPROVE/REJECT`
 
 - [x] F2. **Code Quality Review** — `unspecified-high`
-  Run `pnpm build` (all packages). Run `tsc --noEmit` on each package. Check: `as any`, `@ts-ignore`, console.log in prod, commented-out code, unused imports. Check AI slop: over-abstraction, generic names.
-  Output: `Build [PASS/FAIL] | Lint [PASS/FAIL] | Types [PASS/FAIL] | VERDICT`
+      Run `pnpm build` (all packages). Run `tsc --noEmit` on each package. Check: `as any`, `@ts-ignore`, console.log in prod, commented-out code, unused imports. Check AI slop: over-abstraction, generic names.
+      Output: `Build [PASS/FAIL] | Lint [PASS/FAIL] | Types [PASS/FAIL] | VERDICT`
 
 - [x] F3. **Real QA** — `unspecified-high`
-  Execute EVERY QA scenario from every task. Test cross-task integration: can a React app import and render `@ui/react` components? Can a Solid app still import from `@ui/solid`?
-  Output: `Scenarios [N/N pass] | Integration [PASS/FAIL] | VERDICT`
+      Execute EVERY QA scenario from every task. Test cross-task integration: can a React app import and render `@ui/react` components? Can a Solid app still import from `@ui/solid`?
+      Output: `Scenarios [N/N pass] | Integration [PASS/FAIL] | VERDICT`
 
 - [x] F4. **Scope Fidelity Check** — `deep`
-  For each task: read "What to do", read actual diff. Verify 1:1 everything built (no missing) and nothing beyond spec (no creep). Check "Must NOT do" compliance. Detect cross-package contamination.
-  Output: `Tasks [N/N compliant] | Contamination [CLEAN/N issues] | VERDICT`
+      For each task: read "What to do", read actual diff. Verify 1:1 everything built (no missing) and nothing beyond spec (no creep). Check "Must NOT do" compliance. Detect cross-package contamination.
+      Output: `Tasks [N/N compliant] | Contamination [CLEAN/N issues] | VERDICT`
 
 ---
 
@@ -1029,6 +1077,7 @@ Final Verification Wave:
 ## Success Criteria
 
 ### Verification Commands
+
 ```bash
 # Core builds
 pnpm --filter @ui/core build        # Expected: produces dist/ with JS and .d.ts
@@ -1047,6 +1096,7 @@ pnpm build                          # Expected: all 4 packages build successfull
 ```
 
 ### Final Checklist
+
 - [x] `@ui/core/dist/index.js` exists and exports recipes
 - [x] `@ui/solid/dist/index.js` exists and exports same API as before
 - [x] `@ui/react/dist/index.js` exists and exports all 5 components

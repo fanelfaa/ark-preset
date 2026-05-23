@@ -19,21 +19,21 @@ moon toolchain --json     # Show toolchain config
 ```yaml
 tasks:
   build:
-    command: 'tsup'
-    inputs: ['src/**']
-    outputs: ['dist/**']
-    deps: ['core:build']    # Run core:build first
+    command: "tsup"
+    inputs: ["src/**"]
+    outputs: ["dist/**"]
+    deps: ["core:build"] # Run core:build first
   dev:
-    command: 'tsup --watch'
-    deps: ['core:dev']
+    command: "tsup --watch"
+    deps: ["core:dev"]
 ```
 
 ## Project Dependencies
 
 ```yaml
 dependsOn:
-  - 'core'       # Build core before this project
-  - 'solid'
+  - "core" # Build core before this project
+  - "solid"
 ```
 
 ## Dev vs Build

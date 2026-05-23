@@ -7,7 +7,7 @@
 Extract `class` (and other local props) from remaining props before passing to element/component:
 
 ```tsx
-const [local, others] = splitProps(props, ['class', 'error', 'children'])
+const [local, others] = splitProps(props, ["class", "error", "children"]);
 ```
 
 ### 2. Variants with Reactive Props → `createMemo`
@@ -16,8 +16,8 @@ If variants depend on reactive props (`error`, `variant`, `size`, etc.), wrap wi
 
 ```tsx
 // ✅ Reactive-dependent variants → createMemo
-const styles = createMemo(() => selectVariants({ error: !!local.error }))
-const rootClass = createMemo(() => styles().root({ class: local.class }))
+const styles = createMemo(() => selectVariants({ error: !!local.error }));
+const rootClass = createMemo(() => styles().root({ class: local.class }));
 ```
 
 ### 3. Static Variants (no Props) → no `createMemo`
@@ -26,7 +26,7 @@ If `variants()` takes no arguments or has no reactive dependencies, call directl
 
 ```tsx
 // ✅ Static variants, no createMemo needed
-const styles = selectVariants()
+const styles = selectVariants();
 ```
 
 ### 4. Class Merging via Variants
@@ -35,10 +35,11 @@ Use `{ class: local.class }` to merge user-supplied class with built-in variant 
 
 ```tsx
 // ✅ Merge user class with variant styles
-const controlClass = createMemo(() => styles.control({ class: local.class }))
+const controlClass = createMemo(() => styles.control({ class: local.class }));
 ```
 
 Never spread `{...props}` before `class={}` — it can override variant classes:
+
 ```tsx
 // ❌ CAN OVERRIDE variant class
 <ArkDialog.Title class={styles.title()} {...props} />
@@ -53,11 +54,12 @@ const titleClass = createMemo(() => styles.title({ class: local.class }))
 Every slot that uses `{ class: local.class }` must have its own `createMemo`:
 
 ```tsx
-const styles = createMemo(() => inputVariants({ error: !!local.error }))
-const rootClass = createMemo(() => styles().root({ class: local.class }))  // ✅ slot memo
+const styles = createMemo(() => inputVariants({ error: !!local.error }));
+const rootClass = createMemo(() => styles().root({ class: local.class })); // ✅ slot memo
 ```
 
 Slots without class merging can use `styles.slot()` directly:
+
 ```tsx
 <Field.Label class={styles().label()} />    // ✅ direct
 <Field.Input class={styles().input()} />     // ✅ direct
@@ -65,12 +67,12 @@ Slots without class merging can use `styles.slot()` directly:
 
 ### 6. Reference Examples
 
-| File | Component | Type |
-|---|---|---|
-| `packages/solid/src/input.tsx` | Input | Reactive variants (`error`) + slot memo |
-| `packages/solid/src/button.tsx` | Button | Reactive variants (`variant`, `size`) |
-| `packages/solid/src/select.tsx` | SelectRoot | Reactive variants (`error`) + slot memo |
-| `packages/solid/src/select.tsx` | SelectLabel | Static variants, no memo |
+| File                            | Component     | Type                                         |
+| ------------------------------- | ------------- | -------------------------------------------- |
+| `packages/solid/src/input.tsx`  | Input         | Reactive variants (`error`) + slot memo      |
+| `packages/solid/src/button.tsx` | Button        | Reactive variants (`variant`, `size`)        |
+| `packages/solid/src/select.tsx` | SelectRoot    | Reactive variants (`error`) + slot memo      |
+| `packages/solid/src/select.tsx` | SelectLabel   | Static variants, no memo                     |
 | `packages/solid/src/select.tsx` | SelectControl | Static variants + slot memo (`controlClass`) |
 | `packages/solid/src/dialog.tsx` | DialogContent | Static variants + slot memo (`contentClass`) |
 

@@ -2,6 +2,10 @@
   "name": "@ui/solid",
   "version": "0.1.0",
   "private": true,
+  "files": [
+    "dist/",
+    "src/"
+  ],
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -14,10 +18,6 @@
       "require": "./dist/index.cjs"
     }
   },
-  "files": [
-    "dist/",
-    "src/"
-  ],
   "scripts": {
     "build": "vite build && tsc --build",
     "dev": "vite build --watch",
@@ -30,13 +30,13 @@
     "tailwind-merge": "^3.5.0",
     "tailwind-variants": "^3.0.0"
   },
-  "peerDependencies": {
-    "solid-js": "^1.9.0",
-    "tailwindcss": "^4.0.0"
-  },
   "devDependencies": {
     "typescript": "^5.0.0",
     "vite": "^6.0.0",
     "vite-plugin-solid": "^2.0.0"
+  },
+  "peerDependencies": {
+    "solid-js": "^1.9.0",
+    "tailwindcss": "^4.0.0"
   }
 }

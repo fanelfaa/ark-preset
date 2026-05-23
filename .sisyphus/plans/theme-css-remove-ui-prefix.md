@@ -5,6 +5,7 @@
 > **Quick Summary**: Remove the `ui` segment from all CSS custom property names (`--color-ui-*` → `--color-*`, `--ui-*` → `--*`) across theme definitions and every Tailwind utility class that references them. This is a mechanical rename affecting 15 files across 3 packages.
 >
 > **Deliverables**:
+>
 > - Both `theme.css` files updated with unprefixed variables
 > - All 12 recipe files updated with unprefixed Tailwind classes
 > - `apps/docs/src/App.tsx` updated with unprefixed classes
@@ -19,15 +20,19 @@
 ## Context
 
 ### Original Request
+
 > "refactor core/theme.css remove prefix ui, ensure every related class updated too"
 
 ### Interview Summary
+
 **Key Decisions**:
+
 - Update **both** `packages/core/src/theme.css` and `packages/solid/src/theme.css`
 - **Skip** adding missing `popover`/`popover-foreground` CSS variables (tooltip references them but they were never defined — unchanged behavior)
 - **Build check** as the sole verification step
 
 **Research Findings**:
+
 - 15 files total need updating (2 CSS, 12 recipes, 1 App.tsx)
 - 14 solid component wrappers use variants indirectly — no direct class strings, no changes needed
 - No `var(--ui-*)` references exist in any `.ts`/`.tsx` files outside CSS
@@ -35,7 +40,9 @@
 - `date-picker.ts` already mixes prefixed (`bg-ui-background`) and unprefixed (`border-border`) — inconsistent today, refactor normalizes it
 
 ### Metis Review
+
 **Identified Gaps** (addressed):
+
 - **JS/TS inline style refs**: Searched — zero `var(--ui-*)` references outside CSS files. Safe.
 - **Dark mode variants**: Searched — zero `dark:bg-ui-*` or `dark:text-ui-*` references. Safe.
 - **Rollback**: All files in git. Revert with `git checkout -- <files>` or `git revert`.
@@ -46,19 +53,23 @@
 ## Work Objectives
 
 ### Core Objective
+
 Remove the `ui` prefix from all CSS custom properties and Tailwind utility classes that reference the theme tokens — a mechanical rename with zero behavior change.
 
 ### Concrete Deliverables
+
 - `packages/core/src/theme.css` — vars renamed
 - `packages/solid/src/theme.css` — vars renamed
 - 12 recipe files in `packages/core/src/recipes/` — classes renamed
 - `apps/docs/src/App.tsx` — classes renamed
 
 ### Definition of Done
+
 - [ ] `pnpm -r run build` exits with code 0
 - [ ] `grep -r '\bui-' packages/core/src/ packages/solid/src/ apps/docs/src/` returns zero matches (excluding `@ui/` package import paths in ts/tsx)
 
 ### Must Have
+
 - Every `--color-ui-*` → `--color-*` in `@theme` blocks
 - Every `--ui-*` → `--*` in `:root` blocks
 - Every `var(--ui-*` → `var(--*` in CSS values
@@ -66,6 +77,7 @@ Remove the `ui` prefix from all CSS custom properties and Tailwind utility class
 - Every variant form: `hover:bg-ui-*`, `hover:text-ui-*`, `focus:bg-ui-*`, `focus-visible:ring-ui-*`, `focus-within:ring-ui-*`, `data-[highlighted]:bg-ui-*`, `data-selected:bg-ui-*`, `data-selected:text-ui-*` → same pattern
 
 ### Must NOT Have (Guardrails)
+
 - Do NOT touch `@ui/core`, `@ui/solid` package import paths (they contain `ui` but not `ui-` prefix)
 - Do NOT add missing `popover`/`popover-foreground` CSS variables (user decision to skip — they were never defined, tooltip `bg-popover`/`text-popover-foreground` will remain unresolved)
 - Do NOT modify `.tsx` component files in `packages/solid/src/` — they use variants indirectly
@@ -78,10 +90,12 @@ Remove the `ui` prefix from all CSS custom properties and Tailwind utility class
 > **ZERO HUMAN INTERVENTION** — ALL verification is agent-executed.
 
 ### Test Decision
+
 - **Automated tests**: None (refactoring only — behavior preserved)
 - **Verification method**: Build check + grep audit
 
 ### QA Policy
+
 Every task includes agent-executed verification. The final verification wave runs the full monorepo build plus a comprehensive grep to confirm zero `ui-` prefixed tokens remain.
 
 ---
@@ -266,6 +280,7 @@ Max Concurrent: 14 (Wave 2 — all independent)
   **Acceptance Criteria**:
 
   **QA Scenarios**:
+
   ```
   Scenario: Verify no `ui-` prefixed classes remain
     Tool: Bash
@@ -299,6 +314,7 @@ Max Concurrent: 14 (Wave 2 — all independent)
   **Blocked By**: Tasks 1, 2
 
   **QA Scenarios**:
+
   ```
   Scenario: Verify no `ui-` classes remain
     Tool: Bash
@@ -321,6 +337,7 @@ Max Concurrent: 14 (Wave 2 — all independent)
   **Blocked By**: Tasks 1, 2
 
   **QA Scenarios**:
+
   ```
   Scenario: Verify no `ui-` classes remain
     Tool: Bash
@@ -354,6 +371,7 @@ Max Concurrent: 14 (Wave 2 — all independent)
   **Blocked By**: Tasks 1, 2
 
   **QA Scenarios**:
+
   ```
   Scenario: Verify no `ui-` classes remain
     Tool: Bash
@@ -377,6 +395,7 @@ Max Concurrent: 14 (Wave 2 — all independent)
   **Blocked By**: Tasks 1, 2
 
   **QA Scenarios**:
+
   ```
   Scenario: Verify no `ui-` classes remain
     Tool: Bash
@@ -398,6 +417,7 @@ Max Concurrent: 14 (Wave 2 — all independent)
   **Blocked By**: Tasks 1, 2
 
   **QA Scenarios**:
+
   ```
   Scenario: Verify no `ui-` classes remain
     Tool: Bash
@@ -421,6 +441,7 @@ Max Concurrent: 14 (Wave 2 — all independent)
   **Blocked By**: Tasks 1, 2
 
   **QA Scenarios**:
+
   ```
   Scenario: Verify no `ui-` classes remain
     Tool: Bash
@@ -443,6 +464,7 @@ Max Concurrent: 14 (Wave 2 — all independent)
   **Blocked By**: Tasks 1, 2
 
   **QA Scenarios**:
+
   ```
   Scenario: Verify no `ui-` classes remain
     Tool: Bash
@@ -466,6 +488,7 @@ Max Concurrent: 14 (Wave 2 — all independent)
   **Blocked By**: Tasks 1, 2
 
   **QA Scenarios**:
+
   ```
   Scenario: Verify no `ui-` classes remain
     Tool: Bash
@@ -494,6 +517,7 @@ Max Concurrent: 14 (Wave 2 — all independent)
   **Blocked By**: Tasks 1, 2
 
   **QA Scenarios**:
+
   ```
   Scenario: Verify no `ui-` classes remain
     Tool: Bash
@@ -518,6 +542,7 @@ Max Concurrent: 14 (Wave 2 — all independent)
   **Blocked By**: Tasks 1, 2
 
   **QA Scenarios**:
+
   ```
   Scenario: Verify no `ui-` classes remain
     Tool: Bash
@@ -542,6 +567,7 @@ Max Concurrent: 14 (Wave 2 — all independent)
   **Blocked By**: Tasks 1, 2
 
   **QA Scenarios**:
+
   ```
   Scenario: Verify no `ui-` classes remain
     Tool: Bash
@@ -575,6 +601,7 @@ Max Concurrent: 14 (Wave 2 — all independent)
   **Blocked By**: Tasks 1, 2
 
   **QA Scenarios**:
+
   ```
   Scenario: Verify no `ui-` classes remain in App.tsx
     Tool: Bash
@@ -593,7 +620,7 @@ Max Concurrent: 14 (Wave 2 — all independent)
 ## Final Verification Wave
 
 - [x] F1. **Build + grep audit** — `quick`
-  Run the monorepo build and a comprehensive grep to confirm no `ui-` prefixed tokens remain.
+      Run the monorepo build and a comprehensive grep to confirm no `ui-` prefixed tokens remain.
 
   **Steps**:
   1. `pnpm -r run build` — must exit 0 (timeout: 120s)
@@ -625,6 +652,7 @@ Max Concurrent: 14 (Wave 2 — all independent)
 ## Success Criteria
 
 ### Verification Commands
+
 ```bash
 pnpm -r run build      # Expected: exit 0
 grep -rP '(bg-ui|text-ui|border-ui|ring-ui|ring-offset-ui|placeholder:text-ui)' \
@@ -634,8 +662,9 @@ pnpm -r run typecheck  # Expected: exit 0
 ```
 
 ### Final Checklist
+
 - [ ] Zero `--color-ui-*` references in both theme.css files
-- [ ] Zero `var(--ui-*)` references in both theme.css files  
+- [ ] Zero `var(--ui-*)` references in both theme.css files
 - [ ] Zero `bg-ui-*`, `text-ui-*`, `border-ui-*`, `ring-ui-*`, `ring-offset-ui-*` class references in all recipe files
 - [ ] Zero `bg-ui-*`, `text-ui-*`, `border-ui-*` class references in `apps/docs/src/App.tsx`
 - [ ] `pnpm -r run build` passes

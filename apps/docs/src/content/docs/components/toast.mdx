@@ -5,51 +5,73 @@ category: Overlay
 updatedDate: 2026-05-18
 ---
 
-import ToastBasicDemo from '@components/toast-demo/ToastBasicDemo.tsx'
+import ToastBasicDemo from "@components/toast-demo/ToastBasicDemo.tsx";
 
 # Toast
 
 A notification component for displaying transient messages with multiple variants.
 
-<a href="https://ark-ui.com/docs/components/toast" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors">
-  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+<a
+  href="https://ark-ui.com/docs/components/toast"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="inline-flex items-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="14"
+    height="14"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+    <polyline points="15 3 21 3 21 9" />
+    <line x1="10" x2="21" y1="14" y2="3" />
+  </svg>
   Docs
 </a>
 
 <ToastBasicDemo client:load />
 
 ```tsx
-import { createToaster, Toaster } from "~/components/toast"
+import { createToaster, Toaster } from "~/components/toast";
 
 const toaster = createToaster({
   placement: "bottom-end",
   timeout: 5000,
-})
+});
 
 export function ToastDemo() {
   return (
     <div class="flex flex-col gap-4">
       <button
         class="px-3 py-1.5 text-sm bg-primary text-primary-foreground rounded-md"
-        onClick={() => toaster.create({ title: 'Hello', description: 'World' })}
+        onClick={() => toaster.create({ title: "Hello", description: "World" })}
       >
         Show Toast
       </button>
       <Toaster toaster={toaster} />
     </div>
-  )
+  );
 }
 ```
 
 ## Installation
 
 ### CLI
+
 Run the following command to add the component to your project:
+
 ```bash
 npx solidui-cli@latest add toast
 ```
 
 ### Manual
+
 <div class="space-y-3">
 Install the dependency:
 ```bash
@@ -63,24 +85,26 @@ import { tv, type VariantProps } from 'tailwind-variants'
 
 export const toastVariants = tv({
   slots: {
-    root: 'group pointer-events-auto relative flex w-full min-w-sm max-w-sm items-center justify-between space-x-4 overflow-hidden rounded-md border border-border p-6 pr-8 shadow-lg transition-all data-[state=open]:animate-in data-[state=closed]:animate-out data-[swipe=end]:animate-out',
-    title: 'text-sm font-semibold',
-    description: 'text-sm opacity-90',
-    closeTrigger: 'absolute right-2 top-2 rounded-md p-1 text-foreground/50 transition-opacity hover:text-foreground focus:outline-none focus:ring-2',
-    actionTrigger: 'inline-flex h-8 shrink-0 items-center justify-center rounded-md border bg-transparent px-3 text-xs font-medium transition-colors hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-ring',
+    root: "group pointer-events-auto relative flex w-full min-w-sm max-w-sm items-center justify-between space-x-4 overflow-hidden rounded-md border border-border p-6 pr-8 shadow-lg transition-all data-[state=open]:animate-in data-[state=closed]:animate-out data-[swipe=end]:animate-out",
+    title: "text-sm font-semibold",
+    description: "text-sm opacity-90",
+    closeTrigger:
+      "absolute right-2 top-2 rounded-md p-1 text-foreground/50 transition-opacity hover:text-foreground focus:outline-none focus:ring-2",
+    actionTrigger:
+      "inline-flex h-8 shrink-0 items-center justify-center rounded-md border bg-transparent px-3 text-xs font-medium transition-colors hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-ring",
   },
   variants: {
     variant: {
-      default: { root: 'bg-background border-border' },
-      loading: { root: 'bg-background border-border' },
-      error: { root: 'border-red-500 bg-red-50 text-red-950' },
-      success: { root: 'border-green-500 bg-green-50 text-green-950' },
-      info: { root: 'border-blue-500 bg-blue-50 text-blue-950' },
-      warning: { root: 'border-yellow-500 bg-yellow-50 text-yellow-950' },
+      default: { root: "bg-background border-border" },
+      loading: { root: "bg-background border-border" },
+      error: { root: "border-red-500 bg-red-50 text-red-950" },
+      success: { root: "border-green-500 bg-green-50 text-green-950" },
+      info: { root: "border-blue-500 bg-blue-50 text-blue-950" },
+      warning: { root: "border-yellow-500 bg-yellow-50 text-yellow-950" },
     },
   },
-  defaultVariants: { variant: 'default' },
-})
+  defaultVariants: { variant: "default" },
+});
 
 export type ToastVariants = VariantProps<typeof toastVariants>
 ```
@@ -93,29 +117,30 @@ import { splitProps, type Component } from 'solid-js'
 import { toastVariants, type ToastVariants } from '../recipes/toast'
 
 type ToasterProps = {
-  toaster: CreateToasterReturn
-  class?: string
+toaster: CreateToasterReturn
+class?: string
 }
 
 const Toaster: Component<ToasterProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  return (
-    <ArkToaster class={local.class} {...others}>
-      {(toast) => {
-        const styles = toastVariants({ variant: (toast().type as ToastVariants['variant']) || 'default' })
-        return (
-          <Toast.Root class={styles.root()}>
-            <div class="grid gap-1">
-              {toast().title && <Toast.Title class={styles.title()}>{toast().title}</Toast.Title>}
-              {toast().description && <Toast.Description class={styles.description()}>{toast().description}</Toast.Description>}
-            </div>
-            <Toast.CloseTrigger class={styles.closeTrigger()}>✕</Toast.CloseTrigger>
-            {toast().action && <Toast.ActionTrigger class={styles.actionTrigger()}>{toast().action?.label}</Toast.ActionTrigger>}
-          </Toast.Root>
-        )
-      }}
-    </ArkToaster>
-  )
+const [local, others] = splitProps(props, ['class'])
+return (
+
+<ArkToaster class={local.class} {...others}>
+{(toast) => {
+const styles = toastVariants({ variant: (toast().type as ToastVariants['variant']) || 'default' })
+return (
+<Toast.Root class={styles.root()}>
+<div class="grid gap-1">
+{toast().title && <Toast.Title class={styles.title()}>{toast().title}</Toast.Title>}
+{toast().description && <Toast.Description class={styles.description()}>{toast().description}</Toast.Description>}
+</div>
+<Toast.CloseTrigger class={styles.closeTrigger()}>✕</Toast.CloseTrigger>
+{toast().action && <Toast.ActionTrigger class={styles.actionTrigger()}>{toast().action?.label}</Toast.ActionTrigger>}
+</Toast.Root>
+)
+}}
+</ArkToaster>
+)
 }
 
 export { createToaster }
@@ -130,7 +155,7 @@ export { toastVariants }
 Import the components:
 
 ```tsx
-import { createToaster, Toaster } from "~/components/toast"
+import { createToaster, Toaster } from "~/components/toast";
 ```
 
 Basic toast:
@@ -152,10 +177,10 @@ With action:
 
 ```tsx
 toaster.create({
-  title: 'File deleted',
-  description: 'Your file has been removed.',
-  action: { label: 'Undo', onClick: () => console.log('undo') }
-})
+  title: "File deleted",
+  description: "Your file has been removed.",
+  action: { label: "Undo", onClick: () => console.log("undo") },
+});
 ```
 
 ## Variants
@@ -163,38 +188,38 @@ toaster.create({
 Use the `type` property to change the visual style.
 
 ```tsx
-toaster.create({ title: 'Default toast', description: 'This is a default message' })
-toaster.create({ title: 'Info toast', type: 'info' })
-toaster.create({ title: 'Success toast', type: 'success' })
-toaster.create({ title: 'Warning toast', type: 'warning' })
-toaster.create({ title: 'Error toast', type: 'error' })
+toaster.create({ title: "Default toast", description: "This is a default message" });
+toaster.create({ title: "Info toast", type: "info" });
+toaster.create({ title: "Success toast", type: "success" });
+toaster.create({ title: "Warning toast", type: "warning" });
+toaster.create({ title: "Error toast", type: "error" });
 ```
 
 ## API Reference
 
 ### createToaster
 
-| Option | Type | Default | Description |
-|------|------|---------|-------------|
-| placement | `string` | `"bottom-end"` | Position of toasts. |
-| timeout | `number` | `5000` | Auto-dismiss duration (ms). |
-| max | `number` | `3` | Maximum visible toasts. |
-| gap | `number` | `12` | Gap between toasts (px). |
+| Option    | Type     | Default        | Description                 |
+| --------- | -------- | -------------- | --------------------------- |
+| placement | `string` | `"bottom-end"` | Position of toasts.         |
+| timeout   | `number` | `5000`         | Auto-dismiss duration (ms). |
+| max       | `number` | `3`            | Maximum visible toasts.     |
+| gap       | `number` | `12`           | Gap between toasts (px).    |
 
 ### Toaster
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| toaster | `CreateToasterReturn` | — | Toaster instance from `createToaster`. **Required.** |
-| class | `string` | — | Custom CSS class. |
+| Prop    | Type                  | Default | Description                                          |
+| ------- | --------------------- | ------- | ---------------------------------------------------- |
+| toaster | `CreateToasterReturn` | —       | Toaster instance from `createToaster`. **Required.** |
+| class   | `string`              | —       | Custom CSS class.                                    |
 
 ### toastVariants
 
-| Variant | Description |
-|------|------|
-| default | Neutral styling |
+| Variant | Description                    |
+| ------- | ------------------------------ |
+| default | Neutral styling                |
 | loading | Neutral with loading indicator |
-| success | Green border and background |
-| error | Red border and background |
-| info | Blue border and background |
-| warning | Yellow border and background |
+| success | Green border and background    |
+| error   | Red border and background      |
+| info    | Blue border and background     |
+| warning | Yellow border and background   |

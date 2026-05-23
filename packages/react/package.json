@@ -2,6 +2,10 @@
   "name": "@ui/react",
   "version": "0.1.0",
   "private": true,
+  "files": [
+    "dist/",
+    "src/"
+  ],
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -14,7 +18,6 @@
       "require": "./dist/index.cjs"
     }
   },
-  "files": ["dist/", "src/"],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
@@ -26,16 +29,16 @@
     "tailwind-merge": "^3.5.0",
     "tailwind-variants": "^3.0.0"
   },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0"
+  },
   "peerDependencies": {
+    "@ark-ui/react": "^5.0.0",
     "react": "^18.0.0 || ^19.0.0",
     "react-dom": "^18.0.0 || ^19.0.0",
-    "@ark-ui/react": "^5.0.0",
     "tailwindcss": "^4.0.0"
-  },
-  "devDependencies": {
-    "tsup": "^8.0.0",
-    "typescript": "^5.0.0",
-    "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0"
   }
 }

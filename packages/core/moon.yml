@@ -4,13 +4,13 @@ stack: frontend
 
 tasks:
   build:
-    command: 'pnpm run build'
+    command: "pnpm run build"
     inputs:
-      - 'src/**'
-      - 'tsup.config.ts'
+      - "src/**"
+      - "tsup.config.ts"
     outputs:
-      - 'dist/**'
+      - "dist/**"
   dev:
-    command: 'pnpm run dev'
+    command: "pnpm run dev"
   typecheck:
-    command: 'tsc --noEmit'
+    command: "tsc --noEmit"

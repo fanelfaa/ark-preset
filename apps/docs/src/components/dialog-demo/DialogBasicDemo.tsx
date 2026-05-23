@@ -1,11 +1,19 @@
-import { DialogRoot, DialogTrigger, DialogContent, DialogHeader, DialogFooter, DialogTitle, DialogDescription } from '@ui/solid'
-import { Button } from '@ui/solid'
+import {
+  DialogRoot,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogDescription,
+} from "@ui/solid";
+import { Button } from "@ui/solid";
 
 export default function DialogBasicDemo() {
   return (
     <div class="rounded-lg border border-border p-6">
       <DialogRoot>
-        <DialogTrigger asChild={(p: any)=><Button {...p}/>}>Open Dialog</DialogTrigger>
+        <DialogTrigger asChild={(p: any) => <Button {...p} />}>Open Dialog</DialogTrigger>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Edit Profile</DialogTitle>
@@ -20,5 +28,5 @@ export default function DialogBasicDemo() {
         </DialogContent>
       </DialogRoot>
     </div>
-  )
+  );
 }

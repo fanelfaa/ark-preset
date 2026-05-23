@@ -5,46 +5,66 @@ category: Overlay
 updatedDate: 2026-05-18
 ---
 
-import TooltipBasicDemo from '@components/tooltip-demo/TooltipBasicDemo.tsx'
-import TooltipArrowDemo from '@components/tooltip-demo/TooltipArrowDemo.tsx'
+import TooltipBasicDemo from "@components/tooltip-demo/TooltipBasicDemo.tsx";
+import TooltipArrowDemo from "@components/tooltip-demo/TooltipArrowDemo.tsx";
 
 # Tooltip
 
 A popup component that displays contextual information when hovering or focusing on a trigger element.
 
-<a href="https://ark-ui.com/docs/components/tooltip" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors">
-  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+<a
+  href="https://ark-ui.com/docs/components/tooltip"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="inline-flex items-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="14"
+    height="14"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+    <polyline points="15 3 21 3 21 9" />
+    <line x1="10" x2="21" y1="14" y2="3" />
+  </svg>
   Docs
 </a>
 
 <TooltipBasicDemo client:load />
 
 ```tsx
-import { Tooltip, TooltipTrigger, TooltipPositioner, TooltipContent } from "~/components/tooltip"
+import { Tooltip, TooltipTrigger, TooltipPositioner, TooltipContent } from "~/components/tooltip";
 
 export function TooltipDemo() {
   return (
     <Tooltip>
       <TooltipTrigger>Hover me</TooltipTrigger>
       <TooltipPositioner>
-        <TooltipContent>
-          This is a basic tooltip
-        </TooltipContent>
+        <TooltipContent>This is a basic tooltip</TooltipContent>
       </TooltipPositioner>
     </Tooltip>
-  )
+  );
 }
 ```
 
 ## Installation
 
 ### CLI
+
 Run the following command to add the component to your project:
+
 ```bash
 npx solidui-cli@latest add tooltip
 ```
 
 ### Manual
+
 <div class="space-y-3">
 Install the dependency:
 ```bash
@@ -58,16 +78,16 @@ import { tv, type VariantProps } from 'tailwind-variants'
 
 export const tooltipVariants = tv({
   slots: {
-    root: 'inline-flex',
-    trigger: 'inline-flex items-center justify-center gap-2 rounded-md border border-input bg-transparent px-4 py-2 text-sm font-medium text-foreground ring-offset-background transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
-    positioner: 'z-50',
+    root: "inline-flex",
+    trigger:
+      "inline-flex items-center justify-center gap-2 rounded-md border border-input bg-transparent px-4 py-2 text-sm font-medium text-foreground ring-offset-background transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+    positioner: "z-50",
     content:
-      'z-50 overflow-hidden rounded-md border border-border bg-popover px-3 py-1.5 text-xs text-popover-foreground shadow-md animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
-    arrow: '',
-    arrowTip:
-      'h-2 w-2 rotate-45 border-b border-l border-border bg-popover',
+      "z-50 overflow-hidden rounded-md border border-border bg-popover px-3 py-1.5 text-xs text-popover-foreground shadow-md animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+    arrow: "",
+    arrowTip: "h-2 w-2 rotate-45 border-b border-l border-border bg-popover",
   },
-})
+});
 
 export type TooltipVariants = VariantProps<typeof tooltipVariants>
 ```
@@ -83,37 +103,37 @@ import { tooltipVariants } from '../recipes/tooltip'
 const styles = tooltipVariants()
 
 const TooltipRoot: Component<ArkTooltip.RootProps> = (props) => {
-  return <ArkTooltip.Root {...props} />
+return <ArkTooltip.Root {...props} />
 }
 
 const TooltipTrigger: Component<ArkTooltip.TriggerProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const triggerClass = createMemo(() => styles.trigger({ class: local.class }))
-  return <ArkTooltip.Trigger class={triggerClass()} {...others} />
+const [local, others] = splitProps(props, ['class'])
+const triggerClass = createMemo(() => styles.trigger({ class: local.class }))
+return <ArkTooltip.Trigger class={triggerClass()} {...others} />
 }
 
 const TooltipPositioner: Component<ArkTooltip.PositionerProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const positionerClass = createMemo(() => styles.positioner({ class: local.class }))
-  return <ArkTooltip.Positioner class={positionerClass()} {...others} />
+const [local, others] = splitProps(props, ['class'])
+const positionerClass = createMemo(() => styles.positioner({ class: local.class }))
+return <ArkTooltip.Positioner class={positionerClass()} {...others} />
 }
 
 const TooltipContent: Component<ArkTooltip.ContentProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const contentClass = createMemo(() => styles.content({ class: local.class }))
-  return <ArkTooltip.Content class={contentClass()} {...others} />
+const [local, others] = splitProps(props, ['class'])
+const contentClass = createMemo(() => styles.content({ class: local.class }))
+return <ArkTooltip.Content class={contentClass()} {...others} />
 }
 
 const TooltipArrow: Component<ArkTooltip.ArrowProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const arrowClass = createMemo(() => styles.arrow({ class: local.class }))
-  return <ArkTooltip.Arrow class={arrowClass()} {...others} />
+const [local, others] = splitProps(props, ['class'])
+const arrowClass = createMemo(() => styles.arrow({ class: local.class }))
+return <ArkTooltip.Arrow class={arrowClass()} {...others} />
 }
 
 const TooltipArrowTip: Component<ArkTooltip.ArrowTipProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const arrowTipClass = createMemo(() => styles.arrowTip({ class: local.class }))
-  return <ArkTooltip.ArrowTip class={arrowTipClass()} {...others} />
+const [local, others] = splitProps(props, ['class'])
+const arrowTipClass = createMemo(() => styles.arrowTip({ class: local.class }))
+return <ArkTooltip.ArrowTip class={arrowTipClass()} {...others} />
 }
 
 export {
@@ -134,7 +154,7 @@ export {
 Import the components:
 
 ```tsx
-import { Tooltip, TooltipTrigger, TooltipPositioner, TooltipContent } from "~/components/tooltip"
+import { Tooltip, TooltipTrigger, TooltipPositioner, TooltipContent } from "~/components/tooltip";
 ```
 
 Basic tooltip:
@@ -143,9 +163,7 @@ Basic tooltip:
 <Tooltip>
   <TooltipTrigger>Hover me</TooltipTrigger>
   <TooltipPositioner>
-    <TooltipContent>
-      Tooltip content
-    </TooltipContent>
+    <TooltipContent>Tooltip content</TooltipContent>
   </TooltipPositioner>
 </Tooltip>
 ```
@@ -157,7 +175,14 @@ Add an arrow pointing to the trigger element.
 <TooltipArrowDemo client:load />
 
 ```tsx
-import { Tooltip, TooltipTrigger, TooltipPositioner, TooltipContent, TooltipArrow, TooltipArrowTip } from "~/components/tooltip"
+import {
+  Tooltip,
+  TooltipTrigger,
+  TooltipPositioner,
+  TooltipContent,
+  TooltipArrow,
+  TooltipArrowTip,
+} from "~/components/tooltip";
 
 <Tooltip>
   <TooltipTrigger>Hover me</TooltipTrigger>
@@ -169,49 +194,49 @@ import { Tooltip, TooltipTrigger, TooltipPositioner, TooltipContent, TooltipArro
       Tooltip with arrow
     </TooltipContent>
   </TooltipPositioner>
-</Tooltip>
+</Tooltip>;
 ```
 
 ## API Reference
 
 ### Tooltip (Root)
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| open | `boolean` | — | Controlled open state. |
-| defaultOpen | `boolean` | — | Initial open state. Use when uncontrolled. |
-| onOpenChange | `(details: { open: boolean }) => void` | — | Callback when open state changes. |
-| closeOnPointerDown | `boolean` | `true` | Close on pointer down outside. |
-| openDelay | `number` | — | Delay before opening (ms). |
-| closeDelay | `number` | — | Delay before closing (ms). |
-| class | `string` | — | Custom CSS class. |
+| Prop               | Type                                   | Default | Description                                |
+| ------------------ | -------------------------------------- | ------- | ------------------------------------------ |
+| open               | `boolean`                              | —       | Controlled open state.                     |
+| defaultOpen        | `boolean`                              | —       | Initial open state. Use when uncontrolled. |
+| onOpenChange       | `(details: { open: boolean }) => void` | —       | Callback when open state changes.          |
+| closeOnPointerDown | `boolean`                              | `true`  | Close on pointer down outside.             |
+| openDelay          | `number`                               | —       | Delay before opening (ms).                 |
+| closeDelay         | `number`                               | —       | Delay before closing (ms).                 |
+| class              | `string`                               | —       | Custom CSS class.                          |
 
 ### TooltipTrigger
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| class | `string` | — | Custom CSS class. |
+| Prop  | Type     | Default | Description       |
+| ----- | -------- | ------- | ----------------- |
+| class | `string` | —       | Custom CSS class. |
 
 ### TooltipPositioner
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| class | `string` | — | Custom CSS class. |
+| Prop  | Type     | Default | Description       |
+| ----- | -------- | ------- | ----------------- |
+| class | `string` | —       | Custom CSS class. |
 
 ### TooltipContent
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| class | `string` | — | Custom CSS class. |
+| Prop  | Type     | Default | Description       |
+| ----- | -------- | ------- | ----------------- |
+| class | `string` | —       | Custom CSS class. |
 
 ### TooltipArrow
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| class | `string` | — | Custom CSS class. |
+| Prop  | Type     | Default | Description       |
+| ----- | -------- | ------- | ----------------- |
+| class | `string` | —       | Custom CSS class. |
 
 ### TooltipArrowTip
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| class | `string` | — | Custom CSS class. |
+| Prop  | Type     | Default | Description       |
+| ----- | -------- | ------- | ----------------- |
+| class | `string` | —       | Custom CSS class. |

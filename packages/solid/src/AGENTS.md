@@ -5,22 +5,23 @@
 **Branch:** main
 
 ## OVERVIEW
+
 Source code for solid package (components and index)
 
-
 ## WHERE TO LOOK
-| Task | Location | Notes |
-|------|----------|-------|
-| Add new Solid.js component | . | Create \*.tsx wrapper around Ark UI component |
-| Update component index | index.ts | Export new component |
 
-
+| Task                       | Location | Notes                                         |
+| -------------------------- | -------- | --------------------------------------------- |
+| Add new Solid.js component | .        | Create \*.tsx wrapper around Ark UI component |
+| Update component index     | index.ts | Export new component                          |
 
 ## COMMONS
+
 ```bash
 # Standard commands (if applicable)
 ```
 
 ## NOTES
+
 - This directory is part of the monorepo structure.
 - See the root AGENTS.md for project-wide information.

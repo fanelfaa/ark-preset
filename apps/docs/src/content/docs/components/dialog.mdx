@@ -5,22 +5,49 @@ category: Overlay
 updatedDate: 2026-05-18
 ---
 
-import DialogBasicDemo from '@components/dialog-demo/DialogBasicDemo.tsx'
+import DialogBasicDemo from "@components/dialog-demo/DialogBasicDemo.tsx";
 
 # Dialog
 
 A modal dialog that overlays the page content, typically used for important actions or information.
 
-<a href="https://ark-ui.com/docs/components/dialog" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors">
-  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+<a
+  href="https://ark-ui.com/docs/components/dialog"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="inline-flex items-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="14"
+    height="14"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+    <polyline points="15 3 21 3 21 9" />
+    <line x1="10" x2="21" y1="14" y2="3" />
+  </svg>
   Docs
 </a>
 
 <DialogBasicDemo client:only="solid-js" />
 
 ```tsx
-import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogFooter, DialogTitle, DialogDescription } from "~/components/dialog"
-import { Button } from "~/components/button"
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogDescription,
+} from "~/components/dialog";
+import { Button } from "~/components/button";
 
 export function DialogDemo() {
   return (
@@ -39,19 +66,22 @@ export function DialogDemo() {
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  )
+  );
 }
 ```
 
 ## Installation
 
 ### CLI
+
 Run the following command to add the component to your project:
+
 ```bash
 npx solidui-cli@latest add dialog
 ```
 
 ### Manual
+
 <div class="space-y-3">
 Install the dependency:
 ```bash
@@ -65,16 +95,19 @@ import { tv, type VariantProps } from 'tailwind-variants'
 
 export const dialogVariants = tv({
   slots: {
-    backdrop: 'fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
-    positioner: 'fixed inset-0 z-50 flex items-center justify-center',
-    content: 'relative z-50 grid w-full max-w-lg gap-4 border border-border bg-background p-6 shadow-lg rounded-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
-    header: 'flex flex-col space-y-1.5 text-center sm:text-left',
-    footer: 'flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2',
-    title: 'text-lg font-semibold leading-none tracking-tight',
-    description: 'text-sm text-muted-foreground',
-    closeTrigger: 'absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',
+    backdrop:
+      "fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+    positioner: "fixed inset-0 z-50 flex items-center justify-center",
+    content:
+      "relative z-50 grid w-full max-w-lg gap-4 border border-border bg-background p-6 shadow-lg rounded-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
+    header: "flex flex-col space-y-1.5 text-center sm:text-left",
+    footer: "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2",
+    title: "text-lg font-semibold leading-none tracking-tight",
+    description: "text-sm text-muted-foreground",
+    closeTrigger:
+      "absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
   },
-})
+});
 
 export type DialogVariants = VariantProps<typeof dialogVariants>
 ```
@@ -89,51 +122,52 @@ import { dialogVariants } from './recipes/dialog'
 
 const styles = dialogVariants()
 
-export const DialogRoot = ArkDialog.Root
-export const DialogTrigger = ArkDialog.Trigger
+export const DialogRoot = ArkDialog.Root;
+export const DialogTrigger = ArkDialog.Trigger;
 
 type DialogContentProps = { class?: string; children?: JSX.Element }
 
 const DialogContent: Component<DialogContentProps> = (props) => {
-  const [local, others] = splitProps(props, ['class', 'children'])
-  const contentClass = createMemo(() => styles.content({ class: local.class }))
-  return (
-    <Portal>
-      <ArkDialog.Backdrop class={styles.backdrop()} />
-      <ArkDialog.Positioner class={styles.positioner()}>
-        <ArkDialog.Content class={contentClass()} {...others}>
-          {local.children}
-          <ArkDialog.CloseTrigger class={styles.closeTrigger()}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="size-4"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
-          </ArkDialog.CloseTrigger>
-        </ArkDialog.Content>
-      </ArkDialog.Positioner>
-    </Portal>
-  )
+const [local, others] = splitProps(props, ['class', 'children'])
+const contentClass = createMemo(() => styles.content({ class: local.class }))
+return (
+
+<Portal>
+<ArkDialog.Backdrop class={styles.backdrop()} />
+<ArkDialog.Positioner class={styles.positioner()}>
+<ArkDialog.Content class={contentClass()} {...others}>
+{local.children}
+<ArkDialog.CloseTrigger class={styles.closeTrigger()}>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="size-4"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+</ArkDialog.CloseTrigger>
+</ArkDialog.Content>
+</ArkDialog.Positioner>
+</Portal>
+)
 }
 
 const DialogHeader: Component<{ class?: string; children?: JSX.Element }> = (props) => {
-  const [local, others] = splitProps(props, ['class', 'children'])
-  const headerClass = createMemo(() => styles.header({ class: local.class }))
-  return <div class={headerClass()} {...others}>{local.children}</div>
+const [local, others] = splitProps(props, ['class', 'children'])
+const headerClass = createMemo(() => styles.header({ class: local.class }))
+return <div class={headerClass()} {...others}>{local.children}</div>
 }
 
 const DialogFooter: Component<{ class?: string; children?: JSX.Element }> = (props) => {
-  const [local, others] = splitProps(props, ['class', 'children'])
-  const footerClass = createMemo(() => styles.footer({ class: local.class }))
-  return <div class={footerClass()} {...others}>{local.children}</div>
+const [local, others] = splitProps(props, ['class', 'children'])
+const footerClass = createMemo(() => styles.footer({ class: local.class }))
+return <div class={footerClass()} {...others}>{local.children}</div>
 }
 
 const DialogTitle: Component<ArkDialog.TitleProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const titleClass = createMemo(() => styles.title({ class: local.class }))
-  return <ArkDialog.Title class={titleClass()} {...others} />
+const [local, others] = splitProps(props, ['class'])
+const titleClass = createMemo(() => styles.title({ class: local.class }))
+return <ArkDialog.Title class={titleClass()} {...others} />
 }
 
 const DialogDescription: Component<ArkDialog.DescriptionProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const descriptionClass = createMemo(() => styles.description({ class: local.class }))
-  return <ArkDialog.Description class={descriptionClass()} {...others} />
+const [local, others] = splitProps(props, ['class'])
+const descriptionClass = createMemo(() => styles.description({ class: local.class }))
+return <ArkDialog.Description class={descriptionClass()} {...others} />
 }
 
 export { DialogRoot as Dialog, DialogTrigger, DialogContent, DialogHeader, DialogFooter, DialogTitle, DialogDescription, dialogVariants }
@@ -146,7 +180,15 @@ export { DialogRoot as Dialog, DialogTrigger, DialogContent, DialogHeader, Dialo
 Import the components:
 
 ```tsx
-import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogFooter, DialogTitle, DialogDescription } from "~/components/dialog"
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogDescription,
+} from "~/components/dialog";
 ```
 
 Basic usage:
@@ -188,11 +230,11 @@ Add header and footer sections for structured dialog content.
 Control the dialog open state programmatically.
 
 ```tsx
-import { createSignal } from "solid-js"
-import { Dialog, DialogTrigger, DialogContent, DialogTitle } from "~/components/dialog"
+import { createSignal } from "solid-js";
+import { Dialog, DialogTrigger, DialogContent, DialogTitle } from "~/components/dialog";
 
 export function ControlledDialog() {
-  const [open, setOpen] = createSignal(false)
+  const [open, setOpen] = createSignal(false);
 
   return (
     <>
@@ -204,7 +246,7 @@ export function ControlledDialog() {
         </DialogContent>
       </Dialog>
     </>
-  )
+  );
 }
 ```
 
@@ -212,48 +254,48 @@ export function ControlledDialog() {
 
 ### Dialog (Root)
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| open | `boolean` | — | Controlled open state. |
-| onOpenChange | `(open: boolean) => void` | — | Callback when open state changes. |
-| positioning | `object` | — | Positioning options. |
-| class | `string` | — | Custom CSS class. |
+| Prop         | Type                      | Default | Description                       |
+| ------------ | ------------------------- | ------- | --------------------------------- |
+| open         | `boolean`                 | —       | Controlled open state.            |
+| onOpenChange | `(open: boolean) => void` | —       | Callback when open state changes. |
+| positioning  | `object`                  | —       | Positioning options.              |
+| class        | `string`                  | —       | Custom CSS class.                 |
 
 ### DialogTrigger
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| asChild | `boolean` | — | Whether to merge props with child element. |
-| class | `string` | — | Custom CSS class. |
+| Prop    | Type      | Default | Description                                |
+| ------- | --------- | ------- | ------------------------------------------ |
+| asChild | `boolean` | —       | Whether to merge props with child element. |
+| class   | `string`  | —       | Custom CSS class.                          |
 
 ### DialogContent
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| class | `string` | — | Custom CSS class. |
-| portalled | `boolean` | — | Whether to portal the content. |
-| forceMount | `boolean` | — | Force mount the content. |
+| Prop       | Type      | Default | Description                    |
+| ---------- | --------- | ------- | ------------------------------ |
+| class      | `string`  | —       | Custom CSS class.              |
+| portalled  | `boolean` | —       | Whether to portal the content. |
+| forceMount | `boolean` | —       | Force mount the content.       |
 
 ### DialogHeader
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| class | `string` | — | Custom CSS class. |
+| Prop  | Type     | Default | Description       |
+| ----- | -------- | ------- | ----------------- |
+| class | `string` | —       | Custom CSS class. |
 
 ### DialogFooter
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| class | `string` | — | Custom CSS class. |
+| Prop  | Type     | Default | Description       |
+| ----- | -------- | ------- | ----------------- |
+| class | `string` | —       | Custom CSS class. |
 
 ### DialogTitle
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| class | `string` | — | Custom CSS class. |
+| Prop  | Type     | Default | Description       |
+| ----- | -------- | ------- | ----------------- |
+| class | `string` | —       | Custom CSS class. |
 
 ### DialogDescription
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| class | `string` | — | Custom CSS class. |
+| Prop  | Type     | Default | Description       |
+| ----- | -------- | ------- | ----------------- |
+| class | `string` | —       | Custom CSS class. |

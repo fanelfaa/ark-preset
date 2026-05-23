@@ -4,7 +4,7 @@ import {
   AccordionItemTrigger,
   AccordionItemContent,
   AccordionItemIndicator,
-} from '@ui/solid'
+} from "@ui/solid";
 
 export default function AccordionDisabledDemo() {
   return (
@@ -14,7 +14,19 @@ export default function AccordionDisabledDemo() {
           <AccordionItemTrigger>
             Active Item
             <AccordionItemIndicator>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
             </AccordionItemIndicator>
           </AccordionItemTrigger>
           <AccordionItemContent>
@@ -25,7 +37,19 @@ export default function AccordionDisabledDemo() {
           <AccordionItemTrigger>
             Disabled Item
             <AccordionItemIndicator>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
             </AccordionItemIndicator>
           </AccordionItemTrigger>
           <AccordionItemContent>
@@ -34,5 +58,5 @@ export default function AccordionDisabledDemo() {
         </AccordionItem>
       </Accordion>
     </div>
-  )
+  );
 }

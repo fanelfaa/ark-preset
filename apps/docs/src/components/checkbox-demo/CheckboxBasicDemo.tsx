@@ -1,4 +1,4 @@
-import { Checkbox, CheckboxLabel } from '@ui/solid'
+import { Checkbox, CheckboxLabel } from "@ui/solid";
 
 export default function CheckboxBasicDemo() {
   return (
@@ -18,5 +18,5 @@ export default function CheckboxBasicDemo() {
         </Checkbox>
       </div>
     </div>
-  )
+  );
 }

@@ -5,6 +5,7 @@
 > **Quick Summary**: Initialize TanStack Router (Solid.js) in the docs site with file-based routing, migrate the existing App.tsx to `src/routes/index.tsx`, and fix the build script race condition.
 >
 > **Deliverables**:
+>
 > - `@tanstack/solid-router` + `@tanstack/solid-router-devtools` + `@tanstack/router-plugin` installed
 > - Vite plugin configured with `target: 'solid'` and `autoCodeSplitting: true`
 > - `src/routes/__root.tsx` — root layout with `<Outlet />` + devtools
@@ -23,23 +24,29 @@
 ## Context
 
 ### Original Request
+
 Initialize TanStack Router in `apps/docs` using the manual installation approach with Solid.js, then move the existing App.tsx content to `src/routes/index.tsx`.
 
 ### Interview Summary
+
 **Key Discussions**:
+
 - **Solid.js (not React)**: Use `@tanstack/solid-router` and `@tanstack/solid-router-devtools`
 - **File-based routing**: Use `@tanstack/router-plugin/vite` with `target: 'solid'` and `autoCodeSplitting: true`
 - **routeTree.gen.ts**: Add to `.gitignore` (not committed)
 - **TanStackRouterDevtools**: Include in root layout
 
 **Research Findings**:
+
 - App.tsx is 1107 lines with 19 component demos (Button, Input, Dialog, Select, Toast, Switch, Checkbox, Tabs, Accordion, RadioGroup, Tooltip, DatePicker, NumberInput, Popover, Slider, Collapsible, Menu, Drawer)
 - Current entry: `render(() => <App />, document.getElementById('root')!)`
 - Solid.js uses `class` attribute (not `className`)
 - Plugin must be placed BEFORE `vite-plugin-solid` in plugins array
 
 ### Metis Review
+
 **Identified Gaps** (addressed):
+
 - **Build race condition**: `tsc --noEmit & vite build` uses `&` (parallel). `tsc` fails because `routeTree.gen.ts` doesn't exist yet. Fix: change to `"vite build && tsc --noEmit"`.
 - **Missing HMR pragma**: `/* @refresh reload */` needed in `main.tsx` for Solid HMR compatibility with router
 - **TypeScript module augmentation**: `declare module '@tanstack/solid-router'` needed for type-safe router registration
@@ -50,9 +57,11 @@ Initialize TanStack Router in `apps/docs` using the manual installation approach
 ## Work Objectives
 
 ### Core Objective
+
 Initialize TanStack Router with file-based routing in the Solid.js docs site, migrating the existing single-page App component into a proper router-driven architecture.
 
 ### Concrete Deliverables
+
 - `apps/docs/package.json` — updated with new deps
 - `apps/docs/vite.config.ts` — tanstackRouter plugin added
 - `apps/docs/src/routes/__root.tsx` — root layout file
@@ -62,6 +71,7 @@ Initialize TanStack Router with file-based routing in the Solid.js docs site, mi
 - `apps/docs/src/App.tsx` — **deleted**
 
 ### Definition of Done
+
 - [ ] `pnpm dev` starts without errors; all demos render in browser
 - [ ] `pnpm build` succeeds (vite build + tsc --noEmit)
 - [ ] TanStackRouterDevtools visible in dev mode
@@ -69,6 +79,7 @@ Initialize TanStack Router with file-based routing in the Solid.js docs site, mi
 - [ ] `App.tsx` is deleted
 
 ### Must Have
+
 - Solid.js router packages installed (`@tanstack/solid-router`, `@tanstack/solid-router-devtools`, `@tanstack/router-plugin`)
 - Vite plugin configured with `target: 'solid'` and `autoCodeSplitting: true`
 - Plugin placed BEFORE `vite-plugin-solid` in the plugins array
@@ -80,6 +91,7 @@ Initialize TanStack Router with file-based routing in the Solid.js docs site, mi
 - Build script changed from `&` (parallel) to `&&` (sequential)
 
 ### Must NOT Have (Guardrails)
+
 - No routes beyond `/` (no `/about`, `/components/x`, etc.)
 - No refactoring/cleaning of App.tsx demo code during migration
 - No modifications to `packages/solid` or `packages/core`
@@ -94,11 +106,13 @@ Initialize TanStack Router with file-based routing in the Solid.js docs site, mi
 > **ZERO HUMAN INTERVENTION** — ALL verification is agent-executed. No exceptions.
 
 ### Test Decision
+
 - **Infrastructure exists**: NO
 - **Automated tests**: None (docs-only, no test infra)
 - **Agent-Executed QA**: ALWAYS — each task includes verifiable scenarios
 
 ### QA Policy
+
 Every task MUST include agent-executed QA scenarios. Evidence saved to `.sisyphus/evidence/`.
 
 - **Build verification**: `bash` with `vite build && tsc --noEmit`
@@ -377,14 +391,15 @@ Max Concurrent: 4 (Wave 1)
 
 ---
 
-- [x] 5. Create src/routes/__root.tsx
+- [x] 5. Create src/routes/\_\_root.tsx
 
   **What to do**:
   - Create `apps/docs/src/routes/` directory
   - Create `apps/docs/src/routes/__root.tsx` with:
+
     ```tsx
-    import { createRootRoute, Outlet } from '@tanstack/solid-router'
-    import { TanStackRouterDevtools } from '@tanstack/solid-router-devtools'
+    import { createRootRoute, Outlet } from "@tanstack/solid-router";
+    import { TanStackRouterDevtools } from "@tanstack/solid-router-devtools";
 
     export const Route = createRootRoute({
       component: () => (
@@ -393,8 +408,9 @@ Max Concurrent: 4 (Wave 1)
           <TanStackRouterDevtools />
         </>
       ),
-    })
+    });
     ```
+
   - This is a minimal root layout — no `<html>`/`<head>` tags (client-rendered SPA), no navigation links (only one route exists)
 
   **Must NOT do**:
@@ -445,32 +461,33 @@ Max Concurrent: 4 (Wave 1)
   - Copy ALL content from `apps/docs/src/App.tsx` (1107 lines) into `apps/docs/src/routes/index.tsx`
   - Add this import at the top:
     ```tsx
-    import { createFileRoute } from '@tanstack/solid-router'
+    import { createFileRoute } from "@tanstack/solid-router";
     ```
   - Change the component definition and export:
     - Keep the `App` component function body **EXACTLY AS-IS** (all JSX, signals, state)
     - Remove `export default App` at the bottom
     - Add after the component (or wrap differently):
       ```tsx
-      export const Route = createFileRoute('/')({
+      export const Route = createFileRoute("/")({
         component: App,
-      })
+      });
       ```
     - Keep `export default App` as well for backwards compatibility if any other file imports it (check if anything imports App.tsx first). But since App.tsx will be deleted, this shouldn't matter — remove the default export.
     - Rename the component from `App` to something more descriptive like `HomePage` or keep as `App` (internal name doesn't matter). Let's keep it as `App` for minimal diff.
 
   - Exact structure:
+
     ```tsx
-    import { createFileRoute } from '@tanstack/solid-router'
+    import { createFileRoute } from "@tanstack/solid-router";
     // … all existing imports from App.tsx (Component, createSignal, Index, Portal, @ui/solid components) …
 
     const App = () => {
       // … all existing JSX exactly as-is …
-    }
+    };
 
-    export const Route = createFileRoute('/')({
+    export const Route = createFileRoute("/")({
       component: App,
-    })
+    });
     ```
 
   **Must NOT do**:
@@ -529,31 +546,32 @@ Max Concurrent: 4 (Wave 1)
 
   **What to do**:
   - Replace the entire content of `apps/docs/src/main.tsx` with:
+
     ```tsx
     /* @refresh reload */
-    import { render } from 'solid-js/web'
-    import { RouterProvider, createRouter } from '@tanstack/solid-router'
+    import { render } from "solid-js/web";
+    import { RouterProvider, createRouter } from "@tanstack/solid-router";
 
     // Import the generated route tree
-    import { routeTree } from './routeTree.gen'
+    import { routeTree } from "./routeTree.gen";
 
     // Create a new router instance
-    const router = createRouter({ routeTree })
+    const router = createRouter({ routeTree });
 
     // Register the router instance for type safety
-    declare module '@tanstack/solid-router' {
+    declare module "@tanstack/solid-router" {
       interface Register {
-        router: typeof router
+        router: typeof router;
       }
     }
 
     // Import styles
-    import './index.css'
+    import "./index.css";
 
     // Render the app
-    const rootElement = document.getElementById('root')!
+    const rootElement = document.getElementById("root")!;
 
-    render(() => <RouterProvider router={router} />, rootElement)
+    render(() => <RouterProvider router={router} />, rootElement);
     ```
 
   - Key differences from current main.tsx:
@@ -618,7 +636,7 @@ Max Concurrent: 4 (Wave 1)
   - Run `git diff --stat --name-only` to verify only `apps/docs/` files changed
 
   **Must NOT do**:
-  - Do NOT delete routes/index.tsx, __root.tsx, or any other files
+  - Do NOT delete routes/index.tsx, \_\_root.tsx, or any other files
   - Do NOT merge changes yet — verified by final review wave
 
   **Recommended Agent Profile**:
@@ -691,36 +709,37 @@ Max Concurrent: 4 (Wave 1)
 ## Final Verification Wave (MANDATORY — after ALL implementation tasks)
 
 - [x] F1. **Plan Compliance Audit** — `oracle`
-  Read the plan end-to-end. For each "Must Have": verify implementation exists (read file, curl endpoint, run command). For each "Must NOT Have": search codebase for forbidden patterns — reject with file:line if found. Check evidence files exist in .sisyphus/evidence/. Compare deliverables against plan.
-  Output: `Must Have [N/N] | Must NOT Have [N/N] | Tasks [N/N] | VERDICT: APPROVE/REJECT`
+      Read the plan end-to-end. For each "Must Have": verify implementation exists (read file, curl endpoint, run command). For each "Must NOT Have": search codebase for forbidden patterns — reject with file:line if found. Check evidence files exist in .sisyphus/evidence/. Compare deliverables against plan.
+      Output: `Must Have [N/N] | Must NOT Have [N/N] | Tasks [N/N] | VERDICT: APPROVE/REJECT`
 
 - [x] F2. **Code Quality Review** — `unspecified-high`
-  Run `tsc --noEmit` + linter + build. Review all changed files for: `as any`/`@ts-ignore`, empty catches, console.log in prod, commented-out code, unused imports. Check AI slop: excessive comments, over-abstraction, generic names.
-  Output: `Build [PASS/FAIL] | Lint [PASS/FAIL] | Files [N clean/N issues] | VERDICT`
+      Run `tsc --noEmit` + linter + build. Review all changed files for: `as any`/`@ts-ignore`, empty catches, console.log in prod, commented-out code, unused imports. Check AI slop: excessive comments, over-abstraction, generic names.
+      Output: `Build [PASS/FAIL] | Lint [PASS/FAIL] | Files [N clean/N issues] | VERDICT`
 
 - [x] F3. **Real Manual QA** — `unspecified-high` (+ `playwright` skill)
-  Start from clean state. Execute EVERY QA scenario from EVERY task — follow exact steps, capture evidence. Test cross-task integration (dev server starts, page renders all demos). Test edge cases: routeTree.gen.ts gitignored, no leftover App.tsx, build succeeds. Save to `.sisyphus/evidence/final-qa/`.
-  Output: `Scenarios [N/N pass] | Integration [N/N] | Edge Cases [N tested] | VERDICT`
+      Start from clean state. Execute EVERY QA scenario from EVERY task — follow exact steps, capture evidence. Test cross-task integration (dev server starts, page renders all demos). Test edge cases: routeTree.gen.ts gitignored, no leftover App.tsx, build succeeds. Save to `.sisyphus/evidence/final-qa/`.
+      Output: `Scenarios [N/N pass] | Integration [N/N] | Edge Cases [N tested] | VERDICT`
 
 - [x] F4. **Scope Fidelity Check** — `deep`
-  For each task: read "What to do", read actual diff (git log/diff). Verify 1:1 — everything in spec was built (no missing), nothing beyond spec was built (no creep). Check "Must NOT do" compliance. Detect cross-task contamination: Task N touching packages/solid or packages/core. Flag unaccounted changes.
-  Output: `Tasks [N/N compliant] | Contamination [CLEAN/N issues] | Unaccounted [CLEAN/N files] | VERDICT`
+      For each task: read "What to do", read actual diff (git log/diff). Verify 1:1 — everything in spec was built (no missing), nothing beyond spec was built (no creep). Check "Must NOT do" compliance. Detect cross-task contamination: Task N touching packages/solid or packages/core. Flag unaccounted changes.
+      Output: `Tasks [N/N compliant] | Contamination [CLEAN/N issues] | Unaccounted [CLEAN/N files] | VERDICT`
 
 ---
 
 ## Commit Strategy
 
-| Task(s) | Message | Files | Pre-commit |
-|---------|---------|-------|------------|
-| 1, 2, 3, 4 | `feat(docs): add tanstack router deps and config` | package.json, vite.config.ts, .gitignore, pnpm-lock.yaml | — |
-| 5, 6, 7 | `feat(docs): migrate to tanstack router with file-based routing` | src/routes/__root.tsx, src/routes/index.tsx, src/main.tsx | — |
-| 8 | `chore(docs): delete App.tsx after router migration` | src/App.tsx (deleted) | `pnpm --filter @ui/docs build` |
+| Task(s)    | Message                                                          | Files                                                       | Pre-commit                     |
+| ---------- | ---------------------------------------------------------------- | ----------------------------------------------------------- | ------------------------------ |
+| 1, 2, 3, 4 | `feat(docs): add tanstack router deps and config`                | package.json, vite.config.ts, .gitignore, pnpm-lock.yaml    | —                              |
+| 5, 6, 7    | `feat(docs): migrate to tanstack router with file-based routing` | src/routes/\_\_root.tsx, src/routes/index.tsx, src/main.tsx | —                              |
+| 8          | `chore(docs): delete App.tsx after router migration`             | src/App.tsx (deleted)                                       | `pnpm --filter @ui/docs build` |
 
 ---
 
 ## Success Criteria
 
 ### Verification Commands
+
 ```bash
 # Build must succeed
 pnpm --filter @ui/docs build
@@ -744,6 +763,7 @@ git diff --stat --name-only
 ```
 
 ### Final Checklist
+
 - [ ] All TanStack Router deps installed in apps/docs/package.json
 - [ ] Vite plugin configured with `target: 'solid'` and `autoCodeSplitting: true`
 - [ ] Plugin placed BEFORE `solid()` in plugins array
