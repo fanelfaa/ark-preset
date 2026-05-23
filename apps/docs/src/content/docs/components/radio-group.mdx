@@ -5,6 +5,7 @@ category: Form & Input
 updatedDate: 2026-05-18
 ---
 
+import ArrowRightUp from "@components/icons/ArrowRightUp.astro";
 import RadioGroupBasicDemo from "@components/radio-group-demo/RadioGroupBasicDemo.tsx";
 import RadioGroupRootProviderDemo from "@components/radio-group-demo/RadioGroupRootProviderDemo.tsx";
 
@@ -18,21 +19,7 @@ A component that allows users to select a single option from a set of mutually e
   rel="noopener noreferrer"
   class="inline-flex items-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors"
 >
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="14"
-    height="14"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="2"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-  >
-    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-    <polyline points="15 3 21 3 21 9" />
-    <line x1="10" x2="21" y1="14" y2="3" />
-  </svg>
+  <ArrowRightUp />
   Docs
 </a>
 
@@ -293,47 +280,4 @@ Use the `disabled` prop on a `RadioGroupItem` to disable that specific option.
 
 ## API Reference
 
-### RadioGroup (Root)
-
-| Prop          | Type                                   | Default | Description                                    |
-| ------------- | -------------------------------------- | ------- | ---------------------------------------------- |
-| defaultValue  | `string`                               | —       | Initial selected value. Use when uncontrolled. |
-| value         | `string`                               | —       | Controlled selected value.                     |
-| onValueChange | `(details: { value: string }) => void` | —       | Callback when selection changes.               |
-| disabled      | `boolean`                              | `false` | Whether the entire group is disabled.          |
-| class         | `string`                               | —       | Custom CSS class.                              |
-
-### RadioGroupRootProvider
-
-| Prop  | Type                  | Default | Description                                                      |
-| ----- | --------------------- | ------- | ---------------------------------------------------------------- |
-| value | `UseRadioGroupReturn` | —       | Radio group context returned by `useRadioGroup()`. **Required.** |
-| class | `string`              | —       | Custom CSS class.                                                |
-
-### RadioGroupLabel
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
-
-### RadioGroupItem
-
-| Prop     | Type      | Default | Description                               |
-| -------- | --------- | ------- | ----------------------------------------- |
-| value    | `string`  | —       | Value identifying the item. **Required.** |
-| disabled | `boolean` | `false` | Whether this item is disabled.            |
-| class    | `string`  | —       | Custom CSS class.                         |
-
-### RadioGroupItemControl
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
-
-### RadioGroupItemText
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
-
-> **Note:** `RadioGroupIndicator` is automatically rendered inside the root component, and `RadioGroupItemHiddenInput` is automatically rendered inside `RadioGroupItemControl`. You do not need to add them manually.
+See the [Ark UI Radio Group](https://ark-ui.com/docs/components/radio-group) documentation.

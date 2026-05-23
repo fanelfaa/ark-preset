@@ -5,6 +5,7 @@ category: Navigation
 updatedDate: 2026-05-18
 ---
 
+import ArrowRightUp from "@components/icons/ArrowRightUp.astro";
 import TabsBasicDemo from "@components/tabs-demo/TabsBasicDemo.tsx";
 import TabsRootProviderDemo from "@components/tabs-demo/TabsRootProviderDemo.tsx";
 
@@ -18,21 +19,7 @@ A navigable component that organizes content into separate views where only one 
   rel="noopener noreferrer"
   class="inline-flex items-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors"
 >
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="14"
-    height="14"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="2"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-  >
-    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-    <polyline points="15 3 21 3 21 9" />
-    <line x1="10" x2="21" y1="14" y2="3" />
-  </svg>
+  <ArrowRightUp />
   Docs
 </a>
 
@@ -254,47 +241,4 @@ The key difference:
 
 ## API Reference
 
-### Tabs (Root)
-
-| Prop           | Type                                   | Default        | Description                                |
-| -------------- | -------------------------------------- | -------------- | ------------------------------------------ |
-| defaultValue   | `string`                               | —              | Initial active tab. Use when uncontrolled. |
-| value          | `string`                               | —              | Controlled active tab.                     |
-| onValueChange  | `(details: { value: string }) => void` | —              | Callback when tab changes.                 |
-| orientation    | `"horizontal"` \| `"vertical"`         | `"horizontal"` | Orientation of the tabs.                   |
-| activationMode | `"automatic"` \| `"manual"`            | `"automatic"`  | How tab activation is triggered.           |
-| class          | `string`                               | —              | Custom CSS class.                          |
-
-### TabsList
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
-
-### TabsTrigger
-
-| Prop     | Type      | Default | Description                              |
-| -------- | --------- | ------- | ---------------------------------------- |
-| value    | `string`  | —       | Value identifying the tab. **Required.** |
-| disabled | `boolean` | `false` | Whether the tab is disabled.             |
-| class    | `string`  | —       | Custom CSS class.                        |
-
-### TabsContent
-
-| Prop  | Type     | Default | Description                                  |
-| ----- | -------- | ------- | -------------------------------------------- |
-| value | `string` | —       | Value identifying the content. **Required.** |
-| class | `string` | —       | Custom CSS class.                            |
-
-### TabsIndicator
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
-
-### TabsRootProvider
-
-| Prop  | Type            | Default | Description                                           |
-| ----- | --------------- | ------- | ----------------------------------------------------- |
-| value | `UseTabsReturn` | —       | Tabs context returned by `useTabs()`. **Required.**   |
-| class | `string`        | —       | Custom CSS class.                                     |
+See the [Ark UI Tabs](https://ark-ui.com/docs/components/tabs) documentation.

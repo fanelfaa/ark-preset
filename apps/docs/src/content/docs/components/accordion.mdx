@@ -5,6 +5,7 @@ category: Navigation
 updatedDate: 2026-05-18
 ---
 
+import ArrowRightUp from "@components/icons/ArrowRightUp.astro";
 import AccordionBasicDemo from "@components/accordion-demo/AccordionBasicDemo.tsx";
 import AccordionMultipleDemo from "@components/accordion-demo/AccordionMultipleDemo.tsx";
 import AccordionCollapsibleDemo from "@components/accordion-demo/AccordionCollapsibleDemo.tsx";
@@ -21,21 +22,7 @@ Displays collapsible content panels that reveal or hide sections of content.
   rel="noopener noreferrer"
   class="inline-flex items-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors"
 >
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="14"
-    height="14"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="2"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-  >
-    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-    <polyline points="15 3 21 3 21 9" />
-    <line x1="10" x2="21" y1="14" y2="3" />
-  </svg>
+  <ArrowRightUp />
   Docs
 </a>
 
@@ -423,50 +410,4 @@ To disable all items at once, pass `disabled` to the `<Accordion>` root.
 
 ## API Reference
 
-### Accordion (Root)
-
-| Prop          | Type                                     | Default      | Description                                    |
-| ------------- | ---------------------------------------- | ------------ | ---------------------------------------------- |
-| defaultValue  | `string[]`                               | `[]`         | Initial expanded items. Use when uncontrolled. |
-| value         | `string[]`                               | —            | Controlled value of expanded items.            |
-| onValueChange | `(details: { value: string[] }) => void` | —            | Callback when expand state changes.            |
-| multiple      | `boolean`                                | `false`      | Allow multiple items expanded simultaneously.  |
-| collapsible   | `boolean`                                | `false`      | Allow items to be closed after expansion.      |
-| disabled      | `boolean`                                | `false`      | Disable all accordion items.                   |
-| orientation   | `"horizontal"` \| `"vertical"`           | `"vertical"` | Layout orientation of the accordion.           |
-| lazyMount     | `boolean`                                | `false`      | Enable lazy mounting of content.               |
-| unmountOnExit | `boolean`                                | `false`      | Unmount content on exit animation.             |
-| class         | `string`                                 | —            | Custom CSS class.                              |
-
-### AccordionRootProvider
-
-| Prop  | Type               | Default | Description                                                   |
-| ----- | ------------------ | ------- | ------------------------------------------------------------- |
-| value | `AccordionContext` | —       | Accordion context returned by `useAccordion()`. **Required.** |
-| class | `string`           | —       | Custom CSS class.                                             |
-
-### AccordionItem
-
-| Prop     | Type      | Default | Description                                   |
-| -------- | --------- | ------- | --------------------------------------------- |
-| value    | `string`  | —       | Unique identifier for the item. **Required.** |
-| disabled | `boolean` | `false` | Whether this item is disabled.                |
-| class    | `string`  | —       | Custom CSS class.                             |
-
-### AccordionItemTrigger
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
-
-### AccordionItemContent
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
-
-### AccordionItemIndicator
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
+See the [Ark UI Accordion](https://ark-ui.com/docs/components/accordion) documentation.

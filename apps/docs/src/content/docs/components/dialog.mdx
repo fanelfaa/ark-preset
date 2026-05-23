@@ -5,6 +5,7 @@ category: Overlay
 updatedDate: 2026-05-18
 ---
 
+import ArrowRightUp from "@components/icons/ArrowRightUp.astro";
 import DialogBasicDemo from "@components/dialog-demo/DialogBasicDemo.tsx";
 import DialogRootProviderDemo from "@components/dialog-demo/DialogRootProviderDemo.tsx";
 
@@ -18,21 +19,7 @@ A modal dialog that overlays the page content, typically used for important acti
   rel="noopener noreferrer"
   class="inline-flex items-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors"
 >
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="14"
-    height="14"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="2"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-  >
-    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-    <polyline points="15 3 21 3 21 9" />
-    <line x1="10" x2="21" y1="14" y2="3" />
-  </svg>
+  <ArrowRightUp />
   Docs
 </a>
 
@@ -312,61 +299,4 @@ The key difference:
 
 ## API Reference
 
-### Dialog (Root)
-
-| Prop         | Type                      | Default | Description                       |
-| ------------ | ------------------------- | ------- | --------------------------------- |
-| open         | `boolean`                 | —       | Controlled open state.            |
-| onOpenChange | `(open: boolean) => void` | —       | Callback when open state changes. |
-| positioning  | `object`                  | —       | Positioning options.              |
-| class        | `string`                  | —       | Custom CSS class.                 |
-
-### DialogTrigger
-
-| Prop    | Type      | Default | Description                                |
-| ------- | --------- | ------- | ------------------------------------------ |
-| asChild | `boolean` | —       | Whether to merge props with child element. |
-| class   | `string`  | —       | Custom CSS class.                          |
-
-### DialogContent
-
-| Prop       | Type      | Default | Description                    |
-| ---------- | --------- | ------- | ------------------------------ |
-| class      | `string`  | —       | Custom CSS class.              |
-| portalled  | `boolean` | —       | Whether to portal the content. |
-| forceMount | `boolean` | —       | Force mount the content.       |
-
-### DialogHeader
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
-
-### DialogFooter
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
-
-### DialogTitle
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
-
-### DialogDescription
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
-
-### DialogRootProvider
-
-| Prop           | Type              | Default | Description                                        |
-| -------------- | ----------------- | ------- | -------------------------------------------------- |
-| value          | `UseDialogReturn` | —       | Context returned by `useDialog()`. **Required.**   |
-| lazyMount      | `boolean`         | `false` | Whether to enable lazy mounting.                   |
-| unmountOnExit  | `boolean`         | `false` | Whether to unmount on exit.                        |
-| present        | `boolean`         | —       | Whether the node is present (controlled).          |
-| immediate      | `boolean`         | —       | Whether to synchronize present change immediately. |
-| onExitComplete | `() => void`      | —       | Callback when exit animation completes.            |
+See the [Ark UI Dialog](https://ark-ui.com/docs/components/dialog) documentation.

@@ -5,6 +5,7 @@ category: Form & Input
 updatedDate: 2026-05-18
 ---
 
+import ArrowRightUp from "@components/icons/ArrowRightUp.astro";
 import DatePickerBasicDemo from "@components/date-picker-demo/DatePickerBasicDemo.tsx";
 
 # Date Picker
@@ -17,21 +18,7 @@ A date picker component that allows users to select a date or date range from a 
   rel="noopener noreferrer"
   class="inline-flex items-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors"
 >
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="14"
-    height="14"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="2"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-  >
-    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-    <polyline points="15 3 21 3 21 9" />
-    <line x1="10" x2="21" y1="14" y2="3" />
-  </svg>
+  <ArrowRightUp />
   Docs
 </a>
 
@@ -628,132 +615,4 @@ export function DatePickerControlled() {
 
 ## API Reference
 
-### DatePicker (Root)
-
-| Prop          | Type                                        | Default | Description                                      |
-| ------------- | ------------------------------------------- | ------- | ------------------------------------------------ |
-| value         | `DateValue[]`                               | —       | Controlled selected date(s).                     |
-| onValueChange | `(details: { value: DateValue[] }) => void` | —       | Callback when value changes.                     |
-| defaultValue  | `DateValue[]`                               | —       | Initial selected date(s). Use when uncontrolled. |
-| positioning   | `object`                                    | —       | Positioning options for the popup.               |
-| class         | `string`                                    | —       | Custom CSS class.                                |
-
-### DatePickerLabel
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
-
-### DatePickerControl
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
-
-### DatePickerInput
-
-| Prop        | Type     | Default | Description       |
-| ----------- | -------- | ------- | ----------------- |
-| placeholder | `string` | —       | Placeholder text. |
-| class       | `string` | —       | Custom CSS class. |
-
-### DatePickerTrigger
-
-| Prop     | Type          | Default | Description                                        |
-| -------- | ------------- | ------- | -------------------------------------------------- |
-| class    | `string`      | —       | Custom CSS class.                                  |
-| children | `JSX.Element` | —       | Custom trigger content (calendar icon by default). |
-
-### DatePickerContent
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
-
-### DatePickerView
-
-| Prop  | Type                         | Default | Description               |
-| ----- | ---------------------------- | ------- | ------------------------- |
-| view  | `"day" \| "month" \| "year"` | `"day"` | Calendar view to display. |
-| class | `string`                     | —       | Custom CSS class.         |
-
-### DatePickerViewControl
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
-
-### DatePickerPrevTrigger / DatePickerNextTrigger
-
-| Prop     | Type          | Default | Description                               |
-| -------- | ------------- | ------- | ----------------------------------------- |
-| class    | `string`      | —       | Custom CSS class.                         |
-| children | `JSX.Element` | —       | Custom icon content (chevron by default). |
-
-### DatePickerViewTrigger
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
-
-### DatePickerRangeText
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
-
-### DatePickerTable
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
-
-### DatePickerTableCell
-
-| Prop  | Type           | Default | Description                            |
-| ----- | -------------- | ------- | -------------------------------------- |
-| value | `CalendarDate` | —       | Date value for the cell. **Required.** |
-| class | `string`       | —       | Custom CSS class.                      |
-
-### DatePickerTableCellTrigger
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
-
-### DatePickerClearTrigger
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
-
-### DatePickerRootProvider
-
-| Prop  | Type                  | Default | Description                                                      |
-| ----- | --------------------- | ------- | ---------------------------------------------------------------- |
-| value | `UseDatePickerReturn` | —       | Date picker context returned by `useDatePicker()`. **Required.** |
-| class | `string`              | —       | Custom CSS class.                                                |
-
-### DatePickerYearSelect
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
-
-### DatePickerMonthSelect
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
-
-### DatePickerContext
-
-| Prop     | Type                                             | Default | Description                                                                                                                                            |
-| -------- | ------------------------------------------------ | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| children | `(context: UseDatePickerContext) => JSX.Element` | —       | Render function receiving the date picker context. Call `context()` to access the reactive API (`weekDays`, `weeks`, `getMonthsGrid`, `getYearsGrid`). |
-
-### DatePickerPositioner
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
+See the [Ark UI Date Picker](https://ark-ui.com/docs/components/date-picker) documentation.

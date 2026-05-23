@@ -5,6 +5,7 @@ category: Overlay
 updatedDate: 2026-05-18
 ---
 
+import ArrowRightUp from "@components/icons/ArrowRightUp.astro";
 import ToastBasicDemo from "@components/toast-demo/ToastBasicDemo.tsx";
 
 # Toast
@@ -17,21 +18,7 @@ A notification component for displaying transient messages with multiple variant
   rel="noopener noreferrer"
   class="inline-flex items-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors"
 >
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="14"
-    height="14"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="2"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-  >
-    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-    <polyline points="15 3 21 3 21 9" />
-    <line x1="10" x2="21" y1="14" y2="3" />
-  </svg>
+  <ArrowRightUp />
   Docs
 </a>
 
@@ -197,29 +184,4 @@ toaster.create({ title: "Error toast", type: "error" });
 
 ## API Reference
 
-### createToaster
-
-| Option    | Type     | Default        | Description                 |
-| --------- | -------- | -------------- | --------------------------- |
-| placement | `string` | `"bottom-end"` | Position of toasts.         |
-| timeout   | `number` | `5000`         | Auto-dismiss duration (ms). |
-| max       | `number` | `3`            | Maximum visible toasts.     |
-| gap       | `number` | `12`           | Gap between toasts (px).    |
-
-### Toaster
-
-| Prop    | Type                  | Default | Description                                          |
-| ------- | --------------------- | ------- | ---------------------------------------------------- |
-| toaster | `CreateToasterReturn` | —       | Toaster instance from `createToaster`. **Required.** |
-| class   | `string`              | —       | Custom CSS class.                                    |
-
-### toastVariants
-
-| Variant | Description                    |
-| ------- | ------------------------------ |
-| default | Neutral styling                |
-| loading | Neutral with loading indicator |
-| success | Green border and background    |
-| error   | Red border and background      |
-| info    | Blue border and background     |
-| warning | Yellow border and background   |
+See the [Ark UI Toast](https://ark-ui.com/docs/components/toast) documentation.

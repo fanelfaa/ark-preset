@@ -5,6 +5,7 @@ category: Form & Input
 updatedDate: 2026-05-23
 ---
 
+import ArrowRightUp from "@components/icons/ArrowRightUp.astro";
 import { Toggle } from "@ui/solid";
 import ToggleBasicDemo from "@components/toggle-demo/ToggleBasicDemo.tsx";
 import ToggleIndicatorDemo from "@components/toggle-demo/ToggleIndicatorDemo.tsx";
@@ -19,21 +20,7 @@ A button-like component for toggling between on and off states, commonly used fo
   rel="noopener noreferrer"
   class="inline-flex items-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors"
 >
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="14"
-    height="14"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="2"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-  >
-    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-    <polyline points="15 3 21 3 21 9" />
-    <line x1="10" x2="21" y1="14" y2="3" />
-  </svg>
+  <ArrowRightUp />
   Docs
 </a>
 
@@ -238,20 +225,4 @@ With Indicator:
 
 ## API Reference
 
-### Toggle (Root)
-
-| Prop             | Type                      | Default | Description                           |
-| ---------------- | ------------------------- | ------- | ------------------------------------- |
-| defaultPressed   | boolean                   | —       | Initial state (uncontrolled).         |
-| pressed          | boolean                   | —       | Controlled pressed state.             |
-| onPressedChange  | `(pressed: boolean) => void` | —    | Callback when pressed state changes.  |
-| size             | "sm" \| "md" \| "lg"      | "sm"    | Size of the toggle (h-8 / h-9 / h-10).|
-| disabled         | boolean                   | false   | Whether the toggle is disabled.       |
-| class            | string                    | —       | Custom CSS class.                     |
-
-### ToggleIndicator
-
-| Prop   | Type     | Default | Description                                 |
-| ------ | -------- | ------- | ------------------------------------------- |
-| fallback | `ReactNode` | —    | Content shown when toggle is not pressed.   |
-| class  | string   | —       | Custom CSS class.                           |
+See the [Ark UI Toggle](https://ark-ui.com/docs/components/toggle) documentation.
