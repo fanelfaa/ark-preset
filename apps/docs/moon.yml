@@ -6,23 +6,23 @@ dependsOn:
 
 tasks:
   dev:
-    command: 'pnpm dev'
+    command: "pnpm dev"
     deps:
-      - 'solid:build'
+      - "solid:build"
   typecheck:
-    command: 'pnpm typecheck'
+    command: "pnpm typecheck"
     deps:
-      - 'solid:build'
+      - "solid:build"
   build:
-    command: 'pnpm build'
+    command: "pnpm build"
     deps:
-      - 'solid:build'
+      - "solid:build"
     inputs:
-      - 'src/**/*'
-      - 'astro.config.mjs'
+      - "src/**/*"
+      - "astro.config.mjs"
     outputs:
-      - 'dist'
+      - "dist"
   preview:
-    command: 'pnpm preview'
+    command: "pnpm preview"
     deps:
-      - 'build'
+      - "build"

@@ -5,6 +5,7 @@
 > **Quick Summary**: Initialize moon (v2.2) as the build system for the monorepo. Create workspace config, toolchain config, and per-project `moon.yml` files for all 5 projects. Wire up cross-project dependencies so `moon run docs:dev` reactively runs `core:dev` and `solid:dev` first, enabling full HMR when changing packages code.
 
 > **Deliverables**:
+>
 > - `.moon/workspace.yml` — workspace config with glob-based project discovery
 > - `.moon/toolchains.yml` — JS/TS toolchain config
 > - `packages/core/moon.yml` — core project config
@@ -24,9 +25,11 @@
 ## Context
 
 ### Original Request
+
 Setup moon repo for this project. Ensure all apps/packages have `moon.yml`. Ensure `moon run docs:dev` includes dependencies in the dev loop — changes to `packages/core` or `packages/solid` trigger updates in `apps/docs`.
 
 ### Current Project Structure
+
 ```
 apps/docs/          → @ui/docs (SolidJS + Vite, depends on @ui/solid + @ui/core)
 packages/core/      → @ui/core (standalone, tailwind-variants/merge)
@@ -36,6 +39,7 @@ packages/cli/       → create-ui (standalone, commander CLI)
 ```
 
 ### Key Observations
+
 - **moon v2.2.4** is installed via proto at `~/.proto/shims/moon`
 - Project uses pnpm workspace (already configured in `pnpm-workspace.yaml`)
 - All packages have `build` and `dev` scripts (tsup/tsup --watch or vite)
@@ -44,6 +48,7 @@ packages/cli/       → create-ui (standalone, commander CLI)
 - `vite.config.ts` already has `conditions: ['development', ...]`
 
 ### Dev Workflow Design
+
 ```
 moon run docs:dev
   ├── 1. core:dev (tsup --watch)   [persistent, background]
@@ -54,6 +59,7 @@ moon run docs:dev
 Core + Solid dev tasks run persistently. When you change source in either package, tsup rebuilds `dist/`, vite detects the change, and HMR updates the docs app.
 
 ### Enhancement: Add `development` condition to `@ui/core`
+
 Adding `"development": "./src/index.ts"` to `@ui/core` exports means vite can resolve directly to TypeScript source. Combined with vite's `conditions: ['development', ...]`, this enables HMR for core changes without needing tsup --watch for core. (We still include core:dev as a fallback.)
 
 ---
@@ -61,25 +67,30 @@ Adding `"development": "./src/index.ts"` to `@ui/core` exports means vite can re
 ## Work Objectives
 
 ### Core Objective
+
 Initialize moon build system with correct project graph and task dependencies for a seamless dev experience.
 
 ### Concrete Deliverables
+
 - `.moon/workspace.yml`, `.moon/toolchains.yml` config files
 - `moon.yml` in all 5 projects (core, solid, react, cli, docs)
 - Updated `.gitignore` with moon entries
 - Updated `@ui/core` exports with `development` condition
 
 ### Definition of Done
+
 - `moon project core`, `moon project solid`, `moon project docs` all return valid project info
 - `moon run docs:dev` starts correctly with dependency tasks running first
 - Changes to `packages/core/src/` or `packages/solid/src/` are reflected in `apps/docs`
 
 ### Must Have
+
 - Every project has a valid `moon.yml` with correct `dependsOn` and tasks
 - `docs:dev` task depends on `^:dev` (upstream dev tasks) for proper dev ordering
 - `@ui/core` exports include `development` condition for direct source resolution
 
 ### Must NOT Have (Guardrails)
+
 - Do NOT add Docker config or CI pipeline setup (not requested)
 - Do NOT add remote caching config (not requested)
 - Do NOT modify existing package.json `scripts` — moon tasks should invoke existing scripts
@@ -92,12 +103,15 @@ Initialize moon build system with correct project graph and task dependencies fo
 > **ZERO HUMAN INTERVENTION** — ALL verification is agent-executed.
 
 ### Test Decision
+
 - **Infrastructure exists**: NO (moon is new to this project)
 - **Automated tests**: NO (setup/configuration task — no unit tests needed)
 - **Agent-Executed QA**: ALWAYS — each task verifies via CLI commands
 
 ### QA Policy
+
 Every task includes agent-executed QA scenarios:
+
 - **CLI**: Run `moon project <name>`, parse output for expected fields
 - **CLI**: Run `moon run <project>:<task>`, check process start
 - **File verification**: Check file existence and content with `bash`
@@ -159,6 +173,7 @@ Wave 3 (Validation — parallel):
   **Acceptance Criteria**:
 
   **QA Scenarios**:
+
   ```
   Scenario: moon init creates .moon directory
     Tool: Bash
@@ -180,16 +195,17 @@ Wave 3 (Validation — parallel):
 
   **What to do**:
   - Overwrite `.moon/workspace.yml` with:
+
     ```yaml
-    $schema: 'https://moonrepo.dev/schemas/workspace.json'
+    $schema: "https://moonrepo.dev/schemas/workspace.json"
 
     projects:
-      - 'apps/*'
-      - 'packages/*'
+      - "apps/*"
+      - "packages/*"
 
     vcs:
-      client: 'git'
-      defaultBranch: 'master'
+      client: "git"
+      defaultBranch: "master"
     ```
 
   **Must NOT do**:
@@ -214,6 +230,7 @@ Wave 3 (Validation — parallel):
   **Acceptance Criteria**:
 
   **QA Scenarios**:
+
   ```
   Scenario: workspace.yml has correct structure
     Tool: Bash
@@ -233,18 +250,19 @@ Wave 3 (Validation — parallel):
 
   **What to do**:
   - Create `.moon/toolchains.yml` with:
+
     ```yaml
-    $schema: 'https://moonrepo.dev/schemas/toolchain.json'
+    $schema: "https://moonrepo.dev/schemas/toolchain.json"
 
     javascript:
-      packageManager: 'pnpm'
+      packageManager: "pnpm"
 
     node:
-      version: '18.0.0'
-      packageManager: 'pnpm'
+      version: "18.0.0"
+      packageManager: "pnpm"
 
     pnpm:
-      version: '9.0.0'
+      version: "9.0.0"
 
     typescript:
       createMissingConfig: false
@@ -273,6 +291,7 @@ Wave 3 (Validation — parallel):
   **Acceptance Criteria**:
 
   **QA Scenarios**:
+
   ```
   Scenario: toolchains.yml exists with correct structure
     Tool: Bash
@@ -320,6 +339,7 @@ Wave 3 (Validation — parallel):
   **Acceptance Criteria**:
 
   **QA Scenarios**:
+
   ```
   Scenario: .gitignore has moon entries
     Tool: Bash
@@ -350,7 +370,7 @@ Wave 3 (Validation — parallel):
 
   **Must NOT do**:
   - Do NOT change existing export paths or other fields
-  - Do NOT add development condition to sub-path exports (recipes/*) — only the main entry
+  - Do NOT add development condition to sub-path exports (recipes/\*) — only the main entry
 
   **Recommended Agent Profile**:
   - **Category**: `quick` — simple JSON edit
@@ -370,6 +390,7 @@ Wave 3 (Validation — parallel):
   **Acceptance Criteria**:
 
   **QA Scenarios**:
+
   ```
   Scenario: @ui/core exports have development condition
     Tool: Bash
@@ -389,31 +410,32 @@ Wave 3 (Validation — parallel):
 
   **What to do**:
   - Create `packages/core/moon.yml`:
-    ```yaml
-    $schema: 'https://moonrepo.dev/schemas/project.json'
 
-    language: 'typescript'
-    layer: 'library'
-    stack: 'frontend'
+    ```yaml
+    $schema: "https://moonrepo.dev/schemas/project.json"
+
+    language: "typescript"
+    layer: "library"
+    stack: "frontend"
 
     project:
-      title: '@ui/core'
-      description: 'Core UI library — tailwind-variants recipes and utilities'
+      title: "@ui/core"
+      description: "Core UI library — tailwind-variants recipes and utilities"
 
-    tags: ['ui', 'core']
+    tags: ["ui", "core"]
 
     tasks:
       build:
-        command: 'tsup'
+        command: "tsup"
         inputs:
-          - 'src/**/*'
-          - 'tsup.config.ts'
+          - "src/**/*"
+          - "tsup.config.ts"
         outputs:
-          - 'dist'
+          - "dist"
       dev:
-        command: 'tsup --watch'
+        command: "tsup --watch"
       typecheck:
-        command: 'tsc --noEmit'
+        command: "tsc --noEmit"
     ```
 
   **Must NOT do**:
@@ -437,6 +459,7 @@ Wave 3 (Validation — parallel):
   **Acceptance Criteria**:
 
   **QA Scenarios**:
+
   ```
   Scenario: core moon.yml is valid
     Tool: Bash
@@ -457,38 +480,39 @@ Wave 3 (Validation — parallel):
 
   **What to do**:
   - Create `packages/solid/moon.yml`:
-    ```yaml
-    $schema: 'https://moonrepo.dev/schemas/project.json'
 
-    language: 'typescript'
-    layer: 'library'
-    stack: 'frontend'
+    ```yaml
+    $schema: "https://moonrepo.dev/schemas/project.json"
+
+    language: "typescript"
+    layer: "library"
+    stack: "frontend"
 
     dependsOn:
-      - 'core'
+      - "core"
 
     project:
-      title: '@ui/solid'
-      description: 'Solid.js UI components built on Ark UI'
+      title: "@ui/solid"
+      description: "Solid.js UI components built on Ark UI"
 
-    tags: ['ui', 'solid']
+    tags: ["ui", "solid"]
 
     tasks:
       build:
-        command: 'tsup'
+        command: "tsup"
         deps:
-          - 'core:build'
+          - "core:build"
         inputs:
-          - 'src/**/*'
-          - 'tsup.config.ts'
+          - "src/**/*"
+          - "tsup.config.ts"
         outputs:
-          - 'dist'
+          - "dist"
       dev:
-        command: 'tsup --watch'
+        command: "tsup --watch"
         deps:
-          - 'core:dev'
+          - "core:dev"
       typecheck:
-        command: 'tsc --noEmit'
+        command: "tsc --noEmit"
     ```
 
   **Must NOT do**:
@@ -511,6 +535,7 @@ Wave 3 (Validation — parallel):
   **Acceptance Criteria**:
 
   **QA Scenarios**:
+
   ```
   Scenario: solid moon.yml is valid with core dependency
     Tool: Bash
@@ -531,38 +556,39 @@ Wave 3 (Validation — parallel):
 
   **What to do**:
   - Create `packages/react/moon.yml`:
-    ```yaml
-    $schema: 'https://moonrepo.dev/schemas/project.json'
 
-    language: 'typescript'
-    layer: 'library'
-    stack: 'frontend'
+    ```yaml
+    $schema: "https://moonrepo.dev/schemas/project.json"
+
+    language: "typescript"
+    layer: "library"
+    stack: "frontend"
 
     dependsOn:
-      - 'core'
+      - "core"
 
     project:
-      title: '@ui/react'
-      description: 'React UI components built on Ark UI'
+      title: "@ui/react"
+      description: "React UI components built on Ark UI"
 
-    tags: ['ui', 'react']
+    tags: ["ui", "react"]
 
     tasks:
       build:
-        command: 'tsup'
+        command: "tsup"
         deps:
-          - 'core:build'
+          - "core:build"
         inputs:
-          - 'src/**/*'
-          - 'tsup.config.ts'
+          - "src/**/*"
+          - "tsup.config.ts"
         outputs:
-          - 'dist'
+          - "dist"
       dev:
-        command: 'tsup --watch'
+        command: "tsup --watch"
         deps:
-          - 'core:dev'
+          - "core:dev"
       typecheck:
-        command: 'tsc --noEmit'
+        command: "tsc --noEmit"
     ```
 
   **Must NOT do**:
@@ -585,6 +611,7 @@ Wave 3 (Validation — parallel):
   **Acceptance Criteria**:
 
   **QA Scenarios**:
+
   ```
   Scenario: react moon.yml is valid with core dependency
     Tool: Bash
@@ -605,31 +632,32 @@ Wave 3 (Validation — parallel):
 
   **What to do**:
   - Create `packages/cli/moon.yml`:
-    ```yaml
-    $schema: 'https://moonrepo.dev/schemas/project.json'
 
-    language: 'typescript'
-    layer: 'tool'
-    stack: 'backend'
+    ```yaml
+    $schema: "https://moonrepo.dev/schemas/project.json"
+
+    language: "typescript"
+    layer: "tool"
+    stack: "backend"
 
     project:
-      title: 'create-ui'
-      description: 'CLI tool for scaffolding UI components'
+      title: "create-ui"
+      description: "CLI tool for scaffolding UI components"
 
-    tags: ['cli']
+    tags: ["cli"]
 
     tasks:
       build:
-        command: 'tsup'
+        command: "tsup"
         inputs:
-          - 'src/**/*'
-          - 'tsup.config.ts'
+          - "src/**/*"
+          - "tsup.config.ts"
         outputs:
-          - 'dist'
+          - "dist"
       dev:
-        command: 'tsup --watch'
+        command: "tsup --watch"
       typecheck:
-        command: 'tsc --noEmit'
+        command: "tsc --noEmit"
     ```
 
   **Must NOT do**:
@@ -652,6 +680,7 @@ Wave 3 (Validation — parallel):
   **Acceptance Criteria**:
 
   **QA Scenarios**:
+
   ```
   Scenario: cli moon.yml is valid
     Tool: Bash
@@ -671,42 +700,43 @@ Wave 3 (Validation — parallel):
 
   **What to do**:
   - Create `apps/docs/moon.yml`:
-    ```yaml
-    $schema: 'https://moonrepo.dev/schemas/project.json'
 
-    language: 'typescript'
-    layer: 'application'
-    stack: 'frontend'
+    ```yaml
+    $schema: "https://moonrepo.dev/schemas/project.json"
+
+    language: "typescript"
+    layer: "application"
+    stack: "frontend"
 
     dependsOn:
-      - 'solid'
-      - 'core'
+      - "solid"
+      - "core"
 
     project:
-      title: '@ui/docs'
-      description: 'Documentation site for the UI component library'
+      title: "@ui/docs"
+      description: "Documentation site for the UI component library"
 
-    tags: ['docs', 'solid']
+    tags: ["docs", "solid"]
 
     tasks:
       dev:
-        command: 'vite'
+        command: "vite"
         deps:
-          - 'solid:dev'
-          - 'core:dev'
+          - "solid:dev"
+          - "core:dev"
       build:
-        command: 'vite build'
+        command: "vite build"
         deps:
-          - 'solid:build'
-          - 'core:build'
+          - "solid:build"
+          - "core:build"
         inputs:
-          - 'src/**/*'
-          - 'index.html'
-          - 'vite.config.ts'
+          - "src/**/*"
+          - "index.html"
+          - "vite.config.ts"
         outputs:
-          - 'dist'
+          - "dist"
       preview:
-        command: 'vite preview'
+        command: "vite preview"
     ```
 
   **Must NOT do**:
@@ -730,6 +760,7 @@ Wave 3 (Validation — parallel):
   **Acceptance Criteria**:
 
   **QA Scenarios**:
+
   ```
   Scenario: docs moon.yml is valid with dependencies
     Tool: Bash
@@ -774,6 +805,7 @@ Wave 3 (Validation — parallel):
   **Acceptance Criteria**:
 
   **QA Scenarios**:
+
   ```
   Scenario: All 5 projects are registered
     Tool: Bash
@@ -831,6 +863,7 @@ Wave 3 (Validation — parallel):
   **Acceptance Criteria**:
 
   **QA Scenarios**:
+
   ```
   Scenario: moon run docs:dev starts dependency chain
     Tool: Bash (with timeout)
@@ -879,6 +912,7 @@ Wave 3 (Validation — parallel):
 ## Success Criteria
 
 ### Verification Commands
+
 ```bash
 moon project --list          # Expected: core, solid, react, cli, docs (5 projects)
 moon project docs --json     # Expected: shows deps on solid + core
@@ -886,6 +920,7 @@ moon run docs:dev            # Expected: starts core:dev → solid:dev → docs:
 ```
 
 ### Final Checklist
+
 - [x] `moon project core` succeeds with valid project info
 - [x] `moon project solid` succeeds and lists `core` as dependency
 - [x] `moon project docs` succeeds and lists `solid`, `core` as dependencies

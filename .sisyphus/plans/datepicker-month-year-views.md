@@ -8,9 +8,10 @@
 
 ## Context
 
-We have a DatePicker demo in `apps/docs/src/App.tsx` that only renders the **day** view grid. The `DatePickerViewTrigger` *can* cycle through views (day → month → year), but the month/year view blocks don't exist yet.
+We have a DatePicker demo in `apps/docs/src/App.tsx` that only renders the **day** view grid. The `DatePickerViewTrigger` _can_ cycle through views (day → month → year), but the month/year view blocks don't exist yet.
 
 **Current structure** (wrong - ViewControl hidden on view switch):
+
 ```
 DatePickerContent
   └─ DatePickerView view="day"
@@ -19,6 +20,7 @@ DatePickerContent
 ```
 
 **Target structure**:
+
 ```
 DatePickerContent
   ├─ ViewControl  ← always visible, works with any active view
@@ -34,15 +36,18 @@ DatePickerContent
 **Add month and year view picker grids** to the DatePicker demo so users can cycle day → month → year → day via the `ViewTrigger` button.
 
 ### Deliverables
+
 - `apps/docs/src/App.tsx` — updated DatePickerContent with all three views
 
 ### Must Have
+
 - ViewControl (prev/next, view trigger, range text) is visible in all views
 - Month grid uses `getMonthsGrid({ columns: 4, format: 'short' })`
 - Year grid uses `getYearsGrid({ columns: 4 })`
 - Day grid works identically to before (no regression)
 
 ### Must NOT Have
+
 - No duplicated ViewControl blocks
 - No CSS changes (our existing `tableCellTrigger` recipe with square aspect-ratio already covers all views)
 - No changes outside `apps/docs/src/App.tsx`
@@ -87,6 +92,7 @@ Single task — one file edit.
   - Touch any other file
 
   **QA Scenarios**:
+
   ```
   Scenario: View cycles through day → month → year → day
     Tool: Playwright (browser interaction)
@@ -115,5 +121,6 @@ Single task — one file edit.
 ---
 
 ## Commit Strategy
+
 - **1**: `feat(docs): add month and year view pickers to DatePicker demo`
   - Files: `apps/docs/src/App.tsx`

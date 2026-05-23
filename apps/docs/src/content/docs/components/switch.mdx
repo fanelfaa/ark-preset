@@ -5,22 +5,41 @@ category: Form & Input
 updatedDate: 2026-05-18
 ---
 
-import { Switch, SwitchLabel } from '@ui/solid'
-import SwitchBasicDemo from '@components/switch-demo/SwitchBasicDemo.tsx'
+import { Switch, SwitchLabel } from "@ui/solid";
+import SwitchBasicDemo from "@components/switch-demo/SwitchBasicDemo.tsx";
 
 # Switch
 
 A toggle switch component for on/off boolean input.
 
-<a href="https://ark-ui.com/docs/components/switch" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors">
-  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+<a
+  href="https://ark-ui.com/docs/components/switch"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="inline-flex items-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="14"
+    height="14"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+    <polyline points="15 3 21 3 21 9" />
+    <line x1="10" x2="21" y1="14" y2="3" />
+  </svg>
   Docs
 </a>
 
 <SwitchBasicDemo client:load />
 
 ```tsx
-import { Switch, SwitchLabel } from "~/components/switch"
+import { Switch, SwitchLabel } from "~/components/switch";
 
 export function SwitchDemo() {
   return (
@@ -35,20 +54,22 @@ export function SwitchDemo() {
         <SwitchLabel>Disabled</SwitchLabel>
       </Switch>
     </div>
-  )
+  );
 }
 ```
-
 
 ## Installation
 
 ### CLI
+
 Run the following command to add the component to your project:
+
 ```bash
 npx solidui-cli@latest add switch
 ```
 
 ### Manual
+
 <div class="space-y-3">
 Install the dependency:
 ```bash
@@ -62,14 +83,15 @@ import { tv, type VariantProps } from 'tailwind-variants'
 
 export const switchVariants = tv({
   slots: {
-    root: 'inline-flex items-center gap-2',
+    root: "inline-flex items-center gap-2",
     control:
-      'inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input',
+      "inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input",
     thumb:
-      'pointer-events-none block size-4 rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-4 data-[state=unchecked]:translate-x-0',
-    label: 'text-sm font-medium text-foreground leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
+      "pointer-events-none block size-4 rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-4 data-[state=unchecked]:translate-x-0",
+    label:
+      "text-sm font-medium text-foreground leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
   },
-})
+});
 
 export type SwitchVariants = VariantProps<typeof switchVariants>
 ```
@@ -84,41 +106,41 @@ import { switchVariants } from '../recipes/switch'
 type SwitchProps = SwitchBaseProps & { children?: JSX.Element }
 
 interface SwitchBaseProps extends ArkSwitch.RootProps {
-  class?: string
+class?: string
 }
 const styles = switchVariants()
 
 const SwitchRoot: Component<SwitchProps> = (props) => {
-  const [local, others] = splitProps(props, ['class', 'children'])
-  const rootClass = createMemo(() => styles.root({ class: local.class }))
-  return (
-    <ArkSwitch.Root class={rootClass()} {...others}>
-      <ArkSwitch.Control class={styles.control()}>
-        <ArkSwitch.Thumb class={styles.thumb()} />
-      </ArkSwitch.Control>
-      <ArkSwitch.HiddenInput />
-      {local.children}
-    </ArkSwitch.Root>
-  )
+const [local, others] = splitProps(props, ['class', 'children'])
+const rootClass = createMemo(() => styles.root({ class: local.class }))
+return (
+
+<ArkSwitch.Root class={rootClass()} {...others}>
+<ArkSwitch.Control class={styles.control()}>
+<ArkSwitch.Thumb class={styles.thumb()} />
+</ArkSwitch.Control>
+<ArkSwitch.HiddenInput />
+{local.children}
+</ArkSwitch.Root>
+)
 }
 
 const SwitchLabel: Component<ArkSwitch.LabelProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const labelClass = createMemo(() => styles.label({ class: local.class }))
-  return <ArkSwitch.Label class={labelClass()} {...others} />
+const [local, others] = splitProps(props, ['class'])
+const labelClass = createMemo(() => styles.label({ class: local.class }))
+return <ArkSwitch.Label class={labelClass()} {...others} />
 }
 
 export { SwitchRoot as Switch, SwitchLabel, switchVariants }
 ```
 </div>
 
-
 ## Usage
 
 Import the component:
 
 ```tsx
-import { Switch, SwitchLabel } from "~/components/switch"
+import { Switch, SwitchLabel } from "~/components/switch";
 ```
 
 Basic switch:
@@ -141,21 +163,20 @@ Disabled:
 <Switch disabled />
 ```
 
-
 ## API Reference
 
 ### Switch
 
-| Prop | Type | Default |
-|------|------|---------|
-| checked | boolean | — |
-| defaultChecked | boolean | — |
-| disabled | boolean | false |
-| class | string | — |
-| children | JSX.Element | — |
+| Prop           | Type        | Default |
+| -------------- | ----------- | ------- |
+| checked        | boolean     | —       |
+| defaultChecked | boolean     | —       |
+| disabled       | boolean     | false   |
+| class          | string      | —       |
+| children       | JSX.Element | —       |
 
 ### SwitchLabel
 
-| Prop | Type | Default |
-|------|------|---------|
-| class | string | — |
+| Prop  | Type   | Default |
+| ----- | ------ | ------- |
+| class | string | —       |

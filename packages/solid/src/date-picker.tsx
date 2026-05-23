@@ -1,44 +1,44 @@
-import { children, createMemo, Show, splitProps, type Component, type JSX } from 'solid-js'
-import { DatePicker as DatePickerPrimitive } from '@ark-ui/solid/date-picker'
-import { datePickerVariants, buttonVariants } from '@ui/core'
+import { children, createMemo, Show, splitProps, type Component } from "solid-js";
+import { DatePicker as DatePickerPrimitive } from "@ark-ui/solid/date-picker";
+import { datePickerVariants, buttonVariants } from "@ui/core";
 
-const styles = datePickerVariants()
+const styles = datePickerVariants();
 // ---------------------------------------------------------------------------
 // Re-exports (no styling needed)
 // ---------------------------------------------------------------------------
 
-export const DatePicker = DatePickerPrimitive.Root
-export const DatePickerLabel = DatePickerPrimitive.Label
-export const DatePickerContext = DatePickerPrimitive.Context
-export const DatePickerTableHead = DatePickerPrimitive.TableHead
-export const DatePickerTableBody = DatePickerPrimitive.TableBody
-export const DatePickerYearSelect = DatePickerPrimitive.YearSelect
-export const DatePickerMonthSelect = DatePickerPrimitive.MonthSelect
-export const DatePickerPositioner = DatePickerPrimitive.Positioner
+export const DatePicker = DatePickerPrimitive.Root;
+export const DatePickerLabel = DatePickerPrimitive.Label;
+export const DatePickerContext = DatePickerPrimitive.Context;
+export const DatePickerTableHead = DatePickerPrimitive.TableHead;
+export const DatePickerTableBody = DatePickerPrimitive.TableBody;
+export const DatePickerYearSelect = DatePickerPrimitive.YearSelect;
+export const DatePickerMonthSelect = DatePickerPrimitive.MonthSelect;
+export const DatePickerPositioner = DatePickerPrimitive.Positioner;
 
 // ---------------------------------------------------------------------------
 // Styled components
 // ---------------------------------------------------------------------------
 
 export const DatePickerControl: Component<DatePickerPrimitive.ControlProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const controlClass = createMemo(() => styles.control({ class: local.class }))
-  return <DatePickerPrimitive.Control class={controlClass()} {...others} />
-}
+  const [local, others] = splitProps(props, ["class"]);
+  const controlClass = createMemo(() => styles.control({ class: local.class }));
+  return <DatePickerPrimitive.Control class={controlClass()} {...others} />;
+};
 
 export const DatePickerInput: Component<DatePickerPrimitive.InputProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const inputClass = createMemo(() => styles.input({ class: local.class }))
-  return <DatePickerPrimitive.Input class={inputClass()} {...others} />
-}
+  const [local, others] = splitProps(props, ["class"]);
+  const inputClass = createMemo(() => styles.input({ class: local.class }));
+  return <DatePickerPrimitive.Input class={inputClass()} {...others} />;
+};
 
 export const DatePickerTrigger: Component<DatePickerPrimitive.TriggerProps> = (props) => {
-  const [local, others] = splitProps(props, ['class', 'children'])
+  const [local, others] = splitProps(props, ["class", "children"]);
 
-  const resolvedChildren = children(() => local.children)
-  const hasChildren = () => resolvedChildren.toArray().length !== 0
+  const resolvedChildren = children(() => local.children);
+  const hasChildren = () => resolvedChildren.toArray().length !== 0;
 
-  const triggerClass = createMemo(() => styles.trigger({ class: local.class }))
+  const triggerClass = createMemo(() => styles.trigger({ class: local.class }));
 
   return (
     <DatePickerPrimitive.Trigger class={triggerClass()} {...others}>
@@ -63,44 +63,46 @@ export const DatePickerTrigger: Component<DatePickerPrimitive.TriggerProps> = (p
         </svg>
       </Show>
     </DatePickerPrimitive.Trigger>
-  )
-}
+  );
+};
 
 export const DatePickerClearTrigger: Component<DatePickerPrimitive.ClearTriggerProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const clearTriggerClass = createMemo(() => styles.clearTrigger({ class: local.class }))
-  return <DatePickerPrimitive.ClearTrigger class={clearTriggerClass()} {...others} />
-}
+  const [local, others] = splitProps(props, ["class"]);
+  const clearTriggerClass = createMemo(() => styles.clearTrigger({ class: local.class }));
+  return <DatePickerPrimitive.ClearTrigger class={clearTriggerClass()} {...others} />;
+};
 
 export const DatePickerContent: Component<DatePickerPrimitive.ContentProps> = (props) => {
-  const [local, others] = splitProps(props, ['class', 'children'])
-  const contentClass = createMemo(() => styles.content({ class: local.class }))
+  const [local, others] = splitProps(props, ["class", "children"]);
+  const contentClass = createMemo(() => styles.content({ class: local.class }));
   return (
     <DatePickerPrimitive.Content class={contentClass()} {...others}>
       {local.children}
     </DatePickerPrimitive.Content>
-  )
-}
+  );
+};
 
 export const DatePickerView: Component<DatePickerPrimitive.ViewProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const viewClass = createMemo(() => styles.view({ class: local.class }))
-  return <DatePickerPrimitive.View class={viewClass()} {...others} />
-}
+  const [local, others] = splitProps(props, ["class"]);
+  const viewClass = createMemo(() => styles.view({ class: local.class }));
+  return <DatePickerPrimitive.View class={viewClass()} {...others} />;
+};
 
 export const DatePickerViewControl: Component<DatePickerPrimitive.ViewControlProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const viewControlClass = createMemo(() => styles.viewControl({ class: local.class }))
-  return <DatePickerPrimitive.ViewControl class={viewControlClass()} {...others} />
-}
+  const [local, others] = splitProps(props, ["class"]);
+  const viewControlClass = createMemo(() => styles.viewControl({ class: local.class }));
+  return <DatePickerPrimitive.ViewControl class={viewControlClass()} {...others} />;
+};
 
 export const DatePickerPrevTrigger: Component<DatePickerPrimitive.PrevTriggerProps> = (props) => {
-  const [local, others] = splitProps(props, ['class', 'children'])
+  const [local, others] = splitProps(props, ["class", "children"]);
 
-  const resolvedChildren = children(() => local.children)
-  const hasChildren = () => resolvedChildren.toArray().length !== 0
+  const resolvedChildren = children(() => local.children);
+  const hasChildren = () => resolvedChildren.toArray().length !== 0;
 
-  const navTriggerClass = createMemo(() => styles.navTrigger({ class: [buttonVariants({ variant: 'outline' }), local.class, 'size-7'] }))
+  const navTriggerClass = createMemo(() =>
+    styles.navTrigger({ class: [buttonVariants({ variant: "outline" }), local.class, "size-7"] }),
+  );
 
   return (
     <DatePickerPrimitive.PrevTrigger class={navTriggerClass()} {...others}>
@@ -120,16 +122,18 @@ export const DatePickerPrevTrigger: Component<DatePickerPrimitive.PrevTriggerPro
         </svg>
       </Show>
     </DatePickerPrimitive.PrevTrigger>
-  )
-}
+  );
+};
 
 export const DatePickerNextTrigger: Component<DatePickerPrimitive.NextTriggerProps> = (props) => {
-  const [local, others] = splitProps(props, ['class', 'children'])
+  const [local, others] = splitProps(props, ["class", "children"]);
 
-  const resolvedChildren = children(() => local.children)
-  const hasChildren = () => resolvedChildren.toArray().length !== 0
+  const resolvedChildren = children(() => local.children);
+  const hasChildren = () => resolvedChildren.toArray().length !== 0;
 
-  const navTriggerClass = createMemo(() => styles.navTrigger({ class: [buttonVariants({ variant: 'outline' }), local.class, 'size-7'] }))
+  const navTriggerClass = createMemo(() =>
+    styles.navTrigger({ class: [buttonVariants({ variant: "outline" }), local.class, "size-7"] }),
+  );
 
   return (
     <DatePickerPrimitive.NextTrigger class={navTriggerClass()} {...others}>
@@ -149,49 +153,55 @@ export const DatePickerNextTrigger: Component<DatePickerPrimitive.NextTriggerPro
         </svg>
       </Show>
     </DatePickerPrimitive.NextTrigger>
-  )
-}
+  );
+};
 
 export const DatePickerViewTrigger: Component<DatePickerPrimitive.ViewTriggerProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const viewTriggerClass = createMemo(() => styles.viewTrigger({ class: [buttonVariants({ variant: 'ghost' }), local.class] }))
-  return <DatePickerPrimitive.ViewTrigger class={viewTriggerClass()} {...others} />
-}
+  const [local, others] = splitProps(props, ["class"]);
+  const viewTriggerClass = createMemo(() =>
+    styles.viewTrigger({ class: [buttonVariants({ variant: "ghost" }), local.class] }),
+  );
+  return <DatePickerPrimitive.ViewTrigger class={viewTriggerClass()} {...others} />;
+};
 
 export const DatePickerRangeText: Component<DatePickerPrimitive.RangeTextProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const rangeTextClass = createMemo(() => styles.rangeText({ class: local.class }))
-  return <DatePickerPrimitive.RangeText class={rangeTextClass()} {...others} />
-}
+  const [local, others] = splitProps(props, ["class"]);
+  const rangeTextClass = createMemo(() => styles.rangeText({ class: local.class }));
+  return <DatePickerPrimitive.RangeText class={rangeTextClass()} {...others} />;
+};
 
 export const DatePickerTable: Component<DatePickerPrimitive.TableProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const tableClass = createMemo(() => styles.table({ class: local.class }))
-  return <DatePickerPrimitive.Table class={tableClass()} {...others} />
-}
+  const [local, others] = splitProps(props, ["class"]);
+  const tableClass = createMemo(() => styles.table({ class: local.class }));
+  return <DatePickerPrimitive.Table class={tableClass()} {...others} />;
+};
 
 export const DatePickerTableRow: Component<DatePickerPrimitive.TableRowProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const tableRowClass = createMemo(() => styles.tableRow({ class: local.class }))
-  return <DatePickerPrimitive.TableRow class={tableRowClass()} {...others} />
-}
+  const [local, others] = splitProps(props, ["class"]);
+  const tableRowClass = createMemo(() => styles.tableRow({ class: local.class }));
+  return <DatePickerPrimitive.TableRow class={tableRowClass()} {...others} />;
+};
 
 export const DatePickerTableHeader: Component<DatePickerPrimitive.TableHeaderProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const tableHeaderClass = createMemo(() => styles.tableHeader({ class: local.class }))
-  return <DatePickerPrimitive.TableHeader class={tableHeaderClass()} {...others} />
-}
+  const [local, others] = splitProps(props, ["class"]);
+  const tableHeaderClass = createMemo(() => styles.tableHeader({ class: local.class }));
+  return <DatePickerPrimitive.TableHeader class={tableHeaderClass()} {...others} />;
+};
 
 export const DatePickerTableCell: Component<DatePickerPrimitive.TableCellProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const tableCellClass = createMemo(() => styles.tableCell({ class: local.class }))
-  return <DatePickerPrimitive.TableCell class={tableCellClass()} {...others} />
-}
+  const [local, others] = splitProps(props, ["class"]);
+  const tableCellClass = createMemo(() => styles.tableCell({ class: local.class }));
+  return <DatePickerPrimitive.TableCell class={tableCellClass()} {...others} />;
+};
 
-export const DatePickerTableCellTrigger: Component<DatePickerPrimitive.TableCellTriggerProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const tableCellTriggerClass = createMemo(() => styles.tableCellTrigger({ class: [buttonVariants({ variant: 'ghost' }), local.class] }))
-  return <DatePickerPrimitive.TableCellTrigger class={tableCellTriggerClass()} {...others} />
-}
+export const DatePickerTableCellTrigger: Component<DatePickerPrimitive.TableCellTriggerProps> = (
+  props,
+) => {
+  const [local, others] = splitProps(props, ["class"]);
+  const tableCellTriggerClass = createMemo(() =>
+    styles.tableCellTrigger({ class: [buttonVariants({ variant: "ghost" }), local.class] }),
+  );
+  return <DatePickerPrimitive.TableCellTrigger class={tableCellTriggerClass()} {...others} />;
+};
 
-export { datePickerVariants }
+export { datePickerVariants };

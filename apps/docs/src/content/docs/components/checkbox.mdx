@@ -5,22 +5,41 @@ category: Form & Input
 updatedDate: 2026-05-18
 ---
 
-import { Checkbox, CheckboxLabel } from '@ui/solid'
-import CheckboxBasicDemo from '@components/checkbox-demo/CheckboxBasicDemo.tsx'
+import { Checkbox, CheckboxLabel } from "@ui/solid";
+import CheckboxBasicDemo from "@components/checkbox-demo/CheckboxBasicDemo.tsx";
 
 # Checkbox
 
 A checkbox component for capturing boolean input with support for checked, unchecked, and indeterminate states.
 
-<a href="https://ark-ui.com/docs/components/checkbox" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors">
-  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+<a
+  href="https://ark-ui.com/docs/components/checkbox"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="inline-flex items-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="14"
+    height="14"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+    <polyline points="15 3 21 3 21 9" />
+    <line x1="10" x2="21" y1="14" y2="3" />
+  </svg>
   Docs
 </a>
 
 <CheckboxBasicDemo client:load />
 
 ```tsx
-import { Checkbox, CheckboxLabel } from "~/components/checkbox"
+import { Checkbox, CheckboxLabel } from "~/components/checkbox";
 
 export function CheckboxDemo() {
   return (
@@ -38,20 +57,22 @@ export function CheckboxDemo() {
         <CheckboxLabel>Disabled</CheckboxLabel>
       </Checkbox>
     </div>
-  )
+  );
 }
 ```
-
 
 ## Installation
 
 ### CLI
+
 Run the following command to add the component to your project:
+
 ```bash
 npx solidui-cli@latest add checkbox
 ```
 
 ### Manual
+
 <div class="space-y-3">
 Install the dependency:
 ```bash
@@ -65,13 +86,14 @@ import { tv, type VariantProps } from 'tailwind-variants'
 
 export const checkboxVariants = tv({
   slots: {
-    root: 'inline-flex items-center gap-2',
+    root: "inline-flex items-center gap-2",
     control:
-      'peer size-4 shrink-0 rounded-sm border border-input ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground data-[state=checked]:border-primary data-[state=indeterminate]:bg-primary data-[state=indeterminate]:text-primary-foreground data-[state=indeterminate]:border-primary',
-    indicator: 'flex items-center justify-center text-current',
-    label: 'text-sm font-medium text-foreground leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
+      "peer size-4 shrink-0 rounded-sm border border-input ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground data-[state=checked]:border-primary data-[state=indeterminate]:bg-primary data-[state=indeterminate]:text-primary-foreground data-[state=indeterminate]:border-primary",
+    indicator: "flex items-center justify-center text-current",
+    label:
+      "text-sm font-medium text-foreground leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
   },
-})
+});
 
 export type CheckboxVariants = VariantProps<typeof checkboxVariants>
 ```
@@ -86,54 +108,54 @@ import { checkboxVariants } from '../recipes/checkbox'
 // Global variant instance (no params)
 const styles = checkboxVariants()
 
-export { checkboxVariants }
+export { checkboxVariants };
 
 type CheckboxRootProps = CheckboxRootBaseProps & { children?: JSX.Element }
 
 interface CheckboxRootBaseProps extends ArkCheckbox.RootProps {
-  class?: string
+class?: string
 }
 
 const CheckboxRoot: Component<CheckboxRootProps> = (props) => {
-  const [local, others] = splitProps(props, ['class', 'children'])
-  const rootClass = createMemo(() => styles.root({ class: local.class }))
-  return (
-    <ArkCheckbox.Root class={rootClass()} {...others}>
-      <ArkCheckbox.Control class={styles.control()}>
-        <ArkCheckbox.Indicator class={styles.indicator()}>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3.5">
-            <path d="M20 6 9 17l-5-5"/>
-          </svg>
-        </ArkCheckbox.Indicator>
-        <ArkCheckbox.Indicator class={styles.indicator()} indeterminate>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3.5">
-            <path d="M5 12h14"/>
-          </svg>
-        </ArkCheckbox.Indicator>
-      </ArkCheckbox.Control>
-      <ArkCheckbox.HiddenInput />
-      {local.children}
-    </ArkCheckbox.Root>
-  )
+const [local, others] = splitProps(props, ['class', 'children'])
+const rootClass = createMemo(() => styles.root({ class: local.class }))
+return (
+
+<ArkCheckbox.Root class={rootClass()} {...others}>
+<ArkCheckbox.Control class={styles.control()}>
+<ArkCheckbox.Indicator class={styles.indicator()}>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3.5">
+<path d="M20 6 9 17l-5-5"/>
+</svg>
+</ArkCheckbox.Indicator>
+<ArkCheckbox.Indicator class={styles.indicator()} indeterminate>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3.5">
+<path d="M5 12h14"/>
+</svg>
+</ArkCheckbox.Indicator>
+</ArkCheckbox.Control>
+<ArkCheckbox.HiddenInput />
+{local.children}
+</ArkCheckbox.Root>
+)
 }
 
 const CheckboxLabel: Component<ArkCheckbox.LabelProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const labelClass = createMemo(() => styles.label({ class: local.class }))
-  return <ArkCheckbox.Label class={labelClass()} {...others} />
+const [local, others] = splitProps(props, ['class'])
+const labelClass = createMemo(() => styles.label({ class: local.class }))
+return <ArkCheckbox.Label class={labelClass()} {...others} />
 }
 
 export { CheckboxRoot as Checkbox, CheckboxLabel }
 ```
 </div>
 
-
 ## Usage
 
 Import the component:
 
 ```tsx
-import { Checkbox, CheckboxLabel } from "~/components/checkbox"
+import { Checkbox, CheckboxLabel } from "~/components/checkbox";
 ```
 
 Basic checkbox:
@@ -162,21 +184,20 @@ Indeterminate:
 <Checkbox checked="indeterminate" />
 ```
 
-
 ## API Reference
 
 ### Checkbox
 
-| Prop | Type | Default |
-|------|------|---------|
-| checked | boolean \| "indeterminate" | — |
-| defaultChecked | boolean | — |
-| disabled | boolean | false |
-| class | string | — |
-| children | JSX.Element | — |
+| Prop           | Type                       | Default |
+| -------------- | -------------------------- | ------- |
+| checked        | boolean \| "indeterminate" | —       |
+| defaultChecked | boolean                    | —       |
+| disabled       | boolean                    | false   |
+| class          | string                     | —       |
+| children       | JSX.Element                | —       |
 
 ### CheckboxLabel
 
-| Prop | Type | Default |
-|------|------|---------|
-| class | string | — |
+| Prop  | Type   | Default |
+| ----- | ------ | ------- |
+| class | string | —       |

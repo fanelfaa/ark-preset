@@ -6,7 +6,7 @@ import {
   SliderTrack,
   SliderRange,
   SliderThumb,
-} from '@ui/solid'
+} from "@ui/solid";
 
 export default function SliderBasicDemo() {
   return (
@@ -24,5 +24,5 @@ export default function SliderBasicDemo() {
         </SliderControl>
       </SliderRoot>
     </div>
-  )
+  );
 }

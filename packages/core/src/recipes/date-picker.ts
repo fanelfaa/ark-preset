@@ -1,8 +1,8 @@
-import { tv, type VariantProps } from 'tailwind-variants'
+import { tv, type VariantProps } from "tailwind-variants";
 
 export const datePickerVariants = tv({
   slots: {
-    root: 'w-full',
+    root: "w-full",
     control: "inline-flex items-center gap-1",
     input: [
       "h-8 w-full rounded-md border border-border bg-background px-3 py-1 text-sm shadow-sm",
@@ -60,14 +60,14 @@ export const datePickerVariants = tv({
   variants: {
     error: {
       true: {
-        control: 'border-destructive focus-within:ring-destructive',
-        label: 'text-destructive',
+        control: "border-destructive focus-within:ring-destructive",
+        label: "text-destructive",
       },
     },
   },
   defaultVariants: {
     error: false,
   },
-})
+});
 
-export type DatePickerVariants = VariantProps<typeof datePickerVariants>
+export type DatePickerVariants = VariantProps<typeof datePickerVariants>;

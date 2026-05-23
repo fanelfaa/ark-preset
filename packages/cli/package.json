@@ -2,10 +2,10 @@
   "name": "create-ui",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "bin": {
     "ui": "./dist/index.js"
   },
+  "type": "module",
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
@@ -16,8 +16,8 @@
     "fs-extra": "^11.0.0"
   },
   "devDependencies": {
+    "@types/fs-extra": "^11.0.0",
     "tsup": "^8.0.0",
-    "typescript": "^5.0.0",
-    "@types/fs-extra": "^11.0.0"
+    "typescript": "^5.0.0"
   }
 }

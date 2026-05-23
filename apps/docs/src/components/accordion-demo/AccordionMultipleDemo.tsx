@@ -4,46 +4,88 @@ import {
   AccordionItemTrigger,
   AccordionItemContent,
   AccordionItemIndicator,
-} from '@ui/solid'
+} from "@ui/solid";
 
 export default function AccordionMultipleDemo() {
   return (
     <div class="rounded-lg border border-border p-6">
-      <Accordion multiple defaultValue={['item-1', 'item-2']}>
+      <Accordion multiple defaultValue={["item-1", "item-2"]}>
         <AccordionItem value="item-1">
           <AccordionItemTrigger>
             Can I open multiple items?
             <AccordionItemIndicator>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
             </AccordionItemIndicator>
           </AccordionItemTrigger>
           <AccordionItemContent>
-            <div class="pb-4 text-sm text-foreground">Yes. Just pass the <code>multiple</code> prop to the Accordion.</div>
+            <div class="pb-4 text-sm text-foreground">
+              Yes. Just pass the <code>multiple</code> prop to the Accordion.
+            </div>
           </AccordionItemContent>
         </AccordionItem>
         <AccordionItem value="item-2">
           <AccordionItemTrigger>
             How does it work?
             <AccordionItemIndicator>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
             </AccordionItemIndicator>
           </AccordionItemTrigger>
           <AccordionItemContent>
-            <div class="pb-4 text-sm text-foreground">Each item tracks its own expanded/collapsed state independently.</div>
+            <div class="pb-4 text-sm text-foreground">
+              Each item tracks its own expanded/collapsed state independently.
+            </div>
           </AccordionItemContent>
         </AccordionItem>
         <AccordionItem value="item-3">
           <AccordionItemTrigger>
             Is it accessible?
             <AccordionItemIndicator>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
             </AccordionItemIndicator>
           </AccordionItemTrigger>
           <AccordionItemContent>
-            <div class="pb-4 text-sm text-foreground">Yes. It follows the WAI-ARIA Accordion pattern.</div>
+            <div class="pb-4 text-sm text-foreground">
+              Yes. It follows the WAI-ARIA Accordion pattern.
+            </div>
           </AccordionItemContent>
         </AccordionItem>
       </Accordion>
     </div>
-  )
+  );
 }

@@ -1,4 +1,11 @@
-import { RadioGroup, RadioGroupLabel, RadioGroupItem, RadioGroupItemControl, RadioGroupItemText, RadioGroupIndicator } from '@ui/solid'
+import {
+  RadioGroup,
+  RadioGroupLabel,
+  RadioGroupItem,
+  RadioGroupItemControl,
+  RadioGroupItemText,
+  RadioGroupIndicator,
+} from "@ui/solid";
 
 export default function RadioGroupBasicDemo() {
   return (
@@ -25,5 +32,5 @@ export default function RadioGroupBasicDemo() {
         </RadioGroupItem>
       </RadioGroup>
     </div>
-  )
+  );
 }

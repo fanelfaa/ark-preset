@@ -1,4 +1,4 @@
-import { Switch, SwitchLabel } from '@ui/solid'
+import { Switch, SwitchLabel } from "@ui/solid";
 
 export default function SwitchBasicDemo() {
   return (
@@ -15,5 +15,5 @@ export default function SwitchBasicDemo() {
         </Switch>
       </div>
     </div>
-  )
+  );
 }

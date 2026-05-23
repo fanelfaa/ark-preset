@@ -6,16 +6,17 @@ Applies when creating or editing documentation for UI components under `apps/doc
 
 ## Source of Truth
 
-| Artifact | Source Path |
-|---|---|
-| Recipe (styling primitives) | `packages/core/src/recipes/<component>.ts` |
-| Component (Solid.js wrapper) | `packages/solid/src/<component>.tsx` |
+| Artifact                          | Source Path                                                |
+| --------------------------------- | ---------------------------------------------------------- |
+| Recipe (styling primitives)       | `packages/core/src/recipes/<component>.ts`                 |
+| Component (Solid.js wrapper)      | `packages/solid/src/<component>.tsx`                       |
 | Demo wrappers (context-dependent) | `apps/docs/src/components/<component>-demo/<DemoName>.tsx` |
-| Documentation | `apps/docs/src/content/docs/components/<component>.mdx` |
+| Documentation                     | `apps/docs/src/content/docs/components/<component>.mdx`    |
 
 ## Docs Site Architecture
 
 The docs site uses **Astro with Solid.js islands**. Key implications:
+
 - Solid.js components render client-side via `client:load` directive
 - Inline JSX in MDX works for simple components (Strategy A)
 - Compound components need `.tsx` demo wrappers rendered with `client:load` (Strategy B)
@@ -41,18 +42,18 @@ Component docs follow this section order. Sections marked (optional) are include
 
 ## MDX Sections — Required vs Optional
 
-| Section | Required? |
-|---|---|
-| Frontmatter | Yes |
-| Import(s) + H1 | Yes |
-| Ark UI external link | Yes |
-| Live demo block | Yes |
-| Installation (CLI + Manual) | Yes |
-| Usage | Yes |
-| Variants | Only if component has a `variant` prop |
-| Sizes | Only if component has a `size` prop |
+| Section                                       | Required?                              |
+| --------------------------------------------- | -------------------------------------- |
+| Frontmatter                                   | Yes                                    |
+| Import(s) + H1                                | Yes                                    |
+| Ark UI external link                          | Yes                                    |
+| Live demo block                               | Yes                                    |
+| Installation (CLI + Manual)                   | Yes                                    |
+| Usage                                         | Yes                                    |
+| Variants                                      | Only if component has a `variant` prop |
+| Sizes                                         | Only if component has a `size` prop    |
 | Additional sections (Disabled, Loading, etc.) | Only if component exposes that feature |
-| API Reference | Yes |
+| API Reference                                 | Yes                                    |
 
 ## Frontmatter
 
@@ -71,10 +72,10 @@ updatedDate: YYYY-MM-DD
 
 There are **two distinct import domains** that must never be mixed:
 
-| Domain | Import Path | Used In |
-|---|---|---|
-| **Live demo** | `@ui/solid` | Top-level MDX import for inline JSX, or inside demo wrapper `.tsx` files |
-| **Code blocks** | `~/components/<component>` | All fenced code blocks (````tsx ... ````) shown to the user |
+| Domain          | Import Path                | Used In                                                                  |
+| --------------- | -------------------------- | ------------------------------------------------------------------------ |
+| **Live demo**   | `@ui/solid`                | Top-level MDX import for inline JSX, or inside demo wrapper `.tsx` files |
+| **Code blocks** | `~/components/<component>` | All fenced code blocks (`tsx ... `) shown to the user                    |
 
 **DO NOT** use `@ui/solid` inside any fenced code block. It is only for the docs site's own rendering.
 
@@ -87,12 +88,12 @@ Choose one based on whether the component relies on Solid.js context (Ark UI com
 For simple components like Button, Checkbox, Switch — components that render without needing a parent provider context:
 
 ```tsx
-import { Button } from '@ui/solid'
+import { Button } from "@ui/solid";
 ```
 
 Then use JSX directly in the MDX:
 
-```mdx
+````mdx
 <div class="rounded-lg border border-border p-6">
   <div class="flex flex-wrap gap-4">
     <Button>Default</Button>
@@ -100,7 +101,8 @@ Then use JSX directly in the MDX:
   </div>
 ```tsx
 // code block follows...
-```
+````
+
 </div>
 ```
 
@@ -118,12 +120,12 @@ import {
   AccordionItemTrigger,
   AccordionItemContent,
   AccordionItemIndicator,
-} from '@ui/solid'
+} from "@ui/solid";
 
 export default function AccordionBasicDemo() {
   return (
     <div class="rounded-lg border border-border p-6">
-      <Accordion defaultValue={['item-1']}>
+      <Accordion defaultValue={["item-1"]}>
         <AccordionItem value="item-1">
           <AccordionItemTrigger>
             Is it accessible?
@@ -132,29 +134,33 @@ export default function AccordionBasicDemo() {
             </AccordionItemIndicator>
           </AccordionItemTrigger>
           <AccordionItemContent>
-            <div class="pb-4 text-sm text-foreground">Yes. It adheres to the WAI-ARIA design pattern.</div>
+            <div class="pb-4 text-sm text-foreground">
+              Yes. It adheres to the WAI-ARIA design pattern.
+            </div>
           </AccordionItemContent>
         </AccordionItem>
       </Accordion>
     </div>
-  )
+  );
 }
 ```
 
 2. Import and render in MDX with `client:load`:
 
 ```tsx
-import AccordionBasicDemo from '@components/accordion-demo/AccordionBasicDemo.tsx'
-import AccordionMultipleDemo from '@components/accordion-demo/AccordionMultipleDemo.tsx'
+import AccordionBasicDemo from "@components/accordion-demo/AccordionBasicDemo.tsx";
+import AccordionMultipleDemo from "@components/accordion-demo/AccordionMultipleDemo.tsx";
 ```
 
-```mdx
+````mdx
 <AccordionBasicDemo client:load />
 
 ```tsx
 // code block with ~/components/accordion import...
 ```
-```
+````
+
+````
 
 **Demo wrapper rules:**
 - **Only create `<component>-demo/` when the component needs Solid.js context** — i.e. compound components like Accordion, Select, Dialog, Menu, Tabs, Radio Group, Combobox, Date Picker, etc. where sub-components (`Item`, `ItemTrigger`, `ItemContent`, etc.) rely on a parent provider and crash during Astro SSR with `ContextError: useXxxContext returned undefined`.
@@ -173,7 +179,7 @@ All fenced code blocks use the `~/components/...` alias:
 
 ```tsx
 import { Button } from "~/components/button"
-```
+````
 
 ```tsx
 import {
@@ -182,10 +188,11 @@ import {
   AccordionItemTrigger,
   AccordionItemContent,
   AccordionItemIndicator,
-} from "~/components/accordion"
+} from "~/components/accordion";
 ```
 
 **This alias import (`~/components/...`) MUST be used in:**
+
 - All fenced code blocks under Installation → Manual
 - All fenced code blocks under Usage
 - All fenced code blocks under Variants, Sizes, and additional sections
@@ -194,13 +201,17 @@ import {
 
 ### CLI
 
-```markdown
+````markdown
 ### CLI
+
 Run the following command to add the component to your project:
+
 ```bash
 npx solidui-cli@latest add <component>
 ```
-```
+````
+
+````
 
 The CLI command performs **five operations** automatically:
 1. Copies component file from `packages/solid/src/<component>.tsx` → `src/components/<component>.tsx`
@@ -219,7 +230,7 @@ The manual section contains **two or three code blocks**, each wrapped in `<div 
 1. **Dependency install** (if needed):
    ```bash
    npm install tailwind-variants
-   ```
+````
 
 2. **Recipe file** — copy from `packages/core/src/recipes/<component>.ts`:
    - File path: `src/components/recipes/<component>.ts`
@@ -244,14 +255,15 @@ The manual section contains **two or three code blocks**, each wrapped in `<div 
 
 ## Usage Section
 
-```markdown
+````markdown
 ## Usage
 
 Import the component:
 
 ```tsx
-import { Component } from "~/components/<component>"
+import { Component } from "~/components/<component>";
 ```
+````
 
 Basic usage:
 
@@ -262,9 +274,10 @@ Basic usage:
 With <feature>:
 
 ```tsx
-<Component <props>>...</Component>
+<Component<props>>...</Component>
 ```
-```
+
+````
 
 Each usage example is a standalone fenced code block with a short descriptive heading.
 
@@ -283,16 +296,18 @@ Use the `variant` prop to change the visual style.
   <Component variant="...">...</Component>
   ...
 </div>
-```
+````
 
 ### Additional feature sections
 
 Components may expose additional features beyond variants and sizes. Document each with:
+
 1. Brief description of the prop/feature
 2. Live demo (inline JSX for Strategy A, or `<DemoName client:load />` for Strategy B)
 3. Follow-up code block showing the usage pattern
 
 Common additional sections:
+
 - **Loading** — spinner overlay, auto-disables interaction (e.g. Button with `loading` prop)
 - **Disabled** — interaction disabled on component or sub-component
 - **Multiple** — multiple selection/expansion allowed
@@ -308,7 +323,7 @@ For components that require Strategy B (context dependency), each additional sec
 2. Live demo via `<DemoName client:load />`
 3. Follow-up code block showing the usage pattern
 
-```markdown
+````markdown
 ## Multiple
 
 Use the `multiple` prop to allow more than one item to be expanded at the same time.
@@ -317,12 +332,12 @@ Use the `multiple` prop to allow more than one item to be expanded at the same t
 
 ```tsx
 <Accordion multiple defaultValue={["item-1", "item-2"]}>
-  <AccordionItem value="item-1">
-    ...
-  </AccordionItem>
+  <AccordionItem value="item-1">...</AccordionItem>
 </Accordion>
 ```
-```
+````
+
+````
 
 ## API Reference
 
@@ -336,7 +351,7 @@ Table at the bottom listing all props:
 | Prop | Type | Default |
 |------|------|---------|
 | propName | type | default |
-```
+````
 
 ### Compound components — multiple sub-tables
 
@@ -347,23 +362,23 @@ For compound components with multiple sub-components, create a sub-table for eac
 
 ### Accordion (Root)
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| defaultValue | `string[]` | `[]` | Initial expanded items. |
-| multiple | `boolean` | `false` | Allow multiple items expanded. |
+| Prop         | Type       | Default | Description                    |
+| ------------ | ---------- | ------- | ------------------------------ |
+| defaultValue | `string[]` | `[]`    | Initial expanded items.        |
+| multiple     | `boolean`  | `false` | Allow multiple items expanded. |
 
 ### AccordionItem
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| value | `string` | — | Unique identifier. **Required.** |
-| disabled | `boolean` | `false` | Whether this item is disabled. |
+| Prop     | Type      | Default | Description                      |
+| -------- | --------- | ------- | -------------------------------- |
+| value    | `string`  | —       | Unique identifier. **Required.** |
+| disabled | `boolean` | `false` | Whether this item is disabled.   |
 
 ### AccordionItemTrigger
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| class | `string` | — | Custom CSS class. |
+| Prop  | Type     | Default | Description       |
+| ----- | -------- | ------- | ----------------- |
+| class | `string` | —       | Custom CSS class. |
 ```
 
 Include only props explicitly defined or meaningfully overridden by the component. Do NOT list every inherited HTML attribute. Document whatever props the component actually exposes — variant/size props, boolean flags, `class` overrides, `asChild`, or anything else.

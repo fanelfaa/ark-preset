@@ -2,6 +2,10 @@
   "name": "@ui/core",
   "version": "0.1.0",
   "private": true,
+  "files": [
+    "dist/",
+    "src/"
+  ],
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -15,10 +19,6 @@
     },
     "./src/theme.css": "./src/theme.css"
   },
-  "files": [
-    "dist/",
-    "src/"
-  ],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",

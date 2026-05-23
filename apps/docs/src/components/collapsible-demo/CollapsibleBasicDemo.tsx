@@ -1,4 +1,9 @@
-import { Collapsible, CollapsibleTrigger, CollapsibleContent, CollapsibleIndicator } from '@ui/solid'
+import {
+  Collapsible,
+  CollapsibleTrigger,
+  CollapsibleContent,
+  CollapsibleIndicator,
+} from "@ui/solid";
 
 export default function CollapsibleBasicDemo() {
   return (
@@ -7,7 +12,19 @@ export default function CollapsibleBasicDemo() {
         <CollapsibleTrigger>
           Click to expand
           <CollapsibleIndicator>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="m6 9 6 6 6-6" />
+            </svg>
           </CollapsibleIndicator>
         </CollapsibleTrigger>
         <CollapsibleContent>
@@ -17,5 +34,5 @@ export default function CollapsibleBasicDemo() {
         </CollapsibleContent>
       </Collapsible>
     </div>
-  )
+  );
 }

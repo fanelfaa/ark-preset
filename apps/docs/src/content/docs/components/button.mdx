@@ -5,14 +5,33 @@ category: Form & Input
 updatedDate: 2026-05-16
 ---
 
-import { Button } from '@ui/solid'
+import { Button } from "@ui/solid";
 
 # Button
 
 Displays a button or a component that looks like a button.
 
-<a href="https://ark-ui.com/docs/guides/composition" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors">
-  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+<a
+  href="https://ark-ui.com/docs/guides/composition"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="inline-flex items-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="14"
+    height="14"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+    <polyline points="15 3 21 3 21 9" />
+    <line x1="10" x2="21" y1="14" y2="3" />
+  </svg>
   Docs
 </a>
 
@@ -43,16 +62,18 @@ export function ButtonDemo() {
 ```
 </div>
 
-
 ## Installation
 
 ### CLI
+
 Run the following command to add the component to your project:
+
 ```bash
 npx solidui-cli@latest add button
 ```
 
 ### Manual
+
 <div class="space-y-3">
 Install the dependency:
 ```bash
@@ -97,14 +118,14 @@ import { buttonVariants } from '../recipes/button'
 import type { VariantProps } from 'tailwind-variants'
 
 type ButtonProps = JSX.ButtonHTMLAttributes<HTMLButtonElement> &
-  VariantProps<typeof buttonVariants>
+VariantProps<typeof buttonVariants>
 
 const Button: Component<ButtonProps> = (props) => {
-  const [local, others] = splitProps(props, ['class', 'variant', 'size'])
-  const className = createMemo(() =>
-    buttonVariants({ variant: local.variant, size: local.size, class: local.class })
-  )
-  return <button class={className()} {...others} />
+const [local, others] = splitProps(props, ['class', 'variant', 'size'])
+const className = createMemo(() =>
+buttonVariants({ variant: local.variant, size: local.size, class: local.class })
+)
+return <button class={className()} {...others} />
 }
 
 export { Button, buttonVariants }
@@ -117,7 +138,7 @@ export { Button, buttonVariants }
 Import the component:
 
 ```tsx
-import { Button } from "~/components/button"
+import { Button } from "~/components/button";
 ```
 
 Basic usage:
@@ -129,9 +150,7 @@ Basic usage:
 With event handler:
 
 ```tsx
-<Button onClick={() => console.log("clicked!")}>
-  Submit
-</Button>
+<Button onClick={() => console.log("clicked!")}>Submit</Button>
 ```
 
 Combining variant and size:
@@ -146,16 +165,27 @@ With icon:
 
 ```tsx
 <Button variant="outline" size="icon">
-  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M5 12h14" />
+    <path d="M12 5v14" />
+  </svg>
 </Button>
 ```
 
 Custom class override:
 
 ```tsx
-<Button class="w-full">
-  Full Width Button
-</Button>
+<Button class="w-full">Full Width Button</Button>
 ```
 
 ## Variants
@@ -180,7 +210,20 @@ Use the `size` prop to change the button size.
   <Button size="md">Md</Button>
   <Button size="lg">Lg</Button>
   <Button size="icon">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path d="M5 12h14" />
+      <path d="M12 5v14" />
+    </svg>
   </Button>
 </div>
 
@@ -190,11 +233,21 @@ Add the `disabled` prop to disable interaction.
 
 <div class="flex flex-wrap gap-4">
   <Button disabled>Default</Button>
-  <Button variant="secondary" disabled>Secondary</Button>
-  <Button variant="destructive" disabled>Destructive</Button>
-  <Button variant="outline" disabled>Outline</Button>
-  <Button variant="ghost" disabled>Ghost</Button>
-  <Button variant="link" disabled>Link</Button>
+  <Button variant="secondary" disabled>
+    Secondary
+  </Button>
+  <Button variant="destructive" disabled>
+    Destructive
+  </Button>
+  <Button variant="outline" disabled>
+    Outline
+  </Button>
+  <Button variant="ghost" disabled>
+    Ghost
+  </Button>
+  <Button variant="link" disabled>
+    Link
+  </Button>
 </div>
 
 ## Loading
@@ -203,33 +256,43 @@ Add the `loading` prop to show a spinner overlay and automatically disable inter
 
 <div class="flex flex-wrap gap-4">
   <Button loading>Default</Button>
-  <Button variant="secondary" loading>Secondary</Button>
-  <Button variant="destructive" loading>Destructive</Button>
-  <Button variant="outline" loading>Outline</Button>
-  <Button variant="ghost" loading>Ghost</Button>
-  <Button variant="link" loading>Link</Button>
+  <Button variant="secondary" loading>
+    Secondary
+  </Button>
+  <Button variant="destructive" loading>
+    Destructive
+  </Button>
+  <Button variant="outline" loading>
+    Outline
+  </Button>
+  <Button variant="ghost" loading>
+    Ghost
+  </Button>
+  <Button variant="link" loading>
+    Link
+  </Button>
 </div>
 
 Useful for async operations like form submissions:
 
 ```tsx
-import { createSignal } from "solid-js"
-import { Button } from "~/components/button"
+import { createSignal } from "solid-js";
+import { Button } from "~/components/button";
 
 export function SubmitDemo() {
-  const [loading, setLoading] = createSignal(false)
+  const [loading, setLoading] = createSignal(false);
 
   async function handleSubmit() {
-    setLoading(true)
-    await new Promise((r) => setTimeout(r, 2000))
-    setLoading(false)
+    setLoading(true);
+    await new Promise((r) => setTimeout(r, 2000));
+    setLoading(false);
   }
 
   return (
     <Button loading={loading()} onClick={handleSubmit}>
       Submit
     </Button>
-  )
+  );
 }
 ```
 
@@ -238,30 +301,30 @@ export function SubmitDemo() {
 Use the `buttonVariants` helper to render a link that looks like a button.
 
 ```tsx
-import { buttonVariants } from "~/components/button"
+import { buttonVariants } from "~/components/button";
 
 <a class={buttonVariants({ variant: "outline" })} href="/docs">
   Click here
-</a>
+</a>;
 ```
 
 Alternatively, use the `asChild` prop to render an `<a>` element while keeping the `<Button>` API:
 
 ```tsx
-import { Button } from "~/components/button"
+import { Button } from "~/components/button";
 
 <Button variant="outline" asChild={(props) => <a {...props()} href="/docs" />}>
   Click here
-</Button>
+</Button>;
 ```
 
 ## API Reference
 
-| Prop | Type | Default |
-|------|------|---------|
-| variant | "default" \| "secondary" \| "destructive" \| "outline" \| "ghost" \| "link" | "default" |
-| size | "sm" \| "md" \| "lg" \| "icon" | "sm" |
-| loading | boolean | false |
-| disabled | boolean | false |
-| class | string | — |
-| asChild | `(props: Accessor<ButtonProps>) => JSX.Element` | — |
+| Prop     | Type                                                                        | Default   |
+| -------- | --------------------------------------------------------------------------- | --------- |
+| variant  | "default" \| "secondary" \| "destructive" \| "outline" \| "ghost" \| "link" | "default" |
+| size     | "sm" \| "md" \| "lg" \| "icon"                                              | "sm"      |
+| loading  | boolean                                                                     | false     |
+| disabled | boolean                                                                     | false     |
+| class    | string                                                                      | —         |
+| asChild  | `(props: Accessor<ButtonProps>) => JSX.Element`                             | —         |

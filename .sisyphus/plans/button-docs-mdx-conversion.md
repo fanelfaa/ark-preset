@@ -5,6 +5,7 @@
 > **Quick Summary**: Convert the Solid.js/TanStack Router button documentation page to an Astro MDX page with full docs layout (header + sidebar), matching the original visual/functional output exactly.
 >
 > **Deliverables**:
+>
 > - `apps/docs/src/layouts/DocsLayout.astro` — Docs layout with sticky header + sidebar navigation (18 component links)
 > - `apps/docs/src/components/CodeBlock.tsx` — Solid.js island for copy-to-clipboard code blocks
 > - `apps/docs/src/pages/docs/components/button.mdx` — MDX documentation page
@@ -18,10 +19,13 @@
 ## Context
 
 ### Original Request
+
 Convert button component documentation from `/home/fandi/Lab/Js/ui/apps/docs/src/routes/docs/components/button.tsx` (313 lines) to Astro MDX format at `apps/docs/src/pages/docs/components/button.mdx`, matching the original output exactly.
 
 ### Interview Summary
+
 **Key Discussions**:
+
 - User wants exact visual/functional parity with the original TSX page
 - Only the button component documentation (not other components)
 - Target route: `/docs/components/button` → maps to `src/pages/docs/components/button.mdx`
@@ -29,6 +33,7 @@ Convert button component documentation from `/home/fandi/Lab/Js/ui/apps/docs/src
 - Tailwind CSS v4 already installed manually — just use it
 
 **Research Findings**:
+
 - `@astrojs/mdx` already installed and configured
 - `@astrojs/solid-js` already installed with `solid-js` dependency
 - Tailwind v4 setup complete: `@tailwindcss/vite` in astro.config, `global.css` imports tailwindcss + tw-animate-css + @ui/core/theme.css
@@ -37,6 +42,7 @@ Convert button component documentation from `/home/fandi/Lab/Js/ui/apps/docs/src
 - Original docs layout (`docs.tsx`) has: sticky header with "Solid UI" branding, nav links (Docs, Components), sidebar with 18 component links grouped under "UI", main content area with max-w-4xl
 
 ### Source File Structure (313 lines TSX)
+
 - Hero: title, description, external docs link
 - Preview/Code tabs (interactive) — shows live button variants or usage code
 - Installation: CLI / Manual tabs (interactive) — with recipe and component code snippets
@@ -48,7 +54,9 @@ Convert button component documentation from `/home/fandi/Lab/Js/ui/apps/docs/src
 - API Reference: props table (variant, size, disabled, class)
 
 ### Metis Review
+
 **Identified Gaps** (addressed):
+
 - Tailwind setup: Already done by user — removed from plan scope
 - Docs layout scope: User confirmed full layout with sidebar needed — added as Task 2
 - Route path: Confirmed `/docs/components/button` — updated file path
@@ -60,14 +68,17 @@ Convert button component documentation from `/home/fandi/Lab/Js/ui/apps/docs/src
 ## Work Objectives
 
 ### Core Objective
+
 Create an Astro MDX page that renders identically to the original Solid.js button documentation page, with interactive tabs and live component previews.
 
 ### Concrete Deliverables
+
 - `apps/docs/src/layouts/DocsLayout.astro` — Docs layout with header + sidebar (matches `docs.tsx` from source)
 - `apps/docs/src/components/CodeBlock.tsx` — Solid.js island for copy-to-clipboard
 - `apps/docs/src/pages/docs/components/button.mdx` — Full documentation page
 
 ### Definition of Done
+
 - [ ] `pnpm --filter @ui/docs dev` starts without errors
 - [ ] Navigate to `/docs/components/button` — page renders with header, sidebar, and all content sections
 - [ ] Sidebar shows 18 component links under "UI" group, "Button" highlighted as active
@@ -76,6 +87,7 @@ Create an Astro MDX page that renders identically to the original Solid.js butto
 - [ ] Live Button previews render with correct variants, sizes, disabled states
 
 ### Must Have
+
 - All sections from original: Hero, Preview/Code, Installation, Usage, Variants, Sizes, Disabled, Link, API Reference
 - Interactive tabs (Preview↔Code, CLI↔Manual) using Solid.js Tabs from @ui/solid
 - Copy-to-clipboard on all code blocks with visual feedback
@@ -84,6 +96,7 @@ Create an Astro MDX page that renders identically to the original Solid.js butto
 - API reference table
 
 ### Must NOT Have (Guardrails)
+
 - No TanStack Router imports (Astro handles routing via file system)
 - No `createFileRoute` or route configuration
 - No changes to other pages or components
@@ -94,11 +107,13 @@ Create an Astro MDX page that renders identically to the original Solid.js butto
 ## Verification Strategy
 
 ### Test Decision
+
 - **Infrastructure exists**: NO
 - **Automated tests**: None
 - **Agent-Executed QA**: Playwright browser verification
 
 ### QA Policy
+
 - **Frontend/UI**: Playwright — navigate to `/components/button`, verify sections, interact with tabs, test copy buttons
 
 ---
@@ -124,11 +139,13 @@ Wave FINAL (After ALL tasks):
 ```
 
 ### Dependency Matrix
+
 - **1**: - → 3
 - **2**: - → 3
 - **3**: 1, 2 → FINAL
 
 ### Agent Dispatch Summary
+
 - **Wave 1**: **2** - T1 → `quick`, T2 → `quick`
 - **Wave 2**: **1** - T3 → `quick`
 - **FINAL**: **4** - F1 → `oracle`, F2 → `unspecified-high`, F3 → `unspecified-high`, F4 → `deep`
@@ -284,7 +301,7 @@ Wave FINAL (After ALL tasks):
     7. **Disabled**: Live preview of all 6 variants with disabled prop
     8. **Link**: CodeBlock showing buttonVariants on `<a>` tag
     9. **API Reference**: Table with Prop/Type/Default columns
-  - Use MDX code blocks (```tsx ... ```) for static code display where CodeBlock isn't needed
+  - Use MDX code blocks (`tsx ... `) for static code display where CodeBlock isn't needed
   - All styling via Tailwind classes matching original
 
   **Must NOT do**:
@@ -428,20 +445,20 @@ Wave FINAL (After ALL tasks):
 ## Final Verification Wave (MANDATORY — after ALL implementation tasks)
 
 - [x] F1. **Plan Compliance Audit** — `oracle`
-  Read the plan end-to-end. For each "Must Have": verify implementation exists. For each "Must NOT Have": search codebase for forbidden patterns. Check evidence files exist. Compare deliverables against plan.
-  Output: `Must Have [N/N] | Must NOT Have [N/N] | Tasks [N/N] | VERDICT: APPROVE/REJECT`
+      Read the plan end-to-end. For each "Must Have": verify implementation exists. For each "Must NOT Have": search codebase for forbidden patterns. Check evidence files exist. Compare deliverables against plan.
+      Output: `Must Have [N/N] | Must NOT Have [N/N] | Tasks [N/N] | VERDICT: APPROVE/REJECT`
 
 - [x] F2. **Code Quality Review** — `unspecified-high`
-  Run `pnpm --filter @ui/docs build`. Review all changed files for: `as any`/`@ts-ignore`, unused imports, console.log in prod. Check AI slop: excessive comments, over-abstraction, generic names.
-  Output: `Build [PASS/FAIL] | Files [N clean/N issues] | VERDICT`
+      Run `pnpm --filter @ui/docs build`. Review all changed files for: `as any`/`@ts-ignore`, unused imports, console.log in prod. Check AI slop: excessive comments, over-abstraction, generic names.
+      Output: `Build [PASS/FAIL] | Files [N clean/N issues] | VERDICT`
 
 - [x] F3. **Real Manual QA** — `unspecified-high` (+ `playwright` skill if UI)
-  Start from clean state. Navigate to `/components/button`. Execute EVERY QA scenario — follow exact steps, capture evidence. Test tab switching, copy buttons, all live previews. Save to `.sisyphus/evidence/final-qa/`.
-  Output: `Scenarios [N/N pass] | Integration [N/N] | VERDICT`
+      Start from clean state. Navigate to `/components/button`. Execute EVERY QA scenario — follow exact steps, capture evidence. Test tab switching, copy buttons, all live previews. Save to `.sisyphus/evidence/final-qa/`.
+      Output: `Scenarios [N/N pass] | Integration [N/N] | VERDICT`
 
 - [x] F4. **Scope Fidelity Check** — `deep`
-  For each task: read "What to do", read actual diff. Verify 1:1 — everything in spec was built, nothing beyond spec. Check "Must NOT do" compliance. Flag unaccounted changes.
-  Output: `Tasks [N/N compliant] | Contamination [CLEAN/N issues] | VERDICT`
+      For each task: read "What to do", read actual diff. Verify 1:1 — everything in spec was built, nothing beyond spec. Check "Must NOT do" compliance. Flag unaccounted changes.
+      Output: `Tasks [N/N compliant] | Contamination [CLEAN/N issues] | VERDICT`
 
 ---
 
@@ -455,12 +472,14 @@ Wave FINAL (After ALL tasks):
 ## Success Criteria
 
 ### Verification Commands
+
 ```bash
 pnpm --filter @ui/docs build    # Expected: build succeeds, no errors
 pnpm --filter @ui/docs preview  # Expected: server starts, /docs/components/button accessible
 ```
 
 ### Final Checklist
+
 - [ ] All "Must Have" sections present in rendered page
 - [ ] All "Must NOT Have" patterns absent (no TanStack Router, no Route exports)
 - [ ] Build succeeds without errors

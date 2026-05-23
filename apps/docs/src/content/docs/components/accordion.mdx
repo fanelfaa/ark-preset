@@ -5,17 +5,36 @@ category: Navigation
 updatedDate: 2026-05-18
 ---
 
-import AccordionBasicDemo from '@components/accordion-demo/AccordionBasicDemo.tsx'
-import AccordionMultipleDemo from '@components/accordion-demo/AccordionMultipleDemo.tsx'
-import AccordionCollapsibleDemo from '@components/accordion-demo/AccordionCollapsibleDemo.tsx'
-import AccordionDisabledDemo from '@components/accordion-demo/AccordionDisabledDemo.tsx'
+import AccordionBasicDemo from "@components/accordion-demo/AccordionBasicDemo.tsx";
+import AccordionMultipleDemo from "@components/accordion-demo/AccordionMultipleDemo.tsx";
+import AccordionCollapsibleDemo from "@components/accordion-demo/AccordionCollapsibleDemo.tsx";
+import AccordionDisabledDemo from "@components/accordion-demo/AccordionDisabledDemo.tsx";
 
 # Accordion
 
 Displays collapsible content panels that reveal or hide sections of content.
 
-<a href="https://ark-ui.com/docs/components/accordion" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors">
-  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+<a
+  href="https://ark-ui.com/docs/components/accordion"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="inline-flex items-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="14"
+    height="14"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+    <polyline points="15 3 21 3 21 9" />
+    <line x1="10" x2="21" y1="14" y2="3" />
+  </svg>
   Docs
 </a>
 
@@ -28,7 +47,7 @@ import {
   AccordionItemTrigger,
   AccordionItemContent,
   AccordionItemIndicator,
-} from "~/components/accordion"
+} from "~/components/accordion";
 
 export function AccordionDemo() {
   return (
@@ -41,9 +60,7 @@ export function AccordionDemo() {
           </AccordionItemIndicator>
         </AccordionItemTrigger>
         <AccordionItemContent>
-          <div class="pb-4 text-sm">
-            Yes. It adheres to the WAI-ARIA design pattern.
-          </div>
+          <div class="pb-4 text-sm">Yes. It adheres to the WAI-ARIA design pattern.</div>
         </AccordionItemContent>
       </AccordionItem>
       <AccordionItem value="item-2">
@@ -67,25 +84,26 @@ export function AccordionDemo() {
           </AccordionItemIndicator>
         </AccordionItemTrigger>
         <AccordionItemContent>
-          <div class="pb-4 text-sm">
-            Yes. It's animated by default, but you can disable it.
-          </div>
+          <div class="pb-4 text-sm">Yes. It's animated by default, but you can disable it.</div>
         </AccordionItemContent>
       </AccordionItem>
     </Accordion>
-  )
+  );
 }
 ```
 
 ## Installation
 
 ### CLI
+
 Run the following command to add the component to your project:
+
 ```bash
 npx solidui-cli@latest add accordion
 ```
 
 ### Manual
+
 <div class="space-y-3">
 Install the dependency:
 ```bash
@@ -99,16 +117,17 @@ import { tv, type VariantProps } from 'tailwind-variants'
 
 export const accordionVariants = tv({
   slots: {
-    root: 'w-full',
-    item: 'border-b border-border',
+    root: "w-full",
+    item: "border-b border-border",
     itemTrigger:
-      'flex w-full items-center justify-between gap-2 py-4 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
-    itemIndicator: 'size-4 shrink-0 text-foreground transition-transform duration-200 data-[state=open]:rotate-180',
+      "flex w-full items-center justify-between gap-2 py-4 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+    itemIndicator:
+      "size-4 shrink-0 text-foreground transition-transform duration-200 data-[state=open]:rotate-180",
     itemContent:
-      'overflow-hidden transition-all duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0',
-    itemBody: 'pb-4 text-sm text-foreground',
+      "overflow-hidden transition-all duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0",
+    itemBody: "pb-4 text-sm text-foreground",
   },
-})
+});
 
 export type AccordionVariants = VariantProps<typeof accordionVariants>
 ```
@@ -124,33 +143,33 @@ import { accordionVariants } from './recipes/accordion'
 const styles = accordionVariants()
 
 const AccordionRoot: Component<ArkAccordion.RootProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const rootClass = createMemo(() => styles.root({ class: local.class }))
-  return <ArkAccordion.Root class={rootClass()} {...others} />
+const [local, others] = splitProps(props, ['class'])
+const rootClass = createMemo(() => styles.root({ class: local.class }))
+return <ArkAccordion.Root class={rootClass()} {...others} />
 }
 
 const AccordionItem: Component<ArkAccordion.ItemProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const itemClass = createMemo(() => styles.item({ class: local.class }))
-  return <ArkAccordion.Item class={itemClass()} {...others} />
+const [local, others] = splitProps(props, ['class'])
+const itemClass = createMemo(() => styles.item({ class: local.class }))
+return <ArkAccordion.Item class={itemClass()} {...others} />
 }
 
 const AccordionItemTrigger: Component<ArkAccordion.ItemTriggerProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const triggerClass = createMemo(() => styles.itemTrigger({ class: local.class }))
-  return <ArkAccordion.ItemTrigger class={triggerClass()} {...others} />
+const [local, others] = splitProps(props, ['class'])
+const triggerClass = createMemo(() => styles.itemTrigger({ class: local.class }))
+return <ArkAccordion.ItemTrigger class={triggerClass()} {...others} />
 }
 
 const AccordionItemContent: Component<ArkAccordion.ItemContentProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const contentClass = createMemo(() => styles.itemContent({ class: local.class }))
-  return <ArkAccordion.ItemContent class={contentClass()} {...others} />
+const [local, others] = splitProps(props, ['class'])
+const contentClass = createMemo(() => styles.itemContent({ class: local.class }))
+return <ArkAccordion.ItemContent class={contentClass()} {...others} />
 }
 
 const AccordionItemIndicator: Component<ArkAccordion.ItemIndicatorProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const indicatorClass = createMemo(() => styles.itemIndicator({ class: local.class }))
-  return <ArkAccordion.ItemIndicator class={indicatorClass()} {...others} />
+const [local, others] = splitProps(props, ['class'])
+const indicatorClass = createMemo(() => styles.itemIndicator({ class: local.class }))
+return <ArkAccordion.ItemIndicator class={indicatorClass()} {...others} />
 }
 
 export {
@@ -176,7 +195,7 @@ import {
   AccordionItemTrigger,
   AccordionItemContent,
   AccordionItemIndicator,
-} from "~/components/accordion"
+} from "~/components/accordion";
 ```
 
 Basic usage:
@@ -204,7 +223,9 @@ With multiple items:
   <AccordionItem value="item-1">
     <AccordionItemTrigger>
       First Section
-      <AccordionItemIndicator><ChevronDownIcon /></AccordionItemIndicator>
+      <AccordionItemIndicator>
+        <ChevronDownIcon />
+      </AccordionItemIndicator>
     </AccordionItemTrigger>
     <AccordionItemContent>
       <div class="pb-4 text-sm">First content.</div>
@@ -213,7 +234,9 @@ With multiple items:
   <AccordionItem value="item-2">
     <AccordionItemTrigger>
       Second Section
-      <AccordionItemIndicator><ChevronDownIcon /></AccordionItemIndicator>
+      <AccordionItemIndicator>
+        <ChevronDownIcon />
+      </AccordionItemIndicator>
     </AccordionItemTrigger>
     <AccordionItemContent>
       <div class="pb-4 text-sm">Second content.</div>
@@ -233,7 +256,9 @@ Use the `multiple` prop to allow more than one item to be expanded at the same t
   <AccordionItem value="item-1">
     <AccordionItemTrigger>
       Can I open multiple items?
-      <AccordionItemIndicator><ChevronDownIcon /></AccordionItemIndicator>
+      <AccordionItemIndicator>
+        <ChevronDownIcon />
+      </AccordionItemIndicator>
     </AccordionItemTrigger>
     <AccordionItemContent>
       <div class="pb-4 text-sm">
@@ -249,19 +274,19 @@ Use the `multiple` prop to allow more than one item to be expanded at the same t
 
 Use the `collapsible` prop to allow items to be closed after they have been expanded. By default, at least one item stays open.
 
-<AccordionCollapsibleDemo client:load/>
+<AccordionCollapsibleDemo client:load />
 
 ```tsx
 <Accordion collapsible>
   <AccordionItem value="item-1">
     <AccordionItemTrigger>
       Can this be collapsed?
-      <AccordionItemIndicator><ChevronDownIcon /></AccordionItemIndicator>
+      <AccordionItemIndicator>
+        <ChevronDownIcon />
+      </AccordionItemIndicator>
     </AccordionItemTrigger>
     <AccordionItemContent>
-      <div class="pb-4 text-sm">
-        Yes. Click the trigger again to collapse.
-      </div>
+      <div class="pb-4 text-sm">Yes. Click the trigger again to collapse.</div>
     </AccordionItemContent>
   </AccordionItem>
 </Accordion>
@@ -272,36 +297,33 @@ Use the `collapsible` prop to allow items to be closed after they have been expa
 Control the expanded state programmatically using `value` and `onValueChange`.
 
 ```tsx
-import { createSignal } from "solid-js"
+import { createSignal } from "solid-js";
 import {
   Accordion,
   AccordionItem,
   AccordionItemTrigger,
   AccordionItemContent,
   AccordionItemIndicator,
-} from "~/components/accordion"
+} from "~/components/accordion";
 
 export function AccordionControlled() {
-  const [value, setValue] = createSignal<string[]>([])
+  const [value, setValue] = createSignal<string[]>([]);
 
   return (
-    <Accordion
-      value={value()}
-      onValueChange={(details) => setValue(details.value)}
-    >
+    <Accordion value={value()} onValueChange={(details) => setValue(details.value)}>
       <AccordionItem value="item-1">
         <AccordionItemTrigger>
           Controlled Item
-          <AccordionItemIndicator><ChevronDownIcon /></AccordionItemIndicator>
+          <AccordionItemIndicator>
+            <ChevronDownIcon />
+          </AccordionItemIndicator>
         </AccordionItemTrigger>
         <AccordionItemContent>
-          <div class="pb-4 text-sm">
-            Current state: {value().join(", ") || "closed"}
-          </div>
+          <div class="pb-4 text-sm">Current state: {value().join(", ") || "closed"}</div>
         </AccordionItemContent>
       </AccordionItem>
     </Accordion>
-  )
+  );
 }
 ```
 
@@ -309,7 +331,7 @@ export function AccordionControlled() {
 
 Disable individual items or the entire accordion.
 
-<AccordionDisabledDemo client:load/>
+<AccordionDisabledDemo client:load />
 
 ```tsx
 <Accordion>
@@ -334,41 +356,41 @@ To disable all items at once, pass `disabled` to the `<Accordion>` root.
 
 ### Accordion (Root)
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| defaultValue | `string[]` | `[]` | Initial expanded items. Use when uncontrolled. |
-| value | `string[]` | — | Controlled value of expanded items. |
-| onValueChange | `(details: { value: string[] }) => void` | — | Callback when expand state changes. |
-| multiple | `boolean` | `false` | Allow multiple items expanded simultaneously. |
-| collapsible | `boolean` | `false` | Allow items to be closed after expansion. |
-| disabled | `boolean` | `false` | Disable all accordion items. |
-| orientation | `"horizontal"` \| `"vertical"` | `"vertical"` | Layout orientation of the accordion. |
-| lazyMount | `boolean` | `false` | Enable lazy mounting of content. |
-| unmountOnExit | `boolean` | `false` | Unmount content on exit animation. |
-| class | `string` | — | Custom CSS class. |
+| Prop          | Type                                     | Default      | Description                                    |
+| ------------- | ---------------------------------------- | ------------ | ---------------------------------------------- |
+| defaultValue  | `string[]`                               | `[]`         | Initial expanded items. Use when uncontrolled. |
+| value         | `string[]`                               | —            | Controlled value of expanded items.            |
+| onValueChange | `(details: { value: string[] }) => void` | —            | Callback when expand state changes.            |
+| multiple      | `boolean`                                | `false`      | Allow multiple items expanded simultaneously.  |
+| collapsible   | `boolean`                                | `false`      | Allow items to be closed after expansion.      |
+| disabled      | `boolean`                                | `false`      | Disable all accordion items.                   |
+| orientation   | `"horizontal"` \| `"vertical"`           | `"vertical"` | Layout orientation of the accordion.           |
+| lazyMount     | `boolean`                                | `false`      | Enable lazy mounting of content.               |
+| unmountOnExit | `boolean`                                | `false`      | Unmount content on exit animation.             |
+| class         | `string`                                 | —            | Custom CSS class.                              |
 
 ### AccordionItem
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| value | `string` | — | Unique identifier for the item. **Required.** |
-| disabled | `boolean` | `false` | Whether this item is disabled. |
-| class | `string` | — | Custom CSS class. |
+| Prop     | Type      | Default | Description                                   |
+| -------- | --------- | ------- | --------------------------------------------- |
+| value    | `string`  | —       | Unique identifier for the item. **Required.** |
+| disabled | `boolean` | `false` | Whether this item is disabled.                |
+| class    | `string`  | —       | Custom CSS class.                             |
 
 ### AccordionItemTrigger
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| class | `string` | — | Custom CSS class. |
+| Prop  | Type     | Default | Description       |
+| ----- | -------- | ------- | ----------------- |
+| class | `string` | —       | Custom CSS class. |
 
 ### AccordionItemContent
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| class | `string` | — | Custom CSS class. |
+| Prop  | Type     | Default | Description       |
+| ----- | -------- | ------- | ----------------- |
+| class | `string` | —       | Custom CSS class. |
 
 ### AccordionItemIndicator
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| class | `string` | — | Custom CSS class. |
+| Prop  | Type     | Default | Description       |
+| ----- | -------- | ------- | ----------------- |
+| class | `string` | —       | Custom CSS class. |

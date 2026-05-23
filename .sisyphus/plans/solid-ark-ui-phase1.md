@@ -5,6 +5,7 @@
 > **Quick Summary**: Build the first 5 components (Button, Input/Field, Dialog, Select, Toast) of a Solid.js UI library using Ark UI as headless primitives + tailwind-variants for styling, following shadcn/ui's copy-paste distribution model.
 
 > **Deliverables**:
+>
 > - `packages/ui/` — 5 styled components + theme CSS + custom tv instance
 > - `apps/docs/` — Vite + Solid demo site with interactive component demos
 > - `packages/cli/` — CLI tool (`npx ui add <component>`) for copy-paste workflow
@@ -19,7 +20,9 @@
 ## Context
 
 ### Original Request
+
 Create a UI component library for Solid.js using:
+
 - **Solid.js** + **TypeScript** (strict mode)
 - **Ark UI** as headless primitives
 - **tailwind-variants** (tv) for variant definitions
@@ -27,7 +30,9 @@ Create a UI component library for Solid.js using:
 - shadcn/ui copy-paste distribution model with CLI
 
 ### Interview Summary
+
 **Key Decisions**:
+
 - **Distribution**: shadcn/ui-style copy-paste via CLI (`./src/components/ui/<name>.tsx`)
 - **Phase 1 Components**: Button, Input/Field, Dialog, Select, Toast
 - **Package Manager**: pnpm monorepo (apps/docs + packages/ui + packages/cli)
@@ -41,13 +46,16 @@ Create a UI component library for Solid.js using:
 - **Ark UI**: Latest stable, per-component imports (`@ark-ui/solid/dialog`)
 
 ### Research Findings
+
 - **Ark UI**: 62+ Solid.js components, composable sub-component pattern, data-attribute styling (`data-scope`, `data-part`, `data-state`), `asChild` polymorphic prop
 - **tailwind-variants**: v3+ with Tailwind v4, slots for multi-part components, `extend` for composition, built-in tailwind-merge, `createTV` for custom instance
 - **solid-ui.com**: Uses Kobalte + cva — we replace both with Ark UI + tv
 - **shadcn/ui**: Copy-paste model, single-file components, exported variant functions
 
 ### Metis Review
+
 **Gaps Addressed**:
+
 - **CLI output path**: `./src/components/ui/<name>.tsx` (resolved)
 - **CSS variable location**: Separate `theme.css` file (resolved)
 - **Docs framework**: Vite + Solid (resolved)
@@ -58,9 +66,11 @@ Create a UI component library for Solid.js using:
 ## Work Objectives
 
 ### Core Objective
+
 Deliver 5 production-ready Solid.js UI components with a CLI for copy-paste distribution and a demo documentation site.
 
 ### Concrete Deliverables
+
 1. `packages/ui/src/button.tsx`, `input.tsx`, `dialog.tsx`, `select.tsx`, `toast.tsx`
 2. `packages/ui/src/theme.css` — CSS custom properties (HSL theming)
 3. `packages/ui/src/tv.ts` — Custom tailwind-variants instance via createTV
@@ -69,18 +79,21 @@ Deliver 5 production-ready Solid.js UI components with a CLI for copy-paste dist
 6. `packages/cli/` — CLI tool for `npx ui add <component>`
 
 ### Definition of Done
+
 - [ ] `pnpm build` in packages/ui produces dist/ with ESM + CJS + .d.ts files
 - [ ] All 5 components render correctly on apps/docs dev server
 - [ ] `pnpm ui add button` copies component to target directory
 - [ ] No TypeScript errors with strict mode
 
 ### Must Have
+
 - Each component must have tailwind-variants variant definitions (exported)
 - Each component must support `class` prop override
 - Components using Ark UI must re-export styled sub-components
 - CSS custom properties must use `--ui-*` namespace prefix
 
 ### Must NOT Have (Guardrails)
+
 - No automated tests
 - No Storybook
 - No dark mode implementation (just prepare the CSS vars)
@@ -95,11 +108,13 @@ Deliver 5 production-ready Solid.js UI components with a CLI for copy-paste dist
 > **ZERO HUMAN INTERVENTION** — ALL verification is agent-executed via the docs site.
 
 ### Test Decision
+
 - **Infrastructure exists**: NO (Phase 1 skip)
 - **Automated tests**: NONE (manual verification via docs site)
 - **Framework**: N/A
 
 ### QA Policy
+
 Every task MUST include agent-executed QA scenarios. Evidence saved to `.sisyphus/evidence/task-{N}-{scenario-slug}.{ext}`.
 
 - **Component verification**: Use Vite dev server (bash + curl for HTTP status, Playwright for visual verification)
@@ -137,17 +152,17 @@ Critical Path: T1 → T2 → T3-5 → T6-10 → T11-13
 
 ### Dependency Matrix
 
-| Task | Depends On | Blocks |
-|------|-----------|--------|
-| T1 | — | T2, T5, T11 |
-| T2 | T1 | T3, T4 |
-| T3 | T2 | T6–T10 |
-| T4 | T2 | T6–T10 |
-| T5 | T1 | T12 |
-| T6–T10 | T3, T4 | T12 |
-| T11 | T1 | — |
-| T12 | T5, T6–T10 | T13 |
-| T13 | T11, T12 | — |
+| Task   | Depends On | Blocks      |
+| ------ | ---------- | ----------- |
+| T1     | —          | T2, T5, T11 |
+| T2     | T1         | T3, T4      |
+| T3     | T2         | T6–T10      |
+| T4     | T2         | T6–T10      |
+| T5     | T1         | T12         |
+| T6–T10 | T3, T4     | T12         |
+| T11    | T1         | —           |
+| T12    | T5, T6–T10 | T13         |
+| T13    | T11, T12   | —           |
 
 ---
 
@@ -171,8 +186,8 @@ Critical Path: T1 → T2 → T3-5 → T6-10 → T11-13
   - Create `pnpm-workspace.yaml` with:
     ```yaml
     packages:
-      - 'packages/*'
-      - 'apps/*'
+      - "packages/*"
+      - "apps/*"
     ```
   - Create root `.gitignore` (node_modules, dist, .turbo, .env)
   - Create root `tsconfig.base.json` with strict mode settings:
@@ -221,6 +236,7 @@ Critical Path: T1 → T2 → T3-5 → T6-10 → T11-13
   - [ ] `pnpm install` runs without errors (verify with `pnpm ls`)
 
   **QA Scenarios**:
+
   ```
   Scenario: Check workspace setup
     Tool: Bash
@@ -252,7 +268,11 @@ Critical Path: T1 → T2 → T3-5 → T6-10 → T11-13
       "module": "./dist/index.js",
       "types": "./dist/index.d.ts",
       "exports": {
-        ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js", "require": "./dist/index.cjs" }
+        ".": {
+          "types": "./dist/index.d.ts",
+          "import": "./dist/index.js",
+          "require": "./dist/index.cjs"
+        }
       },
       "files": ["dist/", "src/"],
       "scripts": {
@@ -273,19 +293,23 @@ Critical Path: T1 → T2 → T3-5 → T6-10 → T11-13
     ```
   - Create `packages/ui/tsup.config.ts` with ESM + CJS output:
     ```ts
-    import { defineConfig } from 'tsup'
+    import { defineConfig } from "tsup";
     export default defineConfig({
-      entry: ['src/index.ts'],
-      format: ['esm', 'cjs'],
+      entry: ["src/index.ts"],
+      format: ["esm", "cjs"],
       dts: true,
       sourcemap: true,
       clean: true,
-      external: ['solid-js', '@ark-ui/solid', 'tailwind-variants'],
-    })
+      external: ["solid-js", "@ark-ui/solid", "tailwind-variants"],
+    });
     ```
   - Create `packages/ui/tsconfig.json` extending base:
     ```json
-    { "extends": "../../tsconfig.base.json", "compilerOptions": { "outDir": "./dist" }, "include": ["src"] }
+    {
+      "extends": "../../tsconfig.base.json",
+      "compilerOptions": { "outDir": "./dist" },
+      "include": ["src"]
+    }
     ```
   - Create `packages/ui/src/index.ts` (empty barrel file for now)
 
@@ -312,6 +336,7 @@ Critical Path: T1 → T2 → T3-5 → T6-10 → T11-13
   - [ ] TypeScript strict mode passes
 
   **QA Scenarios**:
+
   ```
   Scenario: Build packages/ui
     Tool: Bash
@@ -331,9 +356,10 @@ Critical Path: T1 → T2 → T3-5 → T6-10 → T11-13
 
   **What to do**:
   - Create `packages/ui/src/tv.ts`:
+
     ```ts
-    import { createTV } from 'tailwind-variants'
-    import type { VariantProps } from 'tailwind-variants'
+    import { createTV } from "tailwind-variants";
+    import type { VariantProps } from "tailwind-variants";
 
     const tv = createTV({
       twMerge: true,
@@ -341,10 +367,11 @@ Critical Path: T1 → T2 → T3-5 → T6-10 → T11-13
         theme: {},
         classGroups: {},
       },
-    })
+    });
 
-    export { tv, type VariantProps }
+    export { tv, type VariantProps };
     ```
+
   - Export from `packages/ui/src/index.ts`: `export { tv } from './tv'`
   - Keep config minimal for Phase 1 — extend with design tokens later
 
@@ -370,6 +397,7 @@ Critical Path: T1 → T2 → T3-5 → T6-10 → T11-13
   - [ ] index.ts re-exports tv
 
   **QA Scenarios**:
+
   ```
   Scenario: tv utility works
     Tool: Bash
@@ -387,6 +415,7 @@ Critical Path: T1 → T2 → T3-5 → T6-10 → T11-13
 
   **What to do**:
   - Create `packages/ui/src/theme.css` with HSL-based CSS custom properties:
+
     ```css
     @theme {
       --color-ui-background: hsl(var(--ui-background));
@@ -425,6 +454,7 @@ Critical Path: T1 → T2 → T3-5 → T6-10 → T11-13
       --ui-radius: 0.5rem;
     }
     ```
+
   - Export from `packages/ui/src/index.ts`: `export * from './theme.css'` (or just document the import path)
   - Note: Since this is CSS, the export is via import path documentation. The docs site will @import it.
 
@@ -452,6 +482,7 @@ Critical Path: T1 → T2 → T3-5 → T6-10 → T11-13
   - [ ] Tailwind v4 `@theme` directive maps CSS vars to color tokens
 
   **QA Scenarios**:
+
   ```
   Scenario: Theme CSS parses correctly
     Tool: Bash
@@ -494,23 +525,25 @@ Critical Path: T1 → T2 → T3-5 → T6-10 → T11-13
     }
     ```
   - Create `apps/docs/vite.config.ts`:
+
     ```ts
-    import { defineConfig } from 'vite'
-    import solid from 'vite-plugin-solid'
-    import tailwindcss from '@tailwindcss/vite'
+    import { defineConfig } from "vite";
+    import solid from "vite-plugin-solid";
+    import tailwindcss from "@tailwindcss/vite";
 
     export default defineConfig({
       plugins: [tailwindcss(), solid()],
-    })
+    });
     ```
+
   - Create `apps/docs/tsconfig.json` extending base
   - Create `apps/docs/index.html` with Solid.js mount point
   - Create `apps/docs/src/main.tsx` as Solid entry
   - Create `apps/docs/src/index.css`:
     ```css
-    @import 'tailwindcss';
-    @import 'tw-animate-css';
-    @import '@ui/solid/src/theme.css';
+    @import "tailwindcss";
+    @import "tw-animate-css";
+    @import "@ui/solid/src/theme.css";
     ```
   - Create `apps/docs/src/App.tsx` with basic layout (sidebar nav + content area)
 
@@ -539,6 +572,7 @@ Critical Path: T1 → T2 → T3-5 → T6-10 → T11-13
   - [ ] Tailwind utility classes work in the app
 
   **QA Scenarios**:
+
   ```
   Scenario: Docs dev server starts
     Tool: Bash
@@ -569,47 +603,51 @@ Critical Path: T1 → T2 → T3-5 → T6-10 → T11-13
     - Define variant function using `tv()`:
       ```ts
       const buttonVariants = tv({
-        base: 'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ui-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
+        base: "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ui-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
         variants: {
           variant: {
-            default: 'bg-ui-primary text-ui-primary-foreground hover:bg-ui-primary/90',
-            destructive: 'bg-ui-destructive text-ui-destructive-foreground hover:bg-ui-destructive/90',
-            outline: 'border border-ui-input bg-ui-background hover:bg-ui-accent hover:text-ui-accent-foreground',
-            secondary: 'bg-ui-secondary text-ui-secondary-foreground hover:bg-ui-secondary/80',
-            ghost: 'hover:bg-ui-accent hover:text-ui-accent-foreground',
-            link: 'text-ui-primary underline-offset-4 hover:underline',
+            default: "bg-ui-primary text-ui-primary-foreground hover:bg-ui-primary/90",
+            destructive:
+              "bg-ui-destructive text-ui-destructive-foreground hover:bg-ui-destructive/90",
+            outline:
+              "border border-ui-input bg-ui-background hover:bg-ui-accent hover:text-ui-accent-foreground",
+            secondary: "bg-ui-secondary text-ui-secondary-foreground hover:bg-ui-secondary/80",
+            ghost: "hover:bg-ui-accent hover:text-ui-accent-foreground",
+            link: "text-ui-primary underline-offset-4 hover:underline",
           },
           size: {
-            sm: 'h-9 rounded-md px-3 text-xs',
-            md: 'h-10 px-4 py-2',
-            lg: 'h-11 rounded-md px-8',
-            icon: 'size-10',
+            sm: "h-9 rounded-md px-3 text-xs",
+            md: "h-10 px-4 py-2",
+            lg: "h-11 rounded-md px-8",
+            icon: "size-10",
           },
         },
         defaultVariants: {
-          variant: 'default',
-          size: 'md',
+          variant: "default",
+          size: "md",
         },
-      })
+      });
       ```
     - Create `Button` component using `splitProps` pattern:
+
       ```tsx
-      import { splitProps, type Component, type JSX } from 'solid-js'
-      import { tv, type VariantProps } from './tv'
+      import { splitProps, type Component, type JSX } from "solid-js";
+      import { tv, type VariantProps } from "./tv";
 
       type ButtonProps = JSX.ButtonHtmlAttributes<HTMLButtonElement> &
-        VariantProps<typeof buttonVariants>
+        VariantProps<typeof buttonVariants>;
 
       const Button: Component<ButtonProps> = (props) => {
-        const [local, others] = splitProps(props, ['class', 'variant', 'size'])
+        const [local, others] = splitProps(props, ["class", "variant", "size"]);
         return (
           <button
             class={buttonVariants({ variant: local.variant, size: local.size, class: local.class })}
             {...others}
           />
-        )
-      }
+        );
+      };
       ```
+
     - Export both: `export { Button, buttonVariants }`
     - Add to `index.ts`: `export * from './button'`
 
@@ -640,6 +678,7 @@ Critical Path: T1 → T2 → T3-5 → T6-10 → T11-13
   - [ ] Exports `buttonVariants` function
 
   **QA Scenarios**:
+
   ```
   Scenario: Button renders with default variant
     Tool: Bash (with ts-check or simple render)
@@ -663,44 +702,46 @@ Critical Path: T1 → T2 → T3-5 → T6-10 → T11-13
     - Use Ark UI's `Field` component for accessible form control
     - Use `tv()` for slot-based variant definitions:
       ```tsx
-      import { Field } from '@ark-ui/solid/field'
-      import { splitProps, type Component, type JSX } from 'solid-js'
-      import { tv, type VariantProps } from './tv'
+      import { Field } from "@ark-ui/solid/field";
+      import { splitProps, type Component, type JSX } from "solid-js";
+      import { tv, type VariantProps } from "./tv";
       ```
     - Define slots for the multi-part field:
       ```ts
       const inputVariants = tv({
         slots: {
-          root: 'grid gap-1.5',
-          label: 'text-sm font-medium text-ui-foreground',
-          input: 'flex h-10 w-full rounded-md border border-ui-input bg-ui-background px-3 py-2 text-sm ring-offset-ui-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-ui-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ui-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
-          description: 'text-sm text-ui-muted-foreground',
-          error: 'text-sm text-ui-destructive',
+          root: "grid gap-1.5",
+          label: "text-sm font-medium text-ui-foreground",
+          input:
+            "flex h-10 w-full rounded-md border border-ui-input bg-ui-background px-3 py-2 text-sm ring-offset-ui-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-ui-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ui-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+          description: "text-sm text-ui-muted-foreground",
+          error: "text-sm text-ui-destructive",
         },
         variants: {
           error: {
             true: {
-              input: 'border-ui-destructive focus-visible:ring-ui-destructive',
+              input: "border-ui-destructive focus-visible:ring-ui-destructive",
             },
           },
         },
         defaultVariants: {
           error: false,
         },
-      })
+      });
       ```
     - Create `Input` component that wraps Ark UI Field parts:
+
       ```tsx
       type InputProps = {
-        label?: string
-        description?: string
-        error?: string
-        class?: string
-      } & JSX.IntrinsicElements['input']
+        label?: string;
+        description?: string;
+        error?: string;
+        class?: string;
+      } & JSX.IntrinsicElements["input"];
 
       const Input: Component<InputProps> = (props) => {
-        const [local, others] = splitProps(props, ['label', 'description', 'error', 'class'])
-        const styles = inputVariants({ error: !!local.error })
+        const [local, others] = splitProps(props, ["label", "description", "error", "class"]);
+        const styles = inputVariants({ error: !!local.error });
         return (
           <Field.Root class={styles.root({ class: local.class })} invalid={!!local.error}>
             {local.label && <Field.Label class={styles.label()}>{local.label}</Field.Label>}
@@ -710,9 +751,10 @@ Critical Path: T1 → T2 → T3-5 → T6-10 → T11-13
             )}
             <Field.ErrorText class={styles.error()}>{local.error}</Field.ErrorText>
           </Field.Root>
-        )
-      }
+        );
+      };
       ```
+
     - Export: `export { Input, inputVariants }`
     - Add to `index.ts`: `export * from './input'`
 
@@ -741,6 +783,7 @@ Critical Path: T1 → T2 → T3-5 → T6-10 → T11-13
   - [ ] class prop override works on root
 
   **QA Scenarios**:
+
   ```
   Scenario: Input renders basic form
     Tool: Bash (check exports)
@@ -763,10 +806,10 @@ Critical Path: T1 → T2 → T3-5 → T6-10 → T11-13
     - Wrap all Ark UI Dialog sub-components with styled versions
     - Use `tv()` with slots for the multi-part dialog:
       ```tsx
-      import { Dialog as ArkDialog } from '@ark-ui/solid/dialog'
-      import { Portal } from 'solid-js/web'
-      import { splitProps, type Component, type JSX } from 'solid-js'
-      import { tv, type VariantProps } from './tv'
+      import { Dialog as ArkDialog } from "@ark-ui/solid/dialog";
+      import { Portal } from "solid-js/web";
+      import { splitProps, type Component, type JSX } from "solid-js";
+      import { tv, type VariantProps } from "./tv";
       ```
     - Dialog has these sub-components to expose:
       - `DialogRoot` — re-export `ArkDialog.Root`
@@ -781,23 +824,27 @@ Critical Path: T1 → T2 → T3-5 → T6-10 → T11-13
       ```ts
       const dialogVariants = tv({
         slots: {
-          backdrop: 'fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
-          positioner: 'fixed inset-0 z-50 flex items-center justify-center',
-          content: 'relative z-50 grid w-full max-w-lg gap-4 border border-ui-border bg-ui-background p-6 shadow-lg rounded-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
-          header: 'flex flex-col space-y-1.5 text-center sm:text-left',
-          footer: 'flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2',
-          title: 'text-lg font-semibold leading-none tracking-tight',
-          description: 'text-sm text-ui-muted-foreground',
-          closeTrigger: 'absolute right-4 top-4 rounded-sm opacity-70 ring-offset-ui-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ui-ring focus:ring-offset-2',
+          backdrop:
+            "fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+          positioner: "fixed inset-0 z-50 flex items-center justify-center",
+          content:
+            "relative z-50 grid w-full max-w-lg gap-4 border border-ui-border bg-ui-background p-6 shadow-lg rounded-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
+          header: "flex flex-col space-y-1.5 text-center sm:text-left",
+          footer: "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2",
+          title: "text-lg font-semibold leading-none tracking-tight",
+          description: "text-sm text-ui-muted-foreground",
+          closeTrigger:
+            "absolute right-4 top-4 rounded-sm opacity-70 ring-offset-ui-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ui-ring focus:ring-offset-2",
         },
-      })
+      });
       ```
     - Implement `DialogContent` as the main compound wrapper:
+
       ```tsx
-      type DialogContentProps = { class?: string; children?: JSX.Element }
+      type DialogContentProps = { class?: string; children?: JSX.Element };
 
       const DialogContent: Component<DialogContentProps> = (props) => {
-        const styles = dialogVariants()
+        const styles = dialogVariants();
         return (
           <Portal>
             <ArkDialog.Backdrop class={styles.backdrop()} />
@@ -805,20 +852,33 @@ Critical Path: T1 → T2 → T3-5 → T6-10 → T11-13
               <ArkDialog.Content class={styles.content({ class: props.class })}>
                 {props.children}
                 <ArkDialog.CloseTrigger class={styles.closeTrigger()}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="size-4"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    class="size-4"
+                  >
+                    <path d="M18 6L6 18" />
+                    <path d="M6 6l12 12" />
+                  </svg>
                 </ArkDialog.CloseTrigger>
               </ArkDialog.Content>
             </ArkDialog.Positioner>
           </Portal>
-        )
-      }
+        );
+      };
       ```
+
     - Export all sub-components:
       ```ts
-      export const DialogRoot = ArkDialog.Root
-      export const DialogTrigger = ArkDialog.Trigger
-      export { DialogContent, DialogHeader, DialogFooter, DialogTitle, DialogDescription }
-      export { dialogVariants }
+      export const DialogRoot = ArkDialog.Root;
+      export const DialogTrigger = ArkDialog.Trigger;
+      export { DialogContent, DialogHeader, DialogFooter, DialogTitle, DialogDescription };
+      export { dialogVariants };
       ```
     - Add to `index.ts`: `export * from './dialog'`
 
@@ -850,6 +910,7 @@ Critical Path: T1 → T2 → T3-5 → T6-10 → T11-13
   - [ ] Content has scale + fade animation
 
   **QA Scenarios**:
+
   ```
   Scenario: Dialog opens and closes
     Tool: Bash (check exports)
@@ -872,71 +933,81 @@ Critical Path: T1 → T2 → T3-5 → T6-10 → T11-13
     - Wrap Ark UI Select with styled sub-components
     - Use `tv()` with slots:
       ```tsx
-      import { Select as ArkSelect, createListCollection, type ListCollection } from '@ark-ui/solid/select'
-      import { Portal } from 'solid-js/web'
-      import { Index, type JSX, splitProps, type Component } from 'solid-js'
-      import { tv, type VariantProps } from './tv'
+      import {
+        Select as ArkSelect,
+        createListCollection,
+        type ListCollection,
+      } from "@ark-ui/solid/select";
+      import { Portal } from "solid-js/web";
+      import { Index, type JSX, splitProps, type Component } from "solid-js";
+      import { tv, type VariantProps } from "./tv";
       ```
     - Define tv slots:
       ```ts
       const selectVariants = tv({
         slots: {
-          root: 'grid gap-1.5 w-full',
-          label: 'text-sm font-medium text-ui-foreground',
-          control: 'flex h-10 w-full items-center justify-between rounded-md border border-ui-input bg-ui-background px-3 py-2 text-sm ring-offset-ui-background focus-within:outline-none focus-within:ring-2 focus-within:ring-ui-ring focus-within:ring-offset-2',
-          trigger: 'flex items-center justify-center size-4 [&[data-state=open]>svg]:rotate-180',
-          valueText: 'text-sm data-[placeholder-shown]:text-ui-muted-foreground',
-          indicator: 'size-4 transition-transform text-ui-muted-foreground',
-          positioner: 'z-50',
-          content: 'z-50 min-w-[8rem] max-h-60 overflow-y-auto rounded-md border border-ui-border bg-ui-background p-1 shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
-          item: 'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none focus:bg-ui-accent focus:text-ui-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[highlighted]:bg-ui-accent data-[highlighted]:text-ui-accent-foreground',
-          itemText: 'flex-1',
-          itemIndicator: 'absolute right-2 flex size-4 items-center justify-center',
+          root: "grid gap-1.5 w-full",
+          label: "text-sm font-medium text-ui-foreground",
+          control:
+            "flex h-10 w-full items-center justify-between rounded-md border border-ui-input bg-ui-background px-3 py-2 text-sm ring-offset-ui-background focus-within:outline-none focus-within:ring-2 focus-within:ring-ui-ring focus-within:ring-offset-2",
+          trigger: "flex items-center justify-center size-4 [&[data-state=open]>svg]:rotate-180",
+          valueText: "text-sm data-[placeholder-shown]:text-ui-muted-foreground",
+          indicator: "size-4 transition-transform text-ui-muted-foreground",
+          positioner: "z-50",
+          content:
+            "z-50 min-w-[8rem] max-h-60 overflow-y-auto rounded-md border border-ui-border bg-ui-background p-1 shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+          item: "relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none focus:bg-ui-accent focus:text-ui-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[highlighted]:bg-ui-accent data-[highlighted]:text-ui-accent-foreground",
+          itemText: "flex-1",
+          itemIndicator: "absolute right-2 flex size-4 items-center justify-center",
         },
         variants: {
           error: {
             true: {
-              control: 'border-ui-destructive focus-within:ring-ui-destructive',
-              label: 'text-ui-destructive',
+              control: "border-ui-destructive focus-within:ring-ui-destructive",
+              label: "text-ui-destructive",
             },
           },
         },
         defaultVariants: {
           error: false,
         },
-      })
+      });
       ```
     - Create `SelectRoot` wrapper with styled sub-components:
+
       ```tsx
-      type SelectRootProps = ArkSelect.RootProps & { class?: string; error?: boolean }
+      type SelectRootProps = ArkSelect.RootProps & { class?: string; error?: boolean };
 
       const SelectRoot: Component<SelectRootProps> = (props) => {
-        const [local, others] = splitProps(props as SelectRootProps, ['class', 'error'])
-        const styles = selectVariants({ error: !!local.error })
-        return (
-          <ArkSelect.Root class={styles.root()} {...others} />
-        )
-      }
+        const [local, others] = splitProps(props as SelectRootProps, ["class", "error"]);
+        const styles = selectVariants({ error: !!local.error });
+        return <ArkSelect.Root class={styles.root()} {...others} />;
+      };
       ```
+
     - Create styled sub-component wrappers:
+
       ```tsx
       const SelectLabel = (props: ArkSelect.LabelProps) => {
-        const styles = selectVariants()
-        return <ArkSelect.Label class={styles.label()} {...props} />
-      }
+        const styles = selectVariants();
+        return <ArkSelect.Label class={styles.label()} {...props} />;
+      };
 
       const SelectControl = (props: ArkSelect.ControlProps) => {
-        const styles = selectVariants()
-        return <ArkSelect.Control class={styles.control()}>
-          {props.children}
-          <ArkSelect.Indicator class={styles.indicator()}>
-            <svg>chevron-down icon</svg>
-          </ArkSelect.Indicator>
-        </ArkSelect.Control>
-      }
+        const styles = selectVariants();
+        return (
+          <ArkSelect.Control class={styles.control()}>
+            {props.children}
+            <ArkSelect.Indicator class={styles.indicator()}>
+              <svg>chevron-down icon</svg>
+            </ArkSelect.Indicator>
+          </ArkSelect.Control>
+        );
+      };
 
       // ... similar for Trigger, ValueText, Content, Item, ItemText, ItemIndicator
       ```
+
     - Export `createListCollection` from Ark UI as a re-export
     - Export all sub-components and the variant function
 
@@ -967,6 +1038,7 @@ Critical Path: T1 → T2 → T3-5 → T6-10 → T11-13
   - [ ] Keyboard navigation works (arrow keys, enter, escape)
 
   **QA Scenarios**:
+
   ```
   Scenario: Select component exports
     Tool: Bash (check exports)
@@ -990,83 +1062,108 @@ Critical Path: T1 → T2 → T3-5 → T6-10 → T11-13
     - Ark UI Toast requires `createToaster()` + `<Toaster>` component
     - Use `tv()` with slots:
       ```tsx
-      import { Toast as ArkToast, createToaster, type CreateToasterReturn } from '@ark-ui/solid/toast'
-      import { Portal } from 'solid-js/web'
-      import { splitProps, type Component, type JSX } from 'solid-js'
-      import { tv, type VariantProps } from './tv'
+      import {
+        Toast as ArkToast,
+        createToaster,
+        type CreateToasterReturn,
+      } from "@ark-ui/solid/toast";
+      import { Portal } from "solid-js/web";
+      import { splitProps, type Component, type JSX } from "solid-js";
+      import { tv, type VariantProps } from "./tv";
       ```
     - Define tv slots:
       ```ts
       const toastVariants = tv({
         slots: {
-          root: 'group pointer-events-auto relative flex w-full items-center justify-between space-x-4 overflow-hidden rounded-md border border-ui-border p-6 pr-8 shadow-lg transition-all data-[state=open]:animate-in data-[state=closed]:animate-out data-[swipe=end]:animate-out',
-          title: 'text-sm font-semibold',
-          description: 'text-sm opacity-90',
-          closeTrigger: 'absolute right-2 top-2 rounded-md p-1 text-ui-foreground/50 opacity-0 transition-opacity hover:text-ui-foreground focus:opacity-100 focus:outline-none focus:ring-2 group-hover:opacity-100',
-          actionTrigger: 'inline-flex h-8 shrink-0 items-center justify-center rounded-md border bg-transparent px-3 text-xs font-medium transition-colors hover:bg-ui-secondary focus:outline-none focus:ring-2 focus:ring-ui-ring',
+          root: "group pointer-events-auto relative flex w-full items-center justify-between space-x-4 overflow-hidden rounded-md border border-ui-border p-6 pr-8 shadow-lg transition-all data-[state=open]:animate-in data-[state=closed]:animate-out data-[swipe=end]:animate-out",
+          title: "text-sm font-semibold",
+          description: "text-sm opacity-90",
+          closeTrigger:
+            "absolute right-2 top-2 rounded-md p-1 text-ui-foreground/50 opacity-0 transition-opacity hover:text-ui-foreground focus:opacity-100 focus:outline-none focus:ring-2 group-hover:opacity-100",
+          actionTrigger:
+            "inline-flex h-8 shrink-0 items-center justify-center rounded-md border bg-transparent px-3 text-xs font-medium transition-colors hover:bg-ui-secondary focus:outline-none focus:ring-2 focus:ring-ui-ring",
         },
         variants: {
           variant: {
-            default: { root: 'bg-ui-background border-ui-border' },
+            default: { root: "bg-ui-background border-ui-border" },
             destructive: {
-              root: 'destructive group border-ui-destructive bg-ui-destructive text-ui-destructive-foreground',
-              title: 'text-ui-destructive-foreground',
-              description: 'text-ui-destructive-foreground/90',
-              closeTrigger: 'text-ui-destructive-foreground/50 hover:text-ui-destructive-foreground',
-              actionTrigger: 'text-ui-destructive-foreground border-ui-destructive-foreground/20 hover:bg-ui-destructive-foreground/10',
+              root: "destructive group border-ui-destructive bg-ui-destructive text-ui-destructive-foreground",
+              title: "text-ui-destructive-foreground",
+              description: "text-ui-destructive-foreground/90",
+              closeTrigger:
+                "text-ui-destructive-foreground/50 hover:text-ui-destructive-foreground",
+              actionTrigger:
+                "text-ui-destructive-foreground border-ui-destructive-foreground/20 hover:bg-ui-destructive-foreground/10",
             },
-            success: { root: 'border-green-500 bg-green-50 text-green-950' },
-            warning: { root: 'border-yellow-500 bg-yellow-50 text-yellow-950' },
+            success: { root: "border-green-500 bg-green-50 text-green-950" },
+            warning: { root: "border-yellow-500 bg-yellow-50 text-yellow-950" },
           },
         },
-        defaultVariants: { variant: 'default' },
-      })
+        defaultVariants: { variant: "default" },
+      });
       ```
     - Create `Toaster` component:
+
       ```tsx
       type ToasterProps = {
-        toaster: CreateToasterReturn
-        class?: string
-      }
+        toaster: CreateToasterReturn;
+        class?: string;
+      };
 
       const Toaster: Component<ToasterProps> = (props) => {
-        const [local, rest] = splitProps(props, ['class'])
+        const [local, rest] = splitProps(props, ["class"]);
         return (
           <ArkToast.Toaster toaster={local.toaster} class={local.class}>
             {(toast) => {
-              const styles = toastVariants({ variant: toast().type as any || 'default' })
+              const styles = toastVariants({ variant: (toast().type as any) || "default" });
               return (
                 <ArkToast.Root class={styles.root()}>
                   <div class="grid gap-1">
-                    {toast().title && <ArkToast.Title class={styles.title()}>{toast().title}</ArkToast.Title>}
-                    {toast().description && <ArkToast.Description class={styles.description()}>{toast().description}</ArkToast.Description>}
+                    {toast().title && (
+                      <ArkToast.Title class={styles.title()}>{toast().title}</ArkToast.Title>
+                    )}
+                    {toast().description && (
+                      <ArkToast.Description class={styles.description()}>
+                        {toast().description}
+                      </ArkToast.Description>
+                    )}
                   </div>
                   <ArkToast.CloseTrigger class={styles.closeTrigger()}>✕</ArkToast.CloseTrigger>
-                  {toast().action && <ArkToast.ActionTrigger class={styles.actionTrigger()}>{toast().action.label}</ArkToast.ActionTrigger>}
+                  {toast().action && (
+                    <ArkToast.ActionTrigger class={styles.actionTrigger()}>
+                      {toast().action.label}
+                    </ArkToast.ActionTrigger>
+                  )}
                 </ArkToast.Root>
-              )
+              );
             }}
           </ArkToast.Toaster>
-        )
-      }
+        );
+      };
       ```
+
     - Export `createToaster` and `Toaster`:
       ```ts
-      export { createToaster }
-      export { Toaster }
-      export { toastVariants }
+      export { createToaster };
+      export { Toaster };
+      export { toastVariants };
       ```
 
     **IMPORTANT**: Note the required CSS for Toast. The Ark UI Toast requires specific CSS transforms on `[data-scope=toast][data-part=root]` for animations. This should be added to theme.css or a separate toast animation CSS section. Add to `theme.css`:
+
     ```css
-    [data-scope=toast][data-part=root] {
+    [data-scope="toast"][data-part="root"] {
       translate: var(--x) var(--y);
       scale: var(--scale);
       z-index: var(--z-index);
       height: var(--height);
       opacity: var(--opacity);
       will-change: translate, opacity, scale;
-      transition: translate 400ms, scale 400ms, opacity 400ms, height 400ms;
+      transition:
+        translate 400ms,
+        scale 400ms,
+        opacity 400ms,
+        height 400ms;
     }
     ```
 
@@ -1098,6 +1195,7 @@ Critical Path: T1 → T2 → T3-5 → T6-10 → T11-13
   - [ ] Toast CSS variables are properly set for animations
 
   **QA Scenarios**:
+
   ```
   Scenario: Toast component exports
     Tool: Bash (check exports)
@@ -1145,37 +1243,39 @@ Critical Path: T1 → T2 → T3-5 → T6-10 → T11-13
     ```
   - Create `packages/cli/tsup.config.ts`:
     ```ts
-    import { defineConfig } from 'tsup'
+    import { defineConfig } from "tsup";
     export default defineConfig({
-      entry: ['src/index.ts'],
-      format: ['esm'],
+      entry: ["src/index.ts"],
+      format: ["esm"],
       dts: false,
       sourcemap: true,
       clean: true,
-    })
+    });
     ```
   - Create `packages/cli/tsconfig.json` extending base
   - Create `packages/cli/src/index.ts`:
+
     ```ts
     #!/usr/bin/env node
-    import { Command } from 'commander'
+    import { Command } from "commander";
 
     const program = new Command()
-      .name('ui')
-      .description('Add UI components to your Solid.js project')
-      .version('0.1.0')
+      .name("ui")
+      .description("Add UI components to your Solid.js project")
+      .version("0.1.0");
 
     program
-      .command('add')
-      .argument('<component>', 'Component name to add')
-      .option('-o, --output <path>', 'Output directory', './src/components/ui')
+      .command("add")
+      .argument("<component>", "Component name to add")
+      .option("-o, --output <path>", "Output directory", "./src/components/ui")
       .action(async (component, options) => {
-        const { addComponent } = await import('./commands/add')
-        await addComponent(component, options.output)
-      })
+        const { addComponent } = await import("./commands/add");
+        await addComponent(component, options.output);
+      });
 
-    program.parse()
+    program.parse();
     ```
+
   - Create `packages/cli/src/commands/add.ts` with logic to:
     - Read component template from `packages/ui/src/` source files
     - Copy the file to target output directory
@@ -1209,6 +1309,7 @@ Critical Path: T1 → T2 → T3-5 → T6-10 → T11-13
   - [ ] theme.css is also copied if missing
 
   **QA Scenarios**:
+
   ```
   Scenario: CLI builds and copies button
     Tool: Bash
@@ -1274,6 +1375,7 @@ Critical Path: T1 → T2 → T3-5 → T6-10 → T11-13
   - [ ] No TypeScript errors
 
   **QA Scenarios**:
+
   ```
   Scenario: Docs site shows all components
     Tool: Playwright
@@ -1348,6 +1450,7 @@ Critical Path: T1 → T2 → T3-5 → T6-10 → T11-13
   - [ ] No errors in console
 
   **QA Scenarios**:
+
   ```
   Scenario: Full build pipeline
     Tool: Bash
@@ -1384,20 +1487,20 @@ Critical Path: T1 → T2 → T3-5 → T6-10 → T11-13
 ---
 
 - [x] F1. **Plan Compliance Audit** — `oracle` ✅
-  Read the plan end-to-end. For each "Must Have": verify implementation exists (read file). For each "Must NOT Have": search codebase for forbidden patterns — reject with file:line if found. Check evidence files exist in .sisyphus/evidence/. Compare deliverables against plan.
-  Output: `Must Have [N/N] | Must NOT Have [N/N] | Tasks [N/N] | VERDICT: APPROVE/REJECT`
+      Read the plan end-to-end. For each "Must Have": verify implementation exists (read file). For each "Must NOT Have": search codebase for forbidden patterns — reject with file:line if found. Check evidence files exist in .sisyphus/evidence/. Compare deliverables against plan.
+      Output: `Must Have [N/N] | Must NOT Have [N/N] | Tasks [N/N] | VERDICT: APPROVE/REJECT`
 
 - [x] F2. **Code Quality Review** — `unspecified-high` ✅
-  Run `tsc --noEmit` + `pnpm build` across all packages. Review all changed files for: `as any`/`@ts-ignore`, empty catches, console.log in prod, commented-out code, unused imports. Check AI slop: excessive comments, over-abstraction, generic names.
-  Output: `Build [PASS/FAIL] | Lint [PASS/FAIL] | Files [N clean/N issues] | VERDICT`
+      Run `tsc --noEmit` + `pnpm build` across all packages. Review all changed files for: `as any`/`@ts-ignore`, empty catches, console.log in prod, commented-out code, unused imports. Check AI slop: excessive comments, over-abstraction, generic names.
+      Output: `Build [PASS/FAIL] | Lint [PASS/FAIL] | Files [N clean/N issues] | VERDICT`
 
 - [x] F3. **Real Manual QA** — `unspecified-high` (+ `playwright` skill) ✅
-  Start from clean state. Execute EVERY QA scenario from EVERY task. Test all 5 components in docs site. Test CLI add command. Save to `.sisyphus/evidence/final-qa/`.
-  Output: `Scenarios [N/N pass] | Integration [N/N] | VERDICT`
+      Start from clean state. Execute EVERY QA scenario from EVERY task. Test all 5 components in docs site. Test CLI add command. Save to `.sisyphus/evidence/final-qa/`.
+      Output: `Scenarios [N/N pass] | Integration [N/N] | VERDICT`
 
 - [x] F4. **Scope Fidelity Check** — `deep` ✅
-  For each task: read "What to do", read actual diff (git log/diff). Verify 1:1 — everything in spec was built (no missing), nothing beyond spec was built (no creep). Check "Must NOT do" compliance.
-  Output: `Tasks [N/N compliant] | Contamination [CLEAN/N issues] | VERDICT`
+      For each task: read "What to do", read actual diff (git log/diff). Verify 1:1 — everything in spec was built (no missing), nothing beyond spec was built (no creep). Check "Must NOT do" compliance.
+      Output: `Tasks [N/N compliant] | Contamination [CLEAN/N issues] | VERDICT`
 
 ---
 
@@ -1418,6 +1521,7 @@ Critical Path: T1 → T2 → T3-5 → T6-10 → T11-13
 ## Success Criteria
 
 ### Verification Commands
+
 ```bash
 # Build UI package
 cd packages/ui && pnpm build
@@ -1441,6 +1545,7 @@ cd packages/ui && pnpm tsc --noEmit
 ```
 
 ### Final Checklist
+
 - [x] All 5 components render in docs site
 - [x] CLI copies components correctly
 - [x] Build produces clean output

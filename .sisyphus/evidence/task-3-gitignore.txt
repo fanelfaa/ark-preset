@@ -1,9 +1,0 @@
-# Task 3: Add src/routeTree.gen.ts to apps/docs/.gitignore
-
-## Verification
-$ cd apps/docs && git check-ignore src/routeTree.gen.ts
-src/routeTree.gen.ts
-
-## Result: PASSED
-- apps/docs/.gitignore created with content: src/routeTree.gen.ts
-- git check-ignore confirms the entry works

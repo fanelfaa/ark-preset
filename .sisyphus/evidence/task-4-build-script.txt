@@ -1,4 +1,0 @@
-Verification: grep '"build"' apps/docs/package.json
-Result: "build": "vite build && tsc --noEmit"
-
-Fixed race condition: Vite now runs first (generates routeTree.gen.ts during build), then tsc type-checks.

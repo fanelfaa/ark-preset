@@ -5,6 +5,7 @@
 > **Quick Summary**: Rename the directory `packages/ui` to `packages/solid` in the monorepo, keeping the npm package name `@ui/solid` unchanged. Update 2 hardcoded directory path references and regenerate the lockfile.
 >
 > **Deliverables**:
+>
 > - Directory renamed: `packages/ui/` → `packages/solid/`
 > - `packages/cli/src/commands/add.ts` path updated
 > - `apps/docs/src/index.css` `@source` path updated
@@ -20,15 +21,19 @@
 ## Context
 
 ### Original Request
+
 Rename `packages/ui` to `packages/solid` in the monorepo, ensuring `packages/cli` and `apps/docs` still work correctly.
 
 ### Interview Summary
+
 **Key Discussions**:
+
 - **Package name**: Keep `@ui/solid` — pnpm resolves workspace deps by package.json `name`, not directory path
 - **Verification**: Simple rename — no formal tests needed; verify via build
 - **Correction**: Original request said "solig", corrected to "solid"
 
 **Research Findings**:
+
 - **2 hardcoded path references** found: `packages/cli/src/commands/add.ts:16` and `apps/docs/src/index.css:5`
 - **Safe packages**: `@ui/core`, `@ui/react` — no references to `packages/ui`
 - **Workspace config**: `pnpm-workspace.yaml` uses `packages/*` glob — auto-includes new dir
@@ -37,7 +42,9 @@ Rename `packages/ui` to `packages/solid` in the monorepo, ensuring `packages/cli
 - **pnpm-lock.yaml** has 3 references — auto-fixed via `pnpm install`
 
 ### Metis Review
+
 **Identified Gaps** (addressed):
+
 - **Rollback plan**: Added as final task — `git checkout` restores if anything fails
 - **Stale reference check**: Added grep verification in the verification task
 - **Pre-flight checks**: Added to ensure clean state before starting
@@ -48,27 +55,32 @@ Rename `packages/ui` to `packages/solid` in the monorepo, ensuring `packages/cli
 ## Work Objectives
 
 ### Core Objective
+
 Rename `packages/ui` directory to `packages/solid` while preserving all functionality.
 
 ### Concrete Deliverables
+
 - `packages/solid/` exists with all `packages/ui/` contents
 - No stale `packages/ui` path references in source files
 - `pnpm install` succeeds cleanly
 - `pnpm build` passes
 
 ### Definition of Done
+
 - [x] `ls packages/` shows `solid/` (not `ui/`)
 - [x] `grep -rn "packages/ui" --include="*.{ts,tsx,css,json}" . | grep -v node_modules | grep -v pnpm-lock | grep -v ".git"` returns empty
 - [x] `pnpm install` exits 0
 - [x] `pnpm build` exits 0
 
 ### Must Have
+
 - Directory renamed with git history preserved (git mv)
 - `/packages/cli/src/commands/add.ts` line 16: `'packages/ui/src'` → `'packages/solid/src'`
 - `apps/docs/src/index.css` line 5: `@source '../../../packages/ui/src/'` → `@source '../../../packages/solid/src/'`
 - Lockfile regenerated
 
 ### Must NOT Have (Guardrails)
+
 - DO NOT change `packages/solid/package.json` `name` field (keep `@ui/solid`)
 - DO NOT touch `packages/core`, `packages/react`, or other packages
 - DO NOT modify `pnpm-workspace.yaml`
@@ -83,11 +95,13 @@ Rename `packages/ui` directory to `packages/solid` while preserving all function
 > **ZERO HUMAN INTERVENTION** — ALL verification is agent-executed.
 
 ### Test Decision
+
 - **Infrastructure exists**: NO
 - **Automated tests**: NONE — simple rename verification
 - **Agent-Executed QA**: YES — grep-based verification + build check
 
 ### QA Policy
+
 Each task includes agent-executed verification scenarios. Evidence directory: `.sisyphus/evidence/rename-ui-to-solid/`.
 
 ---
@@ -323,6 +337,7 @@ Step 4: Verification sweep
 ## Success Criteria
 
 ### Verification Commands
+
 ```bash
 ls packages/solid/src/index.ts          # Should exist
 ls packages/ui 2>&1                     # Should say "No such file or directory"
@@ -332,6 +347,7 @@ pnpm build                              # Exit code 0
 ```
 
 ### Final Checklist
+
 - [x] Directory renamed: `packages/ui/` → `packages/solid/`
 - [x] CLI path updated: `packages/cli/src/commands/add.ts` references `packages/solid`
 - [x] CSS path updated: `apps/docs/src/index.css` references `packages/solid`

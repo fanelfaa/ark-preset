@@ -1,10 +1,30 @@
-import { defineConfig } from 'tsup'
+import { defineConfig } from "tsup";
 
 export default defineConfig({
-  entry: ['src/index.ts', 'src/recipes/button.ts', 'src/recipes/input.ts', 'src/recipes/dialog.ts', 'src/recipes/select.ts', 'src/recipes/toast.ts', 'src/recipes/switch.ts', 'src/recipes/checkbox.ts', 'src/recipes/tabs.ts', 'src/recipes/date-picker.ts', 'src/recipes/tooltip.ts', 'src/recipes/radio-group.ts', 'src/recipes/accordion.ts', 'src/recipes/popover.ts', 'src/recipes/slider.ts', 'src/recipes/number-input.ts', 'src/recipes/collapsible.ts', 'src/recipes/drawer.ts', 'src/recipes/menu.ts'],
-  format: ['esm', 'cjs'],
+  entry: [
+    "src/index.ts",
+    "src/recipes/button.ts",
+    "src/recipes/input.ts",
+    "src/recipes/dialog.ts",
+    "src/recipes/select.ts",
+    "src/recipes/toast.ts",
+    "src/recipes/switch.ts",
+    "src/recipes/checkbox.ts",
+    "src/recipes/tabs.ts",
+    "src/recipes/date-picker.ts",
+    "src/recipes/tooltip.ts",
+    "src/recipes/radio-group.ts",
+    "src/recipes/accordion.ts",
+    "src/recipes/popover.ts",
+    "src/recipes/slider.ts",
+    "src/recipes/number-input.ts",
+    "src/recipes/collapsible.ts",
+    "src/recipes/drawer.ts",
+    "src/recipes/menu.ts",
+  ],
+  format: ["esm", "cjs"],
   dts: true,
   sourcemap: true,
   clean: true,
-  external: ['tailwind-variants'],
-})
+  external: ["tailwind-variants"],
+});

@@ -5,6 +5,7 @@
 > **Quick Summary**: Reduce height of Button, Input, and Select components from 40px (h-10) to 32px (h-8) baseline, with proportional padding adjustments. Button size variants scaled down by 8px each.
 >
 > **Deliverables**:
+>
 > - `packages/ui/src/button.tsx` — 4 size variants adjusted (sm/h-8, md/h-9, lg/h-10, icon/size-9)
 > - `packages/ui/src/input.tsx` — input slot height h-10→h-8, padding px-3→px-2.5, py-2→py-1.5
 > - `packages/ui/src/select.tsx` — control slot height h-10→h-8, padding px-3→px-2.5, py-2→py-1.5
@@ -19,10 +20,13 @@
 ## Context
 
 ### Original Request
+
 Set all shadcn/ui-style control components (button, input, select) to have base height of 32px (h-8 in Tailwind).
 
 ### Interview Summary
+
 **Key Discussions**:
+
 - Button sizes: scaled down by 8px (sm→h-8, md→h-9, lg→h-10, icon→size-9)
 - Input height: h-10 → h-8 with proportional padding reduction
 - Select height: h-10 → h-8 with proportional padding reduction
@@ -30,6 +34,7 @@ Set all shadcn/ui-style control components (button, input, select) to have base 
 - Scope: only 3 components in `packages/ui/src/`
 
 **Research Findings**:
+
 - Component library: `@ui/solid` built on Ark UI v5 + tailwind-variants
 - Tailwind CSS v4 with `tw-animate-css`
 - No other form control components exist (no Checkbox, Radio, Switch, Toggle)
@@ -39,7 +44,9 @@ Set all shadcn/ui-style control components (button, input, select) to have base 
 - No test infrastructure detected
 
 ### Metis Review
+
 **Identified Gaps** (addressed):
+
 - **Scope clarity**: Explicitly defined what's IN/OUT (see below)
 - **Build verification**: Added as acceptance criterion
 - **Icon sizing**: Button base class `[&_svg]:size-4` remains unchanged — icons keep their natural size
@@ -50,19 +57,23 @@ Set all shadcn/ui-style control components (button, input, select) to have base 
 ## Work Objectives
 
 ### Core Objective
+
 Reduce height of all form control components from 40px to 32px baseline, maintaining visual proportions with adjusted padding.
 
 ### Concrete Deliverables
+
 - `packages/ui/src/button.tsx` — height/padding adjustments across all 4 sizes
 - `packages/ui/src/input.tsx` — height/padding adjustment on input slot
 - `packages/ui/src/select.tsx` — height/padding adjustment on control slot
 
 ### Definition of Done
+
 - [ ] All height and padding changes applied to the 3 files
 - [ ] `pnpm run build` passes with no errors
 - [ ] No console errors or runtime issues
 
 ### Must Have
+
 - Button sm: h-8, px-2.5, rounded-md, text-xs
 - Button md: h-9, px-3, py-1.5
 - Button lg: h-10, rounded-md, px-6
@@ -71,6 +82,7 @@ Reduce height of all form control components from 40px to 32px baseline, maintai
 - Select control: h-8, px-2.5, py-1.5
 
 ### Must NOT Have (Guardrails)
+
 - No icon SVG size changes (base `[&_svg]:size-4` stays)
 - No text/line-height adjustments
 - No docs app updates
@@ -85,11 +97,13 @@ Reduce height of all form control components from 40px to 32px baseline, maintai
 > **ZERO HUMAN INTERVENTION** — ALL verification is agent-executed.
 
 ### Test Decision
+
 - **Infrastructure exists**: NO
 - **Automated tests**: None (no test infra — not adding it)
 - **Agent QA**: Every task includes executable verification commands
 
 ### QA Policy
+
 All verification via Bash commands: read files to confirm class changes, run build to confirm no errors, run lint to confirm no regressions.
 
 ---
@@ -109,6 +123,7 @@ Wave FINAL (After all edits):
 ```
 
 ### Agent Dispatch Summary
+
 - **Wave 1**: 3 parallel `quick` agents — each edits 1 file
 - **Final**: 1 `quick` agent — runs build
 
@@ -153,6 +168,7 @@ Wave FINAL (After all edits):
   - [ ] icon variant contains `size-9`
 
   **QA Scenarios**:
+
   ```
   Scenario: Verify Button class changes
     Tool: Bash
@@ -199,6 +215,7 @@ Wave FINAL (After all edits):
   - [ ] input slot contains `px-2.5 py-1.5` instead of `px-3 py-2`
 
   **QA Scenarios**:
+
   ```
   Scenario: Verify Input class changes
     Tool: Bash
@@ -244,6 +261,7 @@ Wave FINAL (After all edits):
   - [ ] control slot contains `px-2.5 py-1.5` instead of `px-3 py-2`
 
   **QA Scenarios**:
+
   ```
   Scenario: Verify Select class changes
     Tool: Bash
@@ -285,6 +303,7 @@ Wave FINAL (After all edits):
   - [ ] No TypeScript errors in build output
 
   **QA Scenarios**:
+
   ```
   Scenario: Build passes
     Tool: Bash
@@ -300,16 +319,16 @@ Wave FINAL (After all edits):
 ## Final Verification Wave
 
 - [x] F1. **Plan Compliance Audit** — `oracle`
-  Read each modified file. For each Must Have: confirm class strings match spec. For each Must NOT Have: search codebase for any changes outside the 3 files. Check evidence files exist in `.sisyphus/evidence/`.
-  Output: `Must Have [N/N] | Must NOT Have [N/N] | Tasks [N/N] | VERDICT: APPROVE/REJECT`
+      Read each modified file. For each Must Have: confirm class strings match spec. For each Must NOT Have: search codebase for any changes outside the 3 files. Check evidence files exist in `.sisyphus/evidence/`.
+      Output: `Must Have [N/N] | Must NOT Have [N/N] | Tasks [N/N] | VERDICT: APPROVE/REJECT`
 
 - [x] F2. **Code Quality Check** — `quick`
-  Run `pnpm run build`. Verify no unused imports, no commented-out code, no accidental deletions. Check diff is clean — only height and padding class changes.
-  Output: `Build [PASS/FAIL] | Diff [CLEAN/ISSUES] | VERDICT`
+      Run `pnpm run build`. Verify no unused imports, no commented-out code, no accidental deletions. Check diff is clean — only height and padding class changes.
+      Output: `Build [PASS/FAIL] | Diff [CLEAN/ISSUES] | VERDICT`
 
 - [x] F3. **Real Manual QA** — `quick`
-  Start from clean state. Re-read all 3 files. Execute all QA scenarios from Tasks 1-3 and 4.
-  Output: `Scenarios [N/N pass] | Edge Cases [N tested] | VERDICT`
+      Start from clean state. Re-read all 3 files. Execute all QA scenarios from Tasks 1-3 and 4.
+      Output: `Scenarios [N/N pass] | Edge Cases [N tested] | VERDICT`
 
 ---
 
@@ -325,11 +344,13 @@ Wave FINAL (After all edits):
 ## Success Criteria
 
 ### Verification Commands
+
 ```bash
 pnpm run build  # Expected: exit 0, no errors
 ```
 
 ### Final Checklist
+
 - [ ] All 3 component files have correct height/padding classes
 - [ ] Build passes
 - [ ] No files outside the 3 were modified

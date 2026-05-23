@@ -5,21 +5,40 @@ category: Navigation
 updatedDate: 2026-05-18
 ---
 
-import TabsBasicDemo from '@components/tabs-demo/TabsBasicDemo.tsx'
+import TabsBasicDemo from "@components/tabs-demo/TabsBasicDemo.tsx";
 
 # Tabs
 
 A navigable component that organizes content into separate views where only one view is visible at a time.
 
-<a href="https://ark-ui.com/docs/components/tabs" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors">
-  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+<a
+  href="https://ark-ui.com/docs/components/tabs"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="inline-flex items-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="14"
+    height="14"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+    <polyline points="15 3 21 3 21 9" />
+    <line x1="10" x2="21" y1="14" y2="3" />
+  </svg>
   Docs
 </a>
 
 <TabsBasicDemo client:load />
 
 ```tsx
-import { Tabs, TabsList, TabsTrigger, TabsContent, TabsIndicator } from "~/components/tabs"
+import { Tabs, TabsList, TabsTrigger, TabsContent, TabsIndicator } from "~/components/tabs";
 
 export function TabsDemo() {
   return (
@@ -30,29 +49,28 @@ export function TabsDemo() {
         <TabsIndicator />
       </TabsList>
       <TabsContent value="account">
-        <div class="text-sm text-foreground">
-          Make changes to your account here.
-        </div>
+        <div class="text-sm text-foreground">Make changes to your account here.</div>
       </TabsContent>
       <TabsContent value="password">
-        <div class="text-sm text-foreground">
-          Change your password here.
-        </div>
+        <div class="text-sm text-foreground">Change your password here.</div>
       </TabsContent>
     </Tabs>
-  )
+  );
 }
 ```
 
 ## Installation
 
 ### CLI
+
 Run the following command to add the component to your project:
+
 ```bash
 npx solidui-cli@latest add tabs
 ```
 
 ### Manual
+
 <div class="space-y-3">
 Install the dependency:
 ```bash
@@ -66,15 +84,16 @@ import { tv, type VariantProps } from 'tailwind-variants'
 
 export const tabsVariants = tv({
   slots: {
-    root: 'w-full',
-    list: 'relative inline-flex h-8 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground',
+    root: "w-full",
+    list: "relative inline-flex h-8 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground",
     trigger:
-      'inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-0.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-selected:bg-background data-selected:text-foreground data-selected:shadow-sm',
+      "inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-0.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-selected:bg-background data-selected:text-foreground data-selected:shadow-sm",
     content:
-      'mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
-    indicator: 'absolute bottom-0 left-0 z-10 h-0.5 bg-foreground transition-[left,top,width,height] duration-200',
+      "mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+    indicator:
+      "absolute bottom-0 left-0 z-10 h-0.5 bg-foreground transition-[left,top,width,height] duration-200",
   },
-})
+});
 
 export type TabsVariants = VariantProps<typeof tabsVariants>
 ```
@@ -90,33 +109,33 @@ import { tabsVariants } from './recipes/tabs'
 const styles = tabsVariants()
 
 const TabsRoot: Component<ArkTabs.RootProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const rootClass = createMemo(() => styles.root({ class: local.class }))
-  return <ArkTabs.Root class={rootClass()} {...others} />
+const [local, others] = splitProps(props, ['class'])
+const rootClass = createMemo(() => styles.root({ class: local.class }))
+return <ArkTabs.Root class={rootClass()} {...others} />
 }
 
 const TabsList: Component<ArkTabs.ListProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const listClass = createMemo(() => styles.list({ class: local.class }))
-  return <ArkTabs.List class={listClass()} {...others} />
+const [local, others] = splitProps(props, ['class'])
+const listClass = createMemo(() => styles.list({ class: local.class }))
+return <ArkTabs.List class={listClass()} {...others} />
 }
 
 const TabsTrigger: Component<ArkTabs.TriggerProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const triggerClass = createMemo(() => styles.trigger({ class: local.class }))
-  return <ArkTabs.Trigger class={triggerClass()} {...others} />
+const [local, others] = splitProps(props, ['class'])
+const triggerClass = createMemo(() => styles.trigger({ class: local.class }))
+return <ArkTabs.Trigger class={triggerClass()} {...others} />
 }
 
 const TabsContent: Component<ArkTabs.ContentProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const contentClass = createMemo(() => styles.content({ class: local.class }))
-  return <ArkTabs.Content class={contentClass()} {...others} />
+const [local, others] = splitProps(props, ['class'])
+const contentClass = createMemo(() => styles.content({ class: local.class }))
+return <ArkTabs.Content class={contentClass()} {...others} />
 }
 
 const TabsIndicator: Component<ArkTabs.IndicatorProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const indicatorClass = createMemo(() => styles.indicator({ class: local.class }))
-  return <ArkTabs.Indicator class={indicatorClass()} {...others} />
+const [local, others] = splitProps(props, ['class'])
+const indicatorClass = createMemo(() => styles.indicator({ class: local.class }))
+return <ArkTabs.Indicator class={indicatorClass()} {...others} />
 }
 
 export { TabsRoot as Tabs, TabsList, TabsTrigger, TabsContent, TabsIndicator, tabsVariants }
@@ -129,7 +148,7 @@ export { TabsRoot as Tabs, TabsList, TabsTrigger, TabsContent, TabsIndicator, ta
 Import the components:
 
 ```tsx
-import { Tabs, TabsList, TabsTrigger, TabsContent, TabsIndicator } from "~/components/tabs"
+import { Tabs, TabsList, TabsTrigger, TabsContent, TabsIndicator } from "~/components/tabs";
 ```
 
 Basic usage:
@@ -174,7 +193,9 @@ Use the `disabled` prop on a `TabsTrigger` to disable that specific tab.
 <Tabs defaultValue="active">
   <TabsList>
     <TabsTrigger value="active">Active</TabsTrigger>
-    <TabsTrigger value="disabled" disabled>Disabled</TabsTrigger>
+    <TabsTrigger value="disabled" disabled>
+      Disabled
+    </TabsTrigger>
   </TabsList>
   <TabsContent value="active">...</TabsContent>
   <TabsContent value="disabled">...</TabsContent>
@@ -185,38 +206,38 @@ Use the `disabled` prop on a `TabsTrigger` to disable that specific tab.
 
 ### Tabs (Root)
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| defaultValue | `string` | — | Initial active tab. Use when uncontrolled. |
-| value | `string` | — | Controlled active tab. |
-| onValueChange | `(details: { value: string }) => void` | — | Callback when tab changes. |
-| orientation | `"horizontal"` \| `"vertical"` | `"horizontal"` | Orientation of the tabs. |
-| activationMode | `"automatic"` \| `"manual"` | `"automatic"` | How tab activation is triggered. |
-| class | `string` | — | Custom CSS class. |
+| Prop           | Type                                   | Default        | Description                                |
+| -------------- | -------------------------------------- | -------------- | ------------------------------------------ |
+| defaultValue   | `string`                               | —              | Initial active tab. Use when uncontrolled. |
+| value          | `string`                               | —              | Controlled active tab.                     |
+| onValueChange  | `(details: { value: string }) => void` | —              | Callback when tab changes.                 |
+| orientation    | `"horizontal"` \| `"vertical"`         | `"horizontal"` | Orientation of the tabs.                   |
+| activationMode | `"automatic"` \| `"manual"`            | `"automatic"`  | How tab activation is triggered.           |
+| class          | `string`                               | —              | Custom CSS class.                          |
 
 ### TabsList
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| class | `string` | — | Custom CSS class. |
+| Prop  | Type     | Default | Description       |
+| ----- | -------- | ------- | ----------------- |
+| class | `string` | —       | Custom CSS class. |
 
 ### TabsTrigger
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| value | `string` | — | Value identifying the tab. **Required.** |
-| disabled | `boolean` | `false` | Whether the tab is disabled. |
-| class | `string` | — | Custom CSS class. |
+| Prop     | Type      | Default | Description                              |
+| -------- | --------- | ------- | ---------------------------------------- |
+| value    | `string`  | —       | Value identifying the tab. **Required.** |
+| disabled | `boolean` | `false` | Whether the tab is disabled.             |
+| class    | `string`  | —       | Custom CSS class.                        |
 
 ### TabsContent
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| value | `string` | — | Value identifying the content. **Required.** |
-| class | `string` | — | Custom CSS class. |
+| Prop  | Type     | Default | Description                                  |
+| ----- | -------- | ------- | -------------------------------------------- |
+| value | `string` | —       | Value identifying the content. **Required.** |
+| class | `string` | —       | Custom CSS class.                            |
 
 ### TabsIndicator
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| class | `string` | — | Custom CSS class. |
+| Prop  | Type     | Default | Description       |
+| ----- | -------- | ------- | ----------------- |
+| class | `string` | —       | Custom CSS class. |

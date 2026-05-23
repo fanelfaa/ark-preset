@@ -1,9 +1,9 @@
-import { createToaster, Toaster } from '@ui/solid'
+import { createToaster, Toaster } from "@ui/solid";
 
 const toaster = createToaster({
-  placement: 'bottom-end',
+  placement: "bottom-end",
   timeout: 5000,
-})
+});
 
 export default function ToastBasicDemo() {
   return (
@@ -12,31 +12,57 @@ export default function ToastBasicDemo() {
         <div class="flex flex-wrap gap-2">
           <button
             class="px-3 py-1.5 text-sm bg-primary text-primary-foreground rounded-md"
-            onClick={() => toaster.create({ title: 'Default toast', description: 'This is a default message' })}
+            onClick={() =>
+              toaster.create({ title: "Default toast", description: "This is a default message" })
+            }
           >
             Default
           </button>
           <button
             class="px-3 py-1.5 text-sm bg-blue-500 text-white rounded-md"
-            onClick={() => toaster.create({ title: 'Info toast', description: 'This is an info message', type: 'info' })}
+            onClick={() =>
+              toaster.create({
+                title: "Info toast",
+                description: "This is an info message",
+                type: "info",
+              })
+            }
           >
             Info
           </button>
           <button
             class="px-3 py-1.5 text-sm bg-green-500 text-white rounded-md"
-            onClick={() => toaster.create({ title: 'Success toast', description: 'Operation completed!', type: 'success' })}
+            onClick={() =>
+              toaster.create({
+                title: "Success toast",
+                description: "Operation completed!",
+                type: "success",
+              })
+            }
           >
             Success
           </button>
           <button
             class="px-3 py-1.5 text-sm bg-yellow-500 text-white rounded-md"
-            onClick={() => toaster.create({ title: 'Warning toast', description: 'Please check this', type: 'warning' })}
+            onClick={() =>
+              toaster.create({
+                title: "Warning toast",
+                description: "Please check this",
+                type: "warning",
+              })
+            }
           >
             Warning
           </button>
           <button
             class="px-3 py-1.5 text-sm bg-red-500 text-white rounded-md"
-            onClick={() => toaster.create({ title: 'Error toast', description: 'Something went wrong', type: 'error' })}
+            onClick={() =>
+              toaster.create({
+                title: "Error toast",
+                description: "Something went wrong",
+                type: "error",
+              })
+            }
           >
             Error
           </button>
@@ -44,5 +70,5 @@ export default function ToastBasicDemo() {
         <Toaster toaster={toaster} />
       </div>
     </div>
-  )
+  );
 }

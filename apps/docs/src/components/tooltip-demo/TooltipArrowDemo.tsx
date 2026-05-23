@@ -1,4 +1,11 @@
-import { Tooltip, TooltipTrigger, TooltipPositioner, TooltipContent, TooltipArrow, TooltipArrowTip } from '@ui/solid'
+import {
+  Tooltip,
+  TooltipTrigger,
+  TooltipPositioner,
+  TooltipContent,
+  TooltipArrow,
+  TooltipArrowTip,
+} from "@ui/solid";
 
 export default function TooltipArrowDemo() {
   return (
@@ -17,5 +24,5 @@ export default function TooltipArrowDemo() {
         </Tooltip>
       </div>
     </div>
-  )
+  );
 }

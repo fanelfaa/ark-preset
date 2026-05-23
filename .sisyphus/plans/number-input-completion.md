@@ -5,6 +5,7 @@
 > **Quick Summary**: Complete the partially-built Solid.js number-input component by adding missing Ark UI subcomponents (Control, IncrementTrigger, DecrementTrigger, Scrubber) with inline SVG icons, and removing the incomplete helperText/description prop.
 >
 > **Deliverables**:
+>
 > - Rewritten `packages/solid/src/number-input.tsx` with full Ark UI integration
 > - Verified build passes and exports are correct
 >
@@ -17,22 +18,28 @@
 ## Context
 
 ### Original Request
+
 Sisyphus created a number-input component but it's not finished. The core recipe is complete but the Solid.js wrapper is missing key Ark UI subcomponents.
 
 ### Interview Summary
+
 **Key Discussions**:
+
 - The core recipe at `packages/core/src/recipes/number-input.ts` is complete with 8 slots: root, label, control, input, incrementTrigger, decrementTrigger, scrubber, valueText
 - The Solid component only uses Root, Label, Input, and a misaligned HelperText
 - Missing: Control wrapper, IncrementTrigger, DecrementTrigger, Scrubber
 - Decision: remove helperText/valueText entirely (no description/helper/value display)
 
 **Research Findings**:
+
 - Ark UI NumberInput provides: Root, Label, Input, Control, IncrementTrigger, DecrementTrigger, Scrubber, ValueText, RootProvider
 - Basic Ark UI structure: `Root > (Label, Control > (Input + (IncrementTrigger + DecrementTrigger)), Scrubber, ValueText)`
 - Existing project patterns (Accordion, Select) use `splitProps`, `createMemo` for variant application, and inline SVGs for icons
 
 ### Metis Review
+
 **Identified Gaps** (addressed):
+
 - All recipe slots confirmed present and matching Ark UI components
 - SVG icon patterns confirmed consistent with existing components
 - disabled/invalid variant flow confirmed via recipe
@@ -43,18 +50,22 @@ Sisyphus created a number-input component but it's not finished. The core recipe
 ## Work Objectives
 
 ### Core Objective
+
 Complete `packages/solid/src/number-input.tsx` to properly wrap all relevant Ark UI NumberInput subcomponents with correct recipe slot styling.
 
 ### Concrete Deliverables
+
 - `packages/solid/src/number-input.tsx` — rewritten with full Ark UI integration
 - Build passes with `pnpm --filter @ui/solid build`
 
 ### Definition of Done
+
 - [ ] `pnpm --filter @ui/solid build` exits with code 0
 - [ ] No TypeScript errors in `packages/solid/src/number-input.tsx`
 - [ ] Component exports `NumberInput`, `numberInputVariants` from package
 
 ### Must Have
+
 - `NumberInputControl` wrapping `NumberInputInput` + triggers, using recipe `control` slot
 - `NumberInputIncrementTrigger` with chevron-up SVG icon, using recipe `incrementTrigger` slot
 - `NumberInputDecrementTrigger` with chevron-down SVG icon, using recipe `decrementTrigger` slot
@@ -63,6 +74,7 @@ Complete `packages/solid/src/number-input.tsx` to properly wrap all relevant Ark
 - `disabled` and `invalid` variant props wired through to recipe
 
 ### Must NOT Have (Guardrails)
+
 - No React component
 - No test files or test infrastructure
 - No `valueText` or `helperText` / `description` prop or display
@@ -77,11 +89,13 @@ Complete `packages/solid/src/number-input.tsx` to properly wrap all relevant Ark
 > **ZERO HUMAN INTERVENTION** - ALL verification is agent-executed.
 
 ### Test Decision
+
 - **Infrastructure exists**: NO
 - **Automated tests**: None (skip)
 - **Agent-Executed QA**: ALWAYS — build verification, export check, file content validation
 
 ### QA Policy
+
 Every task MUST include agent-executed QA scenarios. Evidence saved to `.sisyphus/evidence/task-{N}-{scenario-slug}.{ext}`.
 
 - **Build verification**: `pnpm --filter @ui/solid build`
@@ -105,10 +119,12 @@ Wave FINAL (After ALL tasks):
 ```
 
 ### Dependency Matrix
+
 - Task 1: None (can start immediately)
 - F1-F4: Task 1, build verification
 
 ### Agent Dispatch Summary
+
 - **1**: **1** - T1 → `quick`
 - **FINAL**: **3** - F1 → `oracle`, F2 → `unspecified-high`, F4 → `deep`
 
@@ -135,6 +151,7 @@ Wave FINAL (After ALL tasks):
   13. Use `createMemo` for styles, apply `{ class: local.class }` on root slot
 
   **Structure of the returned JSX**:
+
   ```
   NumberInputRoot (recipe: root)
     NumberInputLabel (recipe: label) — conditional if label prop exists
@@ -241,18 +258,18 @@ Wave FINAL (After ALL tasks):
 ## Final Verification Wave (MANDATORY — after ALL implementation tasks)
 
 - [x] F1. **Plan Compliance Audit** — `oracle`
-  Read the plan end-to-end. For each "Must Have": verify implementation exists (read file). For each "Must NOT Have": search codebase for forbidden patterns (description prop, helperText, valueText in number-input.tsx) — reject with file:line if found. Check evidence files exist in .sisyphus/evidence/. Compare deliverables against plan.
-  Output: `Must Have [6/6] | Must NOT Have [6/6] | Tasks [1/1] | VERDICT: APPROVE`
+      Read the plan end-to-end. For each "Must Have": verify implementation exists (read file). For each "Must NOT Have": search codebase for forbidden patterns (description prop, helperText, valueText in number-input.tsx) — reject with file:line if found. Check evidence files exist in .sisyphus/evidence/. Compare deliverables against plan.
+      Output: `Must Have [6/6] | Must NOT Have [6/6] | Tasks [1/1] | VERDICT: APPROVE`
 
 - [x] F2. **Code Quality Review** — `unspecified-high`
-  Run `pnpm --filter @ui/solid build`. Review changed file for: `as any`/`@ts-ignore`, empty catches, console.log, commented-out code, unused imports. Check AI slop: excessive comments, over-abstraction, generic names. Ensure follows Accordion/Select patterns.
-  Output: `Build [PASS] | Lint [no linter] | Files [1 clean/1 issue] | VERDICT: PASS`
+      Run `pnpm --filter @ui/solid build`. Review changed file for: `as any`/`@ts-ignore`, empty catches, console.log, commented-out code, unused imports. Check AI slop: excessive comments, over-abstraction, generic names. Ensure follows Accordion/Select patterns.
+      Output: `Build [PASS] | Lint [no linter] | Files [1 clean/1 issue] | VERDICT: PASS`
 
-- [x] F3. **Real Manual QA** — *SKIPPED (no UI runtime to verify against — component is a library export)*
+- [x] F3. **Real Manual QA** — _SKIPPED (no UI runtime to verify against — component is a library export)_
 
 - [x] F4. **Scope Fidelity Check** — `deep`
-  For each task: read "What to do", read actual diff (git log/diff). Verify 1:1 — everything in spec was built (no missing), nothing beyond spec was built (no creep). Check "Must NOT do" compliance. Detect cross-task contamination.
-  Output: `Tasks [1/1 compliant] | Contamination [CLEAN] | Unaccounted [CLEAN] | VERDICT: APPROVE`
+      For each task: read "What to do", read actual diff (git log/diff). Verify 1:1 — everything in spec was built (no missing), nothing beyond spec was built (no creep). Check "Must NOT do" compliance. Detect cross-task contamination.
+      Output: `Tasks [1/1 compliant] | Contamination [CLEAN] | Unaccounted [CLEAN] | VERDICT: APPROVE`
 
 ---
 
@@ -265,11 +282,13 @@ Wave FINAL (After ALL tasks):
 ## Success Criteria
 
 ### Verification Commands
+
 ```bash
 pnpm --filter @ui/solid build  # Expected: exit 0, no errors
 ```
 
 ### Final Checklist
+
 - [ ] `packages/solid/src/number-input.tsx` rewritten with all Ark UI subcomponents
 - [ ] No `description`/`helperText`/`valueText` in the component
 - [ ] `NumberInputControl`, `IncrementTrigger`, `DecrementTrigger`, `Scrubber` all present
