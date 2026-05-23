@@ -5,35 +5,14 @@ category: Form & Input
 updatedDate: 2026-05-18
 ---
 
+import DocsLink from "@components/DocsLink.astro";
 import NumberInputBasicDemo from "@components/number-input-demo/NumberInputBasicDemo.tsx";
 
 # Number Input
 
 An input component for entering numeric values, with built-in increment and decrement buttons.
 
-<a
-  href="https://ark-ui.com/docs/components/number-input"
-  target="_blank"
-  rel="noopener noreferrer"
-  class="inline-flex items-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors"
->
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="14"
-    height="14"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="2"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-  >
-    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-    <polyline points="15 3 21 3 21 9" />
-    <line x1="10" x2="21" y1="14" y2="3" />
-  </svg>
-  Docs
-</a>
+<DocsLink href="https://ark-ui.com/docs/components/number-input" />
 
 <NumberInputBasicDemo client:load />
 
@@ -292,42 +271,4 @@ Use the `disabled` prop to disable the input.
 
 ## API Reference
 
-### NumberInput (Root)
-
-| Prop          | Type                                   | Default | Description                           |
-| ------------- | -------------------------------------- | ------- | ------------------------------------- |
-| defaultValue  | `number`                               | —       | Initial value. Use when uncontrolled. |
-| value         | `number`                               | —       | Controlled value.                     |
-| onValueChange | `(details: { value: number }) => void` | —       | Callback when value changes.          |
-| min           | `number`                               | `0`     | Minimum value.                        |
-| max           | `number`                               | `100`   | Maximum value.                        |
-| step          | `number`                               | `1`     | Step value.                           |
-| disabled      | `boolean`                              | `false` | Whether the input is disabled.        |
-| readOnly      | `boolean`                              | `false` | Whether the input is read-only.       |
-| label         | `string`                               | —       | Label text.                           |
-| error         | `boolean`                              | `false` | Show error state styling.             |
-| class         | `string`                               | —       | Custom CSS class.                     |
-
-### NumberInputControl
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
-
-### NumberInputIncrementTrigger
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
-
-### NumberInputDecrementTrigger
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
-
-### NumberInputScrubber
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
+See the [Ark UI Number Input](https://ark-ui.com/docs/components/number-input) documentation.

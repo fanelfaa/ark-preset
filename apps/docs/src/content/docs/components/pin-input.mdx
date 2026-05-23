@@ -5,6 +5,7 @@ category: Form & Input
 updatedDate: 2026-05-23
 ---
 
+import DocsLink from "@components/DocsLink.astro";
 import PinInputBasicDemo from "@components/pin-input-demo/PinInputBasicDemo.tsx";
 import PinInputRootProviderDemo from "@components/pin-input-demo/PinInputRootProviderDemo.tsx";
 
@@ -12,29 +13,7 @@ import PinInputRootProviderDemo from "@components/pin-input-demo/PinInputRootPro
 
 A pin input component for entering one-time codes, PINs, and numeric sequences with individual input fields.
 
-<a
-  href="https://ark-ui.com/docs/components/pin-input"
-  target="_blank"
-  rel="noopener noreferrer"
-  class="inline-flex items-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors"
->
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="14"
-    height="14"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="2"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-  >
-    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-    <polyline points="15 3 21 3 21 9" />
-    <line x1="10" x2="21" y1="14" y2="3" />
-  </svg>
-  Docs
-</a>
+<DocsLink href="https://ark-ui.com/docs/components/pin-input" />
 
 <PinInputBasicDemo client:only="solid-js" />
 
@@ -222,44 +201,4 @@ The key difference:
 
 ## API Reference
 
-### PinInput (Root)
-
-| Prop            | Type                                                      | Default      | Description                            |
-| --------------- | --------------------------------------------------------- | ------------ | -------------------------------------- |
-| mask            | boolean                                                   | false        | Mask input values (like password).     |
-| otp             | boolean                                                   | false        | Enable OTP autocomplete.               |
-| type            | 'numeric' \| 'alphanumeric' \| 'alphabetic'                | 'numeric'    | Input type.                            |
-| count           | number                                                    | 4            | Number of input fields.                |
-| defaultValue    | string[]                                                  | —            | Initial value (uncontrolled).          |
-| value           | string[]                                                  | —            | Controlled value.                      |
-| placeholder     | string                                                    | "○"          | Placeholder for empty inputs.          |
-| disabled        | boolean                                                   | false        | Whether the inputs are disabled.       |
-| invalid         | boolean                                                   | false        | Whether the inputs are in error state. |
-| onValueComplete | `(details) => void`                                       | —            | Called when all inputs have values.    |
-| class           | string                                                    | —            | Custom CSS class.                      |
-
-### PinInputLabel
-
-| Prop  | Type   | Default | Description        |
-| ----- | ------ | ------- | ------------------ |
-| class | string | —       | Custom CSS class.  |
-
-### PinInputControl
-
-| Prop  | Type   | Default | Description        |
-| ----- | ------ | ------- | ------------------ |
-| class | string | —       | Custom CSS class.  |
-
-### PinInputInput
-
-| Prop  | Type   | Default | Description                 |
-| ----- | ------ | ------- | --------------------------- |
-| index | number | —       | Index of the input field.   |
-| class | string | —       | Custom CSS class.           |
-
-### PinInputRootProvider
-
-| Prop  | Type                  | Default | Description                                                    |
-| ----- | --------------------- | ------- | -------------------------------------------------------------- |
-| value | UsePinInputReturn     | —       | Pin input context returned by `usePinInput()`. **Required.**   |
-| class | string                | —       | Custom CSS class.                                              |
+See the [Ark UI Pin Input](https://ark-ui.com/docs/components/pin-input) documentation.

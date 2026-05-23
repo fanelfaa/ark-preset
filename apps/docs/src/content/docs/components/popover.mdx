@@ -5,6 +5,7 @@ category: Overlay
 updatedDate: 2026-05-18
 ---
 
+import DocsLink from "@components/DocsLink.astro";
 import PopoverBasicDemo from "@components/popover-demo/PopoverBasicDemo.tsx";
 import PopoverRootProviderDemo from "@components/popover-demo/PopoverRootProviderDemo.tsx";
 
@@ -12,29 +13,7 @@ import PopoverRootProviderDemo from "@components/popover-demo/PopoverRootProvide
 
 A floating panel that displays content when triggered by a user action, typically a button click.
 
-<a
-  href="https://ark-ui.com/docs/components/popover"
-  target="_blank"
-  rel="noopener noreferrer"
-  class="inline-flex items-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors"
->
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="14"
-    height="14"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="2"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-  >
-    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-    <polyline points="15 3 21 3 21 9" />
-    <line x1="10" x2="21" y1="14" y2="3" />
-  </svg>
-  Docs
-</a>
+<DocsLink href="https://ark-ui.com/docs/components/popover" />
 
 <PopoverBasicDemo client:only="solid-js" />
 
@@ -309,69 +288,4 @@ Add an arrow to visually connect the popover to its trigger.
 
 ## API Reference
 
-### Popover (Root)
-
-| Prop         | Type                      | Default | Description                          |
-| ------------ | ------------------------- | ------- | ------------------------------------ |
-| open         | `boolean`                 | —       | Controlled open state.               |
-| onOpenChange | `(open: boolean) => void` | —       | Callback when open state changes.    |
-| positioning  | `object`                  | —       | Positioning options for the popover. |
-| class        | `string`                  | —       | Custom CSS class.                    |
-
-### PopoverRootProvider
-
-| Prop  | Type               | Default | Description                                               |
-| ----- | ------------------ | ------- | --------------------------------------------------------- |
-| value | `UsePopoverReturn` | —       | Popover context returned by `usePopover()`. **Required.** |
-| class | `string`           | —       | Custom CSS class.                                         |
-
-### PopoverTrigger
-
-| Prop    | Type      | Default | Description                                |
-| ------- | --------- | ------- | ------------------------------------------ |
-| asChild | `boolean` | —       | Whether to merge props with child element. |
-| class   | `string`  | —       | Custom CSS class.                          |
-
-### PopoverContent
-
-| Prop       | Type      | Default | Description                    |
-| ---------- | --------- | ------- | ------------------------------ |
-| class      | `string`  | —       | Custom CSS class.              |
-| portalled  | `boolean` | —       | Whether to portal the content. |
-| forceMount | `boolean` | —       | Force mount the content.       |
-
-### PopoverTitle
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
-
-### PopoverDescription
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
-
-### PopoverCloseTrigger
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
-
-### PopoverArrow
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
-
-### PopoverArrowTip
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
-
-### PopoverIndicator
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
+See the [Ark UI Popover](https://ark-ui.com/docs/components/popover) documentation.

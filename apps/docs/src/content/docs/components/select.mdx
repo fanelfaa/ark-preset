@@ -5,6 +5,7 @@ category: Form & Input
 updatedDate: 2026-05-18
 ---
 
+import DocsLink from "@components/DocsLink.astro";
 import SelectBasicDemo from "@components/select-demo/SelectBasicDemo.tsx";
 import SelectRootProviderDemo from "@components/select-demo/SelectRootProviderDemo.tsx";
 
@@ -12,29 +13,7 @@ import SelectRootProviderDemo from "@components/select-demo/SelectRootProviderDe
 
 A dropdown component that allows users to select one or more options from a list.
 
-<a
-  href="https://ark-ui.com/docs/components/select"
-  target="_blank"
-  rel="noopener noreferrer"
-  class="inline-flex items-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors"
->
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="14"
-    height="14"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="2"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-  >
-    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-    <polyline points="15 3 21 3 21 9" />
-    <line x1="10" x2="21" y1="14" y2="3" />
-  </svg>
-  Docs
-</a>
+<DocsLink href="https://ark-ui.com/docs/components/select" />
 
 <SelectBasicDemo client:load />
 
@@ -366,72 +345,4 @@ Use the `error` prop to show an error state.
 
 ## API Reference
 
-### Select (Root)
-
-| Prop          | Type                                     | Default | Description                        |
-| ------------- | ---------------------------------------- | ------- | ---------------------------------- |
-| collection    | `ListCollection`                         | —       | Collection of items. **Required.** |
-| value         | `string[]`                               | —       | Controlled selected values.        |
-| onValueChange | `(details: { value: string[] }) => void` | —       | Callback when selection changes.   |
-| multiple      | `boolean`                                | `false` | Allow multiple selections.         |
-| disabled      | `boolean`                                | `false` | Whether the select is disabled.    |
-| class         | `string`                                 | —       | Custom CSS class.                  |
-| error         | `boolean`                                | `false` | Show error state styling.          |
-
-### SelectRootProvider
-
-| Prop  | Type              | Default | Description                                             |
-| ----- | ----------------- | ------- | ------------------------------------------------------- |
-| value | `UseSelectReturn` | —       | Select context returned by `useSelect()`. **Required.** |
-| class | `string`          | —       | Custom CSS class.                                       |
-
-### SelectLabel
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
-
-### SelectControl
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
-
-### SelectTrigger
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
-
-### SelectValue
-
-| Prop        | Type     | Default | Description                  |
-| ----------- | -------- | ------- | ---------------------------- |
-| placeholder | `string` | —       | Placeholder text when empty. |
-| class       | `string` | —       | Custom CSS class.            |
-
-### SelectContent
-
-| Prop  | Type     | Default | Description                     |
-| ----- | -------- | ------- | ------------------------------- |
-| items | `array`  | —       | Items to display. **Required.** |
-| class | `string` | —       | Custom CSS class.               |
-
-### SelectItem
-
-| Prop  | Type     | Default | Description              |
-| ----- | -------- | ------- | ------------------------ |
-| item  | `object` | —       | Item data. **Required.** |
-| class | `string` | —       | Custom CSS class.        |
-
-### SelectItemText
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
-
-### SelectItemIndicator
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
+See the [Ark UI Select](https://ark-ui.com/docs/components/select) documentation.

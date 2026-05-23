@@ -5,6 +5,7 @@ category: Overlay
 updatedDate: 2026-05-18
 ---
 
+import DocsLink from "@components/DocsLink.astro";
 import TooltipBasicDemo from "@components/tooltip-demo/TooltipBasicDemo.tsx";
 import TooltipArrowDemo from "@components/tooltip-demo/TooltipArrowDemo.tsx";
 import TooltipRootProviderDemo from "@components/tooltip-demo/TooltipRootProviderDemo.tsx";
@@ -13,29 +14,7 @@ import TooltipRootProviderDemo from "@components/tooltip-demo/TooltipRootProvide
 
 A popup component that displays contextual information when hovering or focusing on a trigger element.
 
-<a
-  href="https://ark-ui.com/docs/components/tooltip"
-  target="_blank"
-  rel="noopener noreferrer"
-  class="inline-flex items-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors"
->
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="14"
-    height="14"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="2"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-  >
-    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-    <polyline points="15 3 21 3 21 9" />
-    <line x1="10" x2="21" y1="14" y2="3" />
-  </svg>
-  Docs
-</a>
+<DocsLink href="https://ark-ui.com/docs/components/tooltip" />
 
 <TooltipBasicDemo client:load />
 
@@ -254,51 +233,4 @@ The key difference:
 
 ## API Reference
 
-### Tooltip (Root)
-
-| Prop               | Type                                   | Default | Description                                |
-| ------------------ | -------------------------------------- | ------- | ------------------------------------------ |
-| open               | `boolean`                              | —       | Controlled open state.                     |
-| defaultOpen        | `boolean`                              | —       | Initial open state. Use when uncontrolled. |
-| onOpenChange       | `(details: { open: boolean }) => void` | —       | Callback when open state changes.          |
-| closeOnPointerDown | `boolean`                              | `true`  | Close on pointer down outside.             |
-| openDelay          | `number`                               | —       | Delay before opening (ms).                 |
-| closeDelay         | `number`                               | —       | Delay before closing (ms).                 |
-| class              | `string`                               | —       | Custom CSS class.                          |
-
-### TooltipTrigger
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
-
-### TooltipPositioner
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
-
-### TooltipContent
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
-
-### TooltipArrow
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
-
-### TooltipArrowTip
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
-
-### TooltipRootProvider
-
-| Prop  | Type              | Default | Description                                             |
-| ----- | ----------------- | ------- | ------------------------------------------------------- |
-| value | `UseTooltipReturn`| —       | Tooltip context returned by `useTooltip()`. **Required.**|
-| class | `string`          | —       | Custom CSS class.                                       |
+See the [Ark UI Tooltip](https://ark-ui.com/docs/components/tooltip) documentation.
