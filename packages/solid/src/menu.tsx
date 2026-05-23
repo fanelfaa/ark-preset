@@ -1,7 +1,7 @@
-import { Menu as ArkMenu } from "@ark-ui/solid/menu";
-import { Portal } from "solid-js/web";
-import { createMemo, splitProps, type Component, type JSX } from "solid-js";
-import { ButtonVariants, buttonVariants, menuVariants } from "@ui/core";
+import { Menu as ArkMenu } from '@ark-ui/solid/menu'
+import { Portal } from 'solid-js/web'
+import { createMemo, splitProps, type Component, type JSX } from 'solid-js'
+import { ButtonVariants, buttonVariants, menuVariants } from '@ui/core'
 
 // Global variant instance (no params)
 const styles = menuVariants();

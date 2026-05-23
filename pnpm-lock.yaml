@@ -17,6 +17,9 @@ importers:
 
   apps/docs:
     dependencies:
+      '@ark-ui/solid':
+        specifier: ^5.36.2
+        version: 5.36.2(solid-js@1.9.13)
       '@astrojs/mdx':
         specifier: ^5.0.6
         version: 5.0.6(astro@6.3.3(@types/node@25.6.2)(jiti@2.7.0)(lightningcss@1.32.0)(rollup@4.60.3))

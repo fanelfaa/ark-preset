@@ -5,10 +5,11 @@ category: Navigation
 updatedDate: 2026-05-18
 ---
 
-import AccordionBasicDemo from "@components/accordion-demo/AccordionBasicDemo.tsx";
-import AccordionMultipleDemo from "@components/accordion-demo/AccordionMultipleDemo.tsx";
-import AccordionCollapsibleDemo from "@components/accordion-demo/AccordionCollapsibleDemo.tsx";
-import AccordionDisabledDemo from "@components/accordion-demo/AccordionDisabledDemo.tsx";
+import AccordionBasicDemo from '@components/accordion-demo/AccordionBasicDemo.tsx'
+import AccordionMultipleDemo from '@components/accordion-demo/AccordionMultipleDemo.tsx'
+import AccordionCollapsibleDemo from '@components/accordion-demo/AccordionCollapsibleDemo.tsx'
+import AccordionDisabledDemo from '@components/accordion-demo/AccordionDisabledDemo.tsx'
+import AccordionRootProviderDemo from '@components/accordion-demo/AccordionRootProviderDemo.tsx'
 
 # Accordion
 
@@ -47,7 +48,8 @@ import {
   AccordionItemTrigger,
   AccordionItemContent,
   AccordionItemIndicator,
-} from "~/components/accordion";
+  AccordionRootProvider,
+} from "~/components/accordion"
 
 export function AccordionDemo() {
   return (
@@ -148,6 +150,12 @@ const rootClass = createMemo(() => styles.root({ class: local.class }))
 return <ArkAccordion.Root class={rootClass()} {...others} />
 }
 
+const AccordionRootProvider: Component<ArkAccordion.RootProviderProps> = (props) => {
+  const [local, others] = splitProps(props, ['class'])
+  const rootClass = createMemo(() => styles.root({ class: local.class }))
+  return <ArkAccordion.RootProvider class={rootClass()} {...others} />
+}
+
 const AccordionItem: Component<ArkAccordion.ItemProps> = (props) => {
 const [local, others] = splitProps(props, ['class'])
 const itemClass = createMemo(() => styles.item({ class: local.class }))
@@ -174,6 +182,7 @@ return <ArkAccordion.ItemIndicator class={indicatorClass()} {...others} />
 
 export {
   AccordionRoot as Accordion,
+  AccordionRootProvider,
   AccordionItem,
   AccordionItemTrigger,
   AccordionItemContent,
@@ -195,7 +204,8 @@ import {
   AccordionItemTrigger,
   AccordionItemContent,
   AccordionItemIndicator,
-} from "~/components/accordion";
+  AccordionRootProvider,
+} from "~/components/accordion"
 ```
 
 Basic usage:
@@ -304,7 +314,8 @@ import {
   AccordionItemTrigger,
   AccordionItemContent,
   AccordionItemIndicator,
-} from "~/components/accordion";
+  AccordionRootProvider,
+} from "~/components/accordion"
 
 export function AccordionControlled() {
   const [value, setValue] = createSignal<string[]>([]);
@@ -326,6 +337,59 @@ export function AccordionControlled() {
   );
 }
 ```
+
+## Root Provider
+
+Use `AccordionRootProvider` when you need to access the accordion state outside of the accordion tree. This pattern uses the `useAccordion` hook from Ark UI to create a shared context that both the accordion and external elements can reference.
+
+<AccordionRootProviderDemo client:load />
+
+```tsx
+import { useAccordion } from "@ark-ui/solid/accordion"
+import {
+  AccordionItem,
+  AccordionItemTrigger,
+  AccordionItemContent,
+  AccordionItemIndicator,
+  AccordionRootProvider,
+} from "~/components/accordion"
+
+export function AccordionWithExternalControl() {
+  const accordion = useAccordion({ multiple: true, defaultValue: ["item-1"] })
+
+  return (
+    <div>
+      {/* Access accordion state outside the tree */}
+      <output>Value: {JSON.stringify(accordion().value)}</output>
+
+      <AccordionRootProvider value={accordion}>
+        <AccordionItem value="item-1">
+          <AccordionItemTrigger>
+            Section One
+            <AccordionItemIndicator><ChevronDownIcon /></AccordionItemIndicator>
+          </AccordionItemTrigger>
+          <AccordionItemContent>
+            <div class="pb-4 text-sm">Content for section one.</div>
+          </AccordionItemContent>
+        </AccordionItem>
+        <AccordionItem value="item-2">
+          <AccordionItemTrigger>
+            Section Two
+            <AccordionItemIndicator><ChevronDownIcon /></AccordionItemIndicator>
+          </AccordionItemTrigger>
+          <AccordionItemContent>
+            <div class="pb-4 text-sm">Content for section two.</div>
+          </AccordionItemContent>
+        </AccordionItem>
+      </AccordionRootProvider>
+    </div>
+  )
+}
+```
+
+The key difference:
+- **`Accordion` (Root)** — manages its own state internally. Use for simple, self-contained accordions.
+- **`AccordionRootProvider`** — accepts a pre-created accordion context via `useAccordion`. Use when you need to read or control the accordion state from outside the component tree.
 
 ## Disabled
 
@@ -368,6 +432,13 @@ To disable all items at once, pass `disabled` to the `<Accordion>` root.
 | lazyMount     | `boolean`                                | `false`      | Enable lazy mounting of content.               |
 | unmountOnExit | `boolean`                                | `false`      | Unmount content on exit animation.             |
 | class         | `string`                                 | —            | Custom CSS class.                              |
+
+### AccordionRootProvider
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| value | `AccordionContext` | — | Accordion context returned by `useAccordion()`. **Required.** |
+| class | `string` | — | Custom CSS class. |
 
 ### AccordionItem
 
