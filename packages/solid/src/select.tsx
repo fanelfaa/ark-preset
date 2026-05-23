@@ -7,11 +7,9 @@ import { Portal } from "solid-js/web";
 import { Index, createMemo, splitProps, type Component, type JSX } from "solid-js";
 import { selectVariants } from "@ui/core";
 
-// Global variant instance (no params)
 const styles = selectVariants();
 
 type SelectRootProps = ArkSelect.RootProps<{ label: string; value: string }> & {
-  class?: string;
   error?: boolean;
 };
 
@@ -21,6 +19,14 @@ const SelectRoot: Component<SelectRootProps> = (props) => {
   const localStyles = selectVariants({ error: !!local.error });
   const rootClass = createMemo(() => localStyles.root({ class: local.class }));
   return <ArkSelect.Root class={rootClass()} {...others} />;
+};
+
+type SelectRootProviderProps = ArkSelect.RootProviderProps<{ label: string; value: string }>;
+
+const SelectRootProvider: Component<SelectRootProviderProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  const rootClass = createMemo(() => styles.root({ class: local.class }));
+  return <ArkSelect.RootProvider class={rootClass()} {...others} />;
 };
 
 const SelectLabel: Component<ArkSelect.LabelProps> = (props) => {
@@ -123,9 +129,11 @@ const SelectItemIndicator: Component<ArkSelect.ItemIndicatorProps> = (props) => 
   return <ArkSelect.ItemIndicator class={itemIndicatorClass()} {...props} />;
 };
 
+
 export { createListCollection };
 export {
   SelectRoot,
+  SelectRootProvider,
   SelectLabel,
   SelectControl,
   SelectTrigger,
