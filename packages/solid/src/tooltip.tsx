@@ -5,9 +5,8 @@ import { tooltipVariants } from "@ui/core";
 // Global variant instance (no params)
 const styles = tooltipVariants();
 
-const TooltipRoot: Component<ArkTooltip.RootProps> = (props) => {
-  return <ArkTooltip.Root {...props} />;
-};
+const TooltipRoot = ArkTooltip.Root;
+const TooltipRootProvider = ArkTooltip.RootProvider;
 
 const TooltipTrigger: Component<ArkTooltip.TriggerProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
@@ -41,6 +40,7 @@ const TooltipArrowTip: Component<ArkTooltip.ArrowTipProps> = (props) => {
 
 export {
   TooltipRoot as Tooltip,
+  TooltipRootProvider,
   TooltipTrigger,
   TooltipPositioner,
   TooltipContent,

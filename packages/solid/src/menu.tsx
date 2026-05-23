@@ -3,18 +3,18 @@ import { Portal } from "solid-js/web";
 import { createMemo, splitProps, type Component, type JSX } from "solid-js";
 import { ButtonVariants, buttonVariants, menuVariants } from "@ui/core";
 
-// Global variant instance (no params)
 const styles = menuVariants();
 
-export const MenuRoot = ArkMenu.Root;
-export const MenuIndicator = ArkMenu.Indicator;
-export const MenuPositioner = ArkMenu.Positioner;
-export const MenuArrow = ArkMenu.Arrow;
-export const MenuArrowTip = ArkMenu.ArrowTip;
-export const MenuSeparator = ArkMenu.Separator;
-export const MenuContextTrigger = ArkMenu.ContextTrigger;
-export const MenuTriggerItem = ArkMenu.TriggerItem;
-export const MenuRadioItemGroup = ArkMenu.RadioItemGroup;
+const MenuRoot = ArkMenu.Root;
+const MenuRootProvider = ArkMenu.RootProvider;
+const MenuIndicator = ArkMenu.Indicator;
+const MenuPositioner = ArkMenu.Positioner;
+const MenuArrow = ArkMenu.Arrow;
+const MenuArrowTip = ArkMenu.ArrowTip;
+const MenuSeparator = ArkMenu.Separator;
+const MenuContextTrigger = ArkMenu.ContextTrigger;
+const MenuTriggerItem = ArkMenu.TriggerItem;
+const MenuRadioItemGroup = ArkMenu.RadioItemGroup;
 
 const MenuTrigger: Component<ArkMenu.TriggerProps & ButtonVariants> = (props) => {
   const [local, others] = splitProps(props, ["class", "variant", "size"]);
@@ -120,6 +120,16 @@ const MenuItemGroupLabel: Component<ArkMenu.ItemGroupLabelProps> = (props) => {
 };
 
 export {
+  MenuRoot,
+  MenuRootProvider,
+  MenuIndicator,
+  MenuPositioner,
+  MenuArrow,
+  MenuArrowTip,
+  MenuSeparator,
+  MenuContextTrigger,
+  MenuTriggerItem,
+  MenuRadioItemGroup,
   MenuTrigger,
   MenuContent,
   MenuItem,

@@ -5,8 +5,9 @@ import { popoverVariants } from "@ui/core";
 
 const styles = popoverVariants();
 
-export const PopoverRoot = ArkPopover.Root;
-export const PopoverTrigger = ArkPopover.Trigger;
+const PopoverRoot = ArkPopover.Root;
+const PopoverRootProvider = ArkPopover.RootProvider;
+const PopoverTrigger = ArkPopover.Trigger;
 
 type PopoverContentProps = ArkPopover.ContentProps & { class?: string; children?: JSX.Element };
 
@@ -91,9 +92,10 @@ const PopoverIndicator: Component<ArkPopover.IndicatorProps> = (props) => {
   );
 };
 
-export const PopoverRootProvider = ArkPopover.RootProvider;
-
 export {
+  PopoverRoot,
+  PopoverRootProvider,
+  PopoverTrigger,
   PopoverContent,
   PopoverTitle,
   PopoverDescription,
