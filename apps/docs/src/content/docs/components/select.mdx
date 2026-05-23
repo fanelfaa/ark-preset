@@ -45,7 +45,7 @@ import {
   SelectLabel,
   SelectControl,
   SelectTrigger,
-  SelectValueText,
+  SelectValue,
   SelectContent,
   createListCollection,
 } from "~/components/select";
@@ -65,7 +65,7 @@ export function SelectDemo() {
       <SelectLabel>Framework</SelectLabel>
       <SelectControl>
         <SelectTrigger>
-          <SelectValueText placeholder="Select a framework" />
+          <SelectValue placeholder="Select a framework" />
         </SelectTrigger>
       </SelectControl>
       <SelectContent items={frameworks.items} />
@@ -186,7 +186,7 @@ const triggerClass = createMemo(() => styles.trigger({ class: props.class }))
 return <ArkSelect.Trigger class={triggerClass()} {...props} />
 }
 
-const SelectValueText: Component<ArkSelect.ValueTextProps> = (props) => {
+const SelectValue: Component<ArkSelect.ValueTextProps> = (props) => {
 const valueTextClass = createMemo(() => styles.valueText({ class: props.class }))
 return <ArkSelect.ValueText class={valueTextClass()} {...props} />
 }
@@ -236,7 +236,7 @@ return <ArkSelect.ItemIndicator class={itemIndicatorClass()} {...props} />
 }
 
 export { createListCollection }
-export { SelectRoot as Select, SelectRootProvider, SelectLabel, SelectControl, SelectTrigger, SelectValueText, SelectContent, SelectItem, SelectItemText, SelectItemIndicator, selectVariants }
+export { SelectRoot as Select, SelectRootProvider, SelectLabel, SelectControl, SelectTrigger, SelectValue, SelectContent, SelectItem, SelectItemText, SelectItemIndicator, selectVariants }
 ```
 </div>
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--foreground`, `--input`, `--border`, etc.) or override the utility classes to match your design system.
@@ -252,7 +252,7 @@ import {
   SelectLabel,
   SelectControl,
   SelectTrigger,
-  SelectValueText,
+  SelectValue,
   SelectContent,
   createListCollection,
 } from "~/components/select";
@@ -272,7 +272,7 @@ const items = createListCollection({
   <SelectLabel>Framework</SelectLabel>
   <SelectControl>
     <SelectTrigger>
-      <SelectValueText placeholder="Select..." />
+      <SelectValue placeholder="Select..." />
     </SelectTrigger>
   </SelectControl>
   <SelectContent items={items.items} />
@@ -288,7 +288,7 @@ Add a label to describe the select field.
   <SelectLabel>Choose your framework</SelectLabel>
   <SelectControl>
     <SelectTrigger>
-      <SelectValueText placeholder="Select..." />
+      <SelectValue placeholder="Select..." />
     </SelectTrigger>
   </SelectControl>
   <SelectContent items={items.items} />
@@ -357,7 +357,7 @@ Use the `error` prop to show an error state.
   <SelectLabel>Framework</SelectLabel>
   <SelectControl>
     <SelectTrigger>
-      <SelectValueText placeholder="Select..." />
+      <SelectValue placeholder="Select..." />
     </SelectTrigger>
   </SelectControl>
   <SelectContent items={items.items} />
@@ -403,7 +403,7 @@ Use the `error` prop to show an error state.
 | ----- | -------- | ------- | ----------------- |
 | class | `string` | —       | Custom CSS class. |
 
-### SelectValueText
+### SelectValue
 
 | Prop        | Type     | Default | Description                  |
 | ----------- | -------- | ------- | ---------------------------- |
