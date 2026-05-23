@@ -4,7 +4,6 @@ import {
   RadioGroupItem,
   RadioGroupItemControl,
   RadioGroupItemText,
-  RadioGroupIndicator,
 } from "@ui/solid";
 
 export default function RadioGroupBasicDemo() {
@@ -13,22 +12,16 @@ export default function RadioGroupBasicDemo() {
       <RadioGroup defaultValue="1">
         <RadioGroupLabel>Payment Method</RadioGroupLabel>
         <RadioGroupItem value="1">
-          <RadioGroupItemControl>
-            <RadioGroupIndicator />
-          </RadioGroupItemControl>
+          <RadioGroupItemControl />
           <RadioGroupItemText>Credit Card</RadioGroupItemText>
         </RadioGroupItem>
         <RadioGroupItem value="2">
-          <RadioGroupItemControl>
-            <RadioGroupIndicator />
-          </RadioGroupItemControl>
-          <RadioGroupItemText>PayPal</RadioGroupItemText>
+          <RadioGroupItemControl />
+          <RadioGroupItemText>Paypal</RadioGroupItemText>
         </RadioGroupItem>
         <RadioGroupItem value="3">
-          <RadioGroupItemControl>
-            <RadioGroupIndicator />
-          </RadioGroupItemControl>
-          <RadioGroupItemText>Bank Transfer</RadioGroupItemText>
+          <RadioGroupItemControl />
+          <RadioGroupItemText>Debit</RadioGroupItemText>
         </RadioGroupItem>
       </RadioGroup>
     </div>
