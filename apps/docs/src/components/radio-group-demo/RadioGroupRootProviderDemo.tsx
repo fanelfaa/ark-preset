@@ -1,15 +1,22 @@
+import { useRadioGroup } from "@ark-ui/solid/radio-group";
 import {
-  RadioGroup,
+  RadioGroupRootProvider,
   RadioGroupLabel,
   RadioGroupItem,
   RadioGroupItemControl,
   RadioGroupItemText,
 } from "@ui/solid";
 
-export default function RadioGroupBasicDemo() {
+export default function RadioGroupRootProviderDemo() {
+  const radioGroup = useRadioGroup({ defaultValue: "1" });
+
   return (
-    <div class="rounded-lg border border-border p-6">
-      <RadioGroup defaultValue="1">
+    <div class="rounded-lg border border-border p-6 space-y-4">
+      <output class="block text-sm text-muted-foreground">
+        Value: {JSON.stringify(radioGroup().value)}
+      </output>
+
+      <RadioGroupRootProvider value={radioGroup}>
         <RadioGroupLabel>Payment Method</RadioGroupLabel>
         <RadioGroupItem value="1">
           <RadioGroupItemControl />
@@ -23,7 +30,7 @@ export default function RadioGroupBasicDemo() {
           <RadioGroupItemControl />
           <RadioGroupItemText>Debit</RadioGroupItemText>
         </RadioGroupItem>
-      </RadioGroup>
+      </RadioGroupRootProvider>
     </div>
   );
 }

@@ -3,11 +3,9 @@ import { DatePicker as DatePickerPrimitive } from "@ark-ui/solid/date-picker";
 import { datePickerVariants, buttonVariants } from "@ui/core";
 
 const styles = datePickerVariants();
-// ---------------------------------------------------------------------------
-// Re-exports (no styling needed)
-// ---------------------------------------------------------------------------
 
 export const DatePicker = DatePickerPrimitive.Root;
+export const DatePickerRootProvider = DatePickerPrimitive.RootProvider;
 export const DatePickerLabel = DatePickerPrimitive.Label;
 export const DatePickerContext = DatePickerPrimitive.Context;
 export const DatePickerTableHead = DatePickerPrimitive.TableHead;
@@ -15,10 +13,6 @@ export const DatePickerTableBody = DatePickerPrimitive.TableBody;
 export const DatePickerYearSelect = DatePickerPrimitive.YearSelect;
 export const DatePickerMonthSelect = DatePickerPrimitive.MonthSelect;
 export const DatePickerPositioner = DatePickerPrimitive.Positioner;
-
-// ---------------------------------------------------------------------------
-// Styled components
-// ---------------------------------------------------------------------------
 
 export const DatePickerControl: Component<DatePickerPrimitive.ControlProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);

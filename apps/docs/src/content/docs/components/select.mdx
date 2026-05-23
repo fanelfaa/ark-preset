@@ -6,6 +6,7 @@ updatedDate: 2026-05-18
 ---
 
 import SelectBasicDemo from "@components/select-demo/SelectBasicDemo.tsx";
+import SelectRootProviderDemo from "@components/select-demo/SelectRootProviderDemo.tsx";
 
 # Select
 
@@ -40,10 +41,11 @@ A dropdown component that allows users to select one or more options from a list
 ```tsx
 import {
   Select,
+  SelectRootProvider,
   SelectLabel,
   SelectControl,
   SelectTrigger,
-  SelectValueText,
+  SelectValue,
   SelectContent,
   createListCollection,
 } from "~/components/select";
@@ -63,7 +65,7 @@ export function SelectDemo() {
       <SelectLabel>Framework</SelectLabel>
       <SelectControl>
         <SelectTrigger>
-          <SelectValueText placeholder="Select a framework" />
+          <SelectValue placeholder="Select a framework" />
         </SelectTrigger>
       </SelectControl>
       <SelectContent items={frameworks.items} />
@@ -151,6 +153,14 @@ return (
 )
 }
 
+type SelectRootProviderProps = ArkSelect.RootProviderProps<{ label: string; value: string }> & { class?: string }
+
+const SelectRootProvider: Component<SelectRootProviderProps> = (props) => {
+const [local, others] = splitProps(props, ['class'])
+const rootClass = createMemo(() => styles.root({ class: local.class }))
+return <ArkSelect.RootProvider class={rootClass()} {...others} />
+}
+
 const SelectLabel: Component<ArkSelect.LabelProps> = (props) => {
 const [local, others] = splitProps(props, ['class'])
 const labelClass = createMemo(() => styles.label({ class: local.class }))
@@ -176,7 +186,7 @@ const triggerClass = createMemo(() => styles.trigger({ class: props.class }))
 return <ArkSelect.Trigger class={triggerClass()} {...props} />
 }
 
-const SelectValueText: Component<ArkSelect.ValueTextProps> = (props) => {
+const SelectValue: Component<ArkSelect.ValueTextProps> = (props) => {
 const valueTextClass = createMemo(() => styles.valueText({ class: props.class }))
 return <ArkSelect.ValueText class={valueTextClass()} {...props} />
 }
@@ -226,7 +236,7 @@ return <ArkSelect.ItemIndicator class={itemIndicatorClass()} {...props} />
 }
 
 export { createListCollection }
-export { SelectRoot as Select, SelectLabel, SelectControl, SelectTrigger, SelectValueText, SelectContent, SelectItem, SelectItemText, SelectItemIndicator, selectVariants }
+export { SelectRoot as Select, SelectRootProvider, SelectLabel, SelectControl, SelectTrigger, SelectValue, SelectContent, SelectItem, SelectItemText, SelectItemIndicator, selectVariants }
 ```
 </div>
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--foreground`, `--input`, `--border`, etc.) or override the utility classes to match your design system.
@@ -238,10 +248,11 @@ Import the components:
 ```tsx
 import {
   Select,
+  SelectRootProvider,
   SelectLabel,
   SelectControl,
   SelectTrigger,
-  SelectValueText,
+  SelectValue,
   SelectContent,
   createListCollection,
 } from "~/components/select";
@@ -261,7 +272,7 @@ const items = createListCollection({
   <SelectLabel>Framework</SelectLabel>
   <SelectControl>
     <SelectTrigger>
-      <SelectValueText placeholder="Select..." />
+      <SelectValue placeholder="Select..." />
     </SelectTrigger>
   </SelectControl>
   <SelectContent items={items.items} />
@@ -277,12 +288,65 @@ Add a label to describe the select field.
   <SelectLabel>Choose your framework</SelectLabel>
   <SelectControl>
     <SelectTrigger>
-      <SelectValueText placeholder="Select..." />
+      <SelectValue placeholder="Select..." />
     </SelectTrigger>
   </SelectControl>
   <SelectContent items={items.items} />
 </Select>
 ```
+
+## Root Provider
+
+Use `SelectRootProvider` when you need to access the select state outside of the component tree. This pattern uses the `useSelect` hook from Ark UI to create a shared context that both the select and external elements can reference.
+
+<SelectRootProviderDemo client:load />
+
+```tsx
+import { useSelect, createListCollection } from "@ark-ui/solid/select";
+import {
+  SelectRootProvider,
+  SelectLabel,
+  SelectControl,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+} from "~/components/select";
+
+const frameworks = createListCollection({
+  items: [
+    { label: "React", value: "react" },
+    { label: "Solid.js", value: "solid" },
+    { label: "Vue", value: "vue" },
+    { label: "Svelte", value: "svelte" },
+  ],
+});
+
+export function SelectWithExternalControl() {
+  const select = useSelect({ collection: frameworks, defaultValue: ["solid"] });
+
+  return (
+    <div>
+      {/* Access select state outside the tree */}
+      <output>Value: {JSON.stringify(select().value)}</output>
+
+      <SelectRootProvider value={select}>
+        <SelectLabel>Framework</SelectLabel>
+        <SelectControl>
+          <SelectTrigger>
+            <SelectValue placeholder="Select a framework" />
+          </SelectTrigger>
+        </SelectControl>
+        <SelectContent items={frameworks.items} />
+      </SelectRootProvider>
+    </div>
+  );
+}
+```
+
+The key difference:
+
+- **`Select` (Root)** — manages its own state internally. Use for simple, self-contained selects.
+- **`SelectRootProvider`** — accepts a pre-created select context via `useSelect`. Use when you need to read or control the select state from outside the component tree.
 
 ## Error State
 
@@ -293,7 +357,7 @@ Use the `error` prop to show an error state.
   <SelectLabel>Framework</SelectLabel>
   <SelectControl>
     <SelectTrigger>
-      <SelectValueText placeholder="Select..." />
+      <SelectValue placeholder="Select..." />
     </SelectTrigger>
   </SelectControl>
   <SelectContent items={items.items} />
@@ -314,6 +378,13 @@ Use the `error` prop to show an error state.
 | class         | `string`                                 | —       | Custom CSS class.                  |
 | error         | `boolean`                                | `false` | Show error state styling.          |
 
+### SelectRootProvider
+
+| Prop  | Type              | Default | Description                                             |
+| ----- | ----------------- | ------- | ------------------------------------------------------- |
+| value | `UseSelectReturn` | —       | Select context returned by `useSelect()`. **Required.** |
+| class | `string`          | —       | Custom CSS class.                                       |
+
 ### SelectLabel
 
 | Prop  | Type     | Default | Description       |
@@ -332,7 +403,7 @@ Use the `error` prop to show an error state.
 | ----- | -------- | ------- | ----------------- |
 | class | `string` | —       | Custom CSS class. |
 
-### SelectValueText
+### SelectValue
 
 | Prop        | Type     | Default | Description                  |
 | ----------- | -------- | ------- | ---------------------------- |

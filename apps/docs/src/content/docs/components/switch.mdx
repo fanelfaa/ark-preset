@@ -7,6 +7,7 @@ updatedDate: 2026-05-18
 
 import { Switch, SwitchLabel } from "@ui/solid";
 import SwitchBasicDemo from "@components/switch-demo/SwitchBasicDemo.tsx";
+import SwitchRootProviderDemo from "@components/switch-demo/SwitchRootProviderDemo.tsx";
 
 # Switch
 
@@ -39,7 +40,7 @@ A toggle switch component for on/off boolean input.
 <SwitchBasicDemo client:load />
 
 ```tsx
-import { Switch, SwitchLabel } from "~/components/switch";
+import { Switch, SwitchLabel, SwitchRootProvider } from "~/components/switch";
 
 export function SwitchDemo() {
   return (
@@ -125,13 +126,27 @@ return (
 )
 }
 
+const SwitchRootProvider: Component<ArkSwitch.RootProviderProps> = (props) => {
+const [local, others] = splitProps(props, ['class', 'children'])
+const rootClass = createMemo(() => styles.root({ class: local.class }))
+return (
+<ArkSwitch.RootProvider class={rootClass()} {...others}>
+<ArkSwitch.Control class={styles.control()}>
+<ArkSwitch.Thumb class={styles.thumb()} />
+</ArkSwitch.Control>
+<ArkSwitch.HiddenInput />
+{local.children}
+</ArkSwitch.RootProvider>
+)
+}
+
 const SwitchLabel: Component<ArkSwitch.LabelProps> = (props) => {
 const [local, others] = splitProps(props, ['class'])
 const labelClass = createMemo(() => styles.label({ class: local.class }))
 return <ArkSwitch.Label class={labelClass()} {...others} />
 }
 
-export { SwitchRoot as Switch, SwitchLabel, switchVariants }
+export { SwitchRoot as Switch, SwitchRootProvider, SwitchLabel, switchVariants }
 ```
 </div>
 
@@ -140,7 +155,7 @@ export { SwitchRoot as Switch, SwitchLabel, switchVariants }
 Import the component:
 
 ```tsx
-import { Switch, SwitchLabel } from "~/components/switch";
+import { Switch, SwitchLabel, SwitchRootProvider } from "~/components/switch";
 ```
 
 Basic switch:
@@ -163,6 +178,37 @@ Disabled:
 <Switch disabled />
 ```
 
+## Root Provider
+
+Use `SwitchRootProvider` when you need to access the switch state outside of the switch tree. This pattern uses the `useSwitch` hook from Ark UI to create a shared context that both the switch and external elements can reference.
+
+<SwitchRootProviderDemo client:load />
+
+```tsx
+import { useSwitch } from "@ark-ui/solid/switch";
+import { SwitchRootProvider, SwitchLabel } from "~/components/switch";
+
+export function SwitchWithExternalControl() {
+  const sw = useSwitch({ defaultChecked: true });
+
+  return (
+    <div>
+      {/* Access switch state outside the tree */}
+      <output>Checked: {JSON.stringify(sw().checked)}</output>
+
+      <SwitchRootProvider value={sw}>
+        <SwitchLabel>Enable notifications</SwitchLabel>
+      </SwitchRootProvider>
+    </div>
+  );
+}
+```
+
+The key difference:
+
+- **`Switch` (Root)** — manages its own state internally. Use for simple, self-contained switches.
+- **`SwitchRootProvider`** — accepts a pre-created switch context via `useSwitch`. Use when you need to read or control the switch state from outside the component tree.
+
 ## API Reference
 
 ### Switch
@@ -180,3 +226,10 @@ Disabled:
 | Prop  | Type   | Default |
 | ----- | ------ | ------- |
 | class | string | —       |
+
+### SwitchRootProvider
+
+| Prop  | Type             | Default | Description                                             |
+| ----- | ---------------- | ------- | ------------------------------------------------------- |
+| value | `UseSwitchReturn`| —       | Switch context returned by `useSwitch()`. **Required.** |
+| class | `string`         | —       | Custom CSS class.                                       |

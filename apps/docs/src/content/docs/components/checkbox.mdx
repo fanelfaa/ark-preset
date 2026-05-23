@@ -7,6 +7,7 @@ updatedDate: 2026-05-18
 
 import { Checkbox, CheckboxLabel } from "@ui/solid";
 import CheckboxBasicDemo from "@components/checkbox-demo/CheckboxBasicDemo.tsx";
+import CheckboxRootProviderDemo from "@components/checkbox-demo/CheckboxRootProviderDemo.tsx";
 
 # Checkbox
 
@@ -39,7 +40,7 @@ A checkbox component for capturing boolean input with support for checked, unche
 <CheckboxBasicDemo client:load />
 
 ```tsx
-import { Checkbox, CheckboxLabel } from "~/components/checkbox";
+import { Checkbox, CheckboxLabel, CheckboxRootProvider } from "~/components/checkbox";
 
 export function CheckboxDemo() {
   return (
@@ -140,13 +141,36 @@ return (
 )
 }
 
+const CheckboxRootProvider: Component<ArkCheckbox.RootProviderProps> = (props) => {
+const [local, others] = splitProps(props, ['class', 'children'])
+const rootClass = createMemo(() => styles.root({ class: local.class }))
+return (
+<ArkCheckbox.RootProvider class={rootClass()} {...others}>
+<ArkCheckbox.Control class={styles.control()}>
+<ArkCheckbox.Indicator class={styles.indicator()}>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3.5">
+<path d="M20 6 9 17l-5-5"/>
+</svg>
+</ArkCheckbox.Indicator>
+<ArkCheckbox.Indicator class={styles.indicator()} indeterminate>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3.5">
+<path d="M5 12h14"/>
+</svg>
+</ArkCheckbox.Indicator>
+</ArkCheckbox.Control>
+<ArkCheckbox.HiddenInput />
+{local.children}
+</ArkCheckbox.RootProvider>
+)
+}
+
 const CheckboxLabel: Component<ArkCheckbox.LabelProps> = (props) => {
 const [local, others] = splitProps(props, ['class'])
 const labelClass = createMemo(() => styles.label({ class: local.class }))
 return <ArkCheckbox.Label class={labelClass()} {...others} />
 }
 
-export { CheckboxRoot as Checkbox, CheckboxLabel }
+export { CheckboxRoot as Checkbox, CheckboxRootProvider, CheckboxLabel }
 ```
 </div>
 
@@ -155,7 +179,7 @@ export { CheckboxRoot as Checkbox, CheckboxLabel }
 Import the component:
 
 ```tsx
-import { Checkbox, CheckboxLabel } from "~/components/checkbox";
+import { Checkbox, CheckboxLabel, CheckboxRootProvider } from "~/components/checkbox";
 ```
 
 Basic checkbox:
@@ -184,6 +208,37 @@ Indeterminate:
 <Checkbox checked="indeterminate" />
 ```
 
+## Root Provider
+
+Use `CheckboxRootProvider` when you need to access the checkbox state outside of the checkbox tree. This pattern uses the `useCheckbox` hook from Ark UI to create a shared context that both the checkbox and external elements can reference.
+
+<CheckboxRootProviderDemo client:load />
+
+```tsx
+import { useCheckbox } from "@ark-ui/solid/checkbox";
+import { CheckboxRootProvider, CheckboxLabel } from "~/components/checkbox";
+
+export function CheckboxWithExternalControl() {
+  const checkbox = useCheckbox({ defaultChecked: true });
+
+  return (
+    <div>
+      {/* Access checkbox state outside the tree */}
+      <output>Checked: {JSON.stringify(checkbox().checked)}</output>
+
+      <CheckboxRootProvider value={checkbox}>
+        <CheckboxLabel>Subscribe to newsletter</CheckboxLabel>
+      </CheckboxRootProvider>
+    </div>
+  );
+}
+```
+
+The key difference:
+
+- **`Checkbox` (Root)** — manages its own state internally. Use for simple, self-contained checkboxes.
+- **`CheckboxRootProvider`** — accepts a pre-created checkbox context via `useCheckbox`. Use when you need to read or control the checkbox state from outside the component tree.
+
 ## API Reference
 
 ### Checkbox
@@ -201,3 +256,10 @@ Indeterminate:
 | Prop  | Type   | Default |
 | ----- | ------ | ------- |
 | class | string | —       |
+
+### CheckboxRootProvider
+
+| Prop  | Type               | Default | Description                                              |
+| ----- | ------------------ | ------- | -------------------------------------------------------- |
+| value | `UseCheckboxReturn`| —       | Checkbox context returned by `useCheckbox()`. **Required.**|
+| class | `string`           | —       | Custom CSS class.                                        |

@@ -3,17 +3,16 @@ import { Portal } from "solid-js/web";
 import { createMemo, splitProps, type Component, type JSX } from "solid-js";
 import { popoverVariants } from "@ui/core";
 
-// Global variant instance (no params consumed)
 const styles = popoverVariants();
 
-export const PopoverRoot = ArkPopover.Root;
-export const PopoverTrigger = ArkPopover.Trigger;
+const PopoverRoot = ArkPopover.Root;
+const PopoverRootProvider = ArkPopover.RootProvider;
+const PopoverTrigger = ArkPopover.Trigger;
 
 type PopoverContentProps = ArkPopover.ContentProps & { class?: string; children?: JSX.Element };
 
 const PopoverContent: Component<PopoverContentProps> = (props) => {
   const [local, others] = splitProps(props, ["class", "children"]);
-  // uses global `styles`
   const contentClass = createMemo(() => styles.content({ class: local.class }));
   return (
     <Portal>
@@ -94,6 +93,9 @@ const PopoverIndicator: Component<ArkPopover.IndicatorProps> = (props) => {
 };
 
 export {
+  PopoverRoot,
+  PopoverRootProvider,
+  PopoverTrigger,
   PopoverContent,
   PopoverTitle,
   PopoverDescription,

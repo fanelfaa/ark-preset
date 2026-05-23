@@ -2,7 +2,6 @@ import { Field } from "@ark-ui/solid/field";
 import { createMemo, splitProps, type Component, type JSX } from "solid-js";
 import { inputVariants } from "@ui/core";
 
-// Global variant instance (no params)
 const styles = inputVariants();
 
 type InputProps = {

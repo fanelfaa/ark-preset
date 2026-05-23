@@ -7,6 +7,7 @@ updatedDate: 2026-05-18
 
 import TooltipBasicDemo from "@components/tooltip-demo/TooltipBasicDemo.tsx";
 import TooltipArrowDemo from "@components/tooltip-demo/TooltipArrowDemo.tsx";
+import TooltipRootProviderDemo from "@components/tooltip-demo/TooltipRootProviderDemo.tsx";
 
 # Tooltip
 
@@ -39,7 +40,7 @@ A popup component that displays contextual information when hovering or focusing
 <TooltipBasicDemo client:load />
 
 ```tsx
-import { Tooltip, TooltipTrigger, TooltipPositioner, TooltipContent } from "~/components/tooltip";
+import { Tooltip, TooltipTrigger, TooltipPositioner, TooltipContent, TooltipRootProvider } from "~/components/tooltip";
 
 export function TooltipDemo() {
   return (
@@ -106,6 +107,10 @@ const TooltipRoot: Component<ArkTooltip.RootProps> = (props) => {
 return <ArkTooltip.Root {...props} />
 }
 
+const TooltipRootProvider: Component<ArkTooltip.RootProviderProps> = (props) => {
+return <ArkTooltip.RootProvider {...props} />
+}
+
 const TooltipTrigger: Component<ArkTooltip.TriggerProps> = (props) => {
 const [local, others] = splitProps(props, ['class'])
 const triggerClass = createMemo(() => styles.trigger({ class: local.class }))
@@ -138,6 +143,7 @@ return <ArkTooltip.ArrowTip class={arrowTipClass()} {...others} />
 
 export {
   TooltipRoot as Tooltip,
+  TooltipRootProvider,
   TooltipTrigger,
   TooltipPositioner,
   TooltipContent,
@@ -154,7 +160,7 @@ export {
 Import the components:
 
 ```tsx
-import { Tooltip, TooltipTrigger, TooltipPositioner, TooltipContent } from "~/components/tooltip";
+import { Tooltip, TooltipTrigger, TooltipPositioner, TooltipContent, TooltipRootProvider } from "~/components/tooltip";
 ```
 
 Basic tooltip:
@@ -182,6 +188,7 @@ import {
   TooltipContent,
   TooltipArrow,
   TooltipArrowTip,
+  TooltipRootProvider,
 } from "~/components/tooltip";
 
 <Tooltip>
@@ -196,6 +203,54 @@ import {
   </TooltipPositioner>
 </Tooltip>;
 ```
+
+## Root Provider
+
+Use `TooltipRootProvider` when you need to access the tooltip state outside of the tooltip tree. This pattern uses the `useTooltip` hook from Ark UI to create a shared context that both the tooltip and external elements can reference.
+
+<TooltipRootProviderDemo client:load />
+
+```tsx
+import { useTooltip } from "@ark-ui/solid/tooltip";
+import {
+  TooltipTrigger,
+  TooltipPositioner,
+  TooltipContent,
+  TooltipArrow,
+  TooltipArrowTip,
+  TooltipRootProvider,
+} from "~/components/tooltip";
+
+export function TooltipWithExternalControl() {
+  const tooltip = useTooltip({ defaultOpen: true });
+
+  return (
+    <div>
+      {/* Access tooltip state outside the tree */}
+      <output>Open: {JSON.stringify(tooltip().open)}</output>
+
+      <div>
+        <TooltipRootProvider value={tooltip}>
+          <TooltipTrigger>Hover me</TooltipTrigger>
+          <TooltipPositioner>
+            <TooltipContent>
+              <TooltipArrow>
+                <TooltipArrowTip />
+              </TooltipArrow>
+              External state via useTooltip
+            </TooltipContent>
+          </TooltipPositioner>
+        </TooltipRootProvider>
+      </div>
+    </div>
+  );
+}
+```
+
+The key difference:
+
+- **`Tooltip` (Root)** — manages its own state internally. Use for simple, self-contained tooltips.
+- **`TooltipRootProvider`** — accepts a pre-created tooltip context via `useTooltip`. Use when you need to read or control the tooltip state from outside the component tree.
 
 ## API Reference
 
@@ -240,3 +295,10 @@ import {
 | Prop  | Type     | Default | Description       |
 | ----- | -------- | ------- | ----------------- |
 | class | `string` | —       | Custom CSS class. |
+
+### TooltipRootProvider
+
+| Prop  | Type              | Default | Description                                             |
+| ----- | ----------------- | ------- | ------------------------------------------------------- |
+| value | `UseTooltipReturn`| —       | Tooltip context returned by `useTooltip()`. **Required.**|
+| class | `string`          | —       | Custom CSS class.                                       |

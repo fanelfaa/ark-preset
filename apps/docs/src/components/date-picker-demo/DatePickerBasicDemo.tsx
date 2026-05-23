@@ -100,18 +100,16 @@ export default function DatePickerBasicDemo() {
                       <DatePickerTable>
                         <DatePickerTableHead>
                           <DatePickerTableRow>
-                            {datePicker().weekDays.map((weekDay: { short: string }, id: number) => (
-                              <DatePickerTableHeader key={id}>
-                                {weekDay.short}
-                              </DatePickerTableHeader>
+                            {datePicker().weekDays.map((weekDay: { short: string }) => (
+                              <DatePickerTableHeader>{weekDay.short}</DatePickerTableHeader>
                             ))}
                           </DatePickerTableRow>
                         </DatePickerTableHead>
                         <DatePickerTableBody>
-                          {datePicker().weeks.map((week: DateValue[], id: number) => (
-                            <DatePickerTableRow key={id}>
-                              {week.map((day: DateValue, id: number) => (
-                                <DatePickerTableCell key={id} value={day}>
+                          {datePicker().weeks.map((week: DateValue[]) => (
+                            <DatePickerTableRow>
+                              {week.map((day: DateValue) => (
+                                <DatePickerTableCell value={day}>
                                   <DatePickerTableCellTrigger>{day.day}</DatePickerTableCellTrigger>
                                 </DatePickerTableCell>
                               ))}
@@ -166,17 +164,15 @@ export default function DatePickerBasicDemo() {
                         <DatePickerTableBody>
                           {datePicker()
                             .getMonthsGrid({ columns: 4, format: "short" })
-                            .map((months: { value: number; label: string }[], id: number) => (
-                              <DatePickerTableRow key={id}>
-                                {months.map(
-                                  (month: { value: number; label: string }, id: number) => (
-                                    <DatePickerTableCell key={id} value={month.value}>
-                                      <DatePickerTableCellTrigger>
-                                        {month.label}
-                                      </DatePickerTableCellTrigger>
-                                    </DatePickerTableCell>
-                                  ),
-                                )}
+                            .map((months: { value: number; label: string }[]) => (
+                              <DatePickerTableRow>
+                                {months.map((month: { value: number; label: string }) => (
+                                  <DatePickerTableCell value={month.value}>
+                                    <DatePickerTableCellTrigger>
+                                      {month.label}
+                                    </DatePickerTableCellTrigger>
+                                  </DatePickerTableCell>
+                                ))}
                               </DatePickerTableRow>
                             ))}
                         </DatePickerTableBody>
@@ -228,10 +224,10 @@ export default function DatePickerBasicDemo() {
                         <DatePickerTableBody>
                           {datePicker()
                             .getYearsGrid({ columns: 4 })
-                            .map((years: { value: number; label: string }[], id: number) => (
-                              <DatePickerTableRow key={id}>
-                                {years.map((year: { value: number; label: string }, id: number) => (
-                                  <DatePickerTableCell key={id} value={year.value}>
+                            .map((years: { value: number; label: string }[]) => (
+                              <DatePickerTableRow>
+                                {years.map((year: { value: number; label: string }) => (
+                                  <DatePickerTableCell value={year.value}>
                                     <DatePickerTableCellTrigger>
                                       {year.label}
                                     </DatePickerTableCellTrigger>

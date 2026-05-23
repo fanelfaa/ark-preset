@@ -6,6 +6,7 @@ updatedDate: 2026-05-18
 ---
 
 import SliderBasicDemo from "@components/slider-demo/SliderBasicDemo.tsx";
+import SliderRootProviderDemo from "@components/slider-demo/SliderRootProviderDemo.tsx";
 
 # Slider
 
@@ -40,6 +41,7 @@ A range input component that allows users to select a value from a predefined ra
 ```tsx
 import {
   Slider,
+  SliderRootProvider,
   SliderLabel,
   SliderValueText,
   SliderControl,
@@ -137,6 +139,14 @@ const rootClass = createMemo(() => styles.root({ class: local.class }))
 return <ArkSlider.Root class={rootClass()} {...others} />
 }
 
+type RootProviderProps = ArkSlider.RootProviderProps & { class?: string }
+
+const SliderRootProvider: Component<RootProviderProps> = (props) => {
+const [local, others] = splitProps(props, ['class'])
+const rootClass = createMemo(() => styles.root({ class: local.class }))
+return <ArkSlider.RootProvider class={rootClass()} {...others} />
+}
+
 const SliderLabel: Component<ArkSlider.LabelProps> = (props) => {
 const labelClass = createMemo(() => styles.label({ class: props.class }))
 return <ArkSlider.Label class={labelClass()} {...props} />
@@ -213,6 +223,7 @@ return <ArkSlider.Marker class={markerClass()} value={local.value} {...others} /
 
 export {
   SliderRoot,
+  SliderRootProvider,
   SliderLabel,
   SliderValueText,
   SliderControl,
@@ -236,6 +247,7 @@ Import the components:
 ```tsx
 import {
   Slider,
+  SliderRootProvider,
   SliderLabel,
   SliderValueText,
   SliderControl,
@@ -261,6 +273,54 @@ Basic usage:
   </SliderControl>
 </Slider>
 ```
+
+## Root Provider
+
+Use `SliderRootProvider` when you need to access the slider state outside of the component tree. This pattern uses the `useSlider` hook from Ark UI to create a shared context that both the slider and external elements can reference.
+
+<SliderRootProviderDemo client:load />
+
+```tsx
+import { useSlider } from "@ark-ui/solid/slider";
+import {
+  SliderRootProvider,
+  SliderLabel,
+  SliderValueText,
+  SliderControl,
+  SliderTrack,
+  SliderRange,
+  SliderThumb,
+} from "~/components/slider";
+
+export function SliderWithExternalControl() {
+  const slider = useSlider({ defaultValue: [50], min: 0, max: 100 });
+
+  return (
+    <div>
+      {/* Access slider state outside the tree */}
+      <output>Value: {JSON.stringify(slider().value)}</output>
+
+      <SliderRootProvider value={slider}>
+        <div class="flex items-center justify-between gap-4">
+          <SliderLabel>Volume</SliderLabel>
+          <SliderValueText />
+        </div>
+        <SliderControl>
+          <SliderTrack>
+            <SliderRange />
+          </SliderTrack>
+          <SliderThumb index={0} />
+        </SliderControl>
+      </SliderRootProvider>
+    </div>
+  );
+}
+```
+
+The key difference:
+
+- **`Slider` (Root)** — manages its own state internally. Use for simple, self-contained sliders.
+- **`SliderRootProvider`** — accepts a pre-created slider context via `useSlider`. Use when you need to read or control the slider state from outside the component tree.
 
 ## Disabled
 
@@ -294,6 +354,13 @@ Use the `disabled` prop to disable the slider.
 | readonly      | `boolean`                                | `false`        | Whether the slider is read-only.                    |
 | orientation   | `"horizontal"` \| `"vertical"`           | `"horizontal"` | Orientation of the slider.                          |
 | class         | `string`                                 | —              | Custom CSS class.                                   |
+
+### SliderRootProvider
+
+| Prop  | Type              | Default | Description                                             |
+| ----- | ----------------- | ------- | ------------------------------------------------------- |
+| value | `UseSliderReturn` | —       | Slider context returned by `useSlider()`. **Required.** |
+| class | `string`          | —       | Custom CSS class.                                       |
 
 ### SliderLabel
 

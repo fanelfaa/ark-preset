@@ -43,11 +43,13 @@ import {
   NumberInputControl,
   NumberInputIncrementTrigger,
   NumberInputDecrementTrigger,
+  NumberInputScrubber,
 } from "~/components/number-input";
 
 export function NumberInputDemo() {
   return (
     <NumberInput defaultValue={50} min={0} max={100}>
+      <NumberInputScrubber />
       <NumberInputControl>
         <NumberInputDecrementTrigger>
           <ChevronDownIcon />
@@ -229,6 +231,7 @@ import {
   NumberInputControl,
   NumberInputIncrementTrigger,
   NumberInputDecrementTrigger,
+  NumberInputScrubber,
 } from "~/components/number-input";
 ```
 
@@ -236,6 +239,7 @@ Basic usage:
 
 ```tsx
 <NumberInput defaultValue={50} min={0} max={100}>
+  <NumberInputScrubber />
   <NumberInputControl>
     <NumberInputDecrementTrigger>
       <ChevronDownIcon />
@@ -317,6 +321,12 @@ Use the `disabled` prop to disable the input.
 | class | `string` | —       | Custom CSS class. |
 
 ### NumberInputDecrementTrigger
+
+| Prop  | Type     | Default | Description       |
+| ----- | -------- | ------- | ----------------- |
+| class | `string` | —       | Custom CSS class. |
+
+### NumberInputScrubber
 
 | Prop  | Type     | Default | Description       |
 | ----- | -------- | ------- | ----------------- |

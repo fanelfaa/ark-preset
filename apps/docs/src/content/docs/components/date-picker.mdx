@@ -35,7 +35,7 @@ A date picker component that allows users to select a date or date range from a 
   Docs
 </a>
 
-<DatePickerBasicDemo client:only="solid-js" />
+<DatePickerBasicDemo client:load />
 
 ```tsx
 import {
@@ -61,6 +61,9 @@ import {
   DatePickerTableHeader,
   DatePickerTableCell,
   DatePickerTableCellTrigger,
+  DatePickerRootProvider,
+  DatePickerYearSelect,
+  DatePickerMonthSelect,
 } from "~/components/date-picker";
 import { Portal } from "solid-js/web";
 
@@ -234,6 +237,7 @@ const styles = datePickerVariants()
 // ---------------------------------------------------------------------------
 
 export const DatePicker = DatePickerPrimitive.Root;
+export const DatePickerRootProvider = DatePickerPrimitive.RootProvider;
 export const DatePickerLabel = DatePickerPrimitive.Label;
 export const DatePickerContext = DatePickerPrimitive.Context;
 export const DatePickerTableHead = DatePickerPrimitive.TableHead;
@@ -456,6 +460,9 @@ import {
   DatePickerTableHeader,
   DatePickerTableCell,
   DatePickerTableCellTrigger,
+  DatePickerRootProvider,
+  DatePickerYearSelect,
+  DatePickerMonthSelect,
 } from "~/components/date-picker";
 import { Portal } from "solid-js/web";
 ```
@@ -549,6 +556,9 @@ import {
   DatePickerTableHeader,
   DatePickerTableCell,
   DatePickerTableCellTrigger,
+  DatePickerRootProvider,
+  DatePickerYearSelect,
+  DatePickerMonthSelect,
 } from "~/components/date-picker";
 import { CalendarDate } from "@internationalized/date";
 import { Portal } from "solid-js/web";
@@ -712,6 +722,25 @@ export function DatePickerControlled() {
 | class | `string` | —       | Custom CSS class. |
 
 ### DatePickerClearTrigger
+
+| Prop  | Type     | Default | Description       |
+| ----- | -------- | ------- | ----------------- |
+| class | `string` | —       | Custom CSS class. |
+
+### DatePickerRootProvider
+
+| Prop  | Type                  | Default | Description                                                      |
+| ----- | --------------------- | ------- | ---------------------------------------------------------------- |
+| value | `UseDatePickerReturn` | —       | Date picker context returned by `useDatePicker()`. **Required.** |
+| class | `string`              | —       | Custom CSS class.                                                |
+
+### DatePickerYearSelect
+
+| Prop  | Type     | Default | Description       |
+| ----- | -------- | ------- | ----------------- |
+| class | `string` | —       | Custom CSS class. |
+
+### DatePickerMonthSelect
 
 | Prop  | Type     | Default | Description       |
 | ----- | -------- | ------- | ----------------- |

@@ -6,6 +6,7 @@ import { dialogVariants } from "@ui/core";
 const styles = dialogVariants();
 
 export const DialogRoot = ArkDialog.Root;
+export const DialogRootProvider = ArkDialog.RootProvider;
 export const DialogTrigger = ArkDialog.Trigger;
 
 type DialogContentProps = { class?: string; children?: JSX.Element };

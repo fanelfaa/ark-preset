@@ -2,13 +2,28 @@ import { RadioGroup as ArkRadioGroup } from "@ark-ui/solid/radio-group";
 import { createMemo, splitProps, type Component } from "solid-js";
 import { radioGroupVariants } from "@ui/core";
 
-// Global variant instance (no params)
 const styles = radioGroupVariants();
 
 const RadioGroupRoot: Component<ArkRadioGroup.RootProps> = (props) => {
-  const [local, others] = splitProps(props, ["class"]);
+  const [local, others] = splitProps(props, ["class", "children"]);
   const rootClass = createMemo(() => styles.root({ class: local.class }));
-  return <ArkRadioGroup.Root class={rootClass()} {...others} />;
+  return (
+    <ArkRadioGroup.Root class={rootClass()} {...others}>
+      {local.children}
+      <ArkRadioGroup.Indicator class={styles.itemIndicator()} />
+    </ArkRadioGroup.Root>
+  );
+};
+
+const RadioGroupRootProvider: Component<ArkRadioGroup.RootProviderProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "children"]);
+  const rootClass = createMemo(() => styles.root({ class: local.class }));
+  return (
+    <ArkRadioGroup.RootProvider class={rootClass()} {...others}>
+      {local.children}
+      <ArkRadioGroup.Indicator class={styles.itemIndicator()} />
+    </ArkRadioGroup.RootProvider>
+  );
 };
 
 const RadioGroupLabel: Component<ArkRadioGroup.LabelProps> = (props) => {
@@ -26,7 +41,12 @@ const RadioGroupItem: Component<ArkRadioGroup.ItemProps> = (props) => {
 const RadioGroupItemControl: Component<ArkRadioGroup.ItemControlProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   const controlClass = createMemo(() => styles.itemControl({ class: local.class }));
-  return <ArkRadioGroup.ItemControl class={controlClass()} {...others} />;
+  return (
+    <>
+      <ArkRadioGroup.ItemControl class={controlClass()} {...others} />
+      <ArkRadioGroup.ItemHiddenInput />
+    </>
+  );
 };
 
 const RadioGroupItemText: Component<ArkRadioGroup.ItemTextProps> = (props) => {
@@ -35,25 +55,12 @@ const RadioGroupItemText: Component<ArkRadioGroup.ItemTextProps> = (props) => {
   return <ArkRadioGroup.ItemText class={textClass()} {...others} />;
 };
 
-const RadioGroupItemHiddenInput: Component<ArkRadioGroup.ItemHiddenInputProps> = (props) => {
-  const [local, others] = splitProps(props, ["class"]);
-  const inputClass = createMemo(() => styles.itemHiddenInput({ class: local.class }));
-  return <ArkRadioGroup.ItemHiddenInput class={inputClass()} {...others} />;
-};
-
-const RadioGroupIndicator: Component<ArkRadioGroup.IndicatorProps> = (props) => {
-  const [local, others] = splitProps(props, ["class"]);
-  const indicatorClass = createMemo(() => styles.itemIndicator({ class: local.class }));
-  return <ArkRadioGroup.Indicator class={indicatorClass()} {...others} />;
-};
-
 export {
   RadioGroupRoot as RadioGroup,
+  RadioGroupRootProvider,
   RadioGroupLabel,
   RadioGroupItem,
   RadioGroupItemControl,
   RadioGroupItemText,
-  RadioGroupItemHiddenInput,
-  RadioGroupIndicator,
   radioGroupVariants,
 };

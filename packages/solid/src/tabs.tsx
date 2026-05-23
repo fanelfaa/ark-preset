@@ -35,4 +35,10 @@ const TabsIndicator: Component<ArkTabs.IndicatorProps> = (props) => {
   return <ArkTabs.Indicator class={indicatorClass()} {...others} />;
 };
 
-export { TabsRoot as Tabs, TabsList, TabsTrigger, TabsContent, TabsIndicator, tabsVariants };
+const TabsRootProvider: Component<ArkTabs.RootProviderProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  const rootClass = createMemo(() => styles.root({ class: local.class }));
+  return <ArkTabs.RootProvider class={rootClass()} {...others} />;
+};
+
+export { TabsRoot as Tabs, TabsRootProvider, TabsList, TabsTrigger, TabsContent, TabsIndicator, tabsVariants };

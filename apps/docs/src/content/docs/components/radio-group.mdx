@@ -6,6 +6,7 @@ updatedDate: 2026-05-18
 ---
 
 import RadioGroupBasicDemo from "@components/radio-group-demo/RadioGroupBasicDemo.tsx";
+import RadioGroupRootProviderDemo from "@components/radio-group-demo/RadioGroupRootProviderDemo.tsx";
 
 # Radio Group
 
@@ -35,16 +36,16 @@ A component that allows users to select a single option from a set of mutually e
   Docs
 </a>
 
-<RadioGroupBasicDemo client:load />
+<RadioGroupBasicDemo client:only="solid-js" />
 
 ```tsx
 import {
   RadioGroup,
+  RadioGroupRootProvider,
   RadioGroupLabel,
   RadioGroupItem,
   RadioGroupItemControl,
   RadioGroupItemText,
-  RadioGroupIndicator,
 } from "~/components/radio-group";
 
 export function RadioGroupDemo() {
@@ -52,16 +53,16 @@ export function RadioGroupDemo() {
     <RadioGroup defaultValue="1">
       <RadioGroupLabel>Payment Method</RadioGroupLabel>
       <RadioGroupItem value="1">
-        <RadioGroupItemControl>
-          <RadioGroupIndicator />
-        </RadioGroupItemControl>
+        <RadioGroupItemControl />
         <RadioGroupItemText>Credit Card</RadioGroupItemText>
       </RadioGroupItem>
       <RadioGroupItem value="2">
-        <RadioGroupItemControl>
-          <RadioGroupIndicator />
-        </RadioGroupItemControl>
-        <RadioGroupItemText>PayPal</RadioGroupItemText>
+        <RadioGroupItemControl />
+        <RadioGroupItemText>Paypal</RadioGroupItemText>
+      </RadioGroupItem>
+      <RadioGroupItem value="3">
+        <RadioGroupItemControl />
+        <RadioGroupItemText>Debit</RadioGroupItemText>
       </RadioGroupItem>
     </RadioGroup>
   );
@@ -114,16 +115,27 @@ export type RadioGroupVariants = VariantProps<typeof radioGroupVariants>
 Create the component file at `src/components/radio-group.tsx`:
 ```tsx
 import { RadioGroup as ArkRadioGroup } from '@ark-ui/solid/radio-group'
-import { createMemo, splitProps, type Component } from 'solid-js'
+import { children, createMemo, splitProps, type Component } from 'solid-js'
 import { radioGroupVariants } from './recipes/radio-group'
 
 // Global variant instance (no params)
 const styles = radioGroupVariants()
 
 const RadioGroupRoot: Component<ArkRadioGroup.RootProps> = (props) => {
+const [local, others] = splitProps(props, ['class', 'children'])
+const rootClass = createMemo(() => styles.root({ class: local.class }))
+const resolvedChildren = children(()=>local.children)
+return <ArkRadioGroup.Root class={rootClass()} {...others}>
+{resolvedChildren()}
+
+<ArkRadioGroup.Indicator class={styles.itemIndicator()} />
+</ArkRadioGroup.Root>
+}
+
+const RadioGroupRootProvider: Component<ArkRadioGroup.RootProviderProps> = (props) => {
 const [local, others] = splitProps(props, ['class'])
 const rootClass = createMemo(() => styles.root({ class: local.class }))
-return <ArkRadioGroup.Root class={rootClass()} {...others} />
+return <ArkRadioGroup.RootProvider class={rootClass()} {...others} />
 }
 
 const RadioGroupLabel: Component<ArkRadioGroup.LabelProps> = (props) => {
@@ -141,7 +153,11 @@ return <ArkRadioGroup.Item class={itemClass()} {...others} />
 const RadioGroupItemControl: Component<ArkRadioGroup.ItemControlProps> = (props) => {
 const [local, others] = splitProps(props, ['class'])
 const controlClass = createMemo(() => styles.itemControl({ class: local.class }))
-return <ArkRadioGroup.ItemControl class={controlClass()} {...others} />
+return <>
+
+<ArkRadioGroup.ItemControl class={controlClass()} {...others} />
+<ArkRadioGroup.ItemHiddenInput />
+</>
 }
 
 const RadioGroupItemText: Component<ArkRadioGroup.ItemTextProps> = (props) => {
@@ -150,26 +166,13 @@ const textClass = createMemo(() => styles.itemText({ class: local.class }))
 return <ArkRadioGroup.ItemText class={textClass()} {...others} />
 }
 
-const RadioGroupItemHiddenInput: Component<ArkRadioGroup.ItemHiddenInputProps> = (props) => {
-const [local, others] = splitProps(props, ['class'])
-const inputClass = createMemo(() => styles.itemHiddenInput({ class: local.class }))
-return <ArkRadioGroup.ItemHiddenInput class={inputClass()} {...others} />
-}
-
-const RadioGroupIndicator: Component<ArkRadioGroup.IndicatorProps> = (props) => {
-const [local, others] = splitProps(props, ['class'])
-const indicatorClass = createMemo(() => styles.itemIndicator({ class: local.class }))
-return <ArkRadioGroup.Indicator class={indicatorClass()} {...others} />
-}
-
 export {
   RadioGroupRoot as RadioGroup,
+  RadioGroupRootProvider,
   RadioGroupLabel,
   RadioGroupItem,
   RadioGroupItemControl,
   RadioGroupItemText,
-  RadioGroupItemHiddenInput,
-  RadioGroupIndicator,
   radioGroupVariants,
 }
 ```
@@ -183,11 +186,11 @@ Import the components:
 ```tsx
 import {
   RadioGroup,
+  RadioGroupRootProvider,
   RadioGroupLabel,
   RadioGroupItem,
   RadioGroupItemControl,
   RadioGroupItemText,
-  RadioGroupIndicator,
 } from "~/components/radio-group";
 ```
 
@@ -195,16 +198,13 @@ Basic usage:
 
 ```tsx
 <RadioGroup defaultValue="1">
+  <RadioGroupLabel>Payment Method</RadioGroupLabel>
   <RadioGroupItem value="1">
-    <RadioGroupItemControl>
-      <RadioGroupIndicator />
-    </RadioGroupItemControl>
+    <RadioGroupItemControl />
     <RadioGroupItemText>Option One</RadioGroupItemText>
   </RadioGroupItem>
   <RadioGroupItem value="2">
-    <RadioGroupItemControl>
-      <RadioGroupIndicator />
-    </RadioGroupItemControl>
+    <RadioGroupItemControl />
     <RadioGroupItemText>Option Two</RadioGroupItemText>
   </RadioGroupItem>
 </RadioGroup>
@@ -218,13 +218,60 @@ Add a label to describe the radio group.
 <RadioGroup defaultValue="1">
   <RadioGroupLabel>Choose an option</RadioGroupLabel>
   <RadioGroupItem value="1">
-    <RadioGroupItemControl>
-      <RadioGroupIndicator />
-    </RadioGroupItemControl>
+    <RadioGroupItemControl />
     <RadioGroupItemText>Option One</RadioGroupItemText>
   </RadioGroupItem>
 </RadioGroup>
 ```
+
+## Root Provider
+
+Use `RadioGroupRootProvider` when you need to access the radio group state outside of the component tree. This pattern uses the `useRadioGroup` hook from Ark UI to create a shared context that both the radio group and external elements can reference.
+
+<RadioGroupRootProviderDemo client:only="solid-js" />
+
+```tsx
+import { useRadioGroup } from "@ark-ui/solid/radio-group";
+import {
+  RadioGroupRootProvider,
+  RadioGroupLabel,
+  RadioGroupItem,
+  RadioGroupItemControl,
+  RadioGroupItemText,
+} from "~/components/radio-group";
+
+export function RadioGroupWithExternalControl() {
+  const radioGroup = useRadioGroup({ defaultValue: "1" });
+
+  return (
+    <div>
+      {/* Access radio group state outside the tree */}
+      <output>Value: {JSON.stringify(radioGroup().value)}</output>
+
+      <RadioGroupRootProvider value={radioGroup}>
+        <RadioGroupLabel>Payment Method</RadioGroupLabel>
+        <RadioGroupItem value="1">
+          <RadioGroupItemControl />
+          <RadioGroupItemText>Credit Card</RadioGroupItemText>
+        </RadioGroupItem>
+        <RadioGroupItem value="2">
+          <RadioGroupItemControl />
+          <RadioGroupItemText>Paypal</RadioGroupItemText>
+        </RadioGroupItem>
+        <RadioGroupItem value="3">
+          <RadioGroupItemControl />
+          <RadioGroupItemText>Debit</RadioGroupItemText>
+        </RadioGroupItem>
+      </RadioGroupRootProvider>
+    </div>
+  );
+}
+```
+
+The key difference:
+
+- **`RadioGroup` (Root)** — manages its own state internally. Use for simple, self-contained radio groups.
+- **`RadioGroupRootProvider`** — accepts a pre-created radio group context via `useRadioGroup`. Use when you need to read or control the radio group state from outside the component tree.
 
 ## Disabled Item
 
@@ -232,16 +279,13 @@ Use the `disabled` prop on a `RadioGroupItem` to disable that specific option.
 
 ```tsx
 <RadioGroup defaultValue="1">
+  <RadioGroupLabel>Payment Method</RadioGroupLabel>
   <RadioGroupItem value="1">
-    <RadioGroupItemControl>
-      <RadioGroupIndicator />
-    </RadioGroupItemControl>
+    <RadioGroupItemControl />
     <RadioGroupItemText>Available Option</RadioGroupItemText>
   </RadioGroupItem>
   <RadioGroupItem value="2" disabled>
-    <RadioGroupItemControl>
-      <RadioGroupIndicator />
-    </RadioGroupItemControl>
+    <RadioGroupItemControl />
     <RadioGroupItemText>Disabled Option</RadioGroupItemText>
   </RadioGroupItem>
 </RadioGroup>
@@ -258,6 +302,13 @@ Use the `disabled` prop on a `RadioGroupItem` to disable that specific option.
 | onValueChange | `(details: { value: string }) => void` | —       | Callback when selection changes.               |
 | disabled      | `boolean`                              | `false` | Whether the entire group is disabled.          |
 | class         | `string`                               | —       | Custom CSS class.                              |
+
+### RadioGroupRootProvider
+
+| Prop  | Type                  | Default | Description                                                      |
+| ----- | --------------------- | ------- | ---------------------------------------------------------------- |
+| value | `UseRadioGroupReturn` | —       | Radio group context returned by `useRadioGroup()`. **Required.** |
+| class | `string`              | —       | Custom CSS class.                                                |
 
 ### RadioGroupLabel
 
@@ -285,8 +336,4 @@ Use the `disabled` prop on a `RadioGroupItem` to disable that specific option.
 | ----- | -------- | ------- | ----------------- |
 | class | `string` | —       | Custom CSS class. |
 
-### RadioGroupIndicator
-
-| Prop  | Type     | Default | Description       |
-| ----- | -------- | ------- | ----------------- |
-| class | `string` | —       | Custom CSS class. |
+> **Note:** `RadioGroupIndicator` is automatically rendered inside the root component, and `RadioGroupItemHiddenInput` is automatically rendered inside `RadioGroupItemControl`. You do not need to add them manually.

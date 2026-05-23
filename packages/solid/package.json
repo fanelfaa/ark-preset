@@ -19,7 +19,7 @@
     }
   },
   "scripts": {
-    "build": "vite build && tsc --build",
+    "build": "vite build && tsc --build --force",
     "dev": "vite build --watch",
     "clean": "rm -rf dist",
     "typecheck": "tsc --noEmit"

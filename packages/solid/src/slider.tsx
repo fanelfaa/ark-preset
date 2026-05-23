@@ -2,15 +2,18 @@ import { Slider as ArkSlider } from "@ark-ui/solid/slider";
 import { createMemo, splitProps, type Component, type JSX } from "solid-js";
 import { sliderVariants } from "@ui/core";
 
-// Global variant instance (no params)
 const styles = sliderVariants();
 
-type RootProps = ArkSlider.RootProps & { class?: string };
-
-const SliderRoot: Component<RootProps> = (props) => {
+const SliderRoot: Component<ArkSlider.RootProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   const rootClass = createMemo(() => styles.root({ class: local.class }));
   return <ArkSlider.Root class={rootClass()} {...others} />;
+};
+
+const SliderRootProvider: Component<ArkSlider.RootProviderProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  const rootClass = createMemo(() => styles.root({ class: local.class }));
+  return <ArkSlider.RootProvider class={rootClass()} {...others} />;
 };
 
 const SliderLabel: Component<ArkSlider.LabelProps> = (props) => {
@@ -53,9 +56,7 @@ const SliderRange: Component<ArkSlider.RangeProps> = (props) => {
   return <ArkSlider.Range class={rangeClass()} {...others} />;
 };
 
-type ThumbProps = ArkSlider.ThumbProps & { class?: string; index: number };
-
-const SliderThumb: Component<ThumbProps> = (props) => {
+const SliderThumb: Component<ArkSlider.ThumbProps> = (props) => {
   const [local, others] = splitProps(props, ["class", "index"]);
   const thumbClass = createMemo(() => styles.thumb({ class: local.class }));
   return <ArkSlider.Thumb class={thumbClass()} index={local.index} {...others} />;
@@ -77,9 +78,7 @@ const SliderMarkerGroup: Component<ArkSlider.MarkerGroupProps> = (props) => {
   return <ArkSlider.MarkerGroup class={markerGroupClass()} {...others} />;
 };
 
-type MarkerProps = ArkSlider.MarkerProps & { class?: string; value: number };
-
-const SliderMarker: Component<MarkerProps> = (props) => {
+const SliderMarker: Component<ArkSlider.MarkerProps> = (props) => {
   const [local, others] = splitProps(props, ["class", "value"]);
   const markerClass = createMemo(() => styles.marker({ class: local.class }));
   return <ArkSlider.Marker class={markerClass()} value={local.value} {...others} />;
@@ -87,6 +86,7 @@ const SliderMarker: Component<MarkerProps> = (props) => {
 
 export {
   SliderRoot,
+  SliderRootProvider,
   SliderLabel,
   SliderValueText,
   SliderControl,

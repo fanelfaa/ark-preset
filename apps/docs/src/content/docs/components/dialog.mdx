@@ -6,6 +6,7 @@ updatedDate: 2026-05-18
 ---
 
 import DialogBasicDemo from "@components/dialog-demo/DialogBasicDemo.tsx";
+import DialogRootProviderDemo from "@components/dialog-demo/DialogRootProviderDemo.tsx";
 
 # Dialog
 
@@ -35,11 +36,12 @@ A modal dialog that overlays the page content, typically used for important acti
   Docs
 </a>
 
-<DialogBasicDemo client:only="solid-js" />
+<DialogBasicDemo client:load />
 
 ```tsx
 import {
   Dialog,
+  DialogRootProvider,
   DialogTrigger,
   DialogContent,
   DialogHeader,
@@ -52,7 +54,7 @@ import { Button } from "~/components/button";
 export function DialogDemo() {
   return (
     <Dialog>
-      <DialogTrigger as={Button}>Open Dialog</DialogTrigger>
+      <DialogTrigger as={(props) => <Button {...props()} />}>Open Dialog</DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Edit Profile</DialogTitle>
@@ -61,7 +63,9 @@ export function DialogDemo() {
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <Button variant="outline">Cancel</Button>
+          <DialogCloseTrigger asChild={(props) => <Button variant="outline" {...props()} />}>
+            Cancel
+          </DialogCloseTrigger>
           <Button>Save Changes</Button>
         </DialogFooter>
       </DialogContent>
@@ -123,54 +127,54 @@ import { dialogVariants } from './recipes/dialog'
 const styles = dialogVariants()
 
 export const DialogRoot = ArkDialog.Root;
+export const DialogRootProvider = ArkDialog.RootProvider;
 export const DialogTrigger = ArkDialog.Trigger;
 
 type DialogContentProps = { class?: string; children?: JSX.Element }
 
 const DialogContent: Component<DialogContentProps> = (props) => {
-const [local, others] = splitProps(props, ['class', 'children'])
-const contentClass = createMemo(() => styles.content({ class: local.class }))
-return (
-
-<Portal>
-<ArkDialog.Backdrop class={styles.backdrop()} />
-<ArkDialog.Positioner class={styles.positioner()}>
-<ArkDialog.Content class={contentClass()} {...others}>
-{local.children}
-<ArkDialog.CloseTrigger class={styles.closeTrigger()}>
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="size-4"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
-</ArkDialog.CloseTrigger>
-</ArkDialog.Content>
-</ArkDialog.Positioner>
-</Portal>
-)
+  const [local, others] = splitProps(props, ['class', 'children'])
+  const contentClass = createMemo(() => styles.content({ class: local.class }))
+  return (
+    <Portal>
+      <ArkDialog.Backdrop class={styles.backdrop()} />
+      <ArkDialog.Positioner class={styles.positioner()}>
+        <ArkDialog.Content class={contentClass()} {...others}>
+          {local.children}
+          <ArkDialog.CloseTrigger class={styles.closeTrigger()}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="size-4"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+          </ArkDialog.CloseTrigger>
+        </ArkDialog.Content>
+      </ArkDialog.Positioner>
+    </Portal>
+  )
 }
 
 const DialogHeader: Component<{ class?: string; children?: JSX.Element }> = (props) => {
-const [local, others] = splitProps(props, ['class', 'children'])
-const headerClass = createMemo(() => styles.header({ class: local.class }))
-return <div class={headerClass()} {...others}>{local.children}</div>
+  const [local, others] = splitProps(props, ['class', 'children'])
+  const headerClass = createMemo(() => styles.header({ class: local.class }))
+  return <div class={headerClass()} {...others}>{local.children}</div>
 }
 
 const DialogFooter: Component<{ class?: string; children?: JSX.Element }> = (props) => {
-const [local, others] = splitProps(props, ['class', 'children'])
-const footerClass = createMemo(() => styles.footer({ class: local.class }))
-return <div class={footerClass()} {...others}>{local.children}</div>
+  const [local, others] = splitProps(props, ['class', 'children'])
+  const footerClass = createMemo(() => styles.footer({ class: local.class }))
+  return <div class={footerClass()} {...others}>{local.children}</div>
 }
 
 const DialogTitle: Component<ArkDialog.TitleProps> = (props) => {
-const [local, others] = splitProps(props, ['class'])
-const titleClass = createMemo(() => styles.title({ class: local.class }))
-return <ArkDialog.Title class={titleClass()} {...others} />
+  const [local, others] = splitProps(props, ['class'])
+  const titleClass = createMemo(() => styles.title({ class: local.class }))
+  return <ArkDialog.Title class={titleClass()} {...others} />
 }
 
 const DialogDescription: Component<ArkDialog.DescriptionProps> = (props) => {
-const [local, others] = splitProps(props, ['class'])
-const descriptionClass = createMemo(() => styles.description({ class: local.class }))
-return <ArkDialog.Description class={descriptionClass()} {...others} />
+  const [local, others] = splitProps(props, ['class'])
+  const descriptionClass = createMemo(() => styles.description({ class: local.class }))
+  return <ArkDialog.Description class={descriptionClass()} {...others} />
 }
 
-export { DialogRoot as Dialog, DialogTrigger, DialogContent, DialogHeader, DialogFooter, DialogTitle, DialogDescription, dialogVariants }
+export { DialogRoot as Dialog, DialogRootProvider, DialogTrigger, DialogContent, DialogHeader, DialogFooter, DialogTitle, DialogDescription, dialogVariants }
 ```
 </div>
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--border`, etc.) or override the utility classes to match your design system.
@@ -182,6 +186,7 @@ Import the components:
 ```tsx
 import {
   Dialog,
+  DialogRootProvider,
   DialogTrigger,
   DialogContent,
   DialogHeader,
@@ -195,7 +200,7 @@ Basic usage:
 
 ```tsx
 <Dialog>
-  <DialogTrigger as={Button}>Open Dialog</DialogTrigger>
+  <DialogTrigger as={(props) => <Button {...props()} />}>Open Dialog</DialogTrigger>
   <DialogContent>
     <DialogHeader>
       <DialogTitle>Title</DialogTitle>
@@ -211,7 +216,7 @@ Add header and footer sections for structured dialog content.
 
 ```tsx
 <Dialog>
-  <DialogTrigger as={Button}>Open</DialogTrigger>
+  <DialogTrigger as={(props) => <Button {...props()} />}>Open</DialogTrigger>
   <DialogContent>
     <DialogHeader>
       <DialogTitle>Confirm Action</DialogTitle>
@@ -249,6 +254,61 @@ export function ControlledDialog() {
   );
 }
 ```
+
+## Root Provider
+
+Use `DialogRootProvider` when you need to access the dialog state outside of the component tree. This pattern uses the `useDialog` hook from Ark UI to create a shared context that both the component and external elements can reference.
+
+<DialogRootProviderDemo client:load />
+
+```tsx
+import { useDialog } from "@ark-ui/solid/dialog";
+import {
+  DialogRootProvider,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogDescription,
+} from "~/components/dialog";
+import { Button } from "~/components/button";
+
+export function ExternalControlExample() {
+  const dialog = useDialog({ defaultOpen: false });
+
+  return (
+    <div>
+      <output>Open: {JSON.stringify(dialog().open)}</output>
+
+      <Button onClick={() => dialog().setOpen(true)}>Open Dialog</Button>
+
+      <DialogRootProvider value={dialog}>
+        <DialogTrigger asChild={(props) => <Button {...props()} style="display:none" />}>
+          Hidden Trigger
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Externally Controlled Dialog</DialogTitle>
+            <DialogDescription>This dialog is controlled via useDialog.</DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => dialog().setOpen(false)}>
+              Cancel
+            </Button>
+            <Button onClick={() => dialog().setOpen(false)}>Confirm</Button>
+          </DialogFooter>
+        </DialogContent>
+      </DialogRootProvider>
+    </div>
+  );
+}
+```
+
+The key difference:
+
+- **`Dialog` (Root)** — manages its own state internally. Use for simple, self-contained usage.
+- **`DialogRootProvider`** — accepts a pre-created context via `useDialog`. Use when you need to read or control the dialog state from outside the component tree.
 
 ## API Reference
 
@@ -299,3 +359,14 @@ export function ControlledDialog() {
 | Prop  | Type     | Default | Description       |
 | ----- | -------- | ------- | ----------------- |
 | class | `string` | —       | Custom CSS class. |
+
+### DialogRootProvider
+
+| Prop           | Type              | Default | Description                                        |
+| -------------- | ----------------- | ------- | -------------------------------------------------- |
+| value          | `UseDialogReturn` | —       | Context returned by `useDialog()`. **Required.**   |
+| lazyMount      | `boolean`         | `false` | Whether to enable lazy mounting.                   |
+| unmountOnExit  | `boolean`         | `false` | Whether to unmount on exit.                        |
+| present        | `boolean`         | —       | Whether the node is present (controlled).          |
+| immediate      | `boolean`         | —       | Whether to synchronize present change immediately. |
+| onExitComplete | `() => void`      | —       | Callback when exit animation completes.            |

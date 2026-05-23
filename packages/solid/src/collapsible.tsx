@@ -2,13 +2,18 @@ import { Collapsible as ArkCollapsible } from "@ark-ui/solid/collapsible";
 import { createMemo, splitProps, type Component } from "solid-js";
 import { collapsibleVariants } from "@ui/core";
 
-// Global variant instance (no params consumed)
 const styles = collapsibleVariants();
 
 const CollapsibleRoot: Component<ArkCollapsible.RootProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   const rootClass = createMemo(() => styles.root({ class: local.class }));
   return <ArkCollapsible.Root class={rootClass()} {...others} />;
+};
+
+const CollapsibleRootProvider: Component<ArkCollapsible.RootProviderProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  const rootClass = createMemo(() => styles.root({ class: local.class }));
+  return <ArkCollapsible.RootProvider class={rootClass()} {...others} />;
 };
 
 const CollapsibleTrigger: Component<ArkCollapsible.TriggerProps> = (props) => {
@@ -31,6 +36,7 @@ const CollapsibleIndicator: Component<ArkCollapsible.IndicatorProps> = (props) =
 
 export {
   CollapsibleRoot as Collapsible,
+  CollapsibleRootProvider,
   CollapsibleTrigger,
   CollapsibleContent,
   CollapsibleIndicator,

@@ -2,13 +2,18 @@ import { Accordion as ArkAccordion } from "@ark-ui/solid/accordion";
 import { createMemo, splitProps, type Component } from "solid-js";
 import { accordionVariants } from "@ui/core";
 
-// Global variant instance (no params)
 const styles = accordionVariants();
 
 const AccordionRoot: Component<ArkAccordion.RootProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   const rootClass = createMemo(() => styles.root({ class: local.class }));
   return <ArkAccordion.Root class={rootClass()} {...others} />;
+};
+
+const AccordionRootProvider: Component<ArkAccordion.RootProviderProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  const rootClass = createMemo(() => styles.root({ class: local.class }));
+  return <ArkAccordion.RootProvider class={rootClass()} {...others} />;
 };
 
 const AccordionItem: Component<ArkAccordion.ItemProps> = (props) => {
@@ -37,6 +42,7 @@ const AccordionItemIndicator: Component<ArkAccordion.ItemIndicatorProps> = (prop
 
 export {
   AccordionRoot as Accordion,
+  AccordionRootProvider,
   AccordionItem,
   AccordionItemTrigger,
   AccordionItemContent,

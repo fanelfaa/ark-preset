@@ -6,6 +6,7 @@ updatedDate: 2026-05-18
 ---
 
 import PopoverBasicDemo from "@components/popover-demo/PopoverBasicDemo.tsx";
+import PopoverRootProviderDemo from "@components/popover-demo/PopoverRootProviderDemo.tsx";
 
 # Popover
 
@@ -35,17 +36,17 @@ A floating panel that displays content when triggered by a user action, typicall
   Docs
 </a>
 
-<PopoverBasicDemo client:load />
+<PopoverBasicDemo client:only="solid-js" />
 
 ```tsx
 import {
   Popover,
+  PopoverRootProvider,
   PopoverTrigger,
   PopoverContent,
   PopoverTitle,
   PopoverDescription,
 } from "~/components/popover";
-import { Button } from "~/components/button";
 
 export function PopoverDemo() {
   return (
@@ -117,6 +118,7 @@ import { popoverVariants } from './recipes/popover'
 const styles = popoverVariants()
 
 export const PopoverRoot = ArkPopover.Root;
+export const PopoverRootProvider = ArkPopover.RootProvider;
 export const PopoverTrigger = ArkPopover.Trigger;
 
 type PopoverContentProps = ArkPopover.ContentProps & { class?: string; children?: JSX.Element }
@@ -185,6 +187,7 @@ return (
 
 export {
   PopoverRoot as Popover,
+  PopoverRootProvider,
   PopoverTrigger,
   PopoverContent,
   PopoverTitle,
@@ -206,6 +209,7 @@ Import the components:
 ```tsx
 import {
   Popover,
+  PopoverRootProvider,
   PopoverTrigger,
   PopoverContent,
   PopoverTitle,
@@ -240,6 +244,52 @@ Add a close trigger to allow users to dismiss the popover.
 </Popover>
 ```
 
+## Root Provider
+
+Use `PopoverRootProvider` when you need to access the popover state outside of the component tree. This pattern uses the `usePopover` hook from Ark UI to create a shared context that both the popover and external elements can reference.
+
+<PopoverRootProviderDemo client:only="solid-js" />
+
+```tsx
+import { usePopover } from "@ark-ui/solid/popover";
+import {
+  PopoverRootProvider,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverTitle,
+  PopoverDescription,
+  PopoverCloseTrigger,
+} from "~/components/popover";
+import { Button } from "~/components/button";
+
+export function PopoverWithExternalControl() {
+  const popover = usePopover();
+
+  return (
+    <div>
+      {/* Access popover state outside the tree */}
+      <output>Open: {JSON.stringify(popover().open)}</output>
+
+      <PopoverRootProvider value={popover}>
+        <PopoverTrigger as={Button}>Open Popover</PopoverTrigger>
+        <PopoverContent>
+          <PopoverTitle>Popover Title</PopoverTitle>
+          <PopoverDescription>
+            This popover state is managed externally via <code>usePopover</code>.
+          </PopoverDescription>
+          <PopoverCloseTrigger>Close</PopoverCloseTrigger>
+        </PopoverContent>
+      </PopoverRootProvider>
+    </div>
+  );
+}
+```
+
+The key difference:
+
+- **`Popover` (Root)** — manages its own state internally. Use for simple, self-contained popovers.
+- **`PopoverRootProvider`** — accepts a pre-created popover context via `usePopover`. Use when you need to read or control the popover state from outside the component tree.
+
 ## With Arrow
 
 Add an arrow to visually connect the popover to its trigger.
@@ -267,6 +317,13 @@ Add an arrow to visually connect the popover to its trigger.
 | onOpenChange | `(open: boolean) => void` | —       | Callback when open state changes.    |
 | positioning  | `object`                  | —       | Positioning options for the popover. |
 | class        | `string`                  | —       | Custom CSS class.                    |
+
+### PopoverRootProvider
+
+| Prop  | Type               | Default | Description                                               |
+| ----- | ------------------ | ------- | --------------------------------------------------------- |
+| value | `UsePopoverReturn` | —       | Popover context returned by `usePopover()`. **Required.** |
+| class | `string`           | —       | Custom CSS class.                                         |
 
 ### PopoverTrigger
 

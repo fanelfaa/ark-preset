@@ -6,6 +6,7 @@ updatedDate: 2026-05-18
 ---
 
 import TabsBasicDemo from "@components/tabs-demo/TabsBasicDemo.tsx";
+import TabsRootProviderDemo from "@components/tabs-demo/TabsRootProviderDemo.tsx";
 
 # Tabs
 
@@ -38,7 +39,7 @@ A navigable component that organizes content into separate views where only one 
 <TabsBasicDemo client:load />
 
 ```tsx
-import { Tabs, TabsList, TabsTrigger, TabsContent, TabsIndicator } from "~/components/tabs";
+import { Tabs, TabsList, TabsTrigger, TabsContent, TabsIndicator, TabsRootProvider } from "~/components/tabs";
 
 export function TabsDemo() {
   return (
@@ -138,7 +139,13 @@ const indicatorClass = createMemo(() => styles.indicator({ class: local.class })
 return <ArkTabs.Indicator class={indicatorClass()} {...others} />
 }
 
-export { TabsRoot as Tabs, TabsList, TabsTrigger, TabsContent, TabsIndicator, tabsVariants }
+const TabsRootProvider: Component<ArkTabs.RootProviderProps> = (props) => {
+const [local, others] = splitProps(props, ['class'])
+const rootClass = createMemo(() => styles.root({ class: local.class }))
+return <ArkTabs.RootProvider class={rootClass()} {...others} />
+}
+
+export { TabsRoot as Tabs, TabsRootProvider, TabsList, TabsTrigger, TabsContent, TabsIndicator, tabsVariants }
 ```
 </div>
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--foreground`, `--muted`, `--background`, etc.) or override the utility classes to match your design system.
@@ -148,7 +155,7 @@ export { TabsRoot as Tabs, TabsList, TabsTrigger, TabsContent, TabsIndicator, ta
 Import the components:
 
 ```tsx
-import { Tabs, TabsList, TabsTrigger, TabsContent, TabsIndicator } from "~/components/tabs";
+import { Tabs, TabsList, TabsTrigger, TabsContent, TabsIndicator, TabsRootProvider } from "~/components/tabs";
 ```
 
 Basic usage:
@@ -202,6 +209,49 @@ Use the `disabled` prop on a `TabsTrigger` to disable that specific tab.
 </Tabs>
 ```
 
+## Root Provider
+
+Use `TabsRootProvider` when you need to access the tabs state outside of the tabs tree. This pattern uses the `useTabs` hook from Ark UI to create a shared context that both the tabs and external elements can reference.
+
+<TabsRootProviderDemo client:load />
+
+```tsx
+import { useTabs } from "@ark-ui/solid/tabs";
+import {
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+  TabsIndicator,
+  TabsRootProvider,
+} from "~/components/tabs";
+
+export function TabsWithExternalControl() {
+  const tabs = useTabs({ defaultValue: "overview" });
+
+  return (
+    <div>
+      {/* Access tabs state outside the tree */}
+      <output>Value: {JSON.stringify(tabs().value)}</output>
+
+      <TabsRootProvider value={tabs}>
+        <TabsList>
+          <TabsTrigger value="overview">Overview</TabsTrigger>
+          <TabsTrigger value="usage">Usage</TabsTrigger>
+          <TabsIndicator />
+        </TabsList>
+        <TabsContent value="overview">...</TabsContent>
+        <TabsContent value="usage">...</TabsContent>
+      </TabsRootProvider>
+    </div>
+  );
+}
+```
+
+The key difference:
+
+- **`Tabs` (Root)** — manages its own state internally. Use for simple, self-contained tabs.
+- **`TabsRootProvider`** — accepts a pre-created tabs context via `useTabs`. Use when you need to read or control the tabs state from outside the component tree.
+
 ## API Reference
 
 ### Tabs (Root)
@@ -241,3 +291,10 @@ Use the `disabled` prop on a `TabsTrigger` to disable that specific tab.
 | Prop  | Type     | Default | Description       |
 | ----- | -------- | ------- | ----------------- |
 | class | `string` | —       | Custom CSS class. |
+
+### TabsRootProvider
+
+| Prop  | Type            | Default | Description                                           |
+| ----- | --------------- | ------- | ----------------------------------------------------- |
+| value | `UseTabsReturn` | —       | Tabs context returned by `useTabs()`. **Required.**   |
+| class | `string`        | —       | Custom CSS class.                                     |
