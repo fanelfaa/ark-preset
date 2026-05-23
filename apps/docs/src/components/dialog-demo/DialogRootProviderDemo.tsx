@@ -29,7 +29,7 @@ export default function DialogRootProviderDemo() {
       </div>
 
       <DialogRootProvider value={dialog}>
-        <DialogTrigger asChild={(p: any) => <Button {...p} />}>
+        <DialogTrigger asChild={(props) => <Button {...props()} />}>
           Hidden Trigger
         </DialogTrigger>
         <DialogContent>

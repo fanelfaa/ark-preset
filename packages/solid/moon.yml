@@ -10,9 +10,13 @@ tasks:
     deps:
       - "core:build"
     inputs:
-      - "src/**"
+      - 'src/**'
+      - 'package.json'
+      - 'tsconfig.json'
+      - 'vite.config.ts'
     outputs:
-      - "dist/**"
+      - 'dist/**'
+      - 'tsconfig.tsbuildinfo'
   dev:
     command: "pnpm run dev"
     deps:

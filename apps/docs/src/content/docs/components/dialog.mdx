@@ -257,7 +257,7 @@ export function ExternalControlExample() {
       <Button onClick={() => dialog().setOpen(true)}>Open Dialog</Button>
 
       <DialogRootProvider value={dialog}>
-        <DialogTrigger asChild={(p: any) => <Button {...p} style="display:none" />}>
+        <DialogTrigger asChild={(props) => <Button {...props()} style="display:none" />}>
           Hidden Trigger
         </DialogTrigger>
         <DialogContent>
