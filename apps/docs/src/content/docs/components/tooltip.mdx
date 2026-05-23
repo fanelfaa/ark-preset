@@ -5,7 +5,7 @@ category: Overlay
 updatedDate: 2026-05-18
 ---
 
-import ArrowRightUp from "@components/icons/ArrowRightUp.astro";
+import DocsLink from "@components/DocsLink.astro";
 import TooltipBasicDemo from "@components/tooltip-demo/TooltipBasicDemo.tsx";
 import TooltipArrowDemo from "@components/tooltip-demo/TooltipArrowDemo.tsx";
 import TooltipRootProviderDemo from "@components/tooltip-demo/TooltipRootProviderDemo.tsx";
@@ -14,15 +14,7 @@ import TooltipRootProviderDemo from "@components/tooltip-demo/TooltipRootProvide
 
 A popup component that displays contextual information when hovering or focusing on a trigger element.
 
-<a
-  href="https://ark-ui.com/docs/components/tooltip"
-  target="_blank"
-  rel="noopener noreferrer"
-  class="inline-flex items-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors"
->
-  <ArrowRightUp />
-  Docs
-</a>
+<DocsLink href="https://ark-ui.com/docs/components/tooltip" />
 
 <TooltipBasicDemo client:load />
 
