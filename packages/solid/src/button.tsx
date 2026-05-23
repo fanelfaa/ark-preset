@@ -1,10 +1,9 @@
 import { createMemo, splitProps, type Component, Show, children } from "solid-js";
-import { buttonVariants } from "@ui/core";
-import type { VariantProps } from "tailwind-variants";
+import { ButtonVariants, buttonVariants } from "@ui/core";
 import { ark, HTMLArkProps } from "@ark-ui/solid/factory";
 
 type ButtonProps = HTMLArkProps<"button"> &
-  VariantProps<typeof buttonVariants> & {
+  ButtonVariants & {
     loading?: boolean;
   };
 

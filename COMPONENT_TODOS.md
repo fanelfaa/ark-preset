@@ -1,6 +1,6 @@
 # Solid UI Components Status
 
-## Implemented (14/52)
+## Implemented (18/52)
 
 | Component       | Status  |
 | --------------- | ------- |
@@ -10,14 +10,18 @@
 | [x] radio-group | ✅ Done |
 | [x] select      | ✅ Done |
 | [x] switch      | ✅ Done |
+| [x] toggle       | ✅ Done |
+| [x] toggle-group | ✅ Done |
 | [x] tabs        | ✅ Done |
 | [x] toast       | ✅ Done |
 | [x] tooltip     | ✅ Done |
 | [x] button      | ✅ Done |
 | [x] input       | ✅ Done |
 | [x] date-picker | ✅ Done |
-| [x] popover     | ✅ Done |
-| [x] slider      | ✅ Done |
+| [x] password-input | ✅ Done |
+| [x] pin-input      | ✅ Done |
+| [x] popover        | ✅ Done |
+| [x] slider         | ✅ Done |
 
 ## Not Implemented (38/52)
 
@@ -39,15 +43,15 @@
 | [ ] field          | ⬜ Not started |
 | [ ] fieldset       | ⬜ Not started |
 | [x] number-input   | ✅ Done        |
-| [ ] password-input | ⬜ Not started |
-| [ ] pin-input      | ⬜ Not started |
+| [x] password-input | ✅ Done |
+| [x] pin-input      | ✅ Done |
 | [ ] progress       | ⬜ Not started |
 | [ ] rating-group   | ⬜ Not started |
 | [ ] scroll-area    | ⬜ Not started |
 | [ ] segment-group  | ⬜ Not started |
 | [ ] tags-input     | ⬜ Not started |
-| [ ] toggle-group   | ⬜ Not started |
-| [ ] toggle         | ⬜ Not started |
+| [x] toggle-group   | ✅ Done |
+| [x] toggle         | ✅ Done |
 | [ ] hover-card     | ⬜ Not started |
 | [ ] listbox        | ⬜ Not started |
 
@@ -94,4 +98,4 @@
 
 ---
 
-**Progress: 27% (14 of 52 components implemented)**
+**Progress: 35% (18 of 52 components implemented)**

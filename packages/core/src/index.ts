@@ -51,3 +51,15 @@ export type { DrawerVariants } from "./recipes/drawer";
 
 export { menuVariants } from "./recipes/menu";
 export type { MenuVariants } from "./recipes/menu";
+
+export { passwordInputVariants } from "./recipes/password-input";
+export type { PasswordInputVariants } from "./recipes/password-input";
+
+export { pinInputVariants } from "./recipes/pin-input";
+export type { PinInputVariants } from "./recipes/pin-input";
+
+export { toggleVariants } from "./recipes/toggle";
+export type { ToggleVariants } from "./recipes/toggle";
+
+export { toggleGroupVariants } from "./recipes/toggle-group";
+export type { ToggleGroupVariants } from "./recipes/toggle-group";

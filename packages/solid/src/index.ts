@@ -16,3 +16,7 @@ export * from "./switch";
 export * from "./tabs";
 export * from "./toast";
 export * from "./tooltip";
+export * from "./password-input";
+export * from "./pin-input";
+export * from "./toggle";
+export * from "./toggle-group";

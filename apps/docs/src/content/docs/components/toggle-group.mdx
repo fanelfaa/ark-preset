@@ -1,0 +1,257 @@
+---
+title: Toggle Group
+description: A group of toggle buttons for selecting one or multiple options from a set.
+category: Form & Input
+updatedDate: 2026-05-23
+---
+
+import ToggleGroupBasicDemo from "@components/toggle-group-demo/ToggleGroupBasicDemo.tsx";
+import ToggleGroupSizesDemo from "@components/toggle-group-demo/ToggleGroupSizesDemo.tsx";
+
+# Toggle Group
+
+A group of toggle buttons that allows single or multiple selection from a set of options, commonly used for formatting toolbars like text alignment.
+
+<a
+  href="https://ark-ui.com/docs/components/toggle-group"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="inline-flex items-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="14"
+    height="14"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+    <polyline points="15 3 21 3 21 9" />
+    <line x1="10" x2="21" y1="14" y2="3" />
+  </svg>
+  Docs
+</a>
+
+<ToggleGroupBasicDemo client:load />
+
+```tsx
+import { ToggleGroup, ToggleGroupItem } from "~/components/toggle-group";
+
+export function ToggleGroupDemo() {
+  return (
+    <div class="flex flex-col gap-6">
+      {/* Single selection */}
+      <ToggleGroup defaultValue={["left"]}>
+        <ToggleGroupItem value="left">
+          <AlignLeftIcon />
+        </ToggleGroupItem>
+        <ToggleGroupItem value="center">
+          <AlignCenterIcon />
+        </ToggleGroupItem>
+        <ToggleGroupItem value="right">
+          <AlignRightIcon />
+        </ToggleGroupItem>
+      </ToggleGroup>
+
+      {/* Multiple selection */}
+      <ToggleGroup defaultValue={["bold"]} multiple>
+        <ToggleGroupItem value="bold">
+          <BoldIcon />
+        </ToggleGroupItem>
+        <ToggleGroupItem value="italic">
+          <ItalicIcon />
+        </ToggleGroupItem>
+        <ToggleGroupItem value="underline">
+          <UnderlineIcon />
+        </ToggleGroupItem>
+      </ToggleGroup>
+    </div>
+  );
+}
+```
+
+## Sizes
+
+Use the `size` prop to change the toggle group item size.
+
+<ToggleGroupSizesDemo client:load />
+
+```tsx
+import { ToggleGroup, ToggleGroupItem } from "~/components/toggle-group";
+
+export function ToggleGroupSizesDemo() {
+  return (
+    <div class="flex flex-col gap-6">
+      <ToggleGroup defaultValue={["sm"]}>
+        <ToggleGroupItem size="sm" value="sm">Sm</ToggleGroupItem>
+        <ToggleGroupItem size="sm" value="md">Sm</ToggleGroupItem>
+        <ToggleGroupItem size="sm" value="lg">Sm</ToggleGroupItem>
+      </ToggleGroup>
+      <ToggleGroup defaultValue={["md"]}>
+        <ToggleGroupItem size="md" value="sm">Md</ToggleGroupItem>
+        <ToggleGroupItem size="md" value="md">Md</ToggleGroupItem>
+        <ToggleGroupItem size="md" value="lg">Md</ToggleGroupItem>
+      </ToggleGroup>
+      <ToggleGroup defaultValue={["lg"]}>
+        <ToggleGroupItem size="lg" value="sm">Lg</ToggleGroupItem>
+        <ToggleGroupItem size="lg" value="md">Lg</ToggleGroupItem>
+        <ToggleGroupItem size="lg" value="lg">Lg</ToggleGroupItem>
+      </ToggleGroup>
+    </div>
+  );
+}
+```
+
+## Installation
+
+### CLI
+
+Run the following command to add the component to your project:
+
+```bash
+npx solidui-cli@latest add toggle-group
+```
+
+### Manual
+
+<div class="space-y-3">
+Install the dependency:
+```bash
+npm install tailwind-variants
+```
+</div>
+
+<div class="space-y-3">
+Create the recipe file at `src/components/recipes/toggle-group.ts`:
+```tsx
+import { tv, type VariantProps } from 'tailwind-variants'
+
+export const toggleGroupVariants = tv({
+  slots: {
+    root: "inline-flex items-center gap-1 data-[orientation=vertical]:flex-col",
+    item: "inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium border border-input bg-transparent text-foreground hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 transition-colors data-[state=on]:bg-accent data-[state=on]:text-accent-foreground data-[state=on]:border-transparent data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+  },
+  variants: {
+    size: {
+      sm: { item: "h-8 px-2.5" },
+      md: { item: "h-9 px-3 py-1.5" },
+      lg: { item: "h-10 px-6" },
+    },
+  },
+  defaultVariants: {
+    size: "sm",
+  },
+});
+
+export type ToggleGroupVariants = VariantProps<typeof toggleGroupVariants>
+```
+</div>
+
+<div class="space-y-3">
+Create the component file at `src/components/toggle-group.tsx`:
+```tsx
+import { ToggleGroup as ArkToggleGroup } from '@ark-ui/solid/toggle-group'
+import { createMemo, splitProps, type Component } from 'solid-js'
+import { ToggleGroupVariants, toggleGroupVariants } from '../recipes/toggle-group'
+
+const styles = toggleGroupVariants()
+
+const ToggleGroupRoot: Component<ArkToggleGroup.RootProps> = (props) => {
+  const [local, others] = splitProps(props, ['class'])
+  const rootClass = createMemo(() => styles.root({ class: local.class }))
+  return <ArkToggleGroup.Root class={rootClass()} {...others} />
+}
+
+const ToggleGroupRootProvider: Component<ArkToggleGroup.RootProviderProps> = (props) => {
+  const [local, others] = splitProps(props, ['class'])
+  const rootClass = createMemo(() => styles.root({ class: local.class }))
+  return <ArkToggleGroup.RootProvider class={rootClass()} {...others} />
+}
+
+const ToggleGroupItem: Component<ArkToggleGroup.ItemProps & ToggleGroupVariants> = (props) => {
+  const [local, others] = splitProps(props, ['class', 'size'])
+  const itemClass = createMemo(() => styles.item({ class: local.class, size: local.size }))
+  return <ArkToggleGroup.Item class={itemClass()} {...others} />
+}
+
+export {
+  ToggleGroupRoot as ToggleGroup,
+  ToggleGroupRootProvider,
+  ToggleGroupItem,
+  toggleGroupVariants,
+}
+```
+</div>
+
+## Usage
+
+Import the component:
+
+```tsx
+import { ToggleGroup } from "~/components/toggle-group";
+```
+
+Single selection:
+
+```tsx
+<ToggleGroup defaultValue={["left"]}>
+  <ToggleGroupItem value="left"><AlignLeftIcon /></ToggleGroupItem>
+  <ToggleGroupItem value="center"><AlignCenterIcon /></ToggleGroupItem>
+  <ToggleGroupItem value="right"><AlignRightIcon /></ToggleGroupItem>
+</ToggleGroup>
+```
+
+Multiple selection:
+
+```tsx
+<ToggleGroup defaultValue={["bold"]} multiple>
+  <ToggleGroupItem value="bold"><BoldIcon /></ToggleGroupItem>
+  <ToggleGroupItem value="italic"><ItalicIcon /></ToggleGroupItem>
+</ToggleGroup>
+```
+
+## Root Provider
+
+Use `ToggleGroupRootProvider` when you need to control the toggle group state externally.
+
+```tsx
+import { useToggleGroup } from "@ark-ui/solid/toggle-group";
+import { ToggleGroupRootProvider, ToggleGroupItem } from "~/components/toggle-group";
+
+const tg = useToggleGroup({ defaultValue: ["left"] });
+
+<ToggleGroupRootProvider value={tg}>
+  <ToggleGroupItem value="left"><AlignLeftIcon /></ToggleGroupItem>
+  <ToggleGroupItem value="center"><AlignCenterIcon /></ToggleGroupItem>
+  <ToggleGroupItem value="right"><AlignRightIcon /></ToggleGroupItem>
+</ToggleGroupRootProvider>
+```
+
+## API Reference
+
+### ToggleGroup (Root)
+
+| Prop          | Type                                 | Default      | Description                               |
+| ------------- | ------------------------------------ | ------------ | ----------------------------------------- |
+| defaultValue  | string[]                             | —            | Initial selection (uncontrolled).         |
+| value         | string[]                             | —            | Controlled selection.                     |
+| onValueChange | `(details: { value: string[] }) => void` | —        | Callback when selection changes.          |
+| multiple      | boolean                              | false        | Allow multiple selection.                 |
+| deselectable  | boolean                              | true         | Allow deselecting the current selection (single mode only). |
+| disabled      | boolean                              | false        | Whether the group is disabled.            |
+| orientation   | 'horizontal' \| 'vertical'           | 'horizontal' | Layout orientation.                       |
+| loopFocus     | boolean                              | true         | Loop focus within the group.              |
+| class         | string                               | —            | Custom CSS class.                         |
+
+### ToggleGroupItem
+
+| Prop     | Type               | Default | Description                    |
+| -------- | ------------------ | ------- | ------------------------------ |
+| value    | string             | —       | Value of the item. **Required.** |
+| size     | "sm" \| "md" \| "lg" | "sm"   | Size of the item.              |
+| disabled | boolean            | false   | Whether the item is disabled.  |
+| class    | string             | —       | Custom CSS class.              |

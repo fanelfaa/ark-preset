@@ -1,0 +1,265 @@
+---
+title: Pin Input
+description: A pin input component for entering one-time codes, PINs, and sequences with individual input fields.
+category: Form & Input
+updatedDate: 2026-05-23
+---
+
+import PinInputBasicDemo from "@components/pin-input-demo/PinInputBasicDemo.tsx";
+import PinInputRootProviderDemo from "@components/pin-input-demo/PinInputRootProviderDemo.tsx";
+
+# Pin Input
+
+A pin input component for entering one-time codes, PINs, and numeric sequences with individual input fields.
+
+<a
+  href="https://ark-ui.com/docs/components/pin-input"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="inline-flex items-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="14"
+    height="14"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+    <polyline points="15 3 21 3 21 9" />
+    <line x1="10" x2="21" y1="14" y2="3" />
+  </svg>
+  Docs
+</a>
+
+<PinInputBasicDemo client:only="solid-js" />
+
+```tsx
+import { PinInput, PinInputControl, PinInputInput, PinInputLabel } from "~/components/pin-input";
+import { Index } from "solid-js";
+
+export function PinInputDemo() {
+  return (
+    <div class="flex flex-col gap-4">
+      <PinInput>
+        <PinInputLabel>Label</PinInputLabel>
+        <PinInputControl>
+          <Index each={[0, 1, 2, 3]}>{(id) => <PinInputInput index={id()} />}</Index>
+        </PinInputControl>
+      </PinInput>
+      <PinInput placeholder="\u2022" mask>
+        <PinInputLabel>Masked</PinInputLabel>
+        <PinInputControl>
+          <Index each={[0, 1, 2, 3]}>{(id) => <PinInputInput index={id()} />}</Index>
+        </PinInputControl>
+      </PinInput>
+    </div>
+  );
+}
+```
+
+## Installation
+
+### CLI
+
+Run the following command to add the component to your project:
+
+```bash
+npx solidui-cli@latest add pin-input
+```
+
+### Manual
+
+<div class="space-y-3">
+Install the dependency:
+```bash
+npm install tailwind-variants
+```
+</div>
+
+<div class="space-y-3">
+Create the recipe file at `src/components/recipes/pin-input.ts`:
+```tsx
+import { tv, type VariantProps } from 'tailwind-variants'
+
+export const pinInputVariants = tv({
+  slots: {
+    root: "flex flex-col gap-1.5",
+    label: "text-sm font-medium text-foreground",
+    control: "inline-flex gap-2",
+    input:
+      "size-8 text-center text-base font-medium rounded-md border border-input bg-background outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 disabled:opacity-50 disabled:cursor-not-allowed data-[invalid]:border-destructive data-[invalid]:focus-visible:ring-destructive placeholder:text-muted-foreground",
+  },
+});
+
+export type PinInputVariants = VariantProps<typeof pinInputVariants>
+```
+</div>
+
+<div class="space-y-3">
+Create the component file at `src/components/pin-input.tsx`:
+```tsx
+import { PinInput as ArkPinInput } from '@ark-ui/solid/pin-input'
+import { createMemo, splitProps, type Component } from 'solid-js'
+import { pinInputVariants } from '../recipes/pin-input'
+
+const styles = pinInputVariants()
+
+const PinInputRoot: Component<ArkPinInput.RootProps> = (props) => {
+  const [local, others] = splitProps(props, ['class'])
+  const rootClass = createMemo(() => styles.root({ class: local.class }))
+  return <ArkPinInput.Root class={rootClass()} {...others} />
+}
+
+const PinInputRootProvider: Component<ArkPinInput.RootProviderProps> = (props) => {
+  const [local, others] = splitProps(props, ['class'])
+  const rootClass = createMemo(() => styles.root({ class: local.class }))
+  return <ArkPinInput.RootProvider class={rootClass()} {...others} />
+}
+
+const PinInputControl: Component<ArkPinInput.ControlProps> = (props) => {
+  const [local, others] = splitProps(props, ['class'])
+  const controlClass = createMemo(() => styles.control({ class: local.class }))
+  return <ArkPinInput.Control class={controlClass()} {...others} />
+}
+
+const PinInputInput: Component<ArkPinInput.InputProps> = (props) => {
+  const [local, others] = splitProps(props, ['class'])
+  const inputClass = createMemo(() => styles.input({ class: local.class }))
+  return <ArkPinInput.Input class={inputClass()} {...others} />
+}
+
+const PinInputLabel: Component<ArkPinInput.LabelProps> = (props) => {
+  const [local, others] = splitProps(props, ['class'])
+  const labelClass = createMemo(() => styles.label({ class: local.class }))
+  return <ArkPinInput.Label class={labelClass()} {...others} />
+}
+
+export {
+  PinInputRoot as PinInput,
+  PinInputRootProvider,
+  PinInputControl,
+  PinInputInput,
+  PinInputLabel,
+  pinInputVariants,
+}
+```
+</div>
+
+## Usage
+
+Import the components:
+
+```tsx
+import { PinInput, PinInputControl, PinInputInput, PinInputLabel } from "~/components/pin-input";
+import { Index } from "solid-js";
+```
+
+Basic:
+
+```tsx
+<PinInput>
+  <PinInputLabel>Code</PinInputLabel>
+  <PinInputControl>
+    <Index each={[0, 1, 2, 3]}>{(id) => <PinInputInput index={id()} />}</Index>
+  </PinInputControl>
+</PinInput>
+```
+
+Masked (for sensitive codes):
+
+```tsx
+<PinInput placeholder="•" mask>
+  <PinInputLabel>PIN</PinInputLabel>
+  <PinInputControl>
+    <Index each={[0, 1, 2, 3]}>{(id) => <PinInputInput index={id()} />}</Index>
+  </PinInputControl>
+</PinInput>
+```
+
+## Root Provider
+
+Use `PinInputRootProvider` when you need to control the pin input state externally.
+
+<PinInputRootProviderDemo client:only="solid-js" />
+
+```tsx
+import { usePinInput } from "@ark-ui/solid/pin-input";
+import {
+  PinInputRootProvider,
+  PinInputControl,
+  PinInputInput,
+  PinInputLabel,
+} from "~/components/pin-input";
+import { Index } from "solid-js";
+
+export function PinInputWithExternalControl() {
+  const pinInput = usePinInput();
+
+  return (
+    <div>
+      <output>Value: {JSON.stringify(pinInput().value)}</output>
+
+      <PinInputRootProvider value={pinInput}>
+        <PinInputLabel>Code</PinInputLabel>
+        <PinInputControl>
+          <Index each={[0, 1, 2, 3]}>{(id) => <PinInputInput index={id()} />}</Index>
+        </PinInputControl>
+      </PinInputRootProvider>
+    </div>
+  );
+}
+```
+
+The key difference:
+
+- **`PinInput` (Root)** — manages its own state internally. Use for simple, self-contained pin inputs.
+- **`PinInputRootProvider`** — accepts a pre-created pin input context via `usePinInput`. Use when you need to read or control the pin input state from outside the component tree.
+
+## API Reference
+
+### PinInput (Root)
+
+| Prop            | Type                                                      | Default      | Description                            |
+| --------------- | --------------------------------------------------------- | ------------ | -------------------------------------- |
+| mask            | boolean                                                   | false        | Mask input values (like password).     |
+| otp             | boolean                                                   | false        | Enable OTP autocomplete.               |
+| type            | 'numeric' \| 'alphanumeric' \| 'alphabetic'                | 'numeric'    | Input type.                            |
+| count           | number                                                    | 4            | Number of input fields.                |
+| defaultValue    | string[]                                                  | —            | Initial value (uncontrolled).          |
+| value           | string[]                                                  | —            | Controlled value.                      |
+| placeholder     | string                                                    | "○"          | Placeholder for empty inputs.          |
+| disabled        | boolean                                                   | false        | Whether the inputs are disabled.       |
+| invalid         | boolean                                                   | false        | Whether the inputs are in error state. |
+| onValueComplete | `(details) => void`                                       | —            | Called when all inputs have values.    |
+| class           | string                                                    | —            | Custom CSS class.                      |
+
+### PinInputLabel
+
+| Prop  | Type   | Default | Description        |
+| ----- | ------ | ------- | ------------------ |
+| class | string | —       | Custom CSS class.  |
+
+### PinInputControl
+
+| Prop  | Type   | Default | Description        |
+| ----- | ------ | ------- | ------------------ |
+| class | string | —       | Custom CSS class.  |
+
+### PinInputInput
+
+| Prop  | Type   | Default | Description                 |
+| ----- | ------ | ------- | --------------------------- |
+| index | number | —       | Index of the input field.   |
+| class | string | —       | Custom CSS class.           |
+
+### PinInputRootProvider
+
+| Prop  | Type                  | Default | Description                                                    |
+| ----- | --------------------- | ------- | -------------------------------------------------------------- |
+| value | UsePinInputReturn     | —       | Pin input context returned by `usePinInput()`. **Required.**   |
+| class | string                | —       | Custom CSS class.                                              |
