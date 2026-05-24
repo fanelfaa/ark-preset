@@ -79,77 +79,100 @@ export type CheckboxVariants = VariantProps<typeof checkboxVariants>
 ```
 </div>
 <div class="space-y-3">
-Create the component file at `src/components/checkbox.tsx`:
+Create the component directory and files:
+
+`src/components/checkbox/checkbox.styled.tsx`:
 ```tsx
-import { Checkbox as ArkCheckbox } from '@ark-ui/solid/checkbox'
-import { createMemo, splitProps, type Component, type JSX } from 'solid-js'
-import { checkboxVariants } from '../recipes/checkbox'
+import { Checkbox as ArkCheckbox } from "@ark-ui/solid/checkbox";
+import { splitProps, type Component } from "solid-js";
+import { checkboxVariants } from "../recipes/checkbox";
 
-// Global variant instance (no params)
-const styles = checkboxVariants()
+const styles = checkboxVariants();
 
-export { checkboxVariants };
+export const CheckboxRoot: Component<ArkCheckbox.RootProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkCheckbox.Root class={styles.root({ class: local.class })} {...others} />;
+};
 
-type CheckboxRootProps = CheckboxRootBaseProps & { children?: JSX.Element }
+export const CheckboxRootProvider: Component<ArkCheckbox.RootProviderProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkCheckbox.RootProvider class={styles.root({ class: local.class })} {...others} />;
+};
 
-interface CheckboxRootBaseProps extends ArkCheckbox.RootProps {
-class?: string
-}
+export const CheckboxControl: Component<ArkCheckbox.ControlProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkCheckbox.Control class={styles.control({ class: local.class })} {...others} />;
+};
 
-const CheckboxRoot: Component<CheckboxRootProps> = (props) => {
-const [local, others] = splitProps(props, ['class', 'children'])
-const rootClass = createMemo(() => styles.root({ class: local.class }))
-return (
+export const CheckboxLabel: Component<ArkCheckbox.LabelProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkCheckbox.Label class={styles.label({ class: local.class })} {...others} />;
+};
 
-<ArkCheckbox.Root class={rootClass()} {...others}>
-<ArkCheckbox.Control class={styles.control()}>
-<ArkCheckbox.Indicator class={styles.indicator()}>
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3.5">
-<path d="M20 6 9 17l-5-5"/>
-</svg>
-</ArkCheckbox.Indicator>
-<ArkCheckbox.Indicator class={styles.indicator()} indeterminate>
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3.5">
-<path d="M5 12h14"/>
-</svg>
-</ArkCheckbox.Indicator>
-</ArkCheckbox.Control>
-<ArkCheckbox.HiddenInput />
-{local.children}
-</ArkCheckbox.Root>
-)
-}
+export const CheckboxIndicator: Component<ArkCheckbox.IndicatorProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkCheckbox.Indicator class={styles.indicator({ class: local.class })} {...others} />;
+};
 
-const CheckboxRootProvider: Component<ArkCheckbox.RootProviderProps> = (props) => {
-const [local, others] = splitProps(props, ['class', 'children'])
-const rootClass = createMemo(() => styles.root({ class: local.class }))
-return (
-<ArkCheckbox.RootProvider class={rootClass()} {...others}>
-<ArkCheckbox.Control class={styles.control()}>
-<ArkCheckbox.Indicator class={styles.indicator()}>
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3.5">
-<path d="M20 6 9 17l-5-5"/>
-</svg>
-</ArkCheckbox.Indicator>
-<ArkCheckbox.Indicator class={styles.indicator()} indeterminate>
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3.5">
-<path d="M5 12h14"/>
-</svg>
-</ArkCheckbox.Indicator>
-</ArkCheckbox.Control>
-<ArkCheckbox.HiddenInput />
-{local.children}
-</ArkCheckbox.RootProvider>
-)
-}
+export const CheckboxHiddenInput = ArkCheckbox.HiddenInput;
+```
 
-const CheckboxLabel: Component<ArkCheckbox.LabelProps> = (props) => {
-const [local, others] = splitProps(props, ['class'])
-const labelClass = createMemo(() => styles.label({ class: local.class }))
-return <ArkCheckbox.Label class={labelClass()} {...others} />
-}
+`src/components/checkbox/index.tsx`:
+```tsx
+import { Checkbox as ArkCheckbox } from "@ark-ui/solid/checkbox";
+import { splitProps, type Component } from "solid-js";
+import { checkboxVariants } from "../recipes/checkbox";
+import {
+  CheckboxControl,
+  CheckboxHiddenInput,
+  CheckboxIndicator,
+  CheckboxRoot,
+  CheckboxRootProvider as BaseCheckboxRootProvider,
+} from "./checkbox.styled";
 
-export { CheckboxRoot as Checkbox, CheckboxRootProvider, CheckboxLabel }
+const styles = checkboxVariants();
+
+const InnerComponent = () => (
+  <>
+    <CheckboxControl class={styles.control()}>
+      <CheckboxIndicator class={styles.indicator()}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3.5">
+          <path d="M20 6 9 17l-5-5" />
+        </svg>
+      </CheckboxIndicator>
+      <CheckboxIndicator class={styles.indicator()} indeterminate>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3.5">
+          <path d="M5 12h14" />
+        </svg>
+      </CheckboxIndicator>
+    </CheckboxControl>
+    <CheckboxHiddenInput />
+  </>
+);
+
+export const Checkbox: Component<ArkCheckbox.RootProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "children"]);
+  return (
+    <CheckboxRoot class={local.class} {...others}>
+      <InnerComponent />
+      {local.children}
+    </CheckboxRoot>
+  );
+};
+
+export const CheckboxRootProvider: Component<ArkCheckbox.RootProviderProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "children"]);
+  return (
+    <BaseCheckboxRootProvider class={local.class} {...others}>
+      <InnerComponent />
+      {local.children}
+    </BaseCheckboxRootProvider>
+  );
+};
+
+export * from "./checkbox.styled";
+
+export { checkboxVariants, type CheckboxVariants } from "../recipes/checkbox";
 ```
 </div>
 

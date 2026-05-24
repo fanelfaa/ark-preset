@@ -1,4 +1,4 @@
-import { createMemo, splitProps, type Component, Show, children } from "solid-js";
+import { splitProps, type Component, Show, children } from "solid-js";
 import { ButtonVariants, buttonVariants } from "@ui/core";
 import { ark, HTMLArkProps } from "@ark-ui/solid/factory";
 
@@ -17,17 +17,19 @@ const Button: Component<ButtonProps> = (props) => {
     "children",
   ]);
   const isDisabled = () => local.loading || local.disabled;
-  const className = createMemo(() =>
-    buttonVariants({
-      variant: local.variant,
-      size: local.size,
-      loading: local.loading,
-      class: local.class,
-    }),
-  );
+
   const resolvedChildren = children(() => local.children);
   return (
-    <ark.button class={className()} disabled={isDisabled()} {...others}>
+    <ark.button
+      class={buttonVariants({
+        variant: local.variant,
+        size: local.size,
+        loading: local.loading,
+        class: local.class,
+      })}
+      disabled={isDisabled()}
+      {...others}
+    >
       {resolvedChildren()}
       <Show when={local.loading}>
         <span class="absolute inset-0 flex items-center justify-center rounded-lg bg-black/20">

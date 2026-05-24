@@ -114,60 +114,62 @@ export type AccordionVariants = VariantProps<typeof accordionVariants>
 ```
 </div>
 <div class="space-y-3">
-Create the component file at `src/components/accordion.tsx`:
+Create the component directory and files:
+
+`src/components/accordion/accordion.styled.tsx`:
 ```tsx
-import { Accordion as ArkAccordion } from '@ark-ui/solid/accordion'
-import { createMemo, splitProps, type Component } from 'solid-js'
-import { accordionVariants } from './recipes/accordion'
+import { Accordion as ArkAccordion } from "@ark-ui/solid/accordion";
+import { splitProps, type Component } from "solid-js";
+import { accordionVariants } from "../recipes/accordion";
 
-// Global variant instance (no params)
-const styles = accordionVariants()
+const styles = accordionVariants();
 
-const AccordionRoot: Component<ArkAccordion.RootProps> = (props) => {
-const [local, others] = splitProps(props, ['class'])
-const rootClass = createMemo(() => styles.root({ class: local.class }))
-return <ArkAccordion.Root class={rootClass()} {...others} />
-}
+export const AccordionRoot: Component<ArkAccordion.RootProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkAccordion.Root class={styles.root({ class: local.class })} {...others} />;
+};
 
-const AccordionRootProvider: Component<ArkAccordion.RootProviderProps> = (props) => {
-const [local, others] = splitProps(props, ['class'])
-const rootClass = createMemo(() => styles.root({ class: local.class }))
-return <ArkAccordion.RootProvider class={rootClass()} {...others} />
-}
+export const AccordionRootProvider: Component<ArkAccordion.RootProviderProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkAccordion.RootProvider class={styles.root({ class: local.class })} {...others} />;
+};
 
-const AccordionItem: Component<ArkAccordion.ItemProps> = (props) => {
-const [local, others] = splitProps(props, ['class'])
-const itemClass = createMemo(() => styles.item({ class: local.class }))
-return <ArkAccordion.Item class={itemClass()} {...others} />
-}
+export const AccordionItem: Component<ArkAccordion.ItemProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkAccordion.Item class={styles.item({ class: local.class })} {...others} />;
+};
 
-const AccordionItemTrigger: Component<ArkAccordion.ItemTriggerProps> = (props) => {
-const [local, others] = splitProps(props, ['class'])
-const triggerClass = createMemo(() => styles.itemTrigger({ class: local.class }))
-return <ArkAccordion.ItemTrigger class={triggerClass()} {...others} />
-}
+export const AccordionItemTrigger: Component<ArkAccordion.ItemTriggerProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return (
+    <ArkAccordion.ItemTrigger class={styles.itemTrigger({ class: local.class })} {...others} />
+  );
+};
 
-const AccordionItemContent: Component<ArkAccordion.ItemContentProps> = (props) => {
-const [local, others] = splitProps(props, ['class'])
-const contentClass = createMemo(() => styles.itemContent({ class: local.class }))
-return <ArkAccordion.ItemContent class={contentClass()} {...others} />
-}
+export const AccordionItemContent: Component<ArkAccordion.ItemContentProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return (
+    <ArkAccordion.ItemContent class={styles.itemContent({ class: local.class })} {...others} />
+  );
+};
 
-const AccordionItemIndicator: Component<ArkAccordion.ItemIndicatorProps> = (props) => {
-const [local, others] = splitProps(props, ['class'])
-const indicatorClass = createMemo(() => styles.itemIndicator({ class: local.class }))
-return <ArkAccordion.ItemIndicator class={indicatorClass()} {...others} />
-}
+export const AccordionItemIndicator: Component<ArkAccordion.ItemIndicatorProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return (
+    <ArkAccordion.ItemIndicator class={styles.itemIndicator({ class: local.class })} {...others} />
+  );
+};
+```
 
-export {
-  AccordionRoot as Accordion,
-  AccordionRootProvider,
-  AccordionItem,
-  AccordionItemTrigger,
-  AccordionItemContent,
-  AccordionItemIndicator,
-  accordionVariants,
-}
+`src/components/accordion/index.tsx`:
+```tsx
+import { AccordionRoot } from "./accordion.styled";
+
+export const Accordion = AccordionRoot;
+
+export * from "./accordion.styled";
+
+export { accordionVariants, type AccordionVariants } from "../recipes/accordion";
 ```
 </div>
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--ring`, `--border`, `--background`, etc.) or override the utility classes to match your design system.
