@@ -6,7 +6,7 @@ import {
   CheckboxIndicator,
   CheckboxRoot,
   CheckboxRootProvider as BaseCheckboxRootProvider,
-} from "./checkbox.styled";
+} from "./checkbox.base";
 
 const InnerComponent = () => (
   <>
@@ -68,6 +68,6 @@ export const CheckboxRootProvider: Component<ArkCheckbox.RootProviderProps> = (p
   );
 };
 
-export * from "./checkbox.styled";
+export * from "./checkbox.base";
 
 export { checkboxVariants, type CheckboxVariants } from "@ui/core";
