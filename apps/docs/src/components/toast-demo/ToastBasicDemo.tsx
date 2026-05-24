@@ -1,8 +1,8 @@
-import { createToaster, Toaster } from "@ui/solid";
+import { Button, createToaster, Toaster } from "@ui/solid";
 
 const toaster = createToaster({
   placement: "bottom-end",
-  timeout: 5000,
+  duration: 500000,
 });
 
 export default function ToastBasicDemo() {
@@ -10,28 +10,15 @@ export default function ToastBasicDemo() {
     <div class="rounded-lg border border-border p-6">
       <div class="flex flex-col gap-4">
         <div class="flex flex-wrap gap-2">
-          <button
-            class="px-3 py-1.5 text-sm bg-primary text-primary-foreground rounded-md"
+          <Button
             onClick={() =>
               toaster.create({ title: "Default toast", description: "This is a default message" })
             }
           >
             Default
-          </button>
-          <button
-            class="px-3 py-1.5 text-sm bg-blue-500 text-white rounded-md"
-            onClick={() =>
-              toaster.create({
-                title: "Info toast",
-                description: "This is an info message",
-                type: "info",
-              })
-            }
-          >
-            Info
-          </button>
-          <button
-            class="px-3 py-1.5 text-sm bg-green-500 text-white rounded-md"
+          </Button>
+          <Button
+            variant="secondary"
             onClick={() =>
               toaster.create({
                 title: "Success toast",
@@ -41,9 +28,9 @@ export default function ToastBasicDemo() {
             }
           >
             Success
-          </button>
-          <button
-            class="px-3 py-1.5 text-sm bg-yellow-500 text-white rounded-md"
+          </Button>
+          <Button
+            variant="ghost"
             onClick={() =>
               toaster.create({
                 title: "Warning toast",
@@ -53,9 +40,9 @@ export default function ToastBasicDemo() {
             }
           >
             Warning
-          </button>
-          <button
-            class="px-3 py-1.5 text-sm bg-red-500 text-white rounded-md"
+          </Button>
+          <Button
+            variant="destructive"
             onClick={() =>
               toaster.create({
                 title: "Error toast",
@@ -65,7 +52,7 @@ export default function ToastBasicDemo() {
             }
           >
             Error
-          </button>
+          </Button>
         </div>
         <Toaster toaster={toaster} />
       </div>
