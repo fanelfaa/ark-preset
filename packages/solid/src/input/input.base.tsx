@@ -1,0 +1,32 @@
+import { Field as ArkField } from "@ark-ui/solid/field";
+import { splitProps, type Component } from "solid-js";
+import { inputVariants, type InputVariants } from "@ui/core";
+
+const styles = inputVariants();
+
+export const InputRoot: Component<ArkField.RootProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkField.Root class={styles.root({ class: local.class })} {...others} />;
+};
+
+export const InputLabel: Component<ArkField.LabelProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkField.Label class={styles.label({ class: local.class })} {...others} />;
+};
+
+export const InputField: Component<ArkField.InputProps & InputVariants> = (props) => {
+  const [local, others] = splitProps(props, ["class", "error"]);
+  return (
+    <ArkField.Input class={styles.input({ class: local.class, error: local.error })} {...others} />
+  );
+};
+
+export const InputDescription: Component<ArkField.HelperTextProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkField.HelperText class={styles.description({ class: local.class })} {...others} />;
+};
+
+export const InputErrorText: Component<ArkField.ErrorTextProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkField.ErrorText class={styles.error({ class: local.class })} {...others} />;
+};

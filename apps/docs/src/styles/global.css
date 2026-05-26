@@ -5,3 +5,7 @@
 
 @source '../../../../packages/solid/src/**/*.{ts,tsx}';
 @source '../../../../packages/core/src/**/*.{ts,tsx}';
+
+:root {
+  font-family: Nunito, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}

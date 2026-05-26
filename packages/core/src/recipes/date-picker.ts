@@ -4,12 +4,7 @@ export const datePickerVariants = tv({
   slots: {
     root: "w-full",
     control: "inline-flex items-center gap-1",
-    input: [
-      "h-8 w-full rounded-md border border-border bg-background px-3 py-1 text-sm shadow-sm",
-      "transition-shadow placeholder:text-muted-foreground",
-      "focus-visible:outline-none focus-visible:ring-[1.5px] focus-visible:ring-ring",
-      "disabled:cursor-not-allowed disabled:opacity-50",
-    ],
+    input: "h-8 rounded-md border border-input bg-background px-2.5 py-1.5 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50",
     trigger: [
       "flex min-h-8 min-w-8 items-center justify-center rounded-md border border-border bg-background",
       "transition-[box-shadow,background-color] hover:bg-accent/50",
@@ -24,7 +19,7 @@ export const datePickerVariants = tv({
       "disabled:cursor-not-allowed disabled:opacity-50",
     ],
     content: [
-      "z-50 rounded-md border bg-background p-3 text-popover-foreground shadow-md outline-none",
+      "z-50 rounded-md border border-border bg-popover p-3 text-popover-foreground shadow-md outline-none",
       "data-[state=open]:animate-in data-[state=closed]:animate-out",
       "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
       "data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",

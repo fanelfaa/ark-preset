@@ -20,14 +20,13 @@ export default function DialogRootProviderDemo() {
       </output>
 
       <div class="flex gap-2">
-        <Button onClick={() => dialog().setOpen(true)}>Open Dialog</Button>
-        <Button variant="outline" onClick={() => dialog().setOpen(false)}>
-          Close
+        <Button onClick={() => dialog().setOpen(true)} variant="secondary">
+          Open Dialog From Outside
         </Button>
       </div>
 
       <DialogRootProvider value={dialog}>
-        <DialogTrigger asChild={(props) => <Button {...props()} />}>Hidden Trigger</DialogTrigger>
+        <DialogTrigger asChild={(props) => <Button {...props()} />}>Open Dialog</DialogTrigger>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Externally Controlled Dialog</DialogTitle>

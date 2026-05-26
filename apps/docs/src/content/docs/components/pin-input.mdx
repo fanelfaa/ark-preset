@@ -80,52 +80,51 @@ export type PinInputVariants = VariantProps<typeof pinInputVariants>
 </div>
 
 <div class="space-y-3">
-Create the component file at `src/components/pin-input.tsx`:
+Create the component directory and files:
+
+`src/components/pin-input/pin-input.base.tsx`:
 ```tsx
-import { PinInput as ArkPinInput } from '@ark-ui/solid/pin-input'
-import { createMemo, splitProps, type Component } from 'solid-js'
-import { pinInputVariants } from '../recipes/pin-input'
+import { PinInput as ArkPinInput } from "@ark-ui/solid/pin-input";
+import { splitProps, type Component } from "solid-js";
+import { pinInputVariants } from "../recipes/pin-input";
 
-const styles = pinInputVariants()
+const styles = pinInputVariants();
 
-const PinInputRoot: Component<ArkPinInput.RootProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const rootClass = createMemo(() => styles.root({ class: local.class }))
-  return <ArkPinInput.Root class={rootClass()} {...others} />
-}
+export const PinInputRoot: Component<ArkPinInput.RootProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkPinInput.Root class={styles.root({ class: local.class })} {...others} />;
+};
 
-const PinInputRootProvider: Component<ArkPinInput.RootProviderProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const rootClass = createMemo(() => styles.root({ class: local.class }))
-  return <ArkPinInput.RootProvider class={rootClass()} {...others} />
-}
+export const PinInputRootProvider: Component<ArkPinInput.RootProviderProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkPinInput.RootProvider class={styles.root({ class: local.class })} {...others} />;
+};
 
-const PinInputControl: Component<ArkPinInput.ControlProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const controlClass = createMemo(() => styles.control({ class: local.class }))
-  return <ArkPinInput.Control class={controlClass()} {...others} />
-}
+export const PinInputControl: Component<ArkPinInput.ControlProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkPinInput.Control class={styles.control({ class: local.class })} {...others} />;
+};
 
-const PinInputInput: Component<ArkPinInput.InputProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const inputClass = createMemo(() => styles.input({ class: local.class }))
-  return <ArkPinInput.Input class={inputClass()} {...others} />
-}
+export const PinInputInput: Component<ArkPinInput.InputProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkPinInput.Input class={styles.input({ class: local.class })} {...others} />;
+};
 
-const PinInputLabel: Component<ArkPinInput.LabelProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const labelClass = createMemo(() => styles.label({ class: local.class }))
-  return <ArkPinInput.Label class={labelClass()} {...others} />
-}
+export const PinInputLabel: Component<ArkPinInput.LabelProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkPinInput.Label class={styles.label({ class: local.class })} {...others} />;
+};
+```
 
-export {
-  PinInputRoot as PinInput,
-  PinInputRootProvider,
-  PinInputControl,
-  PinInputInput,
-  PinInputLabel,
-  pinInputVariants,
-}
+`src/components/pin-input/index.tsx`:
+```tsx
+import { PinInputRoot } from "./pin-input.base";
+
+export const PinInput = PinInputRoot;
+
+export * from "./pin-input.base";
+
+export { pinInputVariants, type PinInputVariants } from "../recipes/pin-input";
 ```
 </div>
 

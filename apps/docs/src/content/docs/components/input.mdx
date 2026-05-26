@@ -2,10 +2,11 @@
 title: Input
 description: A text input component with built-in label, description, and error state support.
 category: Form & Input
-updatedDate: 2026-05-18
+updatedDate: 2026-05-26
 ---
 
 import DocsLink from "@components/DocsLink.astro";
+import InputBasicDemo from "@components/input-demo/InputBasicDemo.tsx";
 import { Input } from "@ui/solid";
 
 # Input
@@ -15,12 +16,7 @@ A text input component with support for labels, descriptions, and error states.
 <DocsLink href="https://ark-ui.com/docs/components/field" />
 
 <div class="rounded-lg border border-border p-6">
-  <div class="flex flex-col gap-4">
-    <Input placeholder="Basic input" />
-    <Input label="Email" placeholder="Enter your email" />
-    <Input label="With Description" description="We'll never share your email." placeholder="email@example.com" />
-    <Input label="Error State" error="This field is required" placeholder="Enter value" />
-  </div>
+  <InputBasicDemo client:load/>
 ```tsx
 import { Input } from "~/components/input"
 
@@ -85,39 +81,89 @@ export type InputVariants = VariantProps<typeof inputVariants>
 ```
 </div>
 <div class="space-y-3">
-Create the component file at `src/components/input.tsx`:
-```tsx
-import { Field } from '@ark-ui/solid/field'
-import { createMemo, splitProps, type Component, type JSX } from 'solid-js'
-import { inputVariants } from '../recipes/input'
+Create the component directory and files:
 
-// Global variant instance (no params)
-const styles = inputVariants()
+`src/components/input/input.base.tsx`:
+```tsx
+import { Field as ArkField } from "@ark-ui/solid/field";
+import { splitProps, type Component } from "solid-js";
+import { inputVariants } from "../recipes/input";
+
+const styles = inputVariants();
+
+export const InputRoot: Component<ArkField.RootProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkField.Root class={styles.root({ class: local.class })} {...others} />;
+};
+
+export const InputLabel: Component<ArkField.LabelProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkField.Label class={styles.label({ class: local.class })} {...others} />;
+};
+
+export const InputField: Component<ArkField.InputProps & { error?: boolean }> = (props) => {
+  const [local, others] = splitProps(props, ["class", "error"]);
+  return (
+    <ArkField.Input
+      class={styles.input({ class: local.class, error: local.error })}
+      {...others}
+    />
+  );
+};
+
+export const InputDescription: Component<ArkField.HelperTextProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkField.HelperText class={styles.description({ class: local.class })} {...others} />;
+};
+
+export const InputErrorText: Component<ArkField.ErrorTextProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkField.ErrorText class={styles.error({ class: local.class })} {...others} />;
+};
+```
+
+`src/components/input/index.tsx`:
+```tsx
+import { Field as ArkField } from "@ark-ui/solid/field";
+import { splitProps, type Component } from "solid-js";
+import {
+  InputRoot,
+  InputLabel,
+  InputField,
+  InputDescription,
+  InputErrorText,
+} from "./input.base";
+import { type InputVariants } from "../recipes/input";
 
 type InputProps = {
-label?: string
-description?: string
-error?: string
-class?: string
-} & JSX.IntrinsicElements['input']
+  label?: string;
+  description?: string;
+  error?: string;
+} & ArkField.InputProps &
+  Omit<InputVariants, "error">;
 
-const Input: Component<InputProps> = (props) => {
-const [local, others] = splitProps(props, ['label', 'description', 'error', 'class'])
-const rootClass = createMemo(() => styles.root({ class: local.class, error: !!local.error }))
-return (
+export const Input: Component<InputProps> = (props) => {
+  const [local, others] = splitProps(props, [
+    "class",
+    "label",
+    "description",
+    "error",
+  ]);
+  return (
+    <InputRoot class={local.class} invalid={!!local.error}>
+      {local.label && <InputLabel>{local.label}</InputLabel>}
+      <InputField error={!!local.error} {...others} />
+      {local.description && !local.error && (
+        <InputDescription>{local.description}</InputDescription>
+      )}
+      {local.error && <InputErrorText>{local.error}</InputErrorText>}
+    </InputRoot>
+  );
+};
 
-<Field.Root class={rootClass()} invalid={!!local.error}>
-{local.label && <Field.Label class={styles.label()}>{local.label}</Field.Label>}
-<Field.Input class={styles.input()} {...others} />
-{local.description && !local.error && (
-<Field.HelperText class={styles.description()}>{local.description}</Field.HelperText>
-)}
-<Field.ErrorText class={styles.error()}>{local.error}</Field.ErrorText>
-</Field.Root>
-)
-}
+export * from "./input.base";
 
-export { Input, inputVariants }
+export { inputVariants, type InputVariants } from "../recipes/input";
 ```
 </div>
 

@@ -89,42 +89,82 @@ export type ToastVariants = VariantProps<typeof toastVariants>
 ```
 </div>
 <div class="space-y-3">
-Create the component file at `src/components/toast.tsx`:
+Create the component directory at `src/components/toast/`:
+
+`toast.base.tsx`:
 ```tsx
-import { Toast, Toaster as ArkToaster, createToaster, type CreateToasterReturn } from '@ark-ui/solid/toast'
-import { splitProps, type Component } from 'solid-js'
-import { toastVariants, type ToastVariants } from '../recipes/toast'
+import { Toast as ArkToast } from "@ark-ui/solid/toast";
+import { splitProps, type Component } from "solid-js";
+import { toastVariants } from "../recipes/toast";
+
+const styles = toastVariants();
+
+export const ToastRoot: Component<ArkToast.RootProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkToast.Root class={styles.root({ class: local.class })} {...others} />;
+};
+
+export const ToastTitle: Component<ArkToast.TitleProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkToast.Title class={styles.title({ class: local.class })} {...others} />;
+};
+
+export const ToastDescription: Component<ArkToast.DescriptionProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkToast.Description class={styles.description({ class: local.class })} {...others} />;
+};
+
+export const ToastCloseTrigger: Component<ArkToast.CloseTriggerProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkToast.CloseTrigger class={styles.closeTrigger({ class: local.class })} {...others} />;
+};
+
+export const ToastActionTrigger: Component<ArkToast.ActionTriggerProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkToast.ActionTrigger class={styles.actionTrigger({ class: local.class })} {...others} />;
+};
+```
+
+`index.tsx`:
+```tsx
+import { Toaster as ArkToaster, createToaster, type CreateToasterReturn } from "@ark-ui/solid/toast";
+import { splitProps, type Component } from "solid-js";
+import { ToastRoot, ToastTitle, ToastDescription, ToastCloseTrigger, ToastActionTrigger } from "./toast.base";
+import { toastVariants, type ToastVariants } from "../recipes/toast";
 
 type ToasterProps = {
-toaster: CreateToasterReturn
-class?: string
-}
+  toaster: CreateToasterReturn;
+  class?: string;
+};
 
 const Toaster: Component<ToasterProps> = (props) => {
-const [local, others] = splitProps(props, ['class'])
-return (
+  const [local, others] = splitProps(props, ["class"]);
+  return (
+    <ArkToaster class={local.class} {...others}>
+      {(toast) => {
+        const variant = (toast().type as ToastVariants["variant"]) || "default";
+        const styles = toastVariants({ variant });
+        return (
+          <ToastRoot class={styles.root()}>
+            <div class="grid gap-1">
+              {toast().title && <ToastTitle class={styles.title()}>{toast().title}</ToastTitle>}
+              {toast().description && (
+                <ToastDescription class={styles.description()}>{toast().description}</ToastDescription>
+              )}
+            </div>
+            <ToastCloseTrigger class={styles.closeTrigger()}>✕</ToastCloseTrigger>
+            {toast().action && (
+              <ToastActionTrigger class={styles.actionTrigger()}>{toast().action?.label}</ToastActionTrigger>
+            )}
+          </ToastRoot>
+        );
+      }}
+    </ArkToaster>
+  );
+};
 
-<ArkToaster class={local.class} {...others}>
-{(toast) => {
-const styles = toastVariants({ variant: (toast().type as ToastVariants['variant']) || 'default' })
-return (
-<Toast.Root class={styles.root()}>
-<div class="grid gap-1">
-{toast().title && <Toast.Title class={styles.title()}>{toast().title}</Toast.Title>}
-{toast().description && <Toast.Description class={styles.description()}>{toast().description}</Toast.Description>}
-</div>
-<Toast.CloseTrigger class={styles.closeTrigger()}>✕</Toast.CloseTrigger>
-{toast().action && <Toast.ActionTrigger class={styles.actionTrigger()}>{toast().action?.label}</Toast.ActionTrigger>}
-</Toast.Root>
-)
-}}
-</ArkToaster>
-)
-}
-
-export { createToaster }
-export { Toaster }
-export { toastVariants }
+export { Toaster, createToaster };
+export { toastVariants, type ToastVariants } from "../recipes/toast";
 ```
 </div>
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--primary`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.

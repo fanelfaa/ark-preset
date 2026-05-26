@@ -2,7 +2,7 @@
 title: Date Picker
 description: A date picker component for selecting dates, date ranges, and navigating calendar views.
 category: Form & Input
-updatedDate: 2026-05-18
+updatedDate: 2026-05-26
 ---
 
 import DocsLink from "@components/DocsLink.astro";
@@ -134,27 +134,22 @@ export const datePickerVariants = tv({
   slots: {
     root: "w-full",
     control: "inline-flex items-center gap-1",
-    input: [
-      "h-9 w-full rounded-md border border-border bg-background px-3 py-1 text-sm shadow-sm",
-      "transition-shadow placeholder:text-muted-foreground",
-      "focus-visible:outline-none focus-visible:ring-[1.5px] focus-visible:ring-ring",
-      "disabled:cursor-not-allowed disabled:opacity-50",
-    ],
+    input: "h-8 rounded-md border border-input bg-background px-2.5 py-1.5 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50",
     trigger: [
-      "flex min-h-9 min-w-9 items-center justify-center rounded-md border border-border bg-background",
+      "flex min-h-8 min-w-8 items-center justify-center rounded-md border border-border bg-background",
       "transition-[box-shadow,background-color] hover:bg-accent/50",
       "focus-visible:outline-none focus-visible:ring-[1.5px] focus-visible:ring-ring",
       "disabled:cursor-not-allowed disabled:opacity-50",
       "[&>svg]:size-4",
     ],
     clearTrigger: [
-      "flex min-h-9 items-center justify-center rounded-md border border-border bg-background px-3 text-sm",
+      "flex min-h-8 items-center justify-center rounded-md border border-border bg-background px-3 text-sm",
       "transition-[box-shadow,background-color] hover:bg-accent/50",
       "focus-visible:outline-none focus-visible:ring-[1.5px] focus-visible:ring-ring",
       "disabled:cursor-not-allowed disabled:opacity-50",
     ],
     content: [
-      "z-50 rounded-md border bg-background p-3 text-popover-foreground shadow-md outline-none",
+      "z-50 rounded-md border border-border bg-popover p-3 text-popover-foreground shadow-md outline-none",
       "data-[state=open]:animate-in data-[state=closed]:animate-out",
       "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
       "data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
@@ -204,209 +199,164 @@ export type DatePickerVariants = VariantProps<typeof datePickerVariants>
 ```
 </div>
 <div class="space-y-3">
-Create the component file at `src/components/date-picker.tsx`:
+Create the component directory and files:
+
+First, create `src/components/date-picker/date-picker.base.tsx`:
 ```tsx
-import { children, createMemo, Show, splitProps, type Component, type JSX } from 'solid-js'
-import { DatePicker as DatePickerPrimitive } from '@ark-ui/solid/date-picker'
-import { datePickerVariants, buttonVariants } from '../recipes/date-picker'
+import { DatePicker as ArkDatePicker } from "@ark-ui/solid/date-picker";
+import { splitProps, type Component } from "solid-js";
+import { datePickerVariants } from "../../recipes/date-picker";
 
-const styles = datePickerVariants()
-// ---------------------------------------------------------------------------
-// Re-exports (no styling needed)
-// ---------------------------------------------------------------------------
+const styles = datePickerVariants();
 
-export const DatePicker = DatePickerPrimitive.Root;
-export const DatePickerRootProvider = DatePickerPrimitive.RootProvider;
-export const DatePickerLabel = DatePickerPrimitive.Label;
-export const DatePickerContext = DatePickerPrimitive.Context;
-export const DatePickerTableHead = DatePickerPrimitive.TableHead;
-export const DatePickerTableBody = DatePickerPrimitive.TableBody;
-export const DatePickerYearSelect = DatePickerPrimitive.YearSelect;
-export const DatePickerMonthSelect = DatePickerPrimitive.MonthSelect;
-export const DatePickerPositioner = DatePickerPrimitive.Positioner;
+// Simple pass-through re-exports (no styling needed)
+export const DatePickerRoot = ArkDatePicker.Root;
+export const DatePickerRootProvider = ArkDatePicker.RootProvider;
+export const DatePickerLabel = ArkDatePicker.Label;
+export const DatePickerContext = ArkDatePicker.Context;
+export const DatePickerTableHead = ArkDatePicker.TableHead;
+export const DatePickerTableBody = ArkDatePicker.TableBody;
+export const DatePickerYearSelect = ArkDatePicker.YearSelect;
+export const DatePickerMonthSelect = ArkDatePicker.MonthSelect;
 
-// ---------------------------------------------------------------------------
-// Styled components
-// ---------------------------------------------------------------------------
+// Styled wrapper components
+export const DatePickerPositioner = ArkDatePicker.Positioner;
 
-export const DatePickerControl: Component<DatePickerPrimitive.ControlProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const controlClass = createMemo(() => styles.control({ class: local.class }))
-  return <DatePickerPrimitive.Control class={controlClass()} {...others} />
-}
+export const DatePickerControl: Component<ArkDatePicker.ControlProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkDatePicker.Control class={styles.control({ class: local.class })} {...others} />;
+};
 
-export const DatePickerInput: Component<DatePickerPrimitive.InputProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const inputClass = createMemo(() => styles.input({ class: local.class }))
-  return <DatePickerPrimitive.Input class={inputClass()} {...others} />
-}
+export const DatePickerInput: Component<ArkDatePicker.InputProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkDatePicker.Input class={styles.input({ class: local.class })} {...others} />;
+};
 
-export const DatePickerTrigger: Component<DatePickerPrimitive.TriggerProps> = (props) => {
-  const [local, others] = splitProps(props, ['class', 'children'])
+export const DatePickerContent: Component<ArkDatePicker.ContentProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkDatePicker.Content class={styles.content({ class: local.class })} {...others} />;
+};
 
-const resolvedChildren = children(() => local.children)
-const hasChildren = () => resolvedChildren.toArray().length !== 0
+export const DatePickerView: Component<ArkDatePicker.ViewProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkDatePicker.View class={styles.view({ class: local.class })} {...others} />;
+};
 
-const triggerClass = createMemo(() => styles.trigger({ class: local.class }))
+export const DatePickerViewControl: Component<ArkDatePicker.ViewControlProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkDatePicker.ViewControl class={styles.viewControl({ class: local.class })} {...others} />;
+};
 
-return (
+export const DatePickerRangeText: Component<ArkDatePicker.RangeTextProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkDatePicker.RangeText class={styles.rangeText({ class: local.class })} {...others} />;
+};
 
-<DatePickerPrimitive.Trigger class={triggerClass()} {...others}>
-<Show when={!hasChildren()} fallback={resolvedChildren()}>
-<svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="size-4"
-        >
-<path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" />
-<path d="M16 3v4" />
-<path d="M8 3v4" />
-<path d="M4 11h16" />
-<path d="M11 15h1" />
-<path d="M12 15v3" />
-<title>Calendar</title>
-</svg>
-</Show>
-</DatePickerPrimitive.Trigger>
-)
-}
+export const DatePickerTable: Component<ArkDatePicker.TableProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkDatePicker.Table class={styles.table({ class: local.class })} {...others} />;
+};
 
-export const DatePickerClearTrigger: Component<DatePickerPrimitive.ClearTriggerProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const clearTriggerClass = createMemo(() => styles.clearTrigger({ class: local.class }))
-  return <DatePickerPrimitive.ClearTrigger class={clearTriggerClass()} {...others} />
-}
+export const DatePickerTableRow: Component<ArkDatePicker.TableRowProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkDatePicker.TableRow class={styles.tableRow({ class: local.class })} {...others} />;
+};
 
-export const DatePickerContent: Component<DatePickerPrimitive.ContentProps> = (props) => {
-  const [local, others] = splitProps(props, ['class', 'children'])
-  const contentClass = createMemo(() => styles.content({ class: local.class }))
+export const DatePickerTableHeader: Component<ArkDatePicker.TableHeaderProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkDatePicker.TableHeader class={styles.tableHeader({ class: local.class })} {...others} />;
+};
+
+export const DatePickerTableCell: Component<ArkDatePicker.TableCellProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkDatePicker.TableCell class={styles.tableCell({ class: local.class })} {...others} />;
+};
+```
+
+Then create `src/components/date-picker/index.tsx`:
+```tsx
+import { DatePicker as ArkDatePicker } from "@ark-ui/solid/date-picker";
+import { children, Show, splitProps, type Component } from "solid-js";
+import { buttonVariants } from "../../recipes/date-picker";
+import { datePickerVariants } from "../../recipes/date-picker";
+
+const styles = datePickerVariants();
+
+export { datePickerVariants, type DatePickerVariants } from "../../recipes/date-picker";
+
+export const DatePicker = ArkDatePicker.Root;
+
+export * from "./date-picker.base";
+
+export const DatePickerTrigger: Component<ArkDatePicker.TriggerProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "children"]);
+  const resolvedChildren = children(() => local.children);
+  const hasChildren = () => resolvedChildren.toArray().length !== 0;
+
   return (
-    <DatePickerPrimitive.Content class={contentClass()} {...others}>
-      {local.children}
-    </DatePickerPrimitive.Content>
-  )
-}
+    <ArkDatePicker.Trigger class={styles.trigger({ class: local.class })} {...others}>
+      <Show when={!hasChildren()} fallback={resolvedChildren()}>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4">
+          <path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" />
+          <path d="M16 3v4" /><path d="M8 3v4" />
+          <path d="M4 11h16" /><path d="M11 15h1" /><path d="M12 15v3" />
+          <title>Calendar</title>
+        </svg>
+      </Show>
+    </ArkDatePicker.Trigger>
+  );
+};
 
-export const DatePickerView: Component<DatePickerPrimitive.ViewProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const viewClass = createMemo(() => styles.view({ class: local.class }))
-  return <DatePickerPrimitive.View class={viewClass()} {...others} />
-}
+export const DatePickerClearTrigger: Component<ArkDatePicker.ClearTriggerProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkDatePicker.ClearTrigger class={styles.clearTrigger({ class: local.class })} {...others} />;
+};
 
-export const DatePickerViewControl: Component<DatePickerPrimitive.ViewControlProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const viewControlClass = createMemo(() => styles.viewControl({ class: local.class }))
-  return <DatePickerPrimitive.ViewControl class={viewControlClass()} {...others} />
-}
+export const DatePickerPrevTrigger: Component<ArkDatePicker.PrevTriggerProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "children"]);
+  const resolvedChildren = children(() => local.children);
+  const hasChildren = () => resolvedChildren.toArray().length !== 0;
 
-export const DatePickerPrevTrigger: Component<DatePickerPrimitive.PrevTriggerProps> = (props) => {
-  const [local, others] = splitProps(props, ['class', 'children'])
+  return (
+    <ArkDatePicker.PrevTrigger class={styles.navTrigger({ class: [buttonVariants({ variant: "outline" }), local.class, "size-7"] })} {...others}>
+      <Show when={!hasChildren()} fallback={resolvedChildren()}>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4">
+          <path d="M15 6l-6 6l6 6" /><title>Previous</title>
+        </svg>
+      </Show>
+    </ArkDatePicker.PrevTrigger>
+  );
+};
 
-const resolvedChildren = children(() => local.children)
-const hasChildren = () => resolvedChildren.toArray().length !== 0
+export const DatePickerNextTrigger: Component<ArkDatePicker.NextTriggerProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "children"]);
+  const resolvedChildren = children(() => local.children);
+  const hasChildren = () => resolvedChildren.toArray().length !== 0;
 
-const navTriggerClass = createMemo(() => styles.navTrigger({ class: [buttonVariants({ variant: 'outline' }), local.class, 'size-7'] }))
+  return (
+    <ArkDatePicker.NextTrigger class={styles.navTrigger({ class: [buttonVariants({ variant: "outline" }), local.class, "size-7"] })} {...others}>
+      <Show when={!hasChildren()} fallback={resolvedChildren()}>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4">
+          <path d="M9 6l6 6l-6 6" /><title>Next</title>
+        </svg>
+      </Show>
+    </ArkDatePicker.NextTrigger>
+  );
+};
 
-return (
+export const DatePickerViewTrigger: Component<ArkDatePicker.ViewTriggerProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return (
+    <ArkDatePicker.ViewTrigger class={styles.viewTrigger({ class: [buttonVariants({ variant: "ghost" }), local.class] })} {...others} />
+  );
+};
 
-<DatePickerPrimitive.PrevTrigger class={navTriggerClass()} {...others}>
-<Show when={!hasChildren()} fallback={resolvedChildren()}>
-<svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="size-4"
-        >
-<path d="M15 6l-6 6l6 6" />
-<title>Previous</title>
-</svg>
-</Show>
-</DatePickerPrimitive.PrevTrigger>
-)
-}
-
-export const DatePickerNextTrigger: Component<DatePickerPrimitive.NextTriggerProps> = (props) => {
-  const [local, others] = splitProps(props, ['class', 'children'])
-
-const resolvedChildren = children(() => local.children)
-const hasChildren = () => resolvedChildren.toArray().length !== 0
-
-const navTriggerClass = createMemo(() => styles.navTrigger({ class: [buttonVariants({ variant: 'outline' }), local.class, 'size-7'] }))
-
-return (
-
-<DatePickerPrimitive.NextTrigger class={navTriggerClass()} {...others}>
-<Show when={!hasChildren()} fallback={resolvedChildren()}>
-<svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="size-4"
-        >
-<path d="M9 6l6 6l-6 6" />
-<title>Next</title>
-</svg>
-</Show>
-</DatePickerPrimitive.NextTrigger>
-)
-}
-
-export const DatePickerViewTrigger: Component<DatePickerPrimitive.ViewTriggerProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const viewTriggerClass = createMemo(() => styles.viewTrigger({ class: [buttonVariants({ variant: 'ghost' }), local.class] }))
-  return <DatePickerPrimitive.ViewTrigger class={viewTriggerClass()} {...others} />
-}
-
-export const DatePickerRangeText: Component<DatePickerPrimitive.RangeTextProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const rangeTextClass = createMemo(() => styles.rangeText({ class: local.class }))
-  return <DatePickerPrimitive.RangeText class={rangeTextClass()} {...others} />
-}
-
-export const DatePickerTable: Component<DatePickerPrimitive.TableProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const tableClass = createMemo(() => styles.table({ class: local.class }))
-  return <DatePickerPrimitive.Table class={tableClass()} {...others} />
-}
-
-export const DatePickerTableRow: Component<DatePickerPrimitive.TableRowProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const tableRowClass = createMemo(() => styles.tableRow({ class: local.class }))
-  return <DatePickerPrimitive.TableRow class={tableRowClass()} {...others} />
-}
-
-export const DatePickerTableHeader: Component<DatePickerPrimitive.TableHeaderProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const tableHeaderClass = createMemo(() => styles.tableHeader({ class: local.class }))
-  return <DatePickerPrimitive.TableHeader class={tableHeaderClass()} {...others} />
-}
-
-export const DatePickerTableCell: Component<DatePickerPrimitive.TableCellProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const tableCellClass = createMemo(() => styles.tableCell({ class: local.class }))
-  return <DatePickerPrimitive.TableCell class={tableCellClass()} {...others} />
-}
-
-export const DatePickerTableCellTrigger: Component<DatePickerPrimitive.TableCellTriggerProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  const tableCellTriggerClass = createMemo(() => styles.tableCellTrigger({ class: [buttonVariants({ variant: 'ghost' }), local.class] }))
-  return <DatePickerPrimitive.TableCellTrigger class={tableCellTriggerClass()} {...others} />
-}
-
-export { datePickerVariants }
+export const DatePickerTableCellTrigger: Component<ArkDatePicker.TableCellTriggerProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return (
+    <ArkDatePicker.TableCellTrigger class={styles.tableCellTrigger({ class: [buttonVariants({ variant: "ghost" }), local.class] })} {...others} />
+  );
+};
 ```
 </div>
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--primary`, `--ring`, `--border`, `--background`, `--accent`, etc.) or override the utility classes to match your design system.

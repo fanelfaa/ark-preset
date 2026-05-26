@@ -2,7 +2,7 @@
 title: Slider
 description: A range input component for selecting a value from a range.
 category: Form & Input
-updatedDate: 2026-05-18
+updatedDate: 2026-05-24
 ---
 
 import DocsLink from "@components/DocsLink.astro";
@@ -27,6 +27,7 @@ import {
   SliderTrack,
   SliderRange,
   SliderThumb,
+  SliderHiddenInput,
 } from "~/components/slider";
 
 export function SliderDemo() {
@@ -40,7 +41,9 @@ export function SliderDemo() {
         <SliderTrack>
           <SliderRange />
         </SliderTrack>
-        <SliderThumb index={0} />
+        <SliderThumb index={0}>
+          <SliderHiddenInput />
+        </SliderThumb>
       </SliderControl>
     </Slider>
   );
@@ -101,120 +104,98 @@ export type SliderVariants = VariantProps<typeof sliderVariants>
 ```
 </div>
 <div class="space-y-3">
-Create the component file at `src/components/slider.tsx`:
+Create the component directory and files:
+
+`src/components/slider/slider.base.tsx`:
 ```tsx
-import { Slider as ArkSlider } from '@ark-ui/solid/slider'
-import { createMemo, splitProps, type Component, type JSX } from 'solid-js'
-import { sliderVariants } from './recipes/slider'
+import { Slider as ArkSlider } from "@ark-ui/solid/slider";
+import { splitProps, type Component, type JSX } from "solid-js";
+import { sliderVariants } from "../recipes/slider";
 
-// Global variant instance (no params)
-const styles = sliderVariants()
+const styles = sliderVariants();
 
-type RootProps = ArkSlider.RootProps & { class?: string }
+export const SliderRoot: Component<ArkSlider.RootProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkSlider.Root class={styles.root({ class: local.class })} {...others} />;
+};
 
-const SliderRoot: Component<RootProps> = (props) => {
-const [local, others] = splitProps(props, ['class'])
-const rootClass = createMemo(() => styles.root({ class: local.class }))
-return <ArkSlider.Root class={rootClass()} {...others} />
-}
+export const SliderRootProvider: Component<ArkSlider.RootProviderProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkSlider.RootProvider class={styles.root({ class: local.class })} {...others} />;
+};
 
-type RootProviderProps = ArkSlider.RootProviderProps & { class?: string }
+export const SliderLabel: Component<ArkSlider.LabelProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkSlider.Label class={styles.label({ class: local.class })} {...others} />;
+};
 
-const SliderRootProvider: Component<RootProviderProps> = (props) => {
-const [local, others] = splitProps(props, ['class'])
-const rootClass = createMemo(() => styles.root({ class: local.class }))
-return <ArkSlider.RootProvider class={rootClass()} {...others} />
-}
+export const SliderValueText: Component<ArkSlider.ValueTextProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkSlider.ValueText class={styles.valueText({ class: local.class })} {...others} />;
+};
 
-const SliderLabel: Component<ArkSlider.LabelProps> = (props) => {
-const labelClass = createMemo(() => styles.label({ class: props.class }))
-return <ArkSlider.Label class={labelClass()} {...props} />
-}
+type ControlProps = ArkSlider.ControlProps & { class?: string; children?: JSX.Element };
 
-const SliderValueText: Component<ArkSlider.ValueTextProps> = (props) => {
-const valueTextClass = createMemo(() => styles.valueText({ class: props.class }))
-return <ArkSlider.ValueText class={valueTextClass()} {...props} />
-}
+export const SliderControl: Component<ControlProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "children"]);
+  return (
+    <ArkSlider.Control class={styles.control({ class: local.class })} {...others}>
+      {local.children}
+    </ArkSlider.Control>
+  );
+};
 
-type ControlProps = ArkSlider.ControlProps & { class?: string; children?: JSX.Element }
+type TrackProps = ArkSlider.TrackProps & { class?: string; children?: JSX.Element };
 
-const SliderControl: Component<ControlProps> = (props) => {
-const [local, others] = splitProps(props, ['class', 'children'])
-const controlClass = createMemo(() => styles.control({ class: local.class }))
-return (
+export const SliderTrack: Component<TrackProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "children"]);
+  return (
+    <ArkSlider.Track class={styles.track({ class: local.class })} {...others}>
+      {local.children}
+    </ArkSlider.Track>
+  );
+};
 
-<ArkSlider.Control class={controlClass()} {...others}>
-{local.children}
-</ArkSlider.Control>
-)
-}
+export const SliderRange: Component<ArkSlider.RangeProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkSlider.Range class={styles.range({ class: local.class })} {...others} />;
+};
 
-type TrackProps = ArkSlider.TrackProps & { class?: string; children?: JSX.Element }
+export const SliderThumb: Component<ArkSlider.ThumbProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "index"]);
+  return <ArkSlider.Thumb class={styles.thumb({ class: local.class })} index={local.index} {...others} />;
+};
 
-const SliderTrack: Component<TrackProps> = (props) => {
-const [local, others] = splitProps(props, ['class', 'children'])
-const trackClass = createMemo(() => styles.track({ class: local.class }))
-return (
+export const SliderHiddenInput: Component<ArkSlider.HiddenInputProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkSlider.HiddenInput class={local.class} {...others} />;
+};
 
-<ArkSlider.Track class={trackClass()} {...others}>
-{local.children}
-</ArkSlider.Track>
-)
-}
+export const SliderDraggingIndicator: Component<ArkSlider.DraggingIndicatorProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkSlider.DraggingIndicator class={styles.draggingIndicator({ class: local.class })} {...others} />;
+};
 
-const SliderRange: Component<ArkSlider.RangeProps> = (props) => {
-const [local, others] = splitProps(props, ['class'])
-const rangeClass = createMemo(() => styles.range({ class: local.class }))
-return <ArkSlider.Range class={rangeClass()} {...others} />
-}
+export const SliderMarkerGroup: Component<ArkSlider.MarkerGroupProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkSlider.MarkerGroup class={styles.markerGroup({ class: local.class })} {...others} />;
+};
 
-type ThumbProps = ArkSlider.ThumbProps & { class?: string; index: number }
+export const SliderMarker: Component<ArkSlider.MarkerProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "value"]);
+  return <ArkSlider.Marker class={styles.marker({ class: local.class })} value={local.value} {...others} />;
+};
+```
 
-const SliderThumb: Component<ThumbProps> = (props) => {
-const [local, others] = splitProps(props, ['class', 'index'])
-const thumbClass = createMemo(() => styles.thumb({ class: local.class }))
-return <ArkSlider.Thumb class={thumbClass()} index={local.index} {...others} />
-}
+`src/components/slider/index.tsx`:
+```tsx
+import { SliderRoot } from "./slider.base";
 
-const SliderHiddenInput: Component<ArkSlider.HiddenInputProps> = (props) => {
-return <ArkSlider.HiddenInput {...props} />
-}
+export const Slider = SliderRoot;
 
-const SliderDraggingIndicator: Component<ArkSlider.DraggingIndicatorProps> = (props) => {
-const [local, others] = splitProps(props, ['class'])
-const draggingIndicatorClass = createMemo(() => styles.draggingIndicator({ class: local.class }))
-return <ArkSlider.DraggingIndicator class={draggingIndicatorClass()} {...others} />
-}
+export * from "./slider.base";
 
-const SliderMarkerGroup: Component<ArkSlider.MarkerGroupProps> = (props) => {
-const [local, others] = splitProps(props, ['class'])
-const markerGroupClass = createMemo(() => styles.markerGroup({ class: local.class }))
-return <ArkSlider.MarkerGroup class={markerGroupClass()} {...others} />
-}
-
-type MarkerProps = ArkSlider.MarkerProps & { class?: string; value: number }
-
-const SliderMarker: Component<MarkerProps> = (props) => {
-const [local, others] = splitProps(props, ['class', 'value'])
-const markerClass = createMemo(() => styles.marker({ class: local.class }))
-return <ArkSlider.Marker class={markerClass()} value={local.value} {...others} />
-}
-
-export {
-  SliderRoot,
-  SliderRootProvider,
-  SliderLabel,
-  SliderValueText,
-  SliderControl,
-  SliderTrack,
-  SliderRange,
-  SliderThumb,
-  SliderHiddenInput,
-  SliderDraggingIndicator,
-  SliderMarkerGroup,
-  SliderMarker,
-  sliderVariants,
-}
+export { sliderVariants, type SliderVariants } from "../recipes/slider";
 ```
 </div>
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--primary`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.
@@ -233,6 +214,7 @@ import {
   SliderTrack,
   SliderRange,
   SliderThumb,
+  SliderHiddenInput,
 } from "~/components/slider";
 ```
 
@@ -248,7 +230,9 @@ Basic usage:
     <SliderTrack>
       <SliderRange />
     </SliderTrack>
-    <SliderThumb index={0} />
+    <SliderThumb index={0}>
+      <SliderHiddenInput />
+    </SliderThumb>
   </SliderControl>
 </Slider>
 ```
@@ -269,6 +253,7 @@ import {
   SliderTrack,
   SliderRange,
   SliderThumb,
+  SliderHiddenInput,
 } from "~/components/slider";
 
 export function SliderWithExternalControl() {
@@ -288,7 +273,9 @@ export function SliderWithExternalControl() {
           <SliderTrack>
             <SliderRange />
           </SliderTrack>
-          <SliderThumb index={0} />
+          <SliderThumb index={0}>
+            <SliderHiddenInput />
+          </SliderThumb>
         </SliderControl>
       </SliderRootProvider>
     </div>
@@ -312,7 +299,9 @@ Use the `disabled` prop to disable the slider.
     <SliderTrack>
       <SliderRange />
     </SliderTrack>
-    <SliderThumb index={0} />
+    <SliderThumb index={0}>
+      <SliderHiddenInput />
+    </SliderThumb>
   </SliderControl>
 </Slider>
 ```

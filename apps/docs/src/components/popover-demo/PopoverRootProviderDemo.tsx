@@ -19,7 +19,7 @@ export default function PopoverRootProviderDemo() {
       </output>
 
       <PopoverRootProvider value={popover}>
-        <PopoverTrigger as={Button}>Open Popover</PopoverTrigger>
+        <PopoverTrigger asChild={(props) => <Button {...props()} />}>Open Popover</PopoverTrigger>
         <PopoverContent>
           <PopoverTitle>Popover Title</PopoverTitle>
           <PopoverDescription>

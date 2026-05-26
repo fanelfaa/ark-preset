@@ -6,6 +6,7 @@ import {
   SliderTrack,
   SliderRange,
   SliderThumb,
+  SliderHiddenInput,
 } from "@ui/solid";
 
 export default function SliderBasicDemo() {
@@ -20,7 +21,9 @@ export default function SliderBasicDemo() {
           <SliderTrack>
             <SliderRange />
           </SliderTrack>
-          <SliderThumb index={0} />
+          <SliderThumb index={0}>
+            <SliderHiddenInput />
+          </SliderThumb>
         </SliderControl>
       </SliderRoot>
     </div>

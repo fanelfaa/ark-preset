@@ -1,7 +1,7 @@
-import { AccordionRoot } from "./accordion.styled";
+import { AccordionRoot } from "./accordion.base";
 
 export const Accordion = AccordionRoot;
 
-export * from "./accordion.styled";
+export * from "./accordion.base";
 
 export { accordionVariants, type AccordionVariants } from "@ui/core";

@@ -25,6 +25,7 @@ import {
   RadioGroupItem,
   RadioGroupItemControl,
   RadioGroupItemText,
+  RadioGroupIndicator,
 } from "~/components/radio-group";
 
 export function RadioGroupDemo() {
@@ -81,7 +82,7 @@ export const radioGroupVariants = tv({
       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
       "data-[state=checked]:border-primary data-[state=checked]:border-[6px] data-[state=checked]:text-primary-foreground",
     ],
-    itemIndicator: "size-2 rounded-full bg-primary",
+    itemIndicator: "size-2 rounded-full hidden",
     itemText: "text-sm font-medium text-foreground",
     itemHiddenInput: "absolute opacity-0 w-0 h-0 pointer-events-none",
   },
@@ -91,69 +92,68 @@ export type RadioGroupVariants = VariantProps<typeof radioGroupVariants>
 ```
 </div>
 <div class="space-y-3">
-Create the component file at `src/components/radio-group.tsx`:
+Create the component directory and files:
+
+`src/components/radio-group/radio-group.base.tsx`:
 ```tsx
-import { RadioGroup as ArkRadioGroup } from '@ark-ui/solid/radio-group'
-import { children, createMemo, splitProps, type Component } from 'solid-js'
-import { radioGroupVariants } from './recipes/radio-group'
+import { RadioGroup as ArkRadioGroup } from "@ark-ui/solid/radio-group";
+import { splitProps, type Component } from "solid-js";
+import { radioGroupVariants } from "../recipes/radio-group";
 
-// Global variant instance (no params)
-const styles = radioGroupVariants()
+const styles = radioGroupVariants();
 
-const RadioGroupRoot: Component<ArkRadioGroup.RootProps> = (props) => {
-const [local, others] = splitProps(props, ['class', 'children'])
-const rootClass = createMemo(() => styles.root({ class: local.class }))
-const resolvedChildren = children(()=>local.children)
-return <ArkRadioGroup.Root class={rootClass()} {...others}>
-{resolvedChildren()}
+export const RadioGroupRoot: Component<ArkRadioGroup.RootProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkRadioGroup.Root class={styles.root({ class: local.class })} {...others} />;
+};
 
-<ArkRadioGroup.Indicator class={styles.itemIndicator()} />
-</ArkRadioGroup.Root>
-}
+export const RadioGroupRootProvider: Component<ArkRadioGroup.RootProviderProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkRadioGroup.RootProvider class={styles.root({ class: local.class })} {...others} />;
+};
 
-const RadioGroupRootProvider: Component<ArkRadioGroup.RootProviderProps> = (props) => {
-const [local, others] = splitProps(props, ['class'])
-const rootClass = createMemo(() => styles.root({ class: local.class }))
-return <ArkRadioGroup.RootProvider class={rootClass()} {...others} />
-}
+export const RadioGroupLabel: Component<ArkRadioGroup.LabelProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkRadioGroup.Label class={styles.label({ class: local.class })} {...others} />;
+};
 
-const RadioGroupLabel: Component<ArkRadioGroup.LabelProps> = (props) => {
-const [local, others] = splitProps(props, ['class'])
-const labelClass = createMemo(() => styles.label({ class: local.class }))
-return <ArkRadioGroup.Label class={labelClass()} {...others} />
-}
+export const RadioGroupItem: Component<ArkRadioGroup.ItemProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkRadioGroup.Item class={styles.item({ class: local.class })} {...others} />;
+};
 
-const RadioGroupItem: Component<ArkRadioGroup.ItemProps> = (props) => {
-const [local, others] = splitProps(props, ['class'])
-const itemClass = createMemo(() => styles.item({ class: local.class }))
-return <ArkRadioGroup.Item class={itemClass()} {...others} />
-}
+export const RadioGroupItemControl: Component<ArkRadioGroup.ItemControlProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return (
+    <>
+      <ArkRadioGroup.ItemControl class={styles.itemControl({ class: local.class })} {...others} />
+      <ArkRadioGroup.ItemHiddenInput />
+    </>
+  );
+};
 
-const RadioGroupItemControl: Component<ArkRadioGroup.ItemControlProps> = (props) => {
-const [local, others] = splitProps(props, ['class'])
-const controlClass = createMemo(() => styles.itemControl({ class: local.class }))
-return <>
+export const RadioGroupItemText: Component<ArkRadioGroup.ItemTextProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkRadioGroup.ItemText class={styles.itemText({ class: local.class })} {...others} />;
+};
 
-<ArkRadioGroup.ItemControl class={controlClass()} {...others} />
-<ArkRadioGroup.ItemHiddenInput />
-</>
-}
+export const RadioGroupIndicator: Component<ArkRadioGroup.IndicatorProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return (
+    <ArkRadioGroup.Indicator class={styles.itemIndicator({ class: local.class })} {...others} />
+  );
+};
+```
 
-const RadioGroupItemText: Component<ArkRadioGroup.ItemTextProps> = (props) => {
-const [local, others] = splitProps(props, ['class'])
-const textClass = createMemo(() => styles.itemText({ class: local.class }))
-return <ArkRadioGroup.ItemText class={textClass()} {...others} />
-}
+`src/components/radio-group/index.tsx`:
+```tsx
+import { RadioGroupRoot } from "./radio-group.base";
 
-export {
-  RadioGroupRoot as RadioGroup,
-  RadioGroupRootProvider,
-  RadioGroupLabel,
-  RadioGroupItem,
-  RadioGroupItemControl,
-  RadioGroupItemText,
-  radioGroupVariants,
-}
+export const RadioGroup = RadioGroupRoot;
+
+export * from "./radio-group.base";
+
+export { radioGroupVariants, type RadioGroupVariants } from "../recipes/radio-group";
 ```
 </div>
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--foreground`, `--input`, `--primary`, etc.) or override the utility classes to match your design system.
@@ -170,6 +170,7 @@ import {
   RadioGroupItem,
   RadioGroupItemControl,
   RadioGroupItemText,
+  RadioGroupIndicator,
 } from "~/components/radio-group";
 ```
 
@@ -217,6 +218,7 @@ import {
   RadioGroupItem,
   RadioGroupItemControl,
   RadioGroupItemText,
+  RadioGroupIndicator,
 } from "~/components/radio-group";
 
 export function RadioGroupWithExternalControl() {

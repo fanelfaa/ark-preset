@@ -19,7 +19,7 @@ A floating panel that displays content when triggered by a user action, typicall
 
 ```tsx
 import {
-  Popover,
+  PopoverRoot,
   PopoverRootProvider,
   PopoverTrigger,
   PopoverContent,
@@ -29,7 +29,7 @@ import {
 
 export function PopoverDemo() {
   return (
-    <Popover>
+    <PopoverRoot>
       <PopoverTrigger as={Button}>Open Popover</PopoverTrigger>
       <PopoverContent>
         <PopoverTitle>Popover Title</PopoverTitle>
@@ -37,7 +37,7 @@ export function PopoverDemo() {
           This is a popover description. It can contain any content you want.
         </PopoverDescription>
       </PopoverContent>
-    </Popover>
+    </PopoverRoot>
   );
 }
 ```
@@ -86,97 +86,105 @@ export type PopoverVariants = VariantProps<typeof popoverVariants>
 ```
 </div>
 <div class="space-y-3">
-Create the component file at `src/components/popover.tsx`:
+Create the component directory and files:
+
+`src/components/popover/popover.base.tsx`:
 ```tsx
 import { Popover as ArkPopover } from '@ark-ui/solid/popover'
-import { Portal } from 'solid-js/web'
-import { createMemo, splitProps, type Component, type JSX } from 'solid-js'
+import { splitProps, type Component } from 'solid-js'
 import { popoverVariants } from './recipes/popover'
 
-// Global variant instance (no params consumed)
 const styles = popoverVariants()
 
-export const PopoverRoot = ArkPopover.Root;
-export const PopoverRootProvider = ArkPopover.RootProvider;
-export const PopoverTrigger = ArkPopover.Trigger;
+export const PopoverRoot = ArkPopover.Root
+export const PopoverRootProvider = ArkPopover.RootProvider
+export const PopoverTrigger = ArkPopover.Trigger
 
-type PopoverContentProps = ArkPopover.ContentProps & { class?: string; children?: JSX.Element }
+export const PopoverContent: Component<ArkPopover.ContentProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "style"]);
+  return (
+    <ArkPopover.Content
+      class={styles.content({ class: local.class })}
+      style={`--arrow-size: 10px; ${local.style}`}
+      {...others}
+    />
+  );
+};
 
-const PopoverContent: Component<PopoverContentProps> = (props) => {
-const [local, others] = splitProps(props, ['class', 'children'])
-// uses global `styles`
-const contentClass = createMemo(() => styles.content({ class: local.class }))
-return (
+export const PopoverTitle: Component<ArkPopover.TitleProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkPopover.Title class={styles.title({ class: local.class })} {...others} />;
+};
 
-<Portal>
-<ArkPopover.Positioner class={styles.positioner()}>
-<ArkPopover.Content class={contentClass()} {...others}>
-{local.children}
-</ArkPopover.Content>
-</ArkPopover.Positioner>
-</Portal>
-)
-}
+export const PopoverDescription: Component<ArkPopover.DescriptionProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkPopover.Description class={styles.description({ class: local.class })} {...others} />;
+};
 
-const PopoverTitle: Component<ArkPopover.TitleProps> = (props) => {
-const [local, others] = splitProps(props, ['class'])
-const titleClass = createMemo(() => styles.title({ class: local.class }))
-return <ArkPopover.Title class={titleClass()} {...others} />
-}
+export const PopoverCloseTrigger: Component<ArkPopover.CloseTriggerProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return (
+    <ArkPopover.CloseTrigger class={styles.closeTrigger({ class: local.class })} {...others} />
+  );
+};
 
-const PopoverDescription: Component<ArkPopover.DescriptionProps> = (props) => {
-const [local, others] = splitProps(props, ['class'])
-const descriptionClass = createMemo(() => styles.description({ class: local.class }))
-return <ArkPopover.Description class={descriptionClass()} {...others} />
-}
+export const PopoverArrow: Component<ArkPopover.ArrowProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return (
+    <ArkPopover.Arrow class={styles.arrow({ class: local.class })} {...others}>
+      <ArkPopover.ArrowTip class={styles.arrowTip()} />
+    </ArkPopover.Arrow>
+  );
+};
 
-const PopoverCloseTrigger: Component<ArkPopover.CloseTriggerProps> = (props) => {
-const [local, others] = splitProps(props, ['class'])
-const closeClass = createMemo(() => styles.closeTrigger({ class: local.class }))
-return (
+export const PopoverIndicator: Component<ArkPopover.IndicatorProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkPopover.Indicator class={styles.indicator({ class: local.class })} {...others} />;
+};
 
-<ArkPopover.CloseTrigger class={closeClass()} {...others}>
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="size-4"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
-</ArkPopover.CloseTrigger>
-)
-}
+export const PopoverPositioner: Component<ArkPopover.PositionerProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkPopover.Positioner class={styles.positioner({ class: local.class })} {...others} />;
+};
+```
 
-const PopoverArrow: Component<ArkPopover.ArrowProps> = (props) => {
-const [local, others] = splitProps(props, ['class'])
-const arrowClass = createMemo(() => styles.arrow({ class: local.class }))
-return <ArkPopover.Arrow class={arrowClass()} {...others} />
-}
+`src/components/popover/index.tsx`:
+```tsx
+import { Popover as ArkPopover } from "@ark-ui/solid/popover";
+import { Portal } from "solid-js/web";
+import { splitProps, type Component } from "solid-js";
+import {
+  PopoverCloseTrigger as BasePopoverCloseTrigger,
+  PopoverContent as BasePopoverContent,
+  PopoverPositioner,
+} from "./popover.base";
+import { popoverVariants, type PopoverVariants } from "../recipes/popover";
 
-const PopoverArrowTip: Component<ArkPopover.ArrowTipProps> = (props) => {
-const [local, others] = splitProps(props, ['class'])
-const arrowTipClass = createMemo(() => styles.arrowTip({ class: local.class }))
-return <ArkPopover.ArrowTip class={arrowTipClass()} {...others} />
-}
+export const PopoverContent: Component<ArkPopover.ContentProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "children"]);
+  return (
+    <Portal>
+      <PopoverPositioner>
+        <BasePopoverContent class={local.class} {...others}>
+          {local.children}
+        </BasePopoverContent>
+      </PopoverPositioner>
+    </Portal>
+  );
+};
 
-const PopoverIndicator: Component<ArkPopover.IndicatorProps> = (props) => {
-const [local, others] = splitProps(props, ['class'])
-const indicatorClass = createMemo(() => styles.indicator({ class: local.class }))
-return (
+export const PopoverCloseTrigger: Component<ArkPopover.CloseTriggerProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return (
+    <BasePopoverCloseTrigger class={local.class} {...others}>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="size-4"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+    </BasePopoverCloseTrigger>
+  );
+};
 
-<ArkPopover.Indicator class={indicatorClass()} {...others}>
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="size-4"><path d="m6 9 6 6 6-6"/></svg>
-</ArkPopover.Indicator>
-)
-}
+export * from "./popover.base";
 
-export {
-  PopoverRoot as Popover,
-  PopoverRootProvider,
-  PopoverTrigger,
-  PopoverContent,
-  PopoverTitle,
-  PopoverDescription,
-  PopoverCloseTrigger,
-  PopoverArrow,
-  PopoverArrowTip,
-  PopoverIndicator,
-  popoverVariants,
-}
+export { popoverVariants, type PopoverVariants };
 ```
 </div>
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--popover`, `--foreground`, `--border`, etc.) or override the utility classes to match your design system.
@@ -187,7 +195,7 @@ Import the components:
 
 ```tsx
 import {
-  Popover,
+  PopoverRoot,
   PopoverRootProvider,
   PopoverTrigger,
   PopoverContent,
@@ -199,13 +207,13 @@ import {
 Basic usage:
 
 ```tsx
-<Popover>
+<PopoverRoot>
   <PopoverTrigger as={Button}>Open Popover</PopoverTrigger>
   <PopoverContent>
     <PopoverTitle>Title</PopoverTitle>
     <PopoverDescription>Description text</PopoverDescription>
   </PopoverContent>
-</Popover>
+</PopoverRoot>
 ```
 
 ## With Close Trigger
@@ -213,14 +221,14 @@ Basic usage:
 Add a close trigger to allow users to dismiss the popover.
 
 ```tsx
-<Popover>
+<PopoverRoot>
   <PopoverTrigger as={Button}>Open</PopoverTrigger>
   <PopoverContent>
     <PopoverTitle>Title</PopoverTitle>
     <PopoverDescription>Description</PopoverDescription>
     <PopoverCloseTrigger>Close</PopoverCloseTrigger>
   </PopoverContent>
-</Popover>
+</PopoverRoot>
 ```
 
 ## Root Provider
@@ -238,6 +246,7 @@ import {
   PopoverTitle,
   PopoverDescription,
   PopoverCloseTrigger,
+  PopoverArrow,
 } from "~/components/popover";
 import { Button } from "~/components/button";
 
@@ -266,7 +275,7 @@ export function PopoverWithExternalControl() {
 
 The key difference:
 
-- **`Popover` (Root)** — manages its own state internally. Use for simple, self-contained popovers.
+- **`PopoverRoot`** — manages its own state internally. Use for simple, self-contained popovers.
 - **`PopoverRootProvider`** — accepts a pre-created popover context via `usePopover`. Use when you need to read or control the popover state from outside the component tree.
 
 ## With Arrow
@@ -274,16 +283,14 @@ The key difference:
 Add an arrow to visually connect the popover to its trigger.
 
 ```tsx
-<Popover>
+<PopoverRoot>
   <PopoverTrigger as={Button}>Open</PopoverTrigger>
   <PopoverContent>
-    <PopoverArrow>
-      <PopoverArrowTip />
-    </PopoverArrow>
+    <PopoverArrow />
     <PopoverTitle>Title</PopoverTitle>
     <PopoverDescription>Description</PopoverDescription>
   </PopoverContent>
-</Popover>
+</PopoverRoot>
 ```
 
 ## API Reference

@@ -14,7 +14,7 @@ Solid.js component library wrapping Ark UI primitives.
 packages/solid/
 ├── package.json
 ├── tsconfig.json
-├── tsup.config.ts
+├── vite.config.ts
 ├── dist/          # Compiled JS
 └── src/           # Source components
     └── *.tsx      # Individual Solid.js components
@@ -22,12 +22,11 @@ packages/solid/
 
 ## WHERE TO LOOK
 
-| Task                | Location       | Notes                                               |
-| ------------------- | -------------- | --------------------------------------------------- |
-| Add new component   | src/           | Create \*.tsx wrapper around Ark UI Solid component |
-| Update build config | tsup.config.ts | Add new component to entry list                     |
-| Update exports      | package.json   | Add new component to exports map                    |
-| Update solid index  | src/index.ts   | Export new component                                |
+| Task               | Location     | Notes                                               |
+| ------------------ | ------------ | --------------------------------------------------- |
+| Add new component  | src/         | Create \*.tsx wrapper around Ark UI Solid component |
+| Update exports     | package.json | Add new component to exports map                    |
+| Update solid index | src/index.ts | Export new component                                |
 
 ## CONVENTIONS
 
@@ -38,6 +37,5 @@ packages/solid/
 
 ## ANTI-PATTERNS
 
-- Forgetting to add the new component to tsup.config.ts entry list
 - Not exporting the new component in src/index.ts
 - Over-complicating the wrapper; keep it minimal and delegate to Ark UI

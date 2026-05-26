@@ -1,8 +1,14 @@
 import { PasswordInput as ArkPasswordInput } from "@ark-ui/solid/password-input";
-import { createMemo, splitProps, type Component } from "solid-js";
-import { passwordInputVariants } from "@ui/core";
-
-const styles = passwordInputVariants();
+import { splitProps, type Component } from "solid-js";
+import {
+  PasswordInputControl,
+  PasswordInputField,
+  PasswordInputIndicator,
+  PasswordInputLabel,
+  PasswordInputRoot,
+  PasswordInputRootProvider as BasePasswordInputRootProvider,
+  PasswordInputVisibilityTrigger,
+} from "./password-input.base";
 
 const EyeIcon: Component = () => (
   <svg
@@ -39,44 +45,40 @@ const EyeOffIcon: Component = () => (
 );
 
 const InnerComponent: Component<ArkPasswordInput.InputProps> = (props) => (
-  <ArkPasswordInput.Control class={styles.control()}>
-    <ArkPasswordInput.Input class={styles.input()} {...props} />
-    <ArkPasswordInput.VisibilityTrigger class={styles.visibilityTrigger()}>
-      <ArkPasswordInput.Indicator class={styles.indicator()} fallback={<EyeOffIcon />}>
+  <PasswordInputControl>
+    <PasswordInputField {...props} />
+    <PasswordInputVisibilityTrigger>
+      <PasswordInputIndicator fallback={<EyeOffIcon />}>
         <EyeIcon />
-      </ArkPasswordInput.Indicator>
-    </ArkPasswordInput.VisibilityTrigger>
-  </ArkPasswordInput.Control>
+      </PasswordInputIndicator>
+    </PasswordInputVisibilityTrigger>
+  </PasswordInputControl>
 );
 
-const PasswordInput: Component<
+export const PasswordInput: Component<
   ArkPasswordInput.RootProps & { label?: string; placeholder?: string }
 > = (props) => {
   const [local, others] = splitProps(props, ["class", "label", "children", "placeholder"]);
-  const rootClass = createMemo(() => styles.root({ class: local.class }));
   return (
-    <ArkPasswordInput.Root class={rootClass()} {...others}>
-      {local.label && (
-        <ArkPasswordInput.Label class={styles.label()}>{local.label}</ArkPasswordInput.Label>
-      )}
+    <PasswordInputRoot class={local.class} {...others}>
+      {local.label && <PasswordInputLabel>{local.label}</PasswordInputLabel>}
       <InnerComponent placeholder={local.placeholder} />
-    </ArkPasswordInput.Root>
+    </PasswordInputRoot>
   );
 };
 
-const PasswordInputRootProvider: Component<
+export const PasswordInputRootProvider: Component<
   ArkPasswordInput.RootProviderProps & { label?: string; placeholder?: string }
 > = (props) => {
   const [local, others] = splitProps(props, ["class", "label", "children", "placeholder"]);
-  const rootClass = createMemo(() => styles.root({ class: local.class }));
   return (
-    <ArkPasswordInput.RootProvider class={rootClass()} {...others}>
-      {local.label && (
-        <ArkPasswordInput.Label class={styles.label()}>{local.label}</ArkPasswordInput.Label>
-      )}
+    <BasePasswordInputRootProvider class={local.class} {...others}>
+      {local.label && <PasswordInputLabel>{local.label}</PasswordInputLabel>}
       <InnerComponent placeholder={local.placeholder} />
-    </ArkPasswordInput.RootProvider>
+    </BasePasswordInputRootProvider>
   );
 };
 
-export { PasswordInput, PasswordInputRootProvider, passwordInputVariants };
+export * from "./password-input.base";
+
+export { passwordInputVariants, type PasswordInputVariants } from "@ui/core";

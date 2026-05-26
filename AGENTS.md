@@ -51,12 +51,11 @@ Monorepo UI library with Ark UI primitives, Solid.js and React implementations, 
 - Framework wrappers (solid/react) delegate to Ark UI with minimal props
 - Export variants from core/index.ts and components from framework/index.ts
 - Keep CLI bin unscoped (`ui`) despite @ui/\* package naming
-- All configuration in package.json, tsup.config.ts, tsconfig.json
+- All configuration in package.json, vite.config.ts, tsconfig.json
 
 ## ANTI-PATTERNS (THIS PROJECT)
 
 - Deep exports in @ui/core/package.json incomplete (only 5/14 recipes exported)
-- Manual maintenance of tsup.config.ts entry lists (no globbing)
 - React library lags behind Solid (5 vs 14 components)
 - No test infrastructure whatsoever
 - Root package name mismatch (solid-ark-ui vs @ui/\* scope)
