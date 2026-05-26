@@ -82,3 +82,5 @@ export type { CarouselVariants } from "./recipes/carousel";
 export { avatarVariants } from "./recipes/avatar";
 export type { AvatarVariants } from "./recipes/avatar";
 
+export { progressVariants } from "./recipes/progress";
+export type { ProgressVariants } from "./recipes/progress";

@@ -1,0 +1,180 @@
+---
+title: Progress
+description: Displays an indicator showing the completion progress of a task.
+category: Feedback
+updatedDate: 2026-05-26
+---
+
+import DocsLink from "@components/DocsLink.astro";
+import ProgressBasicDemo from "@components/progress-demo/ProgressBasicDemo.tsx";
+
+# Progress
+
+A progress bar used to show the completion status of an ongoing operation.
+
+<DocsLink href="https://ark-ui.com/docs/components/progress" />
+
+<ProgressBasicDemo client:load />
+
+```tsx
+import {
+  Progress,
+  ProgressLabel,
+  ProgressTrack,
+  ProgressRange,
+  ProgressValueText,
+} from "~/components/progress";
+
+export function ProgressDemo() {
+  return (
+    <Progress value={65}  class="space-y-2">
+      <ProgressLabel>Loading</ProgressLabel>
+      <ProgressTrack>
+        <ProgressRange />
+      </ProgressTrack>
+      <ProgressValueText />
+    </Progress>
+  );
+}
+```
+
+## Installation
+
+### CLI
+
+Run the following command to add the component to your project:
+
+```bash
+npx solidui-cli@latest add progress
+```
+
+### Manual
+
+<div class="space-y-3">
+Install the dependency:
+```bash
+npm install tailwind-variants
+```
+</div>
+<div class="space-y-3">
+Create the recipe file at `src/components/recipes/progress.ts`:
+```tsx
+import { tv, type VariantProps } from 'tailwind-variants'
+
+export const progressVariants = tv({
+  slots: {
+    root: "relative w-full",
+    label: "text-sm font-medium text-foreground",
+    track: "h-2 w-full overflow-hidden rounded-full bg-muted",
+    range: "h-full w-full flex-1 bg-primary transition-all data-[state=indeterminate]:animate-progress-indeterminate",
+    valueText: "text-sm font-medium tabular-nums text-muted-foreground",
+    view: "",
+  },
+});
+
+export type ProgressVariants = VariantProps<typeof progressVariants>
+```
+</div>
+<div class="space-y-3">
+Create the component directory and files:
+
+`src/components/progress/progress.base.tsx`:
+```tsx
+import { Progress as ArkProgress } from "@ark-ui/solid/progress";
+import { splitProps, type Component } from "solid-js";
+import { progressVariants } from "../recipes/progress";
+
+const styles = progressVariants();
+
+export const ProgressRoot: Component<ArkProgress.RootProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkProgress.Root class={styles.root({ class: local.class })} {...others} />;
+};
+
+export const ProgressRootProvider: Component<ArkProgress.RootProviderProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkProgress.RootProvider class={styles.root({ class: local.class })} {...others} />;
+};
+
+export const ProgressLabel: Component<ArkProgress.LabelProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkProgress.Label class={styles.label({ class: local.class })} {...others} />;
+};
+
+export const ProgressTrack: Component<ArkProgress.TrackProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkProgress.Track class={styles.track({ class: local.class })} {...others} />;
+};
+
+export const ProgressRange: Component<ArkProgress.RangeProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkProgress.Range class={styles.range({ class: local.class })} {...others} />;
+};
+
+export const ProgressValueText: Component<ArkProgress.ValueTextProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkProgress.ValueText class={styles.valueText({ class: local.class })} {...others} />;
+};
+
+export const ProgressView: Component<ArkProgress.ViewProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkProgress.View class={styles.view({ class: local.class })} {...others} />;
+};
+```
+
+`src/components/progress/index.tsx`:
+```tsx
+import { ProgressRoot } from "./progress.base";
+
+export const Progress = ProgressRoot;
+
+export * from "./progress.base";
+
+export { progressVariants, type ProgressVariants } from "../recipes/progress";
+```
+</div>
+
+> **Note:** Make sure your project has the Tailwind CSS theme variables set up or override the utility classes to match your design system.
+
+## Usage
+
+Import the components:
+
+```tsx
+import {
+  Progress,
+  ProgressLabel,
+  ProgressTrack,
+  ProgressRange,
+  ProgressValueText,
+} from "~/components/progress";
+```
+
+Basic usage:
+
+```tsx
+<Progress value={65}  class="space-y-2">
+  <ProgressLabel>Loading</ProgressLabel>
+  <ProgressTrack>
+    <ProgressRange />
+  </ProgressTrack>
+  <ProgressValueText />
+</Progress>
+```
+
+## Indeterminate
+
+Omit the `value` prop to render an indeterminate progress bar:
+
+```tsx
+<Progress>
+  <ProgressLabel>Loading...</ProgressLabel>
+  <ProgressTrack>
+    <ProgressRange />
+  </ProgressTrack>
+</Progress>
+```
+
+## API Reference
+
+See the [Ark UI Progress](https://ark-ui.com/docs/components/progress) documentation.

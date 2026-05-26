@@ -1,0 +1,23 @@
+import {
+  Progress,
+  ProgressLabel,
+  ProgressTrack,
+  ProgressRange,
+  ProgressValueText,
+} from "@ui/solid";
+
+export default function ProgressBasicDemo() {
+  return (
+    <div class="flex flex-col gap-3 rounded-lg border border-border p-6">
+      <Progress value={65} class="space-y-2">
+        <div class="flex items-center justify-between">
+          <ProgressLabel>Loading</ProgressLabel>
+          <ProgressValueText />
+        </div>
+        <ProgressTrack>
+          <ProgressRange />
+        </ProgressTrack>
+      </Progress>
+    </div>
+  );
+}
