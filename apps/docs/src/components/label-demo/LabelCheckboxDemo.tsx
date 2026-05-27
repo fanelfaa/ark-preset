@@ -1,5 +1,6 @@
 import { Label, Checkbox } from "@ui/solid";
 
+// TODO: this demo is not working yet, because checkbox has its own label
 export default function LabelCheckboxDemo() {
   return (
     <div class="rounded-lg border border-border p-6">
