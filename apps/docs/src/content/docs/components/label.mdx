@@ -8,6 +8,7 @@ updatedDate: 2026-05-27
 import DocsLink from "@components/DocsLink.astro";
 import { Label, Input } from "@ui/solid";
 import LabelBasicDemo from "@components/label-demo/LabelBasicDemo.tsx";
+import LabelCheckboxDemo from "@components/label-demo/LabelCheckboxDemo.tsx";
 
 # Label
 
@@ -24,8 +25,8 @@ import { Input } from "~/components/input";
 export function LabelDemo() {
   return (
     <div class="grid w-full max-w-sm items-center gap-1.5">
-      <Label for="name">Name</Label>
-      <Input placeholder="Enter your name" />
+      <Label for="label-name">Name</Label>
+      <Input id="label-name" placeholder="Enter your name" />
     </div>
   );
 }
@@ -59,6 +60,14 @@ import { tv, type VariantProps } from 'tailwind-variants'
 
 export const labelVariants = tv({
   base: "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
+  variants: {
+    error: {
+      true: "text-destructive",
+    },
+  },
+  defaultVariants: {
+    error: false,
+  },
 })
 
 export type LabelVariants = VariantProps<typeof labelVariants>
@@ -73,9 +82,9 @@ import { splitProps, type Component } from 'solid-js'
 import { labelVariants } from '../recipes/label'
 import { ark, type HTMLArkProps } from '@ark-ui/solid/factory'
 
-const Label: Component<HTMLArkProps<"label">> = (props) => {
-  const [local, others] = splitProps(props, ["class"])
-  return <ark.label class={labelVariants({ class: local.class })} {...others} />
+const Label: Component<HTMLArkProps<"label"> & { error?: boolean }> = (props) => {
+  const [local, others] = splitProps(props, ["class", "error"])
+  return <ark.label class={labelVariants({ class: local.class, error: local.error })} {...others} />
 }
 
 export { Label, labelVariants }
@@ -90,10 +99,11 @@ Import the component:
 import { Label } from "@ui/solid";
 ```
 
-Basic:
+The `for` attribute must match the `id` of the associated input element for proper accessibility and click-to-focus behavior:
 
 ```tsx
 <Label for="email">Email</Label>
+<Input id="email" type="email" />
 ```
 
 ## Examples
@@ -103,39 +113,41 @@ Basic:
 <div class="rounded-lg border border-border p-6">
   <div class="grid w-full max-w-sm items-center gap-1.5">
     <Label for="demo-email">Email</Label>
-    <Input type="email" placeholder="your@email.com" />
+    <Input id="demo-email" type="email" placeholder="your@email.com" />
   </div>
 </div>
 
 ```tsx
 <div class="grid w-full max-w-sm items-center gap-1.5">
   <Label for="email">Email</Label>
-  <Input type="email" placeholder="your@email.com" />
+  <Input id="email" type="email" placeholder="your@email.com" />
 </div>
 ```
 
-### Checkbox Label
+### With Checkbox
 
-<div class="rounded-lg border border-border p-6">
-  <div class="flex items-center gap-2">
-    <input type="checkbox" id="terms" class="size-4 accent-foreground" />
-    <Label for="terms">Accept terms and conditions</Label>
-  </div>
-</div>
+Use the `ids` prop on Checkbox to set the hidden input's `id`, then pair it with Label's `for` attribute:
+
+<LabelCheckboxDemo client:load />
 
 ```tsx
-<div class="flex items-center gap-2">
-  <input type="checkbox" id="terms" />
-  <Label for="terms">Accept terms and conditions</Label>
-</div>
+import { Label } from "~/components/label";
+import { Checkbox } from "~/components/checkbox";
+
+<Checkbox ids={{ hiddenInput: "terms" }} />
+<Label for="terms">Accept terms and conditions</Label>
 ```
+
+The Checkbox component passes the `ids` prop through to the underlying Zag.js machine, where `hiddenInput` controls the ID of the native `<input>` element. The Label's `for` attribute then references this ID for proper click-to-focus.
 
 ## API Reference
 
 | Prop | Type | Default |
 |------|------|---------|
 | class | `string` | — |
+| error | `boolean` | `false` |
 | children | `any` | — |
 | for | `string` | — |
 
-All native `<label>` attributes are supported via the `asChild` pattern.
+All native `<label>` attributes are supported. The `for` attribute must match the `id` of the associated form element for click-to-focus to work.
+

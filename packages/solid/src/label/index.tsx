@@ -5,8 +5,8 @@ import { ark, type HTMLArkProps } from "@ark-ui/solid/factory";
 type LabelProps = HTMLArkProps<"label"> & LabelVariants;
 
 const Label: Component<LabelProps> = (props) => {
-  const [local, others] = splitProps(props, ["class"]);
-  return <ark.label class={labelVariants({ class: local.class })} {...others} />;
+  const [local, others] = splitProps(props, ["class", "error"]);
+  return <ark.label class={labelVariants({ class: local.class, error: local.error })} {...others} />;
 };
 
 export { Label, labelVariants };
