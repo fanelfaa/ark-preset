@@ -31,6 +31,7 @@ export * from "./separator";
 export * from "./spinner";
 export * from "./textarea";
 export * from "./typography";
+export * from "./label";
 export * from "./alert";
 export * from "./alert-dialog";
 export * from "./aspect-ratio";
