@@ -17,9 +17,6 @@ export const buttonVariants = tv({
       lg: "h-10 px-6",
       icon: "size-8",
     },
-    loading: {
-      true: "relative isolate",
-    },
   },
   defaultVariants: {
     variant: "default",
