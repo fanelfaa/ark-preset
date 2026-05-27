@@ -96,3 +96,12 @@ export type { TextareaVariants } from "./recipes/textarea";
 
 export { typographyVariants } from "./recipes/typography";
 export type { TypographyVariants } from "./recipes/typography";
+
+export { alertVariants } from "./recipes/alert";
+export type { AlertVariants } from "./recipes/alert";
+
+export { alertDialogVariants } from "./recipes/alert-dialog";
+export type { AlertDialogVariants } from "./recipes/alert-dialog";
+
+export { aspectRatioVariants } from "./recipes/aspect-ratio";
+export type { AspectRatioVariants } from "./recipes/aspect-ratio";
