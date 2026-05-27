@@ -1,7 +1,7 @@
 # Packages/Core/Recipes Knowledge
 
-**Generated:** 2026-05-14 04:58:13 UTC
-**Commit:** 3fcc19f
+**Generated:** 2026-05-27 02:47:19 UTC
+**Commit:** f3d6548f
 **Branch:** main
 
 ## OVERVIEW
@@ -12,20 +12,39 @@ Individual component recipes using tailwind-variants tv() function.
 
 ```
 packages/core/src/recipes/
-├── button.ts
-├── input.ts
-├── dialog.ts
-├── select.ts
-├── toast.ts
-├── switch.ts
-├── checkbox.ts
-├── tabs.ts
 ├── accordion.ts
-├── radio-group.ts
-├── tooltip.ts
+├── avatar.ts
+├── badge.ts
+├── button.ts
+├── card.ts
+├── carousel.ts
+├── checkbox.ts
+├── collapsible.ts
+├── combobox.ts
 ├── date-picker.ts
+├── dialog.ts
+├── drawer.ts
+├── input.ts
+├── menu.ts
+├── number-input.ts
+├── password-input.ts
+├── pin-input.ts
 ├── popover.ts
-└── slider.ts
+├── progress.ts
+├── radio-group.ts
+├── select.ts
+├── separator.ts
+├── skeleton.ts
+├── slider.ts
+├── spinner.ts
+├── switch.ts
+├── tabs.ts
+├── textarea.ts
+├── toast.ts
+├── toggle-group.ts
+├── toggle.ts
+├── tooltip.ts
+├── typography.ts
 ```
 
 ## WHERE TO LOOK
@@ -41,3 +60,5 @@ packages/core/src/recipes/
 - Define slots for each stylable part of the component
 - Define variants for each visual state (e.g., disabled, invalid, size, etc.)
 - Export the variants variable and a TypeScript type for the variants
+- Each recipe must be added to tsup.config.ts entry list
+- Each recipe must be re-exported from ../index.ts

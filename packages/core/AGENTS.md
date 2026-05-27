@@ -1,7 +1,7 @@
 # PROJECT KNOWLEDGE BASE
 
-**Generated:** 2026-05-14 05:04:27 UTC
-**Commit:** 3fcc19f
+**Generated:** 2026-05-27 02:47:19 UTC
+**Commit:** f3d6548f
 **Branch:** main
 
 ## OVERVIEW
@@ -22,13 +22,9 @@ Styling primitives (Ark UI recipes)
 - Not exporting the new recipe variants in src/index.ts
 - Using CSS directly instead of tailwind-variants tv() function
 
-## COMMONS
+## COMMANDS
 
 ```bash
-# Standard commands (if applicable)
+pnpm --filter @ui/core build
+pnpm --filter @ui/core dev
 ```
-
-## NOTES
-
-- This directory is part of the monorepo structure.
-- See the root AGENTS.md for project-wide information.
