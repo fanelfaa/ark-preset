@@ -40,6 +40,7 @@ export default defineConfig({
     "src/recipes/alert.ts",
     "src/recipes/alert-dialog.ts",
     "src/recipes/aspect-ratio.ts",
+    "src/recipes/scroll-area.ts",
   ],
   format: ["esm", "cjs"],
   dts: true,

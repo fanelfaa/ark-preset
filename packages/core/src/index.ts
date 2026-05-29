@@ -108,3 +108,6 @@ export type { AlertDialogVariants } from "./recipes/alert-dialog";
 
 export { aspectRatioVariants } from "./recipes/aspect-ratio";
 export type { AspectRatioVariants } from "./recipes/aspect-ratio";
+
+export { scrollAreaVariants } from "./recipes/scroll-area";
+export type { ScrollAreaVariants } from "./recipes/scroll-area";

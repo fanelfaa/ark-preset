@@ -1,0 +1,231 @@
+---
+title: ScrollArea
+description: A scrollable container with custom scrollbar styling.
+category: Layout
+updatedDate: 2026-05-29
+---
+
+import DocsLink from "@components/DocsLink.astro";
+import ScrollAreaBasicDemo from "@components/scroll-area-demo/ScrollAreaBasicDemo.tsx";
+
+# ScrollArea
+
+A scrollable container with custom scrollbar styling that provides a consistent look across browsers.
+
+<DocsLink href="https://ark-ui.com/docs/components/scroll-area" />
+
+<ScrollAreaBasicDemo client:load />
+
+```tsx
+import { ScrollArea } from "~/components/scroll-area";
+
+export function ScrollAreaDemo() {
+  return (
+    <ScrollArea class="h-[200px] w-[350px]" orientation="vertical">
+      <div class="p-4 space-y-4">
+        {Array.from({ length: 20 }, (_, i) => (
+          <p key={i} class="text-sm">
+            Item {i + 1}: Lorem ipsum dolor sit amet...
+          </p>
+        ))}
+      </div>
+    </ScrollArea>
+  );
+}
+```
+
+## Installation
+
+### CLI
+
+Run the following command to add the component to your project:
+
+```bash
+npx solidui-cli@latest add scroll-area
+```
+
+### Manual
+
+<div class="space-y-3">
+Install the dependency:
+
+```bash
+npm install tailwind-variants
+```
+
+</div>
+
+<div class="space-y-3">
+Create the recipe file at `src/components/recipes/scroll-area.ts`:
+
+```tsx
+import { tv, type VariantProps } from "tailwind-variants";
+
+export const scrollAreaVariants = tv({
+  slots: {
+    viewport:
+      "h-full w-full rounded-[inherit] overflow-scroll [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden [&::-webkit-scrollbar]:size-0",
+    scrollbar: "flex select-none touch-none transition-colors group",
+    thumb:
+      "relative flex-1 rounded-full bg-border/40 transition-colors duration-150 group-hover:bg-border data-[dragging]:bg-border",
+    corner: "bg-background",
+  },
+  variants: {
+    orientation: {
+      vertical: {
+        scrollbar: "w-2.5 border-l border-l-transparent p-px",
+        thumb: "",
+      },
+      horizontal: {
+        scrollbar: "flex-col h-2.5 border-t border-t-transparent p-px",
+        thumb: "",
+      },
+    },
+  },
+  defaultVariants: {
+    orientation: "vertical",
+  },
+});
+
+export type ScrollAreaVariants = VariantProps<typeof scrollAreaVariants>;
+```
+
+</div>
+
+<div class="space-y-3">
+Create the component file at `src/components/scroll-area/scroll-area.base.tsx`:
+
+```tsx
+import { ScrollArea as ArkScrollArea } from "@ark-ui/solid/scroll-area";
+import { splitProps, type Component } from "solid-js";
+import { scrollAreaVariants } from "../recipes/scroll-area";
+
+const styles = scrollAreaVariants();
+
+export const ScrollAreaRoot: Component<ArkScrollArea.RootProps> = (props) => {
+  return <ArkScrollArea.Root {...props} />;
+};
+
+export const ScrollAreaViewport: Component<ArkScrollArea.ViewportProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkScrollArea.Viewport class={styles.viewport({ class: local.class })} {...others} />;
+};
+
+export const ScrollAreaContent: Component<ArkScrollArea.ContentProps> = (props) => {
+  return <ArkScrollArea.Content {...props} />;
+};
+
+export const ScrollAreaScrollbar: Component<ArkScrollArea.ScrollbarProps & { orientation?: "vertical" | "horizontal" }> = (props) => {
+  const [local, others] = splitProps(props, ["class", "orientation"]);
+  return (
+    <ArkScrollArea.Scrollbar
+      class={styles.scrollbar({ class: local.class, orientation: local.orientation })}
+      orientation={local.orientation}
+      {...others}
+    />
+  );
+};
+
+export const ScrollAreaThumb: Component<ArkScrollArea.ThumbProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkScrollArea.Thumb class={styles.thumb({ class: local.class })} {...others} />;
+};
+
+export const ScrollAreaCorner: Component<ArkScrollArea.CornerProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkScrollArea.Corner class={styles.corner({ class: local.class })} {...others} />;
+};
+```
+
+</div>
+
+<div class="space-y-3">
+Create the component file at `src/components/scroll-area/index.tsx`:
+
+```tsx
+import { splitProps, type Component } from "solid-js";
+import {
+  ScrollAreaRoot,
+  ScrollAreaViewport,
+  ScrollAreaContent,
+  ScrollAreaScrollbar,
+  ScrollAreaThumb,
+  ScrollAreaCorner,
+} from "./scroll-area.base";
+import { ScrollArea as ArkScrollArea } from "@ark-ui/solid/scroll-area";
+
+type ScrollAreaProps = ArkScrollArea.RootProps & {
+  orientation?: "vertical" | "horizontal";
+};
+
+const ScrollArea: Component<ScrollAreaProps> = (props) => {
+  const [local, others] = splitProps(props, ["orientation", "children"]);
+  return (
+    <ScrollAreaRoot {...others}>
+      <ScrollAreaViewport>
+        <ScrollAreaContent>
+          {local.children}
+        </ScrollAreaContent>
+      </ScrollAreaViewport>
+      <ScrollAreaScrollbar orientation={local.orientation ?? "vertical"}>
+        <ScrollAreaThumb />
+      </ScrollAreaScrollbar>
+      <ScrollAreaCorner />
+    </ScrollAreaRoot>
+  );
+};
+
+export { ScrollArea };
+
+export * from "./scroll-area.base";
+export { scrollAreaVariants, type ScrollAreaVariants } from "../recipes/scroll-area";
+```
+
+</div>
+
+## Usage
+
+Import the component:
+
+```tsx
+import { ScrollArea } from "~/components/scroll-area";
+```
+
+Basic vertical scroll:
+
+```tsx
+<ScrollArea class="h-[200px] w-[350px]" orientation="vertical">
+  <div class="p-4">
+    <p>Long content here...</p>
+  </div>
+</ScrollArea>
+```
+
+Horizontal scroll:
+
+```tsx
+<ScrollArea class="w-[350px]" orientation="horizontal">
+  <div class="flex w-[800px] p-4">
+    <p>Wide content here...</p>
+  </div>
+</ScrollArea>
+```
+
+## Advanced Usage
+
+For full control over the scroll area structure, import the primitive parts directly. See the [Manual](#manual) installation section for example usage of the primitive parts.
+
+```tsx
+import {
+  ScrollArea,
+  ScrollAreaViewport,
+  ScrollAreaContent,
+  ScrollAreaScrollbar,
+  ScrollAreaThumb,
+  ScrollAreaCorner,
+} from "~/components/scroll-area";
+```
+
+## API Reference
+
+See the [Ark UI ScrollArea](https://ark-ui.com/docs/components/scroll-area) documentation.

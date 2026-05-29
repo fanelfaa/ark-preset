@@ -112,6 +112,152 @@ Use when the inner content needs a Portal from `solid-js/web`.
 
 Similar to Pattern B but wraps content in `<Portal>` from `solid-js/web`.
 
+### Pattern D — Composite with automatic parts
+
+Use when component should work out-of-the-box without manual sub-part composition. Composite `index.tsx` wraps children in Viewport/Content, adds Scrollbar/Thumb/Corner internally. Orientation prop drives scrollbar. Primitives still exported for advanced use.
+
+**Example: scroll-area**
+
+`<component>.base.tsx`:
+```tsx
+import { ComponentName as ArkComponentName } from "@ark-ui/solid/<package>";
+import { splitProps, type Component } from "solid-js";
+import { <component>Variants } from "@ui/core";
+
+const styles = <component>Variants();
+
+// Parts consuming tv() variants — keep splitProps
+// Parts without tv() — spread props directly, no splitProps
+
+export const ScrollAreaViewport: Component<ArkComponentName.ViewportProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkComponentName.Viewport class={styles.viewport({ class: local.class })} {...others} />;
+};
+
+// Parts without tv() — direct spread
+export const ScrollAreaRoot: Component<ArkComponentName.RootProps> = (props) => (
+  <ArkComponentName.Root {...props} />
+);
+```
+
+`index.tsx`:
+```tsx
+import { splitProps, type Component } from "solid-js";
+import {
+  ScrollAreaRoot,
+  ScrollAreaViewport,
+  ScrollAreaContent,
+  ScrollAreaScrollbar,
+  ScrollAreaThumb,
+  ScrollAreaCorner,
+} from "./<component>.base";
+import { ComponentName as ArkComponentName } from "@ark-ui/solid/<package>";
+
+type ScrollAreaProps = ArkComponentName.RootProps & {
+  orientation?: "vertical" | "horizontal";
+};
+
+const ScrollArea: Component<ScrollAreaProps> = (props) => {
+  const [local, others] = splitProps(props, ["orientation", "children"]);
+  return (
+    <ScrollAreaRoot {...others}>
+      <ScrollAreaViewport>
+        <ScrollAreaContent>
+          {local.children}
+        </ScrollAreaContent>
+      </ScrollAreaViewport>
+      <ScrollAreaScrollbar orientation={local.orientation ?? "vertical"}>
+        <ScrollAreaThumb />
+      </ScrollAreaScrollbar>
+      <ScrollAreaCorner />
+    </ScrollAreaRoot>
+  );
+};
+
+export { ScrollArea };
+
+export * from "./<component>.base";
+export { <component>Variants, type <component>Variants } from "@ui/core";
+```
+
+Usage:
+```tsx
+<ScrollArea class="h-[200px]" orientation="vertical">content</ScrollArea>
+```
+
+For advanced use, import primitives:
+```tsx
+import { ScrollAreaViewport, ScrollAreaScrollbar, ... } from "~/components/scroll-area";
+```
+
+## DOCS PATTERN
+
+Each component needs a docs page + demo.
+
+### Structure
+
+```
+apps/docs/
+├── src/content/docs/components/<name>.mdx    # Docs page
+└── src/components/<name>-demo/              # Demo component
+    └── <Name>BasicDemo.tsx
+```
+
+### MDX Page Layout
+
+```mdx
+---
+title: ComponentName
+description: ...
+category: Layout
+updatedDate: YYYY-MM-DD
+---
+
+import DocsLink from "@components/DocsLink.astro";
+import NameBasicDemo from "@components/name-demo/NameBasicDemo.tsx";
+
+# ComponentName
+
+Brief description.
+
+<DocsLink href="https://ark-ui.com/docs/components/<name>" />
+
+<NameBasicDemo client:load />
+
+<-- Inline code block using simple import: import { Name } from "~/components/name" -->
+
+## Installation
+
+### CLI
+
+```bash
+npx solidui-cli@latest add <name>
+```
+
+### Manual
+
+Recipe + base + index code blocks.
+
+## Usage
+
+Simple import + examples using `<Name>` only.
+
+## Advanced Usage
+
+Link to Manual section for primitive parts.
+
+## API Reference
+
+See the [Ark UI Name](https://ark-ui.com/docs/components/<name>) documentation.
+```
+
+### Imports Convention
+
+| Context | Import path |
+|---------|-------------|
+| MDX top (live demo) | `@ui/solid` |
+| User-facing code blocks | `~/components/<name>` |
+
 ## CONVENTIONS
 
 ### Styling
