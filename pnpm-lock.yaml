@@ -84,43 +84,6 @@ importers:
         specifier: ^5.0.0
         version: 5.9.3
 
-  packages/react:
-    dependencies:
-      '@ark-ui/react':
-        specifier: ^5.0.0
-        version: 5.36.2(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
-      '@ui/core':
-        specifier: workspace:*
-        version: link:../core
-      react:
-        specifier: ^18.0.0 || ^19.0.0
-        version: 19.2.6
-      react-dom:
-        specifier: ^18.0.0 || ^19.0.0
-        version: 19.2.6(react@19.2.6)
-      tailwind-merge:
-        specifier: ^3.5.0
-        version: 3.5.0
-      tailwind-variants:
-        specifier: ^3.0.0
-        version: 3.2.2(tailwind-merge@3.5.0)(tailwindcss@4.3.0)
-      tailwindcss:
-        specifier: ^4.0.0
-        version: 4.3.0
-    devDependencies:
-      '@types/react':
-        specifier: ^19.0.0
-        version: 19.2.14
-      '@types/react-dom':
-        specifier: ^19.0.0
-        version: 19.2.3(@types/react@19.2.14)
-      tsup:
-        specifier: ^8.0.0
-        version: 8.5.1(jiti@2.7.0)(postcss@8.5.14)(typescript@5.9.3)
-      typescript:
-        specifier: ^5.0.0
-        version: 5.9.3
-
   packages/solid:
     dependencies:
       '@ark-ui/solid':
@@ -153,12 +116,6 @@ importers:
         version: 2.11.12(solid-js@1.9.13)(vite@6.4.2(@types/node@25.6.2)(jiti@2.7.0)(lightningcss@1.32.0))
 
 packages:
-
-  '@ark-ui/react@5.36.2':
-    resolution: {integrity: sha512-2lrZ7+Qtlj7hGx4qU2jZkE892JNrkULg/fUxqUuqmQfv9UGAXhdcw1Hr3N+zBgMDVz3aqip0Qa4v0Mox09MMvg==}
-    peerDependencies:
-      react: '>=18.0.0'
-      react-dom: '>=18.0.0'
 
   '@ark-ui/solid@5.36.2':
     resolution: {integrity: sha512-ECvfUwpkGWctTVuE6A8V81A12Xuu1CJvfH83oTOD+NcfQQ41U9LwQJ1YjTNVB4In7asJfw68oZdONDnuLyeVgw==}
@@ -1321,14 +1278,6 @@ packages:
   '@types/node@25.6.2':
     resolution: {integrity: sha512-sokuT28dxf9JT5Kady1fsXOvI4HVpjZa95NKT5y9PNTIrs2AsobR4GFAA90ZG8M+nxVRLysCXsVj6eGC7Vbrlw==}
 
-  '@types/react-dom@19.2.3':
-    resolution: {integrity: sha512-jp2L/eY6fn+KgVVQAOqYItbF0VY/YApe5Mz2F0aykSO8gx31bYCZyvSeYxCHKvzHG5eZjc+zyaS5BrBWya2+kQ==}
-    peerDependencies:
-      '@types/react': ^19.2.0
-
-  '@types/react@19.2.14':
-    resolution: {integrity: sha512-ilcTH/UniCkMdtexkoCN0bI7pMcJDvmQFPvuPvmEaYA/NSfFTAgdUSLAoVjaRJm7+6PvcM+q1zYOwS4wTYMF9w==}
-
   '@types/unist@2.0.11':
     resolution: {integrity: sha512-CmBKiL6NNo/OqgmMn95Fk9Whlp2mtvIv+KNpQKN2F4SjvrEesubTRWGYSg+BnWZOnlCaSTU1sMpsBOzgbYhnsA==}
 
@@ -1499,12 +1448,6 @@ packages:
 
   '@zag-js/rating-group@1.40.0':
     resolution: {integrity: sha512-UMBI3xAMcm7otpAczMGPEA7jC1hvV8NhnZ4mN3oftJB0bc1winoXxJdCkrXN58TTNWrGNSRzjtm048G+HPCdpw==}
-
-  '@zag-js/react@1.40.0':
-    resolution: {integrity: sha512-2TFS1HYABYGc0lurC+4WEXvKkpxsVv6vKm+t8QAL7wfoeZnw6HDQWLc91kINp89vln+A2kwCfYqIq8HSm+9EeA==}
-    peerDependencies:
-      react: '>=18.0.0'
-      react-dom: '>=18.0.0'
 
   '@zag-js/rect-utils@1.40.0':
     resolution: {integrity: sha512-ikgLuE4rLlACm4mGLp6Ga8sJA44uFwohA1nVmb95sQ+VIyx2naf91CEF7SMrZVEwFKHaHpxdKVQSZLRjJqO/dw==}
@@ -2510,15 +2453,6 @@ packages:
   radix3@1.1.2:
     resolution: {integrity: sha512-b484I/7b8rDEdSDKckSSBA8knMpcdsXudlE/LNL639wFoHKwLbEkQFZHWEYwDC0wa0FKUcCY+GAF73Z7wxNVFA==}
 
-  react-dom@19.2.6:
-    resolution: {integrity: sha512-0prMI+hvBbPjsWnxDLxlCGyM8PN6UuWjEUCYmZhO67xIV9Xasa/r/vDnq+Xyq4Lo27g8QSbO5YzARu0D1Sps3g==}
-    peerDependencies:
-      react: ^19.2.6
-
-  react@19.2.6:
-    resolution: {integrity: sha512-sfWGGfavi0xr8Pg0sVsyHMAOziVYKgPLNrS7ig+ivMNb3wbCBw3KxtflsGBAwD3gYQlE/AEZsTLgToRrSCjb0Q==}
-    engines: {node: '>=0.10.0'}
-
   readdirp@4.1.2:
     resolution: {integrity: sha512-GDhwkLfywWL2s6vEjyhri+eXmfH6j1L7JE27WhqLeYzoh/A3DBaYGEj2H/HFZCn/kMfim73FXxEJTw06WtxQwg==}
     engines: {node: '>= 14.18.0'}
@@ -2611,9 +2545,6 @@ packages:
   sax@1.6.0:
     resolution: {integrity: sha512-6R3J5M4AcbtLUdZmRv2SygeVaM7IhrLXu9BmnOGmmACak8fiUtOsYNWUS4uK7upbmHIBbLBeFeI//477BKLBzA==}
     engines: {node: '>=11.0.0'}
-
-  scheduler@0.27.0:
-    resolution: {integrity: sha512-eNv+WrVbKu1f3vbYJT/xtiF5syA5HPIMtf9IgY/nKg0sWqzAUEvqY/xm7OcZc/qafLx/iO9FgOmeSAp4v5ti/Q==}
 
   semver@6.3.1:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
@@ -3040,78 +2971,6 @@ packages:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
 
 snapshots:
-
-  '@ark-ui/react@5.36.2(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
-    dependencies:
-      '@internationalized/date': 3.12.0
-      '@zag-js/accordion': 1.40.0
-      '@zag-js/anatomy': 1.40.0
-      '@zag-js/angle-slider': 1.40.0
-      '@zag-js/async-list': 1.40.0
-      '@zag-js/auto-resize': 1.40.0
-      '@zag-js/avatar': 1.40.0
-      '@zag-js/carousel': 1.40.0
-      '@zag-js/cascade-select': 1.40.0
-      '@zag-js/checkbox': 1.40.0
-      '@zag-js/clipboard': 1.40.0
-      '@zag-js/collapsible': 1.40.0
-      '@zag-js/collection': 1.40.0
-      '@zag-js/color-picker': 1.40.0
-      '@zag-js/color-utils': 1.40.0
-      '@zag-js/combobox': 1.40.0
-      '@zag-js/core': 1.40.0
-      '@zag-js/date-input': 1.40.0(@internationalized/date@3.12.0)
-      '@zag-js/date-picker': 1.40.0(@internationalized/date@3.12.0)
-      '@zag-js/date-utils': 1.40.0(@internationalized/date@3.12.0)
-      '@zag-js/dialog': 1.40.0
-      '@zag-js/dom-query': 1.40.0
-      '@zag-js/drawer': 1.40.0
-      '@zag-js/editable': 1.40.0
-      '@zag-js/file-upload': 1.40.0
-      '@zag-js/file-utils': 1.40.0
-      '@zag-js/floating-panel': 1.40.0
-      '@zag-js/focus-trap': 1.40.0
-      '@zag-js/focus-visible': 1.40.0
-      '@zag-js/highlight-word': 1.40.0
-      '@zag-js/hover-card': 1.40.0
-      '@zag-js/i18n-utils': 1.40.0
-      '@zag-js/image-cropper': 1.40.0
-      '@zag-js/json-tree-utils': 1.40.0
-      '@zag-js/listbox': 1.40.0
-      '@zag-js/marquee': 1.40.0
-      '@zag-js/menu': 1.40.0
-      '@zag-js/navigation-menu': 1.40.0
-      '@zag-js/number-input': 1.40.0
-      '@zag-js/pagination': 1.40.0
-      '@zag-js/password-input': 1.40.0
-      '@zag-js/pin-input': 1.40.0
-      '@zag-js/popover': 1.40.0
-      '@zag-js/presence': 1.40.0
-      '@zag-js/progress': 1.40.0
-      '@zag-js/qr-code': 1.40.0
-      '@zag-js/radio-group': 1.40.0
-      '@zag-js/rating-group': 1.40.0
-      '@zag-js/react': 1.40.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
-      '@zag-js/scroll-area': 1.40.0
-      '@zag-js/select': 1.40.0
-      '@zag-js/signature-pad': 1.40.0
-      '@zag-js/slider': 1.40.0
-      '@zag-js/splitter': 1.40.0
-      '@zag-js/steps': 1.40.0
-      '@zag-js/switch': 1.40.0
-      '@zag-js/tabs': 1.40.0
-      '@zag-js/tags-input': 1.40.0
-      '@zag-js/timer': 1.40.0
-      '@zag-js/toast': 1.40.0
-      '@zag-js/toggle': 1.40.0
-      '@zag-js/toggle-group': 1.40.0
-      '@zag-js/tooltip': 1.40.0
-      '@zag-js/tour': 1.40.0
-      '@zag-js/tree-view': 1.40.0
-      '@zag-js/types': 1.40.0
-      '@zag-js/utils': 1.40.0
-      react: 19.2.6
-      react-dom: 19.2.6(react@19.2.6)
 
   '@ark-ui/solid@5.36.2(solid-js@1.9.13)':
     dependencies:
@@ -4100,14 +3959,6 @@ snapshots:
     dependencies:
       undici-types: 7.19.2
 
-  '@types/react-dom@19.2.3(@types/react@19.2.14)':
-    dependencies:
-      '@types/react': 19.2.14
-
-  '@types/react@19.2.14':
-    dependencies:
-      csstype: 3.2.3
-
   '@types/unist@2.0.11': {}
 
   '@types/unist@3.0.3': {}
@@ -4506,15 +4357,6 @@ snapshots:
       '@zag-js/dom-query': 1.40.0
       '@zag-js/types': 1.40.0
       '@zag-js/utils': 1.40.0
-
-  '@zag-js/react@1.40.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
-    dependencies:
-      '@zag-js/core': 1.40.0
-      '@zag-js/store': 1.40.0
-      '@zag-js/types': 1.40.0
-      '@zag-js/utils': 1.40.0
-      react: 19.2.6
-      react-dom: 19.2.6(react@19.2.6)
 
   '@zag-js/rect-utils@1.40.0': {}
 
@@ -6050,13 +5892,6 @@ snapshots:
 
   radix3@1.1.2: {}
 
-  react-dom@19.2.6(react@19.2.6):
-    dependencies:
-      react: 19.2.6
-      scheduler: 0.27.0
-
-  react@19.2.6: {}
-
   readdirp@4.1.2: {}
 
   readdirp@5.0.0: {}
@@ -6242,8 +6077,6 @@ snapshots:
       fsevents: 2.3.3
 
   sax@1.6.0: {}
-
-  scheduler@0.27.0: {}
 
   semver@6.3.1: {}
 
