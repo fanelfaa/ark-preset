@@ -190,6 +190,88 @@ For advanced use, import primitives:
 import { ScrollAreaViewport, ScrollAreaScrollbar, ... } from "~/components/scroll-area";
 ```
 
+### Pattern E — Namespace base with separate entry points
+
+Use when composite `index.tsx` should NOT expose raw base parts, keeping two clean entry points: composite vs raw.
+
+**Example: segment-group**
+
+`<component>.base.tsx`:
+```tsx
+import { ComponentName as ArkComponentName } from "@ark-ui/solid/<package>";
+import { createContext, useContext, splitProps, type Component } from "solid-js";
+import { <component>Variants, type <component>Variants } from "../recipes/<component>";
+
+type VariantContextValue = Pick<ComponentVariants, "variant" | "orientation">;
+
+const VariantContext = createContext<VariantContextValue>();
+const useVariant = () => useContext(VariantContext);
+
+const styles = <component>Variants();
+
+// Local parts — NOT exported individually
+const Root: Component<ArkComponentName.RootProps & ComponentVariants> = (props) => { ... };
+const Label: Component<ArkComponentName.LabelProps> = (props) => { ... };
+const Item: Component<ArkComponentName.ItemProps & ComponentVariants> = (props) => { ... };
+// ...etc
+
+// Single namespace export
+const Component = { Root, Label, Item, /* ... */ };
+export { Component };
+// Context/hooks exported separately for advanced use
+export { VariantContext, useVariant };
+```
+
+`index.tsx`:
+```tsx
+import { splitProps, type Component } from "solid-js";
+import { Component as ComponentBase } from "./<component>.base";
+import { ComponentName as ArkComponentName } from "@ark-ui/solid/<package>";
+import type { ComponentVariants } from "@ui/core";
+
+// Import namespace as alias
+// Uses ComponentBase.Root, ComponentBase.Indicator, etc. in JSX
+
+const CompositeComponent: Component<ArkComponentName.RootProps & ComponentVariants> = (props) => {
+  const [local, others] = splitProps(props, ["variant", "orientation", "children"]);
+  return (
+    <ComponentBase.Root ...>
+      <ComponentBase.Indicator />
+      {local.children}
+    </ComponentBase.Root>
+  );
+};
+
+export { CompositeComponent, ComponentBase };
+
+// Also export composed sub-parts
+export const CompositeItem: Component<ArkComponentName.ItemProps & ComponentVariants> = (props) => {
+  // wraps ComponentBase.Item with auto ItemText/ItemControl/ItemHiddenInput
+};
+
+export { <component>Variants, type <component>Variants } from "@ui/core";
+```
+
+**Key differences from Pattern A/B/C/D:**
+
+| Aspect | Patterns A-D | Pattern E |
+|--------|-------------|-----------|
+| Base exports | Individual named exports (`export const Part`) | Single namespace (`export { Component }`) |
+| Index re-exports | `export * from "./<component>.base"` | **NO** re-export from base |
+| Raw parts access | Via barrel: `~/components/<name>` | Only via base path: `~/components/<name>/<name>.base` |
+| Base namespace import | Not needed | Imported with alias: `import { Component as ComponentBase }` |
+| Context/hooks in barrel | Yes (via `export *`) | No — must import from base file directly |
+
+**When to use Pattern E:**
+- Composite component has automatic parts wrapping (e.g., `SegmentGroupItem` auto-adds `ItemText`/`ItemControl`/`ItemHiddenInput`)
+- Exposing raw base parts through the barrel would be confusing (users might mix composite and raw parts)
+- The component has context providers that should stay internal to base
+
+**When NOT to use Pattern E:**
+- Component is a simple re-export (use Pattern A)
+- All users need is the composite component (use Pattern A)
+- Raw parts are commonly used alongside composite (use Pattern B/CD and keep `export *`)
+
 ## DOCS PATTERN
 
 Each component needs a docs page + demo.
@@ -285,10 +367,13 @@ See the [Ark UI Name](https://ark-ui.com/docs/components/<name>) documentation.
 ### Exports
 | Export | Source | Pattern |
 |--------|--------|---------|
-| All base parts | `<component>.base.tsx` | Named exports only, no defaults |
+| Base parts (Pattern A-D) | `<component>.base.tsx` | Individual named exports (`export const Part`) |
+| Base parts (Pattern E) | `<component>.base.tsx` | Single namespace (`export { Component }`) |
 | Composite component | `index.tsx` | Named export |
 | Recipe variants | `@ui/core` | `export { <component>Variants, type <component>Variants } from "@ui/core"` |
-| Re-export base | `index.tsx` | `export * from "./<component>.base"` |
+| Re-export base (Pattern A-D) | `index.tsx` | `export * from "./<component>.base"` |
+| Re-export base (Pattern E) | `index.tsx` | **None** — raw parts not exposed via barrel |
+| Base namespace (Pattern E) | `index.tsx` | `export { Component as ComponentBase }` |
 
 ### Folder -> Export Resolution
 When a component is refactored from flat file to directory, `packages/solid/src/index.ts` already has:
@@ -323,4 +408,6 @@ export const InputField: Component<ArkField.InputProps & { error?: boolean }> = 
 - Simple wrapper components (no extra UI beyond what Ark provides) use **Pattern A**
 - When both Root and RootProvider variants exist, export both. Alias the RootProvider import in index.tsx: `import { ComponentRootProvider as BaseRootProvider } from "./<component>.base"`
 - Inline SVG icons are used to avoid extra icon dependencies
+- **Pattern E** (namespace base): Use when composite auto-wraps parts and exposing raw parts via barrel would cause confusion. Raw parts are only accessible via `~/components/<name>/<name>.base`, not from the barrel
+- In Pattern E, the namespace object is also exported from `index.tsx` as `ComponentBase` (e.g., `SegmentGroupBase`) so users who need raw parts can import from the barrel if they prefer, but the primary entry point for composite usage stays clean
 - See the root AGENTS.md for project-wide information
