@@ -1,4 +1,4 @@
-import { Tooltip, TooltipTrigger, TooltipPositioner, TooltipContent } from "@ui/solid";
+import { Tooltip, TooltipTrigger, TooltipContent } from "@ui/solid";
 
 export default function TooltipBasicDemo() {
   return (
@@ -6,9 +6,7 @@ export default function TooltipBasicDemo() {
       <div class="flex justify-center">
         <Tooltip>
           <TooltipTrigger>Hover me</TooltipTrigger>
-          <TooltipPositioner>
-            <TooltipContent>This is a basic tooltip</TooltipContent>
-          </TooltipPositioner>
+          <TooltipContent>This is a basic tooltip</TooltipContent>
         </Tooltip>
       </div>
     </div>

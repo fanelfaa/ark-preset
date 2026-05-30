@@ -1,11 +1,4 @@
-import {
-  Tooltip,
-  TooltipTrigger,
-  TooltipPositioner,
-  TooltipContent,
-  TooltipArrow,
-  TooltipArrowTip,
-} from "@ui/solid";
+import { Tooltip, TooltipTrigger, TooltipContent } from "@ui/solid";
 
 export default function TooltipArrowDemo() {
   return (
@@ -13,14 +6,9 @@ export default function TooltipArrowDemo() {
       <div class="flex justify-center">
         <Tooltip>
           <TooltipTrigger>With Arrow</TooltipTrigger>
-          <TooltipPositioner>
-            <TooltipContent>
-              <TooltipArrow>
-                <TooltipArrowTip />
-              </TooltipArrow>
-              Tooltip with arrow
-            </TooltipContent>
-          </TooltipPositioner>
+          <TooltipContent useArrow>
+            Tooltip with arrow
+          </TooltipContent>
         </Tooltip>
       </div>
     </div>

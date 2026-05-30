@@ -2,13 +2,14 @@
 title: Tooltip
 description: A popup component that displays contextual information on hover or focus.
 category: Overlay
-updatedDate: 2026-05-18
+updatedDate: 2026-05-30
 ---
 
 import DocsLink from "@components/DocsLink.astro";
 import TooltipBasicDemo from "@components/tooltip-demo/TooltipBasicDemo.tsx";
 import TooltipArrowDemo from "@components/tooltip-demo/TooltipArrowDemo.tsx";
-import TooltipRootProviderDemo from "@components/tooltip-demo/TooltipRootProviderDemo.tsx";
+import TooltipManualArrowDemo from "@components/tooltip-demo/TooltipManualArrowDemo.tsx";
+import TooltipControlledDemo from "@components/tooltip-demo/TooltipControlledDemo.tsx";
 
 # Tooltip
 
@@ -19,15 +20,13 @@ A popup component that displays contextual information when hovering or focusing
 <TooltipBasicDemo client:load />
 
 ```tsx
-import { Tooltip, TooltipTrigger, TooltipPositioner, TooltipContent, TooltipRootProvider } from "~/components/tooltip";
+import { Tooltip, TooltipTrigger, TooltipContent } from "~/components/tooltip";
 
 export function TooltipDemo() {
   return (
     <Tooltip>
       <TooltipTrigger>Hover me</TooltipTrigger>
-      <TooltipPositioner>
-        <TooltipContent>This is a basic tooltip</TooltipContent>
-      </TooltipPositioner>
+      <TooltipContent>This is a basic tooltip</TooltipContent>
     </Tooltip>
   );
 }
@@ -73,63 +72,92 @@ export type TooltipVariants = VariantProps<typeof tooltipVariants>
 ```
 </div>
 <div class="space-y-3">
-Create the component file at `src/components/tooltip.tsx`:
+Create the base component file at `src/components/tooltip/tooltip.base.tsx`:
 ```tsx
-import { Tooltip as ArkTooltip } from '@ark-ui/solid/tooltip'
-import { createMemo, splitProps, type Component } from 'solid-js'
-import { tooltipVariants } from '../recipes/tooltip'
+import { Tooltip as ArkTooltip } from "@ark-ui/solid/tooltip";
+import { splitProps, type Component } from "solid-js";
+import { tooltipVariants } from "../../recipes/tooltip";
 
-// Global variant instance (no params)
-const styles = tooltipVariants()
+const styles = tooltipVariants();
 
-const TooltipRoot: Component<ArkTooltip.RootProps> = (props) => {
-return <ArkTooltip.Root {...props} />
-}
+const Root = ArkTooltip.Root;
+const RootProvider = ArkTooltip.RootProvider;
 
-const TooltipRootProvider: Component<ArkTooltip.RootProviderProps> = (props) => {
-return <ArkTooltip.RootProvider {...props} />
-}
+const Trigger: Component<ArkTooltip.TriggerProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkTooltip.Trigger class={styles.trigger({ class: local.class })} {...others} />;
+};
 
-const TooltipTrigger: Component<ArkTooltip.TriggerProps> = (props) => {
-const [local, others] = splitProps(props, ['class'])
-const triggerClass = createMemo(() => styles.trigger({ class: local.class }))
-return <ArkTooltip.Trigger class={triggerClass()} {...others} />
-}
+const Positioner: Component<ArkTooltip.PositionerProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkTooltip.Positioner class={styles.positioner({ class: local.class })} {...others} />;
+};
 
-const TooltipPositioner: Component<ArkTooltip.PositionerProps> = (props) => {
-const [local, others] = splitProps(props, ['class'])
-const positionerClass = createMemo(() => styles.positioner({ class: local.class }))
-return <ArkTooltip.Positioner class={positionerClass()} {...others} />
-}
+const Content: Component<ArkTooltip.ContentProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "style"]);
+  return (
+    <ArkTooltip.Content
+      class={styles.content({ class: local.class })}
+      {...others}
+      style={`--arrow-size: 10px; ${local.style}`}
+    />
+  );
+};
 
-const TooltipContent: Component<ArkTooltip.ContentProps> = (props) => {
-const [local, others] = splitProps(props, ['class'])
-const contentClass = createMemo(() => styles.content({ class: local.class }))
-return <ArkTooltip.Content class={contentClass()} {...others} />
-}
+const Arrow: Component<ArkTooltip.ArrowProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkTooltip.Arrow class={styles.arrow({ class: local.class })} {...others} />;
+};
 
-const TooltipArrow: Component<ArkTooltip.ArrowProps> = (props) => {
-const [local, others] = splitProps(props, ['class'])
-const arrowClass = createMemo(() => styles.arrow({ class: local.class }))
-return <ArkTooltip.Arrow class={arrowClass()} {...others} />
-}
+const ArrowTip: Component<ArkTooltip.ArrowTipProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkTooltip.ArrowTip class={styles.arrowTip({ class: local.class })} {...others} />;
+};
 
-const TooltipArrowTip: Component<ArkTooltip.ArrowTipProps> = (props) => {
-const [local, others] = splitProps(props, ['class'])
-const arrowTipClass = createMemo(() => styles.arrowTip({ class: local.class }))
-return <ArkTooltip.ArrowTip class={arrowTipClass()} {...others} />
-}
+export const Tooltip = {
+  Root,
+  RootProvider,
+  Trigger,
+  Positioner,
+  Content,
+  Arrow,
+  ArrowTip,
+};
+```
 
-export {
-  TooltipRoot as Tooltip,
-  TooltipRootProvider,
-  TooltipTrigger,
-  TooltipPositioner,
-  TooltipContent,
-  TooltipArrow,
-  TooltipArrowTip,
-  tooltipVariants,
-}
+Then create the composite component file at `src/components/tooltip/index.tsx`:
+```tsx
+import { splitProps, type Component } from "solid-js";
+import { Tooltip as TooltipBase } from "./tooltip.base";
+import { Tooltip as ArkTooltip } from "@ark-ui/solid/tooltip";
+
+const Tooltip = TooltipBase.Root;
+const TooltipTrigger = TooltipBase.Trigger;
+
+type TooltipContentProps = ArkTooltip.ContentProps & {
+  /** When true, renders an arrow pointing to the trigger element */
+  useArrow?: boolean;
+};
+
+const TooltipContent: Component<TooltipContentProps> = (props) => {
+  const [local, others] = splitProps(props, ["useArrow", "children"]);
+  return (
+    <TooltipBase.Positioner>
+      <TooltipBase.Content {...others}>
+        {local.useArrow && (
+          <TooltipBase.Arrow>
+            <TooltipBase.ArrowTip />
+          </TooltipBase.Arrow>
+        )}
+        {local.children}
+      </TooltipBase.Content>
+    </TooltipBase.Positioner>
+  );
+};
+
+export { Tooltip, TooltipTrigger, TooltipContent, TooltipBase };
+
+export { tooltipVariants, type TooltipVariants } from "../../recipes/tooltip";
 ```
 </div>
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--popover`, `--popover-foreground`, `--border`, `--ring`, etc.) or override the utility classes to match your design system.
@@ -139,7 +167,7 @@ export {
 Import the components:
 
 ```tsx
-import { Tooltip, TooltipTrigger, TooltipPositioner, TooltipContent, TooltipRootProvider } from "~/components/tooltip";
+import { Tooltip, TooltipTrigger, TooltipContent } from "~/components/tooltip";
 ```
 
 Basic tooltip:
@@ -147,9 +175,7 @@ Basic tooltip:
 ```tsx
 <Tooltip>
   <TooltipTrigger>Hover me</TooltipTrigger>
-  <TooltipPositioner>
-    <TooltipContent>Tooltip content</TooltipContent>
-  </TooltipPositioner>
+  <TooltipContent>Tooltip content</TooltipContent>
 </Tooltip>
 ```
 
@@ -160,76 +186,77 @@ Add an arrow pointing to the trigger element.
 <TooltipArrowDemo client:load />
 
 ```tsx
-import {
-  Tooltip,
-  TooltipTrigger,
-  TooltipPositioner,
-  TooltipContent,
-  TooltipArrow,
-  TooltipArrowTip,
-  TooltipRootProvider,
-} from "~/components/tooltip";
+import { Tooltip, TooltipTrigger, TooltipContent } from "~/components/tooltip";
 
 <Tooltip>
   <TooltipTrigger>Hover me</TooltipTrigger>
-  <TooltipPositioner>
-    <TooltipContent>
-      <TooltipArrow>
-        <TooltipArrowTip />
-      </TooltipArrow>
-      Tooltip with arrow
-    </TooltipContent>
-  </TooltipPositioner>
+  <TooltipContent useArrow>
+    Tooltip with arrow
+  </TooltipContent>
 </Tooltip>;
 ```
 
-## Root Provider
+## Advanced Usage
 
-Use `TooltipRootProvider` when you need to access the tooltip state outside of the tooltip tree. This pattern uses the `useTooltip` hook from Ark UI to create a shared context that both the tooltip and external elements can reference.
-
-<TooltipRootProviderDemo client:load />
+When the composite `Tooltip` doesn't provide enough control, import the raw primitive parts via `TooltipBase`:
 
 ```tsx
-import { useTooltip } from "@ark-ui/solid/tooltip";
-import {
-  TooltipTrigger,
-  TooltipPositioner,
-  TooltipContent,
-  TooltipArrow,
-  TooltipArrowTip,
-  TooltipRootProvider,
-} from "~/components/tooltip";
+import { TooltipBase } from "~/components/tooltip";
+```
 
-export function TooltipWithExternalControl() {
-  const tooltip = useTooltip({ defaultOpen: true });
+Or import directly from the base file:
 
+```tsx
+import { Tooltip } from "~/components/tooltip/tooltip.base";
+```
+
+### Manual Arrow Composition
+
+For custom arrow styling or positioning, compose the parts manually using `TooltipBase`:
+
+<TooltipManualArrowDemo client:load />
+
+```tsx
+import { Tooltip, TooltipBase } from "~/components/tooltip";
+
+<Tooltip>
+  <TooltipBase.Trigger>Hover me</TooltipBase.Trigger>
+  <TooltipBase.Positioner>
+    <TooltipBase.Content>
+      <TooltipBase.Arrow class="[--arrow-size:14px]">
+        <TooltipBase.ArrowTip />
+      </TooltipBase.Arrow>
+      Custom arrow size
+    </TooltipBase.Content>
+  </TooltipBase.Positioner>
+</Tooltip>
+```
+
+### Controlled Open State
+
+Use `open` and `onOpenChange` to control the tooltip visibility externally:
+
+<TooltipControlledDemo client:load />
+
+```tsx
+import { createSignal } from "solid-js";
+import { Tooltip, TooltipTrigger, TooltipContent } from "~/components/tooltip";
+
+export function ControlledTooltip() {
+  const [open, setOpen] = createSignal(false);
   return (
-    <div>
-      {/* Access tooltip state outside the tree */}
-      <output>Open: {JSON.stringify(tooltip().open)}</output>
-
-      <div>
-        <TooltipRootProvider value={tooltip}>
-          <TooltipTrigger>Hover me</TooltipTrigger>
-          <TooltipPositioner>
-            <TooltipContent>
-              <TooltipArrow>
-                <TooltipArrowTip />
-              </TooltipArrow>
-              External state via useTooltip
-            </TooltipContent>
-          </TooltipPositioner>
-        </TooltipRootProvider>
-      </div>
+    <div class="space-y-2">
+      <button onClick={() => setOpen((v) => !v)}>
+        {open() ? "Close" : "Open"} tooltip
+      </button>
+      <Tooltip open={open()} onOpenChange={(e) => setOpen(e.open)}>
+        <TooltipTrigger>Hover or click above</TooltipTrigger>
+        <TooltipContent>Controlled tooltip</TooltipContent>
+      </Tooltip>
     </div>
   );
 }
 ```
-
-The key difference:
-
-- **`Tooltip` (Root)** — manages its own state internally. Use for simple, self-contained tooltips.
-- **`TooltipRootProvider`** — accepts a pre-created tooltip context via `useTooltip`. Use when you need to read or control the tooltip state from outside the component tree.
 
 ## API Reference
 
