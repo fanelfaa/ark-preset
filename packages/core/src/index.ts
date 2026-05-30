@@ -111,3 +111,6 @@ export type { AspectRatioVariants } from "./recipes/aspect-ratio";
 
 export { scrollAreaVariants } from "./recipes/scroll-area";
 export type { ScrollAreaVariants } from "./recipes/scroll-area";
+
+export { segmentGroupVariants } from "./recipes/segment-group";
+export type { SegmentGroupVariants } from "./recipes/segment-group";
