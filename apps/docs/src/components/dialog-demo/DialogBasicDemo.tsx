@@ -8,11 +8,7 @@ import {
   DialogTitle,
   DialogDescription,
   Input,
-  RadioGroup,
-  RadioGroupLabel,
-  RadioGroupItem,
-  RadioGroupItemControl,
-  RadioGroupItemText,
+  RadioGroupBase,
   Separator,
 } from "@ui/solid";
 import { Button } from "@ui/solid";
@@ -41,21 +37,21 @@ export default function DialogBasicDemo() {
               placeholder="your@email.com"
               description="We'll never share your email."
             />
-            <RadioGroup class="flex flex-col gap-2">
-              <RadioGroupLabel class="text-sm font-medium">Notification preferences</RadioGroupLabel>
-              <RadioGroupItem value="all">
-                <RadioGroupItemControl />
-                <RadioGroupItemText>All notifications</RadioGroupItemText>
-              </RadioGroupItem>
-              <RadioGroupItem value="mentions">
-                <RadioGroupItemControl />
-                <RadioGroupItemText>Mentions only</RadioGroupItemText>
-              </RadioGroupItem>
-              <RadioGroupItem value="none">
-                <RadioGroupItemControl />
-                <RadioGroupItemText>No notifications</RadioGroupItemText>
-              </RadioGroupItem>
-            </RadioGroup>
+            <RadioGroupBase.Root class="flex flex-col gap-2">
+              <RadioGroupBase.Label class="text-sm font-medium">Notification preferences</RadioGroupBase.Label>
+              <RadioGroupBase.Item value="all">
+                <RadioGroupBase.ItemControl />
+                <RadioGroupBase.ItemText>All notifications</RadioGroupBase.ItemText>
+              </RadioGroupBase.Item>
+              <RadioGroupBase.Item value="mentions">
+                <RadioGroupBase.ItemControl />
+                <RadioGroupBase.ItemText>Mentions only</RadioGroupBase.ItemText>
+              </RadioGroupBase.Item>
+              <RadioGroupBase.Item value="none">
+                <RadioGroupBase.ItemControl />
+                <RadioGroupBase.ItemText>No notifications</RadioGroupBase.ItemText>
+              </RadioGroupBase.Item>
+            </RadioGroupBase.Root>
           </div>
           <Separator />
           <DialogFooter>
