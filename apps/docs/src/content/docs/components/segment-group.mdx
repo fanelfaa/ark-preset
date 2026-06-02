@@ -2,7 +2,7 @@
 title: Segment Group
 description: A segmented control component for selecting one option from a set of mutually exclusive options.
 category: Form & Input
-updatedDate: 2026-05-30
+updatedDate: 2026-06-03
 ---
 
 import DocsLink from "@components/DocsLink.astro";
@@ -253,15 +253,9 @@ export const SegmentGroupItem: Component<ArkSegmentGroup.ItemProps & SegmentGrou
   const [local, others] = splitProps(props, ["children"]);
   return (
     <SegmentGroupBase.Item {...others}>
-      {typeof local.children === "string" ? (
-        <>
-          <SegmentGroupBase.ItemText>{local.children}</SegmentGroupBase.ItemText>
-          <SegmentGroupBase.ItemControl />
-          <SegmentGroupBase.ItemHiddenInput />
-        </>
-      ) : (
-        local.children
-      )}
+      <SegmentGroupBase.ItemText>{local.children}</SegmentGroupBase.ItemText>
+      <SegmentGroupBase.ItemControl />
+      <SegmentGroupBase.ItemHiddenInput />
     </SegmentGroupBase.Item>
   );
 };
