@@ -1,42 +1,43 @@
 import { Switch as ArkSwitch } from "@ark-ui/solid/switch";
 import { splitProps, type Component } from "solid-js";
-import {
-  SwitchControl,
-  SwitchHiddenInput,
-  SwitchRoot as SwitchRootBase,
-  SwitchRootProvider as BaseSwitchRootProvider,
-  SwitchThumb,
-} from "./switch.base";
+import { Switch as SwitchBase } from "./switch.base";
+import { switchVariants } from "@ui/core";
 
-const InnerComponent = () => (
+const styles = switchVariants();
+
+const SwitchControl = () => (
   <>
-    <SwitchControl>
-      <SwitchThumb />
-    </SwitchControl>
-    <SwitchHiddenInput />
+    <SwitchBase.Control>
+      <SwitchBase.Thumb />
+    </SwitchBase.Control>
+    <SwitchBase.HiddenInput />
   </>
 );
 
-export const Switch: Component<ArkSwitch.RootProps> = (props) => {
+const SwitchLabel: Component<ArkSwitch.LabelProps> = (props) => (
+  <SwitchBase.Label class={styles.label({ class: props.class })} {...props} />
+);
+
+const Switch: Component<ArkSwitch.RootProps> = (props) => {
   const [local, others] = splitProps(props, ["class", "children"]);
   return (
-    <SwitchRootBase class={local.class} {...others}>
-      <InnerComponent />
+    <SwitchBase.Root class={local.class} {...others}>
+      <SwitchControl />
       {local.children}
-    </SwitchRootBase>
+    </SwitchBase.Root>
   );
 };
 
-export const SwitchRootProvider: Component<ArkSwitch.RootProviderProps> = (props) => {
+const SwitchRootProvider: Component<ArkSwitch.RootProviderProps> = (props) => {
   const [local, others] = splitProps(props, ["class", "children"]);
   return (
-    <BaseSwitchRootProvider class={local.class} {...others}>
-      <InnerComponent />
+    <SwitchBase.RootProvider class={local.class} {...others}>
+      <SwitchControl />
       {local.children}
-    </BaseSwitchRootProvider>
+    </SwitchBase.RootProvider>
   );
 };
 
-export * from "./switch.base";
+export { Switch, SwitchRootProvider, SwitchLabel, SwitchBase };
 
 export { switchVariants, type SwitchVariants } from "@ui/core";
