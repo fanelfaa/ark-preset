@@ -1,30 +1,13 @@
 import { Popover as ArkPopover } from "@ark-ui/solid/popover";
 import { Portal } from "solid-js/web";
 import { splitProps, type Component } from "solid-js";
-import {
-  PopoverCloseTrigger as BasePopoverCloseTrigger,
-  PopoverContent as BasePopoverContent,
-  PopoverPositioner,
-} from "./popover.base";
+import { Popover as PopoverBase } from "./popover.base";
 import { popoverVariants, type PopoverVariants } from "@ui/core";
 
-export const PopoverContent: Component<ArkPopover.ContentProps> = (props) => {
-  const [local, others] = splitProps(props, ["class", "children"]);
-  return (
-    <Portal>
-      <PopoverPositioner>
-        <BasePopoverContent class={local.class} {...others}>
-          {local.children}
-        </BasePopoverContent>
-      </PopoverPositioner>
-    </Portal>
-  );
-};
-
-export const PopoverCloseTrigger: Component<ArkPopover.CloseTriggerProps> = (props) => {
+const PopoverCloseTrigger: Component<ArkPopover.CloseTriggerProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return (
-    <BasePopoverCloseTrigger class={local.class} {...others}>
+    <PopoverBase.CloseTrigger class={local.class} {...others}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -38,10 +21,30 @@ export const PopoverCloseTrigger: Component<ArkPopover.CloseTriggerProps> = (pro
         <path d="M18 6L6 18" />
         <path d="M6 6l12 12" />
       </svg>
-    </BasePopoverCloseTrigger>
+    </PopoverBase.CloseTrigger>
   );
 };
 
-export * from "./popover.base";
+export const PopoverContent: Component<ArkPopover.ContentProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "children"]);
+  return (
+    <Portal>
+      <PopoverBase.Positioner>
+        <PopoverBase.Content class={local.class} {...others}>
+          <PopoverBase.Arrow />
+          {local.children}
+          <PopoverCloseTrigger />
+        </PopoverBase.Content>
+      </PopoverBase.Positioner>
+    </Portal>
+  );
+};
+
+const Popover = PopoverBase.Root;
+const PopoverTrigger = PopoverBase.Trigger;
+const PopoverTitle = PopoverBase.Title;
+const PopoverDescription = PopoverBase.Description;
+
+export { Popover, PopoverTrigger, PopoverTitle, PopoverDescription, PopoverBase };
 
 export { popoverVariants, type PopoverVariants };

@@ -1,12 +1,5 @@
 import { usePopover } from "@ark-ui/solid/popover";
-import {
-  PopoverRootProvider,
-  PopoverTrigger,
-  PopoverContent,
-  PopoverTitle,
-  PopoverDescription,
-  PopoverCloseTrigger,
-} from "@ui/solid";
+import { PopoverContent, PopoverTrigger, PopoverTitle, PopoverDescription, PopoverBase } from "@ui/solid";
 import { Button } from "@ui/solid";
 
 export default function PopoverRootProviderDemo() {
@@ -18,16 +11,15 @@ export default function PopoverRootProviderDemo() {
         Open: {JSON.stringify(popover().open)}
       </output>
 
-      <PopoverRootProvider value={popover}>
+      <PopoverBase.RootProvider value={popover}>
         <PopoverTrigger asChild={(props) => <Button {...props()} />}>Open Popover</PopoverTrigger>
         <PopoverContent>
           <PopoverTitle>Popover Title</PopoverTitle>
           <PopoverDescription>
             This popover state is managed externally via <code>usePopover</code>.
           </PopoverDescription>
-          <PopoverCloseTrigger>Close</PopoverCloseTrigger>
         </PopoverContent>
-      </PopoverRootProvider>
+      </PopoverBase.RootProvider>
     </div>
   );
 }

@@ -4,11 +4,11 @@ import { popoverVariants } from "@ui/core";
 
 const styles = popoverVariants();
 
-export const PopoverRoot = ArkPopover.Root;
-export const PopoverRootProvider = ArkPopover.RootProvider;
-export const PopoverTrigger = ArkPopover.Trigger;
+const Root = ArkPopover.Root;
+const RootProvider = ArkPopover.RootProvider;
+const Trigger = ArkPopover.Trigger;
 
-export const PopoverContent: Component<ArkPopover.ContentProps> = (props) => {
+const Content: Component<ArkPopover.ContentProps> = (props) => {
   const [local, others] = splitProps(props, ["class", "style"]);
   return (
     <ArkPopover.Content
@@ -19,24 +19,24 @@ export const PopoverContent: Component<ArkPopover.ContentProps> = (props) => {
   );
 };
 
-export const PopoverTitle: Component<ArkPopover.TitleProps> = (props) => {
+const Title: Component<ArkPopover.TitleProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkPopover.Title class={styles.title({ class: local.class })} {...others} />;
 };
 
-export const PopoverDescription: Component<ArkPopover.DescriptionProps> = (props) => {
+const Description: Component<ArkPopover.DescriptionProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkPopover.Description class={styles.description({ class: local.class })} {...others} />;
 };
 
-export const PopoverCloseTrigger: Component<ArkPopover.CloseTriggerProps> = (props) => {
+const CloseTrigger: Component<ArkPopover.CloseTriggerProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return (
     <ArkPopover.CloseTrigger class={styles.closeTrigger({ class: local.class })} {...others} />
   );
 };
 
-export const PopoverArrow: Component<ArkPopover.ArrowProps> = (props) => {
+const Arrow: Component<ArkPopover.ArrowProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return (
     <ArkPopover.Arrow class={styles.arrow({ class: local.class })} {...others}>
@@ -45,12 +45,25 @@ export const PopoverArrow: Component<ArkPopover.ArrowProps> = (props) => {
   );
 };
 
-export const PopoverIndicator: Component<ArkPopover.IndicatorProps> = (props) => {
+const Indicator: Component<ArkPopover.IndicatorProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkPopover.Indicator class={styles.indicator({ class: local.class })} {...others} />;
 };
 
-export const PopoverPositioner: Component<ArkPopover.PositionerProps> = (props) => {
+const Positioner: Component<ArkPopover.PositionerProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkPopover.Positioner class={styles.positioner({ class: local.class })} {...others} />;
+};
+
+export const Popover = {
+  Root,
+  RootProvider,
+  Trigger,
+  Content,
+  Title,
+  Description,
+  CloseTrigger,
+  Arrow,
+  Indicator,
+  Positioner,
 };
