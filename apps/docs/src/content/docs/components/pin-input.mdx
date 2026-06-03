@@ -90,39 +90,52 @@ import { pinInputVariants } from "../recipes/pin-input";
 
 const styles = pinInputVariants();
 
-export const PinInputRoot: Component<ArkPinInput.RootProps> = (props) => {
+const Root: Component<ArkPinInput.RootProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkPinInput.Root class={styles.root({ class: local.class })} {...others} />;
 };
 
-export const PinInputRootProvider: Component<ArkPinInput.RootProviderProps> = (props) => {
+const RootProvider: Component<ArkPinInput.RootProviderProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkPinInput.RootProvider class={styles.root({ class: local.class })} {...others} />;
 };
 
-export const PinInputControl: Component<ArkPinInput.ControlProps> = (props) => {
+const Control: Component<ArkPinInput.ControlProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkPinInput.Control class={styles.control({ class: local.class })} {...others} />;
 };
 
-export const PinInputInput: Component<ArkPinInput.InputProps> = (props) => {
+const Input: Component<ArkPinInput.InputProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkPinInput.Input class={styles.input({ class: local.class })} {...others} />;
 };
 
-export const PinInputLabel: Component<ArkPinInput.LabelProps> = (props) => {
+const Label: Component<ArkPinInput.LabelProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkPinInput.Label class={styles.label({ class: local.class })} {...others} />;
 };
+
+export const PinInput = { Root, RootProvider, Control, Input, Label };
 ```
 
 `src/components/pin-input/index.tsx`:
 ```tsx
-import { PinInputRoot } from "./pin-input.base";
+import { PinInput as PinInputBase } from "./pin-input.base";
 
-export const PinInput = PinInputRoot;
+const PinInput = PinInputBase.Root;
+const PinInputRootProvider = PinInputBase.RootProvider;
+const PinInputControl = PinInputBase.Control;
+const PinInputInput = PinInputBase.Input;
+const PinInputLabel = PinInputBase.Label;
 
-export * from "./pin-input.base";
+export {
+  PinInput,
+  PinInputRootProvider,
+  PinInputControl,
+  PinInputInput,
+  PinInputLabel,
+  PinInputBase,
+};
 
 export { pinInputVariants, type PinInputVariants } from "../recipes/pin-input";
 ```

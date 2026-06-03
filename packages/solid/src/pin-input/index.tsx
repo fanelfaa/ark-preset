@@ -1,7 +1,18 @@
-import { PinInputRoot } from "./pin-input.base";
+import { PinInput as PinInputBase } from "./pin-input.base";
 
-export const PinInput = PinInputRoot;
+const PinInput = PinInputBase.Root;
+const PinInputRootProvider = PinInputBase.RootProvider;
+const PinInputControl = PinInputBase.Control;
+const PinInputInput = PinInputBase.Input;
+const PinInputLabel = PinInputBase.Label;
 
-export * from "./pin-input.base";
+export {
+  PinInput,
+  PinInputRootProvider,
+  PinInputControl,
+  PinInputInput,
+  PinInputLabel,
+  PinInputBase,
+};
 
 export { pinInputVariants, type PinInputVariants } from "@ui/core";
