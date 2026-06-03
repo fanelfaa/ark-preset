@@ -21,7 +21,6 @@ import {
   Progress,
   ProgressLabel,
   ProgressTrack,
-  ProgressRange,
   ProgressValueText,
 } from "~/components/progress";
 
@@ -29,9 +28,7 @@ export function ProgressDemo() {
   return (
     <Progress value={65}  class="space-y-2">
       <ProgressLabel>Loading</ProgressLabel>
-      <ProgressTrack>
-        <ProgressRange />
-      </ProgressTrack>
+      <ProgressTrack />
       <ProgressValueText />
     </Progress>
   );
@@ -86,49 +83,74 @@ import { progressVariants } from "../recipes/progress";
 
 const styles = progressVariants();
 
-export const ProgressRoot: Component<ArkProgress.RootProps> = (props) => {
+const Root: Component<ArkProgress.RootProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkProgress.Root class={styles.root({ class: local.class })} {...others} />;
 };
 
-export const ProgressRootProvider: Component<ArkProgress.RootProviderProps> = (props) => {
+const RootProvider: Component<ArkProgress.RootProviderProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkProgress.RootProvider class={styles.root({ class: local.class })} {...others} />;
 };
 
-export const ProgressLabel: Component<ArkProgress.LabelProps> = (props) => {
+const Label: Component<ArkProgress.LabelProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkProgress.Label class={styles.label({ class: local.class })} {...others} />;
 };
 
-export const ProgressTrack: Component<ArkProgress.TrackProps> = (props) => {
+const Track: Component<ArkProgress.TrackProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkProgress.Track class={styles.track({ class: local.class })} {...others} />;
 };
 
-export const ProgressRange: Component<ArkProgress.RangeProps> = (props) => {
+const Range: Component<ArkProgress.RangeProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkProgress.Range class={styles.range({ class: local.class })} {...others} />;
 };
 
-export const ProgressValueText: Component<ArkProgress.ValueTextProps> = (props) => {
+const ValueText: Component<ArkProgress.ValueTextProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkProgress.ValueText class={styles.valueText({ class: local.class })} {...others} />;
 };
 
-export const ProgressView: Component<ArkProgress.ViewProps> = (props) => {
+const View: Component<ArkProgress.ViewProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkProgress.View class={styles.view({ class: local.class })} {...others} />;
 };
+
+export const Progress = { Root, RootProvider, Label, Track, Range, ValueText, View };
 ```
 
 `src/components/progress/index.tsx`:
 ```tsx
-import { ProgressRoot } from "./progress.base";
+import { splitProps, type Component } from "solid-js";
+import { Progress as ProgressBase } from "./progress.base";
+import { Progress as ArkProgress } from "@ark-ui/solid/progress";
 
-export const Progress = ProgressRoot;
+const Progress = ProgressBase.Root;
+const ProgressRootProvider = ProgressBase.RootProvider;
+const ProgressLabel = ProgressBase.Label;
+const ProgressValueText = ProgressBase.ValueText;
 
-export * from "./progress.base";
+// Composite wrappers — auto-include sub-parts
+const ProgressTrack: Component<ArkProgress.TrackProps> = (props) => {
+  const [local, others] = splitProps(props, ["children"]);
+  return (
+    <ProgressBase.Track {...others}>
+      <ProgressBase.Range />
+      {local.children}
+    </ProgressBase.Track>
+  );
+};
+
+export {
+  Progress,
+  ProgressRootProvider,
+  ProgressLabel,
+  ProgressTrack,
+  ProgressValueText,
+  ProgressBase,
+};
 
 export { progressVariants, type ProgressVariants } from "../recipes/progress";
 ```
@@ -145,7 +167,6 @@ import {
   Progress,
   ProgressLabel,
   ProgressTrack,
-  ProgressRange,
   ProgressValueText,
 } from "~/components/progress";
 ```
@@ -155,9 +176,7 @@ Basic usage:
 ```tsx
 <Progress value={65}  class="space-y-2">
   <ProgressLabel>Loading</ProgressLabel>
-  <ProgressTrack>
-    <ProgressRange />
-  </ProgressTrack>
+  <ProgressTrack />
   <ProgressValueText />
 </Progress>
 ```
@@ -169,9 +188,7 @@ Omit the `value` prop to render an indeterminate progress bar:
 ```tsx
 <Progress>
   <ProgressLabel>Loading...</ProgressLabel>
-  <ProgressTrack>
-    <ProgressRange />
-  </ProgressTrack>
+  <ProgressTrack />
 </Progress>
 ```
 
