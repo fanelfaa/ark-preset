@@ -8,8 +8,8 @@
 
 | Status     | Count  |
 | ---------- | ------ |
-| ✅ Done    | 24     |
-| 🔜 Pending | 5      |
+| ✅ Done    | 26     |
+| 🔜 Pending | 3      |
 
 ---
 
@@ -67,8 +67,8 @@ Components with InnerComponent (SVG icons) or Field wrapper pattern.
 Components with Portal wrapping, many parts, or custom composite logic.
 
 - [x] **carousel** — Pattern A → E. 11 base parts.
-- [ ] **alert-dialog** — Pattern C. Portal + composite content. 10 base parts.
-- [ ] **scroll-area** — Pattern D. Composite with auto parts. 7 base parts.
+- [x] **alert-dialog** — Pattern C → E. Portal + composite content. 10 base parts.
+- [x] **scroll-area** — Pattern D → E. Composite with auto parts. 7 base parts.
 
 ### Tier 4 — Very High Complexity
 

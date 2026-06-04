@@ -2,7 +2,7 @@
 title: ScrollArea
 description: A scrollable container with custom scrollbar styling.
 category: Layout
-updatedDate: 2026-05-29
+updatedDate: 2026-06-03
 ---
 
 import DocsLink from "@components/DocsLink.astro";
@@ -102,20 +102,20 @@ import { scrollAreaVariants } from "../recipes/scroll-area";
 
 const styles = scrollAreaVariants();
 
-export const ScrollAreaRoot: Component<ArkScrollArea.RootProps> = (props) => {
+const ScrollAreaRoot: Component<ArkScrollArea.RootProps> = (props) => {
   return <ArkScrollArea.Root {...props} />;
 };
 
-export const ScrollAreaViewport: Component<ArkScrollArea.ViewportProps> = (props) => {
+const ScrollAreaViewport: Component<ArkScrollArea.ViewportProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkScrollArea.Viewport class={styles.viewport({ class: local.class })} {...others} />;
 };
 
-export const ScrollAreaContent: Component<ArkScrollArea.ContentProps> = (props) => {
+const ScrollAreaContent: Component<ArkScrollArea.ContentProps> = (props) => {
   return <ArkScrollArea.Content {...props} />;
 };
 
-export const ScrollAreaScrollbar: Component<ArkScrollArea.ScrollbarProps & { orientation?: "vertical" | "horizontal" }> = (props) => {
+const ScrollAreaScrollbar: Component<ArkScrollArea.ScrollbarProps & { orientation?: "vertical" | "horizontal" }> = (props) => {
   const [local, others] = splitProps(props, ["class", "orientation"]);
   return (
     <ArkScrollArea.Scrollbar
@@ -126,14 +126,23 @@ export const ScrollAreaScrollbar: Component<ArkScrollArea.ScrollbarProps & { ori
   );
 };
 
-export const ScrollAreaThumb: Component<ArkScrollArea.ThumbProps> = (props) => {
+const ScrollAreaThumb: Component<ArkScrollArea.ThumbProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkScrollArea.Thumb class={styles.thumb({ class: local.class })} {...others} />;
 };
 
-export const ScrollAreaCorner: Component<ArkScrollArea.CornerProps> = (props) => {
+const ScrollAreaCorner: Component<ArkScrollArea.CornerProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkScrollArea.Corner class={styles.corner({ class: local.class })} {...others} />;
+};
+
+export const ScrollArea = {
+  Root: ScrollAreaRoot,
+  Viewport: ScrollAreaViewport,
+  Content: ScrollAreaContent,
+  Scrollbar: ScrollAreaScrollbar,
+  Thumb: ScrollAreaThumb,
+  Corner: ScrollAreaCorner,
 };
 ```
 
@@ -144,14 +153,7 @@ Create the component file at `src/components/scroll-area/index.tsx`:
 
 ```tsx
 import { splitProps, type Component } from "solid-js";
-import {
-  ScrollAreaRoot,
-  ScrollAreaViewport,
-  ScrollAreaContent,
-  ScrollAreaScrollbar,
-  ScrollAreaThumb,
-  ScrollAreaCorner,
-} from "./scroll-area.base";
+import { ScrollArea as ScrollAreaBase } from "./scroll-area.base";
 import { ScrollArea as ArkScrollArea } from "@ark-ui/solid/scroll-area";
 
 type ScrollAreaProps = ArkScrollArea.RootProps & {
@@ -161,23 +163,22 @@ type ScrollAreaProps = ArkScrollArea.RootProps & {
 const ScrollArea: Component<ScrollAreaProps> = (props) => {
   const [local, others] = splitProps(props, ["orientation", "children"]);
   return (
-    <ScrollAreaRoot {...others}>
-      <ScrollAreaViewport>
-        <ScrollAreaContent>
+    <ScrollAreaBase.Root {...others}>
+      <ScrollAreaBase.Viewport>
+        <ScrollAreaBase.Content>
           {local.children}
-        </ScrollAreaContent>
-      </ScrollAreaViewport>
-      <ScrollAreaScrollbar orientation={local.orientation ?? "vertical"}>
-        <ScrollAreaThumb />
-      </ScrollAreaScrollbar>
-      <ScrollAreaCorner />
-    </ScrollAreaRoot>
+        </ScrollAreaBase.Content>
+      </ScrollAreaBase.Viewport>
+      <ScrollAreaBase.Scrollbar orientation={local.orientation ?? "vertical"}>
+        <ScrollAreaBase.Thumb />
+      </ScrollAreaBase.Scrollbar>
+      <ScrollAreaBase.Corner />
+    </ScrollAreaBase.Root>
   );
 };
 
-export { ScrollArea };
+export { ScrollArea, ScrollAreaBase };
 
-export * from "./scroll-area.base";
 export { scrollAreaVariants, type ScrollAreaVariants } from "../recipes/scroll-area";
 ```
 
@@ -213,18 +214,17 @@ Horizontal scroll:
 
 ## Advanced Usage
 
-For full control over the scroll area structure, import the primitive parts directly. See the [Manual](#manual) installation section for example usage of the primitive parts.
+For full control over the scroll area structure, import the primitive parts via `ScrollAreaBase`:
 
 ```tsx
-import {
-  ScrollArea,
-  ScrollAreaViewport,
-  ScrollAreaContent,
-  ScrollAreaScrollbar,
-  ScrollAreaThumb,
-  ScrollAreaCorner,
-} from "~/components/scroll-area";
+import { ScrollArea, ScrollAreaBase } from "~/components/scroll-area";
+
+// ScrollAreaBase provides direct access to parts:
+// ScrollAreaBase.Root, ScrollAreaBase.Viewport, ScrollAreaBase.Content,
+// ScrollAreaBase.Scrollbar, ScrollAreaBase.Thumb, ScrollAreaBase.Corner
 ```
+
+See the [Manual](#manual) installation section for example usage of the primitive parts.
 
 ## API Reference
 

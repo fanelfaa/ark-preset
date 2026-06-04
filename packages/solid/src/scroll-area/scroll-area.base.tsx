@@ -4,16 +4,16 @@ import { splitProps, type Component } from "solid-js";
 
 const styles = scrollAreaVariants();
 
-export const ScrollAreaRoot: Component<ArkScrollArea.RootProps> = (props) => {
+const ScrollAreaRoot: Component<ArkScrollArea.RootProps> = (props) => {
   return <ArkScrollArea.Root {...props} />;
 };
 
-export const ScrollAreaViewport: Component<ArkScrollArea.ViewportProps> = (props) => {
+const ScrollAreaViewport: Component<ArkScrollArea.ViewportProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkScrollArea.Viewport class={styles.viewport({ class: local.class })} {...others} />;
 };
 
-export const ScrollAreaContent: Component<ArkScrollArea.ContentProps> = (props) => {
+const ScrollAreaContent: Component<ArkScrollArea.ContentProps> = (props) => {
   return <ArkScrollArea.Content {...props} />;
 };
 
@@ -21,7 +21,7 @@ export interface ScrollAreaScrollbarProps extends ArkScrollArea.ScrollbarProps {
   orientation?: "vertical" | "horizontal";
 }
 
-export const ScrollAreaScrollbar: Component<ScrollAreaScrollbarProps> = (props) => {
+const ScrollAreaScrollbar: Component<ScrollAreaScrollbarProps> = (props) => {
   const [local, others] = splitProps(props, ["class", "orientation"]);
   return (
     <ArkScrollArea.Scrollbar
@@ -32,14 +32,23 @@ export const ScrollAreaScrollbar: Component<ScrollAreaScrollbarProps> = (props) 
   );
 };
 
-export const ScrollAreaThumb: Component<ArkScrollArea.ThumbProps> = (props) => {
+const ScrollAreaThumb: Component<ArkScrollArea.ThumbProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkScrollArea.Thumb class={styles.thumb({ class: local.class })} {...others} />;
 };
 
-export const ScrollAreaCorner: Component<ArkScrollArea.CornerProps> = (props) => {
+const ScrollAreaCorner: Component<ArkScrollArea.CornerProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkScrollArea.Corner class={styles.corner({ class: local.class })} {...others} />;
+};
+
+export const ScrollArea = {
+  Root: ScrollAreaRoot,
+  Viewport: ScrollAreaViewport,
+  Content: ScrollAreaContent,
+  Scrollbar: ScrollAreaScrollbar,
+  Thumb: ScrollAreaThumb,
+  Corner: ScrollAreaCorner,
 };
 
 // Re-export types
