@@ -91,17 +91,17 @@ import { inputVariants } from "../recipes/input";
 
 const styles = inputVariants();
 
-export const InputRoot: Component<ArkField.RootProps> = (props) => {
+const InputRoot: Component<ArkField.RootProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkField.Root class={styles.root({ class: local.class })} {...others} />;
 };
 
-export const InputLabel: Component<ArkField.LabelProps> = (props) => {
+const InputLabel: Component<ArkField.LabelProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkField.Label class={styles.label({ class: local.class })} {...others} />;
 };
 
-export const InputField: Component<ArkField.InputProps & { error?: boolean }> = (props) => {
+const InputField: Component<ArkField.InputProps & { error?: boolean }> = (props) => {
   const [local, others] = splitProps(props, ["class", "error"]);
   return (
     <ArkField.Input
@@ -111,14 +111,22 @@ export const InputField: Component<ArkField.InputProps & { error?: boolean }> = 
   );
 };
 
-export const InputDescription: Component<ArkField.HelperTextProps> = (props) => {
+const InputDescription: Component<ArkField.HelperTextProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkField.HelperText class={styles.description({ class: local.class })} {...others} />;
 };
 
-export const InputErrorText: Component<ArkField.ErrorTextProps> = (props) => {
+const InputErrorText: Component<ArkField.ErrorTextProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkField.ErrorText class={styles.error({ class: local.class })} {...others} />;
+};
+
+export const Input = {
+  Root: InputRoot,
+  Label: InputLabel,
+  Field: InputField,
+  Description: InputDescription,
+  ErrorText: InputErrorText,
 };
 ```
 
@@ -126,13 +134,7 @@ export const InputErrorText: Component<ArkField.ErrorTextProps> = (props) => {
 ```tsx
 import { Field as ArkField } from "@ark-ui/solid/field";
 import { splitProps, type Component } from "solid-js";
-import {
-  InputRoot,
-  InputLabel,
-  InputField,
-  InputDescription,
-  InputErrorText,
-} from "./input.base";
+import { Input as InputBase } from "./input.base";
 import { type InputVariants } from "../recipes/input";
 
 type InputProps = {
@@ -142,7 +144,7 @@ type InputProps = {
 } & ArkField.InputProps &
   Omit<InputVariants, "error">;
 
-export const Input: Component<InputProps> = (props) => {
+const Input: Component<InputProps> = (props) => {
   const [local, others] = splitProps(props, [
     "class",
     "label",
@@ -150,18 +152,18 @@ export const Input: Component<InputProps> = (props) => {
     "error",
   ]);
   return (
-    <InputRoot class={local.class} invalid={!!local.error}>
-      {local.label && <InputLabel>{local.label}</InputLabel>}
-      <InputField error={!!local.error} {...others} />
+    <InputBase.Root class={local.class} invalid={!!local.error}>
+      {local.label && <InputBase.Label>{local.label}</InputBase.Label>}
+      <InputBase.Field error={!!local.error} {...others} />
       {local.description && !local.error && (
-        <InputDescription>{local.description}</InputDescription>
+        <InputBase.Description>{local.description}</InputBase.Description>
       )}
-      {local.error && <InputErrorText>{local.error}</InputErrorText>}
-    </InputRoot>
+      {local.error && <InputBase.ErrorText>{local.error}</InputBase.ErrorText>}
+    </InputBase.Root>
   );
 };
 
-export * from "./input.base";
+export { Input, InputBase };
 
 export { inputVariants, type InputVariants } from "../recipes/input";
 ```

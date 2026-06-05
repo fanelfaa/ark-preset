@@ -101,29 +101,27 @@ import { HTMLProps } from "@ark-ui/solid";
 
 const styles = numberInputVariants();
 
-export const NumberInputRoot: Component<ArkNumberInput.RootProps> = (props) => {
+const NumberInputRoot: Component<ArkNumberInput.RootProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkNumberInput.Root class={styles.root({ class: local.class })} {...others} />;
 };
 
-export const NumberInputLabel: Component<ArkNumberInput.LabelProps> = (props) => {
+const NumberInputLabel: Component<ArkNumberInput.LabelProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkNumberInput.Label class={styles.label({ class: local.class })} {...others} />;
 };
 
-export const NumberInputControl: Component<ArkNumberInput.ControlProps> = (props) => {
+const NumberInputControl: Component<ArkNumberInput.ControlProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkNumberInput.Control class={styles.control({ class: local.class })} {...others} />;
 };
 
-export const NumberInputInput: Component<ArkNumberInput.InputProps> = (props) => {
+const NumberInputInput: Component<ArkNumberInput.InputProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkNumberInput.Input class={styles.input({ class: local.class })} {...others} />;
 };
 
-export const NumberInputIncrementTrigger: Component<ArkNumberInput.IncrementTriggerProps> = (
-  props,
-) => {
+const NumberInputIncrementTrigger: Component<ArkNumberInput.IncrementTriggerProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return (
     <ArkNumberInput.IncrementTrigger
@@ -133,9 +131,7 @@ export const NumberInputIncrementTrigger: Component<ArkNumberInput.IncrementTrig
   );
 };
 
-export const NumberInputDecrementTrigger: Component<ArkNumberInput.DecrementTriggerProps> = (
-  props,
-) => {
+const NumberInputDecrementTrigger: Component<ArkNumberInput.DecrementTriggerProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return (
     <ArkNumberInput.DecrementTrigger
@@ -145,19 +141,31 @@ export const NumberInputDecrementTrigger: Component<ArkNumberInput.DecrementTrig
   );
 };
 
-export const NumberInputScrubber: Component<ArkNumberInput.ScrubberProps> = (props) => {
+const NumberInputScrubber: Component<ArkNumberInput.ScrubberProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkNumberInput.Scrubber class={styles.scrubber({ class: local.class })} {...others} />;
 };
 
-export const NumberInputTriggerGroup: Component<HTMLProps<"div">> = (props) => {
+const NumberInputTriggerGroup: Component<HTMLProps<"div">> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <div class={styles.triggerGroup({ class: local.class })} {...others} />;
 };
 
-export const NumberInputValueText: Component<ArkNumberInput.ValueTextProps> = (props) => {
+const NumberInputValueText: Component<ArkNumberInput.ValueTextProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkNumberInput.ValueText class={styles.valueText({ class: local.class })} {...others} />;
+};
+
+export const NumberInput = {
+  Root: NumberInputRoot,
+  Label: NumberInputLabel,
+  Control: NumberInputControl,
+  Input: NumberInputInput,
+  IncrementTrigger: NumberInputIncrementTrigger,
+  DecrementTrigger: NumberInputDecrementTrigger,
+  Scrubber: NumberInputScrubber,
+  TriggerGroup: NumberInputTriggerGroup,
+  ValueText: NumberInputValueText,
 };
 ```
 
@@ -165,72 +173,33 @@ export const NumberInputValueText: Component<ArkNumberInput.ValueTextProps> = (p
 ```tsx
 import { NumberInput as ArkNumberInput } from "@ark-ui/solid/number-input";
 import { splitProps, type Component } from "solid-js";
-import {
-  NumberInputControl,
-  NumberInputDecrementTrigger,
-  NumberInputIncrementTrigger,
-  NumberInputInput,
-  NumberInputLabel,
-  NumberInputRoot,
-  NumberInputScrubber,
-  NumberInputTriggerGroup,
-} from "./number-input.base";
+import { NumberInput as NumberInputBase } from "./number-input.base";
 
-type NumberInputProps = ArkNumberInput.RootProps & {
+type NumberInputProps = Omit<ArkNumberInput.RootProps, "children"> & {
   label?: string;
   class?: string;
   error?: boolean;
 };
 
-const InnerComponent = () => (
+const NumberInputControl = () => (
   <>
-    <NumberInputControl>
-      <NumberInputInput />
-      <NumberInputTriggerGroup>
-        <NumberInputIncrementTrigger>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
+    <NumberInputBase.Control>
+      <NumberInputBase.Input />
+      <NumberInputBase.TriggerGroup>
+        <NumberInputBase.IncrementTrigger>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="m18 15-6-6-6 6" />
           </svg>
-        </NumberInputIncrementTrigger>
-        <NumberInputDecrementTrigger>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
+        </NumberInputBase.IncrementTrigger>
+        <NumberInputBase.DecrementTrigger>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="m6 9 6 6 6-6" />
           </svg>
-        </NumberInputDecrementTrigger>
-      </NumberInputTriggerGroup>
-    </NumberInputControl>
-    <NumberInputScrubber>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
+        </NumberInputBase.DecrementTrigger>
+      </NumberInputBase.TriggerGroup>
+    </NumberInputBase.Control>
+    <NumberInputBase.Scrubber>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="9" cy="12" r="1" />
         <circle cx="15" cy="12" r="1" />
         <circle cx="9" cy="5" r="1" />
@@ -238,27 +207,21 @@ const InnerComponent = () => (
         <circle cx="9" cy="19" r="1" />
         <circle cx="15" cy="19" r="1" />
       </svg>
-    </NumberInputScrubber>
+    </NumberInputBase.Scrubber>
   </>
 );
 
-export const NumberInput: Component<NumberInputProps> = (props) => {
-  const [local, others] = splitProps(props, [
-    "class",
-    "label",
-    "children",
-    "disabled",
-    "error",
-  ]);
+const NumberInput: Component<NumberInputProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "label", "disabled", "error"]);
   return (
-    <NumberInputRoot class={local.class} disabled={local.disabled} {...others}>
-      {local.label && <NumberInputLabel>{local.label}</NumberInputLabel>}
-      <InnerComponent />
-    </NumberInputRoot>
+    <NumberInputBase.Root class={local.class} disabled={local.disabled} {...others}>
+      {local.label && <NumberInputBase.Label>{local.label}</NumberInputBase.Label>}
+      <NumberInputControl />
+    </NumberInputBase.Root>
   );
 };
 
-export * from "./number-input.base";
+export { NumberInput, NumberInputBase };
 
 export { numberInputVariants, type NumberInputVariants } from "../recipes/number-input";
 ```

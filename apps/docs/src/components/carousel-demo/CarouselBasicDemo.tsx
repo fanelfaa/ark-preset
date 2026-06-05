@@ -1,6 +1,6 @@
 import { Index } from "solid-js";
 import {
-  CarouselRoot as Carousel,
+  Carousel,
   CarouselControl,
   CarouselItemGroup,
   CarouselItem,
@@ -43,7 +43,11 @@ export default function CarouselBasicDemo() {
             <Index each={images}>
               {(image, index) => (
                 <CarouselItem index={index} class="flex-0 flex-shrink-0 min-w-0 w-full">
-                  <img src={image().src} alt={image().alt} class="w-full h-48 object-cover rounded-lg" />
+                  <img
+                    src={image().src}
+                    alt={image().alt}
+                    class="w-full h-48 object-cover rounded-lg"
+                  />
                 </CarouselItem>
               )}
             </Index>

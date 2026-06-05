@@ -1,7 +1,9 @@
-import { AvatarRoot } from "./avatar.base";
+import { Avatar as AvatarBase } from "./avatar.base";
 
-export const Avatar = AvatarRoot;
+const Avatar = AvatarBase.Root;
+const AvatarFallback = AvatarBase.Fallback;
+const AvatarImage = AvatarBase.Image;
 
-export * from "./avatar.base";
+export { Avatar, AvatarFallback, AvatarImage, AvatarBase };
 
 export { avatarVariants, type AvatarVariants } from "@ui/core";

@@ -1,5 +1,5 @@
 import { splitProps, type Component } from "solid-js";
-import { cardVariants, type CardVariants } from "@ui/core";
+import { cardVariants } from "@ui/core";
 import { ark, type HTMLArkProps } from "@ark-ui/solid/factory";
 
 const styles = cardVariants();
@@ -41,12 +41,4 @@ const CardFooter: Component<CardFooterProps> = (props) => {
   return <ark.div class={styles.footer({ class: local.class })} {...others} />;
 };
 
-export {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
-  cardVariants,
-};
+export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter, cardVariants };

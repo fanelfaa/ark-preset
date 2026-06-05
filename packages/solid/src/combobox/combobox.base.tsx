@@ -75,7 +75,9 @@ const Control: Component<ArkCombobox.ControlProps> = (props) => {
 
 const ClearTrigger: Component<ArkCombobox.ClearTriggerProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
-  return <ArkCombobox.ClearTrigger class={styles.clearTrigger({ class: local.class })} {...others} />;
+  return (
+    <ArkCombobox.ClearTrigger class={styles.clearTrigger({ class: local.class })} {...others} />
+  );
 };
 
 const Content: Component<ArkCombobox.ContentProps> = (props) => {

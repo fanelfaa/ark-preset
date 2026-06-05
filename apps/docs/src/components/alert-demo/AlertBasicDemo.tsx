@@ -1,5 +1,4 @@
-import { Alert, AlertTitle, AlertDescription, AlertAction } from "@ui/solid";
-import { Button } from "@ui/solid";
+import { Alert, AlertTitle, AlertDescription } from "@ui/solid";
 
 export default function AlertBasicDemo() {
   return (

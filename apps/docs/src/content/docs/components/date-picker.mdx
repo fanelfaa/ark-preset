@@ -2,7 +2,7 @@
 title: Date Picker
 description: A date picker component for selecting dates, date ranges, and navigating calendar views.
 category: Form & Input
-updatedDate: 2026-05-26
+updatedDate: 2026-06-05
 ---
 
 import DocsLink from "@components/DocsLink.astro";
@@ -17,94 +17,28 @@ A date picker component that allows users to select a date or date range from a 
 <DatePickerBasicDemo client:load />
 
 ```tsx
-import {
-  DatePicker,
-  DatePickerLabel,
-  DatePickerControl,
-  DatePickerInput,
-  DatePickerTrigger,
-  DatePickerClearTrigger,
-  DatePickerContent,
-  DatePickerPositioner,
-  DatePickerView,
-  DatePickerViewControl,
-  DatePickerPrevTrigger,
-  DatePickerNextTrigger,
-  DatePickerViewTrigger,
-  DatePickerRangeText,
-  DatePickerContext,
-  DatePickerTable,
-  DatePickerTableHead,
-  DatePickerTableBody,
-  DatePickerTableRow,
-  DatePickerTableHeader,
-  DatePickerTableCell,
-  DatePickerTableCellTrigger,
-  DatePickerRootProvider,
-  DatePickerYearSelect,
-  DatePickerMonthSelect,
-} from "~/components/date-picker";
-import { Portal } from "solid-js/web";
+import { DatePicker, DatePickerBase } from "~/components/date-picker";
 
-export function DatePickerDemo() {
-  return (
-    <DatePicker>
-      <DatePickerLabel>Label</DatePickerLabel>
-      <DatePickerControl>
-        <DatePickerInput />
-        <DatePickerTrigger>
-          <CalendarIcon />
-        </DatePickerTrigger>
-        <DatePickerClearTrigger>Clear</DatePickerClearTrigger>
-      </DatePickerControl>
-      <Portal>
-        <DatePickerPositioner>
-          <DatePickerContent>
-            <DatePickerView view="day">
-              <DatePickerContext>
-                {(datePicker) => (
-                  <>
-                    <DatePickerViewControl>
-                      <DatePickerPrevTrigger>
-                        <ChevronLeftIcon />
-                      </DatePickerPrevTrigger>
-                      <DatePickerViewTrigger>
-                        <DatePickerRangeText />
-                      </DatePickerViewTrigger>
-                      <DatePickerNextTrigger>
-                        <ChevronRightIcon />
-                      </DatePickerNextTrigger>
-                    </DatePickerViewControl>
-                    <DatePickerTable>
-                      <DatePickerTableHead>
-                        <DatePickerTableRow>
-                          {datePicker().weekDays.map((weekDay, id) => (
-                            <DatePickerTableHeader key={id}>{weekDay.short}</DatePickerTableHeader>
-                          ))}
-                        </DatePickerTableRow>
-                      </DatePickerTableHead>
-                      <DatePickerTableBody>
-                        {datePicker().weeks.map((week, id) => (
-                          <DatePickerTableRow key={id}>
-                            {week.map((day, id) => (
-                              <DatePickerTableCell key={id} value={day}>
-                                <DatePickerTableCellTrigger>{day.day}</DatePickerTableCellTrigger>
-                              </DatePickerTableCell>
-                            ))}
-                          </DatePickerTableRow>
-                        ))}
-                      </DatePickerTableBody>
-                    </DatePickerTable>
-                  </>
-                )}
-              </DatePickerContext>
-            </DatePickerView>
-          </DatePickerContent>
-        </DatePickerPositioner>
-      </Portal>
-    </DatePicker>
-  );
-}
+// Self-contained — label, control, and calendar all built in
+<DatePicker label="Birth date" />
+
+// With custom placeholder
+<DatePicker label="Select date" placeholder="Pick a date" />
+
+// Error state
+<DatePicker label="Birth date" error />
+
+// Custom clear button label
+<DatePicker label="Select date" clearLabel="清除" />
+
+// Range selection — two inputs for start/end
+<DatePicker selectionMode="range" label="Date range" />
+
+// Multiple selection — dates shown as removable chips
+<DatePicker selectionMode="multiple" label="Select dates" />
+
+// For advanced usage with custom composition, import DatePickerBase:
+import { DatePickerBase } from "~/components/date-picker";
 ```
 
 ## Installation
@@ -133,6 +67,7 @@ import { tv, type VariantProps } from 'tailwind-variants'
 export const datePickerVariants = tv({
   slots: {
     root: "w-full",
+    label: "text-sm font-medium text-foreground",
     control: "inline-flex items-center gap-1",
     input: "h-8 rounded-md border border-input bg-background px-2.5 py-1.5 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50",
     trigger: [
@@ -181,11 +116,23 @@ export const datePickerVariants = tv({
       "[&:is([data-outside-range][data-in-range])]:text-muted-foreground",
       "[&:is([data-outside-range][data-in-range])]:opacity-30",
     ],
+    selectedValue: "flex flex-wrap items-center gap-1.5 flex-1 min-w-0 min-h-8 rounded-md border border-input bg-background px-2.5 py-1 text-sm",
+    selectedValuePlaceholder: "text-sm text-muted-foreground",
+    selectedValueTag: [
+      "inline-flex items-center gap-1 rounded-md bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary",
+      "data-[disabled]:opacity-50",
+    ],
+    selectedValueRemove: [
+      "inline-flex items-center justify-center size-4 rounded-sm",
+      "text-primary hover:bg-primary/20 focus-visible:outline-none focus-visible:ring-[1.5px] focus-visible:ring-ring",
+    ],
   },
   variants: {
     error: {
       true: {
         control: "border-destructive focus-within:ring-destructive",
+        input: "border-destructive focus-visible:ring-destructive",
+        selectedValue: "border-destructive",
         label: "text-destructive",
       },
     },
@@ -209,252 +156,469 @@ import { datePickerVariants } from "../../recipes/date-picker";
 
 const styles = datePickerVariants();
 
-// Simple pass-through re-exports (no styling needed)
-export const DatePickerRoot = ArkDatePicker.Root;
-export const DatePickerRootProvider = ArkDatePicker.RootProvider;
-export const DatePickerLabel = ArkDatePicker.Label;
-export const DatePickerContext = ArkDatePicker.Context;
-export const DatePickerTableHead = ArkDatePicker.TableHead;
-export const DatePickerTableBody = ArkDatePicker.TableBody;
-export const DatePickerYearSelect = ArkDatePicker.YearSelect;
-export const DatePickerMonthSelect = ArkDatePicker.MonthSelect;
-
-// Styled wrapper components
-export const DatePickerPositioner = ArkDatePicker.Positioner;
-
-export const DatePickerControl: Component<ArkDatePicker.ControlProps> = (props) => {
+// Styled wrapper components (tv() recipe styling)
+const Root: Component<ArkDatePicker.RootProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
-  return <ArkDatePicker.Control class={styles.control({ class: local.class })} {...others} />;
+  return <ArkDatePicker.Root class={styles.root({ class: local.class })} {...others} />;
+};
+const RootProvider = ArkDatePicker.RootProvider;
+
+const Label: Component<ArkDatePicker.LabelProps & { error?: boolean }> = (props) => {
+  const [local, others] = splitProps(props, ["class", "error"]);
+  return <ArkDatePicker.Label class={styles.label({ class: local.class, error: local.error })} {...others} />;
 };
 
-export const DatePickerInput: Component<ArkDatePicker.InputProps> = (props) => {
-  const [local, others] = splitProps(props, ["class"]);
-  return <ArkDatePicker.Input class={styles.input({ class: local.class })} {...others} />;
+const Context = ArkDatePicker.Context;
+const TableHead = ArkDatePicker.TableHead;
+const TableBody = ArkDatePicker.TableBody;
+const YearSelect = ArkDatePicker.YearSelect;
+const MonthSelect = ArkDatePicker.MonthSelect;
+const Positioner = ArkDatePicker.Positioner;
+
+const Control: Component<ArkDatePicker.ControlProps & { error?: boolean }> = (props) => {
+  const [local, others] = splitProps(props, ["class", "error"]);
+  return <ArkDatePicker.Control class={styles.control({ class: local.class, error: local.error })} {...others} />;
 };
 
-export const DatePickerContent: Component<ArkDatePicker.ContentProps> = (props) => {
+const Input: Component<ArkDatePicker.InputProps & { error?: boolean }> = (props) => {
+  const [local, others] = splitProps(props, ["class", "error"]);
+  return <ArkDatePicker.Input class={styles.input({ class: local.class, error: local.error })} {...others} />;
+};
+
+const Content: Component<ArkDatePicker.ContentProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkDatePicker.Content class={styles.content({ class: local.class })} {...others} />;
 };
 
-export const DatePickerView: Component<ArkDatePicker.ViewProps> = (props) => {
+const View: Component<ArkDatePicker.ViewProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkDatePicker.View class={styles.view({ class: local.class })} {...others} />;
 };
 
-export const DatePickerViewControl: Component<ArkDatePicker.ViewControlProps> = (props) => {
+const ViewControl: Component<ArkDatePicker.ViewControlProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkDatePicker.ViewControl class={styles.viewControl({ class: local.class })} {...others} />;
 };
 
-export const DatePickerRangeText: Component<ArkDatePicker.RangeTextProps> = (props) => {
+const RangeText: Component<ArkDatePicker.RangeTextProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkDatePicker.RangeText class={styles.rangeText({ class: local.class })} {...others} />;
 };
 
-export const DatePickerTable: Component<ArkDatePicker.TableProps> = (props) => {
+const Table: Component<ArkDatePicker.TableProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkDatePicker.Table class={styles.table({ class: local.class })} {...others} />;
 };
 
-export const DatePickerTableRow: Component<ArkDatePicker.TableRowProps> = (props) => {
+const TableRow: Component<ArkDatePicker.TableRowProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkDatePicker.TableRow class={styles.tableRow({ class: local.class })} {...others} />;
 };
 
-export const DatePickerTableHeader: Component<ArkDatePicker.TableHeaderProps> = (props) => {
+const TableHeader: Component<ArkDatePicker.TableHeaderProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkDatePicker.TableHeader class={styles.tableHeader({ class: local.class })} {...others} />;
 };
 
-export const DatePickerTableCell: Component<ArkDatePicker.TableCellProps> = (props) => {
+const TableCell: Component<ArkDatePicker.TableCellProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkDatePicker.TableCell class={styles.tableCell({ class: local.class })} {...others} />;
 };
-```
 
-Then create `src/components/date-picker/index.tsx`:
-```tsx
-import { DatePicker as ArkDatePicker } from "@ark-ui/solid/date-picker";
-import { children, Show, splitProps, type Component } from "solid-js";
-import { buttonVariants } from "../../recipes/date-picker";
-import { datePickerVariants } from "../../recipes/date-picker";
-
-const styles = datePickerVariants();
-
-export { datePickerVariants, type DatePickerVariants } from "../../recipes/date-picker";
-
-export const DatePicker = ArkDatePicker.Root;
-
-export * from "./date-picker.base";
-
-export const DatePickerTrigger: Component<ArkDatePicker.TriggerProps> = (props) => {
-  const [local, others] = splitProps(props, ["class", "children"]);
-  const resolvedChildren = children(() => local.children);
-  const hasChildren = () => resolvedChildren.toArray().length !== 0;
-
-  return (
-    <ArkDatePicker.Trigger class={styles.trigger({ class: local.class })} {...others}>
-      <Show when={!hasChildren()} fallback={resolvedChildren()}>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4">
-          <path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" />
-          <path d="M16 3v4" /><path d="M8 3v4" />
-          <path d="M4 11h16" /><path d="M11 15h1" /><path d="M12 15v3" />
-          <title>Calendar</title>
-        </svg>
-      </Show>
-    </ArkDatePicker.Trigger>
-  );
+const Trigger: Component<ArkDatePicker.TriggerProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkDatePicker.Trigger class={styles.trigger({ class: local.class })} {...others} />;
 };
 
-export const DatePickerClearTrigger: Component<ArkDatePicker.ClearTriggerProps> = (props) => {
+const ClearTrigger: Component<ArkDatePicker.ClearTriggerProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkDatePicker.ClearTrigger class={styles.clearTrigger({ class: local.class })} {...others} />;
 };
 
-export const DatePickerPrevTrigger: Component<ArkDatePicker.PrevTriggerProps> = (props) => {
-  const [local, others] = splitProps(props, ["class", "children"]);
-  const resolvedChildren = children(() => local.children);
-  const hasChildren = () => resolvedChildren.toArray().length !== 0;
-
-  return (
-    <ArkDatePicker.PrevTrigger class={styles.navTrigger({ class: [buttonVariants({ variant: "outline" }), local.class, "size-7"] })} {...others}>
-      <Show when={!hasChildren()} fallback={resolvedChildren()}>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4">
-          <path d="M15 6l-6 6l6 6" /><title>Previous</title>
-        </svg>
-      </Show>
-    </ArkDatePicker.PrevTrigger>
-  );
-};
-
-export const DatePickerNextTrigger: Component<ArkDatePicker.NextTriggerProps> = (props) => {
-  const [local, others] = splitProps(props, ["class", "children"]);
-  const resolvedChildren = children(() => local.children);
-  const hasChildren = () => resolvedChildren.toArray().length !== 0;
-
-  return (
-    <ArkDatePicker.NextTrigger class={styles.navTrigger({ class: [buttonVariants({ variant: "outline" }), local.class, "size-7"] })} {...others}>
-      <Show when={!hasChildren()} fallback={resolvedChildren()}>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4">
-          <path d="M9 6l6 6l-6 6" /><title>Next</title>
-        </svg>
-      </Show>
-    </ArkDatePicker.NextTrigger>
-  );
-};
-
-export const DatePickerViewTrigger: Component<ArkDatePicker.ViewTriggerProps> = (props) => {
+const PrevTrigger: Component<ArkDatePicker.PrevTriggerProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
+  return <ArkDatePicker.PrevTrigger class={styles.navTrigger({ class: local.class })} {...others} />;
+};
+
+const NextTrigger: Component<ArkDatePicker.NextTriggerProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkDatePicker.NextTrigger class={styles.navTrigger({ class: local.class })} {...others} />;
+};
+
+const ViewTrigger: Component<ArkDatePicker.ViewTriggerProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkDatePicker.ViewTrigger class={styles.viewTrigger({ class: local.class })} {...others} />;
+};
+
+const TableCellTrigger: Component<ArkDatePicker.TableCellTriggerProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkDatePicker.TableCellTrigger class={styles.tableCellTrigger({ class: local.class })} {...others} />;
+};
+
+export const DatePickerBase = {
+  Root, RootProvider, Label, Context,
+  TableHead, TableBody, YearSelect, MonthSelect,
+  Positioner,
+  Control, Input, Content,
+  View, ViewControl, RangeText,
+  Table, TableRow, TableHeader, TableCell,
+  Trigger, ClearTrigger, PrevTrigger, NextTrigger,
+  ViewTrigger, TableCellTrigger,
+};
+```
+
+Then create `src/components/date-picker/index.tsx`:
+
+```tsx
+import { For, Show, splitProps, type Component, type JSX } from "solid-js";
+import { DatePicker as ArkDatePicker } from "@ark-ui/solid/date-picker";
+import type { UseDatePickerContext } from "@ark-ui/solid/date-picker";
+import type { DateValue } from "@internationalized/date";
+import { Portal } from "solid-js/web";
+import { buttonVariants, datePickerVariants } from "../../recipes/date-picker";
+import { DatePickerBase } from "./date-picker.base";
+
+const styles = datePickerVariants();
+
+// ── SVG Icon Components ──────────────────────────────────────
+
+const CalendarIcon: Component<JSX.SvgSVGAttributes<SVGSVGElement>> = (props) => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4" {...props}>
+    <path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" />
+    <path d="M16 3v4" />
+    <path d="M8 3v4" />
+    <path d="M4 11h16" />
+    <path d="M11 15h1" />
+    <path d="M12 15v3" />
+    <title>Calendar</title>
+  </svg>
+);
+
+const ChevronLeftIcon: Component<JSX.SvgSVGAttributes<SVGSVGElement>> = (props) => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4" {...props}>
+    <path d="M15 6l-6 6l6 6" />
+    <title>Previous</title>
+  </svg>
+);
+
+const ChevronRightIcon: Component<JSX.SvgSVGAttributes<SVGSVGElement>> = (props) => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4" {...props}>
+    <path d="M9 6l6 6l-6 6" />
+    <title>Next</title>
+  </svg>
+);
+
+const XIcon: Component<JSX.SvgSVGAttributes<SVGSVGElement>> = (props) => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3" {...props}>
+    <path d="M18 6l-12 12" />
+    <path d="M6 6l12 12" />
+    <title>Remove</title>
+  </svg>
+);
+
+// ── CalendarGridView (internal) ──────────────────────────────
+
+const CalendarGridView: Component<{ view: "day" | "month" | "year" }> = (props) => (
+  <DatePickerBase.View view={props.view}>
+    <DatePickerBase.Context>
+      {(ctx: UseDatePickerContext) => (
+        <>
+          <DatePickerBase.ViewControl>
+            <DatePickerBase.PrevTrigger class={buttonVariants({ variant: "outline" })}>
+              <ChevronLeftIcon />
+            </DatePickerBase.PrevTrigger>
+            <DatePickerBase.ViewTrigger class={buttonVariants({ variant: "ghost" })}>
+              <DatePickerBase.RangeText />
+            </DatePickerBase.ViewTrigger>
+            <DatePickerBase.NextTrigger class={buttonVariants({ variant: "outline" })}>
+              <ChevronRightIcon />
+            </DatePickerBase.NextTrigger>
+          </DatePickerBase.ViewControl>
+          <DatePickerBase.Table>
+            <Show when={props.view === "day"}>
+              <DatePickerBase.TableHead>
+                <DatePickerBase.TableRow>
+                  {ctx().weekDays.map((weekDay: { short: string }) => (
+                    <DatePickerBase.TableHeader>{weekDay.short}</DatePickerBase.TableHeader>
+                  ))}
+                </DatePickerBase.TableRow>
+              </DatePickerBase.TableHead>
+            </Show>
+            <DatePickerBase.TableBody>
+              <Show when={props.view === "day"}>
+                {ctx().weeks.map((week: DateValue[]) => (
+                  <DatePickerBase.TableRow>
+                    {week.map((day: DateValue) => (
+                      <DatePickerBase.TableCell value={day}>
+                        <DatePickerBase.TableCellTrigger class={buttonVariants({ variant: "ghost", class: "aspect-square px-0" })}>
+                          {day.day}
+                        </DatePickerBase.TableCellTrigger>
+                      </DatePickerBase.TableCell>
+                    ))}
+                  </DatePickerBase.TableRow>
+                ))}
+              </Show>
+              <Show when={props.view === "month"}>
+                {ctx().getMonthsGrid({ columns: 4, format: "short" }).map((months: { value: number; label: string }[]) => (
+                  <DatePickerBase.TableRow>
+                    {months.map((month) => (
+                      <DatePickerBase.TableCell value={month.value}>
+                        <DatePickerBase.TableCellTrigger class={buttonVariants({ variant: "ghost" })}>
+                          {month.label}
+                        </DatePickerBase.TableCellTrigger>
+                      </DatePickerBase.TableCell>
+                    ))}
+                  </DatePickerBase.TableRow>
+                ))}
+              </Show>
+              <Show when={props.view === "year"}>
+                {ctx().getYearsGrid({ columns: 4 }).map((years: { value: number; label: string }[]) => (
+                  <DatePickerBase.TableRow>
+                    {years.map((year) => (
+                      <DatePickerBase.TableCell value={year.value}>
+                        <DatePickerBase.TableCellTrigger class={buttonVariants({ variant: "ghost" })}>
+                          {year.label}
+                        </DatePickerBase.TableCellTrigger>
+                      </DatePickerBase.TableCell>
+                    ))}
+                  </DatePickerBase.TableRow>
+                ))}
+              </Show>
+            </DatePickerBase.TableBody>
+          </DatePickerBase.Table>
+        </>
+      )}
+    </DatePickerBase.Context>
+  </DatePickerBase.View>
+);
+
+// ── SingleControl ────────────────────────────────────────────
+
+const SingleControl: Component<{
+  placeholder?: string;
+  clearLabel?: string | JSX.Element;
+  error?: boolean;
+}> = (props) => (
+  <>
+    <DatePickerBase.Input placeholder={props.placeholder} error={props.error} />
+    <DatePickerBase.Trigger>
+      <CalendarIcon />
+    </DatePickerBase.Trigger>
+    <DatePickerBase.ClearTrigger>{props.clearLabel ?? "Clear"}</DatePickerBase.ClearTrigger>
+  </>
+);
+
+// ── RangeControl ─────────────────────────────────────────────
+
+const RangeControl: Component<{
+  placeholder?: string;
+  clearLabel?: string | JSX.Element;
+  error?: boolean;
+}> = (props) => (
+  <>
+    <DatePickerBase.Input placeholder={props.placeholder} error={props.error} index={0} />
+    <span class="text-sm text-muted-foreground select-none">—</span>
+    <DatePickerBase.Input placeholder={props.placeholder} error={props.error} index={1} />
+    <DatePickerBase.Trigger>
+      <CalendarIcon />
+    </DatePickerBase.Trigger>
+    <DatePickerBase.ClearTrigger>{props.clearLabel ?? "Clear"}</DatePickerBase.ClearTrigger>
+  </>
+);
+
+// ── MultipleControl ──────────────────────────────────────────
+
+const MultipleControl: Component<{
+  placeholder?: string;
+  clearLabel?: string | JSX.Element;
+  error?: boolean;
+}> = (props) => (
+  <DatePickerBase.Context>
+    {(ctx: UseDatePickerContext) => (
+      <>
+        <div class={styles.selectedValue()}>
+          <Show
+            when={ctx().value.length > 0}
+            fallback={
+              <span class={styles.selectedValuePlaceholder()}>
+                {props.placeholder || "Select dates..."}
+              </span>
+            }
+          >
+            <For each={ctx().value}>
+              {(date: DateValue, index) => {
+                const fmt = (d: DateValue) =>
+                  d.toDate("UTC").toLocaleDateString("en-US", {
+                    month: "short",
+                    day: "numeric",
+                    year: "numeric",
+                  });
+                return (
+                  <span class={styles.selectedValueTag()}>
+                    {fmt(date)}
+                    <button
+                      class={styles.selectedValueRemove()}
+                      onClick={() =>
+                        ctx().setValue(ctx().value.filter((_, i) => i !== index()))
+                      }
+                      aria-label={`Remove ${fmt(date)}`}
+                    >
+                      <XIcon />
+                    </button>
+                  </span>
+                );
+              }}
+            </For>
+          </Show>
+        </div>
+        <DatePickerBase.Trigger>
+          <CalendarIcon />
+        </DatePickerBase.Trigger>
+        <DatePickerBase.ClearTrigger>{props.clearLabel ?? "Clear"}</DatePickerBase.ClearTrigger>
+      </>
+    )}
+  </DatePickerBase.Context>
+);
+
+// ── Composite: DatePicker ────────────────────────────────────
+
+type DatePickerProps = ArkDatePicker.RootProps & {
+  label?: string;
+  placeholder?: string;
+  clearLabel?: string | JSX.Element;
+  error?: boolean;
+};
+
+const DatePicker: Component<DatePickerProps> = (props) => {
+  const [local, others] = splitProps(props, [
+    "class",
+    "label",
+    "placeholder",
+    "clearLabel",
+    "error",
+  ]);
+
+  const selectionMode = () => props.selectionMode ?? "single";
+
   return (
-    <ArkDatePicker.ViewTrigger class={styles.viewTrigger({ class: [buttonVariants({ variant: "ghost" }), local.class] })} {...others} />
+    <DatePickerBase.Root class={local.class} {...others}>
+      {local.label && (
+        <DatePickerBase.Label error={local.error}>{local.label}</DatePickerBase.Label>
+      )}
+      <DatePickerBase.Control error={local.error}>
+        <Show when={selectionMode() === "single" || selectionMode() === undefined}>
+          <SingleControl
+            placeholder={local.placeholder}
+            clearLabel={local.clearLabel}
+            error={local.error}
+          />
+        </Show>
+        <Show when={selectionMode() === "range"}>
+          <RangeControl
+            placeholder={local.placeholder}
+            clearLabel={local.clearLabel}
+            error={local.error}
+          />
+        </Show>
+        <Show when={selectionMode() === "multiple"}>
+          <MultipleControl
+            placeholder={local.placeholder}
+            clearLabel={local.clearLabel}
+            error={local.error}
+          />
+        </Show>
+      </DatePickerBase.Control>
+      <Portal>
+        <DatePickerBase.Positioner>
+          <DatePickerBase.Content>
+            <CalendarGridView view="day" />
+            <CalendarGridView view="month" />
+            <CalendarGridView view="year" />
+          </DatePickerBase.Content>
+        </DatePickerBase.Positioner>
+      </Portal>
+    </DatePickerBase.Root>
   );
 };
 
-export const DatePickerTableCellTrigger: Component<ArkDatePicker.TableCellTriggerProps> = (props) => {
-  const [local, others] = splitProps(props, ["class"]);
-  return (
-    <ArkDatePicker.TableCellTrigger class={styles.tableCellTrigger({ class: [buttonVariants({ variant: "ghost" }), local.class] })} {...others} />
-  );
-};
+export { DatePicker, DatePickerBase };
+
+export { datePickerVariants, type DatePickerVariants } from "../../recipes/date-picker";
 ```
 </div>
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--primary`, `--ring`, `--border`, `--background`, `--accent`, etc.) or override the utility classes to match your design system.
 
 ## Usage
 
-Import the components:
+Import `DatePicker`:
 
 ```tsx
-import {
-  DatePicker,
-  DatePickerLabel,
-  DatePickerControl,
-  DatePickerInput,
-  DatePickerTrigger,
-  DatePickerClearTrigger,
-  DatePickerContent,
-  DatePickerPositioner,
-  DatePickerView,
-  DatePickerViewControl,
-  DatePickerPrevTrigger,
-  DatePickerNextTrigger,
-  DatePickerViewTrigger,
-  DatePickerRangeText,
-  DatePickerContext,
-  DatePickerTable,
-  DatePickerTableHead,
-  DatePickerTableBody,
-  DatePickerTableRow,
-  DatePickerTableHeader,
-  DatePickerTableCell,
-  DatePickerTableCellTrigger,
-  DatePickerRootProvider,
-  DatePickerYearSelect,
-  DatePickerMonthSelect,
-} from "~/components/date-picker";
-import { Portal } from "solid-js/web";
+import { DatePicker, DatePickerBase } from "~/components/date-picker";
 ```
 
 Basic usage:
 
 ```tsx
-<DatePicker>
-  <DatePickerLabel>Label</DatePickerLabel>
-  <DatePickerControl>
-    <DatePickerInput />
-    <DatePickerTrigger>
-      <CalendarIcon />
-    </DatePickerTrigger>
-    <DatePickerClearTrigger>Clear</DatePickerClearTrigger>
-  </DatePickerControl>
-  <Portal>
-    <DatePickerPositioner>
-      <DatePickerContent>
-        <DatePickerView view="day">
-          <DatePickerContext>
-            {(datePicker) => (
-              <>
-                <DatePickerViewControl>
-                  <DatePickerPrevTrigger>
-                    <ChevronLeftIcon />
-                  </DatePickerPrevTrigger>
-                  <DatePickerViewTrigger>
-                    <DatePickerRangeText />
-                  </DatePickerViewTrigger>
-                  <DatePickerNextTrigger>
-                    <ChevronRightIcon />
-                  </DatePickerNextTrigger>
-                </DatePickerViewControl>
-                <DatePickerTable>
-                  <DatePickerTableHead>
-                    <DatePickerTableRow>
-                      {datePicker().weekDays.map((weekDay, id) => (
-                        <DatePickerTableHeader key={id}>{weekDay.short}</DatePickerTableHeader>
-                      ))}
-                    </DatePickerTableRow>
-                  </DatePickerTableHead>
-                  <DatePickerTableBody>
-                    {datePicker().weeks.map((week, id) => (
-                      <DatePickerTableRow key={id}>
-                        {week.map((day, id) => (
-                          <DatePickerTableCell key={id} value={day}>
-                            <DatePickerTableCellTrigger>{day.day}</DatePickerTableCellTrigger>
-                          </DatePickerTableCell>
-                        ))}
-                      </DatePickerTableRow>
-                    ))}
-                  </DatePickerTableBody>
-                </DatePickerTable>
-              </>
-            )}
-          </DatePickerContext>
-        </DatePickerView>
-      </DatePickerContent>
-    </DatePickerPositioner>
-  </Portal>
-</DatePicker>
+// label prop renders an accessible label above the control
+<DatePicker label="Birth date" />
+
+// placeholder sets the input placeholder text
+<DatePicker label="Select date" placeholder="Pick a date" />
+
+// error applies error styling to both label and control
+<DatePicker label="Birth date" error />
+
+// clearLabel customizes the clear button text (defaults to "Clear")
+<DatePicker label="Select date" clearLabel="清除" />
 ```
+
+## Selection Modes
+
+The date picker supports three selection modes via the `selectionMode` prop:
+
+### Single (default)
+
+Select one date at a time. This is the default mode.
+
+```tsx
+<DatePicker label="Birth date" />
+```
+
+### Range
+
+Select a start and end date. The control renders two inputs — one for each end of the range.
+
+```tsx
+<DatePicker
+  selectionMode="range"
+  label="Date range"
+  placeholder="Start date"
+/>
+```
+
+### Multiple
+
+Select multiple individual dates. The control renders selected dates as removable chips.
+
+```tsx
+<DatePicker
+  selectionMode="multiple"
+  label="Multiple dates"
+  placeholder="Select dates..."
+/>
+```
+
+Use `maxSelectedDates` to limit the number of selections in multiple mode:
+
+```tsx
+<DatePicker
+  selectionMode="multiple"
+  maxSelectedDates={3}
+  label="Up to 3 dates"
+/>
+```
+
+> **Note:** `closeOnSelect` is automatically ignored when `selectionMode` is `"multiple"` (Ark UI behavior).
 
 ## Controlled
 
@@ -462,95 +626,18 @@ Control the selected date programmatically using `value` and `onValueChange`.
 
 ```tsx
 import { createSignal } from "solid-js";
-import {
-  DatePicker,
-  DatePickerLabel,
-  DatePickerControl,
-  DatePickerInput,
-  DatePickerTrigger,
-  DatePickerClearTrigger,
-  DatePickerContent,
-  DatePickerPositioner,
-  DatePickerView,
-  DatePickerViewControl,
-  DatePickerPrevTrigger,
-  DatePickerNextTrigger,
-  DatePickerViewTrigger,
-  DatePickerRangeText,
-  DatePickerContext,
-  DatePickerTable,
-  DatePickerTableHead,
-  DatePickerTableBody,
-  DatePickerTableRow,
-  DatePickerTableHeader,
-  DatePickerTableCell,
-  DatePickerTableCellTrigger,
-  DatePickerRootProvider,
-  DatePickerYearSelect,
-  DatePickerMonthSelect,
-} from "~/components/date-picker";
+import { DatePicker } from "~/components/date-picker";
 import { CalendarDate } from "@internationalized/date";
-import { Portal } from "solid-js/web";
 
 export function DatePickerControlled() {
   const [value, setValue] = createSignal<CalendarDate[]>([]);
 
   return (
-    <DatePicker value={value()} onValueChange={(details) => setValue(details.value)}>
-      <DatePickerLabel>Select date</DatePickerLabel>
-      <DatePickerControl>
-        <DatePickerInput />
-        <DatePickerTrigger>
-          <CalendarIcon />
-        </DatePickerTrigger>
-        <DatePickerClearTrigger>Clear</DatePickerClearTrigger>
-      </DatePickerControl>
-      <Portal>
-        <DatePickerPositioner>
-          <DatePickerContent>
-            <DatePickerView view="day">
-              <DatePickerContext>
-                {(datePicker) => (
-                  <>
-                    <DatePickerViewControl>
-                      <DatePickerPrevTrigger>
-                        <ChevronLeftIcon />
-                      </DatePickerPrevTrigger>
-                      <DatePickerViewTrigger>
-                        <DatePickerRangeText />
-                      </DatePickerViewTrigger>
-                      <DatePickerNextTrigger>
-                        <ChevronRightIcon />
-                      </DatePickerNextTrigger>
-                    </DatePickerViewControl>
-                    <DatePickerTable>
-                      <DatePickerTableHead>
-                        <DatePickerTableRow>
-                          {datePicker().weekDays.map((weekDay, id) => (
-                            <DatePickerTableHeader key={id}>{weekDay.short}</DatePickerTableHeader>
-                          ))}
-                        </DatePickerTableRow>
-                      </DatePickerTableHead>
-                      <DatePickerTableBody>
-                        {datePicker().weeks.map((week, id) => (
-                          <DatePickerTableRow key={id}>
-                            {week.map((day, id) => (
-                              <DatePickerTableCell key={id} value={day}>
-                                <DatePickerTableCellTrigger>{day.day}</DatePickerTableCellTrigger>
-                              </DatePickerTableCell>
-                            ))}
-                          </DatePickerTableRow>
-                        ))}
-                      </DatePickerTableBody>
-                    </DatePickerTable>
-                  </>
-                )}
-              </DatePickerContext>
-            </DatePickerView>
-          </DatePickerContent>
-        </DatePickerPositioner>
-      </Portal>
-    </DatePicker>
+    <DatePicker
+      label="Select date"
+      value={value()}
+      onValueChange={(details) => setValue(details.value)}
+    />
   );
 }
 ```

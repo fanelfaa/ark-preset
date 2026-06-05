@@ -13,7 +13,9 @@ const styles = segmentGroupVariants();
 const Root: Component<ArkSegmentGroup.RootProps & SegmentGroupVariants> = (props) => {
   const [local, others] = splitProps(props, ["class", "variant", "orientation"]);
   return (
-    <SegmentGroupVariantContext.Provider value={{ variant: local.variant, orientation: local.orientation }}>
+    <SegmentGroupVariantContext.Provider
+      value={{ variant: local.variant, orientation: local.orientation }}
+    >
       <ArkSegmentGroup.Root
         class={styles.root({
           class: local.class,
@@ -32,7 +34,9 @@ const RootProvider: Component<ArkSegmentGroup.RootProviderProps & SegmentGroupVa
 ) => {
   const [local, others] = splitProps(props, ["class", "variant", "orientation"]);
   return (
-    <SegmentGroupVariantContext.Provider value={{ variant: local.variant, orientation: local.orientation }}>
+    <SegmentGroupVariantContext.Provider
+      value={{ variant: local.variant, orientation: local.orientation }}
+    >
       <ArkSegmentGroup.RootProvider
         class={styles.root({
           class: local.class,

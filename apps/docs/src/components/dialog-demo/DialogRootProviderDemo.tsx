@@ -1,5 +1,13 @@
 import { useDialog } from "@ark-ui/solid/dialog";
-import { DialogContent, DialogTrigger, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogBase } from "@ui/solid";
+import {
+  DialogContent,
+  DialogTrigger,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+  DialogBase,
+} from "@ui/solid";
 import { Button } from "@ui/solid";
 
 export default function DialogRootProviderDemo() {

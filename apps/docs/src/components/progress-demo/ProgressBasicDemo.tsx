@@ -1,10 +1,4 @@
-import {
-  Progress,
-  ProgressLabel,
-  ProgressTrack,
-  ProgressRange,
-  ProgressValueText,
-} from "@ui/solid";
+import { Progress, ProgressLabel, ProgressTrack, ProgressValueText } from "@ui/solid";
 
 export default function ProgressBasicDemo() {
   return (
@@ -14,9 +8,7 @@ export default function ProgressBasicDemo() {
           <ProgressLabel>Loading</ProgressLabel>
           <ProgressValueText />
         </div>
-        <ProgressTrack>
-          <ProgressRange />
-        </ProgressTrack>
+        <ProgressTrack />
       </Progress>
     </div>
   );

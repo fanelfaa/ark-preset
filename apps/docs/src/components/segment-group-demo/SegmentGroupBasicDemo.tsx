@@ -10,9 +10,7 @@ export default function SegmentGroupBasicDemo() {
         <p class="text-sm text-muted-foreground mb-2">Basic horizontal</p>
         <SegmentGroup defaultValue="React">
           <Index each={frameworks}>
-            {(framework) => (
-              <SegmentGroupItem value={framework()}>{framework()}</SegmentGroupItem>
-            )}
+            {(framework) => <SegmentGroupItem value={framework()}>{framework()}</SegmentGroupItem>}
           </Index>
         </SegmentGroup>
       </div>
@@ -21,9 +19,7 @@ export default function SegmentGroupBasicDemo() {
         <p class="text-sm text-muted-foreground mb-2">Vertical orientation</p>
         <SegmentGroup defaultValue="Solid" orientation="vertical">
           <Index each={frameworks}>
-            {(framework) => (
-              <SegmentGroupItem value={framework()}>{framework()}</SegmentGroupItem>
-            )}
+            {(framework) => <SegmentGroupItem value={framework()}>{framework()}</SegmentGroupItem>}
           </Index>
         </SegmentGroup>
       </div>

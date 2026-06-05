@@ -23,6 +23,6 @@ CLI for component generation
 ## COMMANDS
 
 ```bash
-pnpm --filter create-ui build
-pnpm --filter create-ui dev
+moon run create-ui:build
+moon run create-ui:dev
 ```

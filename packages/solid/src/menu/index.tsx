@@ -2,17 +2,14 @@ import { Menu as ArkMenu } from "@ark-ui/solid/menu";
 import { Portal } from "solid-js/web";
 import { splitProps, type Component } from "solid-js";
 import { ButtonVariants, buttonVariants } from "@ui/core";
-import {
-  MenuContent as BaseMenuContent,
-  MenuIndicator,
-  MenuItemIndicator as BaseMenuItemIndicator,
-  MenuPositioner,
-} from "./menu.base";
+import { Menu as MenuBase } from "./menu.base";
+
+const Menu = MenuBase.Root;
 
 const MenuTrigger: Component<ArkMenu.TriggerProps & ButtonVariants> = (props) => {
   const [local, others] = splitProps(props, ["class", "variant", "size"]);
   return (
-    <ArkMenu.Trigger
+    <MenuBase.Trigger
       class={buttonVariants({
         class: local.class,
         variant: local.variant || "outline",
@@ -21,7 +18,7 @@ const MenuTrigger: Component<ArkMenu.TriggerProps & ButtonVariants> = (props) =>
       {...others}
     >
       {props.children}
-      <MenuIndicator>
+      <MenuBase.Indicator>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -36,8 +33,8 @@ const MenuTrigger: Component<ArkMenu.TriggerProps & ButtonVariants> = (props) =>
         >
           <path d="m6 9 6 6 6-6" />
         </svg>
-      </MenuIndicator>
-    </ArkMenu.Trigger>
+      </MenuBase.Indicator>
+    </MenuBase.Trigger>
   );
 };
 
@@ -45,39 +42,89 @@ const MenuContent: Component<ArkMenu.ContentProps> = (props) => {
   const [local, others] = splitProps(props, ["class", "children"]);
   return (
     <Portal>
-      <MenuPositioner>
-        <BaseMenuContent class={local.class} {...others}>
+      <MenuBase.Positioner>
+        <MenuBase.Content class={local.class} {...others}>
+          <MenuBase.Arrow />
           {local.children}
-        </BaseMenuContent>
-      </MenuPositioner>
+        </MenuBase.Content>
+      </MenuBase.Positioner>
     </Portal>
   );
 };
 
-const MenuItemIndicator: Component<ArkMenu.ItemIndicatorProps> = (props) => {
-  const [local, others] = splitProps(props, ["class"]);
+const MenuItem: Component<ArkMenu.ItemProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "children"]);
   return (
-    <BaseMenuItemIndicator class={local.class} {...others}>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="size-4"
-      >
-        <path d="M20 6 9 17l-5-5" />
-      </svg>
-    </BaseMenuItemIndicator>
+    <MenuBase.Item class={local.class} {...others}>
+      <MenuBase.ItemText>{local.children}</MenuBase.ItemText>
+      <MenuBase.ItemIndicator>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="size-4"
+        >
+          <path d="M20 6 9 17l-5-5" />
+        </svg>
+      </MenuBase.ItemIndicator>
+    </MenuBase.Item>
   );
 };
 
-export { MenuTrigger, MenuContent, MenuItemIndicator };
+const MenuTriggerItem: Component<ArkMenu.TriggerItemProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "children"]);
+  return (
+    <MenuBase.TriggerItem class={local.class} {...others}>
+      {local.children}
+      <MenuBase.Indicator>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="size-4"
+        >
+          <path d="m9 18 6-6-6-6" />
+        </svg>
+      </MenuBase.Indicator>
+    </MenuBase.TriggerItem>
+  );
+};
 
-export * from "./menu.base";
+const MenuSeparator: Component<ArkMenu.SeparatorProps> = (props) => {
+  return <MenuBase.Separator {...props} />;
+};
 
+const NestedMenuContent: Component<ArkMenu.ContentProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "children"]);
+  return (
+    <MenuBase.Positioner>
+      <MenuBase.Content class={local.class} {...others}>
+        {local.children}
+      </MenuBase.Content>
+    </MenuBase.Positioner>
+  );
+};
+
+export { Menu };
+export {
+  MenuTrigger,
+  MenuContent,
+  MenuItem,
+  MenuTriggerItem,
+  MenuSeparator,
+  NestedMenuContent,
+  MenuBase,
+};
 export { menuVariants, type MenuVariants } from "@ui/core";

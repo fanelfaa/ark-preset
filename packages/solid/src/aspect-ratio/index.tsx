@@ -16,10 +16,7 @@ const AspectRatio: Component<AspectRatioProps> = (props) => {
       style={{ "padding-bottom": `${100 / (local.ratio ?? 16 / 9)}%` }}
       {...others}
     >
-      <ark.div
-        class="absolute inset-0"
-        style={{ position: "absolute", inset: 0 }}
-      >
+      <ark.div class="absolute inset-0" style={{ position: "absolute", inset: 0 }}>
         {resolvedChildren()}
       </ark.div>
     </ark.div>

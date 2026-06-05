@@ -1,6 +1,6 @@
 import { Field as ArkField } from "@ark-ui/solid/field";
 import { splitProps, type Component } from "solid-js";
-import { InputRoot, InputLabel, InputField, InputDescription, InputErrorText } from "./input.base";
+import { Input as InputBase } from "./input.base";
 import { InputVariants } from "@ui/core";
 
 type InputProps = {
@@ -10,20 +10,20 @@ type InputProps = {
 } & ArkField.InputProps &
   Omit<InputVariants, "error">;
 
-export const Input: Component<InputProps> = (props) => {
+const Input: Component<InputProps> = (props) => {
   const [local, others] = splitProps(props, ["class", "label", "description", "error", "children"]);
   return (
-    <InputRoot class={local.class} invalid={!!local.error}>
-      {local.label && <InputLabel>{local.label}</InputLabel>}
-      <InputField error={!!local.error} {...others} />
+    <InputBase.Root class={local.class} invalid={!!local.error}>
+      {local.label && <InputBase.Label>{local.label}</InputBase.Label>}
+      <InputBase.Field error={!!local.error} {...others} />
       {local.description && !local.error && (
-        <InputDescription>{local.description}</InputDescription>
+        <InputBase.Description>{local.description}</InputBase.Description>
       )}
-      {local.error && <InputErrorText>{local.error}</InputErrorText>}
-    </InputRoot>
+      {local.error && <InputBase.ErrorText>{local.error}</InputBase.ErrorText>}
+    </InputBase.Root>
   );
 };
 
-export * from "./input.base";
+export { Input, InputBase };
 
 export { inputVariants, type InputVariants } from "@ui/core";

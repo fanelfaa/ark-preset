@@ -30,7 +30,7 @@ Monorepo UI library with Ark UI primitives, Solid.js implementations, CLI tool, 
 | Add Solid.js component   | packages/solid/src/        | Create \*.tsx wrapper around Ark UI Solid component |
 | Add React component      | (temporarily removed)      | Focus on Solid.js components first                  |
 | Update CLI templates     | packages/cli/src/          | Modify command templates                            |
-| Update documentation     | apps/docs/src/             | Edit MDX, TSX, or Astro files                      |
+| Update documentation     | apps/docs/src/             | Edit MDX, TSX, or Astro files                       |
 | Check component status   | COMPONENT_TODOS.md         | Track implementation progress                       |
 
 ## CODE MAP
@@ -71,15 +71,15 @@ Monorepo UI library with Ark UI primitives, Solid.js implementations, CLI tool, 
 
 # Development
 
-pnpm dev # Run docs site
+moon run docs:dev # Run docs site
 pnpm build # Build all packages
 pnpm test # Not implemented yet
 
 # Package-specific
 
-pnpm --filter @ui/core build
-pnpm --filter @ui/solid dev
-pnpm --filter create-ui dev
+moon run core:build
+moon run solid:dev
+moon run create-ui:dev
 
 # Moonrepo
 

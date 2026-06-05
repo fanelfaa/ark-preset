@@ -1,28 +1,13 @@
 import { NumberInput as ArkNumberInput } from "@ark-ui/solid/number-input";
 import { splitProps, type Component } from "solid-js";
-import {
-  NumberInputControl,
-  NumberInputDecrementTrigger,
-  NumberInputIncrementTrigger,
-  NumberInputInput,
-  NumberInputLabel,
-  NumberInputRoot,
-  NumberInputScrubber,
-  NumberInputTriggerGroup,
-} from "./number-input.base";
+import { NumberInput as NumberInputBase } from "./number-input.base";
 
-type NumberInputProps = Omit<ArkNumberInput.RootProps, "children"> & {
-  label?: string;
-  class?: string;
-  error?: boolean;
-};
-
-const InnerComponent = () => (
+const NumberInputControl = () => (
   <>
-    <NumberInputControl>
-      <NumberInputInput />
-      <NumberInputTriggerGroup>
-        <NumberInputIncrementTrigger>
+    <NumberInputBase.Control>
+      <NumberInputBase.Input />
+      <NumberInputBase.TriggerGroup>
+        <NumberInputBase.IncrementTrigger>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -36,8 +21,8 @@ const InnerComponent = () => (
           >
             <path d="m18 15-6-6-6 6" />
           </svg>
-        </NumberInputIncrementTrigger>
-        <NumberInputDecrementTrigger>
+        </NumberInputBase.IncrementTrigger>
+        <NumberInputBase.DecrementTrigger>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -51,10 +36,10 @@ const InnerComponent = () => (
           >
             <path d="m6 9 6 6 6-6" />
           </svg>
-        </NumberInputDecrementTrigger>
-      </NumberInputTriggerGroup>
-    </NumberInputControl>
-    <NumberInputScrubber>
+        </NumberInputBase.DecrementTrigger>
+      </NumberInputBase.TriggerGroup>
+    </NumberInputBase.Control>
+    <NumberInputBase.Scrubber>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"
@@ -73,20 +58,26 @@ const InnerComponent = () => (
         <circle cx="9" cy="19" r="1" />
         <circle cx="15" cy="19" r="1" />
       </svg>
-    </NumberInputScrubber>
+    </NumberInputBase.Scrubber>
   </>
 );
 
-export const NumberInput: Component<NumberInputProps> = (props) => {
+type NumberInputProps = Omit<ArkNumberInput.RootProps, "children"> & {
+  label?: string;
+  class?: string;
+  error?: boolean;
+};
+
+const NumberInput: Component<NumberInputProps> = (props) => {
   const [local, others] = splitProps(props, ["class", "label", "disabled", "error"]);
   return (
-    <NumberInputRoot class={local.class} disabled={local.disabled} {...others}>
-      {local.label && <NumberInputLabel>{local.label}</NumberInputLabel>}
-      <InnerComponent />
-    </NumberInputRoot>
+    <NumberInputBase.Root class={local.class} disabled={local.disabled} {...others}>
+      {local.label && <NumberInputBase.Label>{local.label}</NumberInputBase.Label>}
+      <NumberInputControl />
+    </NumberInputBase.Root>
   );
 };
 
-export * from "./number-input.base";
+export { NumberInput, NumberInputBase };
 
 export { numberInputVariants, type NumberInputVariants } from "@ui/core";

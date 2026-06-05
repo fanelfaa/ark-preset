@@ -39,6 +39,15 @@ const DialogTitle = DialogBase.Title;
 const DialogDescription = DialogBase.Description;
 const DialogFooter = DialogBase.Footer;
 
-export { Dialog, DialogTrigger, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogContent, DialogBase };
+export {
+  Dialog,
+  DialogTrigger,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+  DialogContent,
+  DialogBase,
+};
 
 export { dialogVariants, type DialogVariants } from "@ui/core";

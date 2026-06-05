@@ -65,12 +65,7 @@ const Control: Component<ArkSelect.ControlProps> = (props) => {
 
 const ClearTrigger: Component<ArkSelect.ClearTriggerProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
-  return (
-    <ArkSelect.ClearTrigger
-      class={styles.clearTrigger({ class: local.class })}
-      {...others}
-    />
-  );
+  return <ArkSelect.ClearTrigger class={styles.clearTrigger({ class: local.class })} {...others} />;
 };
 
 const Indicator: Component<ArkSelect.IndicatorProps> = (props) => {

@@ -4,10 +4,7 @@ import {
   SliderLabel,
   SliderValueText,
   SliderControl,
-  SliderTrack,
-  SliderRange,
   SliderThumb,
-  SliderHiddenInput,
 } from "@ui/solid";
 
 export default function SliderRootProviderDemo() {
@@ -25,12 +22,7 @@ export default function SliderRootProviderDemo() {
           <SliderValueText />
         </div>
         <SliderControl>
-          <SliderTrack>
-            <SliderRange />
-          </SliderTrack>
-          <SliderThumb index={0}>
-            <SliderHiddenInput />
-          </SliderThumb>
+          <SliderThumb index={0} />
         </SliderControl>
       </SliderRootProvider>
     </div>

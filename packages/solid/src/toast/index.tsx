@@ -22,10 +22,14 @@ const Toaster: Component<ToasterProps> = (props) => {
           <ToastBase.Root variant={(toast().type as ToastVariants["variant"]) || "default"}>
             <div class="grid gap-1">
               {toast().title && <ToastBase.Title>{toast().title}</ToastBase.Title>}
-              {toast().description && <ToastBase.Description>{toast().description}</ToastBase.Description>}
+              {toast().description && (
+                <ToastBase.Description>{toast().description}</ToastBase.Description>
+              )}
             </div>
             <ToastBase.CloseTrigger>✕</ToastBase.CloseTrigger>
-            {toast().action && <ToastBase.ActionTrigger>{toast().action?.label}</ToastBase.ActionTrigger>}
+            {toast().action && (
+              <ToastBase.ActionTrigger>{toast().action?.label}</ToastBase.ActionTrigger>
+            )}
           </ToastBase.Root>
         )}
       </ArkToaster>

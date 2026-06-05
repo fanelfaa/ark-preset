@@ -4,7 +4,12 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@ui/solid";
 const tabs = [
   { value: "active", label: "Active", content: "This tab is enabled and functional." },
   { value: "settings", label: "Settings", content: "Configure your preferences here." },
-  { value: "disabled", label: "Disabled", content: "This content is not accessible.", disabled: true },
+  {
+    value: "disabled",
+    label: "Disabled",
+    content: "This content is not accessible.",
+    disabled: true,
+  },
 ];
 
 export default function TabsDisabledDemo() {
@@ -14,7 +19,9 @@ export default function TabsDisabledDemo() {
         <TabsList>
           <Index each={tabs}>
             {(tab) => (
-              <TabsTrigger value={tab().value} disabled={tab().disabled}>{tab().label}</TabsTrigger>
+              <TabsTrigger value={tab().value} disabled={tab().disabled}>
+                {tab().label}
+              </TabsTrigger>
             )}
           </Index>
         </TabsList>

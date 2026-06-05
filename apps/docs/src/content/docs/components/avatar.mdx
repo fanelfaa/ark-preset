@@ -25,10 +25,19 @@ import {
 
 export function AvatarDemo() {
   return (
-    <Avatar>
-      <AvatarFallback>JD</AvatarFallback>
-      <AvatarImage src="https://i.pravatar.cc/150?u=john" alt="John Doe" />
-    </Avatar>
+    <div class="flex items-center gap-4">
+      <Avatar>
+        <AvatarFallback>JD</AvatarFallback>
+        <AvatarImage src="https://i.pravatar.cc/150?u=john" alt="John Doe" />
+      </Avatar>
+      <Avatar>
+        <AvatarFallback>AB</AvatarFallback>
+        <AvatarImage src="https://i.pravatar.cc/150?u=jane" alt="Alice Brown" />
+      </Avatar>
+      <Avatar>
+        <AvatarFallback>+3</AvatarFallback>
+      </Avatar>
+    </div>
   );
 }
 ```
@@ -74,40 +83,44 @@ Create the component directory and files:
 ```tsx
 import { Avatar as ArkAvatar } from "@ark-ui/solid/avatar";
 import { splitProps, type Component } from "solid-js";
-import { avatarVariants } from "../recipes/avatar";
+import { avatarVariants } from "@ui/core";
 
 const styles = avatarVariants();
 
-export const AvatarRoot: Component<ArkAvatar.RootProps> = (props) => {
+const Root: Component<ArkAvatar.RootProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkAvatar.Root class={styles.root({ class: local.class })} {...others} />;
 };
 
-export const AvatarRootProvider: Component<ArkAvatar.RootProviderProps> = (props) => {
+const RootProvider: Component<ArkAvatar.RootProviderProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkAvatar.RootProvider class={styles.root({ class: local.class })} {...others} />;
 };
 
-export const AvatarFallback: Component<ArkAvatar.FallbackProps> = (props) => {
+const Fallback: Component<ArkAvatar.FallbackProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkAvatar.Fallback class={styles.fallback({ class: local.class })} {...others} />;
 };
 
-export const AvatarImage: Component<ArkAvatar.ImageProps> = (props) => {
+const Image: Component<ArkAvatar.ImageProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkAvatar.Image class={styles.image({ class: local.class })} {...others} />;
 };
+
+export const Avatar = { Root, RootProvider, Fallback, Image };
 ```
 
 `src/components/avatar/index.tsx`:
 ```tsx
-import { AvatarRoot } from "./avatar.base";
+import { Avatar as AvatarBase } from "./avatar.base";
 
-export const Avatar = AvatarRoot;
+const Avatar = AvatarBase.Root;
+const AvatarFallback = AvatarBase.Fallback;
+const AvatarImage = AvatarBase.Image;
 
-export * from "./avatar.base";
+export { Avatar, AvatarFallback, AvatarImage, AvatarBase };
 
-export { avatarVariants, type AvatarVariants } from "../recipes/avatar";
+export { avatarVariants, type AvatarVariants } from "@ui/core";
 ```
 </div>
 

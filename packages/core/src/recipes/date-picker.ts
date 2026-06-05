@@ -3,8 +3,10 @@ import { tv, type VariantProps } from "tailwind-variants";
 export const datePickerVariants = tv({
   slots: {
     root: "w-full",
+    label: "text-sm font-medium text-foreground",
     control: "inline-flex items-center gap-1",
-    input: "h-8 rounded-md border border-input bg-background px-2.5 py-1.5 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50",
+    input:
+      "h-8 rounded-md border border-input bg-background px-2.5 py-1.5 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50",
     trigger: [
       "flex min-h-8 min-w-8 items-center justify-center rounded-md border border-border bg-background",
       "transition-[box-shadow,background-color] hover:bg-accent/50",
@@ -51,11 +53,23 @@ export const datePickerVariants = tv({
       "[&:is([data-outside-range][data-in-range])]:text-muted-foreground",
       "[&:is([data-outside-range][data-in-range])]:opacity-30",
     ],
+    selectedValue: "flex flex-wrap items-center gap-1.5 flex-1 min-w-0 min-h-8 rounded-md border border-input bg-background px-2.5 py-1 text-sm",
+    selectedValuePlaceholder: "text-sm text-muted-foreground",
+    selectedValueTag: [
+      "inline-flex items-center gap-1 rounded-md bg-primary/10 ps-2 pe-0.5 py-0.5 text-xs font-medium text-primary",
+      "data-[disabled]:opacity-50",
+    ],
+    selectedValueRemove: [
+      "inline-flex items-center justify-center size-4 rounded-sm",
+      "text-primary hover:bg-primary/20 focus-visible:outline-none focus-visible:ring-[1.5px] focus-visible:ring-ring",
+    ],
   },
   variants: {
     error: {
       true: {
         control: "border-destructive focus-within:ring-destructive",
+        input: "border-destructive focus-visible:ring-destructive",
+        selectedValue: "border-destructive",
         label: "text-destructive",
       },
     },

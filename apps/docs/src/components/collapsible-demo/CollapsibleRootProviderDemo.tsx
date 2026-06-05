@@ -1,9 +1,9 @@
 import { useCollapsible } from "@ark-ui/solid/collapsible";
 import {
+  CollapsibleBase,
+  CollapsibleIndicator,
   CollapsibleTrigger,
   CollapsibleContent,
-  CollapsibleIndicator,
-  CollapsibleRootProvider,
 } from "@ui/solid";
 
 export default function CollapsibleRootProviderDemo() {
@@ -15,24 +15,10 @@ export default function CollapsibleRootProviderDemo() {
         Open: {JSON.stringify(collapsible().open)}
       </output>
 
-      <CollapsibleRootProvider value={collapsible}>
+      <CollapsibleBase.RootProvider value={collapsible}>
         <CollapsibleTrigger>
           Click to expand
-          <CollapsibleIndicator>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="m6 9 6 6 6-6" />
-            </svg>
-          </CollapsibleIndicator>
+          <CollapsibleIndicator />
         </CollapsibleTrigger>
         <CollapsibleContent>
           <div class="pt-4 text-sm text-foreground">
@@ -41,7 +27,7 @@ export default function CollapsibleRootProviderDemo() {
             collapsible tree.
           </div>
         </CollapsibleContent>
-      </CollapsibleRootProvider>
+      </CollapsibleBase.RootProvider>
     </div>
   );
 }

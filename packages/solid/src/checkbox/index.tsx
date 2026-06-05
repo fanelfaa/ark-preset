@@ -1,17 +1,13 @@
 import { Checkbox as ArkCheckbox } from "@ark-ui/solid/checkbox";
 import { splitProps, type Component } from "solid-js";
-import {
-  CheckboxControl,
-  CheckboxHiddenInput,
-  CheckboxIndicator,
-  CheckboxRoot,
-  CheckboxRootProvider as BaseCheckboxRootProvider,
-} from "./checkbox.base";
+import { Checkbox as CheckboxBase } from "./checkbox.base";
 
-const InnerComponent = () => (
+const CheckboxLabel = CheckboxBase.Label;
+
+const CheckboxControl = () => (
   <>
-    <CheckboxControl>
-      <CheckboxIndicator>
+    <CheckboxBase.Control>
+      <CheckboxBase.Indicator>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -26,8 +22,8 @@ const InnerComponent = () => (
         >
           <path d="M20 6 9 17l-5-5" />
         </svg>
-      </CheckboxIndicator>
-      <CheckboxIndicator indeterminate>
+      </CheckboxBase.Indicator>
+      <CheckboxBase.Indicator indeterminate>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -42,32 +38,32 @@ const InnerComponent = () => (
         >
           <path d="M5 12h14" />
         </svg>
-      </CheckboxIndicator>
-    </CheckboxControl>
-    <CheckboxHiddenInput />
+      </CheckboxBase.Indicator>
+    </CheckboxBase.Control>
+    <CheckboxBase.HiddenInput />
   </>
 );
 
-export const Checkbox: Component<ArkCheckbox.RootProps> = (props) => {
+const Checkbox: Component<ArkCheckbox.RootProps> = (props) => {
   const [local, others] = splitProps(props, ["class", "children"]);
   return (
-    <CheckboxRoot class={local.class} {...others}>
-      <InnerComponent />
+    <CheckboxBase.Root class={local.class} {...others}>
+      <CheckboxControl />
       {local.children}
-    </CheckboxRoot>
+    </CheckboxBase.Root>
   );
 };
 
-export const CheckboxRootProvider: Component<ArkCheckbox.RootProviderProps> = (props) => {
+const CheckboxRootProvider: Component<ArkCheckbox.RootProviderProps> = (props) => {
   const [local, others] = splitProps(props, ["class", "children"]);
   return (
-    <BaseCheckboxRootProvider class={local.class} {...others}>
-      <InnerComponent />
+    <CheckboxBase.RootProvider class={local.class} {...others}>
+      <CheckboxControl />
       {local.children}
-    </BaseCheckboxRootProvider>
+    </CheckboxBase.RootProvider>
   );
 };
 
-export * from "./checkbox.base";
+export { Checkbox, CheckboxRootProvider, CheckboxLabel, CheckboxBase };
 
 export { checkboxVariants, type CheckboxVariants } from "@ui/core";

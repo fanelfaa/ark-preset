@@ -1,7 +1,8 @@
-import { ToggleRoot } from "./toggle.base";
+import { Toggle as ToggleBase } from "./toggle.base";
 
-export const Toggle = ToggleRoot;
+const Toggle = ToggleBase.Root;
+const ToggleIndicator = ToggleBase.Indicator;
 
-export * from "./toggle.base";
+export { Toggle, ToggleIndicator, ToggleBase };
 
 export { toggleVariants, type ToggleVariants } from "@ui/core";

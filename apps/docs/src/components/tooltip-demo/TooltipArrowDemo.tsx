@@ -6,9 +6,7 @@ export default function TooltipArrowDemo() {
       <div class="flex justify-center">
         <Tooltip>
           <TooltipTrigger>With Arrow</TooltipTrigger>
-          <TooltipContent useArrow>
-            Tooltip with arrow
-          </TooltipContent>
+          <TooltipContent useArrow>Tooltip with arrow</TooltipContent>
         </Tooltip>
       </div>
     </div>

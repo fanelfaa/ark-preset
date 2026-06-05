@@ -20,20 +20,17 @@ A component that allows users to expand or collapse content sections.
 ```tsx
 import {
   Collapsible,
-  CollapsibleRootProvider,
+  CollapsibleIndicator,
   CollapsibleTrigger,
   CollapsibleContent,
-  CollapsibleIndicator,
 } from "~/components/collapsible";
 
 export function CollapsibleDemo() {
   return (
-    <Collapsible defaultValue="content">
+    <Collapsible>
       <CollapsibleTrigger>
         Click to expand
-        <CollapsibleIndicator>
-          <ChevronDownIcon />
-        </CollapsibleIndicator>
+        <CollapsibleIndicator />
       </CollapsibleTrigger>
       <CollapsibleContent>
         <div class="pt-4 text-sm">This is the collapsible content.</div>
@@ -91,43 +88,74 @@ import { collapsibleVariants } from "../recipes/collapsible";
 
 const styles = collapsibleVariants();
 
-export const CollapsibleRoot: Component<ArkCollapsible.RootProps> = (props) => {
+const Root: Component<ArkCollapsible.RootProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkCollapsible.Root class={styles.root({ class: local.class })} {...others} />;
 };
 
-export const CollapsibleRootProvider: Component<ArkCollapsible.RootProviderProps> = (props) => {
+const RootProvider: Component<ArkCollapsible.RootProviderProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return (
     <ArkCollapsible.RootProvider class={styles.root({ class: local.class })} {...others} />
   );
 };
 
-export const CollapsibleTrigger: Component<ArkCollapsible.TriggerProps> = (props) => {
+const Trigger: Component<ArkCollapsible.TriggerProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkCollapsible.Trigger class={styles.trigger({ class: local.class })} {...others} />;
 };
 
-export const CollapsibleContent: Component<ArkCollapsible.ContentProps> = (props) => {
+const Content: Component<ArkCollapsible.ContentProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkCollapsible.Content class={styles.content({ class: local.class })} {...others} />;
 };
 
-export const CollapsibleIndicator: Component<ArkCollapsible.IndicatorProps> = (props) => {
+const Indicator: Component<ArkCollapsible.IndicatorProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
-  return (
-    <ArkCollapsible.Indicator class={styles.indicator({ class: local.class })} {...others} />
-  );
+  return <ArkCollapsible.Indicator class={styles.indicator({ class: local.class })} {...others} />;
 };
+
+export const Collapsible = { Root, RootProvider, Trigger, Content, Indicator };
 ```
 
 `src/components/collapsible/index.tsx`:
 ```tsx
-import { CollapsibleRoot } from "./collapsible.styled";
+import { type Component } from "solid-js";
+import { Collapsible as CollapsibleBase } from "./collapsible.base";
+import { Collapsible as ArkCollapsible } from "@ark-ui/solid/collapsible";
 
-export const Collapsible = CollapsibleRoot;
+const Collapsible = CollapsibleBase.Root;
 
-export * from "./collapsible.styled";
+const CollapsibleIndicator: Component<ArkCollapsible.IndicatorProps> = (props) => {
+  return (
+    <CollapsibleBase.Indicator {...props}>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="m6 9 6 6 6-6" />
+      </svg>
+    </CollapsibleBase.Indicator>
+  );
+};
+
+const CollapsibleTrigger = CollapsibleBase.Trigger;
+const CollapsibleContent = CollapsibleBase.Content;
+
+export {
+  Collapsible,
+  CollapsibleTrigger,
+  CollapsibleIndicator,
+  CollapsibleContent,
+  CollapsibleBase,
+};
 
 export { collapsibleVariants, type CollapsibleVariants } from "../recipes/collapsible";
 ```
@@ -141,10 +169,9 @@ Import the components:
 ```tsx
 import {
   Collapsible,
-  CollapsibleRootProvider,
+  CollapsibleIndicator,
   CollapsibleTrigger,
   CollapsibleContent,
-  CollapsibleIndicator,
 } from "~/components/collapsible";
 ```
 
@@ -154,9 +181,6 @@ Basic usage:
 <Collapsible>
   <CollapsibleTrigger>
     Click to expand
-    <CollapsibleIndicator>
-      <ChevronDownIcon />
-    </CollapsibleIndicator>
   </CollapsibleTrigger>
   <CollapsibleContent>
     <div class="pt-4 text-sm">Hidden content goes here.</div>
@@ -166,15 +190,20 @@ Basic usage:
 
 ## With Indicator
 
-The indicator rotates when the content is expanded. Use the `data-[state=open]` selector for styling.
+The indicator rotates when the content is expanded. Use `CollapsibleIndicator` inside the trigger to show the chevron icon. The rotation is styled via the `indicator` slot in the recipe.
 
 ```tsx
+import {
+  Collapsible,
+  CollapsibleIndicator,
+  CollapsibleTrigger,
+  CollapsibleContent,
+} from "~/components/collapsible";
+
 <Collapsible>
   <CollapsibleTrigger>
     Toggle Content
-    <CollapsibleIndicator>
-      <ChevronDownIcon />
-    </CollapsibleIndicator>
+    <CollapsibleIndicator />
   </CollapsibleTrigger>
   <CollapsibleContent>
     <div class="pt-4 text-sm">The indicator automatically rotates when expanded.</div>
@@ -191,10 +220,10 @@ Use `CollapsibleRootProvider` when you need to access the collapsible state outs
 ```tsx
 import { useCollapsible } from "@ark-ui/solid/collapsible";
 import {
+  CollapsibleBase,
+  CollapsibleIndicator,
   CollapsibleTrigger,
   CollapsibleContent,
-  CollapsibleIndicator,
-  CollapsibleRootProvider,
 } from "~/components/collapsible";
 
 export function ExternalControlExample() {
@@ -204,17 +233,15 @@ export function ExternalControlExample() {
     <div>
       <output>Open: {JSON.stringify(collapsible().open)}</output>
 
-      <CollapsibleRootProvider value={collapsible}>
+      <CollapsibleBase.RootProvider value={collapsible}>
         <CollapsibleTrigger>
           Click to expand
-          <CollapsibleIndicator>
-            <ChevronDownIcon />
-          </CollapsibleIndicator>
+          <CollapsibleIndicator />
         </CollapsibleTrigger>
         <CollapsibleContent>
           <div class="pt-4 text-sm">Content goes here.</div>
         </CollapsibleContent>
-      </CollapsibleRootProvider>
+      </CollapsibleBase.RootProvider>
     </div>
   );
 }

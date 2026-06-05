@@ -18,9 +18,7 @@ export default function ToggleGroupRootProviderDemo() {
       <ToggleGroupBase.RootProvider value={toggleGroup}>
         <Index each={alignments}>
           {(alignment) => (
-            <ToggleGroupItem value={alignment().value}>
-              {alignment().label}
-            </ToggleGroupItem>
+            <ToggleGroupItem value={alignment().value}>{alignment().label}</ToggleGroupItem>
           )}
         </Index>
       </ToggleGroupBase.RootProvider>

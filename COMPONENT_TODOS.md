@@ -7,35 +7,35 @@
 
 ## Implemented (31/88)
 
-| Component     | Status  |
-| ------------- | ------- |
-| [x] accordion | ✅ Done |
-| [x] alert | ✅ Done |
-| [x] alert-dialog | ✅ Done |
-| [x] aspect-ratio | ✅ Done |
-| [x] button | ✅ Done |
-| [x] carousel | ✅ Done |
-| [x] checkbox | ✅ Done |
-| [x] collapsible | ✅ Done |
-| [x] combobox | ✅ Done |
-| [x] date-picker | ✅ Done |
-| [x] dialog | ✅ Done |
-| [x] drawer | ✅ Done |
-| [x] input | ✅ Done |
-| [x] menu | ✅ Done |
-| [x] number-input | ✅ Done |
+| Component          | Status  |
+| ------------------ | ------- |
+| [x] accordion      | ✅ Done |
+| [x] alert          | ✅ Done |
+| [x] alert-dialog   | ✅ Done |
+| [x] aspect-ratio   | ✅ Done |
+| [x] button         | ✅ Done |
+| [x] carousel       | ✅ Done |
+| [x] checkbox       | ✅ Done |
+| [x] collapsible    | ✅ Done |
+| [x] combobox       | ✅ Done |
+| [x] date-picker    | ✅ Done |
+| [x] dialog         | ✅ Done |
+| [x] drawer         | ✅ Done |
+| [x] input          | ✅ Done |
+| [x] menu           | ✅ Done |
+| [x] number-input   | ✅ Done |
 | [x] password-input | ✅ Done |
-| [x] pin-input | ✅ Done |
-| [x] popover | ✅ Done |
-| [x] radio-group | ✅ Done |
-| [x] select | ✅ Done |
-| [x] slider | ✅ Done |
-| [x] switch | ✅ Done |
-| [x] tabs | ✅ Done |
-| [x] toast | ✅ Done |
-| [x] toggle | ✅ Done |
-| [x] toggle-group | ✅ Done |
-| [x] tooltip | ✅ Done |
+| [x] pin-input      | ✅ Done |
+| [x] popover        | ✅ Done |
+| [x] radio-group    | ✅ Done |
+| [x] select         | ✅ Done |
+| [x] slider         | ✅ Done |
+| [x] switch         | ✅ Done |
+| [x] tabs           | ✅ Done |
+| [x] toast          | ✅ Done |
+| [x] toggle         | ✅ Done |
+| [x] toggle-group   | ✅ Done |
+| [x] tooltip        | ✅ Done |
 
 ## Not Implemented (62) — 20 Ark UI + 42 shadcn parity
 

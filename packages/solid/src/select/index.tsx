@@ -1,8 +1,5 @@
 import { Select as SelectBase } from "./select.base";
-import type {
-  Select as ArkSelect,
-  SelectOpenChangeDetails,
-} from "@ark-ui/solid/select";
+import type { Select as ArkSelect, SelectOpenChangeDetails } from "@ark-ui/solid/select";
 import { Portal } from "solid-js/web";
 import {
   Show,

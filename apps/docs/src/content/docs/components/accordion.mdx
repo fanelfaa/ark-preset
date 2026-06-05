@@ -8,7 +8,6 @@ updatedDate: 2026-05-18
 import DocsLink from "@components/DocsLink.astro";
 import AccordionBasicDemo from "@components/accordion-demo/AccordionBasicDemo.tsx";
 import AccordionMultipleDemo from "@components/accordion-demo/AccordionMultipleDemo.tsx";
-import AccordionCollapsibleDemo from "@components/accordion-demo/AccordionCollapsibleDemo.tsx";
 import AccordionDisabledDemo from "@components/accordion-demo/AccordionDisabledDemo.tsx";
 import AccordionRootProviderDemo from "@components/accordion-demo/AccordionRootProviderDemo.tsx";
 
@@ -26,8 +25,6 @@ import {
   AccordionItem,
   AccordionItemTrigger,
   AccordionItemContent,
-  AccordionItemIndicator,
-  AccordionRootProvider,
 } from "~/components/accordion";
 
 export function AccordionDemo() {
@@ -36,9 +33,6 @@ export function AccordionDemo() {
       <AccordionItem value="item-1">
         <AccordionItemTrigger>
           Is it accessible?
-          <AccordionItemIndicator>
-            <ChevronDownIcon />
-          </AccordionItemIndicator>
         </AccordionItemTrigger>
         <AccordionItemContent>
           <div class="pb-4 text-sm">Yes. It adheres to the WAI-ARIA design pattern.</div>
@@ -47,9 +41,6 @@ export function AccordionDemo() {
       <AccordionItem value="item-2">
         <AccordionItemTrigger>
           Is it styled?
-          <AccordionItemIndicator>
-            <ChevronDownIcon />
-          </AccordionItemIndicator>
         </AccordionItemTrigger>
         <AccordionItemContent>
           <div class="pb-4 text-sm">
@@ -60,9 +51,6 @@ export function AccordionDemo() {
       <AccordionItem value="item-3">
         <AccordionItemTrigger>
           Is it animated?
-          <AccordionItemIndicator>
-            <ChevronDownIcon />
-          </AccordionItemIndicator>
         </AccordionItemTrigger>
         <AccordionItemContent>
           <div class="pb-4 text-sm">Yes. It's animated by default, but you can disable it.</div>
@@ -124,50 +112,81 @@ import { accordionVariants } from "../recipes/accordion";
 
 const styles = accordionVariants();
 
-export const AccordionRoot: Component<ArkAccordion.RootProps> = (props) => {
+const Root: Component<ArkAccordion.RootProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkAccordion.Root class={styles.root({ class: local.class })} {...others} />;
 };
 
-export const AccordionRootProvider: Component<ArkAccordion.RootProviderProps> = (props) => {
+const RootProvider: Component<ArkAccordion.RootProviderProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkAccordion.RootProvider class={styles.root({ class: local.class })} {...others} />;
 };
 
-export const AccordionItem: Component<ArkAccordion.ItemProps> = (props) => {
+const Item: Component<ArkAccordion.ItemProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkAccordion.Item class={styles.item({ class: local.class })} {...others} />;
 };
 
-export const AccordionItemTrigger: Component<ArkAccordion.ItemTriggerProps> = (props) => {
+const ItemTrigger: Component<ArkAccordion.ItemTriggerProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return (
     <ArkAccordion.ItemTrigger class={styles.itemTrigger({ class: local.class })} {...others} />
   );
 };
 
-export const AccordionItemContent: Component<ArkAccordion.ItemContentProps> = (props) => {
+const ItemContent: Component<ArkAccordion.ItemContentProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return (
     <ArkAccordion.ItemContent class={styles.itemContent({ class: local.class })} {...others} />
   );
 };
 
-export const AccordionItemIndicator: Component<ArkAccordion.ItemIndicatorProps> = (props) => {
+const ItemIndicator: Component<ArkAccordion.ItemIndicatorProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return (
     <ArkAccordion.ItemIndicator class={styles.itemIndicator({ class: local.class })} {...others} />
   );
 };
+
+export const Accordion = { Root, RootProvider, Item, ItemTrigger, ItemContent, ItemIndicator };
 ```
 
 `src/components/accordion/index.tsx`:
 ```tsx
-import { AccordionRoot } from "./accordion.styled";
+import { splitProps, type Component } from "solid-js";
+import { Accordion as AccordionBase } from "./accordion.base";
+import type { Accordion as ArkAccordion } from "@ark-ui/solid/accordion";
 
-export const Accordion = AccordionRoot;
+const Accordion: Component<ArkAccordion.RootProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "children"]);
+  return (
+    <AccordionBase.Root class={local.class} {...others}>
+      {local.children}
+    </AccordionBase.Root>
+  );
+};
 
-export * from "./accordion.styled";
+const AccordionItem = AccordionBase.Item;
+
+const AccordionItemTrigger: Component<ArkAccordion.ItemTriggerProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "children"]);
+  return (
+    <AccordionBase.ItemTrigger class={local.class} {...others}>
+      <AccordionBase.ItemIndicator />
+      {local.children}
+    </AccordionBase.ItemTrigger>
+  );
+};
+
+const AccordionItemContent = AccordionBase.ItemContent;
+
+export {
+  Accordion,
+  AccordionItem,
+  AccordionItemTrigger,
+  AccordionItemContent,
+  AccordionBase,
+};
 
 export { accordionVariants, type AccordionVariants } from "../recipes/accordion";
 ```
@@ -184,8 +203,7 @@ import {
   AccordionItem,
   AccordionItemTrigger,
   AccordionItemContent,
-  AccordionItemIndicator,
-  AccordionRootProvider,
+  AccordionBase,
 } from "~/components/accordion";
 ```
 
@@ -196,9 +214,6 @@ Basic usage:
   <AccordionItem value="item-1">
     <AccordionItemTrigger>
       Section Title
-      <AccordionItemIndicator>
-        <ChevronDownIcon />
-      </AccordionItemIndicator>
     </AccordionItemTrigger>
     <AccordionItemContent>
       <div class="pb-4 text-sm">Content goes here.</div>
@@ -214,9 +229,6 @@ With multiple items:
   <AccordionItem value="item-1">
     <AccordionItemTrigger>
       First Section
-      <AccordionItemIndicator>
-        <ChevronDownIcon />
-      </AccordionItemIndicator>
     </AccordionItemTrigger>
     <AccordionItemContent>
       <div class="pb-4 text-sm">First content.</div>
@@ -225,9 +237,6 @@ With multiple items:
   <AccordionItem value="item-2">
     <AccordionItemTrigger>
       Second Section
-      <AccordionItemIndicator>
-        <ChevronDownIcon />
-      </AccordionItemIndicator>
     </AccordionItemTrigger>
     <AccordionItemContent>
       <div class="pb-4 text-sm">Second content.</div>
@@ -247,9 +256,6 @@ Use the `multiple` prop to allow more than one item to be expanded at the same t
   <AccordionItem value="item-1">
     <AccordionItemTrigger>
       Can I open multiple items?
-      <AccordionItemIndicator>
-        <ChevronDownIcon />
-      </AccordionItemIndicator>
     </AccordionItemTrigger>
     <AccordionItemContent>
       <div class="pb-4 text-sm">
@@ -258,28 +264,6 @@ Use the `multiple` prop to allow more than one item to be expanded at the same t
     </AccordionItemContent>
   </AccordionItem>
   {/* ... more items */}
-</Accordion>
-```
-
-## Collapsible
-
-Use the `collapsible` prop to allow items to be closed after they have been expanded. By default, at least one item stays open.
-
-<AccordionCollapsibleDemo client:load />
-
-```tsx
-<Accordion collapsible>
-  <AccordionItem value="item-1">
-    <AccordionItemTrigger>
-      Can this be collapsed?
-      <AccordionItemIndicator>
-        <ChevronDownIcon />
-      </AccordionItemIndicator>
-    </AccordionItemTrigger>
-    <AccordionItemContent>
-      <div class="pb-4 text-sm">Yes. Click the trigger again to collapse.</div>
-    </AccordionItemContent>
-  </AccordionItem>
 </Accordion>
 ```
 
@@ -294,8 +278,6 @@ import {
   AccordionItem,
   AccordionItemTrigger,
   AccordionItemContent,
-  AccordionItemIndicator,
-  AccordionRootProvider,
 } from "~/components/accordion";
 
 export function AccordionControlled() {
@@ -305,11 +287,8 @@ export function AccordionControlled() {
     <Accordion value={value()} onValueChange={(details) => setValue(details.value)}>
       <AccordionItem value="item-1">
         <AccordionItemTrigger>
-          Controlled Item
-          <AccordionItemIndicator>
-            <ChevronDownIcon />
-          </AccordionItemIndicator>
-        </AccordionItemTrigger>
+      Controlled Item
+    </AccordionItemTrigger>
         <AccordionItemContent>
           <div class="pb-4 text-sm">Current state: {value().join(", ") || "closed"}</div>
         </AccordionItemContent>
@@ -328,11 +307,10 @@ Use `AccordionRootProvider` when you need to access the accordion state outside 
 ```tsx
 import { useAccordion } from "@ark-ui/solid/accordion";
 import {
+  AccordionBase,
   AccordionItem,
   AccordionItemTrigger,
   AccordionItemContent,
-  AccordionItemIndicator,
-  AccordionRootProvider,
 } from "~/components/accordion";
 
 export function AccordionWithExternalControl() {
@@ -343,30 +321,24 @@ export function AccordionWithExternalControl() {
       {/* Access accordion state outside the tree */}
       <output>Value: {JSON.stringify(accordion().value)}</output>
 
-      <AccordionRootProvider value={accordion}>
+      <AccordionBase.RootProvider value={accordion}>
         <AccordionItem value="item-1">
           <AccordionItemTrigger>
-            Section One
-            <AccordionItemIndicator>
-              <ChevronDownIcon />
-            </AccordionItemIndicator>
-          </AccordionItemTrigger>
+      Section One
+    </AccordionItemTrigger>
           <AccordionItemContent>
             <div class="pb-4 text-sm">Content for section one.</div>
           </AccordionItemContent>
         </AccordionItem>
         <AccordionItem value="item-2">
           <AccordionItemTrigger>
-            Section Two
-            <AccordionItemIndicator>
-              <ChevronDownIcon />
-            </AccordionItemIndicator>
-          </AccordionItemTrigger>
+      Section Two
+    </AccordionItemTrigger>
           <AccordionItemContent>
             <div class="pb-4 text-sm">Content for section two.</div>
           </AccordionItemContent>
         </AccordionItem>
-      </AccordionRootProvider>
+      </AccordionBase.RootProvider>
     </div>
   );
 }

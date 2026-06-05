@@ -1,5 +1,13 @@
 import { DialogCloseTrigger } from "@ark-ui/solid";
-import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@ui/solid";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from "@ui/solid";
 import { Button, Input, RadioGroup, RadioGroupItem, RadioGroupBase, Separator } from "@ui/solid";
 
 export default function DialogBasicDemo() {
@@ -27,7 +35,9 @@ export default function DialogBasicDemo() {
               description="We'll never share your email."
             />
             <RadioGroup>
-              <RadioGroupBase.Label class="text-sm font-medium">Notification preferences</RadioGroupBase.Label>
+              <RadioGroupBase.Label class="text-sm font-medium">
+                Notification preferences
+              </RadioGroupBase.Label>
               <div class="flex flex-row gap-6">
                 <RadioGroupItem value="all">All notifications</RadioGroupItem>
                 <RadioGroupItem value="mentions">Mentions only</RadioGroupItem>

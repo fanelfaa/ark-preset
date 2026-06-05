@@ -1,5 +1,11 @@
 import { usePopover } from "@ark-ui/solid/popover";
-import { PopoverContent, PopoverTrigger, PopoverTitle, PopoverDescription, PopoverBase } from "@ui/solid";
+import {
+  PopoverContent,
+  PopoverTrigger,
+  PopoverTitle,
+  PopoverDescription,
+  PopoverBase,
+} from "@ui/solid";
 import { Button } from "@ui/solid";
 
 export default function PopoverRootProviderDemo() {

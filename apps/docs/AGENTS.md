@@ -25,13 +25,13 @@ apps/docs/
 
 ## WHERE TO LOOK
 
-| Task                      | Location                            | Notes                                |
-| ------------------------- | ----------------------------------- | ------------------------------------ |
-| Add component docs page   | src/content/docs/components/        | Create \*.mdx file                   |
-| Add component demo        | src/components/<name>-demo/         | Create TSX demo with Astro wrapper   |
-| Add new page              | src/pages/                          | Astro routing (file-based)           |
-| Update site layout        | src/layouts/                        | Astro layouts                        |
-| Update global styles      | src/styles/global.css               | Tailwind CSS v4                      |
+| Task                    | Location                     | Notes                              |
+| ----------------------- | ---------------------------- | ---------------------------------- |
+| Add component docs page | src/content/docs/components/ | Create \*.mdx file                 |
+| Add component demo      | src/components/<name>-demo/  | Create TSX demo with Astro wrapper |
+| Add new page            | src/pages/                   | Astro routing (file-based)         |
+| Update site layout      | src/layouts/                 | Astro layouts                      |
+| Update global styles    | src/styles/global.css        | Tailwind CSS v4                    |
 
 ## CONVENTIONS
 
@@ -44,9 +44,9 @@ apps/docs/
 ## COMMANDS
 
 ```bash
-pnpm --filter @ui/docs dev        # Dev server with HMR
-pnpm --filter @ui/docs build      # Static build
-pnpm --filter @ui/docs preview    # Preview built site
+moon run docs:dev        # Dev server with HMR
+moon run docs:build      # Static build
+moon run docs:preview    # Preview built site
 ```
 
 ## NOTES

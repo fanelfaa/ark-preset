@@ -1,5 +1,5 @@
 import {
-  AlertDialogRoot,
+  AlertDialog,
   AlertDialogTrigger,
   AlertDialogContent,
   AlertDialogHeader,
@@ -14,7 +14,7 @@ import { Button } from "@ui/solid";
 export default function AlertDialogBasicDemo() {
   return (
     <div class="rounded-lg border border-border p-6">
-      <AlertDialogRoot>
+      <AlertDialog>
         <AlertDialogTrigger asChild={(props) => <Button {...props()} />}>
           Delete Account
         </AlertDialogTrigger>
@@ -22,8 +22,8 @@ export default function AlertDialogBasicDemo() {
           <AlertDialogHeader>
             <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
             <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete your account
-              and remove your data from our servers.
+              This action cannot be undone. This will permanently delete your account and remove
+              your data from our servers.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
@@ -31,7 +31,7 @@ export default function AlertDialogBasicDemo() {
             <AlertDialogAction variant="destructive">Delete Account</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
-      </AlertDialogRoot>
+      </AlertDialog>
     </div>
   );
 }

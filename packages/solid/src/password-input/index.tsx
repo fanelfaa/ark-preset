@@ -1,14 +1,6 @@
 import { PasswordInput as ArkPasswordInput } from "@ark-ui/solid/password-input";
 import { splitProps, type Component } from "solid-js";
-import {
-  PasswordInputControl,
-  PasswordInputField,
-  PasswordInputIndicator,
-  PasswordInputLabel,
-  PasswordInputRoot,
-  PasswordInputRootProvider as BasePasswordInputRootProvider,
-  PasswordInputVisibilityTrigger,
-} from "./password-input.base";
+import { PasswordInput as PasswordInputBase } from "./password-input.base";
 
 const EyeIcon: Component = () => (
   <svg
@@ -44,41 +36,41 @@ const EyeOffIcon: Component = () => (
   </svg>
 );
 
-const InnerComponent: Component<ArkPasswordInput.InputProps> = (props) => (
-  <PasswordInputControl>
-    <PasswordInputField {...props} />
-    <PasswordInputVisibilityTrigger>
-      <PasswordInputIndicator fallback={<EyeOffIcon />}>
+const PasswordInputControl: Component<ArkPasswordInput.InputProps> = (props) => (
+  <PasswordInputBase.Control>
+    <PasswordInputBase.Field {...props} />
+    <PasswordInputBase.VisibilityTrigger>
+      <PasswordInputBase.Indicator fallback={<EyeOffIcon />}>
         <EyeIcon />
-      </PasswordInputIndicator>
-    </PasswordInputVisibilityTrigger>
-  </PasswordInputControl>
+      </PasswordInputBase.Indicator>
+    </PasswordInputBase.VisibilityTrigger>
+  </PasswordInputBase.Control>
 );
 
-export const PasswordInput: Component<
+const PasswordInput: Component<
   ArkPasswordInput.RootProps & { label?: string; placeholder?: string }
 > = (props) => {
   const [local, others] = splitProps(props, ["class", "label", "children", "placeholder"]);
   return (
-    <PasswordInputRoot class={local.class} {...others}>
-      {local.label && <PasswordInputLabel>{local.label}</PasswordInputLabel>}
-      <InnerComponent placeholder={local.placeholder} />
-    </PasswordInputRoot>
+    <PasswordInputBase.Root class={local.class} {...others}>
+      {local.label && <PasswordInputBase.Label>{local.label}</PasswordInputBase.Label>}
+      <PasswordInputControl placeholder={local.placeholder} />
+    </PasswordInputBase.Root>
   );
 };
 
-export const PasswordInputRootProvider: Component<
+const PasswordInputRootProvider: Component<
   ArkPasswordInput.RootProviderProps & { label?: string; placeholder?: string }
 > = (props) => {
   const [local, others] = splitProps(props, ["class", "label", "children", "placeholder"]);
   return (
-    <BasePasswordInputRootProvider class={local.class} {...others}>
-      {local.label && <PasswordInputLabel>{local.label}</PasswordInputLabel>}
-      <InnerComponent placeholder={local.placeholder} />
-    </BasePasswordInputRootProvider>
+    <PasswordInputBase.RootProvider class={local.class} {...others}>
+      {local.label && <PasswordInputBase.Label>{local.label}</PasswordInputBase.Label>}
+      <PasswordInputControl placeholder={local.placeholder} />
+    </PasswordInputBase.RootProvider>
   );
 };
 
-export * from "./password-input.base";
+export { PasswordInput, PasswordInputRootProvider, PasswordInputBase };
 
 export { passwordInputVariants, type PasswordInputVariants } from "@ui/core";

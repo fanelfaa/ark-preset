@@ -7,14 +7,12 @@ export default function CardBasicDemo() {
       <Card>
         <CardHeader>
           <CardTitle>Create Project</CardTitle>
-          <CardDescription>
-            Deploy your new project in one-click.
-          </CardDescription>
+          <CardDescription>Deploy your new project in one-click.</CardDescription>
         </CardHeader>
         <CardContent>
           <p class="text-sm text-muted-foreground">
-            Your project will be deployed to a global network of servers
-            and available within minutes.
+            Your project will be deployed to a global network of servers and available within
+            minutes.
           </p>
         </CardContent>
         <CardFooter class="flex gap-2">

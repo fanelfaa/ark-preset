@@ -1,4 +1,10 @@
-import { Popover, PopoverTrigger, PopoverContent, PopoverTitle, PopoverDescription } from "@ui/solid";
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverTitle,
+  PopoverDescription,
+} from "@ui/solid";
 import { Button } from "@ui/solid";
 
 export default function PopoverBasicDemo() {

@@ -5,83 +5,109 @@ import { menuVariants } from "@ui/core";
 const styles = menuVariants();
 
 // Re-exports (no style slot required)
-export const MenuRoot = ArkMenu.Root;
-export const MenuRootProvider = ArkMenu.RootProvider;
-export const MenuTrigger = ArkMenu.Trigger;
-export const MenuRadioItemGroup = ArkMenu.RadioItemGroup;
+const Root = ArkMenu.Root;
+const RootProvider = ArkMenu.RootProvider;
+const Trigger = ArkMenu.Trigger;
+const RadioItemGroup = ArkMenu.RadioItemGroup;
 
 // Styled wrappers
-export const MenuIndicator: Component<ArkMenu.IndicatorProps> = (props) => {
+const Indicator: Component<ArkMenu.IndicatorProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkMenu.Indicator class={styles.indicator({ class: local.class })} {...others} />;
 };
 
-export const MenuPositioner: Component<ArkMenu.PositionerProps> = (props) => {
+const Positioner: Component<ArkMenu.PositionerProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkMenu.Positioner class={styles.positioner({ class: local.class })} {...others} />;
 };
 
-export const MenuArrow: Component<ArkMenu.ArrowProps> = (props) => {
+const Arrow: Component<ArkMenu.ArrowProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkMenu.Arrow class={styles.arrow({ class: local.class })} {...others} />;
 };
 
-export const MenuArrowTip: Component<ArkMenu.ArrowTipProps> = (props) => {
+const ArrowTip: Component<ArkMenu.ArrowTipProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkMenu.ArrowTip class={styles.arrowTip({ class: local.class })} {...others} />;
 };
 
-export const MenuSeparator: Component<ArkMenu.SeparatorProps> = (props) => {
+const Separator: Component<ArkMenu.SeparatorProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkMenu.Separator class={styles.separator({ class: local.class })} {...others} />;
 };
 
-export const MenuContextTrigger: Component<ArkMenu.ContextTriggerProps> = (props) => {
+const ContextTrigger: Component<ArkMenu.ContextTriggerProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
-  return <ArkMenu.ContextTrigger class={styles.contextTrigger({ class: local.class })} {...others} />;
+  return (
+    <ArkMenu.ContextTrigger class={styles.contextTrigger({ class: local.class })} {...others} />
+  );
 };
 
-export const MenuTriggerItem: Component<ArkMenu.TriggerItemProps> = (props) => {
+const TriggerItem: Component<ArkMenu.TriggerItemProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkMenu.TriggerItem class={styles.triggerItem({ class: local.class })} {...others} />;
 };
 
-export const MenuContent: Component<ArkMenu.ContentProps> = (props) => {
+const Content: Component<ArkMenu.ContentProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkMenu.Content class={styles.content({ class: local.class })} {...others} />;
 };
 
-export const MenuItem: Component<ArkMenu.ItemProps> = (props) => {
+const Item: Component<ArkMenu.ItemProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkMenu.Item class={styles.item({ class: local.class })} {...others} />;
 };
 
-export const MenuItemText: Component<ArkMenu.ItemTextProps> = (props) => {
+const ItemText: Component<ArkMenu.ItemTextProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkMenu.ItemText class={styles.itemText({ class: local.class })} {...others} />;
 };
 
-export const MenuItemIndicator: Component<ArkMenu.ItemIndicatorProps> = (props) => {
+const ItemIndicator: Component<ArkMenu.ItemIndicatorProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkMenu.ItemIndicator class={styles.itemIndicator({ class: local.class })} {...others} />;
 };
 
-export const MenuCheckboxItem: Component<ArkMenu.CheckboxItemProps> = (props) => {
+const CheckboxItem: Component<ArkMenu.CheckboxItemProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkMenu.CheckboxItem class={styles.checkboxItem({ class: local.class })} {...others} />;
 };
 
-export const MenuRadioItem: Component<ArkMenu.RadioItemProps> = (props) => {
+const RadioItem: Component<ArkMenu.RadioItemProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkMenu.RadioItem class={styles.radioItem({ class: local.class })} {...others} />;
 };
 
-export const MenuItemGroup: Component<ArkMenu.ItemGroupProps> = (props) => {
+const ItemGroup: Component<ArkMenu.ItemGroupProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
   return <ArkMenu.ItemGroup class={styles.itemGroup({ class: local.class })} {...others} />;
 };
 
-export const MenuItemGroupLabel: Component<ArkMenu.ItemGroupLabelProps> = (props) => {
+const ItemGroupLabel: Component<ArkMenu.ItemGroupLabelProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
-  return <ArkMenu.ItemGroupLabel class={styles.itemGroupLabel({ class: local.class })} {...others} />;
+  return (
+    <ArkMenu.ItemGroupLabel class={styles.itemGroupLabel({ class: local.class })} {...others} />
+  );
+};
+
+export const Menu = {
+  Root,
+  RootProvider,
+  Trigger,
+  RadioItemGroup,
+  Indicator,
+  Positioner,
+  Arrow,
+  ArrowTip,
+  Separator,
+  ContextTrigger,
+  TriggerItem,
+  Content,
+  Item,
+  ItemText,
+  ItemIndicator,
+  CheckboxItem,
+  RadioItem,
+  ItemGroup,
+  ItemGroupLabel,
 };

@@ -1,12 +1,6 @@
 import { useFilter, useListCollection } from "@ark-ui/solid";
 import { Index } from "solid-js";
-import {
-  Select,
-  SelectLabel,
-  SelectTrigger,
-  SelectContent,
-  SelectItem,
-} from "@ui/solid";
+import { Select, SelectLabel, SelectTrigger, SelectContent, SelectItem } from "@ui/solid";
 
 export default function SelectSearchableDemo() {
   const filterFn = useFilter({ sensitivity: "base" });
@@ -26,11 +20,7 @@ export default function SelectSearchableDemo() {
 
   return (
     <div class="rounded-lg border border-border p-6">
-      <Select
-        collection={collection()}
-        searchable
-        onSearch={(value) => filter(value)}
-      >
+      <Select collection={collection()} searchable onSearch={(value) => filter(value)}>
         <SelectLabel>Framework</SelectLabel>
         <SelectTrigger placeholder="Select a framework" />
         <SelectContent>

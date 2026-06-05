@@ -25,6 +25,6 @@ Styling primitives (Ark UI recipes)
 ## COMMANDS
 
 ```bash
-pnpm --filter @ui/core build
-pnpm --filter @ui/core dev
+moon run core:build
+moon run core:dev
 ```

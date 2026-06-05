@@ -6,9 +6,10 @@ updatedDate: 2026-05-27
 ---
 
 import DocsLink from "@components/DocsLink.astro";
-import { AlertDialogRoot, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader, AlertDialogFooter, AlertDialogTitle, AlertDialogDescription, AlertDialogCancel, AlertDialogAction } from "@ui/solid";
+import { AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader, AlertDialogFooter, AlertDialogTitle, AlertDialogDescription, AlertDialogCancel, AlertDialogAction } from "@ui/solid";
 import { Button } from "@ui/solid";
 import AlertDialogBasicDemo from "@components/alert-dialog-demo/AlertDialogBasicDemo.tsx";
+import AlertDialogDeleteDemo from "@components/alert-dialog-demo/AlertDialogDeleteDemo.tsx";
 
 # Alert Dialog
 
@@ -20,7 +21,7 @@ A modal dialog that interrupts the user with important content and expects a res
 
 ```tsx
 import {
-  AlertDialogRoot,
+  AlertDialog,
   AlertDialogTrigger,
   AlertDialogContent,
   AlertDialogHeader,
@@ -34,7 +35,7 @@ import { Button } from "~/components/button";
 
 export function AlertDialogDemo() {
   return (
-    <AlertDialogRoot>
+    <AlertDialog>
       <AlertDialogTrigger asChild={(props) => <Button {...props()} />}>
         Delete Account
       </AlertDialogTrigger>
@@ -51,7 +52,7 @@ export function AlertDialogDemo() {
           <AlertDialogAction variant="destructive">Delete Account</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
-    </AlertDialogRoot>
+    </AlertDialog>
   );
 }
 ```
@@ -119,10 +120,9 @@ import { HTMLProps } from '@ark-ui/solid'
 import { ark, type HTMLArkProps } from '@ark-ui/solid/factory'
 
 const styles = alertDialogVariants()
-
-export const AlertDialogRoot = ArkDialog.Root
-export const AlertDialogRootProvider = ArkDialog.RootProvider
-export const AlertDialogTrigger = ArkDialog.Trigger
+const AlertDialog = ArkDialog.Root
+const AlertDialogRootProvider = ArkDialog.RootProvider
+const AlertDialogTrigger = ArkDialog.Trigger
 
 export const AlertDialogBackdrop: Component<ArkDialog.BackdropProps> = (props) => {
   const [local, others] = splitProps(props, ['class'])
@@ -229,7 +229,7 @@ Import the components:
 
 ```tsx
 import {
-  AlertDialogRoot,
+  AlertDialog,
   AlertDialogTrigger,
   AlertDialogContent,
   AlertDialogHeader,
@@ -244,7 +244,7 @@ import {
 Basic usage:
 
 ```tsx
-<AlertDialogRoot>
+<AlertDialog>
   <AlertDialogTrigger asChild={(props) => <Button {...props()}>Open</Button>}>
   <AlertDialogContent>
     <AlertDialogHeader>
@@ -256,14 +256,76 @@ Basic usage:
       <AlertDialogAction variant="destructive">Delete</AlertDialogAction>
     </AlertDialogFooter>
   </AlertDialogContent>
-</AlertDialogRoot>
+</AlertDialog>
 ```
+
+## Root Provider
+
+Use `AlertDialogBase.RootProvider` when you need to control the dialog state from outside its component tree. This pattern uses the `useDialog` hook from Ark UI and is useful for utility dialogs like delete confirmations that can be triggered from any element.
+
+<AlertDialogDeleteDemo client:load />
+
+```tsx
+import { useDialog, type UseDialogReturn } from "@ark-ui/solid/dialog";
+import { AlertDialogContent, AlertDialogHeader, AlertDialogFooter, AlertDialogTitle, AlertDialogDescription, AlertDialogCancel, AlertDialogAction, AlertDialogBase } from "~/components/alert-dialog";
+import { Button } from "~/components/button";
+import { type Component } from "solid-js";
+
+interface DeleteAlertDialogProps {
+  dialog: UseDialogReturn;
+  title: string;
+  description: string;
+  onDelete: () => void;
+}
+
+const DeleteAlertDialog: Component<DeleteAlertDialogProps> = (props) => {
+  return (
+    <AlertDialogBase.RootProvider value={props.dialog}>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>{props.title}</AlertDialogTitle>
+          <AlertDialogDescription>{props.description}</AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel variant="outline">Cancel</AlertDialogCancel>
+          <AlertDialogAction variant="destructive" onClick={() => props.onDelete()}>
+            Delete
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialogBase.RootProvider>
+  );
+};
+
+export function DeleteConfirmation() {
+  const dialog = useDialog({ defaultOpen: false });
+
+  return (
+    <div>
+      <Button onClick={() => dialog().setOpen(true)} variant="destructive">
+        Delete Account
+      </Button>
+      <DeleteAlertDialog
+        dialog={dialog}
+        title="Delete Account"
+        description="This will permanently delete your account and remove your data from our servers."
+        onDelete={() => dialog().setOpen(false)}
+      />
+    </div>
+  );
+}
+```
+
+The key difference:
+
+- **`AlertDialog`** — manages its own state internally. Use for simple, self-contained usage.
+- **`AlertDialogBase.RootProvider`** — accepts a pre-created context via `useDialog`. Use when you need to read or control the dialog state from outside the component tree. Ideal for reusable utility dialogs.
 
 ## Anatomy
 
 | Part | Element | Description |
 |------|---------|-------------|
-| `AlertDialogRoot` | — | Manages dialog state, uses `role="alertdialog"` |
+| `AlertDialog` | — | Manages dialog state, uses `role="alertdialog"` |
 | `AlertDialogTrigger` | `button` | The button that opens the dialog |
 | `AlertDialogContent` | `div` | The dialog panel (portal to body) |
 | `AlertDialogHeader` | `div` | Header section for title and description |
@@ -277,4 +339,4 @@ Basic usage:
 
 See the [Ark UI Dialog](https://ark-ui.com/docs/components/dialog) documentation.
 
-The `AlertDialogRoot` automatically sets `role="alertdialog"` on the dialog content, providing proper accessibility semantics for alert dialogs.
+The `AlertDialog` automatically sets `role="alertdialog"` on the dialog content, providing proper accessibility semantics for alert dialogs.

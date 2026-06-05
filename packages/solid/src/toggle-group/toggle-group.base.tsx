@@ -16,7 +16,12 @@ const RootProvider: Component<ArkToggleGroup.RootProviderProps> = (props) => {
 
 const Item: Component<ArkToggleGroup.ItemProps & ToggleGroupVariants> = (props) => {
   const [local, others] = splitProps(props, ["class", "size"]);
-  return <ArkToggleGroup.Item class={styles.item({ class: local.class, size: local.size })} {...others} />;
+  return (
+    <ArkToggleGroup.Item
+      class={styles.item({ class: local.class, size: local.size })}
+      {...others}
+    />
+  );
 };
 
 export const ToggleGroup = { Root, RootProvider, Item };

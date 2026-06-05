@@ -12,9 +12,7 @@ export default function RadioGroupBasicDemo() {
     <div class="rounded-lg border border-border p-6">
       <RadioGroup defaultValue="1" orientation="horizontal">
         <Index each={paymentMethods}>
-          {(method) => (
-            <RadioGroupItem value={method().value}>{method().label}</RadioGroupItem>
-          )}
+          {(method) => <RadioGroupItem value={method().value}>{method().label}</RadioGroupItem>}
         </Index>
       </RadioGroup>
     </div>
