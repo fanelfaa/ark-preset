@@ -66,6 +66,99 @@ const ChevronRightIcon: Component<JSX.SvgSVGAttributes<SVGSVGElement>> = (props)
   </svg>
 );
 
+// ── CalendarGridView ──────────────────────────────────────
+
+const CalendarGridView: Component<{ view: "day" | "month" | "year" }> = (props) => (
+  <DatePickerBase.View view={props.view}>
+    <DatePickerBase.Context>
+      {(ctx: UseDatePickerContext) => (
+        <>
+          <DatePickerBase.ViewControl>
+            <DatePickerBase.PrevTrigger class={buttonVariants({ variant: "outline" })}>
+              <ChevronLeftIcon />
+            </DatePickerBase.PrevTrigger>
+            <DatePickerBase.ViewTrigger class={buttonVariants({ variant: "ghost" })}>
+              <DatePickerBase.RangeText />
+            </DatePickerBase.ViewTrigger>
+            <DatePickerBase.NextTrigger class={buttonVariants({ variant: "outline" })}>
+              <ChevronRightIcon />
+            </DatePickerBase.NextTrigger>
+          </DatePickerBase.ViewControl>
+          <DatePickerBase.Table>
+            <Show when={props.view === "day"}>
+              <DatePickerBase.TableHead>
+                <DatePickerBase.TableRow>
+                  {ctx().weekDays.map((weekDay: { short: string }) => (
+                    <DatePickerBase.TableHeader>{weekDay.short}</DatePickerBase.TableHeader>
+                  ))}
+                </DatePickerBase.TableRow>
+              </DatePickerBase.TableHead>
+            </Show>
+            <DatePickerBase.TableBody>
+              <Show when={props.view === "day"}>
+                {ctx().weeks.map((week: DateValue[]) => (
+                  <DatePickerBase.TableRow>
+                    {week.map((day: DateValue) => (
+                      <DatePickerBase.TableCell value={day}>
+                        <DatePickerBase.TableCellTrigger
+                          class={buttonVariants({
+                            variant: "ghost",
+                            class: "aspect-square px-0",
+                          })}
+                        >
+                          {day.day}
+                        </DatePickerBase.TableCellTrigger>
+                      </DatePickerBase.TableCell>
+                    ))}
+                  </DatePickerBase.TableRow>
+                ))}
+              </Show>
+              <Show when={props.view === "month"}>
+                {ctx()
+                  .getMonthsGrid({ columns: 4, format: "short" })
+                  .map((months: { value: number; label: string }[]) => (
+                    <DatePickerBase.TableRow>
+                      {months.map((month) => (
+                        <DatePickerBase.TableCell value={month.value}>
+                          <DatePickerBase.TableCellTrigger
+                            class={buttonVariants({
+                              variant: "ghost",
+                            })}
+                          >
+                            {month.label}
+                          </DatePickerBase.TableCellTrigger>
+                        </DatePickerBase.TableCell>
+                      ))}
+                    </DatePickerBase.TableRow>
+                  ))}
+              </Show>
+              <Show when={props.view === "year"}>
+                {ctx()
+                  .getYearsGrid({ columns: 4 })
+                  .map((years: { value: number; label: string }[]) => (
+                    <DatePickerBase.TableRow>
+                      {years.map((year) => (
+                        <DatePickerBase.TableCell value={year.value}>
+                          <DatePickerBase.TableCellTrigger
+                            class={buttonVariants({
+                              variant: "ghost",
+                            })}
+                          >
+                            {year.label}
+                          </DatePickerBase.TableCellTrigger>
+                        </DatePickerBase.TableCell>
+                      ))}
+                    </DatePickerBase.TableRow>
+                  ))}
+              </Show>
+            </DatePickerBase.TableBody>
+          </DatePickerBase.Table>
+        </>
+      )}
+    </DatePickerBase.Context>
+  </DatePickerBase.View>
+);
+
 // ── Composite: DatePicker (Root + children + calendar popover) ──
 
 type DatePickerProps = ArkDatePicker.RootProps;
@@ -79,136 +172,9 @@ const DatePicker: Component<DatePickerProps> = (props) => {
       <Portal>
         <DatePickerBase.Positioner>
           <DatePickerBase.Content>
-            {/* Day view */}
-            <DatePickerBase.View view="day">
-              <DatePickerBase.Context>
-                {(ctx: UseDatePickerContext) => (
-                  <>
-                    <DatePickerBase.ViewControl>
-                      <DatePickerBase.PrevTrigger class={buttonVariants({ variant: "outline" })}>
-                        <ChevronLeftIcon />
-                      </DatePickerBase.PrevTrigger>
-                      <DatePickerBase.ViewTrigger class={buttonVariants({ variant: "ghost" })}>
-                        <DatePickerBase.RangeText />
-                      </DatePickerBase.ViewTrigger>
-                      <DatePickerBase.NextTrigger class={buttonVariants({ variant: "outline" })}>
-                        <ChevronRightIcon />
-                      </DatePickerBase.NextTrigger>
-                    </DatePickerBase.ViewControl>
-                    <DatePickerBase.Table>
-                      <DatePickerBase.TableHead>
-                        <DatePickerBase.TableRow>
-                          {ctx().weekDays.map((weekDay: { short: string }) => (
-                            <DatePickerBase.TableHeader>{weekDay.short}</DatePickerBase.TableHeader>
-                          ))}
-                        </DatePickerBase.TableRow>
-                      </DatePickerBase.TableHead>
-                      <DatePickerBase.TableBody>
-                        {ctx().weeks.map((week: DateValue[]) => (
-                          <DatePickerBase.TableRow>
-                            {week.map((day: DateValue) => (
-                              <DatePickerBase.TableCell value={day}>
-                                <DatePickerBase.TableCellTrigger
-                                  class={buttonVariants({
-                                    variant: "ghost",
-                                  })}
-                                >
-                                  {day.day}
-                                </DatePickerBase.TableCellTrigger>
-                              </DatePickerBase.TableCell>
-                            ))}
-                          </DatePickerBase.TableRow>
-                        ))}
-                      </DatePickerBase.TableBody>
-                    </DatePickerBase.Table>
-                  </>
-                )}
-              </DatePickerBase.Context>
-            </DatePickerBase.View>
-
-            {/* Month view */}
-            <DatePickerBase.View view="month">
-              <DatePickerBase.Context>
-                {(ctx: UseDatePickerContext) => (
-                  <>
-                    <DatePickerBase.ViewControl>
-                      <DatePickerBase.PrevTrigger class={buttonVariants({ variant: "outline" })}>
-                        <ChevronLeftIcon />
-                      </DatePickerBase.PrevTrigger>
-                      <DatePickerBase.ViewTrigger class={buttonVariants({ variant: "ghost" })}>
-                        <DatePickerBase.RangeText />
-                      </DatePickerBase.ViewTrigger>
-                      <DatePickerBase.NextTrigger class={buttonVariants({ variant: "outline" })}>
-                        <ChevronRightIcon />
-                      </DatePickerBase.NextTrigger>
-                    </DatePickerBase.ViewControl>
-                    <DatePickerBase.Table>
-                      <DatePickerBase.TableBody>
-                        {ctx()
-                          .getMonthsGrid({ columns: 4, format: "short" })
-                          .map((months: { value: number; label: string }[]) => (
-                            <DatePickerBase.TableRow>
-                              {months.map((month) => (
-                                <DatePickerBase.TableCell value={month.value}>
-                                  <DatePickerBase.TableCellTrigger
-                                    class={buttonVariants({
-                                      variant: "ghost",
-                                    })}
-                                  >
-                                    {month.label}
-                                  </DatePickerBase.TableCellTrigger>
-                                </DatePickerBase.TableCell>
-                              ))}
-                            </DatePickerBase.TableRow>
-                          ))}
-                      </DatePickerBase.TableBody>
-                    </DatePickerBase.Table>
-                  </>
-                )}
-              </DatePickerBase.Context>
-            </DatePickerBase.View>
-
-            {/* Year view */}
-            <DatePickerBase.View view="year">
-              <DatePickerBase.Context>
-                {(ctx: UseDatePickerContext) => (
-                  <>
-                    <DatePickerBase.ViewControl>
-                      <DatePickerBase.PrevTrigger class={buttonVariants({ variant: "outline" })}>
-                        <ChevronLeftIcon />
-                      </DatePickerBase.PrevTrigger>
-                      <DatePickerBase.ViewTrigger class={buttonVariants({ variant: "ghost" })}>
-                        <DatePickerBase.RangeText />
-                      </DatePickerBase.ViewTrigger>
-                      <DatePickerBase.NextTrigger class={buttonVariants({ variant: "outline" })}>
-                        <ChevronRightIcon />
-                      </DatePickerBase.NextTrigger>
-                    </DatePickerBase.ViewControl>
-                    <DatePickerBase.Table>
-                      <DatePickerBase.TableBody>
-                        {ctx()
-                          .getYearsGrid({ columns: 4 })
-                          .map((years: { value: number; label: string }[]) => (
-                            <DatePickerBase.TableRow>
-                              {years.map((year) => (
-                                <DatePickerBase.TableCell value={year.value}>
-                                  <DatePickerBase.TableCellTrigger
-                                    class={buttonVariants({
-                                      variant: "ghost",
-                                    })}
-                                  >
-                                    {year.label}
-                                  </DatePickerBase.TableCellTrigger>
-                                </DatePickerBase.TableCell>
-                              ))}
-                            </DatePickerBase.TableRow>
-                          ))}
-                      </DatePickerBase.TableBody>
-                    </DatePickerBase.Table>
-                  </>
-                )}
-              </DatePickerBase.Context>
-            </DatePickerBase.View>
+            <CalendarGridView view="day" />
+            <CalendarGridView view="month" />
+            <CalendarGridView view="year" />
           </DatePickerBase.Content>
         </DatePickerBase.Positioner>
       </Portal>
@@ -224,15 +190,21 @@ const DatePickerLabel: Component<ArkDatePicker.LabelProps> = (props) => (
 
 // ── Composite: DatePickerControl (Control + Input + Trigger + ClearTrigger) ──
 
-const DatePickerControl: Component<ArkDatePicker.InputProps> = (props) => {
-  const [local, others] = splitProps(props, ["class"]);
+type DatePickerControlProps = ArkDatePicker.InputProps & {
+  clearLabel?: string | JSX.Element;
+};
+
+const DatePickerControl: Component<DatePickerControlProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "clearLabel"]);
   return (
     <DatePickerBase.Control class={styles.control({ class: local.class })}>
       <DatePickerBase.Input {...others} />
       <DatePickerBase.Trigger>
         <CalendarIcon />
       </DatePickerBase.Trigger>
-      <DatePickerBase.ClearTrigger>Clear</DatePickerBase.ClearTrigger>
+      <DatePickerBase.ClearTrigger>
+        {local.clearLabel ?? "Clear"}
+      </DatePickerBase.ClearTrigger>
     </DatePickerBase.Control>
   );
 };
