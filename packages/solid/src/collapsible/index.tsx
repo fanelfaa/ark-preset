@@ -23,6 +23,7 @@ const CollapsibleIndicator: Component<ArkCollapsible.IndicatorProps> = (props) =
     </CollapsibleBase.Indicator>
   );
 };
+
 const CollapsibleTrigger = CollapsibleBase.Trigger;
 const CollapsibleContent = CollapsibleBase.Content;
 
