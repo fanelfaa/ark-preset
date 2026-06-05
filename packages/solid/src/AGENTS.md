@@ -355,6 +355,51 @@ See the [Ark UI Name](https://ark-ui.com/docs/components/<name>) documentation.
 | MDX top (live demo) | `@ui/solid` |
 | User-facing code blocks | `~/components/<name>` |
 
+### ⚠️ Critical Rule: Basic Demo Import Constraint
+
+**Basic demo MUST NOT import from `.base.tsx` or `<ComponentBase>`.**
+It must only import **named composite exports** from `index.tsx`.
+
+```
+// ❌ WRONG — basic demo imports ComponentBase
+import { Dialog, DialogContent, DialogBase } from "@ui/solid";
+// then uses DialogBase.Trigger, DialogBase.Header, etc.
+
+// ✅ CORRECT — basic demo imports named composites only
+import { SegmentGroup, SegmentGroupItem } from "@ui/solid";
+```
+
+**How to satisfy this rule**: If the basic demo needs a part (e.g., Trigger, Header, Title, Description, Footer), `index.tsx` **must export a composite version** of that part — a named export that internally uses the base namespace. Never force the basic demo to reach for `ComponentBase.*`.
+
+**Example** — segment-group pattern:
+
+```tsx
+// index.tsx — composite named exports for basic use
+const SegmentGroup: Component<...> = (props) => (
+  <SegmentGroupBase.Root ...>
+    <SegmentGroupBase.Indicator />
+    {local.children}
+  </SegmentGroupBase.Root>
+);
+
+const SegmentGroupItem: Component<...> = (props) => (
+  <SegmentGroupBase.Item {...others}>
+    <SegmentGroupBase.ItemText>{local.children}</SegmentGroupBase.ItemText>
+    <SegmentGroupBase.ItemControl />
+    <SegmentGroupBase.ItemHiddenInput />
+  </SegmentGroupBase.Item>
+);
+
+export { SegmentGroup, SegmentGroupItem };
+export { SegmentGroupBase }; // Only exported for advanced use (RootProvider)
+```
+
+**When is `ComponentBase` allowed?**
+
+- Only in **RootProvider demos** (advanced usage)
+- Only for accessing base parts that don't have composite wrappers (rare)
+- Never in basic demo code blocks in docs
+
 ## CONVENTIONS
 
 ### Styling
