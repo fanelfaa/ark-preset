@@ -1,6 +1,6 @@
 import { splitProps, type Component } from "solid-js";
 import { Accordion as AccordionBase } from "./accordion.base";
-import { Accordion as ArkAccordion } from "@ark-ui/solid/accordion";
+import type { Accordion as ArkAccordion } from "@ark-ui/solid/accordion";
 
 const Accordion = AccordionBase.Root;
 const AccordionItem = AccordionBase.Item;
