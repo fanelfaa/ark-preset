@@ -1,12 +1,12 @@
-import { DatePicker, DatePickerLabel, DatePickerControl } from "@ui/solid";
+import { DatePicker } from "@ui/solid";
 
 export default function DatePickerBasicDemo() {
   return (
-    <div class="rounded-lg border border-border p-6">
-      <DatePicker class="flex flex-col gap-1">
-        <DatePickerLabel>Label</DatePickerLabel>
-        <DatePickerControl />
-      </DatePicker>
+    <div class="rounded-lg border border-border p-6 space-y-4">
+      <DatePicker class="flex flex-col gap-1.5" label="Birth date" />
+      <DatePicker class="flex flex-col gap-1.5" label="Select date" placeholder="Pick a date" />
+      <DatePicker class="flex flex-col gap-1.5" label="Birth date" error />
+      <DatePicker class="flex flex-col gap-1.5" label="Select date" clearLabel="清除" />
     </div>
   );
 }

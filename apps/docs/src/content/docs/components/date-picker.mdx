@@ -17,23 +17,22 @@ A date picker component that allows users to select a date or date range from a 
 <DatePickerBasicDemo client:load />
 
 ```tsx
-import {
-  DatePicker,
-  DatePickerLabel,
-  DatePickerControl,
-  DatePickerRootProvider,
-  DatePickerYearSelect,
-  DatePickerMonthSelect,
-} from "~/components/date-picker";
+import { DatePicker, DatePickerBase } from "~/components/date-picker";
 
-// Simple usage — just 3 components
-<DatePicker>
-  <DatePickerLabel>Label</DatePickerLabel>
-  <DatePickerControl />
-</DatePicker>
+// Self-contained — label, control, and calendar all built in
+<DatePicker label="Birth date" />
+
+// With custom placeholder
+<DatePicker label="Select date" placeholder="Pick a date" />
+
+// Error state
+<DatePicker label="Birth date" error />
+
+// Custom clear button label
+<DatePicker label="Select date" clearLabel="清除" />
 
 // For advanced usage with custom composition, import DatePickerBase:
-import { DatePickerBase } from "~/components/date-picker/date-picker.base";
+import { DatePickerBase } from "~/components/date-picker";
 ```
 
 ## Installation
@@ -62,6 +61,7 @@ import { tv, type VariantProps } from 'tailwind-variants'
 export const datePickerVariants = tv({
   slots: {
     root: "w-full",
+    label: "text-sm font-medium text-foreground",
     control: "inline-flex items-center gap-1",
     input: "h-8 rounded-md border border-input bg-background px-2.5 py-1.5 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50",
     trigger: [
@@ -115,6 +115,7 @@ export const datePickerVariants = tv({
     error: {
       true: {
         control: "border-destructive focus-within:ring-destructive",
+        input: "border-destructive focus-visible:ring-destructive",
         label: "text-destructive",
       },
     },
@@ -138,10 +139,18 @@ import { datePickerVariants } from "../../recipes/date-picker";
 
 const styles = datePickerVariants();
 
-// Simple pass-through (no tv() styling needed)
-const Root = ArkDatePicker.Root;
+// Styled wrapper components (tv() recipe styling)
+const Root: Component<ArkDatePicker.RootProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkDatePicker.Root class={styles.root({ class: local.class })} {...others} />;
+};
 const RootProvider = ArkDatePicker.RootProvider;
-const Label = ArkDatePicker.Label;
+
+const Label: Component<ArkDatePicker.LabelProps & { error?: boolean }> = (props) => {
+  const [local, others] = splitProps(props, ["class", "error"]);
+  return <ArkDatePicker.Label class={styles.label({ class: local.class, error: local.error })} {...others} />;
+};
+
 const Context = ArkDatePicker.Context;
 const TableHead = ArkDatePicker.TableHead;
 const TableBody = ArkDatePicker.TableBody;
@@ -149,15 +158,14 @@ const YearSelect = ArkDatePicker.YearSelect;
 const MonthSelect = ArkDatePicker.MonthSelect;
 const Positioner = ArkDatePicker.Positioner;
 
-// Styled wrapper components (tv() recipe styling)
-const Control: Component<ArkDatePicker.ControlProps> = (props) => {
-  const [local, others] = splitProps(props, ["class"]);
-  return <ArkDatePicker.Control class={styles.control({ class: local.class })} {...others} />;
+const Control: Component<ArkDatePicker.ControlProps & { error?: boolean }> = (props) => {
+  const [local, others] = splitProps(props, ["class", "error"]);
+  return <ArkDatePicker.Control class={styles.control({ class: local.class, error: local.error })} {...others} />;
 };
 
-const Input: Component<ArkDatePicker.InputProps> = (props) => {
-  const [local, others] = splitProps(props, ["class"]);
-  return <ArkDatePicker.Input class={styles.input({ class: local.class })} {...others} />;
+const Input: Component<ArkDatePicker.InputProps & { error?: boolean }> = (props) => {
+  const [local, others] = splitProps(props, ["class", "error"]);
+  return <ArkDatePicker.Input class={styles.input({ class: local.class, error: local.error })} {...others} />;
 };
 
 const Content: Component<ArkDatePicker.ContentProps> = (props) => {
@@ -245,21 +253,13 @@ export const DatePickerBase = {
 Then create `src/components/date-picker/index.tsx`:
 
 ```tsx
-import {
-  children,
-  Show,
-  splitProps,
-  type Component,
-  type JSX,
-} from "solid-js";
+import { Show, splitProps, type Component, type JSX } from "solid-js";
 import { DatePicker as ArkDatePicker } from "@ark-ui/solid/date-picker";
 import type { UseDatePickerContext } from "@ark-ui/solid/date-picker";
 import type { DateValue } from "@internationalized/date";
 import { Portal } from "solid-js/web";
 import { buttonVariants, datePickerVariants } from "../../recipes/date-picker";
 import { DatePickerBase } from "./date-picker.base";
-
-const styles = datePickerVariants();
 
 // ── SVG Icon Components ──────────────────────────────────────
 
@@ -289,7 +289,7 @@ const ChevronRightIcon: Component<JSX.SvgSVGAttributes<SVGSVGElement>> = (props)
   </svg>
 );
 
-// ── CalendarGridView ──────────────────────────────────────
+// ── CalendarGridView (internal) ──────────────────────────────
 
 const CalendarGridView: Component<{ view: "day" | "month" | "year" }> = (props) => (
   <DatePickerBase.View view={props.view}>
@@ -365,13 +365,40 @@ const CalendarGridView: Component<{ view: "day" | "month" | "year" }> = (props) 
   </DatePickerBase.View>
 );
 
-// ── Composite: DatePicker (Root + children + calendar popover) ──
+// ── Composite: DatePicker ────────────────────────────────────
 
-const DatePicker: Component<ArkDatePicker.RootProps> = (props) => {
-  const [local, others] = splitProps(props, ["children", "class"]);
+type DatePickerProps = ArkDatePicker.RootProps & {
+  label?: string;
+  placeholder?: string;
+  clearLabel?: string | JSX.Element;
+  error?: boolean;
+};
+
+const DatePicker: Component<DatePickerProps> = (props) => {
+  const [local, others] = splitProps(props, [
+    "class",
+    "label",
+    "placeholder",
+    "clearLabel",
+    "error",
+  ]);
+
   return (
-    <DatePickerBase.Root class={styles.root({ class: local.class })} {...others}>
-      {local.children}
+    <DatePickerBase.Root class={local.class} {...others}>
+      {local.label && (
+        <DatePickerBase.Label error={local.error}>
+          {local.label}
+        </DatePickerBase.Label>
+      )}
+      <DatePickerBase.Control error={local.error}>
+        <DatePickerBase.Input placeholder={local.placeholder} error={local.error} />
+        <DatePickerBase.Trigger>
+          <CalendarIcon />
+        </DatePickerBase.Trigger>
+        <DatePickerBase.ClearTrigger>
+          {local.clearLabel ?? "Clear"}
+        </DatePickerBase.ClearTrigger>
+      </DatePickerBase.Control>
       <Portal>
         <DatePickerBase.Positioner>
           <DatePickerBase.Content>
@@ -385,35 +412,7 @@ const DatePicker: Component<ArkDatePicker.RootProps> = (props) => {
   );
 };
 
-const DatePickerLabel: Component<ArkDatePicker.LabelProps> = (props) => (
-  <DatePickerBase.Label {...props} />
-);
-
-type DatePickerControlProps = ArkDatePicker.InputProps & {
-  clearLabel?: string | JSX.Element;
-};
-
-const DatePickerControl: Component<DatePickerControlProps> = (props) => {
-  const [local, others] = splitProps(props, ["class", "clearLabel"]);
-  return (
-    <DatePickerBase.Control class={styles.control({ class: local.class })}>
-      <DatePickerBase.Input {...others} />
-      <DatePickerBase.Trigger>
-        <CalendarIcon />
-      </DatePickerBase.Trigger>
-      <DatePickerBase.ClearTrigger>
-        {local.clearLabel ?? "Clear"}
-      </DatePickerBase.ClearTrigger>
-    </DatePickerBase.Control>
-  );
-};
-
-export {
-  DatePicker,
-  DatePickerLabel,
-  DatePickerControl,
-  DatePickerBase,
-};
+export { DatePicker, DatePickerBase };
 
 export { datePickerVariants, type DatePickerVariants } from "../../recipes/date-picker";
 ```
@@ -422,37 +421,26 @@ export { datePickerVariants, type DatePickerVariants } from "../../recipes/date-
 
 ## Usage
 
-Import the components:
+Import `DatePicker`:
 
 ```tsx
-import {
-  DatePicker,
-  DatePickerLabel,
-  DatePickerControl,
-  DatePickerRootProvider,
-  DatePickerYearSelect,
-  DatePickerMonthSelect,
-} from "~/components/date-picker";
-
-// For custom composition, import DatePickerBase:
-import { DatePickerBase } from "~/components/date-picker/date-picker.base";
+import { DatePicker, DatePickerBase } from "~/components/date-picker";
 ```
 
 Basic usage:
 
 ```tsx
-// DatePickerControl renders a styled Control with Input + calendar Trigger + ClearTrigger.
-// Set clearLabel to customize the clear button text (accepts string or JSX.Element, defaults to "Clear").
-<DatePicker>
-  <DatePickerLabel>Label</DatePickerLabel>
-  <DatePickerControl />
-</DatePicker>
+// label prop renders an accessible label above the control
+<DatePicker label="Birth date" />
 
-{/* Custom clear label */}
-<DatePicker>
-  <DatePickerLabel>Select date</DatePickerLabel>
-  <DatePickerControl clearLabel="清除" />
-</DatePicker>
+// placeholder sets the input placeholder text
+<DatePicker label="Select date" placeholder="Pick a date" />
+
+// error applies error styling to both label and control
+<DatePicker label="Birth date" error />
+
+// clearLabel customizes the clear button text (defaults to "Clear")
+<DatePicker label="Select date" clearLabel="清除" />
 ```
 
 ## Controlled
@@ -461,24 +449,18 @@ Control the selected date programmatically using `value` and `onValueChange`.
 
 ```tsx
 import { createSignal } from "solid-js";
-import {
-  DatePicker,
-  DatePickerLabel,
-  DatePickerControl,
-  DatePickerRootProvider,
-  DatePickerYearSelect,
-  DatePickerMonthSelect,
-} from "~/components/date-picker";
+import { DatePicker } from "~/components/date-picker";
 import { CalendarDate } from "@internationalized/date";
 
 export function DatePickerControlled() {
   const [value, setValue] = createSignal<CalendarDate[]>([]);
 
   return (
-    <DatePicker value={value()} onValueChange={(details) => setValue(details.value)}>
-      <DatePickerLabel>Select date</DatePickerLabel>
-      <DatePickerControl />
-    </DatePicker>
+    <DatePicker
+      label="Select date"
+      value={value()}
+      onValueChange={(details) => setValue(details.value)}
+    />
   );
 }
 ```

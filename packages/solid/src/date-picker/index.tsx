@@ -1,12 +1,10 @@
-import { children, Show, splitProps, type Component, type JSX } from "solid-js";
+import { Show, splitProps, type Component, type JSX } from "solid-js";
 import { DatePicker as ArkDatePicker } from "@ark-ui/solid/date-picker";
 import type { UseDatePickerContext } from "@ark-ui/solid/date-picker";
 import type { DateValue } from "@internationalized/date";
 import { Portal } from "solid-js/web";
-import { buttonVariants, datePickerVariants } from "@ui/core";
+import { buttonVariants } from "@ui/core";
 import { DatePickerBase } from "./date-picker.base";
-
-const styles = datePickerVariants();
 
 // ── SVG Icon Components ──────────────────────────────────────
 
@@ -66,7 +64,7 @@ const ChevronRightIcon: Component<JSX.SvgSVGAttributes<SVGSVGElement>> = (props)
   </svg>
 );
 
-// ── CalendarGridView ──────────────────────────────────────
+// ── CalendarGridView (internal) ──────────────────────────────
 
 const CalendarGridView: Component<{ view: "day" | "month" | "year" }> = (props) => (
   <DatePickerBase.View view={props.view}>
@@ -159,16 +157,36 @@ const CalendarGridView: Component<{ view: "day" | "month" | "year" }> = (props) 
   </DatePickerBase.View>
 );
 
-// ── Composite: DatePicker (Root + children + calendar popover) ──
+// ── Composite: DatePicker ────────────────────────────────────
 
-type DatePickerProps = ArkDatePicker.RootProps;
+type DatePickerProps = ArkDatePicker.RootProps & {
+  label?: string;
+  placeholder?: string;
+  clearLabel?: string | JSX.Element;
+  error?: boolean;
+};
 
 const DatePicker: Component<DatePickerProps> = (props) => {
-  const [local, others] = splitProps(props, ["children", "class"]);
+  const [local, others] = splitProps(props, [
+    "class",
+    "label",
+    "placeholder",
+    "clearLabel",
+    "error",
+  ]);
 
   return (
-    <DatePickerBase.Root class={styles.root({ class: local.class })} {...others}>
-      {local.children}
+    <DatePickerBase.Root class={local.class} {...others}>
+      {local.label && (
+        <DatePickerBase.Label error={local.error}>{local.label}</DatePickerBase.Label>
+      )}
+      <DatePickerBase.Control error={local.error}>
+        <DatePickerBase.Input placeholder={local.placeholder} error={local.error} />
+        <DatePickerBase.Trigger>
+          <CalendarIcon />
+        </DatePickerBase.Trigger>
+        <DatePickerBase.ClearTrigger>{local.clearLabel ?? "Clear"}</DatePickerBase.ClearTrigger>
+      </DatePickerBase.Control>
       <Portal>
         <DatePickerBase.Positioner>
           <DatePickerBase.Content>
@@ -182,163 +200,8 @@ const DatePicker: Component<DatePickerProps> = (props) => {
   );
 };
 
-// ── Composite: DatePickerLabel ────────────────────────────────
+// ── Exports ──────────────────────────────────────────────────
 
-const DatePickerLabel: Component<ArkDatePicker.LabelProps> = (props) => (
-  <DatePickerBase.Label {...props} />
-);
-
-// ── Composite: DatePickerControl (Control + Input + Trigger + ClearTrigger) ──
-
-type DatePickerControlProps = ArkDatePicker.InputProps & {
-  clearLabel?: string | JSX.Element;
-};
-
-const DatePickerControl: Component<DatePickerControlProps> = (props) => {
-  const [local, others] = splitProps(props, ["class", "clearLabel"]);
-  return (
-    <DatePickerBase.Control class={styles.control({ class: local.class })}>
-      <DatePickerBase.Input {...others} />
-      <DatePickerBase.Trigger>
-        <CalendarIcon />
-      </DatePickerBase.Trigger>
-      <DatePickerBase.ClearTrigger>
-        {local.clearLabel ?? "Clear"}
-      </DatePickerBase.ClearTrigger>
-    </DatePickerBase.Control>
-  );
-};
-
-// ── Styled Named Trigger Exports (advanced use / custom configuration) ──
-
-const DatePickerTrigger: Component<ArkDatePicker.TriggerProps> = (props) => {
-  const [local, others] = splitProps(props, ["class", "children"]);
-
-  const resolvedChildren = children(() => local.children);
-  const hasChildren = () => resolvedChildren.toArray().length !== 0;
-
-  return (
-    <DatePickerBase.Trigger class={local.class} {...others}>
-      <Show when={!hasChildren()} fallback={resolvedChildren()}>
-        <CalendarIcon />
-      </Show>
-    </DatePickerBase.Trigger>
-  );
-};
-
-const DatePickerClearTrigger: Component<ArkDatePicker.ClearTriggerProps> = (props) => {
-  const [local, others] = splitProps(props, ["class"]);
-  return <DatePickerBase.ClearTrigger class={local.class} {...others} />;
-};
-
-const DatePickerPrevTrigger: Component<ArkDatePicker.PrevTriggerProps> = (props) => {
-  const [local, others] = splitProps(props, ["class", "children"]);
-
-  const resolvedChildren = children(() => local.children);
-  const hasChildren = () => resolvedChildren.toArray().length !== 0;
-
-  return (
-    <DatePickerBase.PrevTrigger
-      class={buttonVariants({
-        variant: "outline",
-        class: local.class,
-      })}
-      {...others}
-    >
-      <Show when={!hasChildren()} fallback={resolvedChildren()}>
-        <ChevronLeftIcon />
-      </Show>
-    </DatePickerBase.PrevTrigger>
-  );
-};
-
-const DatePickerNextTrigger: Component<ArkDatePicker.NextTriggerProps> = (props) => {
-  const [local, others] = splitProps(props, ["class", "children"]);
-
-  const resolvedChildren = children(() => local.children);
-  const hasChildren = () => resolvedChildren.toArray().length !== 0;
-
-  return (
-    <DatePickerBase.NextTrigger
-      class={buttonVariants({
-        variant: "outline",
-        class: local.class,
-      })}
-      {...others}
-    >
-      <Show when={!hasChildren()} fallback={resolvedChildren()}>
-        <ChevronRightIcon />
-      </Show>
-    </DatePickerBase.NextTrigger>
-  );
-};
-
-const DatePickerViewTrigger: Component<ArkDatePicker.ViewTriggerProps> = (props) => {
-  const [local, others] = splitProps(props, ["class"]);
-  return (
-    <DatePickerBase.ViewTrigger
-      class={buttonVariants({ variant: "ghost", class: local.class })}
-      {...others}
-    />
-  );
-};
-
-const DatePickerTableCellTrigger: Component<ArkDatePicker.TableCellTriggerProps> = (props) => {
-  const [local, others] = splitProps(props, ["class"]);
-  return (
-    <DatePickerBase.TableCellTrigger
-      class={buttonVariants({ variant: "ghost", class: local.class })}
-      {...others}
-    />
-  );
-};
-
-// ── Barrel re-exports from base (advanced use) ────────────────
-
-const DatePickerContext = DatePickerBase.Context;
-const DatePickerRootProvider = DatePickerBase.RootProvider;
-const DatePickerYearSelect = DatePickerBase.YearSelect;
-const DatePickerMonthSelect = DatePickerBase.MonthSelect;
-const DatePickerContent = DatePickerBase.Content;
-const DatePickerPositioner = DatePickerBase.Positioner;
-const DatePickerView = DatePickerBase.View;
-const DatePickerViewControl = DatePickerBase.ViewControl;
-const DatePickerRangeText = DatePickerBase.RangeText;
-const DatePickerTable = DatePickerBase.Table;
-const DatePickerTableHead = DatePickerBase.TableHead;
-const DatePickerTableBody = DatePickerBase.TableBody;
-const DatePickerTableRow = DatePickerBase.TableRow;
-const DatePickerTableHeader = DatePickerBase.TableHeader;
-const DatePickerTableCell = DatePickerBase.TableCell;
-
-// ── Exports ────────────────────────────────────────────
-
-export {
-  DatePicker,
-  DatePickerLabel,
-  DatePickerControl,
-  DatePickerTrigger,
-  DatePickerClearTrigger,
-  DatePickerPrevTrigger,
-  DatePickerNextTrigger,
-  DatePickerViewTrigger,
-  DatePickerTableCellTrigger,
-  DatePickerContext,
-  DatePickerRootProvider,
-  DatePickerYearSelect,
-  DatePickerMonthSelect,
-  DatePickerContent,
-  DatePickerPositioner,
-  DatePickerView,
-  DatePickerViewControl,
-  DatePickerRangeText,
-  DatePickerTable,
-  DatePickerTableHead,
-  DatePickerTableBody,
-  DatePickerTableRow,
-  DatePickerTableHeader,
-  DatePickerTableCell,
-  DatePickerBase,
-};
+export { DatePicker, DatePickerBase };
 
 export { datePickerVariants, type DatePickerVariants } from "@ui/core";

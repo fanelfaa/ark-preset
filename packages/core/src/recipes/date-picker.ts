@@ -3,6 +3,7 @@ import { tv, type VariantProps } from "tailwind-variants";
 export const datePickerVariants = tv({
   slots: {
     root: "w-full",
+    label: "text-sm font-medium text-foreground",
     control: "inline-flex items-center gap-1",
     input:
       "h-8 rounded-md border border-input bg-background px-2.5 py-1.5 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50",
@@ -57,6 +58,7 @@ export const datePickerVariants = tv({
     error: {
       true: {
         control: "border-destructive focus-within:ring-destructive",
+        input: "border-destructive focus-visible:ring-destructive",
         label: "text-destructive",
       },
     },

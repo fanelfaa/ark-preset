@@ -4,10 +4,15 @@ import { datePickerVariants } from "@ui/core";
 
 const styles = datePickerVariants();
 
-// Simple pass-through (no tv() styling needed)
-const Root = ArkDatePicker.Root;
+const Root: Component<ArkDatePicker.RootProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkDatePicker.Root class={styles.root({ class: local.class })} {...others} />;
+};
 const RootProvider = ArkDatePicker.RootProvider;
-const Label = ArkDatePicker.Label;
+const Label: Component<ArkDatePicker.LabelProps & { error?: boolean }> = (props) => {
+  const [local, others] = splitProps(props, ["class", "error"]);
+  return <ArkDatePicker.Label class={styles.label({ class: local.class, error: local.error })} {...others} />;
+};
 const Context = ArkDatePicker.Context;
 const TableHead = ArkDatePicker.TableHead;
 const TableBody = ArkDatePicker.TableBody;
@@ -18,14 +23,14 @@ const MonthSelect = ArkDatePicker.MonthSelect;
 const Positioner = ArkDatePicker.Positioner;
 
 // Styled wrapper components (tv() recipe styling)
-const Control: Component<ArkDatePicker.ControlProps> = (props) => {
-  const [local, others] = splitProps(props, ["class"]);
-  return <ArkDatePicker.Control class={styles.control({ class: local.class })} {...others} />;
+const Control: Component<ArkDatePicker.ControlProps & { error?: boolean }> = (props) => {
+  const [local, others] = splitProps(props, ["class", "error"]);
+  return <ArkDatePicker.Control class={styles.control({ class: local.class, error: local.error })} {...others} />;
 };
 
-const Input: Component<ArkDatePicker.InputProps> = (props) => {
-  const [local, others] = splitProps(props, ["class"]);
-  return <ArkDatePicker.Input class={styles.input({ class: local.class })} {...others} />;
+const Input: Component<ArkDatePicker.InputProps & { error?: boolean }> = (props) => {
+  const [local, others] = splitProps(props, ["class", "error"]);
+  return <ArkDatePicker.Input class={styles.input({ class: local.class, error: local.error })} {...others} />;
 };
 
 const Content: Component<ArkDatePicker.ContentProps> = (props) => {
