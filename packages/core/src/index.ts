@@ -40,6 +40,9 @@ export type { TooltipVariants } from "./recipes/tooltip";
 export { datePickerVariants } from "./recipes/date-picker";
 export type { DatePickerVariants } from "./recipes/date-picker";
 
+export { hoverCardVariants } from "./recipes/hover-card";
+export type { HoverCardVariants } from "./recipes/hover-card";
+
 export { popoverVariants } from "./recipes/popover";
 export type { PopoverVariants } from "./recipes/popover";
 
@@ -114,3 +117,12 @@ export type { ScrollAreaVariants } from "./recipes/scroll-area";
 
 export { segmentGroupVariants } from "./recipes/segment-group";
 export type { SegmentGroupVariants } from "./recipes/segment-group";
+
+export { ratingGroupVariants } from "./recipes/rating-group";
+export type { RatingGroupVariants } from "./recipes/rating-group";
+
+export { listboxVariants } from "./recipes/listbox";
+export type { ListboxVariants } from "./recipes/listbox";
+
+export { tagsInputVariants } from "./recipes/tags-input";
+export type { TagsInputVariants } from "./recipes/tags-input";

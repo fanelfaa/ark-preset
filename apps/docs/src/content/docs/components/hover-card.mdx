@@ -1,0 +1,303 @@
+---
+title: Hover Card
+description: A popup card that appears when the user hovers over a trigger element.
+category: Overlay
+updatedDate: 2026-06-05
+---
+
+import DocsLink from "@components/DocsLink.astro";
+import HoverCardBasicDemo from "@components/hover-card-demo/HoverCardBasicDemo.tsx";
+import HoverCardControlledDemo from "@components/hover-card-demo/HoverCardControlledDemo.tsx";
+import HoverCardDelayDemo from "@components/hover-card-demo/HoverCardDelayDemo.tsx";
+import HoverCardPositioningDemo from "@components/hover-card-demo/HoverCardPositioningDemo.tsx";
+import HoverCardRootProviderDemo from "@components/hover-card-demo/HoverCardRootProviderDemo.tsx";
+import HoverCardArrowDemo from "@components/hover-card-demo/HoverCardArrowDemo.tsx";
+
+# Hover Card
+
+A popup card that appears when the user hovers over a trigger element, displaying additional information or actions without leaving the current context.
+
+<DocsLink href="https://ark-ui.com/docs/components/hover-card" />
+
+<HoverCardBasicDemo client:load />
+
+```tsx
+import { HoverCard, HoverCardTrigger, HoverCardContent } from "~/components/hover-card";
+
+export default function HoverCardBasicDemo() {
+  return (
+    <div class="rounded-lg border border-border p-6">
+      <div class="flex justify-center">
+        <HoverCard>
+          <HoverCardTrigger>Hover me</HoverCardTrigger>
+          <HoverCardContent useArrow>
+            <div class="text-sm">
+              The content of this hover card is displayed when you hover over the trigger element.
+            </div>
+          </HoverCardContent>
+        </HoverCard>
+      </div>
+    </div>
+  );
+}
+```
+
+## Installation
+
+### CLI
+
+Run the following command to add the component to your project:
+
+```bash
+npx solidui-cli@latest add hover-card
+```
+
+### Manual
+
+<div class="space-y-3">
+Install the dependency:
+```bash
+npm install tailwind-variants
+```
+</div>
+<div class="space-y-3">
+Create the recipe file at `src/components/recipes/hover-card.ts`:
+```tsx
+import { tv, type VariantProps } from 'tailwind-variants'
+
+export const hoverCardVariants = tv({
+  slots: {
+    root: "inline-flex",
+    trigger:
+      "inline-flex items-center justify-center gap-2 rounded-md border border-input bg-transparent px-4 py-2 text-sm font-medium text-foreground ring-offset-background transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+    positioner: "z-50",
+    content:
+      "z-50 w-72 rounded-lg border border-border bg-popover p-4 text-popover-foreground shadow-lg animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+    arrow: "",
+    arrowTip: "h-2 w-2 border-t border-l border-border bg-popover",
+  },
+});
+
+export type HoverCardVariants = VariantProps<typeof hoverCardVariants>
+```
+</div>
+<div class="space-y-3">
+Create the base component file at `src/components/hover-card/hover-card.base.tsx`:
+```tsx
+import { HoverCard as ArkHoverCard } from "@ark-ui/solid/hover-card";
+import { splitProps, type Component } from "solid-js";
+import { hoverCardVariants } from "../../recipes/hover-card";
+
+const styles = hoverCardVariants();
+
+const Root = ArkHoverCard.Root;
+const RootProvider = ArkHoverCard.RootProvider;
+
+const Trigger: Component<ArkHoverCard.TriggerProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkHoverCard.Trigger class={styles.trigger({ class: local.class })} {...others} />;
+};
+
+const Positioner: Component<ArkHoverCard.PositionerProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkHoverCard.Positioner class={styles.positioner({ class: local.class })} {...others} />;
+};
+
+const Content: Component<ArkHoverCard.ContentProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "style"]);
+  return (
+    <ArkHoverCard.Content
+      class={styles.content({ class: local.class })}
+      {...others}
+      style={`--arrow-size: 10px; ${local.style}`}
+    />
+  );
+};
+
+const Arrow: Component<ArkHoverCard.ArrowProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkHoverCard.Arrow class={styles.arrow({ class: local.class })} {...others} />;
+};
+
+const ArrowTip: Component<ArkHoverCard.ArrowTipProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkHoverCard.ArrowTip class={styles.arrowTip({ class: local.class })} {...others} />;
+};
+
+export const HoverCard = {
+  Root,
+  RootProvider,
+  Trigger,
+  Positioner,
+  Content,
+  Arrow,
+  ArrowTip,
+};
+```
+
+Then create the composite component file at `src/components/hover-card/index.tsx`:
+```tsx
+import { splitProps, type Component } from "solid-js";
+import { HoverCard as HoverCardBase } from "./hover-card.base";
+import { HoverCard as ArkHoverCard } from "@ark-ui/solid/hover-card";
+
+const HoverCard = HoverCardBase.Root;
+const HoverCardTrigger = HoverCardBase.Trigger;
+
+type HoverCardContentProps = ArkHoverCard.ContentProps & {
+  /** When true, renders an arrow pointing to the trigger element */
+  useArrow?: boolean;
+};
+
+const HoverCardContent: Component<HoverCardContentProps> = (props) => {
+  const [local, others] = splitProps(props, ["useArrow", "children"]);
+  return (
+    <HoverCardBase.Positioner>
+      <HoverCardBase.Content {...others}>
+        {local.useArrow && (
+          <HoverCardBase.Arrow>
+            <HoverCardBase.ArrowTip />
+          </HoverCardBase.Arrow>
+        )}
+        {local.children}
+      </HoverCardBase.Content>
+    </HoverCardBase.Positioner>
+  );
+};
+
+export { HoverCard, HoverCardTrigger, HoverCardContent, HoverCardBase };
+
+export { hoverCardVariants, type HoverCardVariants } from "../../recipes/hover-card";
+```
+</div>
+> **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--popover`, `--popover-foreground`, `--border`, `--ring`, etc.) or override the utility classes to match your design system.
+
+## Usage
+
+Import the components:
+
+```tsx
+import { HoverCard, HoverCardTrigger, HoverCardContent } from "~/components/hover-card";
+```
+
+Basic hover card:
+
+```tsx
+<HoverCard>
+  <HoverCardTrigger>Hover me</HoverCardTrigger>
+  <HoverCardContent useArrow>
+    <div>Content displayed on hover</div>
+  </HoverCardContent>
+</HoverCard>
+```
+
+### Controlled Open State
+
+<HoverCardControlledDemo client:load />
+
+Use `open` and `onOpenChange` to control the hover card visibility externally:
+
+```tsx
+import { createSignal } from "solid-js";
+import { HoverCard, HoverCardTrigger, HoverCardContent } from "~/components/hover-card";
+
+function ControlledHoverCard() {
+  const [open, setOpen] = createSignal(false);
+  return (
+    <HoverCard open={open()} onOpenChange={(e) => setOpen(e.open)}>
+      <HoverCardTrigger>Hover me</HoverCardTrigger>
+      <HoverCardContent>Controlled hover card</HoverCardContent>
+    </HoverCard>
+  );
+}
+```
+
+### Custom Delay
+
+<HoverCardDelayDemo client:load />
+
+Adjust the hover open and close delays:
+
+```tsx
+<HoverCard openDelay={200} closeDelay={100}>
+  <HoverCardTrigger>Hover me</HoverCardTrigger>
+  <HoverCardContent>Custom delay (200ms open, 100ms close)</HoverCardContent>
+</HoverCard>
+```
+
+### Custom Positioning
+
+<HoverCardPositioningDemo client:load />
+
+Position the hover card at different sides:
+
+```tsx
+<HoverCard positioning={{ placement: "right" }}>
+  <HoverCardTrigger>Hover me</HoverCardTrigger>
+  <HoverCardContent>
+    Positioned to the right
+  </HoverCardContent>
+</HoverCard>
+```
+
+## Advanced Usage
+
+When the composite `HoverCard` does not provide enough control, import the raw primitive parts via `HoverCardBase`:
+
+```tsx
+import { HoverCardBase } from "~/components/hover-card";
+```
+
+Or import directly from the base file:
+
+```tsx
+import { HoverCard } from "~/components/hover-card/hover-card.base";
+```
+
+### RootProvider Pattern
+
+<HoverCardRootProviderDemo client:load />
+
+For machine-controlled usage with `useHoverCard`:
+
+```tsx
+import { useHoverCard } from "@ark-ui/solid/hover-card";
+import { HoverCardBase } from "~/components/hover-card";
+
+const machine = useHoverCard({ open: true });
+
+<HoverCardBase.RootProvider value={machine}>
+  <HoverCardBase.Trigger>Hover me</HoverCardBase.Trigger>
+  <HoverCardBase.Positioner>
+    <HoverCardBase.Content>
+      Content controlled via machine
+    </HoverCardBase.Content>
+  </HoverCardBase.Positioner>
+</HoverCardBase.RootProvider>
+```
+
+### Custom Arrow
+
+<HoverCardArrowDemo client:load />
+
+For custom arrow styling or positioning, compose the parts manually using `HoverCardBase`:
+
+```tsx
+import { HoverCard, HoverCardBase } from "~/components/hover-card";
+
+<HoverCard>
+  <HoverCardBase.Trigger>Hover me</HoverCardBase.Trigger>
+  <HoverCardBase.Positioner>
+    <HoverCardBase.Content>
+      <HoverCardBase.Arrow class="[--arrow-size:14px]">
+        <HoverCardBase.ArrowTip />
+      </HoverCardBase.Arrow>
+      Custom arrow size
+    </HoverCardBase.Content>
+  </HoverCardBase.Positioner>
+</HoverCard>
+```
+
+## API Reference
+
+See the [Ark UI Hover Card](https://ark-ui.com/docs/components/hover-card) documentation.

@@ -60,21 +60,21 @@
 | [ ] Empty (shadcn)        | ⬜ Not started |
 | [ ] field                 | ⬜ Not started |
 | [ ] fieldset              | ⬜ Not started |
-| [ ] hover-card            | ⬜ Not started |
+| [x] hover-card            | ✅ Done        |
 | [ ] Input Group (shadcn)  | ⬜ Not started |
 | [ ] Kbd (shadcn)          | ⬜ Not started |
 | [ ] Label (shadcn)        | ⬜ Not started |
-| [ ] listbox               | ⬜ Not started |
+| [x] listbox               | ✅ Done        |
 | [x] progress              | ✅ Done        |
 | [x] separator             | ✅ Done        |
 | [x] spinner               | ✅ Done        |
-| [ ] rating-group          | ⬜ Not started |
+| [x] rating-group          | ✅ Done        |
 | [x] scroll-area           | ✅ Done        |
 | [x] segment-group         | ✅ Done        |
 | [x] Separator (shadcn)    | ✅ Done        |
 | [x] Spinner (shadcn)      | ✅ Done        |
 | [ ] Table (shadcn)        | ⬜ Not started |
-| [ ] tags-input            | ⬜ Not started |
+| [x] tags-input            | ✅ Done        |
 | [x] textarea              | ✅ Done        |
 | [x] typography            | ✅ Done        |
 
@@ -138,4 +138,4 @@
 
 ---
 
-**Progress: 36 of 88 tracked components implemented (41%)**
+**Progress: 40 of 88 tracked components implemented (45%)**
