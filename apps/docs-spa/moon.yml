@@ -1,0 +1,32 @@
+language: typescript
+layer: application
+stack: frontend
+dependsOn:
+  - solid
+
+tasks:
+  dev:
+    command: "pnpm dev"
+    deps:
+      - "solid:build"
+  typecheck:
+    command: "pnpm typecheck"
+    deps:
+      - "generate-routes"
+  generate-routes:
+    command: "pnpm generate-routes"
+    deps:
+      - "solid:build"
+  build:
+    command: "pnpm build"
+    deps:
+      - "typecheck"
+    inputs:
+      - "src/**/*"
+      - "vite.config.ts"
+    outputs:
+      - "dist"
+  preview:
+    command: "pnpm preview"
+    deps:
+      - "build"

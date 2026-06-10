@@ -1,0 +1,27 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "@ui/core/src/theme.css";
+@plugin "@tailwindcss/typography";
+
+@source '../../../packages/solid/src/**/*.{ts,tsx}';
+@source '../../../packages/core/src/**/*.{ts,tsx}';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  font-family: Inter, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+}
