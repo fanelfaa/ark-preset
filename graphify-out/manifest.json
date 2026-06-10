@@ -1,239 +1,627 @@
 {
   "/home/fandi/Lab/Js/ui/apps/docs-spa/vite.config.ts": {
-    "mtime": 1780888193.2908993,
-    "hash": "c5901a748cc394af56d722dc6dd69f0d"
+    "mtime": 1781054722.649548,
+    "hash": "dc771f63b33ecf7e96bd982d556a5ffe"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/sidebar-nav.ts": {
-    "mtime": 1780891083.923708,
-    "hash": "229e7cf27e45a79ccf9f3b52d4380c8f"
+    "mtime": 1781054722.637548,
+    "hash": "452c61d1d6e39dd9afa0608383e9ed2f"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/main.tsx": {
-    "mtime": 1780888193.250899,
-    "hash": "45c54c77b429145b25cc0568ab2bd367"
+    "mtime": 1781054722.637548,
+    "hash": "26257bfb37234872c33eb7885ff29654"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routeTree.gen.ts": {
-    "mtime": 1781049146.3741748,
+    "mtime": 1781055984.4682403,
     "hash": "c02f4813f96f608ad714e582b053fad5"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/router.tsx": {
-    "mtime": 1780888193.2628992,
-    "hash": "7c30fffaaba9254bdda66043312ce9ab"
+    "mtime": 1781054722.5575476,
+    "hash": "671b25c78519e183601703fd257babe3"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/CodeBlock.tsx": {
-    "mtime": 1780912772.5554209,
-    "hash": "53238e36725f849f8e24dc4e589cb33b"
+    "mtime": 1781055734.0749185,
+    "hash": "2b1bce0099dd7987cc435259deed6d60"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/ArrowRightUp.tsx": {
-    "mtime": 1780891355.881014,
-    "hash": "b5c291fb02690ef330415b0b0fa9deed"
+    "mtime": 1781054722.637548,
+    "hash": "64efd56f4ab31c0f27a92c3e33c33f79"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/DocsLayout.tsx": {
     "mtime": 1781050993.1938868,
     "hash": "97138fad7da02dd1f7d6b2e5078e0390"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/DocsLink.tsx": {
-    "mtime": 1780891368.2970738,
-    "hash": "ade1794959fe7e60668da357f76d5a8a"
+    "mtime": 1781054722.637548,
+    "hash": "a786700249da262a05734995d1e548e2"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/index.ts": {
-    "mtime": 1780891408.7692683,
-    "hash": "bb070978ff75b9c20219d65c858d4546"
+    "mtime": 1781054722.637548,
+    "hash": "95f706d138b2dde28788cc67216d7122"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/markdown/index.tsx": {
     "mtime": 1781048616.4978456,
     "hash": "0067e0ee333ae7b96377153eb22a87cf"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/badge-demo/BadgeBasicDemo.tsx": {
+    "mtime": 1781055882.7677035,
+    "hash": "17ea9b62ab34471dcfcb5c475adb680b"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/alert-dialog-demo/AlertDialogBasicDemo.tsx": {
+    "mtime": 1781055882.7037032,
+    "hash": "515568addfc4043b46c92ffdeb41624a"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/alert-dialog-demo/AlertDialogDeleteDemo.tsx": {
+    "mtime": 1781055882.7037032,
+    "hash": "77dc4e21756b2a3cdf6fe0d0a180e795"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/collapsible-demo/CollapsibleBasicDemo.tsx": {
+    "mtime": 1781055882.843704,
+    "hash": "cb34d303d652472e1015c8d835e2d26b"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/collapsible-demo/CollapsibleRootProviderDemo.tsx": {
+    "mtime": 1781055882.843704,
+    "hash": "35c3a862b359d5c4ed12135a2c4c85eb"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/textarea-demo/TextareaBasicDemo.tsx": {
+    "mtime": 1781055883.0997052,
+    "hash": "0371ef3416e9bd30a5465b665769b01e"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/scroll-area-demo/ScrollAreaBasicDemo.tsx": {
+    "mtime": 1781056058.0486288,
+    "hash": "71d88af44c5e71c2799c625d503c4369"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/toggle-demo/ToggleBasicDemo.tsx": {
+    "mtime": 1781055883.1237054,
+    "hash": "1691591cb08e2e63553b2e7beda27f6d"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/toggle-demo/ToggleIndicatorDemo.tsx": {
+    "mtime": 1781055883.1237054,
+    "hash": "2408e4c5ed1e625156eb5a324928644f"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/tags-input-demo/TagsInputBasicDemo.tsx": {
+    "mtime": 1781055883.0917053,
+    "hash": "badfb5ec413b4e77de2b48fc84418d57"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/tags-input-demo/TagsInputDisabledDemo.tsx": {
+    "mtime": 1781055883.0917053,
+    "hash": "047dd6351c81096a381a8ab33ab76922"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/tags-input-demo/TagsInputRootProviderDemo.tsx": {
+    "mtime": 1781055883.0917053,
+    "hash": "9d0e10fe12613a7a3a596bf328609ba4"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/tags-input-demo/TagsInputInvalidDemo.tsx": {
+    "mtime": 1781055883.0917053,
+    "hash": "32056f47487291ff2287d20e34c4c29e"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/tags-input-demo/TagsInputControlledDemo.tsx": {
+    "mtime": 1781055883.0917053,
+    "hash": "1a6cd00995f9f5ab91cd2b3f7d795935"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/switch-demo/SwitchBasicDemo.tsx": {
+    "mtime": 1781055883.0677052,
+    "hash": "2e2dbf195f0674f2180acfe67bff3efd"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/switch-demo/SwitchRootProviderDemo.tsx": {
+    "mtime": 1781055883.0677052,
+    "hash": "1429ea17b67c418da4c27aea686db7d4"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/listbox-demo/ListboxHorizontalDemo.tsx": {
+    "mtime": 1781055882.9197042,
+    "hash": "9649168017f232ec088cafe3314c67d7"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/listbox-demo/ListboxBasicDemo.tsx": {
+    "mtime": 1781055882.9197042,
+    "hash": "c781e2f04e6bbdb79af525f6dcef665b"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/listbox-demo/ListboxMultipleDemo.tsx": {
+    "mtime": 1781055882.9197042,
+    "hash": "c126ca31b78814cd53d88f37eeb2fc60"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/hover-card-demo/HoverCardRootProviderDemo.tsx": {
+    "mtime": 1781055882.8957043,
+    "hash": "4154afcf7c8527f9e76dc99c8b089270"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/hover-card-demo/HoverCardDelayDemo.tsx": {
+    "mtime": 1781055882.8957043,
+    "hash": "ad51fc2169d4120bec97d1c1734cee24"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/hover-card-demo/HoverCardArrowDemo.tsx": {
+    "mtime": 1781055882.8957043,
+    "hash": "b2cee35fef99c626e0c1ce6c28d221f4"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/hover-card-demo/HoverCardBasicDemo.tsx": {
+    "mtime": 1781055882.8957043,
+    "hash": "bea8a5d512103ce3e144d093da535e1b"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/hover-card-demo/HoverCardPositioningDemo.tsx": {
+    "mtime": 1781055882.8957043,
+    "hash": "3c8f3040871d57a2926d233ab0d3f9fa"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/hover-card-demo/HoverCardControlledDemo.tsx": {
+    "mtime": 1781055882.8957043,
+    "hash": "74db8b6e73761398286e16e59b623468"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/color-picker-demo/ColorPickerInlineDemo.tsx": {
+    "mtime": 1781055882.851704,
+    "hash": "658ffb4bbcbd7dd185c940cfa8574615"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/color-picker-demo/ColorPickerBasicDemo.tsx": {
+    "mtime": 1781055882.851704,
+    "hash": "7e2f5963ed4cd48ecd32a92a55b4f0e3"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/color-picker-demo/ColorPickerControlledDemo.tsx": {
+    "mtime": 1781056042.5885472,
+    "hash": "6f261a69ef6ccfcd6a0622f2614da596"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/accordion-demo/AccordionRootProviderDemo.tsx": {
+    "mtime": 1781055882.679703,
+    "hash": "c13ac17593ebf7d47adb4e18505bf371"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/accordion-demo/AccordionMultipleDemo.tsx": {
+    "mtime": 1781055882.679703,
+    "hash": "4a7ea33133bbdd1b10dbeda9be031b89"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/accordion-demo/AccordionBasicDemo.tsx": {
+    "mtime": 1781055882.679703,
+    "hash": "5274b9b3c8821f397dd3101fa6811b52"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/accordion-demo/AccordionDisabledDemo.tsx": {
+    "mtime": 1781055882.679703,
+    "hash": "7ee59e51726c89d03886af1a6c31d898"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/popover-demo/PopoverRootProviderDemo.tsx": {
+    "mtime": 1781055882.9757047,
+    "hash": "8671834eaf9a2e2ddd0e83c863774c4d"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/popover-demo/PopoverBasicDemo.tsx": {
+    "mtime": 1781055882.9717045,
+    "hash": "ac076a229bf3e8f79cf23f88446d0928"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/skeleton-demo/SkeletonBasicDemo.tsx": {
+    "mtime": 1781055883.039705,
+    "hash": "dc7713096e5960bfdcf0d6fb23256641"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/typography-demo/TypographyBasicDemo.tsx": {
+    "mtime": 1781055883.2517061,
+    "hash": "c151c2f7ea618cc5e94f64bddbcf44e4"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/card-demo/CardBasicDemo.tsx": {
+    "mtime": 1781055882.8237038,
+    "hash": "fc52a607123cb9d799a24bdfd270dea6"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/select-demo/SelectRootProviderDemo.tsx": {
+    "mtime": 1781055883.0237048,
+    "hash": "754e15aa40b4b1820da4a4eddf79c6d0"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/select-demo/SelectMultipleDemo.tsx": {
+    "mtime": 1781055883.0237048,
+    "hash": "76f64ca2033194ed6bba8b04346b68e0"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/select-demo/SelectSearchableDemo.tsx": {
+    "mtime": 1781055883.0237048,
+    "hash": "540b5444fae3b9f9e4adf7c6ceef2753"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/select-demo/SelectBasicDemo.tsx": {
+    "mtime": 1781055883.0237048,
+    "hash": "acfc0d92d5bee73f3be8cd2f5e83c42d"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/menu-demo/MenuBasicDemo.tsx": {
+    "mtime": 1781055882.9277043,
+    "hash": "b0a9479756fe5cbbad60b7d94a7d29f1"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/menu-demo/MenuNestedDemo.tsx": {
+    "mtime": 1781055882.9277043,
+    "hash": "25d8950b5cfde60ab698f02199b5d818"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/separator-demo/SeparatorBasicDemo.tsx": {
+    "mtime": 1781055883.031705,
+    "hash": "b1ced9f32f9a862c97acd50e5c93bf66"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/date-picker-demo/DatePickerBasicDemo.tsx": {
+    "mtime": 1781055882.867704,
+    "hash": "4d8008be17f1edf43617bb8d8a47efe3"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/aspect-ratio-demo/AspectRatioBasicDemo.tsx": {
+    "mtime": 1781055882.7117033,
+    "hash": "b81395be6ee074b4394346a4021a4d2d"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/pin-input-demo/PinInputRootProviderDemo.tsx": {
+    "mtime": 1781055882.9637046,
+    "hash": "c05ad2d0b9fdfb8fbb0b107b4a62f522"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/pin-input-demo/PinInputBasicDemo.tsx": {
+    "mtime": 1781055882.9637046,
+    "hash": "9a32daddced673b13b1e4fa442ac435e"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/slider-demo/SliderBasicDemo.tsx": {
+    "mtime": 1781055883.047705,
+    "hash": "7a2acb39a566e1fd3fa7a00e7afa59bd"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/slider-demo/SliderRootProviderDemo.tsx": {
+    "mtime": 1781055883.047705,
+    "hash": "d85a281efd68ea7d082cf36931e88661"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/input-demo/InputBasicDemo.tsx": {
+    "mtime": 1781055882.9117043,
+    "hash": "c0c480d2253f06d668a034d8fd933ced"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/spinner-demo/SpinnerBasicDemo.tsx": {
+    "mtime": 1781055883.059705,
+    "hash": "f058416507df74de235240a499f04148"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/drawer-demo/DrawerBasicDemo.tsx": {
+    "mtime": 1781055882.8837042,
+    "hash": "fc765a566efd92aef0b20557fc75fcf1"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/password-input-demo/PasswordInputBasicDemo.tsx": {
+    "mtime": 1781055882.9517045,
+    "hash": "860f9251f07692785a116ab6216f81b0"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/password-input-demo/PasswordInputRootProviderDemo.tsx": {
+    "mtime": 1781055882.9517045,
+    "hash": "50db544a1fcb2e1c667c4e6931d3d5b3"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/tooltip-demo/TooltipManualArrowDemo.tsx": {
+    "mtime": 1781055883.243706,
+    "hash": "22251fb0f66a0d37c984c45f3877e48e"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/tooltip-demo/TooltipBasicDemo.tsx": {
+    "mtime": 1781055883.243706,
+    "hash": "23670e818e4550ef036186c4c15acd25"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/tooltip-demo/TooltipArrowDemo.tsx": {
+    "mtime": 1781055883.243706,
+    "hash": "534a2ba2ad86fae5cb0a443aa7b85501"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/tooltip-demo/TooltipControlledDemo.tsx": {
+    "mtime": 1781055883.243706,
+    "hash": "09e637f2281f70eabf92dd915acc42a5"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/dialog-demo/DialogRootProviderDemo.tsx": {
+    "mtime": 1781055882.879704,
+    "hash": "76ed4464c565a7ad260428158f110aab"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/dialog-demo/DialogBasicDemo.tsx": {
+    "mtime": 1781055882.875704,
+    "hash": "690feeb7aafcfe056efa44c7c8676173"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/alert-demo/AlertBasicDemo.tsx": {
+    "mtime": 1781055882.6877031,
+    "hash": "737251c90955d0d1776696a3c32c8e0d"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/checkbox-demo/CheckboxBasicDemo.tsx": {
+    "mtime": 1781055882.8357038,
+    "hash": "695a5cc4c3ae8e98c8103c7b868b8490"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/checkbox-demo/CheckboxRootProviderDemo.tsx": {
+    "mtime": 1781055882.8357038,
+    "hash": "e00735af55a3280b15e9ce3d55f02c24"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/progress-demo/ProgressBasicDemo.tsx": {
+    "mtime": 1781055882.9797046,
+    "hash": "02d7e445de785f1191de36fb9cb1cf63"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/toast-demo/ToastBasicDemo.tsx": {
+    "mtime": 1781055883.1117053,
+    "hash": "e9facbf67bb59284d9fe7e9eebf40119"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/rating-group-demo/RatingGroupControlledDemo.tsx": {
+    "mtime": 1781055882.9957047,
+    "hash": "e2a2cb8deadbe75157c0fced3871a76d"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/rating-group-demo/RatingGroupHalfStarDemo.tsx": {
+    "mtime": 1781055882.9957047,
+    "hash": "11dce5e9eae3f585521b03888b061768"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/rating-group-demo/RatingGroupDisabledDemo.tsx": {
+    "mtime": 1781055882.9957047,
+    "hash": "005862640308bbb430f0c10b3bc8c87c"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/rating-group-demo/RatingGroupBasicDemo.tsx": {
+    "mtime": 1781055882.9957047,
+    "hash": "d7b16ff827944fb2a19577c1f2b3ae8d"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/rating-group-demo/RatingGroupRootProviderDemo.tsx": {
+    "mtime": 1781055882.9957047,
+    "hash": "afd7289f8a8694e7a045ebd20800c8c1"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/toggle-group-demo/ToggleGroupBasicDemo.tsx": {
+    "mtime": 1781055883.1317055,
+    "hash": "947f06421b9ebaf9791d98c79cb93090"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/toggle-group-demo/ToggleGroupSizesDemo.tsx": {
+    "mtime": 1781055883.1317055,
+    "hash": "4a54a314e44047a49d8096d4740be338"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/toggle-group-demo/ToggleGroupRootProviderDemo.tsx": {
+    "mtime": 1781055883.1317055,
+    "hash": "97c46eff115a16c1e33c1d5ea389e91b"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/radio-group-demo/RadioGroupBasicDemo.tsx": {
+    "mtime": 1781055882.9837046,
+    "hash": "0a837b4f2b2b8334af6c23af96ae3e14"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/radio-group-demo/RadioGroupRootProviderDemo.tsx": {
+    "mtime": 1781055882.9837046,
+    "hash": "77d7aff4cd9cc17c69b5f7d22316050b"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/radio-group-demo/RadioGroupControlledDemo.tsx": {
+    "mtime": 1781055882.9837046,
+    "hash": "5989fbca2ce2a273f05f12ec7156375e"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/radio-group-demo/RadioGroupDisabledDemo.tsx": {
+    "mtime": 1781055882.9837046,
+    "hash": "f0345f84a40b36c8d89f55e531c62cc7"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/number-input-demo/NumberInputBasicDemo.tsx": {
+    "mtime": 1781055882.9357045,
+    "hash": "088e77c2f8d9ee472f298bc819364f26"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/pagination-demo/PaginationRootProviderDemo.tsx": {
+    "mtime": 1781055882.9437044,
+    "hash": "c13201673bab1e9e46a5a0f883b4fef2"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/pagination-demo/PaginationBasicDemo.tsx": {
+    "mtime": 1781055882.9437044,
+    "hash": "b519107966b4971c04b27c5cb083a2aa"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/pagination-demo/PaginationControlledDemo.tsx": {
+    "mtime": 1781055882.9437044,
+    "hash": "65846b61a5e22323251f461afd65b4e4"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/pagination-demo/PaginationSizeDemo.tsx": {
+    "mtime": 1781055882.9437044,
+    "hash": "0ad6d9b45b2f9a22fb13b8dd3a528def"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/tabs-demo/TabsDisabledDemo.tsx": {
+    "mtime": 1781055883.0837052,
+    "hash": "fb40055c8c9e9311c1b8d3c270f685cb"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/tabs-demo/TabsRootProviderDemo.tsx": {
+    "mtime": 1781055883.0837052,
+    "hash": "8415d3ed3f05a62266995a0046f788a0"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/tabs-demo/TabsBasicDemo.tsx": {
+    "mtime": 1781055883.0837052,
+    "hash": "a0b5cb96745d87b67208b5d4a8453272"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/table-demo/TableBasicDemo.tsx": {
+    "mtime": 1781055883.0797052,
+    "hash": "8bb6624c1aa4512c5a1edcb422271894"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/avatar-demo/AvatarBasicDemo.tsx": {
+    "mtime": 1781055882.7197032,
+    "hash": "49b7266a51986593f8f32e84472fde80"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/combobox-demo/ComboboxRootProviderDemo.tsx": {
+    "mtime": 1781055882.859704,
+    "hash": "f37f5205657fd8374ac1f1a26fb6e0b6"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/combobox-demo/ComboboxBasicDemo.tsx": {
+    "mtime": 1781055882.859704,
+    "hash": "d511e0e02a3f8308c1c094f0acdbdc27"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/breadcrumb-demo/BreadcrumbBasicDemo.tsx": {
+    "mtime": 1781055882.7957036,
+    "hash": "f14b61a074cc7d32cc09176d3733a94d"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/segment-group-demo/SegmentGroupRootProviderDemo.tsx": {
+    "mtime": 1781055883.0117047,
+    "hash": "5e2e3e1548b088b5c459616057ab570b"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/segment-group-demo/SegmentGroupOutlineDemo.tsx": {
+    "mtime": 1781055883.0117047,
+    "hash": "40a58907b7deb0db9a59b4a59eb4e3e1"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/segment-group-demo/SegmentGroupControlledDemo.tsx": {
+    "mtime": 1781055883.0117047,
+    "hash": "8bce76345dfb6f31f10803e2aee4f773"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/segment-group-demo/SegmentGroupDisabledDemo.tsx": {
+    "mtime": 1781055883.0117047,
+    "hash": "0b0e764d17fdf1629a17506043048c32"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/segment-group-demo/SegmentGroupBasicDemo.tsx": {
+    "mtime": 1781055883.0117047,
+    "hash": "baa04bdc562bdf8200b280112093a469"
+  },
+  "/home/fandi/Lab/Js/ui/apps/docs-spa/src/components/demos/carousel-demo/CarouselBasicDemo.tsx": {
+    "mtime": 1781055882.8277037,
+    "hash": "7d7d9da597645b5fb885a61d040d92c6"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components.tsx": {
     "mtime": 1781049162.8502848,
     "hash": "b33963b110dc154685edd341ffcdbbe3"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/index.tsx": {
-    "mtime": 1780888193.2868993,
-    "hash": "c67fe48fe6ccf0689664103e9a6d0052"
+    "mtime": 1781054722.6135478,
+    "hash": "972d443202f5d30a31c2deaf02886442"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/__root.tsx": {
-    "mtime": 1780891115.0478575,
-    "hash": "980650d10eb372468a6bc9bbb76aaec3"
+    "mtime": 1781054722.6135478,
+    "hash": "09c4c96d2617bccb8466160246b3f627"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/listbox.tsx": {
-    "mtime": 1781049761.802437,
-    "hash": "f5f9d4730063b69711dc7f8963882561"
+    "mtime": 1781054722.637548,
+    "hash": "5378171658b99331b1fb0e26ba6387b6"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/accordion.tsx": {
-    "mtime": 1781049491.0727437,
-    "hash": "5c884336c96fa94a91588a5c86d1c7cd"
+    "mtime": 1781054722.6335478,
+    "hash": "b7fd52f856d51ed155c76a07e1a9a31a"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/color-picker.tsx": {
-    "mtime": 1781049712.04214,
-    "hash": "090e03dcd84a771d2b0f41bdc5be7bce"
+    "mtime": 1781054722.6335478,
+    "hash": "fdc860767fcfa9ba08d5f13c83250a2f"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/hover-card.tsx": {
-    "mtime": 1781049761.5744357,
-    "hash": "9d4db2d2380fdf733e0ace08c59ae777"
+    "mtime": 1781054722.6335478,
+    "hash": "548ac9748bfb43921fb59faf07bf730b"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/input.tsx": {
-    "mtime": 1781049804.9386947,
-    "hash": "2b9b0243a7442f7a38dc256835583797"
+    "mtime": 1781054722.6335478,
+    "hash": "31adefb4722fa7f39ae240668f3c3355"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/dialog.tsx": {
-    "mtime": 1781049711.722138,
-    "hash": "f4034e87f12357bc619115ca35d96581"
+    "mtime": 1781054722.6335478,
+    "hash": "9c860e905673512547b6e20ef96ff33d"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/toast.tsx": {
-    "mtime": 1781050180.3889036,
-    "hash": "70456771c2e19baf45e71e3f3b8800b4"
+    "mtime": 1781054722.6335478,
+    "hash": "cd84f039aa8c28e07e25c297936615ce"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/skeleton.tsx": {
-    "mtime": 1781049983.6237586,
-    "hash": "1a893e12e155353a422cf6dedbc9d747"
+    "mtime": 1781054722.6335478,
+    "hash": "4662200a4e9e2756800b25aed6c88bf2"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/spinner.tsx": {
-    "mtime": 1781050002.6358693,
-    "hash": "a9ed7578ba215d5ddbc3e307482c5950"
+    "mtime": 1781054722.6335478,
+    "hash": "e7ecf1ade13c3fdae6bd3fc89b856352"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/tooltip.tsx": {
-    "mtime": 1781050180.2689028,
-    "hash": "05688d470036613697e6217b39f135b9"
+    "mtime": 1781054722.6335478,
+    "hash": "82d7ddb9ab9f39a28875a252c843a2d3"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/avatar.tsx": {
-    "mtime": 1781049479.2166684,
-    "hash": "8846d55ae5080ea2e06c5d94a965da5b"
+    "mtime": 1781054722.6295478,
+    "hash": "d25477e2935fb772acb5f767d8d6f8ad"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/pin-input.tsx": {
-    "mtime": 1781049852.6069794,
-    "hash": "d83ae59f1e79f9f5f88d3339735b6097"
+    "mtime": 1781054722.6295478,
+    "hash": "eaaedfec8713971c2e9dde798410ed56"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/badge.tsx": {
-    "mtime": 1781049628.5176144,
-    "hash": "b8e7d2ae5dbbd3c0505b685973bc7b26"
+    "mtime": 1781054722.6295478,
+    "hash": "3b1784259f84b0d91d615e145ce70804"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/popover.tsx": {
-    "mtime": 1781049853.1109824,
-    "hash": "97676decd7b35655316231f2954fbef3"
+    "mtime": 1781054722.6295478,
+    "hash": "015782adba17502f205f7bc26e23ca98"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/switch.tsx": {
-    "mtime": 1781050050.1881459,
-    "hash": "5603a5d86a2fd9654d83456688de0422"
+    "mtime": 1781054722.6295478,
+    "hash": "c242feec6b6f08d79dde01eea9055576"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/button.tsx": {
     "mtime": 1781049175.8383713,
     "hash": "39710d17a7d21818cd28bbf6908234da"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/radio-group.tsx": {
-    "mtime": 1781049904.5792897,
-    "hash": "e025489ffce06a80382f22f7609df76d"
+    "mtime": 1781054722.649548,
+    "hash": "ac67472f3ecbb9de3cb1394e9df09aca"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/alert.tsx": {
-    "mtime": 1781049526.2969668,
-    "hash": "088057d6d511d508e49eaa1d15358b15"
+    "mtime": 1781054722.625548,
+    "hash": "220dc71e9aef5526d295d5d65abedb5b"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/typography.tsx": {
-    "mtime": 1781050231.9252017,
-    "hash": "a6f9e5a531d1c328f2c94539e27e2ca5"
+    "mtime": 1781055976.7281995,
+    "hash": "999c1e9f55b6ac7370c4558ed8e651d3"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/alert-dialog.tsx": {
-    "mtime": 1781049509.8288624,
-    "hash": "a55d0811fd00f207f26134e57509138d"
+    "mtime": 1781054722.625548,
+    "hash": "74feabc756735d4bc69ccbbc0c3679c3"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/checkbox.tsx": {
-    "mtime": 1781049615.1615298,
-    "hash": "492d143fe5438de6f3481dcb81b4f42d"
+    "mtime": 1781054722.625548,
+    "hash": "cda89eb31715e95bba7b4a38a6a3bab4"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/combobox.tsx": {
-    "mtime": 1781049711.4541364,
-    "hash": "9a2745674dfdd3f34798c5ed514c4ee8"
+    "mtime": 1781054722.625548,
+    "hash": "3cfc805c75a447c1645797c0b70c36a5"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/scroll-area.tsx": {
-    "mtime": 1781049904.483289,
-    "hash": "10a7cadb18cfe7fcc26fe4a74315faeb"
+    "mtime": 1781054722.625548,
+    "hash": "afcdc3a8b32e058fa0bd0adb89cb8533"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/toggle-group.tsx": {
-    "mtime": 1781050180.6009047,
-    "hash": "dd96bc418ae5565ea0d3bab1a10c6ad5"
+    "mtime": 1781054722.6295478,
+    "hash": "3bdfdff83faa72cc6be5db412532eb73"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/tags-input.tsx": {
-    "mtime": 1781050050.8241496,
-    "hash": "6b375b8a9a7816046492d47b856d3bb1"
+    "mtime": 1781054722.6215477,
+    "hash": "f8a015cf1b4971b2ac8f6a6d87bf2955"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/date-picker.tsx": {
-    "mtime": 1781049711.890139,
-    "hash": "6618d548494c613a888a0074b0b9bd38"
+    "mtime": 1781054722.6215477,
+    "hash": "4b5cb42f0a0c49f7ea8c34b695631b5f"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/carousel.tsx": {
-    "mtime": 1781049609.5974944,
-    "hash": "871030b85ceedccf3d09189ecf35ecc0"
+    "mtime": 1781054722.6215477,
+    "hash": "e939829eb2f11fd5d15c23ca846f594a"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/card.tsx": {
-    "mtime": 1781049667.2818599,
-    "hash": "c5b3422af491adcda23e64a6fb77e1c4"
+    "mtime": 1781054722.6215477,
+    "hash": "ad5f0730ed50851acae02dc9887c4e34"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/select.tsx": {
-    "mtime": 1781049962.8276374,
-    "hash": "fe26b561b6337f6b483069c98789ce94"
+    "mtime": 1781054722.6215477,
+    "hash": "bf26b062ba5c7191c3aa56f2ded36a49"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/textarea.tsx": {
-    "mtime": 1781050133.6086314,
-    "hash": "e1701a3d70011b0b53586ad24e312062"
+    "mtime": 1781054722.6215477,
+    "hash": "befe00323b875735c0110cfe655e5355"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/collapsible.tsx": {
-    "mtime": 1781049711.1101344,
-    "hash": "ca0753fcd3c16c403a383158f97bf506"
+    "mtime": 1781054722.6215477,
+    "hash": "9fed068924c25dab5169c4e788e53a07"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/segment-group.tsx": {
-    "mtime": 1781049904.3672884,
-    "hash": "ca30337c80cd45758a516beaf955cc92"
+    "mtime": 1781054722.6215477,
+    "hash": "dfd5449fd16cd8c6e26676c0c87c7cb5"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/tabs.tsx": {
-    "mtime": 1781050068.6362534,
-    "hash": "4cf62c8dfe448e36ca297f0ffd920aa9"
+    "mtime": 1781054722.6215477,
+    "hash": "7c8423b271dc560437d911e62289c2d6"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/pagination.tsx": {
-    "mtime": 1781049852.022976,
-    "hash": "572fe1cdaf73b541711770239f1750e9"
+    "mtime": 1781054722.6215477,
+    "hash": "781796507ebf0aaefc484ea28ec0dcdd"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/separator.tsx": {
-    "mtime": 1781050008.447903,
-    "hash": "c349dec2c75f221728b1dcb726c13175"
+    "mtime": 1781054722.6175478,
+    "hash": "896a177182ac94e6fb04e7e8bf8b6a25"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/breadcrumb.tsx": {
-    "mtime": 1781049648.8497431,
-    "hash": "6a4108c3c92f69bebe7192bb671ff5cc"
+    "mtime": 1781054722.6175478,
+    "hash": "b05e439c1b76247329c83b89c77061e4"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/slider.tsx": {
-    "mtime": 1781049958.055609,
-    "hash": "e3e50514e38a73878f5369dfa185e2bb"
+    "mtime": 1781054722.6175478,
+    "hash": "17622835a187d294a0d535414aa0d0f1"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/drawer.tsx": {
-    "mtime": 1781049761.9984381,
-    "hash": "5a2974cd0fb38f70b47973e8ef60bb4d"
+    "mtime": 1781054722.6175478,
+    "hash": "45064e32d404466d88182e600e75742c"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/aspect-ratio.tsx": {
-    "mtime": 1781049579.549304,
-    "hash": "210f002ccf1ddd528d3ccd32d1b12e96"
+    "mtime": 1781054722.6175478,
+    "hash": "8d549daa695fb54577813b63eeb443de"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/menu.tsx": {
-    "mtime": 1781049761.6184359,
-    "hash": "62d2ac4bb91510788d1d4baf5f192702"
+    "mtime": 1781054722.6175478,
+    "hash": "1e043dd32ad17da0b81b1c0abfb37e41"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/rating-group.tsx": {
-    "mtime": 1781049904.5472894,
-    "hash": "fc6caa2ac58f4d0fa27a1c6f406050c8"
+    "mtime": 1781054722.6175478,
+    "hash": "cca71f1284bd8fdf3dc1cc9b1cac74d2"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/progress.tsx": {
-    "mtime": 1781049904.0232863,
-    "hash": "baf29172288bc94cee48eaa07dcb4f90"
+    "mtime": 1781054722.6175478,
+    "hash": "50df1637f4288eada937cae285cdddac"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/number-input.tsx": {
-    "mtime": 1781049852.8669808,
-    "hash": "0c89cd76b9777d322e4293ed8e21656f"
+    "mtime": 1781054722.6175478,
+    "hash": "aed72c1c49818db2fcaaa7b769da34f0"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/toggle.tsx": {
-    "mtime": 1781050180.3729033,
-    "hash": "97c8c20ea0dac86831b7dbe360006946"
+    "mtime": 1781054722.6175478,
+    "hash": "567853f7d4f908929f4e9f7c4e65a7e0"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/src/routes/components/table.tsx": {
-    "mtime": 1781050125.0605817,
-    "hash": "1bc749b03f0f1aa73a7cecbfd26f35fe"
+    "mtime": 1781054722.6175478,
+    "hash": "b04f030e33fa7c133b031b62688d470c"
   },
   "/home/fandi/Lab/Js/ui/apps/docs/astro.config.mjs": {
     "mtime": 1779505758.8702788,
@@ -272,8 +660,8 @@
     "hash": "0371ef3416e9bd30a5465b665769b01e"
   },
   "/home/fandi/Lab/Js/ui/apps/docs/src/components/scroll-area-demo/ScrollAreaBasicDemo.tsx": {
-    "mtime": 1780910805.745312,
-    "hash": "d88f73acc939f9b6e77fa54a6e2a09f6"
+    "mtime": 1781055858.5035753,
+    "hash": "ab228d17dc3cc7163fb92edbdb617661"
   },
   "/home/fandi/Lab/Js/ui/apps/docs/src/components/toggle-demo/ToggleBasicDemo.tsx": {
     "mtime": 1780649478.543916,
@@ -288,20 +676,20 @@
     "hash": "badfb5ec413b4e77de2b48fc84418d57"
   },
   "/home/fandi/Lab/Js/ui/apps/docs/src/components/tags-input-demo/TagsInputDisabledDemo.tsx": {
-    "mtime": 1780730037.511561,
-    "hash": "4da6af1dce85ac2b9dfb83aff945a44e"
+    "mtime": 1781054722.6615481,
+    "hash": "047dd6351c81096a381a8ab33ab76922"
   },
   "/home/fandi/Lab/Js/ui/apps/docs/src/components/tags-input-demo/TagsInputRootProviderDemo.tsx": {
-    "mtime": 1780730037.511561,
-    "hash": "aeed2008f8df554514c5b41231283ac8"
+    "mtime": 1781054722.6615481,
+    "hash": "9d0e10fe12613a7a3a596bf328609ba4"
   },
   "/home/fandi/Lab/Js/ui/apps/docs/src/components/tags-input-demo/TagsInputInvalidDemo.tsx": {
-    "mtime": 1780730037.511561,
-    "hash": "856f87d1d3284d140890557397a5575f"
+    "mtime": 1781054722.6615481,
+    "hash": "32056f47487291ff2287d20e34c4c29e"
   },
   "/home/fandi/Lab/Js/ui/apps/docs/src/components/tags-input-demo/TagsInputControlledDemo.tsx": {
-    "mtime": 1780730037.511561,
-    "hash": "aabcd47ea98546075ea3a034f0401795"
+    "mtime": 1781054722.6615481,
+    "hash": "1a6cd00995f9f5ab91cd2b3f7d795935"
   },
   "/home/fandi/Lab/Js/ui/apps/docs/src/components/switch-demo/SwitchBasicDemo.tsx": {
     "mtime": 1780111666.3632872,
@@ -356,8 +744,8 @@
     "hash": "7e2f5963ed4cd48ecd32a92a55b4f0e3"
   },
   "/home/fandi/Lab/Js/ui/apps/docs/src/components/color-picker-demo/ColorPickerControlledDemo.tsx": {
-    "mtime": 1780910805.737312,
-    "hash": "0e9c4334da0aaa2ce11103337bf75879"
+    "mtime": 1781055194.2720683,
+    "hash": "046ff2f638efe28904bb171f05e86096"
   },
   "/home/fandi/Lab/Js/ui/apps/docs/src/components/accordion-demo/AccordionRootProviderDemo.tsx": {
     "mtime": 1780649478.539916,
@@ -512,8 +900,8 @@
     "hash": "e9facbf67bb59284d9fe7e9eebf40119"
   },
   "/home/fandi/Lab/Js/ui/apps/docs/src/components/rating-group-demo/RatingGroupControlledDemo.tsx": {
-    "mtime": 1780730037.511561,
-    "hash": "462df3c4382eb67092550e4bc7b7633b"
+    "mtime": 1781054722.657548,
+    "hash": "e2a2cb8deadbe75157c0fced3871a76d"
   },
   "/home/fandi/Lab/Js/ui/apps/docs/src/components/rating-group-demo/RatingGroupHalfStarDemo.tsx": {
     "mtime": 1780730037.511561,
@@ -528,8 +916,8 @@
     "hash": "d7b16ff827944fb2a19577c1f2b3ae8d"
   },
   "/home/fandi/Lab/Js/ui/apps/docs/src/components/rating-group-demo/RatingGroupRootProviderDemo.tsx": {
-    "mtime": 1781054525.70844,
-    "hash": "e7a7d1a34ef6cb12101f8eca7ef6a747"
+    "mtime": 1781055209.0521464,
+    "hash": "afd7289f8a8694e7a045ebd20800c8c1"
   },
   "/home/fandi/Lab/Js/ui/apps/docs/src/components/toggle-group-demo/ToggleGroupBasicDemo.tsx": {
     "mtime": 1780649478.543916,
@@ -564,20 +952,20 @@
     "hash": "088e77c2f8d9ee472f298bc819364f26"
   },
   "/home/fandi/Lab/Js/ui/apps/docs/src/components/pagination-demo/PaginationRootProviderDemo.tsx": {
-    "mtime": 1780811180.8851109,
-    "hash": "8d62c231af8d7adcf7aac3502822ddb6"
+    "mtime": 1781054722.657548,
+    "hash": "c13201673bab1e9e46a5a0f883b4fef2"
   },
   "/home/fandi/Lab/Js/ui/apps/docs/src/components/pagination-demo/PaginationBasicDemo.tsx": {
-    "mtime": 1780811180.8851109,
-    "hash": "7613e7d42408a5920c0955fb2103f682"
+    "mtime": 1781054722.649548,
+    "hash": "b519107966b4971c04b27c5cb083a2aa"
   },
   "/home/fandi/Lab/Js/ui/apps/docs/src/components/pagination-demo/PaginationControlledDemo.tsx": {
-    "mtime": 1780811180.8851109,
-    "hash": "8b0f0c46fe5dab427ac30ba031b7f872"
+    "mtime": 1781054722.649548,
+    "hash": "65846b61a5e22323251f461afd65b4e4"
   },
   "/home/fandi/Lab/Js/ui/apps/docs/src/components/pagination-demo/PaginationSizeDemo.tsx": {
-    "mtime": 1780811180.8851109,
-    "hash": "f3687c7fd9a0e47757238057da5ce3cd"
+    "mtime": 1781054722.649548,
+    "hash": "0ad6d9b45b2f9a22fb13b8dd3a528def"
   },
   "/home/fandi/Lab/Js/ui/apps/docs/src/components/tabs-demo/TabsDisabledDemo.tsx": {
     "mtime": 1780649478.543916,
@@ -708,8 +1096,8 @@
     "hash": "29ccb6910c43d3dd71bf792f22239967"
   },
   "/home/fandi/Lab/Js/ui/packages/solid/src/pagination/index.tsx": {
-    "mtime": 1780811180.889111,
-    "hash": "f43e3660175cd812d6ba4823d4f4d5c7"
+    "mtime": 1781054722.4095466,
+    "hash": "e2071b68c4ff68a31bf9b6dafde48ba5"
   },
   "/home/fandi/Lab/Js/ui/packages/solid/src/popover/popover.base.tsx": {
     "mtime": 1780457083.4043686,
@@ -720,8 +1108,8 @@
     "hash": "766024752c6e596016037e18d2a1c28f"
   },
   "/home/fandi/Lab/Js/ui/packages/solid/src/color-picker/color-picker.base.tsx": {
-    "mtime": 1780811180.889111,
-    "hash": "219e875aa0c28e5e3715707eac6957c5"
+    "mtime": 1781054722.4055467,
+    "hash": "0b369598723218f5b4160c17488b1bf3"
   },
   "/home/fandi/Lab/Js/ui/packages/solid/src/color-picker/index.tsx": {
     "mtime": 1780811180.889111,
@@ -768,12 +1156,12 @@
     "hash": "5e446848a771691174c9a3c3f9787159"
   },
   "/home/fandi/Lab/Js/ui/packages/solid/src/tags-input/tags-input.base.tsx": {
-    "mtime": 1780730037.511561,
-    "hash": "965fca937e7b7f0c852324c8b38f78c2"
+    "mtime": 1781054833.1821399,
+    "hash": "e041813a34ec55f2164fa52781603d26"
   },
   "/home/fandi/Lab/Js/ui/packages/solid/src/tags-input/index.tsx": {
-    "mtime": 1780730037.511561,
-    "hash": "0738dec18cff72b61a3f0b89403ff6ed"
+    "mtime": 1781054722.473547,
+    "hash": "198cd221015ebcde42d4be8cdb40f89c"
   },
   "/home/fandi/Lab/Js/ui/packages/solid/src/scroll-area/scroll-area.base.tsx": {
     "mtime": 1780649478.559916,
@@ -788,8 +1176,8 @@
     "hash": "fd3a857816461066a4ab7fff50aa66c6"
   },
   "/home/fandi/Lab/Js/ui/packages/solid/src/hover-card/hover-card.base.tsx": {
-    "mtime": 1780730037.511561,
-    "hash": "beaab431093efd0b942e4fe5ed15ef88"
+    "mtime": 1781054722.4295468,
+    "hash": "30f9ecddaa26378883309c63cb72db8b"
   },
   "/home/fandi/Lab/Js/ui/packages/solid/src/hover-card/index.tsx": {
     "mtime": 1780730037.511561,
@@ -828,12 +1216,12 @@
     "hash": "1be7e0fc55486b892562dc40dd81fbee"
   },
   "/home/fandi/Lab/Js/ui/packages/solid/src/rating-group/rating-group.base.tsx": {
-    "mtime": 1780730037.511561,
-    "hash": "fcf07b9a49e1a4177bb2527b7747c698"
+    "mtime": 1781054722.4135468,
+    "hash": "9da3c4a39a803ff6bf886ebdf10577b8"
   },
   "/home/fandi/Lab/Js/ui/packages/solid/src/rating-group/index.tsx": {
-    "mtime": 1780730037.511561,
-    "hash": "e7b6ff5a7b58a60a720533016813f0d6"
+    "mtime": 1781054851.0102353,
+    "hash": "b3e4f0f5e1a9b02d290e177fb08e8f48"
   },
   "/home/fandi/Lab/Js/ui/packages/solid/src/carousel/carousel.base.tsx": {
     "mtime": 1780649478.555916,
@@ -864,12 +1252,12 @@
     "hash": "a2988d4aeb2be1b7f047d94eb27441d4"
   },
   "/home/fandi/Lab/Js/ui/packages/solid/src/listbox/listbox.base.tsx": {
-    "mtime": 1780730037.511561,
-    "hash": "a38ccce76bdd23d3ee49b5ff8959308d"
+    "mtime": 1781054722.4055467,
+    "hash": "d9a73618cf85e1b39b86109df1d6d8c1"
   },
   "/home/fandi/Lab/Js/ui/packages/solid/src/listbox/index.tsx": {
-    "mtime": 1780730037.511561,
-    "hash": "8570f5c32d8d48d99826d4e9f60b33f2"
+    "mtime": 1781054722.4055467,
+    "hash": "485f61977d44719a692863301417debe"
   },
   "/home/fandi/Lab/Js/ui/packages/solid/src/input/index.tsx": {
     "mtime": 1780649478.555916,
@@ -980,8 +1368,8 @@
     "hash": "754f214ebee776e6b72bcf942e7577e6"
   },
   "/home/fandi/Lab/Js/ui/packages/core/src/index.ts": {
-    "mtime": 1780811180.889111,
-    "hash": "886cb28632547045416ef6e653df0e9f"
+    "mtime": 1781054722.3255463,
+    "hash": "1ad79cef721670ad99ae140e51a4c120"
   },
   "/home/fandi/Lab/Js/ui/packages/core/src/recipes/rating-group.ts": {
     "mtime": 1780730037.511561,
@@ -1012,8 +1400,8 @@
     "hash": "ec3930faf83820f48943e25ac26d3dba"
   },
   "/home/fandi/Lab/Js/ui/packages/core/src/recipes/tags-input.ts": {
-    "mtime": 1780730037.511561,
-    "hash": "3a7163023dafbafaf515f6b9a04ed54f"
+    "mtime": 1781054722.3415463,
+    "hash": "8987416e6b121d14b6662cf568d8ba1e"
   },
   "/home/fandi/Lab/Js/ui/packages/core/src/recipes/typography.ts": {
     "mtime": 1779800565.3094745,
@@ -1168,20 +1556,20 @@
     "hash": "5975030dfee837280ffd3e4d9f91760e"
   },
   "/home/fandi/Lab/Js/ui/AGENTS.md": {
-    "mtime": 1780908713.0273798,
-    "hash": "0fa26836a69aa8c1203ebf29b0b65c19"
+    "mtime": 1781054722.5375473,
+    "hash": "86921e7e25ac570d9aa1272be1656f35"
   },
   "/home/fandi/Lab/Js/ui/COMPONENT_TODOS.md": {
-    "mtime": 1780811180.8851109,
-    "hash": "e1791270ca6e70648a046933b2eb1633"
+    "mtime": 1781054722.6295478,
+    "hash": "856a67c0084296eac36efed7c56a2244"
   },
   "/home/fandi/Lab/Js/ui/pnpm-workspace.yaml": {
     "mtime": 1779505758.9662795,
     "hash": "5cf64d88f9650586110ffd596a8bbbdd"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/README.md": {
-    "mtime": 1780888193.154899,
-    "hash": "9eced0b412917755caf05dcad8e622a8"
+    "mtime": 1781054722.7615485,
+    "hash": "541ca9cf784a4d18c234bd601eea037a"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/moon.yml": {
     "mtime": 1780910438.9430764,
@@ -1420,40 +1808,40 @@
     "hash": "1da89b1453accc6da0b367a9be889961"
   },
   "/home/fandi/Lab/Js/ui/plans/pagination-plan.md": {
-    "mtime": 1780811180.889111,
-    "hash": "f5c33938ef7a81ac87ecbe7241430560"
+    "mtime": 1781054722.3375463,
+    "hash": "ba9ff57d8902e9514326c959a82e47d5"
   },
   "/home/fandi/Lab/Js/ui/plans/color-picker-plan.md": {
-    "mtime": 1780811180.889111,
-    "hash": "f9a25e2991ad3cb4575e83fc452dac93"
+    "mtime": 1781054722.3175461,
+    "hash": "3cc3863bde1aeb7e94432a4e3f93967d"
   },
   "/home/fandi/Lab/Js/ui/plans/rating-group-plan.md": {
-    "mtime": 1780730037.511561,
-    "hash": "1266fccf60e88d81bf8106c6cee05271"
+    "mtime": 1781054721.8415437,
+    "hash": "afc4a256432a7c1431c7dcab48b9f879"
   },
   "/home/fandi/Lab/Js/ui/plans/breadcrumb-plan.md": {
-    "mtime": 1780811180.889111,
-    "hash": "ebb24670634a01139b7d15590d625109"
+    "mtime": 1781054721.9815445,
+    "hash": "832e61a2e3d328fe49be8191d0556e74"
   },
   "/home/fandi/Lab/Js/ui/plans/listbox-plan.md": {
-    "mtime": 1780730037.511561,
-    "hash": "8345df8532983fd90cf7a336845cc309"
+    "mtime": 1781054721.7815433,
+    "hash": "4e3498a1d680d6d345df051cc0c614f6"
   },
   "/home/fandi/Lab/Js/ui/plans/hover-card-plan.md": {
-    "mtime": 1780730037.511561,
-    "hash": "361cfd5fd6458f64003f187b8eb4822f"
+    "mtime": 1781054722.0215447,
+    "hash": "9131c8bee1d38292a02af7f8ffd95eec"
   },
   "/home/fandi/Lab/Js/ui/plans/tags-input-plan.md": {
-    "mtime": 1780730037.511561,
-    "hash": "21dc627dde019d7db390db45682fa69e"
+    "mtime": 1781054722.1495452,
+    "hash": "10ecf6dc147bb8ff595a8f754e7d4a0c"
   },
   "/home/fandi/Lab/Js/ui/plans/PLAN_TEMPLATE.md": {
-    "mtime": 1780811180.889111,
-    "hash": "1a0b643f73f6d0e7b23a171c14f69f1f"
+    "mtime": 1781054721.8735437,
+    "hash": "21d9525a0442821d44dcb6bbb02dc79f"
   },
   "/home/fandi/Lab/Js/ui/plans/table-plan.md": {
-    "mtime": 1780811180.889111,
-    "hash": "b8e3618b5f6372f62b16b07f2e355f5a"
+    "mtime": 1781054721.9175441,
+    "hash": "49c50b7f8fb868b7c060f8321f83c39a"
   },
   "/home/fandi/Lab/Js/ui/apps/docs-spa/public/logo192.png": {
     "mtime": 1780888193.1588988,
