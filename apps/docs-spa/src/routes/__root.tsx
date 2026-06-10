@@ -36,7 +36,7 @@ function RootComponent() {
             </svg>
           </Button>
           <a href="/" class="text-lg font-bold hover:text-muted-foreground transition-colors">
-            Solid UI
+            UI
           </a>
           <nav class="flex items-center gap-4 text-sm ml-6">
             <a href="/" class="text-muted-foreground hover:text-foreground transition-colors">

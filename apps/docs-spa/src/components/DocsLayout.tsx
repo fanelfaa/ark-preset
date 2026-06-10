@@ -11,7 +11,7 @@ export const DocsLayout: Component<DocsLayoutProps> = (props) => {
   return (
     <div class="mx-auto max-w-7xl flex">
       {/* Sidebar */}
-      <aside class="hidden lg:block w-64 shrink-0 border-r border-border sticky top-14 self-start">
+      <aside class="hidden lg:block w-64 shrink-0 border-r border-border sticky top-14 self-start h-[calc(100vh-3.5rem)]">
         <SidebarNav />
       </aside>
 
