@@ -1,4 +1,4 @@
-# Solid UI Components Status
+# UI Components Status
 
 ## Legend
 
