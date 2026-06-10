@@ -17,7 +17,8 @@ function RootComponent() {
           <Button
             size="icon"
             variant="outline"
-            asChild={(props) => <label for="drawer-trigger" class="lg:hidden" {...props()} />}
+            class="lg:hidden"
+            asChild={(props) => <label for="drawer-trigger" {...props()} />}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
