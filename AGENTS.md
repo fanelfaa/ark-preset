@@ -40,7 +40,7 @@ Monorepo UI library with Ark UI primitives, Solid.js implementations, CLI tool, 
 | buttonVariants | variable  | packages/core/src/recipes/button.ts | 3    | Styling variant for Button |
 | inputVariants  | variable  | packages/core/src/recipes/input.ts  | 3    | Styling variant for Input  |
 | Button         | component | packages/solid/src/button/          | 3    | Solid.js Button wrapper    |
-| create-ui      | binary    | packages/cli/src/index.ts           | 1    | CLI entry point            |
+| @ui/cli        | binary    | packages/cli/src/index.ts           | 1    | CLI entry point            |
 
 ## CONVENTIONS
 

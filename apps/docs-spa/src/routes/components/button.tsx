@@ -288,11 +288,16 @@ export function SubmitDemo() {
       </P>
       <Pre>{`
 
-import { buttonVariants } from "~/components/button";
+import { Button, buttonVariants } from "~/components/button";
 
 <a class={buttonVariants({ variant: "outline" })} href="/docs">
   Click here
 </a>;
+
+// or
+<Button asChild={(props)=><a {...props()}/>}>
+  Click Here
+</Button>
       `}</Pre>
       <H2>API Reference</H2>
       <Table>

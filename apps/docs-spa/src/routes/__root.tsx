@@ -1,4 +1,4 @@
-import { Outlet, createRootRoute } from "@tanstack/solid-router";
+import { Link, Outlet, createRootRoute } from "@tanstack/solid-router";
 import { TanStackRouterDevtools } from "@tanstack/solid-router-devtools";
 import { Button } from "@ui/solid";
 
@@ -35,19 +35,19 @@ function RootComponent() {
               <path d="M3 18h18" />
             </svg>
           </Button>
-          <a href="/" class="text-lg font-bold hover:text-muted-foreground transition-colors">
+          <Link to="/" class="text-lg font-bold hover:text-muted-foreground transition-colors">
             UI
-          </a>
+          </Link>
           <nav class="flex items-center gap-4 text-sm ml-6">
-            <a href="/" class="text-muted-foreground hover:text-foreground transition-colors">
+            <Link to="/" class="text-muted-foreground hover:text-foreground transition-colors">
               Docs
-            </a>
-            <a
-              href="/components/button"
+            </Link>
+            <Link
+              to="/components/button"
               class="text-foreground font-medium hover:text-foreground transition-colors"
             >
               Components
-            </a>
+            </Link>
           </nav>
         </div>
       </header>

@@ -1,12 +1,25 @@
 language: typescript
 layer: tool
 stack: backend
+dependsOn:
+  - core
+  - solid
 
 tasks:
+  generate-manifest:
+    command: tsx src/scripts/generate-manifest.ts
+    deps:
+      - core:build
+      - solid:build
+
   build:
-    command: tsup
+    script: tsup && cp -r templates component-manifest.json dist/
+    deps:
+      - generate-manifest
     inputs:
       - src/**/*
+      - component-manifest.json
+      - templates/**/*
     outputs:
       - dist/**/*
 
