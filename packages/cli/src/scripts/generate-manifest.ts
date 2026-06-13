@@ -70,6 +70,11 @@ interface Manifest {
 
 // ── Helpers ────────────────────────────────────────────────────
 
+/** Convert camelCase to kebab-case (e.g. scrollArea → scroll-area) */
+function camelToKebab(name: string): string {
+  return name.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`);
+}
+
 /** Scan imports in a source file to detect cross-dependencies */
 function detectDependencies(filePath: string, ownComponent?: string): {
   recipeDependencies: string[];
@@ -104,6 +109,7 @@ function detectDependencies(filePath: string, ownComponent?: string): {
               let compName = cleanName
                 .replace(/Variants$/i, "")
                 .replace(/^[A-Z]/, (c) => c.toLowerCase());
+              compName = camelToKebab(compName);
               // Skip self-references (own component importing its own variants)
               if (compName !== ownComponent) {
                 recipeDeps.add(compName);
