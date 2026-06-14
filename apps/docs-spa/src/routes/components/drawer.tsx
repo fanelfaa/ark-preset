@@ -25,12 +25,12 @@ import {
   DrawerDescription,
   DrawerGrabber,
 } from "~/components/drawer";
-import { Button, Input, Separator } from "~/components/button";
+import { Input, Separator } from "~/components/button";
 
 export function DrawerDemo() {
   return (
     <Drawer>
-      <DrawerTrigger asChild={(props) => <Button {...props()} />}>Edit Profile</DrawerTrigger>
+      <DrawerTrigger>Edit Profile</DrawerTrigger>
       <DrawerContent>
         <DrawerGrabber />
         <div class="flex flex-col gap-1 px-4 pt-2 pb-4">
@@ -84,15 +84,21 @@ export type DrawerVariants = VariantProps<typeof drawerVariants>`}</Pre>
         <Pre>{`import { Drawer as ArkDrawer } from '@ark-ui/solid/drawer'
 import { splitProps, type Component } from 'solid-js'
 import { drawerVariants } from './recipes/drawer'
+import { buttonVariants, type ButtonVariants } from './recipes/button'
 
 const styles = drawerVariants()
 
 const Root = ArkDrawer.Root
 const RootProvider = ArkDrawer.RootProvider
 
-const Trigger: Component<ArkDrawer.TriggerProps> = (props) => {
-  const [local, others] = splitProps(props, ['class'])
-  return <ArkDrawer.Trigger class={styles.trigger({ class: local.class })} {...others} />
+const Trigger: Component<ArkDrawer.TriggerProps & ButtonVariants> = (props) => {
+  const [local, others] = splitProps(props, ['class', 'variant', 'size'])
+  return (
+    <ArkDrawer.Trigger
+      class={buttonVariants({ variant: local.variant, size: local.size, class: local.class })}
+      {...others}
+    />
+  )
 }
 
 const Backdrop: Component<ArkDrawer.BackdropProps> = (props) => {
@@ -213,7 +219,7 @@ import {
       <Pre>{`
 
 <Drawer swipeDirection="start">
-  <DrawerTrigger asChild={(props) => <Button {...props()} />}>Open Drawer</DrawerTrigger>
+  <DrawerTrigger>Open Drawer</DrawerTrigger>
   <DrawerContent>
     <DrawerTitle>Title</DrawerTitle>
     <DrawerDescription>Description text</DrawerDescription>
@@ -225,7 +231,7 @@ import {
       <Pre>{`
 
 <Drawer swipeDirection="start">
-  <DrawerTrigger asChild={(props) => <Button {...props()} />}>Edit Profile</DrawerTrigger>
+  <DrawerTrigger>Edit Profile</DrawerTrigger>
   <DrawerContent>
     <div class="flex flex-col gap-1 px-4 pt-2 pb-4">
       <DrawerTitle>Edit Profile</DrawerTitle>
@@ -258,9 +264,7 @@ export function ExternalControlExample() {
       <Button onClick={() => drawer().setOpen(true)}>Open Drawer</Button>
 
       <DrawerBase.RootProvider value={drawer}>
-        <DrawerTrigger asChild={(props) => <Button {...props()} />}>
-          Hidden Trigger
-        </DrawerTrigger>
+        <DrawerTrigger style="display:none">Hidden Trigger</DrawerTrigger>
         <DrawerContent>
           <DrawerTitle>Externally Controlled Drawer</DrawerTitle>
           <DrawerDescription>This drawer is controlled via useDrawer.</DrawerDescription>
@@ -289,17 +293,19 @@ export function ExternalControlExample() {
           <strong>
             <InlineCode>DrawerBase.Context</InlineCode>
           </strong>{" "}
-          — a render-prop component that provides access to the drawer state. Use when you need
-          to read the open/close state inside the drawer tree.
+          — a render-prop component that provides access to the drawer state. Use when you need to
+          read the open/close state inside the drawer tree.
         </li>
       </List>
-      <P>Example using <InlineCode>DrawerBase.Context</InlineCode>:</P>
+      <P>
+        Example using <InlineCode>DrawerBase.Context</InlineCode>:
+      </P>
       <Pre>{`
 import { Drawer, DrawerTrigger, DrawerContent, DrawerBase } from "~/components/drawer";
 import { Button } from "~/components/button";
 
 <Drawer>
-  <DrawerTrigger asChild={(props) => <Button {...props()} />}>Open</DrawerTrigger>
+  <DrawerTrigger>Open</DrawerTrigger>
   <DrawerContent>
     <DrawerBase.Context>
       {(drawer) => <p>Drawer is {drawer().open ? "open" : "closed"}</p>}

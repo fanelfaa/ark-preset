@@ -1,15 +1,20 @@
 import { HoverCard as ArkHoverCard } from "@ark-ui/solid/hover-card";
 import { splitProps, type Component } from "solid-js";
-import { hoverCardVariants } from "@fan-ui/core";
+import { buttonVariants, hoverCardVariants, type ButtonVariants } from "@fan-ui/core";
 
 const styles = hoverCardVariants();
 
 const Root = ArkHoverCard.Root;
 const RootProvider = ArkHoverCard.RootProvider;
 
-const Trigger: Component<ArkHoverCard.TriggerProps> = (props) => {
-  const [local, others] = splitProps(props, ["class"]);
-  return <ArkHoverCard.Trigger class={styles.trigger({ class: local.class })} {...others} />;
+const Trigger: Component<ArkHoverCard.TriggerProps & ButtonVariants> = (props) => {
+  const [local, others] = splitProps(props, ["class", "variant", "size"]);
+  return (
+    <ArkHoverCard.Trigger
+      class={buttonVariants({ variant: local.variant, size: local.size, class: local.class })}
+      {...others}
+    />
+  );
 };
 
 const Positioner: Component<ArkHoverCard.PositionerProps> = (props) => {

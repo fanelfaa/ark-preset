@@ -8,7 +8,15 @@ const styles = alertDialogVariants();
 
 const AlertDialogRoot = ArkDialog.Root;
 const AlertDialogRootProvider = ArkDialog.RootProvider;
-const AlertDialogTrigger = ArkDialog.Trigger;
+const AlertDialogTrigger: Component<ArkDialog.TriggerProps & ButtonVariants> = (props) => {
+  const [local, others] = splitProps(props, ["class", "variant", "size"]);
+  return (
+    <ArkDialog.Trigger
+      class={buttonVariants({ variant: local.variant, size: local.size, class: local.class })}
+      {...others}
+    />
+  );
+};
 
 const AlertDialogBackdrop: Component<ArkDialog.BackdropProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);

@@ -56,8 +56,6 @@ npx @fan-ui/cli@latest add hover-card
 export const hoverCardVariants = tv({
   slots: {
     root: "inline-flex",
-    trigger:
-      "inline-flex items-center justify-center gap-2 rounded-md border border-input bg-transparent px-4 py-2 text-sm font-medium text-foreground ring-offset-background transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
     positioner: "z-50",
     content:
       "z-50 w-72 rounded-lg border border-border bg-popover p-4 text-popover-foreground shadow-lg animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
@@ -73,15 +71,21 @@ export type HoverCardVariants = VariantProps<typeof hoverCardVariants>`}</Pre>
         <Pre>{`import { HoverCard as ArkHoverCard } from "@ark-ui/solid/hover-card";
 import { splitProps, type Component } from "solid-js";
 import { hoverCardVariants } from "../../recipes/hover-card";
+import { buttonVariants, type ButtonVariants } from "../../recipes/button";
 
 const styles = hoverCardVariants();
 
 const Root = ArkHoverCard.Root;
 const RootProvider = ArkHoverCard.RootProvider;
 
-const Trigger: Component<ArkHoverCard.TriggerProps> = (props) => {
-  const [local, others] = splitProps(props, ["class"]);
-  return <ArkHoverCard.Trigger class={styles.trigger({ class: local.class })} {...others} />;
+const Trigger: Component<ArkHoverCard.TriggerProps & ButtonVariants> = (props) => {
+  const [local, others] = splitProps(props, ["class", "variant", "size"]);
+  return (
+    <ArkHoverCard.Trigger
+      class={buttonVariants({ variant: local.variant, size: local.size, class: local.class })}
+      {...others}
+    />
+  );
 };
 
 const Positioner: Component<ArkHoverCard.PositionerProps> = (props) => {

@@ -85,13 +85,23 @@ export type MenuVariants = VariantProps<typeof menuVariants>;`}</Pre>
         <Pre>{`import { Menu as ArkMenu } from "@ark-ui/solid/menu";
 import { splitProps, type Component } from "solid-js";
 import { menuVariants } from "../recipes/menu";
+import { buttonVariants, type ButtonVariants } from './recipes/button'
 
 const styles = menuVariants();
 
 // Direct re-exports (no styling needed)
 const Root = ArkMenu.Root;
 const RootProvider = ArkMenu.RootProvider;
-const Trigger = ArkMenu.Trigger;
+const Trigger: Component<ArkMenu.TriggerProps & ButtonVariants> = (props) => {
+  const [local, others] = splitProps(props, ['class', 'variant', 'size'])
+  return (
+    <ArkMenu.Trigger
+      class={buttonVariants({ variant: local.variant, size: local.size, class: local.class })}
+      {...others}
+    />
+  )
+}
+
 const RadioItemGroup = ArkMenu.RadioItemGroup;
 
 // Styled wrappers
@@ -195,11 +205,9 @@ const MenuTrigger: Component<ArkMenu.TriggerProps & ButtonVariants> = (props) =>
   const [local, others] = splitProps(props, ["class", "variant", "size"]);
   return (
     <MenuBase.Trigger
-      class={buttonVariants({
-        class: local.class,
-        variant: local.variant || "outline",
-        size: local.size,
-      })}
+      class={local.class}
+      variant={local.variant || "outline"}
+      size={local.size}
       {...others}
     >
       {props.children}

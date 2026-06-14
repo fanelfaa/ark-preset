@@ -1,13 +1,21 @@
 import { Dialog as ArkDialog } from "@ark-ui/solid/dialog";
 import { splitProps, type Component } from "solid-js";
-import { dialogVariants } from "@fan-ui/core";
+import { buttonVariants, dialogVariants, type ButtonVariants } from "@fan-ui/core";
 import { HTMLProps } from "@ark-ui/solid";
 
 const styles = dialogVariants();
 
 const DialogRoot = ArkDialog.Root;
 const DialogRootProvider = ArkDialog.RootProvider;
-const DialogTrigger = ArkDialog.Trigger;
+const DialogTrigger: Component<ArkDialog.TriggerProps & ButtonVariants> = (props) => {
+  const [local, others] = splitProps(props, ["class", "variant", "size"]);
+  return (
+    <ArkDialog.Trigger
+      class={buttonVariants({ variant: local.variant, size: local.size, class: local.class })}
+      {...others}
+    />
+  );
+};
 
 const DialogBackdrop: Component<ArkDialog.BackdropProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);

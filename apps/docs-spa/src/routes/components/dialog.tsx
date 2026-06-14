@@ -35,7 +35,7 @@ import { Separator } from "~/components/separator";
 export function DialogDemo() {
   return (
     <Dialog>
-      <DialogTrigger asChild={(props) => <Button {...props()} />}>Edit Profile</DialogTrigger>
+      <DialogTrigger>Edit Profile</DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Edit Profile</DialogTitle>
@@ -100,13 +100,22 @@ export type DialogVariants = VariantProps<typeof dialogVariants>`}</Pre>
         <Pre>{`import { Dialog as ArkDialog } from '@ark-ui/solid/dialog'
 import { splitProps, type Component } from 'solid-js'
 import { dialogVariants } from './recipes/dialog'
+import { buttonVariants, type ButtonVariants } from './recipes/button'
 import { HTMLProps } from '@ark-ui/solid'
 
 const styles = dialogVariants()
 
 const Root = ArkDialog.Root
 const RootProvider = ArkDialog.RootProvider
-const Trigger = ArkDialog.Trigger
+const Trigger: Component<ArkDialog.TriggerProps & ButtonVariants> = (props) => {
+  const [local, others] = splitProps(props, ['class', 'variant', 'size']);
+  return (
+    <ArkDialog.Trigger
+      class={buttonVariants({ variant: local.variant, size: local.size, class: local.class })}
+      {...others}
+    />
+  );
+};
 
 const Backdrop: Component<ArkDialog.BackdropProps> = (props) => {
   const [local, others] = splitProps(props, ['class'])
@@ -218,7 +227,7 @@ import {
       <Pre>{`
 
 <Dialog>
-  <DialogTrigger asChild={(props) => <Button {...props()} />}>Open Dialog</DialogTrigger>
+  <DialogTrigger>Open Dialog</DialogTrigger>
   <DialogContent>
     <DialogHeader>
       <DialogTitle>Title</DialogTitle>
@@ -232,7 +241,7 @@ import {
       <Pre>{`
 
 <Dialog>
-  <DialogTrigger asChild={(props) => <Button {...props()} />}>Open</DialogTrigger>
+  <DialogTrigger>Open</DialogTrigger>
   <DialogContent>
     <DialogHeader>
       <DialogTitle>Confirm Action</DialogTitle>
@@ -292,7 +301,7 @@ export function ExternalControlExample() {
       <Button onClick={() => dialog().setOpen(true)}>Open Dialog</Button>
 
       <DialogBase.RootProvider value={dialog}>
-        <DialogTrigger asChild={(props) => <Button {...props()} style="display:none" />}>
+        <DialogTrigger style="display:none">
           Hidden Trigger
         </DialogTrigger>
         <DialogContent>

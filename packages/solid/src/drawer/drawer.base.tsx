@@ -1,12 +1,20 @@
 import { Drawer as ArkDrawer } from "@ark-ui/solid/drawer";
 import { splitProps, type Component } from "solid-js";
-import { drawerVariants } from "@fan-ui/core";
+import { buttonVariants, drawerVariants, type ButtonVariants } from "@fan-ui/core";
 
 const styles = drawerVariants();
 
 const Root = ArkDrawer.Root;
 const RootProvider = ArkDrawer.RootProvider;
-const Trigger = ArkDrawer.Trigger;
+const Trigger: Component<ArkDrawer.TriggerProps & ButtonVariants> = (props) => {
+  const [local, others] = splitProps(props, ["class", "variant", "size"]);
+  return (
+    <ArkDrawer.Trigger
+      class={buttonVariants({ variant: local.variant, size: local.size, class: local.class })}
+      {...others}
+    />
+  );
+};
 
 const Backdrop: Component<ArkDrawer.BackdropProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);

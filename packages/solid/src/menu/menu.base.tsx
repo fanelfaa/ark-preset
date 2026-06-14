@@ -1,13 +1,21 @@
 import { Menu as ArkMenu } from "@ark-ui/solid/menu";
 import { splitProps, type Component } from "solid-js";
-import { menuVariants } from "@fan-ui/core";
+import { buttonVariants, menuVariants, type ButtonVariants } from "@fan-ui/core";
 
 const styles = menuVariants();
 
 // Re-exports (no style slot required)
 const Root = ArkMenu.Root;
 const RootProvider = ArkMenu.RootProvider;
-const Trigger = ArkMenu.Trigger;
+const Trigger: Component<ArkMenu.TriggerProps & ButtonVariants> = (props) => {
+  const [local, others] = splitProps(props, ["class", "variant", "size"]);
+  return (
+    <ArkMenu.Trigger
+      class={buttonVariants({ variant: local.variant, size: local.size, class: local.class })}
+      {...others}
+    />
+  );
+};
 const RadioItemGroup = ArkMenu.RadioItemGroup;
 
 // Styled wrappers

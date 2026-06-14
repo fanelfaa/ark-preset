@@ -14,7 +14,7 @@ export default function DialogBasicDemo() {
   return (
     <div class="rounded-lg border border-border p-6">
       <Dialog>
-        <DialogTrigger asChild={(props) => <Button {...props()} />}>Edit Profile</DialogTrigger>
+        <DialogTrigger>Edit Profile</DialogTrigger>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Edit Profile</DialogTitle>

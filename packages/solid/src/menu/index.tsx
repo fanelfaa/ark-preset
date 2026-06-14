@@ -1,7 +1,7 @@
 import { Menu as ArkMenu } from "@ark-ui/solid/menu";
 import { Portal } from "solid-js/web";
 import { splitProps, type Component } from "solid-js";
-import { ButtonVariants, buttonVariants } from "@fan-ui/core";
+import type { ButtonVariants } from "@fan-ui/core";
 import { Menu as MenuBase } from "./menu.base";
 
 const Menu = MenuBase.Root;
@@ -10,11 +10,9 @@ const MenuTrigger: Component<ArkMenu.TriggerProps & ButtonVariants> = (props) =>
   const [local, others] = splitProps(props, ["class", "variant", "size"]);
   return (
     <MenuBase.Trigger
-      class={buttonVariants({
-        class: local.class,
-        variant: local.variant || "outline",
-        size: local.size,
-      })}
+      class={local.class}
+      variant={local.variant || "outline"}
+      size={local.size}
       {...others}
     >
       {props.children}

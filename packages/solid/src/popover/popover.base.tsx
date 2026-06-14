@@ -1,12 +1,20 @@
 import { Popover as ArkPopover } from "@ark-ui/solid/popover";
 import { splitProps, type Component } from "solid-js";
-import { popoverVariants } from "@fan-ui/core";
+import { buttonVariants, popoverVariants, type ButtonVariants } from "@fan-ui/core";
 
 const styles = popoverVariants();
 
 const Root = ArkPopover.Root;
 const RootProvider = ArkPopover.RootProvider;
-const Trigger = ArkPopover.Trigger;
+const Trigger: Component<ArkPopover.TriggerProps & ButtonVariants> = (props) => {
+  const [local, others] = splitProps(props, ["class", "variant", "size"]);
+  return (
+    <ArkPopover.Trigger
+      class={buttonVariants({ variant: local.variant, size: local.size, class: local.class })}
+      {...others}
+    />
+  );
+};
 
 const Content: Component<ArkPopover.ContentProps> = (props) => {
   const [local, others] = splitProps(props, ["class", "style"]);

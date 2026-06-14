@@ -5,13 +5,13 @@ import {
   DrawerTitle,
   DrawerDescription,
 } from "@fan-ui/solid";
-import { Button, Input, Separator } from "@fan-ui/solid";
+import { Input, Separator } from "@fan-ui/solid";
 
 export default function DrawerBasicDemo() {
   return (
     <div class="rounded-lg border border-border p-6">
       <Drawer swipeDirection="start">
-        <DrawerTrigger asChild={(props) => <Button {...props()} />}>Edit Profile</DrawerTrigger>
+        <DrawerTrigger>Edit Profile</DrawerTrigger>
         <DrawerContent>
           <div class="flex flex-col gap-1 px-4 pt-2 pb-4">
             <DrawerTitle>Edit Profile</DrawerTitle>

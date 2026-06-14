@@ -1,15 +1,20 @@
 import { Tooltip as ArkTooltip } from "@ark-ui/solid/tooltip";
 import { splitProps, type Component } from "solid-js";
-import { tooltipVariants } from "@fan-ui/core";
+import { buttonVariants, tooltipVariants, type ButtonVariants } from "@fan-ui/core";
 
 const styles = tooltipVariants();
 
 const Root = ArkTooltip.Root;
 const RootProvider = ArkTooltip.RootProvider;
 
-const Trigger: Component<ArkTooltip.TriggerProps> = (props) => {
-  const [local, others] = splitProps(props, ["class"]);
-  return <ArkTooltip.Trigger class={styles.trigger({ class: local.class })} {...others} />;
+const Trigger: Component<ArkTooltip.TriggerProps & ButtonVariants> = (props) => {
+  const [local, others] = splitProps(props, ["class", "variant", "size"]);
+  return (
+    <ArkTooltip.Trigger
+      class={buttonVariants({ variant: local.variant, size: local.size, class: local.class })}
+      {...others}
+    />
+  );
 };
 
 const Positioner: Component<ArkTooltip.PositionerProps> = (props) => {

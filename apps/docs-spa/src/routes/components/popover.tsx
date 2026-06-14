@@ -25,12 +25,11 @@ import {
   PopoverTitle,
   PopoverDescription,
 } from "~/components/popover";
-import { Button } from "~/components/button";
 
 export function PopoverDemo() {
   return (
     <Popover>
-      <PopoverTrigger asChild={(props) => <Button {...props()} />}>Open Popover</PopoverTrigger>
+      <PopoverTrigger>Open Popover</PopoverTrigger>
       <PopoverContent>
         <PopoverTitle>Popover Title</PopoverTitle>
         <PopoverDescription>
@@ -56,7 +55,6 @@ npx @fan-ui/cli@latest add popover
 export const popoverVariants = tv({
   slots: {
     root: "relative inline-flex",
-    trigger: "inline-flex",
     positioner: "fixed z-50",
     content:
       "z-50 w-72 rounded-lg border border-border bg-popover p-4 text-popover-foreground shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 relative",
@@ -77,12 +75,21 @@ export type PopoverVariants = VariantProps<typeof popoverVariants>`}</Pre>
         <Pre>{`import { Popover as ArkPopover } from '@ark-ui/solid/popover'
 import { splitProps, type Component } from 'solid-js'
 import { popoverVariants, type PopoverVariants } from './recipes/popover'
+import { buttonVariants, type ButtonVariants } from './recipes/button'
 
 const styles = popoverVariants()
 
 const Root = ArkPopover.Root
 const RootProvider = ArkPopover.RootProvider
-const Trigger = ArkPopover.Trigger
+const Trigger: Component<ArkPopover.TriggerProps & ButtonVariants> = (props) => {
+  const [local, others] = splitProps(props, ['class', 'variant', 'size']);
+  return (
+    <ArkPopover.Trigger
+      class={buttonVariants({ variant: local.variant, size: local.size, class: local.class })}
+      {...others}
+    />
+  );
+};
 
 const Content: Component<ArkPopover.ContentProps> = (props) => {
   const [local, others] = splitProps(props, ["class", "style"]);
@@ -201,13 +208,12 @@ import {
   PopoverTitle,
   PopoverDescription,
 } from "~/components/popover";
-import { Button } from "~/components/button";
       `}</Pre>
       <P>Basic usage:</P>
       <Pre>{`
 
 <Popover>
-  <PopoverTrigger asChild={(props) => <Button {...props()} />}>Open Popover</PopoverTrigger>
+  <PopoverTrigger>Open Popover</PopoverTrigger>
   <PopoverContent>
     <PopoverTitle>Title</PopoverTitle>
     <PopoverDescription>Description text</PopoverDescription>
@@ -238,8 +244,6 @@ import {
   PopoverDescription,
   PopoverBase,
 } from "~/components/popover";
-import { Button } from "~/components/button";
-
 export function PopoverWithExternalControl() {
   const popover = usePopover();
 
@@ -248,7 +252,7 @@ export function PopoverWithExternalControl() {
       <output>Open: {JSON.stringify(popover().open)}</output>
 
       <PopoverBase.RootProvider value={popover}>
-        <PopoverTrigger asChild={(props) => <Button {...props()} />}>Open Popover</PopoverTrigger>
+        <PopoverTrigger>Open Popover</PopoverTrigger>
         <PopoverContent>
           <PopoverTitle>Popover Title</PopoverTitle>
           <PopoverDescription>
