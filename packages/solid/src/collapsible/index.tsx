@@ -35,4 +35,4 @@ export {
   CollapsibleBase,
 };
 
-export { collapsibleVariants, type CollapsibleVariants } from "@ui/core";
+export { collapsibleVariants, type CollapsibleVariants } from "@fan-ui/core";

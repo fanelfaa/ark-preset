@@ -19,4 +19,4 @@ const TabsContent = TabsBase.Content;
 
 export { Tabs, TabsContent, TabsTrigger, TabsBase, TabsList };
 
-export { tabsVariants, type TabsVariants } from "@ui/core";
+export { tabsVariants, type TabsVariants } from "@fan-ui/core";

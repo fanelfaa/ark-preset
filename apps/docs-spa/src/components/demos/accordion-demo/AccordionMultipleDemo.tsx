@@ -1,4 +1,4 @@
-import { Accordion, AccordionItem, AccordionItemTrigger, AccordionItemContent } from "@ui/solid";
+import { Accordion, AccordionItem, AccordionItemTrigger, AccordionItemContent } from "@fan-ui/solid";
 
 export default function AccordionMultipleDemo() {
   return (

@@ -1,4 +1,4 @@
-import { PasswordInput } from "@ui/solid";
+import { PasswordInput } from "@fan-ui/solid";
 
 export default function PasswordInputBasicDemo() {
   return (

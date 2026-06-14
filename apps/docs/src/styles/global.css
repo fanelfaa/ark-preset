@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "@ui/core/src/theme.css";
+@import "@fan-ui/core/src/theme.css";
 @plugin "@tailwindcss/typography";
 
 @source '../../../../packages/solid/src/**/*.{ts,tsx}';

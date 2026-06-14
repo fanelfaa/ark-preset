@@ -46,7 +46,7 @@ export function AspectRatioDemo() {
       <P>Run the following command to add the component to your project:</P>
       <Pre>{`
 
-npx solidui-cli@latest add aspect-ratio
+npx @fan-ui/cli@latest add aspect-ratio
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
@@ -90,7 +90,7 @@ export { AspectRatio, aspectRatioVariants }`}</Pre>
       <P>Import the component:</P>
       <Pre>{`
 
-import { AspectRatio } from "@ui/solid";
+import { AspectRatio } from "@fan-ui/solid";
       `}</Pre>
       <P>Basic:</P>
       <Pre>{`

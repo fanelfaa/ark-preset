@@ -1,7 +1,7 @@
 import { Menu as ArkMenu } from "@ark-ui/solid/menu";
 import { Portal } from "solid-js/web";
 import { splitProps, type Component } from "solid-js";
-import { ButtonVariants, buttonVariants } from "@ui/core";
+import { ButtonVariants, buttonVariants } from "@fan-ui/core";
 import { Menu as MenuBase } from "./menu.base";
 
 const Menu = MenuBase.Root;
@@ -127,4 +127,4 @@ export {
   NestedMenuContent,
   MenuBase,
 };
-export { menuVariants, type MenuVariants } from "@ui/core";
+export { menuVariants, type MenuVariants } from "@fan-ui/core";

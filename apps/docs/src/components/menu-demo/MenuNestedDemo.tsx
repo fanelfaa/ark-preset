@@ -6,7 +6,7 @@ import {
   MenuSeparator,
   NestedMenuContent,
   Menu,
-} from "@ui/solid";
+} from "@fan-ui/solid";
 
 export default function MenuNestedDemo() {
   return (

@@ -8,7 +8,7 @@ import {
   CarouselNextTrigger,
   CarouselIndicatorGroup,
   CarouselIndicator,
-} from "@ui/solid";
+} from "@fan-ui/solid";
 
 const images = [
   { src: "https://picsum.photos/seed/carousel-1/600/400", alt: "Mountain landscape" },

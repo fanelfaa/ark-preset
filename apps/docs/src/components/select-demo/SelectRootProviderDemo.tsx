@@ -6,7 +6,7 @@ import {
   SelectTrigger,
   SelectContent,
   SelectItem,
-} from "@ui/solid";
+} from "@fan-ui/solid";
 
 const frameworks = createListCollection({
   items: [

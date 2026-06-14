@@ -73,7 +73,7 @@ export function TableDemo() {
       <P>Run the following command to add the component to your project:</P>
       <Pre>{`
 
-npx solidui-cli@latest add table
+npx @fan-ui/cli@latest add table
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
@@ -160,7 +160,7 @@ import {
   TableHead,
   TableCell,
   TableCaption,
-} from "@ui/solid";
+} from "@fan-ui/solid";
       `}</Pre>
       <P>Basic table:</P>
       <Pre>{`

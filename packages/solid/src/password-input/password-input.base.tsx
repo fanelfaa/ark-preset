@@ -1,6 +1,6 @@
 import { PasswordInput as ArkPasswordInput } from "@ark-ui/solid/password-input";
 import { splitProps, type Component } from "solid-js";
-import { passwordInputVariants } from "@ui/core";
+import { passwordInputVariants } from "@fan-ui/core";
 
 const styles = passwordInputVariants();
 

@@ -1,6 +1,6 @@
 import { TagsInput as ArkTagsInput } from "@ark-ui/solid/tags-input";
 import { createContext, useContext, splitProps, type Component } from "solid-js";
-import { tagsInputVariants } from "@ui/core";
+import { tagsInputVariants } from "@fan-ui/core";
 
 type TagsInputVariantContextValue = {
   disabled?: boolean;

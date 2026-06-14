@@ -1,5 +1,5 @@
 import { Index, createSignal } from "solid-js";
-import { SegmentGroupBase } from "@ui/solid";
+import { SegmentGroupBase } from "@fan-ui/solid";
 
 const frameworks = ["React", "Solid", "Vue"];
 

@@ -1,6 +1,6 @@
 import { Tooltip as ArkTooltip } from "@ark-ui/solid/tooltip";
 import { splitProps, type Component } from "solid-js";
-import { tooltipVariants } from "@ui/core";
+import { tooltipVariants } from "@fan-ui/core";
 
 const styles = tooltipVariants();
 

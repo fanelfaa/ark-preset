@@ -1,7 +1,7 @@
 import { Index, splitProps, type Component } from "solid-js";
 import { RatingGroup as RatingGroupBase } from "./rating-group.base";
 import { RatingGroup as ArkRatingGroup } from "@ark-ui/solid/rating-group";
-import { ratingGroupVariants, type RatingGroupVariants } from "@ui/core";
+import { ratingGroupVariants, type RatingGroupVariants } from "@fan-ui/core";
 
 const styles = ratingGroupVariants();
 
@@ -92,4 +92,4 @@ export {
   RatingGroupBase,
 };
 
-export { ratingGroupVariants, type RatingGroupVariants } from "@ui/core";
+export { ratingGroupVariants, type RatingGroupVariants } from "@fan-ui/core";

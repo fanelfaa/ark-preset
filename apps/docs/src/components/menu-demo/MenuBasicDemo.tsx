@@ -1,5 +1,5 @@
 import { For } from "solid-js";
-import { MenuTrigger, MenuContent, MenuItem, Menu } from "@ui/solid";
+import { MenuTrigger, MenuContent, MenuItem, Menu } from "@fan-ui/solid";
 
 const menuItems = [
   { value: "edit", label: "Edit" },

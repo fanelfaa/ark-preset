@@ -1,5 +1,5 @@
 import { Index } from "solid-js";
-import { RadioGroup, RadioGroupItem } from "@ui/solid";
+import { RadioGroup, RadioGroupItem } from "@fan-ui/solid";
 
 const paymentMethods = [
   { value: "1", label: "Credit Card" },

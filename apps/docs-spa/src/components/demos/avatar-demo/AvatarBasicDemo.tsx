@@ -1,4 +1,4 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@ui/solid";
+import { Avatar, AvatarFallback, AvatarImage } from "@fan-ui/solid";
 
 export default function AvatarBasicDemo() {
   return (

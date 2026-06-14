@@ -1,5 +1,5 @@
 {
-  "name": "@ui/cli",
+  "name": "@fan-ui/cli",
   "version": "0.1.0",
   "private": true,
   "bin": {
@@ -15,8 +15,8 @@
   "dependencies": {
     "commander": "^13.0.0",
     "fs-extra": "^11.0.0",
-    "@ui/core": "workspace:*",
-    "@ui/solid": "workspace:*"
+    "@fan-ui/core": "workspace:*",
+    "@fan-ui/solid": "workspace:*"
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.0",

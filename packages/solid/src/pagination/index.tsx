@@ -1,7 +1,7 @@
 import { splitProps, For, type Component } from "solid-js";
 import { Pagination as PaginationBase } from "./pagination.base";
 import { Pagination as ArkPagination } from "@ark-ui/solid/pagination";
-import type { PaginationVariants } from "@ui/core";
+import type { PaginationVariants } from "@fan-ui/core";
 
 const Pagination: Component<ArkPagination.RootProps & PaginationVariants> = (props) => {
   const [local, others] = splitProps(props, ["class", "size", "children"]);
@@ -58,4 +58,4 @@ export {
   PaginationBase,
 };
 
-export { paginationVariants, type PaginationVariants } from "@ui/core";
+export { paginationVariants, type PaginationVariants } from "@fan-ui/core";

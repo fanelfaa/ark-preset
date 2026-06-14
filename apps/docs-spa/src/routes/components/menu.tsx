@@ -17,7 +17,7 @@ function MenuPage() {
       <Pre>{`
 
 import { For } from "solid-js";
-import { MenuTrigger, MenuContent, MenuItem, Menu } from "@ui/solid";
+import { MenuTrigger, MenuContent, MenuItem, Menu } from "@fan-ui/solid";
 
 const menuItems = [
   { value: "edit", label: "Edit" },
@@ -45,7 +45,7 @@ export default function MenuDemo() {
       <P>Run the following command to add the component to your project:</P>
       <Pre>{`
 
-npx solidui-cli@latest add menu
+npx @fan-ui/cli@latest add menu
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">

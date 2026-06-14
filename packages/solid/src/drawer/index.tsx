@@ -56,4 +56,4 @@ export {
   DrawerBase,
 };
 
-export { drawerVariants, type DrawerVariants } from "@ui/core";
+export { drawerVariants, type DrawerVariants } from "@fan-ui/core";

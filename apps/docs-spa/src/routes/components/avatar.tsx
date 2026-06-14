@@ -43,7 +43,7 @@ export function AvatarDemo() {
       <P>Run the following command to add the component to your project:</P>
       <Pre>{`
 
-npx solidui-cli@latest add avatar
+npx @fan-ui/cli@latest add avatar
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
@@ -64,7 +64,7 @@ export type AvatarVariants = VariantProps<typeof avatarVariants>`}</Pre>
         Create the component directory and files: `src/components/avatar/avatar.base.tsx`:
         <Pre>{`import { Avatar as ArkAvatar } from "@ark-ui/solid/avatar";
 import { splitProps, type Component } from "solid-js";
-import { avatarVariants } from "@ui/core";
+import { avatarVariants } from "@fan-ui/core";
 
 const styles = avatarVariants();
 
@@ -98,7 +98,7 @@ const AvatarImage = AvatarBase.Image;
 
 export { Avatar, AvatarFallback, AvatarImage, AvatarBase };
 
-export { avatarVariants, type AvatarVariants } from "@ui/core";`}</Pre>
+export { avatarVariants, type AvatarVariants } from "@fan-ui/core";`}</Pre>
       </div>
       <Blockquote>
         <strong>Note:</strong> Make sure your project has the Tailwind CSS theme variables set up or

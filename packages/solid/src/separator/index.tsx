@@ -1,5 +1,5 @@
 import { splitProps, type Component } from "solid-js";
-import { separatorVariants, type SeparatorVariants } from "@ui/core";
+import { separatorVariants, type SeparatorVariants } from "@fan-ui/core";
 import { ark, type HTMLArkProps } from "@ark-ui/solid/factory";
 
 type SeparatorProps = HTMLArkProps<"div"> & SeparatorVariants;

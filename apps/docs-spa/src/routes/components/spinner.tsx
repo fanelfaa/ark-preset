@@ -48,7 +48,7 @@ export function SpinnerDemo() {
       <P>Run the following command to add the component to your project:</P>
       <Pre>{`
 
-npx solidui-cli@latest add spinner
+npx @fan-ui/cli@latest add spinner
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
@@ -109,7 +109,7 @@ export { Spinner, spinnerVariants }`}</Pre>
       <P>Import the component:</P>
       <Pre>{`
 
-import { Spinner } from "@ui/solid";
+import { Spinner } from "@fan-ui/solid";
       `}</Pre>
       <P>Basic spinner:</P>
       <Pre>{`

@@ -1,5 +1,5 @@
 import { usePinInput } from "@ark-ui/solid/pin-input";
-import { PinInputRootProvider, PinInputControl, PinInputInput, PinInputLabel } from "@ui/solid";
+import { PinInputRootProvider, PinInputControl, PinInputInput, PinInputLabel } from "@fan-ui/solid";
 import { Index } from "solid-js";
 
 export default function PinInputRootProviderDemo() {

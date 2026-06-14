@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/solid-router";
-import { buttonVariants } from "@ui/core";
+import { buttonVariants } from "@fan-ui/core";
 
 export const Route = createFileRoute("/$")({ component: NotFound });
 

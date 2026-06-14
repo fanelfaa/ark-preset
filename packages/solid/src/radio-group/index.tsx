@@ -1,7 +1,7 @@
 import { splitProps, type Component } from "solid-js";
 import { RadioGroup as RadioGroupBase } from "./radio-group.base";
 import { RadioGroup as ArkRadioGroup } from "@ark-ui/solid/radio-group";
-import type { RadioGroupVariants } from "@ui/core";
+import type { RadioGroupVariants } from "@fan-ui/core";
 
 const RadioGroup: Component<ArkRadioGroup.RootProps & RadioGroupVariants> = (props) => {
   const [local, others] = splitProps(props, ["class", "orientation", "children"]);
@@ -26,4 +26,4 @@ const RadioGroupItem: Component<ArkRadioGroup.ItemProps> = (props) => {
 
 export { RadioGroup, RadioGroupItem, RadioGroupBase };
 
-export { radioGroupVariants, type RadioGroupVariants } from "@ui/core";
+export { radioGroupVariants, type RadioGroupVariants } from "@fan-ui/core";

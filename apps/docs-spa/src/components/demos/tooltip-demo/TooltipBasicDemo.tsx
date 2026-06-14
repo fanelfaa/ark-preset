@@ -1,4 +1,4 @@
-import { Tooltip, TooltipTrigger, TooltipContent } from "@ui/solid";
+import { Tooltip, TooltipTrigger, TooltipContent } from "@fan-ui/solid";
 
 export default function TooltipBasicDemo() {
   return (

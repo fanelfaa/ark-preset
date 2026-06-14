@@ -40,7 +40,7 @@ Monorepo UI library with Ark UI primitives, Solid.js implementations, CLI tool, 
 | buttonVariants | variable  | packages/core/src/recipes/button.ts | 3    | Styling variant for Button |
 | inputVariants  | variable  | packages/core/src/recipes/input.ts  | 3    | Styling variant for Input  |
 | Button         | component | packages/solid/src/button/          | 3    | Solid.js Button wrapper    |
-| @ui/cli        | binary    | packages/cli/src/index.ts           | 1    | CLI entry point            |
+| @fan-ui/cli        | binary    | packages/cli/src/index.ts           | 1    | CLI entry point            |
 
 ## CONVENTIONS
 
@@ -48,14 +48,14 @@ Monorepo UI library with Ark UI primitives, Solid.js implementations, CLI tool, 
 - Style with tailwind-variants tv() function in core recipes
 - Framework wrappers (solid) delegate to Ark UI with minimal props
 - Export variants from core/index.ts and components from framework/index.ts
-- Keep CLI bin unscoped (`ui`) despite @ui/\* package naming
+- Keep CLI bin unscoped (`ui`) despite @fan-ui/\* package naming
 - All configuration in package.json, vite.config.ts, tsconfig.json
 
 ## ANTI-PATTERNS (THIS PROJECT)
 
 - No test infrastructure whatsoever
-- Root package name mismatch (solid-ark-ui vs @ui/\* scope)
-- Deep exports in @ui/core/package.json incomplete (only 2/35 recipes exported)
+- Root package name mismatch (solid-ark-ui vs @fan-ui/\* scope)
+- Deep exports in @fan-ui/core/package.json incomplete (only 2/35 recipes exported)
 - 3 flat `.tsx` files in solid/src inconsistent with directory component pattern
 
 ## UNIQUE STYLES

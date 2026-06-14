@@ -46,7 +46,7 @@ export function SliderDemo() {
       <P>Run the following command to add the component to your project:</P>
       <Pre>{`
 
-npx solidui-cli@latest add slider
+npx @fan-ui/cli@latest add slider
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
@@ -86,7 +86,7 @@ export type SliderVariants = VariantProps<typeof sliderVariants>`}</Pre>
         Create the component directory and files: `src/components/slider/slider.base.tsx`:
         <Pre>{`import { Slider as ArkSlider } from "@ark-ui/solid/slider";
 import { splitProps, type Component } from "solid-js";
-import { sliderVariants } from "@ui/core";
+import { sliderVariants } from "@fan-ui/core";
 
 const styles = sliderVariants();
 
@@ -215,7 +215,7 @@ export {
   SliderBase,
 };
 
-export { sliderVariants, type SliderVariants } from "@ui/core";`}</Pre>
+export { sliderVariants, type SliderVariants } from "@fan-ui/core";`}</Pre>
       </div>
       <Blockquote>
         <strong>Note:</strong> Make sure your project has the Tailwind CSS theme variables set up (

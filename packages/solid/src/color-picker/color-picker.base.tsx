@@ -1,6 +1,6 @@
 import { ColorPicker as ArkColorPicker } from "@ark-ui/solid/color-picker";
 import { splitProps, type Component } from "solid-js";
-import { colorPickerVariants } from "@ui/core";
+import { colorPickerVariants } from "@fan-ui/core";
 
 const styles = colorPickerVariants();
 

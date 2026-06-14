@@ -7,8 +7,8 @@ import {
   DialogDescription,
   DialogFooter,
   DialogBase,
-} from "@ui/solid";
-import { Button } from "@ui/solid";
+} from "@fan-ui/solid";
+import { Button } from "@fan-ui/solid";
 
 export default function DialogRootProviderDemo() {
   const dialog = useDialog({ defaultOpen: false });

@@ -5,7 +5,7 @@
 
 ## OVERVIEW
 
-CLI for component generation (`@ui/cli` / `ui`).
+CLI for component generation (`@fan-ui/cli` / `ui`).
 
 ## ARCHITECTURE
 
@@ -15,7 +15,7 @@ packages/{framework}/src/  ──  generate-manifest.ts  ──  templates/ + co
 packages/core/src/recipes/ ──                        ──       ↓
                                                       ──  add.ts reads manifest
                                                       ──  copies files to user project
-                                                      ──  rewrites @ui/core → ../recipes
+                                                      ──  rewrites @fan-ui/core → ../recipes
 ```
 
 ### Key Design Decisions
@@ -25,7 +25,7 @@ packages/core/src/recipes/ ──                        ──       ↓
 2. **Bundled templates**: Component source files are copied into `templates/` at build time so the CLI is self-contained (no external deps).
 
 3. **Auto-detected dependencies**: The build script scans imports to detect two types:
-   - `recipeDependencies` — `import { buttonVariants } from "@ui/core"` → cross-recipe deps
+   - `recipeDependencies` — `import { buttonVariants } from "@fan-ui/core"` → cross-recipe deps
    - `componentDependencies` — `import { Spinner } from "../spinner"` → cross-component deps
 
 4. **Multi-framework architecture**: `templates/solid/`, `templates/react/`, `templates/vue/` directories. CLI selects via `--framework` flag.
@@ -45,8 +45,8 @@ packages/core/src/recipes/ ──                        ──       ↓
 ```bash
 npm run generate-manifest    # Generate templates + manifest from source
 npm run build                # Full build (generate-manifest + tsup + copy to dist)
-moon run @ui/cli:build     # Same via moonrepo
-moon run @ui/cli:dev       # Watch mode
+moon run @fan-ui/cli:build     # Same via moonrepo
+moon run @fan-ui/cli:dev       # Watch mode
 ```
 
 ## IMPORTANT NOTES
@@ -54,7 +54,7 @@ moon run @ui/cli:dev       # Watch mode
 - `templates/` and `component-manifest.json` are generated artifacts — do not edit manually
 - They are gitignored; regenerate after changing packages/solid/ or packages/core/recipes/
 - The build script (`generate-manifest.ts`) is NOT bundled into dist/ — it's a build-time tool only
-- Cross-dependency detection currently handles: `@ui/core` imports (recipe deps) and `../<component>` relative imports (component deps)
+- Cross-dependency detection currently handles: `@fan-ui/core` imports (recipe deps) and `../<component>` relative imports (component deps)
 - Known cross-dependencies: button→spinner, select→scroll-area, alert-dialog→button, date-picker→button, menu→button
 
 ## ANTI-PATTERNS (THIS DIRECTORY)

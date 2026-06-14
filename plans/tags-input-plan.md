@@ -66,7 +66,7 @@ Slots reference:
 
 - [ ] Import Ark UI parts from `@ark-ui/solid/tags-input`: `{ TagsInput as ArkTagsInput }`
 - [ ] Import `splitProps`, `type Component` from `solid-js`
-- [ ] Import `tagsInputVariants`, `type TagsInputVariants` from `@ui/core`
+- [ ] Import `tagsInputVariants`, `type TagsInputVariants` from `@fan-ui/core`
 - [ ] Create variant context (for error/disabled propagation to children)
 - [ ] Create module-level styles: `const styles = tagsInputVariants();`
 - [ ] Wrap each Ark UI part with tv() styling:
@@ -145,7 +145,7 @@ Slots reference:
 - [ ] **No** `export *` from base (Pattern E rule)
 - [ ] Export base namespace: `export { TagsInput as TagsInputBase }`
 - [ ] Export composite named exports: `TagsInput`, `TagsInputItem`
-- [ ] Re-export variants from `@ui/core`: `export { tagsInputVariants, type TagsInputVariants } from "@ui/core"`
+- [ ] Re-export variants from `@fan-ui/core`: `export { tagsInputVariants, type TagsInputVariants } from "@fan-ui/core"`
 
 ### 6. Solid Barrel: `packages/solid/src/index.ts`
 
@@ -154,13 +154,13 @@ Slots reference:
 ### 7. Demo: `apps/docs/src/components/tags-input-demo/TagsInputBasicDemo.tsx`
 
 - [ ] Create directory: `tags-input-demo/`
-- [ ] Create BasicDemo importing only named composites from `@ui/solid`: `import { TagsInput, TagsInputItem } from "@ui/solid"`
+- [ ] Create BasicDemo importing only named composites from `@fan-ui/solid`: `import { TagsInput, TagsInputItem } from "@fan-ui/solid"`
 - [ ] Must NOT import `.base.tsx` or `TagsInputBase`
 - [ ] Basic demo structure:
 
   ```tsx
   import { Index } from "solid-js";
-  import { TagsInput, TagsInputItem } from "@ui/solid";
+  import { TagsInput, TagsInputItem } from "@fan-ui/solid";
 
   export default function TagsInputBasicDemo() {
     return (
@@ -191,7 +191,7 @@ Slots reference:
   import { TagsInput, TagsInputItem } from "~/components/tags-input";
   ```
 - [ ] Add Installation section:
-  - CLI: `npx solidui-cli@latest add tags-input`
+  - CLI: `npx @fan-ui/cli@latest add tags-input`
   - Manual: recipe, base, index code blocks (same structure as segment-group docs)
 - [ ] Add Usage section with basic code examples (basic, controlled, disabled, invalid)
 - [ ] Add Advanced Usage section covering:

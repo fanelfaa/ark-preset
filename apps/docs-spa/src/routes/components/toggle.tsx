@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/solid-router";
 import { DocsLink } from "../../components/DocsLink";
 import { H1, H2, H3, P, InlineCode, Pre, A } from "../../components/markdown";
-import { Toggle } from "@ui/solid";
+import { Toggle } from "@fan-ui/solid";
 import ToggleBasicDemo from "@demos/toggle-demo/ToggleBasicDemo.tsx";
 import ToggleIndicatorDemo from "@demos/toggle-demo/ToggleIndicatorDemo.tsx";
 
@@ -95,7 +95,7 @@ export function ToggleSizesDemo() {
       <P>Run the following command to add the component to your project:</P>
       <Pre>{`
 
-npx solidui-cli@latest add toggle
+npx @fan-ui/cli@latest add toggle
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
@@ -126,7 +126,7 @@ export type ToggleVariants = VariantProps<typeof toggleVariants>`}</Pre>
         <Pre>{`// src/components/toggle/toggle.base.tsx
 import { Toggle as ArkToggle } from "@ark-ui/solid/toggle";
 import { splitProps, type Component } from "solid-js";
-import { toggleVariants, type ToggleVariants } from "@ui/core";
+import { toggleVariants, type ToggleVariants } from "@fan-ui/core";
 
 const styles = toggleVariants();
 
@@ -149,7 +149,7 @@ const ToggleIndicator = ToggleBase.Indicator;
 
 export { ToggleRoot, ToggleIndicator, ToggleBase };
 
-export { toggleVariants, type ToggleVariants } from "@ui/core";`}</Pre>
+export { toggleVariants, type ToggleVariants } from "@fan-ui/core";`}</Pre>
       </div>
       <H2>Usage</H2>
       <P>Import the components:</P>

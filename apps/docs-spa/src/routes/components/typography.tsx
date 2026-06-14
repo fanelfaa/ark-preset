@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/solid-router";
 import { DocsLink } from "../../components/DocsLink";
 import TypographyBasicDemo from "@demos/typography-demo/TypographyBasicDemo.tsx";
-import { H1, H2, H3, P, InlineCode } from "@ui/solid";
+import { H1, H2, H3, P, InlineCode } from "@fan-ui/solid";
 import { Pre, Table, Th, Td, THead, TBody, Tr } from "../../components/markdown";
 
 export const Route = createFileRoute("/components/typography")({ component: TypographyPage });
@@ -42,7 +42,7 @@ export function TypographyDemo() {
       <P>Run the following command to add the component to your project:</P>
       <Pre>{`
 
-npx solidui-cli@latest add typography
+npx @fan-ui/cli@latest add typography
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
@@ -140,7 +140,7 @@ export const List: Component<HTMLArkProps<"ul">> = (props) => {
       <P>Import the component:</P>
       <Pre>{`
 
-import { H1, H2, P, Lead } from "@ui/solid";
+import { H1, H2, P, Lead } from "@fan-ui/solid";
       `}</Pre>
       <P>Headings:</P>
       <Pre>{`

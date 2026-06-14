@@ -1,4 +1,4 @@
-import { Separator } from "@ui/solid";
+import { Separator } from "@fan-ui/solid";
 
 export default function SeparatorBasicDemo() {
   return (

@@ -1,6 +1,6 @@
 import { RadioGroup as ArkRadioGroup } from "@ark-ui/solid/radio-group";
 import { splitProps, type Component } from "solid-js";
-import { radioGroupVariants, type RadioGroupVariants } from "@ui/core";
+import { radioGroupVariants, type RadioGroupVariants } from "@fan-ui/core";
 
 const styles = radioGroupVariants();
 

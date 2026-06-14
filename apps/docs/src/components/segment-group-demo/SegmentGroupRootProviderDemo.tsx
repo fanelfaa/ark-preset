@@ -1,5 +1,5 @@
 import { Index, createMemo } from "solid-js";
-import { SegmentGroupBase } from "@ui/solid";
+import { SegmentGroupBase } from "@fan-ui/solid";
 import { useSegmentGroup } from "@ark-ui/solid/segment-group";
 
 const frameworks = ["React", "Solid", "Vue"];

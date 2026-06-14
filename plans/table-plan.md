@@ -52,7 +52,7 @@ No visual variants — table does not have semantic visual variants. The recipe 
 
 ### 4. Solid Component: `packages/solid/src/table/index.tsx`
 
-- [ ] Import `tableVariants` from `@ui/core`
+- [ ] Import `tableVariants` from `@fan-ui/core`
 - [ ] Import `ark, type HTMLArkProps` from `@ark-ui/solid/factory`
 - [ ] Module-level: `const styles = tableVariants();`
 - [ ] Create flat component file (no base/ directory needed) — same pattern as Card:
@@ -71,8 +71,8 @@ No visual variants — table does not have semantic visual variants. The recipe 
 
 ### 6. Demo: `apps/docs/src/components/table-demo/TableBasicDemo.tsx`
 
-- [ ] Create BasicDemo importing named composites from `@ui/solid` only
-- [ ] Imports: `import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell, TableCaption } from "@ui/solid"`
+- [ ] Create BasicDemo importing named composites from `@fan-ui/solid` only
+- [ ] Imports: `import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell, TableCaption } from "@fan-ui/solid"`
 - [ ] Basic usage:
   ```tsx
   <Table>

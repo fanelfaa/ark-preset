@@ -80,4 +80,4 @@ const NumberInput: Component<NumberInputProps> = (props) => {
 
 export { NumberInput, NumberInputBase };
 
-export { numberInputVariants, type NumberInputVariants } from "@ui/core";
+export { numberInputVariants, type NumberInputVariants } from "@fan-ui/core";

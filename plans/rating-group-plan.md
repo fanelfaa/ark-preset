@@ -62,7 +62,7 @@ Star-based rating input component supporting controlled/uncontrolled modes, half
 
 ### 7. Demo: `apps/docs/src/components/rating-group-demo/RatingGroupBasicDemo.tsx`
 
-- [ ] Only named composites from `@ui/solid`, no `.base.tsx`
+- [ ] Only named composites from `@fan-ui/solid`, no `.base.tsx`
 - [ ] Uses `Index` over `context().items`
 
 ### 8. Docs: `apps/docs/src/content/docs/components/rating-group.mdx`

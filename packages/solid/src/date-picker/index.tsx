@@ -3,7 +3,7 @@ import { DatePicker as ArkDatePicker } from "@ark-ui/solid/date-picker";
 import type { UseDatePickerContext } from "@ark-ui/solid/date-picker";
 import type { DateValue } from "@internationalized/date";
 import { Portal } from "solid-js/web";
-import { buttonVariants, datePickerVariants } from "@ui/core";
+import { buttonVariants, datePickerVariants } from "@fan-ui/core";
 import { DatePickerBase } from "./date-picker.base";
 
 const styles = datePickerVariants();
@@ -328,4 +328,4 @@ const DatePicker: Component<DatePickerProps> = (props) => {
 
 export { DatePicker, DatePickerBase };
 
-export { datePickerVariants, type DatePickerVariants } from "@ui/core";
+export { datePickerVariants, type DatePickerVariants } from "@fan-ui/core";

@@ -1,4 +1,4 @@
-import { Toggle } from "@ui/solid";
+import { Toggle } from "@fan-ui/solid";
 
 export default function ToggleBasicDemo() {
   return (

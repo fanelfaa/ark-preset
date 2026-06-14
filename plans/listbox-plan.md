@@ -64,7 +64,7 @@ The Listbox component provides a list of selectable options with keyboard naviga
 
 ### 7. Demo: `apps/docs/src/components/listbox-demo/ListboxBasicDemo.tsx`
 
-- [ ] Only named composites from `@ui/solid`, no `.base.tsx`
+- [ ] Only named composites from `@fan-ui/solid`, no `.base.tsx`
 - [ ] Uses `createListCollection` + `Index`
 
 ### 8. Docs: `apps/docs/src/content/docs/components/listbox.mdx`

@@ -128,7 +128,7 @@ import { Pagination, PaginationPageList, PaginationFirstTrigger, PaginationPrevT
       <P>Run the following command to add the component to your project:</P>
       <Pre>{`
 
-npx solidui-cli@latest add pagination
+npx @fan-ui/cli@latest add pagination
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
@@ -264,7 +264,7 @@ export { PaginationVariantContext, usePaginationVariant };`}</Pre>
         <Pre>{`import { splitProps, For, type Component } from "solid-js";
 import { Pagination as PaginationBase } from "./pagination.base";
 import { Pagination as ArkPagination } from "@ark-ui/solid/pagination";
-import type { PaginationVariants } from "@ui/core";
+import type { PaginationVariants } from "@fan-ui/core";
 
 const Pagination: Component<ArkPagination.RootProps & PaginationVariants> = (props) => {
   const [local, others] = splitProps(props, ["class", "size", "children"]);

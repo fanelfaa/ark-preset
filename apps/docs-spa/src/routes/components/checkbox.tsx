@@ -45,7 +45,7 @@ export function CheckboxDemo() {
       <P>Run the following command to add the component to your project:</P>
       <Pre>{`
 
-npx solidui-cli@latest add checkbox
+npx @fan-ui/cli@latest add checkbox
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">

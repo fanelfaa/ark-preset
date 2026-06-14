@@ -1,5 +1,5 @@
 import { splitProps, type Component } from "solid-js";
-import { breadcrumbVariants } from "@ui/core";
+import { breadcrumbVariants } from "@fan-ui/core";
 import { ark, type HTMLArkProps } from "@ark-ui/solid/factory";
 
 const styles = breadcrumbVariants();

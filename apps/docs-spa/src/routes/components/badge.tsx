@@ -14,7 +14,7 @@ import {
   TBody,
   Tr,
 } from "../../components/markdown";
-import { Badge } from "@ui/solid";
+import { Badge } from "@fan-ui/solid";
 import BadgeBasicDemo from "@demos/badge-demo/BadgeBasicDemo.tsx";
 
 export const Route = createFileRoute("/components/badge")({ component: BadgePage });
@@ -51,7 +51,7 @@ export function BadgeDemo() {
       <P>Run the following command to add the component to your project:</P>
       <Pre>{`
 
-npx solidui-cli@latest add badge
+npx @fan-ui/cli@latest add badge
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
@@ -106,7 +106,7 @@ export { Badge, badgeVariants }`}</Pre>
       <P>Import the component:</P>
       <Pre>{`
 
-import { Badge } from "@ui/solid";
+import { Badge } from "@fan-ui/solid";
       `}</Pre>
       <P>Basic:</P>
       <Pre>{`
@@ -151,7 +151,7 @@ import { Badge } from "@ui/solid";
       </div>
       <Pre>{`
 
-import { Badge } from "@ui/solid";
+import { Badge } from "@fan-ui/solid";
 
 <Badge asChild={props=> <a {...props()}/>} variant="outline">
   Anchor Badge

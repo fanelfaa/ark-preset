@@ -1,4 +1,4 @@
-import { TagsInput } from "@ui/solid";
+import { TagsInput } from "@fan-ui/solid";
 
 export default function TagsInputInvalidDemo() {
   return (

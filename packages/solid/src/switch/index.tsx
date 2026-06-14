@@ -1,7 +1,7 @@
 import { Switch as ArkSwitch } from "@ark-ui/solid/switch";
 import { splitProps, type Component } from "solid-js";
 import { Switch as SwitchBase } from "./switch.base";
-import { switchVariants } from "@ui/core";
+import { switchVariants } from "@fan-ui/core";
 
 const styles = switchVariants();
 
@@ -40,4 +40,4 @@ const SwitchRootProvider: Component<ArkSwitch.RootProviderProps> = (props) => {
 
 export { Switch, SwitchRootProvider, SwitchLabel, SwitchBase };
 
-export { switchVariants, type SwitchVariants } from "@ui/core";
+export { switchVariants, type SwitchVariants } from "@fan-ui/core";

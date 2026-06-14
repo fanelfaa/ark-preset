@@ -1,4 +1,4 @@
-import { Tooltip, TooltipBase } from "@ui/solid";
+import { Tooltip, TooltipBase } from "@fan-ui/solid";
 
 export default function TooltipManualArrowDemo() {
   return (

@@ -1,4 +1,4 @@
-import { Spinner } from "@ui/solid";
+import { Spinner } from "@fan-ui/solid";
 
 export default function SpinnerBasicDemo() {
   return (

@@ -1,9 +1,9 @@
-# `@ui/cli` — UI Component CLI
+# `@fan-ui/cli` — UI Component CLI
 
 Generate UI components into your project from pre-built templates.
 
 ```bash
-npx @ui/cli add button --solid
+npx @fan-ui/cli add button --solid
 ```
 
 ## Architecture
@@ -14,7 +14,7 @@ packages/solid/src/  ──  generate   ──  templates/ + component-manifest.
 packages/core/       ──  manifest   ──       ↓
                                          add.ts reads manifest
                                          copies files to user project
-                                         rewrites @ui/core → ../recipes
+                                         rewrites @fan-ui/core → ../recipes
 ```
 
 The CLI no longer reads directly from monorepo source files at runtime. Instead:
@@ -61,7 +61,7 @@ node dist/index.js add button --framework solid
 ```
 ./src/components/
 ├── ui/
-│   ├── button/index.tsx   # Component source (@ui/core → ../recipes)
+│   ├── button/index.tsx   # Component source (@fan-ui/core → ../recipes)
 │   ├── index.ts           # Barrel: export * from './button'
 │   └── theme.css          # Base theme styles (copied once)
 └── recipes/
@@ -98,7 +98,7 @@ The generated `component-manifest.json` follows this schema:
 
 Dependencies are auto-detected by the build script:
 
-- **recipeDependencies** — detected via `import { *Variants } from "@ui/core"` (cross-recipe references)
+- **recipeDependencies** — detected via `import { *Variants } from "@fan-ui/core"` (cross-recipe references)
 - **componentDependencies** — detected via `import { ... } from "../<component>"` (cross-component references)
 
 Known cross-dependencies: `button → spinner`, `select → scroll-area`, `alert-dialog → button`, `date-picker → button`, `menu → button`.

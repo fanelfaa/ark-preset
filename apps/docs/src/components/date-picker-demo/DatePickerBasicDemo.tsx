@@ -1,4 +1,4 @@
-import { DatePicker, Separator } from "@ui/solid";
+import { DatePicker, Separator } from "@fan-ui/solid";
 
 export default function DatePickerBasicDemo() {
   return (

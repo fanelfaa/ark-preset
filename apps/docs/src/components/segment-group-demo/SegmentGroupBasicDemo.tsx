@@ -1,5 +1,5 @@
 import { Index } from "solid-js";
-import { SegmentGroup, SegmentGroupItem } from "@ui/solid";
+import { SegmentGroup, SegmentGroupItem } from "@fan-ui/solid";
 
 const frameworks = ["React", "Solid", "Svelte", "Vue"];
 

@@ -1,5 +1,5 @@
 import { splitProps, type Component, children } from "solid-js";
-import { aspectRatioVariants } from "@ui/core";
+import { aspectRatioVariants } from "@fan-ui/core";
 import { ark, type HTMLArkProps } from "@ark-ui/solid/factory";
 
 type AspectRatioProps = HTMLArkProps<"div"> & {

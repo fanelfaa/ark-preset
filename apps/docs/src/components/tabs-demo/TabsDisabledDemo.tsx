@@ -1,5 +1,5 @@
 import { Index } from "solid-js";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@ui/solid";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@fan-ui/solid";
 
 const tabs = [
   { value: "active", label: "Active", content: "This tab is enabled and functional." },

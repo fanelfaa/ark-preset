@@ -39,7 +39,7 @@ export function SwitchDemo() {
       <P>Run the following command to add the component to your project:</P>
       <Pre>{`
 
-npx solidui-cli@latest add switch
+npx @fan-ui/cli@latest add switch
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">

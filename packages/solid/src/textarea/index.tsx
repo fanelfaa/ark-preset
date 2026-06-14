@@ -1,6 +1,6 @@
 import { splitProps, type Component } from "solid-js";
 import { Textarea as TextareaBase } from "./textarea.base";
-import { type TextareaVariants } from "@ui/core";
+import { type TextareaVariants } from "@fan-ui/core";
 import { Field as ArkField } from "@ark-ui/solid/field";
 
 type TextareaProps = {
@@ -25,4 +25,4 @@ const Textarea: Component<TextareaProps> = (props) => {
 };
 
 export { Textarea, TextareaBase };
-export { textareaVariants, type TextareaVariants } from "@ui/core";
+export { textareaVariants, type TextareaVariants } from "@fan-ui/core";

@@ -1,4 +1,4 @@
-import { ToggleGroup, ToggleGroupItem } from "@ui/solid";
+import { ToggleGroup, ToggleGroupItem } from "@fan-ui/solid";
 
 export default function ToggleGroupBasicDemo() {
   return (

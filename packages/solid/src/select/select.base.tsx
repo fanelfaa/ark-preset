@@ -1,6 +1,6 @@
 import { Select as ArkSelect } from "@ark-ui/solid/select";
 import { splitProps, type Component } from "solid-js";
-import { selectVariants } from "@ui/core";
+import { selectVariants } from "@fan-ui/core";
 
 const styles = selectVariants();
 

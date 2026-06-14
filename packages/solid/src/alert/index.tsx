@@ -1,5 +1,5 @@
 import { splitProps, type Component } from "solid-js";
-import { alertVariants, type AlertVariants } from "@ui/core";
+import { alertVariants, type AlertVariants } from "@fan-ui/core";
 import { ark, type HTMLArkProps } from "@ark-ui/solid/factory";
 
 const styles = alertVariants();

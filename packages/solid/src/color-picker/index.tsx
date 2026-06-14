@@ -98,4 +98,4 @@ const ColorPicker: Component<ColorPickerProps> = (props) => {
 
 export { ColorPicker, ColorPickerBase };
 
-export { colorPickerVariants, type ColorPickerVariants } from "@ui/core";
+export { colorPickerVariants, type ColorPickerVariants } from "@fan-ui/core";

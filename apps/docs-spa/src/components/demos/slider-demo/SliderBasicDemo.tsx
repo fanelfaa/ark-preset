@@ -1,4 +1,4 @@
-import { Slider, SliderLabel, SliderValueText, SliderControl, SliderThumb } from "@ui/solid";
+import { Slider, SliderLabel, SliderValueText, SliderControl, SliderThumb } from "@fan-ui/solid";
 
 export default function SliderBasicDemo() {
   return (

@@ -5,8 +5,8 @@ import {
   PopoverTitle,
   PopoverDescription,
   PopoverBase,
-} from "@ui/solid";
-import { Button } from "@ui/solid";
+} from "@fan-ui/solid";
+import { Button } from "@fan-ui/solid";
 
 export default function PopoverRootProviderDemo() {
   const popover = usePopover();

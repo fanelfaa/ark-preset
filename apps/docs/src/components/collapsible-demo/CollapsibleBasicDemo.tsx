@@ -3,7 +3,7 @@ import {
   CollapsibleIndicator,
   CollapsibleTrigger,
   CollapsibleContent,
-} from "@ui/solid";
+} from "@fan-ui/solid";
 
 export default function CollapsibleBasicDemo() {
   return (

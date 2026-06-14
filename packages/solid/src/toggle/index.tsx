@@ -5,4 +5,4 @@ const ToggleIndicator = ToggleBase.Indicator;
 
 export { Toggle, ToggleIndicator, ToggleBase };
 
-export { toggleVariants, type ToggleVariants } from "@ui/core";
+export { toggleVariants, type ToggleVariants } from "@fan-ui/core";

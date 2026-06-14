@@ -1,6 +1,6 @@
 import { Tabs as ArkTabs } from "@ark-ui/solid/tabs";
 import { splitProps, type Component } from "solid-js";
-import { tabsVariants } from "@ui/core";
+import { tabsVariants } from "@fan-ui/core";
 
 const styles = tabsVariants();
 

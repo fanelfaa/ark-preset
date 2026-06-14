@@ -1,6 +1,6 @@
 import { Slider as ArkSlider } from "@ark-ui/solid/slider";
 import { splitProps, type Component } from "solid-js";
-import { sliderVariants } from "@ui/core";
+import { sliderVariants } from "@fan-ui/core";
 
 const styles = sliderVariants();
 

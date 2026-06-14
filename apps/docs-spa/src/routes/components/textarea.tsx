@@ -53,7 +53,7 @@ export function TextareaDemo() {
       <P>Run the following command to add the component to your project:</P>
       <Pre>{`
 
-npx solidui-cli@latest add textarea
+npx @fan-ui/cli@latest add textarea
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
@@ -163,7 +163,7 @@ export { textareaVariants, type TextareaVariants } from "../recipes/textarea";`}
       <P>Import the component:</P>
       <Pre>{`
 
-import { Textarea } from "@ui/solid";
+import { Textarea } from "@fan-ui/solid";
       `}</Pre>
       <P>Basic textarea:</P>
       <Pre>{`

@@ -1,4 +1,4 @@
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@ui/solid";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@fan-ui/solid";
 
 export default function TabsBasicDemo() {
   return (

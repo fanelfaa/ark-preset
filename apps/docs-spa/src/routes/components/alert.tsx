@@ -14,7 +14,7 @@ import {
   Tr,
   Td,
 } from "../../components/markdown";
-import { Alert, AlertTitle, AlertDescription } from "@ui/solid";
+import { Alert, AlertTitle, AlertDescription } from "@fan-ui/solid";
 import AlertBasicDemo from "@demos/alert-demo/AlertBasicDemo.tsx";
 
 export const Route = createFileRoute("/components/alert")({ component: AlertPage });
@@ -50,7 +50,7 @@ export function AlertDemo() {
       <P>Run the following command to add the component to your project:</P>
       <Pre>{`
 
-npx solidui-cli@latest add alert
+npx @fan-ui/cli@latest add alert
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
@@ -118,7 +118,7 @@ export { Alert, AlertTitle, AlertDescription, alertVariants }`}</Pre>
       <P>Import the components:</P>
       <Pre>{`
 
-import { Alert, AlertTitle, AlertDescription, AlertAction } from "@ui/solid";
+import { Alert, AlertTitle, AlertDescription, AlertAction } from "@fan-ui/solid";
       `}</Pre>
       <P>Basic:</P>
       <Pre>{`

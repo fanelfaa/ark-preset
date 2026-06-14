@@ -70,7 +70,7 @@ export function DialogDemo() {
       <P>Run the following command to add the component to your project:</P>
       <Pre>{`
 
-npx solidui-cli@latest add dialog
+npx @fan-ui/cli@latest add dialog
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">

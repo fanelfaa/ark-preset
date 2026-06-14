@@ -1,5 +1,5 @@
 import { createSignal } from "solid-js";
-import { Tooltip, TooltipTrigger, TooltipContent } from "@ui/solid";
+import { Tooltip, TooltipTrigger, TooltipContent } from "@fan-ui/solid";
 
 export default function TooltipControlledDemo() {
   const [open, setOpen] = createSignal(false);

@@ -1,5 +1,5 @@
 import { Index, createMemo } from "solid-js";
-import { TabsBase, TabsList, TabsTrigger, TabsContent } from "@ui/solid";
+import { TabsBase, TabsList, TabsTrigger, TabsContent } from "@fan-ui/solid";
 import { useTabs } from "@ark-ui/solid/tabs";
 
 const tabData = [

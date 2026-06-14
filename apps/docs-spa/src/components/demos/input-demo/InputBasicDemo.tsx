@@ -1,4 +1,4 @@
-import { Input } from "@ui/solid";
+import { Input } from "@fan-ui/solid";
 
 export default function InputBasicDemo() {
   return (

@@ -1,6 +1,6 @@
 import { Progress as ArkProgress } from "@ark-ui/solid/progress";
 import { splitProps, type Component } from "solid-js";
-import { progressVariants } from "@ui/core";
+import { progressVariants } from "@fan-ui/core";
 
 const styles = progressVariants();
 

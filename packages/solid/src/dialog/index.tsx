@@ -50,4 +50,4 @@ export {
   DialogBase,
 };
 
-export { dialogVariants, type DialogVariants } from "@ui/core";
+export { dialogVariants, type DialogVariants } from "@fan-ui/core";

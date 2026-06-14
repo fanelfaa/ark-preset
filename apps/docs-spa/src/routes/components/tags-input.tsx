@@ -36,7 +36,7 @@ export default function TagsInputBasicDemo() {
       <P>Run the following command to add the component to your project:</P>
       <Pre>{`
 
-npx solidui-cli@latest add tags-input
+npx @fan-ui/cli@latest add tags-input
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">

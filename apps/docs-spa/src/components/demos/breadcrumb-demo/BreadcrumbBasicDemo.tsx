@@ -10,7 +10,7 @@ import {
   MenuBase,
   MenuContent,
   MenuItem,
-} from "@ui/solid";
+} from "@fan-ui/solid";
 
 export default function BreadcrumbBasicDemo() {
   return (

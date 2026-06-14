@@ -101,7 +101,7 @@ A color selection component with saturation/brightness area, channel sliders, fo
   ```tsx
   import { ColorPicker as ArkColorPicker } from "@ark-ui/solid/color-picker";
   ```
-- [ ] Import `colorPickerVariants` + type `ColorPickerVariants` from `@ui/core`
+- [ ] Import `colorPickerVariants` + type `ColorPickerVariants` from `@fan-ui/core`
 - [ ] Module-level: `const styles = colorPickerVariants();`
 - [ ] Create individual named exports (Pattern C, same as date-picker):
   - **Root**: `Component<ArkColorPicker.RootProps & ColorPickerVariants>` — split `["class", "size", "inline"]`, apply `styles.root({ class: local.class, size: local.size, inline: local.inline })`
@@ -225,7 +225,7 @@ A color selection component with saturation/brightness area, channel sliders, fo
 - [ ] Additional named exports for advanced composition:
   - **ColorPickerArea**, **ColorPickerChannelSlider**, **ColorPickerChannelInput**, **ColorPickerSwatchGroup**, **ColorPickerSwatch**, etc.
 - [ ] Re-export base parts: `export * from "./color-picker.base"`
-- [ ] Re-export variants: `export { colorPickerVariants, type ColorPickerVariants } from "@ui/core"`
+- [ ] Re-export variants: `export { colorPickerVariants, type ColorPickerVariants } from "@fan-ui/core"`
 
 ### 6. Solid Barrel: `packages/solid/src/index.ts`
 
@@ -234,7 +234,7 @@ A color selection component with saturation/brightness area, channel sliders, fo
 ### 7. Demo: `apps/docs/src/components/color-picker-demo/`
 
 - [ ] Create `ColorPickerBasicDemo.tsx` — basic color picker with presets
-  - Imports: `import { ColorPicker } from "@ui/solid"`
+  - Imports: `import { ColorPicker } from "@fan-ui/solid"`
   - Usage: `<ColorPicker label="Color" presets={["#ff0000", "#00ff00", "#0000ff"]} />`
 - [ ] Create `ColorPickerInlineDemo.tsx` — inline layout (no popover)
 - [ ] Create `ColorPickerControlledDemo.tsx` — controlled `value` + `onValueChange`

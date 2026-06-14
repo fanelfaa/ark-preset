@@ -55,7 +55,7 @@
 - [ ] Create composite named exports (e.g., `<Name>`, `<Name>Item`)
 - [ ] **No** `export *` from base (Pattern E rule)
 - [ ] Export base namespace: `export { <Name> as <Name>Base }`
-- [ ] Re-export variants from `@ui/core`
+- [ ] Re-export variants from `@fan-ui/core`
 
 ### 6. Solid Barrel: `packages/solid/src/index.ts`
 
@@ -64,7 +64,7 @@
 ### 7. Demos: `apps/docs/src/components/<name>-demo/`
 
 - [ ] Create `{Name}BasicDemo.tsx` — single basic example only (not multiple variants bundled)
-- [ ] Must import only named composites from `@ui/solid`, **never** `.base.tsx` or `<Name>Base`
+- [ ] Must import only named composites from `@fan-ui/solid`, **never** `.base.tsx` or `<Name>Base`
 - [ ] Create ONE separate demo file per usage variant:
   - `{Name}ControlledDemo.tsx` — controlled value variant
   - `{Name}DisabledDemo.tsx` — disabled variant

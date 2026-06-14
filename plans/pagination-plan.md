@@ -56,7 +56,7 @@ A navigation component for moving between pages of content. Built on Ark UI's `@
 
 - [ ] Import Ark UI parts from `@ark-ui/solid/pagination`
   - `Pagination as ArkPagination, type PaginationProps as ArkPaginationProps` (or use namespace imports)
-- [ ] Import `paginationVariants`, `type PaginationVariants` from `@ui/core`
+- [ ] Import `paginationVariants`, `type PaginationVariants` from `@fan-ui/core`
 - [ ] Import `splitProps, type Component, createContext, useContext` from "solid-js"
 - [ ] Create `PaginationVariantContext` for size propagation (same pattern as segment-group variant context)
 - [ ] Module-level: `const styles = paginationVariants();`
@@ -88,7 +88,7 @@ A navigation component for moving between pages of content. Built on Ark UI's `@
 
 - [ ] Import namespace as `{ Pagination as PaginationBase }` from `./pagination.base`
 - [ ] Import Ark types from `@ark-ui/solid/pagination`
-- [ ] Import `PaginationVariants` type from `@ui/core`
+- [ ] Import `PaginationVariants` type from `@fan-ui/core`
 - [ ] Import `Index, For, type Component` from "solid-js" for rendering page items
 - [ ] **No** `export *` from base (Pattern E rule)
 - [ ] Create composite named exports:
@@ -153,7 +153,7 @@ A navigation component for moving between pages of content. Built on Ark UI's `@
   The composite Pagination component (Root with default children rendering all triggers + pages) is more complex and can be a separate higher-level export. Let's keep it simple with re-exported aliases.
 
 - [ ] Export base namespace: `export { Pagination as PaginationBase }`
-- [ ] Re-export variants: `export { paginationVariants, type PaginationVariants } from "@ui/core"`
+- [ ] Re-export variants: `export { paginationVariants, type PaginationVariants } from "@fan-ui/core"`
 
 ### 6. Solid Barrel: `packages/solid/src/index.ts`
 
@@ -162,13 +162,13 @@ A navigation component for moving between pages of content. Built on Ark UI's `@
 ### 7. Demo: `apps/docs/src/components/pagination-demo/`
 
 - [ ] Create `PaginationBasicDemo.tsx` — basic usage with default page items
-- [ ] Must import only named composites from `@ui/solid`, never `.base.tsx` or `PaginationBase`
-- [ ] Imports: `import { Pagination, PaginationItem, PaginationPrevTrigger, PaginationNextTrigger, PaginationFirstTrigger, PaginationLastTrigger, PaginationEllipsis } from "@ui/solid"`
+- [ ] Must import only named composites from `@fan-ui/solid`, never `.base.tsx` or `PaginationBase`
+- [ ] Imports: `import { Pagination, PaginationItem, PaginationPrevTrigger, PaginationNextTrigger, PaginationFirstTrigger, PaginationLastTrigger, PaginationEllipsis } from "@fan-ui/solid"`
 - [ ] Basic usage:
 
   ```tsx
   import { Index } from "solid-js";
-  import { Pagination, ... } from "@ui/solid";
+  import { Pagination, ... } from "@fan-ui/solid";
 
   <Pagination count={100} pageSize={10}>
     <PaginationFirstTrigger>

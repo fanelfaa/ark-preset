@@ -1,9 +1,9 @@
 import { splitProps, type Component, type JSX } from "solid-js";
 import { type HTMLArkProps } from "@ark-ui/solid/factory";
 import CodeBlock from "../CodeBlock";
-import { Table as TableBase } from "@ui/solid";
+import { Table as TableBase } from "@fan-ui/solid";
 
-// ── Re-export typography components from @ui/solid ──────────────
+// ── Re-export typography components from @fan-ui/solid ──────────────
 export {
   H1,
   H2,
@@ -17,7 +17,7 @@ export {
   InlineCode,
   Blockquote,
   List,
-} from "@ui/solid";
+} from "@fan-ui/solid";
 
 // ── Link ────────────────────────────────────────────────────────
 interface AProps extends JSX.AnchorHTMLAttributes<HTMLAnchorElement> {
@@ -74,7 +74,7 @@ export const Img: Component<ImgProps> = (props) => {
   );
 };
 
-// ── Table (wrapper with overflow scroll + @ui/solid Table) ─────
+// ── Table (wrapper with overflow scroll + @fan-ui/solid Table) ─────
 type TableProps = HTMLArkProps<"table">;
 
 export const Table: Component<TableProps> = (props) => {
@@ -86,11 +86,11 @@ export const Table: Component<TableProps> = (props) => {
   );
 };
 
-// ── Re-export table components from @ui/solid ───────────────────
+// ── Re-export table components from @fan-ui/solid ───────────────────
 export {
   TableHeader as THead,
   TableBody as TBody,
   TableHead as Th,
   TableCell as Td,
   TableRow as Tr,
-} from "@ui/solid";
+} from "@fan-ui/solid";

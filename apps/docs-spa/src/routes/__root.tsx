@@ -1,6 +1,6 @@
 import { Link, Outlet, createRootRoute } from "@tanstack/solid-router";
 import { TanStackRouterDevtools } from "@tanstack/solid-router-devtools";
-import { Button } from "@ui/solid";
+import { Button } from "@fan-ui/solid";
 
 import "../styles.css";
 

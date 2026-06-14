@@ -207,7 +207,7 @@ import {
 Run the following command to add the component to your project:
 
 ```bash
-npx solidui-cli@latest add <component>
+npx @fan-ui/cli@latest add <component>
 ```
 ````
 

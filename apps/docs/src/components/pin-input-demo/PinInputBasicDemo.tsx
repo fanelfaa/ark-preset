@@ -1,4 +1,4 @@
-import { PinInput, PinInputControl, PinInputInput, PinInputLabel } from "@ui/solid";
+import { PinInput, PinInputControl, PinInputInput, PinInputLabel } from "@fan-ui/solid";
 import { Index } from "solid-js";
 
 export default function PinInputBasicDemo() {

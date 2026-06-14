@@ -5,7 +5,7 @@ import {
   SliderValueText,
   SliderControl,
   SliderThumb,
-} from "@ui/solid";
+} from "@fan-ui/solid";
 
 export default function SliderRootProviderDemo() {
   const slider = useSlider({ defaultValue: [50], min: 0, max: 100 });

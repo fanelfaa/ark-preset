@@ -66,4 +66,4 @@ const CheckboxRootProvider: Component<ArkCheckbox.RootProviderProps> = (props) =
 
 export { Checkbox, CheckboxRootProvider, CheckboxLabel, CheckboxBase };
 
-export { checkboxVariants, type CheckboxVariants } from "@ui/core";
+export { checkboxVariants, type CheckboxVariants } from "@fan-ui/core";

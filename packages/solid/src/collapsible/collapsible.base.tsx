@@ -1,6 +1,6 @@
 import { Collapsible as ArkCollapsible } from "@ark-ui/solid/collapsible";
 import { splitProps, type Component } from "solid-js";
-import { collapsibleVariants } from "@ui/core";
+import { collapsibleVariants } from "@fan-ui/core";
 
 const styles = collapsibleVariants();
 

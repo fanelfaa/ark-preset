@@ -1,6 +1,6 @@
 import { Dialog as ArkDialog } from "@ark-ui/solid/dialog";
 import { splitProps, type Component } from "solid-js";
-import { alertDialogVariants, buttonVariants, type ButtonVariants } from "@ui/core";
+import { alertDialogVariants, buttonVariants, type ButtonVariants } from "@fan-ui/core";
 import { HTMLProps } from "@ark-ui/solid";
 import { ark, type HTMLArkProps } from "@ark-ui/solid/factory";
 

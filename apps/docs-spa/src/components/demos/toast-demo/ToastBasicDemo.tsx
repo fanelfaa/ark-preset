@@ -1,4 +1,4 @@
-import { Button, createToaster, Toaster } from "@ui/solid";
+import { Button, createToaster, Toaster } from "@fan-ui/solid";
 
 const toaster = createToaster({
   placement: "bottom-end",

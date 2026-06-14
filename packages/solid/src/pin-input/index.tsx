@@ -15,4 +15,4 @@ export {
   PinInputBase,
 };
 
-export { pinInputVariants, type PinInputVariants } from "@ui/core";
+export { pinInputVariants, type PinInputVariants } from "@fan-ui/core";

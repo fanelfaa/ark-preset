@@ -26,12 +26,12 @@ importers:
       '@astrojs/solid-js':
         specifier: ^6.0.1
         version: 6.0.1(@types/node@25.9.3)(jiti@2.7.0)(lightningcss@1.32.0)(solid-js@1.9.13)(tsx@4.22.4)
+      '@fan-ui/solid':
+        specifier: workspace:*
+        version: link:../../packages/solid
       '@tailwindcss/vite':
         specifier: ^4.3.0
         version: 4.3.1(vite@7.3.5(@types/node@25.9.3)(jiti@2.7.0)(lightningcss@1.32.0)(tsx@4.22.4))
-      '@ui/solid':
-        specifier: workspace:*
-        version: link:../../packages/solid
       astro:
         specifier: ^6.3.3
         version: 6.4.6(@types/node@25.9.3)(jiti@2.7.0)(lightningcss@1.32.0)(rollup@4.62.0)(tsx@4.22.4)
@@ -54,6 +54,12 @@ importers:
       '@ark-ui/solid':
         specifier: ^5.36.2
         version: 5.37.1(solid-js@1.9.13)
+      '@fan-ui/core':
+        specifier: workspace:*
+        version: link:../../packages/core
+      '@fan-ui/solid':
+        specifier: workspace:*
+        version: link:../../packages/solid
       '@tailwindcss/vite':
         specifier: ^4.1.18
         version: 4.3.1(vite@8.0.16(@types/node@25.9.3)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.22.4))
@@ -66,12 +72,6 @@ importers:
       '@tanstack/solid-router-devtools':
         specifier: latest
         version: 1.167.0(@tanstack/router-core@1.171.13)(@tanstack/solid-router@1.170.15(solid-js@1.9.13))(csstype@3.2.3)(solid-js@1.9.13)
-      '@ui/core':
-        specifier: workspace:*
-        version: link:../../packages/core
-      '@ui/solid':
-        specifier: workspace:*
-        version: link:../../packages/solid
       solid-js:
         specifier: ^1.9.12
         version: 1.9.13
@@ -112,10 +112,10 @@ importers:
 
   packages/cli:
     dependencies:
-      '@ui/core':
+      '@fan-ui/core':
         specifier: workspace:*
         version: link:../core
-      '@ui/solid':
+      '@fan-ui/solid':
         specifier: workspace:*
         version: link:../solid
       commander:
@@ -159,7 +159,7 @@ importers:
       '@ark-ui/solid':
         specifier: ^5.0.0
         version: 5.37.1(solid-js@1.9.13)
-      '@ui/core':
+      '@fan-ui/core':
         specifier: workspace:*
         version: link:../core
       solid-js:

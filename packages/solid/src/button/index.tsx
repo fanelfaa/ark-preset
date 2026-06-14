@@ -1,5 +1,5 @@
 import { splitProps, type Component, Show, children } from "solid-js";
-import { ButtonVariants, buttonVariants } from "@ui/core";
+import { ButtonVariants, buttonVariants } from "@fan-ui/core";
 import { ark, HTMLArkProps } from "@ark-ui/solid/factory";
 import { Spinner } from "../spinner";
 

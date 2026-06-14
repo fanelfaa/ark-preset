@@ -36,7 +36,7 @@ apps/docs/
 ## CONVENTIONS
 
 - Demos live in `src/components/<component>-demo/` as `.tsx` files
-- Each demo is a simple Solid.js component imported from `@ui/solid`
+- Each demo is a simple Solid.js component imported from `@fan-ui/solid`
 - Doc pages are `.mdx` files loading the demo component
 - Dark mode handled via Tailwind CSS v4 (no separate toggle)
 - Astro provides the page shell; Solid.js components are interactive islands
@@ -51,6 +51,6 @@ moon run docs:preview    # Preview built site
 
 ## NOTES
 
-- This app depends on `@ui/solid` — rebuild solid first when changing components
+- This app depends on `@fan-ui/solid` — rebuild solid first when changing components
 - Component demos auto-discovered from `src/content/docs/components/` directory
 - See root AGENTS.md for project-wide information

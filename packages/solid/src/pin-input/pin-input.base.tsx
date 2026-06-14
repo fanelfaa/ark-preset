@@ -1,6 +1,6 @@
 import { PinInput as ArkPinInput } from "@ark-ui/solid/pin-input";
 import { splitProps, type Component } from "solid-js";
-import { pinInputVariants } from "@ui/core";
+import { pinInputVariants } from "@fan-ui/core";
 
 const styles = pinInputVariants();
 

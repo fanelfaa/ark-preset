@@ -29,4 +29,4 @@ const HoverCardContent: Component<HoverCardContentProps> = (props) => {
 
 export { HoverCard, HoverCardTrigger, HoverCardContent, HoverCardBase };
 
-export { hoverCardVariants, type HoverCardVariants } from "@ui/core";
+export { hoverCardVariants, type HoverCardVariants } from "@fan-ui/core";

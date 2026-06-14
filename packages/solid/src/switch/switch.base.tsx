@@ -1,6 +1,6 @@
 import { Switch as ArkSwitch } from "@ark-ui/solid/switch";
 import { splitProps, type Component } from "solid-js";
-import { switchVariants } from "@ui/core";
+import { switchVariants } from "@fan-ui/core";
 
 const styles = switchVariants();
 

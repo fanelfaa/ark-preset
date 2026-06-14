@@ -1,5 +1,5 @@
 import { splitProps, type Component } from "solid-js";
-import { tableVariants } from "@ui/core";
+import { tableVariants } from "@fan-ui/core";
 import { ark, type HTMLArkProps } from "@ark-ui/solid/factory";
 
 const styles = tableVariants();

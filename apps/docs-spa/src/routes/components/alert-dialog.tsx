@@ -75,7 +75,7 @@ export function AlertDialogDemo() {
       <P>Run the following command to add the component to your project:</P>
       <Pre>{`
 
-npx solidui-cli@latest add alert-dialog
+npx @fan-ui/cli@latest add alert-dialog
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
@@ -225,7 +225,7 @@ import {
   AlertDialogDescription,
   AlertDialogCancel,
   AlertDialogAction,
-} from "@ui/solid";
+} from "@fan-ui/solid";
       `}</Pre>
       <P>Basic usage:</P>
       <Pre>{`

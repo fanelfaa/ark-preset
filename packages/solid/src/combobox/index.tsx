@@ -111,4 +111,4 @@ export {
   ComboboxRootProvider,
   ComboboxBase,
 };
-export { comboboxVariants, type ComboboxVariants } from "@ui/core";
+export { comboboxVariants, type ComboboxVariants } from "@fan-ui/core";

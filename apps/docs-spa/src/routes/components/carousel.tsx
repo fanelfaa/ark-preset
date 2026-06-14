@@ -26,7 +26,7 @@ import {
   CarouselNextTrigger,
   CarouselIndicatorGroup,
   CarouselIndicator,
-} from "@ui/solid";
+} from "@fan-ui/solid";
 
 const images = [
   { src: "https://picsum.photos/seed/carousel-1/600/400", alt: "Mountain landscape" },
@@ -64,7 +64,7 @@ export function CarouselDemo() {
       <P>Run the following command to add the component to your project:</P>
       <Pre>{`
 
-npx solidui-cli@latest add carousel
+npx @fan-ui/cli@latest add carousel
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">

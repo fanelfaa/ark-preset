@@ -1,6 +1,6 @@
 import { type JSX, type Component, Index } from "solid-js";
 import { Link } from "@tanstack/solid-router";
-import { ScrollArea, DrawerContent, Drawer, DrawerTrigger, DrawerBase } from "@ui/solid";
+import { ScrollArea, DrawerContent, Drawer, DrawerTrigger, DrawerBase } from "@fan-ui/solid";
 import { sidebarNav } from "../sidebar-nav";
 
 interface DocsLayoutProps {

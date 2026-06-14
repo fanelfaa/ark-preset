@@ -82,7 +82,7 @@ function QuickstartPage() {
 
       <Blockquote>
         <strong>Framework support:</strong> Currently only Solid.js is supported. Support for React,
-        Vue, and other frameworks is coming in future releases. A CLI (<InlineCode>@ui/cli</InlineCode>)
+        Vue, and other frameworks is coming in future releases. A CLI (<InlineCode>@fan-ui/cli</InlineCode>)
         to automate setup is also planned.
       </Blockquote>
 
@@ -140,7 +140,7 @@ npm install tw-animate-css
       </P>
 
       <Blockquote>
-        <strong>Tip:</strong> A CLI (<InlineCode>@ui/cli</InlineCode>) to automate this setup will be
+        <strong>Tip:</strong> A CLI (<InlineCode>@fan-ui/cli</InlineCode>) to automate this setup will be
         available in a future release.
       </Blockquote>
 

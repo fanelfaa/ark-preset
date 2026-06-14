@@ -1,4 +1,4 @@
-import { HoverCard, HoverCardTrigger, HoverCardBase } from "@ui/solid";
+import { HoverCard, HoverCardTrigger, HoverCardBase } from "@fan-ui/solid";
 
 export default function HoverCardArrowDemo() {
   return (

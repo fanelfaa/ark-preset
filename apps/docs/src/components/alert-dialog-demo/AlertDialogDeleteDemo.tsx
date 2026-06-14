@@ -8,8 +8,8 @@ import {
   AlertDialogCancel,
   AlertDialogAction,
   AlertDialogBase,
-} from "@ui/solid";
-import { Button } from "@ui/solid";
+} from "@fan-ui/solid";
+import { Button } from "@fan-ui/solid";
 import { type Component, createSignal } from "solid-js";
 
 interface DeleteAlertDialogProps {

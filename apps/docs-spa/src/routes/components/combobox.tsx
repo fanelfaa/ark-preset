@@ -56,7 +56,7 @@ function ComboboxDemo() {
       <P>Run the following command to add the component to your project:</P>
       <Pre>{`
 
-npx solidui-cli@latest add combobox
+npx @fan-ui/cli@latest add combobox
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">

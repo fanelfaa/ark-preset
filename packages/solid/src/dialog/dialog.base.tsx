@@ -1,6 +1,6 @@
 import { Dialog as ArkDialog } from "@ark-ui/solid/dialog";
 import { splitProps, type Component } from "solid-js";
-import { dialogVariants } from "@ui/core";
+import { dialogVariants } from "@fan-ui/core";
 import { HTMLProps } from "@ark-ui/solid";
 
 const styles = dialogVariants();

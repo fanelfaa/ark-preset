@@ -1,4 +1,4 @@
-import { Badge } from "@ui/solid";
+import { Badge } from "@fan-ui/solid";
 
 export default function BadgeBasicDemo() {
   return (

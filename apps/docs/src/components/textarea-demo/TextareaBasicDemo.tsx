@@ -1,4 +1,4 @@
-import { Textarea } from "@ui/solid";
+import { Textarea } from "@fan-ui/solid";
 
 export default function TextareaBasicDemo() {
   return (

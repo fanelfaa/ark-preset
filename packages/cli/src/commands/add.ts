@@ -3,7 +3,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 /**
- * usage: npx @ui/cli add {component_name}
+ * usage: npx @fan-ui/cli add {component_name}
  *
  * Reads from component-manifest.json (generated at build time) to find
  * component source files and recipes, copies them to the user's project,
@@ -43,7 +43,7 @@ function findPackageRoot(): string {
   }
   console.error(
     "❌ component-manifest.json not found. Run the build script first:\n" +
-    "  moon run @ui/cli:generate-manifest"
+    "  moon run @fan-ui/cli:generate-manifest"
   );
   process.exit(1);
 }
@@ -74,7 +74,7 @@ function loadManifest(): Manifest {
   if (!fs.existsSync(MANIFEST_PATH)) {
     console.error(
       `❌ component-manifest.json not found at ${MANIFEST_PATH}\n` +
-        "  Run the build script first: moon run @ui/cli:generate-manifest\n" +
+        "  Run the build script first: moon run @fan-ui/cli:generate-manifest\n" +
         "  Or reinstall the CLI package.",
     );
     process.exit(1);
@@ -179,7 +179,7 @@ async function copyWithImportRewrite(
   // Compute relative path from the target file to the recipe directory
   const relPath = path.relative(path.dirname(targetPath), recipeDir);
   const importPath = relPath.startsWith(".") ? relPath : `./${relPath}`;
-  content = content.replace(/from\s+['"]@ui\/core['"]/g, `from '${importPath}'`);
+  content = content.replace(/from\s+['"]@fan-ui\/core['"]/g, `from '${importPath}'`);
   await fs.writeFile(targetPath, content, "utf-8");
 }
 

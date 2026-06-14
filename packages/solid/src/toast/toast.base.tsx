@@ -1,6 +1,6 @@
 import { Toast as ArkToast } from "@ark-ui/solid/toast";
 import { splitProps, type Component } from "solid-js";
-import { type ToastVariants, toastVariants } from "@ui/core";
+import { type ToastVariants, toastVariants } from "@fan-ui/core";
 
 const styles = toastVariants();
 

@@ -1,4 +1,4 @@
-import { AspectRatio } from "@ui/solid";
+import { AspectRatio } from "@fan-ui/solid";
 
 export default function AspectRatioBasicDemo() {
   return (

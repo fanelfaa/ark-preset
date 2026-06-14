@@ -1,4 +1,4 @@
-import { Button } from "@ui/solid";
+import { Button } from "@fan-ui/solid";
 import {
   children,
   createSignal,

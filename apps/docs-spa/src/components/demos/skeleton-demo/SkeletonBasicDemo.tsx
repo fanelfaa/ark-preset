@@ -1,4 +1,4 @@
-import { Skeleton } from "@ui/solid";
+import { Skeleton } from "@fan-ui/solid";
 
 export default function SkeletonBasicDemo() {
   return (

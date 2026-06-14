@@ -1,6 +1,6 @@
 import { NumberInput as ArkNumberInput } from "@ark-ui/solid/number-input";
 import { splitProps, type Component } from "solid-js";
-import { numberInputVariants } from "@ui/core";
+import { numberInputVariants } from "@fan-ui/core";
 import { HTMLProps } from "@ark-ui/solid";
 
 const styles = numberInputVariants();

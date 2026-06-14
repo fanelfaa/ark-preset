@@ -1,6 +1,6 @@
 import { createListCollection } from "@ark-ui/solid";
 import { Index } from "solid-js";
-import { Listbox, ListboxItem } from "@ui/solid";
+import { Listbox, ListboxItem } from "@fan-ui/solid";
 
 const frameworks = createListCollection({
   items: [

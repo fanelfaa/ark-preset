@@ -33,4 +33,4 @@ const AccordionItemContent = AccordionBase.ItemContent;
 
 export { Accordion, AccordionItem, AccordionItemTrigger, AccordionItemContent, AccordionBase };
 
-export { accordionVariants, type AccordionVariants } from "@ui/core";
+export { accordionVariants, type AccordionVariants } from "@fan-ui/core";

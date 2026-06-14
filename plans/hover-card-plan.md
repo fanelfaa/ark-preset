@@ -54,7 +54,7 @@ No visual variants — hover-card does not have semantic visual variants. The re
 ### 4. Base File: `packages/solid/src/hover-card/hover-card.base.tsx`
 
 - [ ] Import Ark UI parts from `@ark-ui/solid/hover-card`
-- [ ] Import `hoverCardVariants`, `type HoverCardVariants` from `@ui/core`
+- [ ] Import `hoverCardVariants`, `type HoverCardVariants` from `@fan-ui/core`
 - [ ] Module-level: `const styles = hoverCardVariants();`
 - [ ] No variant context needed (no variants)
 - [ ] Wrap each part with tv() styling using `splitProps(props, ["class"])`:
@@ -80,7 +80,7 @@ No visual variants — hover-card does not have semantic visual variants. The re
     - Props: `ArkHoverCard.ContentProps & { useArrow?: boolean }`
     - Renders: `<HoverCardBase.Positioner><HoverCardBase.Content ...>{local.useArrow && (...)}</HoverCardBase.Content></HoverCardBase.Positioner>`
 - [ ] Export base namespace: `export { HoverCard as HoverCardBase }`
-- [ ] Re-export variants: `export { hoverCardVariants, type HoverCardVariants } from "@ui/core"`
+- [ ] Re-export variants: `export { hoverCardVariants, type HoverCardVariants } from "@fan-ui/core"`
 
 ### 6. Solid Barrel: `packages/solid/src/index.ts`
 
@@ -89,9 +89,9 @@ No visual variants — hover-card does not have semantic visual variants. The re
 
 ### 7. Demo: `apps/docs/src/components/hover-card-demo/HoverCardBasicDemo.tsx`
 
-- [ ] Create BasicDemo importing only named composites from `@ui/solid`
+- [ ] Create BasicDemo importing only named composites from `@fan-ui/solid`
 - [ ] Must NOT import `.base.tsx` or `HoverCardBase`
-- [ ] Imports: `import { HoverCard, HoverCardTrigger, HoverCardContent } from "@ui/solid"`
+- [ ] Imports: `import { HoverCard, HoverCardTrigger, HoverCardContent } from "@fan-ui/solid"`
 - [ ] Usage:
   ```tsx
   <HoverCard>

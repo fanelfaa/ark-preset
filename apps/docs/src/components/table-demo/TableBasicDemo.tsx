@@ -6,7 +6,7 @@ import {
   TableHead,
   TableCell,
   TableCaption,
-} from "@ui/solid";
+} from "@fan-ui/solid";
 
 export default function TableBasicDemo() {
   return (

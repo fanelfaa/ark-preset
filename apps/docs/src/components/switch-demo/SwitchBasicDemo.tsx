@@ -1,4 +1,4 @@
-import { Switch, SwitchLabel } from "@ui/solid";
+import { Switch, SwitchLabel } from "@fan-ui/solid";
 
 export default function SwitchBasicDemo() {
   return (

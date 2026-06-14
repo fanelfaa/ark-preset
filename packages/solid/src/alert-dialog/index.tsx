@@ -54,4 +54,4 @@ export {
   AlertDialogBase,
 };
 
-export { alertDialogVariants, type AlertDialogVariants } from "@ui/core";
+export { alertDialogVariants, type AlertDialogVariants } from "@fan-ui/core";

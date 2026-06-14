@@ -1,5 +1,5 @@
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@ui/solid";
-import { Button } from "@ui/solid";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@fan-ui/solid";
+import { Button } from "@fan-ui/solid";
 
 export default function CardBasicDemo() {
   return (

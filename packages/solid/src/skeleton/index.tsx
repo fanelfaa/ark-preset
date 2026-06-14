@@ -1,5 +1,5 @@
 import { splitProps, type Component } from "solid-js";
-import { skeletonVariants } from "@ui/core";
+import { skeletonVariants } from "@fan-ui/core";
 import { ark, type HTMLArkProps } from "@ark-ui/solid/factory";
 
 type SkeletonProps = HTMLArkProps<"div">;

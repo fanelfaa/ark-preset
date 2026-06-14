@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/solid-router";
-import { buttonVariants } from "@ui/core";
+import { buttonVariants } from "@fan-ui/core";
 import { H2, P, InlineCode } from "../components/markdown";
 
 export const Route = createFileRoute("/")({ component: Home });

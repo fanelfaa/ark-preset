@@ -1,4 +1,4 @@
-import { Checkbox, CheckboxLabel } from "@ui/solid";
+import { Checkbox, CheckboxLabel } from "@fan-ui/solid";
 
 export default function CheckboxBasicDemo() {
   return (

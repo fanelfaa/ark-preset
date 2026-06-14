@@ -1,4 +1,4 @@
-import { NumberInput } from "@ui/solid";
+import { NumberInput } from "@fan-ui/solid";
 
 export default function NumberInputBasicDemo() {
   return (

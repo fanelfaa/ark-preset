@@ -49,4 +49,4 @@ export {
   SliderBase,
 };
 
-export { sliderVariants, type SliderVariants } from "@ui/core";
+export { sliderVariants, type SliderVariants } from "@fan-ui/core";

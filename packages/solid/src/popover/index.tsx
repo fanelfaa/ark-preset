@@ -2,7 +2,7 @@ import { Popover as ArkPopover } from "@ark-ui/solid/popover";
 import { Portal } from "solid-js/web";
 import { splitProps, type Component } from "solid-js";
 import { Popover as PopoverBase } from "./popover.base";
-import { popoverVariants, type PopoverVariants } from "@ui/core";
+import { popoverVariants, type PopoverVariants } from "@fan-ui/core";
 
 const PopoverCloseTrigger: Component<ArkPopover.CloseTriggerProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);

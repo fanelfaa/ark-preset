@@ -39,7 +39,7 @@ export default function RatingGroupBasicDemo() {
       <P>Run the following command to add the component to your project:</P>
       <Pre>{`
 
-npx solidui-cli@latest add rating-group
+npx @fan-ui/cli@latest add rating-group
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">

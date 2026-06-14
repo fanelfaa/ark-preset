@@ -43,7 +43,7 @@ export function TabsDemo() {
       <P>Run the following command to add the component to your project:</P>
       <Pre>{`
 
-npx solidui-cli@latest add tabs
+npx @fan-ui/cli@latest add tabs
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">

@@ -1,4 +1,4 @@
-import { RatingGroup, RatingGroupLabel } from "@ui/solid";
+import { RatingGroup, RatingGroupLabel } from "@fan-ui/solid";
 
 export default function RatingGroupBasicDemo() {
   return (

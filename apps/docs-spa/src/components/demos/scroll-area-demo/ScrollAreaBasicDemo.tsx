@@ -1,4 +1,4 @@
-import { ScrollArea } from "@ui/solid";
+import { ScrollArea } from "@fan-ui/solid";
 
 export default function ScrollAreaBasicDemo() {
   return (

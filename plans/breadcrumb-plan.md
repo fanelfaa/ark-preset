@@ -51,7 +51,7 @@ No visual variants — breadcrumb does not have semantic visual variants. The re
 
 ### 4. Solid Component: `packages/solid/src/breadcrumb/index.tsx`
 
-- [ ] Import `breadcrumbVariants` from `@ui/core`
+- [ ] Import `breadcrumbVariants` from `@fan-ui/core`
 - [ ] Import `ark, type HTMLArkProps` from `@ark-ui/solid/factory`
 - [ ] Module-level: `const styles = breadcrumbVariants();`
 - [ ] Create flat component file (no base/ directory needed) — same pattern as Card/Badge:
@@ -70,8 +70,8 @@ No visual variants — breadcrumb does not have semantic visual variants. The re
 
 ### 6. Demo: `apps/docs/src/components/breadcrumb-demo/BreadcrumbBasicDemo.tsx`
 
-- [ ] Create BasicDemo importing named composites from `@ui/solid` only — no base imports
-- [ ] Imports: `import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator, BreadcrumbEllipsis } from "@ui/solid"`
+- [ ] Create BasicDemo importing named composites from `@fan-ui/solid` only — no base imports
+- [ ] Imports: `import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator, BreadcrumbEllipsis } from "@fan-ui/solid"`
 - [ ] Usage:
   ```tsx
   <Breadcrumb>

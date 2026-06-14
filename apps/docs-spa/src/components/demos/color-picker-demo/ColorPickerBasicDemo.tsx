@@ -1,4 +1,4 @@
-import { ColorPicker } from "@ui/solid";
+import { ColorPicker } from "@fan-ui/solid";
 import { parseColor } from "@ark-ui/solid/color-picker";
 
 export default function ColorPickerBasicDemo() {

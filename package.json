@@ -1,5 +1,5 @@
 {
-  "name": "@ui/monorepo",
+  "name": "@fan-ui/monorepo",
   "version": "0.0.0",
   "private": true,
   "description": "Solid.js component library built on Ark UI",

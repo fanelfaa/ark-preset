@@ -8,8 +8,8 @@ import {
   AlertDialogDescription,
   AlertDialogCancel,
   AlertDialogAction,
-} from "@ui/solid";
-import { Button } from "@ui/solid";
+} from "@fan-ui/solid";
+import { Button } from "@fan-ui/solid";
 
 export default function AlertDialogBasicDemo() {
   return (

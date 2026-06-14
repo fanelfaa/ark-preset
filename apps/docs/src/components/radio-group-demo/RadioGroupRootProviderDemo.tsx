@@ -1,5 +1,5 @@
 import { Index, createMemo } from "solid-js";
-import { RadioGroupBase, RadioGroupItem } from "@ui/solid";
+import { RadioGroupBase, RadioGroupItem } from "@fan-ui/solid";
 import { useRadioGroup } from "@ark-ui/solid/radio-group";
 
 const paymentMethods = [

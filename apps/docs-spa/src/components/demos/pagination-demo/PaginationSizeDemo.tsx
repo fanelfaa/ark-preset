@@ -5,7 +5,7 @@ import {
   PaginationPrevTrigger,
   PaginationNextTrigger,
   PaginationLastTrigger,
-} from "@ui/solid";
+} from "@fan-ui/solid";
 
 function PaginationSized(props: { size: "sm" | "md" | "lg"; label: string }) {
   return (

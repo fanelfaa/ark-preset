@@ -33,11 +33,11 @@ You can use just the recipes to style your own Ark UI components, or take the fu
 
 | Package | What |
 |---|---|
-| `@ui/core` | Tailwind-variants recipes — one per component. Pure styling, no framework deps. |
-| `@ui/solid` | Solid.js wrappers around `@ark-ui/solid`. Delegates to Ark UI, applies recipe styles. |
+| `@fan-ui/core` | Tailwind-variants recipes — one per component. Pure styling, no framework deps. |
+| `@fan-ui/solid` | Solid.js wrappers around `@ark-ui/solid`. Delegates to Ark UI, applies recipe styles. |
 | `create-ui` | CLI to scaffold new components (not ready). |
 
-### `@ui/core` — recipes
+### `@fan-ui/core` — recipes
 
 Each component has a recipe file in `packages/core/src/recipes/`. A recipe uses `tv()` to define slots and variants.
 
@@ -68,7 +68,7 @@ Multi-slot recipes (e.g., accordion, dialog, card) use `tv({ slots: { ... } })` 
 
 **48 recipes** as of last count. Each exports a `*Variants` value + `*Variants` type.
 
-### `@ui/solid` — Solid.js wrappers
+### `@fan-ui/solid` — Solid.js wrappers
 
 Wraps Ark UI Solid primitives with the recipe styles. Components are minimal — they delegate most props to Ark UI.
 
@@ -106,7 +106,7 @@ Every component ships two entry points — a **composite** (high-level) and a **
 <Input label="Email" type="email" error="Invalid address" />
 
 // Base — manual composition when you need full control
-import { Input as InputBase } from "@ui/solid";
+import { Input as InputBase } from "@fan-ui/solid";
 
 <InputBase.Root>
   <InputBase.Label>Custom Label</InputBase.Label>
@@ -114,7 +114,7 @@ import { Input as InputBase } from "@ui/solid";
 </InputBase.Root>
 ```
 
-Both are exported from `@ui/solid`. Use the composite for 80% of cases, drop to `*Base` when you need custom structure.
+Both are exported from `@fan-ui/solid`. Use the composite for 80% of cases, drop to `*Base` when you need custom structure.
 
 ### `create-ui` — CLI (not ready)
 
@@ -182,4 +182,4 @@ Separating styling (recipes) from framework wrappers means:
 - **Framework packages are thin** — just wiring + minimal composition
 - **Future React/Vue/Svelte packages** only need to write wrappers, not restyle everything
 
-When React, Vue, and Svelte wrappers are added, they'll all share the same `@ui/core` recipes. One styling source of truth, multiple framework targets.
+When React, Vue, and Svelte wrappers are added, they'll all share the same `@fan-ui/core` recipes. One styling source of truth, multiple framework targets.

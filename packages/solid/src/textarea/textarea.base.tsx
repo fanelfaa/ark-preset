@@ -1,6 +1,6 @@
 import { Field as ArkField } from "@ark-ui/solid/field";
 import { splitProps, type Component } from "solid-js";
-import { textareaVariants, type TextareaVariants } from "@ui/core";
+import { textareaVariants, type TextareaVariants } from "@fan-ui/core";
 
 const styles = textareaVariants();
 

@@ -1,4 +1,4 @@
-import { scrollAreaVariants } from "@ui/core";
+import { scrollAreaVariants } from "@fan-ui/core";
 import { ScrollArea as ArkScrollArea } from "@ark-ui/solid/scroll-area";
 import { splitProps, type Component } from "solid-js";
 

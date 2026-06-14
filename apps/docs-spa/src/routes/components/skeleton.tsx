@@ -14,7 +14,7 @@ import {
   TBody,
   Tr,
 } from "../../components/markdown";
-import { Skeleton } from "@ui/solid";
+import { Skeleton } from "@fan-ui/solid";
 import SkeletonBasicDemo from "@demos/skeleton-demo/SkeletonBasicDemo.tsx";
 
 export const Route = createFileRoute("/components/skeleton")({ component: SkeletonPage });
@@ -50,7 +50,7 @@ export function SkeletonDemo() {
       <P>Run the following command to add the component to your project:</P>
       <Pre>{`
 
-npx solidui-cli@latest add skeleton
+npx @fan-ui/cli@latest add skeleton
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
@@ -80,7 +80,7 @@ export { Skeleton, skeletonVariants }`}</Pre>
       <P>Import the component:</P>
       <Pre>{`
 
-import { Skeleton } from "@ui/solid";
+import { Skeleton } from "@fan-ui/solid";
       `}</Pre>
       <P>Basic:</P>
       <Pre>{`

@@ -7,8 +7,8 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-} from "@ui/solid";
-import { Button, Input, RadioGroup, RadioGroupItem, RadioGroupBase, Separator } from "@ui/solid";
+} from "@fan-ui/solid";
+import { Button, Input, RadioGroup, RadioGroupItem, RadioGroupBase, Separator } from "@fan-ui/solid";
 
 export default function DialogBasicDemo() {
   return (

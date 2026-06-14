@@ -7,7 +7,7 @@ import {
   ComboboxInputTrigger,
   ComboboxContent,
   ComboboxItem,
-} from "@ui/solid";
+} from "@fan-ui/solid";
 
 export default function ComboboxRootProviderDemo() {
   const filterFn = useFilter({ sensitivity: "base" });
