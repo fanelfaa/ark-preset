@@ -15,7 +15,7 @@ function CarouselPage() {
       </P>
       <DocsLink href="https://ark-ui.com/docs/components/carousel" />
       <CarouselBasicDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import {
   Carousel,
@@ -62,14 +62,14 @@ export function CarouselDemo() {
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add carousel
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/carousel.ts`:
-        <Pre>{`import { tv } from "tailwind-variants";
+        <Pre lang="tsx">{`import { tv } from "tailwind-variants";
 
 export const carouselVariants = tv({
   slots: {
@@ -94,7 +94,7 @@ export type CarouselVariants = ReturnType<typeof carouselVariants>;`}</Pre>
       </div>
       <div class="space-y-3">
         Create the component file at `src/components/carousel.tsx`:
-        <Pre>{`import { Carousel as ArkCarousel } from "@ark-ui/solid/carousel";
+        <Pre lang="tsx">{`import { Carousel as ArkCarousel } from "@ark-ui/solid/carousel";
 import { splitProps, type Component } from "solid-js";
 import { carouselVariants } from "./recipes/carousel";
 
@@ -165,7 +165,7 @@ export { CarouselRoot as Carousel, carouselVariants, type CarouselVariants };`}<
       </Blockquote>
       <H2>Usage</H2>
       <P>Import the components:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import {
   Carousel,
@@ -179,7 +179,7 @@ import {
 } from "~/components/carousel";
       `}</Pre>
       <P>Basic usage:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 const images = [
   { src: "/image1.jpg", alt: "Image 1" },
@@ -208,7 +208,7 @@ const images = [
       `}</Pre>
       <H2>With Loop</H2>
       <P>Enable looping to allow the carousel to wrap around:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Carousel slideCount={images.length} loop>
   {/* ... */}
@@ -216,7 +216,7 @@ const images = [
       `}</Pre>
       <H2>With Autoplay</H2>
       <P>Enable automatic scrolling:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Carousel slideCount={images.length} autoplay>
   {/* ... */}

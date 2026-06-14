@@ -17,7 +17,7 @@ function ColorPickerPage() {
       </P>
       <DocsLink href="https://ark-ui.com/docs/components/color-picker" />
       <ColorPickerBasicDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { ColorPicker, ColorPickerBase } from "~/components/color-picker";
 
@@ -30,14 +30,14 @@ import { ColorPicker, ColorPickerBase } from "~/components/color-picker";
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add color-picker
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/color-picker.ts`:
-        <Pre>{`import { tv, type VariantProps } from 'tailwind-variants'
+        <Pre lang="tsx">{`import { tv, type VariantProps } from 'tailwind-variants'
 
 export const colorPickerVariants = tv({
   slots: {
@@ -100,7 +100,7 @@ export type ColorPickerVariants = VariantProps<typeof colorPickerVariants>`}</Pr
       <div class="space-y-3">
         Create the component directory and files. First, create
         `src/components/color-picker/color-picker.base.tsx`:
-        <Pre>{`import { ColorPicker as ArkColorPicker } from "@ark-ui/solid/color-picker";
+        <Pre lang="tsx">{`import { ColorPicker as ArkColorPicker } from "@ark-ui/solid/color-picker";
 import { splitProps, type Component } from "solid-js";
 import { colorPickerVariants } from "../../recipes/color-picker";
 
@@ -256,7 +256,7 @@ export const ColorPickerBase = {
   Context,
 };`}</Pre>
         Then create `src/components/color-picker/index.tsx`:
-        <Pre>{`import { For, Show, splitProps, type Component, type JSX } from "solid-js";
+        <Pre lang="tsx">{`import { For, Show, splitProps, type Component, type JSX } from "solid-js";
 import { ColorPicker as ArkColorPicker, parseColor } from "@ark-ui/solid/color-picker";
 import { Portal } from "solid-js/web";
 import { ColorPickerBase } from "./color-picker.base";
@@ -361,12 +361,12 @@ export { colorPickerVariants, type ColorPickerVariants } from "../../recipes/col
       <P>
         Import <InlineCode>ColorPicker</InlineCode>:
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { ColorPicker, ColorPickerBase } from "~/components/color-picker";
       `}</Pre>
       <P>Basic usage:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <ColorPicker label="Color" presets={["#ff0000", "#00ff00", "#0000ff"]} />
       `}</Pre>
@@ -375,7 +375,7 @@ import { ColorPicker, ColorPickerBase } from "~/components/color-picker";
         For inline rendering (no popover), use the <InlineCode>inline</InlineCode> prop:
       </P>
       <ColorPickerInlineDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { parseColor } from "@ark-ui/solid/color-picker";
 
@@ -388,7 +388,7 @@ import { parseColor } from "@ark-ui/solid/color-picker";
       `}</Pre>
       <H3>Controlled</H3>
       <ColorPickerControlledDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { createSignal } from "solid-js";
 import { parseColor } from "@ark-ui/solid/color-picker";
@@ -416,7 +416,7 @@ export function ColorPickerControlled() {
         For fully controlled mode, use <InlineCode>value</InlineCode> and{" "}
         <InlineCode>onValueChange</InlineCode>:
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { createSignal } from "solid-js";
 import { parseColor } from "@ark-ui/solid/color-picker";
@@ -439,7 +439,7 @@ export function ColorPickerControlled() {
         For advanced layouts with custom composition, import{" "}
         <InlineCode>ColorPickerBase</InlineCode> to access individual parts:
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { ColorPickerBase } from "~/components/color-picker";
 

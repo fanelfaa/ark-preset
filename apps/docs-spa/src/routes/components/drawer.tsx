@@ -15,7 +15,7 @@ function DrawerPage() {
       </P>
       <DocsLink href="https://ark-ui.com/docs/components/drawer" />
       <DrawerBasicDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import {
   Drawer,
@@ -52,14 +52,14 @@ export function DrawerDemo() {
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add drawer
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/drawer.ts`:
-        <Pre>{`import { tv, type VariantProps } from 'tailwind-variants'
+        <Pre lang="tsx">{`import { tv, type VariantProps } from 'tailwind-variants'
 
 export const drawerVariants = tv({
   slots: {
@@ -81,7 +81,7 @@ export type DrawerVariants = VariantProps<typeof drawerVariants>`}</Pre>
       </div>
       <div class="space-y-3">
         Create the component files: At `src/components/drawer/drawer.base.tsx`:
-        <Pre>{`import { Drawer as ArkDrawer } from '@ark-ui/solid/drawer'
+        <Pre lang="tsx">{`import { Drawer as ArkDrawer } from '@ark-ui/solid/drawer'
 import { splitProps, type Component } from 'solid-js'
 import { drawerVariants } from './recipes/drawer'
 import { buttonVariants, type ButtonVariants } from './recipes/button'
@@ -158,7 +158,7 @@ export const Drawer = {
   Context,
 }`}</Pre>
         At `src/components/drawer/index.tsx`:
-        <Pre>{`import { Drawer as ArkDrawer } from '@ark-ui/solid/drawer'
+        <Pre lang="tsx">{`import { Drawer as ArkDrawer } from '@ark-ui/solid/drawer'
 import { Portal } from 'solid-js/web'
 import { splitProps, type Component } from 'solid-js'
 import { Drawer as DrawerBase } from './drawer.base'
@@ -205,7 +205,7 @@ export { drawerVariants, type DrawerVariants } from './recipes/drawer'`}</Pre>
       </Blockquote>
       <H2>Usage</H2>
       <P>Import the components:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import {
   Drawer,
@@ -216,7 +216,7 @@ import {
 } from "~/components/drawer";
       `}</Pre>
       <P>Basic usage:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Drawer swipeDirection="start">
   <DrawerTrigger>Open Drawer</DrawerTrigger>
@@ -228,7 +228,7 @@ import {
       `}</Pre>
       <H2>With Form</H2>
       <P>Combine with form elements for profile editing, settings, or data entry.</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Drawer swipeDirection="start">
   <DrawerTrigger>Edit Profile</DrawerTrigger>
@@ -250,7 +250,7 @@ import {
         state outside of the component tree. This pattern uses the{" "}
         <InlineCode>useDrawer</InlineCode> hook from Ark UI to create a shared context.
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { useDrawer } from "@ark-ui/solid/drawer";
 import { DrawerContent, DrawerTrigger, DrawerTitle, DrawerDescription, DrawerBase } from "~/components/drawer";
@@ -300,7 +300,7 @@ export function ExternalControlExample() {
       <P>
         Example using <InlineCode>DrawerBase.Context</InlineCode>:
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 import { Drawer, DrawerTrigger, DrawerContent, DrawerBase } from "~/components/drawer";
 import { Button } from "~/components/button";
 

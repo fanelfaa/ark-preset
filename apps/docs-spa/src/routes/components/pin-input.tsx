@@ -16,7 +16,7 @@ function PinInputPage() {
       </P>
       <DocsLink href="https://ark-ui.com/docs/components/pin-input" />
       <PinInputBasicDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { PinInput, PinInputControl, PinInputInput, PinInputLabel } from "~/components/pin-input";
 import { Index } from "solid-js";
@@ -43,14 +43,14 @@ export function PinInputDemo() {
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add pin-input
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/pin-input.ts`:
-        <Pre>{`import { tv, type VariantProps } from 'tailwind-variants'
+        <Pre lang="tsx">{`import { tv, type VariantProps } from 'tailwind-variants'
 
 export const pinInputVariants = tv({
   slots: {
@@ -66,7 +66,7 @@ export type PinInputVariants = VariantProps<typeof pinInputVariants>`}</Pre>
       </div>
       <div class="space-y-3">
         Create the component directory and files: `src/components/pin-input/pin-input.base.tsx`:
-        <Pre>{`import { PinInput as ArkPinInput } from "@ark-ui/solid/pin-input";
+        <Pre lang="tsx">{`import { PinInput as ArkPinInput } from "@ark-ui/solid/pin-input";
 import { splitProps, type Component } from "solid-js";
 import { pinInputVariants } from "../recipes/pin-input";
 
@@ -99,7 +99,7 @@ const Label: Component<ArkPinInput.LabelProps> = (props) => {
 
 export const PinInput = { Root, RootProvider, Control, Input, Label };`}</Pre>
         `src/components/pin-input/index.tsx`:
-        <Pre>{`import { PinInput as PinInputBase } from "./pin-input.base";
+        <Pre lang="tsx">{`import { PinInput as PinInputBase } from "./pin-input.base";
 
 const PinInput = PinInputBase.Root;
 const PinInputRootProvider = PinInputBase.RootProvider;
@@ -120,13 +120,13 @@ export { pinInputVariants, type PinInputVariants } from "../recipes/pin-input";`
       </div>
       <H2>Usage</H2>
       <P>Import the components:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { PinInput, PinInputControl, PinInputInput, PinInputLabel } from "~/components/pin-input";
 import { Index } from "solid-js";
       `}</Pre>
       <P>Basic:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <PinInput>
   <PinInputLabel>Code</PinInputLabel>
@@ -136,7 +136,7 @@ import { Index } from "solid-js";
 </PinInput>
       `}</Pre>
       <P>Masked (for sensitive codes):</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <PinInput placeholder="•" mask>
   <PinInputLabel>PIN</PinInputLabel>
@@ -151,7 +151,7 @@ import { Index } from "solid-js";
         state externally.
       </P>
       <PinInputRootProviderDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { usePinInput } from "@ark-ui/solid/pin-input";
 import {

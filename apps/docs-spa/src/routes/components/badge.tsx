@@ -29,7 +29,7 @@ function BadgePage() {
       </P>
       <DocsLink href="https://ui.shadcn.com/docs/components/badge" />
       <BadgeBasicDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Badge } from "~/components/badge";
 
@@ -49,14 +49,14 @@ export function BadgeDemo() {
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add badge
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/badge.ts`:
-        <Pre>{`import { tv, type VariantProps } from 'tailwind-variants'
+        <Pre lang="tsx">{`import { tv, type VariantProps } from 'tailwind-variants'
 
 export const badgeVariants = tv({
   base: "inline-flex items-center rounded-full border border-transparent px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 [a&]:cursor-pointer",
@@ -84,7 +84,7 @@ export type BadgeVariants = VariantProps<typeof badgeVariants>`}</Pre>
       </div>
       <div class="space-y-3">
         Create the component file at `src/components/badge.tsx`:
-        <Pre>{`import { splitProps, type Component } from 'solid-js'
+        <Pre lang="tsx">{`import { splitProps, type Component } from 'solid-js'
 import { badgeVariants, type BadgeVariants } from '../recipes/badge'
 import { ark, type HTMLArkProps } from '@ark-ui/solid/factory'
 
@@ -104,24 +104,24 @@ export { Badge, badgeVariants }`}</Pre>
       </div>
       <H2>Usage</H2>
       <P>Import the component:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Badge } from "@fan-ui/solid";
       `}</Pre>
       <P>Basic:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Badge>Default</Badge>
       `}</Pre>
       <P>Variants:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Badge variant="secondary">Secondary</Badge>
 <Badge variant="outline">Outline</Badge>
 <Badge variant="ghost">Ghost</Badge>
       `}</Pre>
       <P>Custom class override:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Badge class="px-4 py-1 text-sm">Custom Size</Badge>
       `}</Pre>
@@ -149,7 +149,7 @@ import { Badge } from "@fan-ui/solid";
           Anchor Badge
         </Badge>
       </div>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Badge } from "@fan-ui/solid";
 

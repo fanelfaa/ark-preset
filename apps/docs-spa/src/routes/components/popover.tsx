@@ -16,7 +16,7 @@ function PopoverPage() {
       </P>
       <DocsLink href="https://ark-ui.com/docs/components/popover" />
       <PopoverBasicDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import {
   Popover,
@@ -43,14 +43,14 @@ export function PopoverDemo() {
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add popover
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/popover.ts`:
-        <Pre>{`import { tv, type VariantProps } from 'tailwind-variants'
+        <Pre lang="tsx">{`import { tv, type VariantProps } from 'tailwind-variants'
 
 export const popoverVariants = tv({
   slots: {
@@ -72,7 +72,7 @@ export type PopoverVariants = VariantProps<typeof popoverVariants>`}</Pre>
       </div>
       <div class="space-y-3">
         Create the component directory and files: `src/components/popover/popover.base.tsx`:
-        <Pre>{`import { Popover as ArkPopover } from '@ark-ui/solid/popover'
+        <Pre lang="tsx">{`import { Popover as ArkPopover } from '@ark-ui/solid/popover'
 import { splitProps, type Component } from 'solid-js'
 import { popoverVariants, type PopoverVariants } from './recipes/popover'
 import { buttonVariants, type ButtonVariants } from './recipes/button'
@@ -151,7 +151,7 @@ export const Popover = {
   Positioner,
 };`}</Pre>
         `src/components/popover/index.tsx`:
-        <Pre>{`import { Popover as ArkPopover } from "@ark-ui/solid/popover";
+        <Pre lang="tsx">{`import { Popover as ArkPopover } from "@ark-ui/solid/popover";
 import { Portal } from "solid-js/web";
 import { splitProps, type Component } from "solid-js";
 import { Popover as PopoverBase } from "./popover.base";
@@ -199,7 +199,7 @@ export { popoverVariants, type PopoverVariants };`}</Pre>
       </Blockquote>
       <H2>Usage</H2>
       <P>Import the components:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import {
   Popover,
@@ -210,7 +210,7 @@ import {
 } from "~/components/popover";
       `}</Pre>
       <P>Basic usage:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Popover>
   <PopoverTrigger>Open Popover</PopoverTrigger>
@@ -234,7 +234,7 @@ import {
         reference.
       </P>
       <PopoverRootProviderDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { usePopover } from "@ark-ui/solid/popover";
 import {

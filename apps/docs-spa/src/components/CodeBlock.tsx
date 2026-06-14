@@ -9,7 +9,32 @@ import {
   splitProps,
   type JSX,
   children,
+  createEffect,
 } from "solid-js";
+import hljs from "highlight.js/lib/core";
+import typescript from "highlight.js/lib/languages/typescript";
+import javascript from "highlight.js/lib/languages/javascript";
+import xml from "highlight.js/lib/languages/xml";
+import css from "highlight.js/lib/languages/css";
+import bash from "highlight.js/lib/languages/bash";
+
+// Register languages at module scope so they're available when createEffect runs
+hljs.registerLanguage("typescript", typescript);
+hljs.registerLanguage("javascript", javascript);
+hljs.registerLanguage("xml", xml);
+hljs.registerLanguage("css", css);
+hljs.registerLanguage("bash", bash);
+
+// Common language alias mappings
+// Note: tsx uses javascript grammar because highlight.js typescript has no JSX support
+const LANG_MAP: Record<string, string> = {
+  ts: "typescript",
+  tsx: "javascript",
+  js: "javascript",
+  jsx: "javascript",
+  sh: "bash",
+  shell: "bash",
+};
 
 const MAX_HEIGHT = 200;
 
@@ -28,14 +53,21 @@ function normalize(code: string): string {
   return dedent(code.trim());
 }
 
-export default function CodeBlock(props: ParentProps<JSX.HTMLAttributes<HTMLPreElement>>) {
+interface CodeBlockProps extends ParentProps<JSX.HTMLAttributes<HTMLPreElement>> {
+  /** Language for syntax highlighting (required). */
+  lang: string;
+}
+
+export default function CodeBlock(props: CodeBlockProps) {
   const [copied, setCopied] = createSignal(false);
   const [expanded, setExpanded] = createSignal(false);
   const [overflowing, setOverflowing] = createSignal(false);
   // oxlint-disable-next-line no-unassigned-vars
   let preRef: HTMLPreElement | undefined;
+  // oxlint-disable-next-line no-unassigned-vars
+  let codeRef: HTMLElement | undefined;
 
-  const [local, rest] = splitProps(props, ["class", "style", "classList", "children"]);
+  const [local, rest] = splitProps(props, ["class", "style", "classList", "children", "lang"]);
 
   // Reactive code content — tracks children reactively
   const code = createMemo(() => {
@@ -50,13 +82,22 @@ export default function CodeBlock(props: ParentProps<JSX.HTMLAttributes<HTMLPreE
     }
   };
 
+  createEffect(() => {
+    // Apply syntax highlighting
+    if (codeRef) {
+      const lang = LANG_MAP[local.lang] || local.lang;
+      const result = hljs.highlight(code(), { language: lang });
+      codeRef.innerHTML = result.value;
+    }
+  });
+
   onMount(() => {
-    // Defer measurement until after paint + syntax highlighting
+    // Defer overflow measurement until after highlighting is applied
     const raf = requestAnimationFrame(() => {
       requestAnimationFrame(checkOverflow);
     });
 
-    // Watch for content changes (e.g. syntax highlighting applied async)
+    // Watch for content changes
     const observer = new ResizeObserver(checkOverflow);
     if (preRef) observer.observe(preRef);
 
@@ -70,7 +111,7 @@ export default function CodeBlock(props: ParentProps<JSX.HTMLAttributes<HTMLPreE
     <div class="relative isolate">
       <pre
         ref={preRef}
-        class={`whitespace-pre-wrap bg-neutral-900 dark:bg-neutral-800 ${local.class ? ` ${local.class}` : ""}`}
+        class={`whitespace-pre-wrap ${local.class ? ` ${local.class}` : ""}`}
         classList={{
           "cursor-pointer": overflowing() && !expanded(),
           "overflow-hidden": overflowing() && !expanded(),
@@ -85,7 +126,7 @@ export default function CodeBlock(props: ParentProps<JSX.HTMLAttributes<HTMLPreE
         }}
         {...rest}
       >
-        {code()}
+        <code ref={codeRef}>{code()}</code>
       </pre>
       <Show when={overflowing()}>
         <Show when={!expanded()}>

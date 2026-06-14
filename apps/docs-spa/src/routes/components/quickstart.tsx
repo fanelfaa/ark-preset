@@ -93,7 +93,7 @@ function QuickstartPage() {
         recipes), and the Vite plugin if using Vite:
       </P>
 
-      <Pre>{`
+      <Pre lang="bash">{`
 npm install tailwindcss tailwind-variants @tailwindcss/vite
       `}</Pre>
 
@@ -102,13 +102,13 @@ npm install tailwindcss tailwind-variants @tailwindcss/vite
         dependency <InlineCode>solid-js</InlineCode>:
       </P>
 
-      <Pre>{`
+      <Pre lang="bash">{`
 npm install @ark-ui/solid solid-js
       `}</Pre>
 
       <P>Optionally install the animation plugin (used by toast, dialog, and other components):</P>
 
-      <Pre>{`
+      <Pre lang="bash">{`
 npm install tw-animate-css
       `}</Pre>
 
@@ -116,7 +116,7 @@ npm install tw-animate-css
         Configure <InlineCode>src/index.css</InlineCode>:
       </P>
 
-      <Pre>{`@import "tailwindcss";
+      <Pre lang="css">{`@import "tailwindcss";
 @import "tw-animate-css";`}</Pre>
 
       <H2>Theme variables</H2>
@@ -126,7 +126,7 @@ npm install tw-animate-css
         all components.
       </P>
 
-      <Pre>{themeCssContent}</Pre>
+      <Pre lang="css">{themeCssContent}</Pre>
 
       <Blockquote>
         <strong>Note:</strong> The <InlineCode>[data-scope="toast"]</InlineCode> block at the bottom

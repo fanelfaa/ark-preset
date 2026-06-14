@@ -17,7 +17,7 @@ function TabsPage() {
       </P>
       <DocsLink href="https://ark-ui.com/docs/components/tabs" />
       <TabsBasicDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "~/components/tabs";
 
@@ -41,14 +41,14 @@ export function TabsDemo() {
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add tabs
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/tabs.ts`:
-        <Pre>{`import { tv, type VariantProps } from 'tailwind-variants'
+        <Pre lang="tsx">{`import { tv, type VariantProps } from 'tailwind-variants'
 
 export const tabsVariants = tv({
   slots: {
@@ -67,7 +67,7 @@ export type TabsVariants = VariantProps<typeof tabsVariants>`}</Pre>
       </div>
       <div class="space-y-3">
         Create the base component file at `src/components/tabs/tabs.base.tsx`:
-        <Pre>{`import { Tabs as ArkTabs } from '@ark-ui/solid/tabs'
+        <Pre lang="tsx">{`import { Tabs as ArkTabs } from '@ark-ui/solid/tabs'
 import { splitProps, type Component } from 'solid-js'
 import { tabsVariants } from '../recipes/tabs'
 
@@ -116,7 +116,7 @@ export { TabsBase, tabsVariants }`}</Pre>
       </div>
       <div class="space-y-3">
         Create the component file at `src/components/tabs/index.tsx`:
-        <Pre>{`import { splitProps, type Component } from "solid-js";
+        <Pre lang="tsx">{`import { splitProps, type Component } from "solid-js";
 import { Tabs as TabsBase } from "./tabs.base";
 import { Tabs as ArkTabs } from "@ark-ui/solid/tabs";
 
@@ -155,12 +155,12 @@ export { Tabs, TabsContent, TabsTrigger, TabsBase, TabsList, tabsVariants };`}</
       </Blockquote>
       <H2>Usage</H2>
       <P>Import the components:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "~/components/tabs";
       `}</Pre>
       <P>Basic usage:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Tabs defaultValue="tab-1">
   <TabsList>
@@ -180,7 +180,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "~/components/tabs";
         When the composite <InlineCode>Tabs</InlineCode> doesn't provide enough control, import the
         raw primitive parts from <InlineCode>TabsBase</InlineCode>:
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { TabsBase, TabsTrigger, TabsContent } from "~/components/tabs";
       `}</Pre>
@@ -191,7 +191,7 @@ import { TabsBase, TabsTrigger, TabsContent } from "~/components/tabs";
         <InlineCode>TabsBase.Trigger</InlineCode>, <InlineCode>TabsBase.Content</InlineCode>, and{" "}
         <InlineCode>TabsBase.Indicator</InlineCode>:
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <TabsBase.Root defaultValue="account">
   <TabsBase.List>
@@ -209,7 +209,7 @@ import { TabsBase, TabsTrigger, TabsContent } from "~/components/tabs";
         disable that specific tab.
       </P>
       <TabsDisabledDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Index } from "solid-js";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "~/components/tabs";
@@ -250,7 +250,7 @@ export function DisabledDemo() {
         Ark UI to create a shared context that both the tabs and external elements can reference.
       </P>
       <TabsRootProviderDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { TabsBase, TabsList, TabsTrigger, TabsContent } from "~/components/tabs";
 import { useTabs } from "@ark-ui/solid/tabs";

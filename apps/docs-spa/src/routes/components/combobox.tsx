@@ -16,7 +16,7 @@ function ComboboxPage() {
       </P>
       <DocsLink href="https://ark-ui.com/docs/components/combobox" />
       <ComboboxBasicDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { useFilter } from "@ark-ui/solid";
 import { useListCollection } from "@ark-ui/solid/combobox";
@@ -54,14 +54,14 @@ function ComboboxDemo() {
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add combobox
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/combobox.ts`:
-        <Pre>{`import { tv, type VariantProps } from 'tailwind-variants'
+        <Pre lang="tsx">{`import { tv, type VariantProps } from 'tailwind-variants'
 
 export const comboboxVariants = tv({
   slots: {
@@ -101,7 +101,7 @@ export type ComboboxVariants = VariantProps<typeof comboboxVariants>`}</Pre>
       </div>
       <div class="space-y-3">
         Create the component directory at `src/components/combobox/`: `combobox.base.tsx`:
-        <Pre>{`import { Combobox as ArkCombobox } from "@ark-ui/solid/combobox";
+        <Pre lang="tsx">{`import { Combobox as ArkCombobox } from "@ark-ui/solid/combobox";
 import { splitProps, type Component } from "solid-js";
 import { comboboxVariants, type ComboboxVariants } from "../recipes/combobox";
 
@@ -172,7 +172,7 @@ export { Combobox };`}</Pre>
       </div>
       <div class="space-y-3">
         Create the component file at `src/components/combobox/index.tsx`:
-        <Pre>{`import { Combobox as ComboboxBase } from "./combobox.base";
+        <Pre lang="tsx">{`import { Combobox as ComboboxBase } from "./combobox.base";
 import type { Combobox as ArkCombobox } from "@ark-ui/solid/combobox";
 import { Portal } from "solid-js/web";
 import { splitProps, type Component, type JSX } from "solid-js";
@@ -255,7 +255,7 @@ export { comboboxVariants, type ComboboxVariants } from "../recipes/combobox";`}
       </Blockquote>
       <H2>Usage</H2>
       <P>Import the components:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { useFilter } from "@ark-ui/solid";
 import { useListCollection } from "@ark-ui/solid/combobox";
@@ -263,7 +263,7 @@ import { Index } from "solid-js";
 import { Combobox, ComboboxLabel, ComboboxInputTrigger, ComboboxContent, ComboboxItem } from "~/components/combobox";
       `}</Pre>
       <P>Basic usage with client-side filtering:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 const filterFn = useFilter({ sensitivity: "base" });
 const { collection, filter } = useListCollection({
@@ -289,7 +289,7 @@ const { collection, filter } = useListCollection({
       `}</Pre>
       <H2>With Label</H2>
       <P>Add a label to describe the combobox field.</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Combobox
   collection={collection()}
@@ -312,7 +312,7 @@ const { collection, filter } = useListCollection({
         reference.
       </P>
       <ComboboxRootProviderDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { useFilter } from "@ark-ui/solid";
 import { useCombobox, useListCollection } from "@ark-ui/solid/combobox";
@@ -381,7 +381,7 @@ function ComboboxWithExternalControl() {
         its root styling to <InlineCode>ComboboxBase.Root</InlineCode>, so the{" "}
         <InlineCode>error</InlineCode> prop requires using the base component directly:
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <ComboboxBase.Root
   collection={collection()}
@@ -404,13 +404,13 @@ function ComboboxWithExternalControl() {
         entry point that include inline SVG icons and Portal. Import them alongside{" "}
         <InlineCode>Combobox</InlineCode>:
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Combobox, ComboboxLabel, ComboboxInputTrigger, ComboboxContent, ComboboxItem } from "~/components/combobox";
       `}</Pre>
       <H2>Advanced Usage</H2>
       <P>When you need more control, import raw primitive parts directly from the base file:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Combobox } from "~/components/combobox/combobox.base";
       `}</Pre>
@@ -418,7 +418,7 @@ import { Combobox } from "~/components/combobox/combobox.base";
         Or import <InlineCode>ComboboxBase</InlineCode> (the raw parts namespace) from the barrel
         entry point:
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { ComboboxBase } from "~/components/combobox";
       `}</Pre>

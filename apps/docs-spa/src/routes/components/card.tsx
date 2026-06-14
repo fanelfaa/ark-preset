@@ -28,7 +28,7 @@ function CardPage() {
       </P>
       <DocsLink href="https://ui.shadcn.com/docs/components/card" />
       <CardBasicDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "~/components/card";
 import { Button } from "~/components/button";
@@ -59,14 +59,14 @@ export function CardDemo() {
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add card
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/card.ts`:
-        <Pre>{`import { tv, type VariantProps } from 'tailwind-variants'
+        <Pre lang="tsx">{`import { tv, type VariantProps } from 'tailwind-variants'
 
 export const cardVariants = tv({
   slots: {
@@ -83,7 +83,7 @@ export type CardVariants = VariantProps<typeof cardVariants>`}</Pre>
       </div>
       <div class="space-y-3">
         Create the component file at `src/components/card.tsx`:
-        <Pre>{`import { splitProps, type Component } from 'solid-js'
+        <Pre lang="tsx">{`import { splitProps, type Component } from 'solid-js'
 import { cardVariants, type CardVariants } from '../recipes/card'
 import { ark, type HTMLArkProps } from '@ark-ui/solid/factory'
 
@@ -123,12 +123,12 @@ export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter, 
       </div>
       <H2>Usage</H2>
       <P>Import the components:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@fan-ui/solid";
       `}</Pre>
       <P>Basic card:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Card>
   <CardHeader>
@@ -211,7 +211,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
         </TBody>
       </Table>
       <H2>Examples</H2>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Card>
   <CardHeader>

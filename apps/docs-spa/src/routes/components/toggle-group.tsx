@@ -17,7 +17,7 @@ function ToggleGroupPage() {
       </P>
       <DocsLink href="https://ark-ui.com/docs/components/toggle-group" />
       <ToggleGroupBasicDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { ToggleGroup, ToggleGroupItem } from "~/components/toggle-group";
 
@@ -58,7 +58,7 @@ export function ToggleGroupDemo() {
         Use the <InlineCode>size</InlineCode> prop to change the toggle group item size.
       </P>
       <ToggleGroupSizesDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { ToggleGroup, ToggleGroupItem } from "~/components/toggle-group";
 
@@ -87,14 +87,14 @@ export function ToggleGroupSizesDemo() {
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add toggle-group
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/toggle-group.ts`:
-        <Pre>{`import { tv, type VariantProps } from "tailwind-variants";
+        <Pre lang="tsx">{`import { tv, type VariantProps } from "tailwind-variants";
 
 export const toggleGroupVariants = tv({
   slots: {
@@ -117,7 +117,7 @@ export type ToggleGroupVariants = VariantProps<typeof toggleGroupVariants>;`}</P
       </div>
       <div class="space-y-3">
         Create the component file at `src/components/toggle-group/toggle-group.base.tsx`:
-        <Pre>{`import { ToggleGroup as ArkToggleGroup } from "@ark-ui/solid/toggle-group";
+        <Pre lang="tsx">{`import { ToggleGroup as ArkToggleGroup } from "@ark-ui/solid/toggle-group";
 import { splitProps, type Component } from "solid-js";
 import { toggleGroupVariants, type ToggleGroupVariants } from "../recipes/toggle-group";
 
@@ -142,7 +142,7 @@ export const ToggleGroup = { Root, RootProvider, Item };`}</Pre>
       </div>
       <div class="space-y-3">
         Create the component file at `src/components/toggle-group/index.tsx`:
-        <Pre>{`import { splitProps, type Component } from "solid-js";
+        <Pre lang="tsx">{`import { splitProps, type Component } from "solid-js";
 import { ToggleGroup as ToggleGroupBase } from "./toggle-group.base";
 import { ToggleGroup as ArkToggleGroup } from "@ark-ui/solid/toggle-group";
 import type { ToggleGroupVariants } from "../recipes/toggle-group";
@@ -173,12 +173,12 @@ export { toggleGroupVariants, type ToggleGroupVariants } from "@fan-ui/core";`}<
       </div>
       <H2>Usage</H2>
       <P>Import the component:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { ToggleGroup } from "~/components/toggle-group";
       `}</Pre>
       <P>Single selection:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <ToggleGroup defaultValue={["left"]}>
   <ToggleGroupItem value="left"><AlignLeftIcon /></ToggleGroupItem>
@@ -187,7 +187,7 @@ import { ToggleGroup } from "~/components/toggle-group";
 </ToggleGroup>
       `}</Pre>
       <P>Multiple selection:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <ToggleGroup defaultValue={["bold"]} multiple>
   <ToggleGroupItem value="bold"><BoldIcon /></ToggleGroupItem>
@@ -200,7 +200,7 @@ import { ToggleGroup } from "~/components/toggle-group";
         toggle group state externally.
       </P>
       <ToggleGroupRootProviderDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { useToggleGroup } from "@ark-ui/solid/toggle-group";
 import { ToggleGroupBase, ToggleGroupItem } from "~/components/toggle-group";

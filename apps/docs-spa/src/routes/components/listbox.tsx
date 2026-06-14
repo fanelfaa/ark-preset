@@ -14,7 +14,7 @@ function ListboxPage() {
       <P>A list of selectable options with keyboard navigation and typeahead support.</P>
       <DocsLink href="https://ark-ui.com/docs/components/listbox" />
       <ListboxBasicDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { createListCollection } from "@ark-ui/solid";
 import { Index } from "solid-js";
@@ -47,14 +47,14 @@ export default function ListboxBasicDemo() {
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add listbox
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/listbox.ts`:
-        <Pre>{`import { tv, type VariantProps } from "tailwind-variants";
+        <Pre lang="tsx">{`import { tv, type VariantProps } from "tailwind-variants";
 
 export const listboxVariants = tv({
   slots: {
@@ -93,7 +93,7 @@ export type ListboxVariants = VariantProps<typeof listboxVariants>;`}</Pre>
       </div>
       <div class="space-y-3">
         Create the component file at `src/components/listbox/listbox.base.tsx`:
-        <Pre>{`import { Listbox as ArkListbox, type CollectionItem } from "@ark-ui/solid/listbox";
+        <Pre lang="tsx">{`import { Listbox as ArkListbox, type CollectionItem } from "@ark-ui/solid/listbox";
 import { createContext, useContext, splitProps, type Component } from "solid-js";
 import { listboxVariants, type ListboxVariants } from "../recipes/listbox";
 
@@ -157,7 +157,7 @@ export { ListboxVariantContext, useListboxVariant };`}</Pre>
       </div>
       <div class="space-y-3">
         Create the component file at `src/components/listbox/index.tsx`:
-        <Pre>{`import { splitProps, type Component } from "solid-js";
+        <Pre lang="tsx">{`import { splitProps, type Component } from "solid-js";
 import { Listbox as ListboxBase } from "./listbox.base";
 import { type CollectionItem } from "@ark-ui/solid/listbox";
 import type { ListboxVariants } from "../recipes/listbox";
@@ -191,14 +191,14 @@ export { listboxVariants, type ListboxVariants } from "../recipes/listbox";`}</P
       </div>
       <H2>Usage</H2>
       <P>Import the component and use it inline:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { createListCollection } from "@ark-ui/solid";
 import { Index } from "solid-js";
 import { Listbox, ListboxItem } from "~/components/listbox";
       `}</Pre>
       <P>Basic listbox:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 const frameworks = createListCollection({
   items: [
@@ -219,7 +219,7 @@ const frameworks = createListCollection({
         Use <InlineCode>{`selectionMode="multiple"`}</InlineCode> to allow selecting multiple items:
       </P>
       <ListboxMultipleDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { createListCollection } from "@ark-ui/solid";
 import { Index } from "solid-js";
@@ -247,7 +247,7 @@ const frameworks = createListCollection({
         Use <InlineCode>{`orientation="horizontal"`}</InlineCode> for a horizontal layout:
       </P>
       <ListboxHorizontalDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { createListCollection } from "@ark-ui/solid";
 import { Index } from "solid-js";
@@ -274,7 +274,7 @@ const frameworks = createListCollection({
         When the composite <InlineCode>Listbox</InlineCode> doesn't provide enough control, import
         the raw primitive parts from the base file directly:
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Listbox } from "~/components/listbox/listbox.base";
       `}</Pre>
@@ -282,7 +282,7 @@ import { Listbox } from "~/components/listbox/listbox.base";
         Or import <InlineCode>ListboxBase</InlineCode> (the raw parts namespace) from the composite
         entry point:
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { ListboxBase } from "~/components/listbox";
       `}</Pre>
@@ -291,7 +291,7 @@ import { ListboxBase } from "~/components/listbox";
         For full control over the listbox machine, use <InlineCode>useListbox</InlineCode> with{" "}
         <InlineCode>ListboxBase.RootProvider</InlineCode>:
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { ListboxBase, useListboxVariant } from "~/components/listbox/listbox.base";
 import { useListbox } from "@ark-ui/solid/listbox";

@@ -16,7 +16,7 @@ function SliderPage() {
       </P>
       <DocsLink href="https://ark-ui.com/docs/components/slider" />
       <SliderBasicDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import {
   Slider,
@@ -44,14 +44,14 @@ export function SliderDemo() {
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add slider
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/slider.ts`:
-        <Pre>{`import { tv, type VariantProps } from 'tailwind-variants'
+        <Pre lang="tsx">{`import { tv, type VariantProps } from 'tailwind-variants'
 
 export const sliderVariants = tv({
   slots: {
@@ -84,7 +84,7 @@ export type SliderVariants = VariantProps<typeof sliderVariants>`}</Pre>
       </div>
       <div class="space-y-3">
         Create the component directory and files: `src/components/slider/slider.base.tsx`:
-        <Pre>{`import { Slider as ArkSlider } from "@ark-ui/solid/slider";
+        <Pre lang="tsx">{`import { Slider as ArkSlider } from "@ark-ui/solid/slider";
 import { splitProps, type Component } from "solid-js";
 import { sliderVariants } from "@fan-ui/core";
 
@@ -164,7 +164,7 @@ const Marker: Component<ArkSlider.MarkerProps> = (props) => {
 
 export const Slider = { Root, RootProvider, Label, ValueText, Control, Track, Range, Thumb, HiddenInput, DraggingIndicator, MarkerGroup, Marker };`}</Pre>
         `src/components/slider/index.tsx`:
-        <Pre>{`import { splitProps, type Component } from "solid-js";
+        <Pre lang="tsx">{`import { splitProps, type Component } from "solid-js";
 import { Slider as SliderBase } from "./slider.base";
 import { Slider as ArkSlider } from "@ark-ui/solid/slider";
 
@@ -225,7 +225,7 @@ export { sliderVariants, type SliderVariants } from "@fan-ui/core";`}</Pre>
       </Blockquote>
       <H2>Usage</H2>
       <P>Import the components:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import {
   Slider,
@@ -237,7 +237,7 @@ import {
 } from "~/components/slider";
       `}</Pre>
       <P>Basic usage:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Slider defaultValue={[50]} min={0} max={100}>
   <div class="flex items-center justify-between gap-4">
@@ -257,7 +257,7 @@ import {
         reference.
       </P>
       <SliderRootProviderDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { useSlider } from "@ark-ui/solid/slider";
 import {
@@ -309,7 +309,7 @@ export function SliderWithExternalControl() {
       <P>
         Use the <InlineCode>disabled</InlineCode> prop to disable the slider.
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Slider defaultValue={[50]} disabled>
   <SliderLabel>Disabled Slider</SliderLabel>

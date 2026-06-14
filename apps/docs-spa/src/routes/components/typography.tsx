@@ -13,7 +13,7 @@ function TypographyPage() {
       <P>A collection of styled text components for headings, body text, and inline elements.</P>
       <DocsLink href="https://ui.shadcn.com/docs/components/typography" />
       <TypographyBasicDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 import { H1, H2, H3, H4, P, Lead, Large, Small, Muted, InlineCode, Blockquote, List } from "~/components/typography";
 
 export function TypographyDemo() {
@@ -40,14 +40,14 @@ export function TypographyDemo() {
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add typography
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/typography.ts`:
-        <Pre>{`import { tv, type VariantProps } from 'tailwind-variants'
+        <Pre lang="tsx">{`import { tv, type VariantProps } from 'tailwind-variants'
 
 export const typographyVariants = tv({
   slots: {
@@ -70,7 +70,7 @@ export type TypographyVariants = VariantProps<typeof typographyVariants>`}</Pre>
       </div>
       <div class="space-y-3">
         Create the component file at `src/components/typography/index.tsx`:
-        <Pre>{`import { splitProps, type Component } from "solid-js";
+        <Pre lang="tsx">{`import { splitProps, type Component } from "solid-js";
 import { typographyVariants } from "../recipes/typography";
 import { ark, type HTMLArkProps } from "@ark-ui/solid/factory";
 
@@ -138,12 +138,12 @@ export const List: Component<HTMLArkProps<"ul">> = (props) => {
       </div>
       <H2>Usage</H2>
       <P>Import the component:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { H1, H2, P, Lead } from "@fan-ui/solid";
       `}</Pre>
       <P>Headings:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <H1>The Quick Brown Fox</H1>
 <H2>The Quick Brown Fox</H2>
@@ -151,7 +151,7 @@ import { H1, H2, P, Lead } from "@fan-ui/solid";
 <H4>The Quick Brown Fox</H4>
       `}</Pre>
       <P>Body text:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <P>Regular paragraph text with standard styling.</P>
 <Lead>Lead paragraph for introducing content.</Lead>
@@ -160,17 +160,17 @@ import { H1, H2, P, Lead } from "@fan-ui/solid";
 <Muted>Muted secondary text.</Muted>
       `}</Pre>
       <P>Inline elements:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <P>Use <InlineCode>InlineCode</InlineCode> for inline code snippets.</P>
       `}</Pre>
       <P>Blockquote:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Blockquote>"A quote for emphasis."</Blockquote>
       `}</Pre>
       <P>List:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <List>
   <li>First item</li>

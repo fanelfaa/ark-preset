@@ -14,7 +14,7 @@ function SwitchPage() {
       <P>A toggle switch component for on/off boolean input.</P>
       <DocsLink href="https://ark-ui.com/docs/components/switch" />
       <SwitchBasicDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Switch, SwitchLabel, SwitchRootProvider } from "~/components/switch";
 
@@ -37,14 +37,14 @@ export function SwitchDemo() {
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add switch
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/switch.ts`:
-        <Pre>{`import { tv, type VariantProps } from 'tailwind-variants'
+        <Pre lang="tsx">{`import { tv, type VariantProps } from 'tailwind-variants'
 
 export const switchVariants = tv({
   slots: {
@@ -62,7 +62,7 @@ export type SwitchVariants = VariantProps<typeof switchVariants>`}</Pre>
       </div>
       <div class="space-y-3">
         Create the component directory and files: `src/components/switch/switch.base.tsx`:
-        <Pre>{`import { Switch as ArkSwitch } from "@ark-ui/solid/switch";
+        <Pre lang="tsx">{`import { Switch as ArkSwitch } from "@ark-ui/solid/switch";
 import { splitProps, type Component } from "solid-js";
 import { switchVariants } from "../recipes/switch";
 
@@ -104,7 +104,7 @@ export const Switch = {
   HiddenInput: SwitchHiddenInput,
 };`}</Pre>
         `src/components/switch/index.tsx`:
-        <Pre>{`import { Switch as ArkSwitch } from "@ark-ui/solid/switch";
+        <Pre lang="tsx">{`import { Switch as ArkSwitch } from "@ark-ui/solid/switch";
 import { splitProps, type Component } from "solid-js";
 import { Switch as SwitchBase } from "./switch.base";
 
@@ -149,24 +149,24 @@ export { switchVariants, type SwitchVariants } from "../recipes/switch";`}</Pre>
       </div>
       <H2>Usage</H2>
       <P>Import the component:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Switch, SwitchLabel, SwitchRootProvider } from "~/components/switch";
       `}</Pre>
       <P>Basic switch:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Switch />
       `}</Pre>
       <P>With label:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Switch defaultChecked>
   <SwitchLabel>Enable notifications</SwitchLabel>
 </Switch>
       `}</Pre>
       <P>Disabled:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Switch disabled />
       `}</Pre>
@@ -178,7 +178,7 @@ import { Switch, SwitchLabel, SwitchRootProvider } from "~/components/switch";
         reference.
       </P>
       <SwitchRootProviderDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { useSwitch } from "@ark-ui/solid/switch";
 import { SwitchRootProvider, SwitchLabel } from "~/components/switch";

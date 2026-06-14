@@ -15,7 +15,7 @@ function AccordionPage() {
       <P>Displays collapsible content panels that reveal or hide sections of content.</P>
       <DocsLink href="https://ark-ui.com/docs/components/accordion" />
       <AccordionBasicDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import {
   Accordion,
@@ -60,14 +60,14 @@ export function AccordionDemo() {
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add accordion
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/accordion.ts`:
-        <Pre>{`import { tv, type VariantProps } from 'tailwind-variants'
+        <Pre lang="tsx">{`import { tv, type VariantProps } from 'tailwind-variants'
 
 export const accordionVariants = tv({
   slots: {
@@ -87,7 +87,7 @@ export type AccordionVariants = VariantProps<typeof accordionVariants>`}</Pre>
       </div>
       <div class="space-y-3">
         Create the component directory and files: `src/components/accordion/accordion.base.tsx`:
-        <Pre>{`import { Accordion as ArkAccordion } from "@ark-ui/solid/accordion";
+        <Pre lang="tsx">{`import { Accordion as ArkAccordion } from "@ark-ui/solid/accordion";
 import { splitProps, type Component } from "solid-js";
 import { accordionVariants } from "../recipes/accordion";
 
@@ -131,7 +131,7 @@ const ItemIndicator: Component<ArkAccordion.ItemIndicatorProps> = (props) => {
 
 export const Accordion = { Root, RootProvider, Item, ItemTrigger, ItemContent, ItemIndicator };`}</Pre>
         `src/components/accordion/index.tsx`:
-        <Pre>{`import { splitProps, type Component } from "solid-js";
+        <Pre lang="tsx">{`import { splitProps, type Component } from "solid-js";
 import { Accordion as AccordionBase } from "./accordion.base";
 import type { Accordion as ArkAccordion } from "@ark-ui/solid/accordion";
 
@@ -176,7 +176,7 @@ export { accordionVariants, type AccordionVariants } from "../recipes/accordion"
       </Blockquote>
       <H2>Usage</H2>
       <P>Import the components:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import {
   Accordion,
@@ -187,7 +187,7 @@ import {
 } from "~/components/accordion";
       `}</Pre>
       <P>Basic usage:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Accordion>
   <AccordionItem value="item-1">
@@ -201,7 +201,7 @@ import {
 </Accordion>
       `}</Pre>
       <P>With multiple items:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Accordion defaultValue={["item-1"]}>
   <AccordionItem value="item-1">
@@ -228,7 +228,7 @@ import {
         the same time.
       </P>
       <AccordionMultipleDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Accordion multiple defaultValue={["item-1", "item-2"]}>
   <AccordionItem value="item-1">
@@ -249,7 +249,7 @@ import {
         Control the expanded state programmatically using <InlineCode>value</InlineCode> and{" "}
         <InlineCode>onValueChange</InlineCode>.
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { createSignal } from "solid-js";
 import {
@@ -284,7 +284,7 @@ export function AccordionControlled() {
         the accordion and external elements can reference.
       </P>
       <AccordionRootProviderDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { useAccordion } from "@ark-ui/solid/accordion";
 import {
@@ -343,7 +343,7 @@ export function AccordionWithExternalControl() {
       <H2>Disabled</H2>
       <P>Disable individual items or the entire accordion.</P>
       <AccordionDisabledDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Accordion>
   <AccordionItem value="item-1">

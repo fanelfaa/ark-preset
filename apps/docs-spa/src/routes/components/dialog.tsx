@@ -16,7 +16,7 @@ function DialogPage() {
       </P>
       <DocsLink href="https://ark-ui.com/docs/components/dialog" />
       <DialogBasicDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import {
   Dialog,
@@ -68,14 +68,14 @@ export function DialogDemo() {
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add dialog
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/dialog.ts`:
-        <Pre>{`import { tv, type VariantProps } from 'tailwind-variants'
+        <Pre lang="tsx">{`import { tv, type VariantProps } from 'tailwind-variants'
 
 export const dialogVariants = tv({
   slots: {
@@ -97,7 +97,7 @@ export type DialogVariants = VariantProps<typeof dialogVariants>`}</Pre>
       </div>
       <div class="space-y-3">
         Create the component files: At `src/components/dialog/dialog.base.tsx`:
-        <Pre>{`import { Dialog as ArkDialog } from '@ark-ui/solid/dialog'
+        <Pre lang="tsx">{`import { Dialog as ArkDialog } from '@ark-ui/solid/dialog'
 import { splitProps, type Component } from 'solid-js'
 import { dialogVariants } from './recipes/dialog'
 import { buttonVariants, type ButtonVariants } from './recipes/button'
@@ -171,7 +171,7 @@ export const Dialog = {
   Footer,
 }`}</Pre>
         At `src/components/dialog/index.tsx`:
-        <Pre>{`import { Dialog as ArkDialog } from '@ark-ui/solid/dialog'
+        <Pre lang="tsx">{`import { Dialog as ArkDialog } from '@ark-ui/solid/dialog'
 import { Portal } from 'solid-js/web'
 import { splitProps, type Component } from 'solid-js'
 import { Dialog as DialogBase } from './dialog.base'
@@ -211,7 +211,7 @@ export { dialogVariants, type DialogVariants } from './recipes/dialog'`}</Pre>
       </Blockquote>
       <H2>Usage</H2>
       <P>Import the components:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import {
   Dialog,
@@ -224,7 +224,7 @@ import {
 } from "~/components/dialog";
       `}</Pre>
       <P>Basic usage:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Dialog>
   <DialogTrigger>Open Dialog</DialogTrigger>
@@ -238,7 +238,7 @@ import {
       `}</Pre>
       <H2>With Header and Footer</H2>
       <P>Add header and footer sections for structured dialog content.</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Dialog>
   <DialogTrigger>Open</DialogTrigger>
@@ -256,7 +256,7 @@ import {
       `}</Pre>
       <H2>Controlled Open</H2>
       <P>Control the dialog open state programmatically.</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { createSignal } from "solid-js";
 import { Dialog, DialogTrigger, DialogContent, DialogTitle } from "~/components/dialog";
@@ -285,7 +285,7 @@ export function ControlledDialog() {
         component and external elements can reference.
       </P>
       <DialogRootProviderDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { useDialog } from "@ark-ui/solid/dialog";
 import { DialogContent, DialogTrigger, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogBase } from "~/components/dialog";

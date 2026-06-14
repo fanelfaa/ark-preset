@@ -29,7 +29,7 @@ function AspectRatioPage() {
       </P>
       <DocsLink href="https://ui.shadcn.com/docs/components/aspect-ratio" />
       <AspectRatioBasicDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { AspectRatio } from "~/components/aspect-ratio";
 
@@ -44,14 +44,14 @@ export function AspectRatioDemo() {
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add aspect-ratio
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/aspect-ratio.ts`:
-        <Pre>{`import { tv, type VariantProps } from 'tailwind-variants'
+        <Pre lang="tsx">{`import { tv, type VariantProps } from 'tailwind-variants'
 
 export const aspectRatioVariants = tv({
   base: "relative w-full",
@@ -61,7 +61,7 @@ export type AspectRatioVariants = VariantProps<typeof aspectRatioVariants>`}</Pr
       </div>
       <div class="space-y-3">
         Create the component file at `src/components/aspect-ratio.tsx`:
-        <Pre>{`import { splitProps, type Component, children } from 'solid-js'
+        <Pre lang="tsx">{`import { splitProps, type Component, children } from 'solid-js'
 import { aspectRatioVariants } from '../recipes/aspect-ratio'
 import { ark, type HTMLArkProps } from '@ark-ui/solid/factory'
 
@@ -88,19 +88,19 @@ export { AspectRatio, aspectRatioVariants }`}</Pre>
       </div>
       <H2>Usage</H2>
       <P>Import the component:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { AspectRatio } from "@fan-ui/solid";
       `}</Pre>
       <P>Basic:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <AspectRatio ratio={16 / 9}>
   <img src="https://images.unsplash.com/photo-..." alt="Image" class="rounded-md object-cover" />
 </AspectRatio>
       `}</Pre>
       <P>Square:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <AspectRatio ratio={1 / 1}>
   <div class="flex items-center justify-center bg-muted rounded-md">

@@ -15,7 +15,7 @@ function ScrollAreaPage() {
       </P>
       <DocsLink href="https://ark-ui.com/docs/components/scroll-area" />
       <ScrollAreaBasicDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { ScrollArea } from "~/components/scroll-area";
 
@@ -36,14 +36,14 @@ export function ScrollAreaDemo() {
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add scroll-area
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/scroll-area.ts`:
-        <Pre>{`import { tv, type VariantProps } from "tailwind-variants";
+        <Pre lang="tsx">{`import { tv, type VariantProps } from "tailwind-variants";
 
 export const scrollAreaVariants = tv({
   slots: {
@@ -75,7 +75,7 @@ export type ScrollAreaVariants = VariantProps<typeof scrollAreaVariants>;`}</Pre
       </div>
       <div class="space-y-3">
         Create the component file at `src/components/scroll-area/scroll-area.base.tsx`:
-        <Pre>{`import { ScrollArea as ArkScrollArea } from "@ark-ui/solid/scroll-area";
+        <Pre lang="tsx">{`import { ScrollArea as ArkScrollArea } from "@ark-ui/solid/scroll-area";
 import { splitProps, type Component } from "solid-js";
 import { scrollAreaVariants } from "../recipes/scroll-area";
 
@@ -126,7 +126,7 @@ export const ScrollArea = {
       </div>
       <div class="space-y-3">
         Create the component file at `src/components/scroll-area/index.tsx`:
-        <Pre>{`import { splitProps, type Component } from "solid-js";
+        <Pre lang="tsx">{`import { splitProps, type Component } from "solid-js";
 import { ScrollArea as ScrollAreaBase } from "./scroll-area.base";
 import { ScrollArea as ArkScrollArea } from "@ark-ui/solid/scroll-area";
 
@@ -157,12 +157,12 @@ export { scrollAreaVariants, type ScrollAreaVariants } from "../recipes/scroll-a
       </div>
       <H2>Usage</H2>
       <P>Import the component:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { ScrollArea } from "~/components/scroll-area";
       `}</Pre>
       <P>Basic vertical scroll:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <ScrollArea class="h-[200px] w-[350px]" orientation="vertical">
   <div class="p-4">
@@ -171,7 +171,7 @@ import { ScrollArea } from "~/components/scroll-area";
 </ScrollArea>
       `}</Pre>
       <P>Horizontal scroll:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <ScrollArea class="w-[350px]" orientation="horizontal">
   <div class="flex w-[800px] p-4">
@@ -184,7 +184,7 @@ import { ScrollArea } from "~/components/scroll-area";
         For full control over the scroll area structure, import the primitive parts via{" "}
         <InlineCode>ScrollAreaBase</InlineCode>:
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { ScrollArea, ScrollAreaBase } from "~/components/scroll-area";
 

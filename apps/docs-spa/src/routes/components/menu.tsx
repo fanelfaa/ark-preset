@@ -14,7 +14,7 @@ function MenuPage() {
       <DocsLink href="https://ark-ui.com/docs/components/menu" />
       <H2>Basic Usage</H2>
       <MenuBasicDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { For } from "solid-js";
 import { MenuTrigger, MenuContent, MenuItem, Menu } from "@fan-ui/solid";
@@ -43,14 +43,14 @@ export default function MenuDemo() {
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add menu
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/menu.ts`:
-        <Pre>{`import { tv, type VariantProps } from "tailwind-variants";
+        <Pre lang="tsx">{`import { tv, type VariantProps } from "tailwind-variants";
 
 export const menuVariants = tv({
   slots: {
@@ -82,7 +82,7 @@ export type MenuVariants = VariantProps<typeof menuVariants>;`}</Pre>
       </div>
       <div class="space-y-3">
         Create the base component file at `src/components/menu/menu.base.tsx`:
-        <Pre>{`import { Menu as ArkMenu } from "@ark-ui/solid/menu";
+        <Pre lang="tsx">{`import { Menu as ArkMenu } from "@ark-ui/solid/menu";
 import { splitProps, type Component } from "solid-js";
 import { menuVariants } from "../recipes/menu";
 import { buttonVariants, type ButtonVariants } from './recipes/button'
@@ -195,7 +195,7 @@ export const Menu = {
       </div>
       <div class="space-y-3">
         Create the composite wrapper at `src/components/menu/index.tsx`:
-        <Pre>{`import { Menu as ArkMenu } from "@ark-ui/solid/menu";
+        <Pre lang="tsx">{`import { Menu as ArkMenu } from "@ark-ui/solid/menu";
 import { Portal } from "solid-js/web";
 import { splitProps, type Component } from "solid-js";
 import { Menu as MenuBase } from "./menu.base";
@@ -326,7 +326,7 @@ export { menuVariants, type MenuVariants } from "../recipes/menu";`}</Pre>
       </Blockquote>
       <H2>Usage</H2>
       <P>Import the components:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import {
   MenuTrigger,
@@ -335,7 +335,7 @@ import {
 } from "~/components/menu";
       `}</Pre>
       <P>Basic usage:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { For } from "solid-js";
 import { MenuTrigger, MenuContent, MenuItem, Menu } from "~/components/menu";
@@ -353,7 +353,7 @@ import { MenuTrigger, MenuContent, MenuItem, Menu } from "~/components/menu";
       `}</Pre>
       <P>Nested submenus:</P>
       <MenuNestedDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { MenuTrigger, MenuContent, MenuTriggerItem, MenuItem, MenuSeparator, NestedMenuContent, Menu } from "~/components/menu";
 
@@ -371,7 +371,7 @@ import { MenuTrigger, MenuContent, MenuTriggerItem, MenuItem, MenuSeparator, Nes
 </Menu>
       `}</Pre>
       <P>With separator:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <MenuItem value="edit">Edit</MenuItem>
 <MenuSeparator />

@@ -26,7 +26,7 @@ function TablePage() {
         <InlineCode>{`<table>`}</InlineCode> elements — no external dependencies.
       </P>
       <TableBasicDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import {
   Table,
@@ -71,14 +71,14 @@ export function TableDemo() {
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add table
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/table.ts`:
-        <Pre>{`import { tv, type VariantProps } from 'tailwind-variants'
+        <Pre lang="tsx">{`import { tv, type VariantProps } from 'tailwind-variants'
 
 export const tableVariants = tv({
   slots: {
@@ -96,7 +96,7 @@ export type TableVariants = VariantProps<typeof tableVariants>`}</Pre>
       </div>
       <div class="space-y-3">
         Create the component file at `src/components/table.tsx`:
-        <Pre>{`import { splitProps, type Component } from 'solid-js'
+        <Pre lang="tsx">{`import { splitProps, type Component } from 'solid-js'
 import { tableVariants } from '../recipes/table'
 import { ark, type HTMLArkProps } from '@ark-ui/solid/factory'
 
@@ -150,7 +150,7 @@ export {
       </div>
       <H2>Usage</H2>
       <P>Import the components:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import {
   Table,
@@ -163,7 +163,7 @@ import {
 } from "@fan-ui/solid";
       `}</Pre>
       <P>Basic table:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Table>
   <TableCaption>A list of recent invoices.</TableCaption>
@@ -194,7 +194,7 @@ import {
       <P>
         Column alignment can be customized using the <InlineCode>class</InlineCode> prop:
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <TableHead class="text-right">Amount</TableHead>
 <TableCell class="text-right">$250.00</TableCell>

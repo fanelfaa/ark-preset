@@ -18,7 +18,7 @@ function RadioGroupPage() {
       </P>
       <DocsLink href="https://ark-ui.com/docs/components/radio-group" />
       <RadioGroupBasicDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { RadioGroup, RadioGroupItem } from "~/components/radio-group";
 
@@ -35,14 +35,14 @@ export function RadioGroupDemo() {
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add radio-group
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/radio-group.ts`:
-        <Pre>{`import { tv, type VariantProps } from 'tailwind-variants'
+        <Pre lang="tsx">{`import { tv, type VariantProps } from 'tailwind-variants'
 
 export const radioGroupVariants = tv({
   slots: {
@@ -80,7 +80,7 @@ export type RadioGroupVariants = VariantProps<typeof radioGroupVariants>`}</Pre>
       </div>
       <div class="space-y-3">
         Create the component directory and files: `src/components/radio-group/radio-group.base.tsx`:
-        <Pre>{`import { RadioGroup as ArkRadioGroup } from "@ark-ui/solid/radio-group";
+        <Pre lang="tsx">{`import { RadioGroup as ArkRadioGroup } from "@ark-ui/solid/radio-group";
 import { splitProps, type Component } from "solid-js";
 import { radioGroupVariants } from "../recipes/radio-group";
 
@@ -150,7 +150,7 @@ const RadioGroup = {
 export { RadioGroup };
 export { ItemHiddenInput };`}</Pre>
         `src/components/radio-group/index.tsx`:
-        <Pre>{`import { splitProps, type Component } from "solid-js";
+        <Pre lang="tsx">{`import { splitProps, type Component } from "solid-js";
 import { RadioGroup as RadioGroupBase } from "./radio-group.base";
 import { RadioGroup as ArkRadioGroup } from "@ark-ui/solid/radio-group";
 import type { RadioGroupVariants } from "../recipes/radio-group";
@@ -188,12 +188,12 @@ export { radioGroupVariants, type RadioGroupVariants } from "../recipes/radio-gr
       </Blockquote>
       <H2>Usage</H2>
       <P>Import the components:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { RadioGroup, RadioGroupItem } from "~/components/radio-group";
       `}</Pre>
       <P>Basic usage:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <RadioGroup defaultValue="1" orientation="horizontal">
   <RadioGroupItem value="1">Credit Card</RadioGroupItem>
@@ -203,7 +203,7 @@ import { RadioGroup, RadioGroupItem } from "~/components/radio-group";
       `}</Pre>
       <H2>With Label</H2>
       <P>Add a label to describe the radio group.</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <RadioGroup defaultValue="1" orientation="horizontal">
   <RadioGroupItem value="1">Credit Card</RadioGroupItem>
@@ -215,7 +215,7 @@ import { RadioGroup, RadioGroupItem } from "~/components/radio-group";
         When the composite <InlineCode>RadioGroup</InlineCode> doesn't provide enough control,
         import the raw primitive parts from the base file directly:
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { RadioGroup } from "~/components/radio-group/radio-group.base";
       `}</Pre>
@@ -223,7 +223,7 @@ import { RadioGroup } from "~/components/radio-group/radio-group.base";
         Or import <InlineCode>RadioGroupBase</InlineCode> (the raw parts namespace) from the
         composite entry point:
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { RadioGroupBase } from "~/components/radio-group";
       `}</Pre>
@@ -233,7 +233,7 @@ import { RadioGroupBase } from "~/components/radio-group";
         selection state externally:
       </P>
       <RadioGroupControlledDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Index, createSignal } from "solid-js";
 import { RadioGroupBase } from "~/components/radio-group";
@@ -266,7 +266,7 @@ export function ControlledDemo() {
         Individual items can be disabled using the <InlineCode>disabled</InlineCode> prop:
       </P>
       <RadioGroupDisabledDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { RadioGroup } from "~/components/radio-group/radio-group.base";
 
@@ -288,7 +288,7 @@ export function DisabledDemo() {
         the radio group and external elements can reference.
       </P>
       <RadioGroupRootProviderDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Index, createMemo } from "solid-js";
 import { RadioGroupBase, RadioGroupItem } from "~/components/radio-group";

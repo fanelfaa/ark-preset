@@ -14,7 +14,7 @@ function InputPage() {
       <DocsLink href="https://ark-ui.com/docs/components/field" />
       <div class="rounded-lg border border-border p-6">
         <InputBasicDemo />
-        <Pre>{`import { Input } from "~/components/input"
+        <Pre lang="tsx">{`import { Input } from "~/components/input"
 
 export function InputDemo() {
   return (
@@ -30,14 +30,14 @@ export function InputDemo() {
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add input
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/input.ts`:
-        <Pre>{`import { tv, type VariantProps } from 'tailwind-variants'
+        <Pre lang="tsx">{`import { tv, type VariantProps } from 'tailwind-variants'
 
 export const inputVariants = tv({
   slots: {
@@ -64,7 +64,7 @@ export type InputVariants = VariantProps<typeof inputVariants>`}</Pre>
       </div>
       <div class="space-y-3">
         Create the component directory and files: `src/components/input/input.base.tsx`:
-        <Pre>{`import { Field as ArkField } from "@ark-ui/solid/field";
+        <Pre lang="tsx">{`import { Field as ArkField } from "@ark-ui/solid/field";
 import { splitProps, type Component } from "solid-js";
 import { inputVariants } from "../recipes/input";
 
@@ -108,7 +108,7 @@ export const Input = {
   ErrorText: InputErrorText,
 };`}</Pre>
         `src/components/input/index.tsx`:
-        <Pre>{`import { Field as ArkField } from "@ark-ui/solid/field";
+        <Pre lang="tsx">{`import { Field as ArkField } from "@ark-ui/solid/field";
 import { splitProps, type Component } from "solid-js";
 import { Input as InputBase } from "./input.base";
 import { type InputVariants } from "../recipes/input";
@@ -145,27 +145,27 @@ export { inputVariants, type InputVariants } from "../recipes/input";`}</Pre>
       </div>
       <H2>Usage</H2>
       <P>Import the component:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Input } from "~/components/input";
       `}</Pre>
       <P>Basic input:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Input placeholder="Enter text..." />
       `}</Pre>
       <P>With label:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Input label="Username" placeholder="Enter username" />
       `}</Pre>
       <P>With description:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Input label="Email" description="We'll never share your email." placeholder="email@example.com" />
       `}</Pre>
       <P>With error state:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Input label="Password" error="Password is required" type="password" />
       `}</Pre>

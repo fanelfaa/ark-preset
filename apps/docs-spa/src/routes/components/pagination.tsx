@@ -19,7 +19,7 @@ function PaginationPage() {
       <DocsLink href="https://ark-ui.com/docs/components/pagination" />
       <H2>Basic</H2>
       <PaginationBasicDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Pagination, PaginationPageList, PaginationFirstTrigger, PaginationPrevTrigger, PaginationNextTrigger, PaginationLastTrigger } from "~/components/pagination";
 
@@ -41,7 +41,7 @@ export function PaginationDemo() {
         current page externally.
       </P>
       <PaginationControlledDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { createSignal } from "solid-js";
 import { Pagination, PaginationPageList, PaginationFirstTrigger, PaginationPrevTrigger, PaginationNextTrigger, PaginationLastTrigger } from "~/components/pagination";
@@ -70,7 +70,7 @@ export function ControlledDemo() {
         <InlineCode>PaginationBase.RootProvider</InlineCode>.
       </P>
       <PaginationRootProviderDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { For } from "solid-js";
 import { usePagination } from "@ark-ui/solid/pagination";
@@ -107,7 +107,7 @@ export function RootProviderDemo() {
         <InlineCode>lg</InlineCode> (h-9 min-w-9).
       </P>
       <PaginationSizeDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Pagination, PaginationPageList, PaginationFirstTrigger, PaginationPrevTrigger, PaginationNextTrigger, PaginationLastTrigger } from "~/components/pagination";
 
@@ -126,14 +126,14 @@ import { Pagination, PaginationPageList, PaginationFirstTrigger, PaginationPrevT
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add pagination
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/pagination.ts`:
-        <Pre>{`import { tv, type VariantProps } from "tailwind-variants";
+        <Pre lang="tsx">{`import { tv, type VariantProps } from "tailwind-variants";
 
 export const paginationVariants = tv({
   slots: {
@@ -172,7 +172,7 @@ export type PaginationVariants = VariantProps<typeof paginationVariants>;`}</Pre
       </div>
       <div class="space-y-3">
         Create the base file at `src/components/pagination/pagination.base.tsx`:
-        <Pre>{`import { Pagination as ArkPagination } from "@ark-ui/solid/pagination";
+        <Pre lang="tsx">{`import { Pagination as ArkPagination } from "@ark-ui/solid/pagination";
 import { createContext, useContext, splitProps, type Component } from "solid-js";
 import { paginationVariants, type PaginationVariants } from "../recipes/pagination";
 
@@ -261,7 +261,7 @@ export { PaginationVariantContext, usePaginationVariant };`}</Pre>
       </div>
       <div class="space-y-3">
         Create the component file at `src/components/pagination/index.tsx`:
-        <Pre>{`import { splitProps, For, type Component } from "solid-js";
+        <Pre lang="tsx">{`import { splitProps, For, type Component } from "solid-js";
 import { Pagination as PaginationBase } from "./pagination.base";
 import { Pagination as ArkPagination } from "@ark-ui/solid/pagination";
 import type { PaginationVariants } from "@fan-ui/core";

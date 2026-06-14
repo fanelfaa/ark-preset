@@ -15,7 +15,7 @@ function NumberInputPage() {
       </P>
       <DocsLink href="https://ark-ui.com/docs/components/number-input" />
       <NumberInputBasicDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { NumberInput } from "~/components/number-input";
 
@@ -26,14 +26,14 @@ export function NumberInputDemo() {
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add number-input
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/number-input.ts`:
-        <Pre>{`import { tv, type VariantProps } from 'tailwind-variants'
+        <Pre lang="tsx">{`import { tv, type VariantProps } from 'tailwind-variants'
 
 export const numberInputVariants = tv({
   slots: {
@@ -79,7 +79,7 @@ export type NumberInputVariants = VariantProps<typeof numberInputVariants>`}</Pr
       <div class="space-y-3">
         Create the component directory and files:
         `src/components/number-input/number-input.base.tsx`:
-        <Pre>{`import { NumberInput as ArkNumberInput } from "@ark-ui/solid/number-input";
+        <Pre lang="tsx">{`import { NumberInput as ArkNumberInput } from "@ark-ui/solid/number-input";
 import { splitProps, type Component } from "solid-js";
 import { numberInputVariants } from "../recipes/number-input";
 import { HTMLProps } from "@ark-ui/solid";
@@ -153,7 +153,7 @@ export const NumberInput = {
   ValueText: NumberInputValueText,
 };`}</Pre>
         `src/components/number-input/index.tsx`:
-        <Pre>{`import { NumberInput as ArkNumberInput } from "@ark-ui/solid/number-input";
+        <Pre lang="tsx">{`import { NumberInput as ArkNumberInput } from "@ark-ui/solid/number-input";
 import { splitProps, type Component } from "solid-js";
 import { NumberInput as NumberInputBase } from "./number-input.base";
 
@@ -215,12 +215,12 @@ export { numberInputVariants, type NumberInputVariants } from "../recipes/number
       </Blockquote>
       <H2>Usage</H2>
       <P>Import the component:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { NumberInput } from "~/components/number-input";
       `}</Pre>
       <P>Basic usage:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <NumberInput defaultValue={50} min={0} max={100} />
       `}</Pre>
@@ -228,7 +228,7 @@ import { NumberInput } from "~/components/number-input";
       <P>
         Add a label using the <InlineCode>label</InlineCode> prop.
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <NumberInput label="Quantity" defaultValue={1} min={1} max={10} />
       `}</Pre>
@@ -236,7 +236,7 @@ import { NumberInput } from "~/components/number-input";
       <P>
         Use the <InlineCode>error</InlineCode> prop to show an error state.
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <NumberInput label="Amount" defaultValue={0} error />
       `}</Pre>
@@ -244,7 +244,7 @@ import { NumberInput } from "~/components/number-input";
       <P>
         Use the <InlineCode>disabled</InlineCode> prop to disable the input.
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <NumberInput defaultValue={50} disabled />
       `}</Pre>

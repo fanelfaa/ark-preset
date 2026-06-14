@@ -32,7 +32,7 @@ function AlertDialogPage() {
       </P>
       <DocsLink href="https://ui.shadcn.com/docs/components/alert-dialog" />
       <AlertDialogBasicDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import {
   AlertDialog,
@@ -70,18 +70,18 @@ export function AlertDialogDemo() {
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add alert-dialog
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Install the dependencies:
-        <Pre>{`npm install @ark-ui/solid tailwind-variants`}</Pre>
+        <Pre lang="tsx">{`npm install @ark-ui/solid tailwind-variants`}</Pre>
       </div>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/alert-dialog.ts`:
-        <Pre>{`import { tv, type VariantProps } from 'tailwind-variants'
+        <Pre lang="tsx">{`import { tv, type VariantProps } from 'tailwind-variants'
 
 export const alertDialogVariants = tv({
   slots: {
@@ -105,7 +105,7 @@ export type AlertDialogVariants = VariantProps<typeof alertDialogVariants>`}</Pr
       </div>
       <div class="space-y-3">
         Create the component files: At `src/components/alert-dialog/alert-dialog.base.tsx`:
-        <Pre>{`import { Dialog as ArkDialog } from '@ark-ui/solid/dialog'
+        <Pre lang="tsx">{`import { Dialog as ArkDialog } from '@ark-ui/solid/dialog'
 import { splitProps, type Component } from 'solid-js'
 import { alertDialogVariants } from './recipes/alert-dialog'
 import { buttonVariants, type ButtonVariants } from './recipes/button'
@@ -186,7 +186,7 @@ export const AlertDialogAction: Component<HTMLArkProps<'button'> & ButtonVariant
   )
 }`}</Pre>
         At `src/components/alert-dialog/index.tsx`:
-        <Pre>{`import { Dialog as ArkDialog } from '@ark-ui/solid/dialog'
+        <Pre lang="tsx">{`import { Dialog as ArkDialog } from '@ark-ui/solid/dialog'
 import { Portal } from 'solid-js/web'
 import { splitProps, type Component } from 'solid-js'
 import {
@@ -219,7 +219,7 @@ export { alertDialogVariants, type AlertDialogVariants } from './recipes/alert-d
       </div>
       <H2>Usage</H2>
       <P>Import the components:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import {
   AlertDialog,
@@ -234,7 +234,7 @@ import {
 } from "@fan-ui/solid";
       `}</Pre>
       <P>Basic usage:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <AlertDialog>
   <AlertDialogTrigger>Open</AlertDialogTrigger>
@@ -258,7 +258,7 @@ import {
         delete confirmations that can be triggered from any element.
       </P>
       <AlertDialogDeleteDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { useDialog, type UseDialogReturn } from "@ark-ui/solid/dialog";
 import { AlertDialogContent, AlertDialogHeader, AlertDialogFooter, AlertDialogTitle, AlertDialogDescription, AlertDialogCancel, AlertDialogAction, AlertDialogBase } from "~/components/alert-dialog";

@@ -12,7 +12,7 @@ function AvatarPage() {
       <P>An image element with a fallback for representing users or entities.</P>
       <DocsLink href="https://ark-ui.com/docs/components/avatar" />
       <AvatarBasicDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import {
   Avatar,
@@ -41,14 +41,14 @@ export function AvatarDemo() {
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add avatar
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/avatar.ts`:
-        <Pre>{`import { tv, type VariantProps } from 'tailwind-variants'
+        <Pre lang="tsx">{`import { tv, type VariantProps } from 'tailwind-variants'
 
 export const avatarVariants = tv({
   slots: {
@@ -62,7 +62,7 @@ export type AvatarVariants = VariantProps<typeof avatarVariants>`}</Pre>
       </div>
       <div class="space-y-3">
         Create the component directory and files: `src/components/avatar/avatar.base.tsx`:
-        <Pre>{`import { Avatar as ArkAvatar } from "@ark-ui/solid/avatar";
+        <Pre lang="tsx">{`import { Avatar as ArkAvatar } from "@ark-ui/solid/avatar";
 import { splitProps, type Component } from "solid-js";
 import { avatarVariants } from "@fan-ui/core";
 
@@ -90,7 +90,7 @@ const Image: Component<ArkAvatar.ImageProps> = (props) => {
 
 export const Avatar = { Root, RootProvider, Fallback, Image };`}</Pre>
         `src/components/avatar/index.tsx`:
-        <Pre>{`import { Avatar as AvatarBase } from "./avatar.base";
+        <Pre lang="tsx">{`import { Avatar as AvatarBase } from "./avatar.base";
 
 const Avatar = AvatarBase.Root;
 const AvatarFallback = AvatarBase.Fallback;
@@ -106,7 +106,7 @@ export { avatarVariants, type AvatarVariants } from "@fan-ui/core";`}</Pre>
       </Blockquote>
       <H2>Usage</H2>
       <P>Import the components:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import {
   Avatar,
@@ -115,7 +115,7 @@ import {
 } from "~/components/avatar";
       `}</Pre>
       <P>Basic usage:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Avatar>
   <AvatarFallback>JD</AvatarFallback>
@@ -124,7 +124,7 @@ import {
       `}</Pre>
       <H2>With Fallback Only</H2>
       <P>When no image is provided or the image fails to load, the fallback is shown:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Avatar>
   <AvatarFallback>AB</AvatarFallback>

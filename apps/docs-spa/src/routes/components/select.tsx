@@ -15,7 +15,7 @@ function SelectPage() {
       <P>A dropdown component that allows users to select one or more options from a list.</P>
       <DocsLink href="https://ark-ui.com/docs/components/select" />
       <SelectBasicDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { createListCollection } from "@ark-ui/solid";
 import { Index } from "solid-js";
@@ -53,14 +53,14 @@ export function SelectDemo() {
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add select
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/select.ts`:
-        <Pre>{`import { tv, type VariantProps } from 'tailwind-variants'
+        <Pre lang="tsx">{`import { tv, type VariantProps } from 'tailwind-variants'
 
 export const selectVariants = tv({
   slots: {
@@ -95,7 +95,7 @@ export type SelectVariants = VariantProps<typeof selectVariants>`}</Pre>
       </div>
       <div class="space-y-3">
         Create the component directory at `src/components/select/`: `select.base.tsx`:
-        <Pre>{`import { Select as ArkSelect } from "@ark-ui/solid/select";
+        <Pre lang="tsx">{`import { Select as ArkSelect } from "@ark-ui/solid/select";
 import { splitProps, type Component } from "solid-js";
 import { selectVariants } from "../recipes/select";
 
@@ -167,7 +167,7 @@ export { Select };`}</Pre>
       </div>
       <div class="space-y-3">
         Create the component file at `src/components/select/index.tsx`:
-        <Pre>{`import { Select as SelectBase } from "./select.base";
+        <Pre lang="tsx">{`import { Select as SelectBase } from "./select.base";
 import { Select as ArkSelect } from "@ark-ui/solid/select";
 import { Portal } from "solid-js/web";
 import { splitProps, type Component, type JSX } from "solid-js";
@@ -267,7 +267,7 @@ export type { ListCollection } from "@ark-ui/solid/select";`}</Pre>
       </Blockquote>
       <H2>Usage</H2>
       <P>Import the components:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { createListCollection } from "@ark-ui/solid";
 import { Index } from "solid-js";
@@ -280,7 +280,7 @@ import {
 } from "~/components/select";
       `}</Pre>
       <P>Basic usage:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 const items = createListCollection({
   items: [
@@ -301,7 +301,7 @@ const items = createListCollection({
       `}</Pre>
       <H2>With Label</H2>
       <P>Add a label to describe the select field.</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Select collection={items}>
   <SelectLabel>Choose your framework</SelectLabel>
@@ -321,7 +321,7 @@ const items = createListCollection({
         reference.
       </P>
       <SelectRootProviderDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { useSelect, createListCollection } from "@ark-ui/solid/select";
 import { Index } from "solid-js";
@@ -380,7 +380,7 @@ export function SelectWithExternalControl() {
         selections.
       </P>
       <SelectMultipleDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { createListCollection } from "@ark-ui/solid";
 import { Index } from "solid-js";
@@ -421,7 +421,7 @@ export function SelectMultipleDemo() {
         dropdown. Pass <InlineCode>onSearch</InlineCode> to filter the collection as the user types.
       </P>
       <SelectSearchableDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { useFilter, useListCollection } from "@ark-ui/solid";
 import { Index } from "solid-js";
@@ -473,7 +473,7 @@ export function SelectSearchableDemo() {
         root styling to <InlineCode>SelectBase.Root</InlineCode>, so the{" "}
         <InlineCode>error</InlineCode> prop requires using the base component directly:
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <SelectBase.Root collection={items} error>
   <SelectLabel>Framework</SelectLabel>
@@ -493,13 +493,13 @@ export function SelectSearchableDemo() {
         includes a clear button when used with <InlineCode>multiple</InlineCode> selection. Import
         them alongside <InlineCode>Select</InlineCode>:
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Select, SelectLabel, SelectTrigger, SelectContent, SelectItem } from "~/components/select";
       `}</Pre>
       <H2>Advanced Usage</H2>
       <P>When you need more control, import raw primitive parts directly from the base file:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Select } from "~/components/select/select.base";
       `}</Pre>
@@ -507,7 +507,7 @@ import { Select } from "~/components/select/select.base";
         Or import <InlineCode>SelectBase</InlineCode> (the raw parts namespace) from the barrel
         entry point:
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { SelectBase } from "~/components/select";
       `}</Pre>

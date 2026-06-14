@@ -17,7 +17,7 @@ function CheckboxPage() {
       </P>
       <DocsLink href="https://ark-ui.com/docs/components/checkbox" />
       <CheckboxBasicDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Checkbox, CheckboxLabel, CheckboxRootProvider } from "~/components/checkbox";
 
@@ -43,14 +43,14 @@ export function CheckboxDemo() {
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add checkbox
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/checkbox.ts`:
-        <Pre>{`import { tv, type VariantProps } from 'tailwind-variants'
+        <Pre lang="tsx">{`import { tv, type VariantProps } from 'tailwind-variants'
 
 export const checkboxVariants = tv({
   slots: {
@@ -67,7 +67,7 @@ export type CheckboxVariants = VariantProps<typeof checkboxVariants>`}</Pre>
       </div>
       <div class="space-y-3">
         Create the component directory and files: `src/components/checkbox/checkbox.base.tsx`:
-        <Pre>{`import { Checkbox as ArkCheckbox } from "@ark-ui/solid/checkbox";
+        <Pre lang="tsx">{`import { Checkbox as ArkCheckbox } from "@ark-ui/solid/checkbox";
 import { splitProps, type Component } from "solid-js";
 import { checkboxVariants } from "../recipes/checkbox";
 
@@ -109,7 +109,7 @@ export const Checkbox = {
   HiddenInput: CheckboxHiddenInput,
 };`}</Pre>
         `src/components/checkbox/index.tsx`:
-        <Pre>{`import { Checkbox as ArkCheckbox } from "@ark-ui/solid/checkbox";
+        <Pre lang="tsx">{`import { Checkbox as ArkCheckbox } from "@ark-ui/solid/checkbox";
 import { splitProps, type Component } from "solid-js";
 import { Checkbox as CheckboxBase } from "./checkbox.base";
 const CheckboxLabel = CheckboxBase.Label;
@@ -158,29 +158,29 @@ export { checkboxVariants, type CheckboxVariants } from "../recipes/checkbox";`}
       </div>
       <H2>Usage</H2>
       <P>Import the component:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Checkbox, CheckboxLabel, CheckboxRootProvider } from "~/components/checkbox";
       `}</Pre>
       <P>Basic checkbox:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Checkbox />
       `}</Pre>
       <P>With label:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Checkbox defaultChecked>
   <CheckboxLabel>Accept terms</CheckboxLabel>
 </Checkbox>
       `}</Pre>
       <P>Disabled:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Checkbox disabled />
       `}</Pre>
       <P>Indeterminate:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Checkbox checked="indeterminate" />
       `}</Pre>
@@ -192,7 +192,7 @@ import { Checkbox, CheckboxLabel, CheckboxRootProvider } from "~/components/chec
         reference.
       </P>
       <CheckboxRootProviderDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { useCheckbox } from "@ark-ui/solid/checkbox";
 import { CheckboxRootProvider, CheckboxLabel } from "~/components/checkbox";

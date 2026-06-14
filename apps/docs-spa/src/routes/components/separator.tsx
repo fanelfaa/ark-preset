@@ -28,7 +28,7 @@ function SeparatorPage() {
       </P>
       <DocsLink href="https://ui.shadcn.com/docs/components/separator" />
       <SeparatorBasicDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Separator } from "~/components/separator";
 
@@ -45,14 +45,14 @@ export function SeparatorDemo() {
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add separator
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/separator.ts`:
-        <Pre>{`import { tv, type VariantProps } from 'tailwind-variants'
+        <Pre lang="tsx">{`import { tv, type VariantProps } from 'tailwind-variants'
 
 export const separatorVariants = tv({
   base: "shrink-0 bg-border",
@@ -71,7 +71,7 @@ export type SeparatorVariants = VariantProps<typeof separatorVariants>`}</Pre>
       </div>
       <div class="space-y-3">
         Create the component file at `src/components/separator.tsx`:
-        <Pre>{`import { splitProps, type Component } from 'solid-js'
+        <Pre lang="tsx">{`import { splitProps, type Component } from 'solid-js'
 import { separatorVariants, type SeparatorVariants } from '../recipes/separator'
 import { ark, type HTMLArkProps } from '@ark-ui/solid/factory'
 
@@ -94,17 +94,17 @@ export { Separator, separatorVariants }`}</Pre>
       </div>
       <H2>Usage</H2>
       <P>Import the component:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Separator } from "@fan-ui/solid";
       `}</Pre>
       <P>Basic horizontal:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Separator />
       `}</Pre>
       <P>Vertical:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <div class="flex h-10 items-center gap-4">
   <span>Left</span>

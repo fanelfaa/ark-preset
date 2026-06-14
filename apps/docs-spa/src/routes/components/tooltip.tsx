@@ -18,7 +18,7 @@ function TooltipPage() {
       </P>
       <DocsLink href="https://ark-ui.com/docs/components/tooltip" />
       <TooltipBasicDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Tooltip, TooltipTrigger, TooltipContent } from "~/components/tooltip";
 
@@ -34,14 +34,14 @@ export function TooltipDemo() {
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add tooltip
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/tooltip.ts`:
-        <Pre>{`import { tv, type VariantProps } from 'tailwind-variants'
+        <Pre lang="tsx">{`import { tv, type VariantProps } from 'tailwind-variants'
 
 export const tooltipVariants = tv({
   slots: {
@@ -58,7 +58,7 @@ export type TooltipVariants = VariantProps<typeof tooltipVariants>`}</Pre>
       </div>
       <div class="space-y-3">
         Create the base component file at `src/components/tooltip/tooltip.base.tsx`:
-        <Pre>{`import { Tooltip as ArkTooltip } from "@ark-ui/solid/tooltip";
+        <Pre lang="tsx">{`import { Tooltip as ArkTooltip } from "@ark-ui/solid/tooltip";
 import { splitProps, type Component } from "solid-js";
 import { tooltipVariants } from "../../recipes/tooltip";
 import { buttonVariants, type ButtonVariants } from "../../recipes/button";
@@ -114,7 +114,7 @@ export const Tooltip = {
   ArrowTip,
 };`}</Pre>
         Then create the composite component file at `src/components/tooltip/index.tsx`:
-        <Pre>{`import { splitProps, type Component } from "solid-js";
+        <Pre lang="tsx">{`import { splitProps, type Component } from "solid-js";
 import { Tooltip as TooltipBase } from "./tooltip.base";
 import { Tooltip as ArkTooltip } from "@ark-ui/solid/tooltip";
 
@@ -154,12 +154,12 @@ export { tooltipVariants, type TooltipVariants } from "../../recipes/tooltip";`}
       </Blockquote>
       <H2>Usage</H2>
       <P>Import the components:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Tooltip, TooltipTrigger, TooltipContent } from "~/components/tooltip";
       `}</Pre>
       <P>Basic tooltip:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Tooltip>
   <TooltipTrigger>Hover me</TooltipTrigger>
@@ -169,7 +169,7 @@ import { Tooltip, TooltipTrigger, TooltipContent } from "~/components/tooltip";
       <H2>With Arrow</H2>
       <P>Add an arrow pointing to the trigger element.</P>
       <TooltipArrowDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Tooltip, TooltipTrigger, TooltipContent } from "~/components/tooltip";
 
@@ -185,12 +185,12 @@ import { Tooltip, TooltipTrigger, TooltipContent } from "~/components/tooltip";
         When the composite <InlineCode>Tooltip</InlineCode> doesn't provide enough control, import
         the raw primitive parts via <InlineCode>TooltipBase</InlineCode>:
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { TooltipBase } from "~/components/tooltip";
       `}</Pre>
       <P>Or import directly from the base file:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Tooltip } from "~/components/tooltip/tooltip.base";
       `}</Pre>
@@ -200,7 +200,7 @@ import { Tooltip } from "~/components/tooltip/tooltip.base";
         <InlineCode>TooltipBase</InlineCode>:
       </P>
       <TooltipManualArrowDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Tooltip, TooltipBase } from "~/components/tooltip";
 
@@ -222,7 +222,7 @@ import { Tooltip, TooltipBase } from "~/components/tooltip";
         tooltip visibility externally:
       </P>
       <TooltipControlledDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { createSignal } from "solid-js";
 import { Tooltip, TooltipTrigger, TooltipContent } from "~/components/tooltip";

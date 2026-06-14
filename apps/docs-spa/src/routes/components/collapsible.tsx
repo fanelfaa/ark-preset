@@ -13,7 +13,7 @@ function CollapsiblePage() {
       <P>A component that allows users to expand or collapse content sections.</P>
       <DocsLink href="https://ark-ui.com/docs/components/collapsible" />
       <CollapsibleBasicDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import {
   Collapsible,
@@ -39,14 +39,14 @@ export function CollapsibleDemo() {
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add collapsible
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/collapsible.ts`:
-        <Pre>{`import { tv, type VariantProps } from 'tailwind-variants'
+        <Pre lang="tsx">{`import { tv, type VariantProps } from 'tailwind-variants'
 
 export const collapsibleVariants = tv({
   slots: {
@@ -63,7 +63,7 @@ export type CollapsibleVariants = VariantProps<typeof collapsibleVariants>`}</Pr
       </div>
       <div class="space-y-3">
         Create the component directory and files: `src/components/collapsible/collapsible.base.tsx`:
-        <Pre>{`import { Collapsible as ArkCollapsible } from "@ark-ui/solid/collapsible";
+        <Pre lang="tsx">{`import { Collapsible as ArkCollapsible } from "@ark-ui/solid/collapsible";
 import { splitProps, type Component } from "solid-js";
 import { collapsibleVariants } from "../recipes/collapsible";
 
@@ -98,7 +98,7 @@ const Indicator: Component<ArkCollapsible.IndicatorProps> = (props) => {
 
 export const Collapsible = { Root, RootProvider, Trigger, Content, Indicator };`}</Pre>
         `src/components/collapsible/index.tsx`:
-        <Pre>{`import { type Component } from "solid-js";
+        <Pre lang="tsx">{`import { type Component } from "solid-js";
 import { Collapsible as CollapsibleBase } from "./collapsible.base";
 import { Collapsible as ArkCollapsible } from "@ark-ui/solid/collapsible";
 
@@ -144,7 +144,7 @@ export { collapsibleVariants, type CollapsibleVariants } from "../recipes/collap
       </Blockquote>
       <H2>Usage</H2>
       <P>Import the components:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import {
   Collapsible,
@@ -154,7 +154,7 @@ import {
 } from "~/components/collapsible";
       `}</Pre>
       <P>Basic usage:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Collapsible>
   <CollapsibleTrigger>
@@ -171,7 +171,7 @@ import {
         <InlineCode>CollapsibleIndicator</InlineCode> inside the trigger to show the chevron icon.
         The rotation is styled via the <InlineCode>indicator</InlineCode> slot in the recipe.
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import {
   Collapsible,
@@ -198,7 +198,7 @@ import {
         both the component and external elements can reference.
       </P>
       <CollapsibleRootProviderDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { useCollapsible } from "@ark-ui/solid/collapsible";
 import {

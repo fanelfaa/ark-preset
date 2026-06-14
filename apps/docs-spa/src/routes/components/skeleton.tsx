@@ -29,7 +29,7 @@ function SkeletonPage() {
       </P>
       <DocsLink href="https://ui.shadcn.com/docs/components/skeleton" />
       <SkeletonBasicDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Skeleton } from "~/components/skeleton";
 
@@ -48,14 +48,14 @@ export function SkeletonDemo() {
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add skeleton
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/skeleton.ts`:
-        <Pre>{`import { tv, type VariantProps } from 'tailwind-variants'
+        <Pre lang="tsx">{`import { tv, type VariantProps } from 'tailwind-variants'
 
 export const skeletonVariants = tv({
   base: "animate-pulse rounded-md bg-muted",
@@ -65,7 +65,7 @@ export type SkeletonVariants = VariantProps<typeof skeletonVariants>`}</Pre>
       </div>
       <div class="space-y-3">
         Create the component file at `src/components/skeleton.tsx`:
-        <Pre>{`import { splitProps, type Component } from 'solid-js'
+        <Pre lang="tsx">{`import { splitProps, type Component } from 'solid-js'
 import { skeletonVariants } from '../recipes/skeleton'
 import { ark, type HTMLArkProps } from '@ark-ui/solid/factory'
 
@@ -78,12 +78,12 @@ export { Skeleton, skeletonVariants }`}</Pre>
       </div>
       <H2>Usage</H2>
       <P>Import the component:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Skeleton } from "@fan-ui/solid";
       `}</Pre>
       <P>Basic:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Skeleton class="h-4 w-[250px]" />
       `}</Pre>
@@ -98,7 +98,7 @@ import { Skeleton } from "@fan-ui/solid";
           </div>
         </div>
       </div>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <div class="flex items-center gap-4">
   <Skeleton class="size-10 rounded-full" />
@@ -120,7 +120,7 @@ import { Skeleton } from "@fan-ui/solid";
           </div>
         </div>
       </div>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <div class="flex flex-col gap-3 rounded-lg border border-border p-4">
   <Skeleton class="h-5 w-[250px]" />
@@ -138,7 +138,7 @@ import { Skeleton } from "@fan-ui/solid";
         <InlineCode>animate-pulse</InlineCode> and <InlineCode>bg-muted</InlineCode> applied. Use{" "}
         <InlineCode>class</InlineCode> to control dimensions and shape:
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 {/* Circle for avatars */}
 <Skeleton class="size-10 rounded-full" />

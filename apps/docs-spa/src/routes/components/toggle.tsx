@@ -17,7 +17,7 @@ function TogglePage() {
       </P>
       <DocsLink href="https://ark-ui.com/docs/components/toggle" />
       <ToggleBasicDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Toggle } from "~/components/toggle";
 
@@ -44,7 +44,7 @@ export function ToggleDemo() {
         on.
       </P>
       <ToggleIndicatorDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Toggle, ToggleIndicator } from "~/components/toggle";
 
@@ -76,7 +76,7 @@ export function ToggleIndicatorDemo() {
           <Toggle size="lg">Lg</Toggle>
         </div>
       </div>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Toggle } from "~/components/toggle";
 
@@ -93,14 +93,14 @@ export function ToggleSizesDemo() {
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add toggle
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/toggle.ts`:
-        <Pre>{`import { tv, type VariantProps } from 'tailwind-variants'
+        <Pre lang="tsx">{`import { tv, type VariantProps } from 'tailwind-variants'
 
 export const toggleVariants = tv({
   slots: {
@@ -123,7 +123,7 @@ export type ToggleVariants = VariantProps<typeof toggleVariants>`}</Pre>
       </div>
       <div class="space-y-3">
         Create the component directory and files:
-        <Pre>{`// src/components/toggle/toggle.base.tsx
+        <Pre lang="tsx">{`// src/components/toggle/toggle.base.tsx
 import { Toggle as ArkToggle } from "@ark-ui/solid/toggle";
 import { splitProps, type Component } from "solid-js";
 import { toggleVariants, type ToggleVariants } from "@fan-ui/core";
@@ -141,7 +141,7 @@ const Indicator: Component<ArkToggle.IndicatorProps> = (props) => {
 };
 
 export const Toggle = { Root, Indicator };`}</Pre>
-        <Pre>{`// src/components/toggle/index.tsx
+        <Pre lang="tsx">{`// src/components/toggle/index.tsx
 import { Toggle as ToggleBase } from "./toggle.base";
 
 const ToggleRoot = ToggleBase.Root;
@@ -153,26 +153,26 @@ export { toggleVariants, type ToggleVariants } from "@fan-ui/core";`}</Pre>
       </div>
       <H2>Usage</H2>
       <P>Import the components:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Toggle, ToggleIndicator } from "~/components/toggle";
       `}</Pre>
       <P>Basic:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Toggle>
   <BoldIcon />
 </Toggle>
       `}</Pre>
       <P>Default pressed:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Toggle defaultPressed>
   <BoldIcon />
 </Toggle>
       `}</Pre>
       <P>Controlled:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 const [pressed, setPressed] = createSignal(false);
 
@@ -181,7 +181,7 @@ const [pressed, setPressed] = createSignal(false);
 </Toggle>
       `}</Pre>
       <P>Disabled:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Toggle disabled>
   <BoldIcon />
@@ -193,7 +193,7 @@ const [pressed, setPressed] = createSignal(false);
         — the <InlineCode>fallback</InlineCode> is shown when off, and the children are shown when
         on.
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Toggle>
   <ToggleIndicator fallback={<SunIcon />}>

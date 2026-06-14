@@ -29,7 +29,7 @@ function AlertPage() {
       </P>
       <DocsLink href="https://ui.shadcn.com/docs/components/alert" />
       <AlertBasicDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Alert, AlertTitle, AlertDescription, AlertAction } from "~/components/alert";
 
@@ -48,14 +48,14 @@ export function AlertDemo() {
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add alert
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/alert.ts`:
-        <Pre>{`import { tv, type VariantProps } from 'tailwind-variants'
+        <Pre lang="tsx">{`import { tv, type VariantProps } from 'tailwind-variants'
 
 export const alertVariants = tv({
   slots: {
@@ -83,7 +83,7 @@ export type AlertVariants = VariantProps<typeof alertVariants>`}</Pre>
       </div>
       <div class="space-y-3">
         Create the component file at `src/components/alert.tsx`:
-        <Pre>{`import { splitProps, type Component } from 'solid-js'
+        <Pre lang="tsx">{`import { splitProps, type Component } from 'solid-js'
 import { alertVariants, type AlertVariants } from '../recipes/alert'
 import { ark, type HTMLArkProps } from '@ark-ui/solid/factory'
 
@@ -116,12 +116,12 @@ export { Alert, AlertTitle, AlertDescription, alertVariants }`}</Pre>
       </div>
       <H2>Usage</H2>
       <P>Import the components:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Alert, AlertTitle, AlertDescription, AlertAction } from "@fan-ui/solid";
       `}</Pre>
       <P>Basic:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Alert>
   <AlertTitle>Heads up!</AlertTitle>
@@ -131,7 +131,7 @@ import { Alert, AlertTitle, AlertDescription, AlertAction } from "@fan-ui/solid"
 </Alert>
       `}</Pre>
       <P>Destructive variant:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Alert variant="destructive">
   <AlertTitle>Error</AlertTitle>
@@ -141,7 +141,7 @@ import { Alert, AlertTitle, AlertDescription, AlertAction } from "@fan-ui/solid"
 </Alert>
       `}</Pre>
       <P>With icon:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Alert>
   <svg xmlns="..." class="size-4">{/* icon */}</svg>

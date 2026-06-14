@@ -12,7 +12,7 @@ function ProgressPage() {
       <P>A progress bar used to show the completion status of an ongoing operation.</P>
       <DocsLink href="https://ark-ui.com/docs/components/progress" />
       <ProgressBasicDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import {
   Progress,
@@ -34,14 +34,14 @@ export function ProgressDemo() {
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add progress
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/progress.ts`:
-        <Pre>{`import { tv, type VariantProps } from 'tailwind-variants'
+        <Pre lang="tsx">{`import { tv, type VariantProps } from 'tailwind-variants'
 
 export const progressVariants = tv({
   slots: {
@@ -58,7 +58,7 @@ export type ProgressVariants = VariantProps<typeof progressVariants>`}</Pre>
       </div>
       <div class="space-y-3">
         Create the component directory and files: `src/components/progress/progress.base.tsx`:
-        <Pre>{`import { Progress as ArkProgress } from "@ark-ui/solid/progress";
+        <Pre lang="tsx">{`import { Progress as ArkProgress } from "@ark-ui/solid/progress";
 import { splitProps, type Component } from "solid-js";
 import { progressVariants } from "../recipes/progress";
 
@@ -101,7 +101,7 @@ const View: Component<ArkProgress.ViewProps> = (props) => {
 
 export const Progress = { Root, RootProvider, Label, Track, Range, ValueText, View };`}</Pre>
         `src/components/progress/index.tsx`:
-        <Pre>{`import { splitProps, type Component } from "solid-js";
+        <Pre lang="tsx">{`import { splitProps, type Component } from "solid-js";
 import { Progress as ProgressBase } from "./progress.base";
 import { Progress as ArkProgress } from "@ark-ui/solid/progress";
 
@@ -138,7 +138,7 @@ export { progressVariants, type ProgressVariants } from "../recipes/progress";`}
       </Blockquote>
       <H2>Usage</H2>
       <P>Import the components:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import {
   Progress,
@@ -148,7 +148,7 @@ import {
 } from "~/components/progress";
       `}</Pre>
       <P>Basic usage:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Progress value={65}  class="space-y-2">
   <ProgressLabel>Loading</ProgressLabel>
@@ -160,7 +160,7 @@ import {
       <P>
         Omit the <InlineCode>value</InlineCode> prop to render an indeterminate progress bar:
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Progress>
   <ProgressLabel>Loading...</ProgressLabel>

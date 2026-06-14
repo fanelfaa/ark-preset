@@ -15,7 +15,7 @@ function DatePickerPage() {
       </P>
       <DocsLink href="https://ark-ui.com/docs/components/date-picker" />
       <DatePickerBasicDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { DatePicker, DatePickerBase } from "~/components/date-picker";
 
@@ -43,14 +43,14 @@ import { DatePickerBase } from "~/components/date-picker";
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add date-picker
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/date-picker.ts`:
-        <Pre>{`import { tv, type VariantProps } from 'tailwind-variants'
+        <Pre lang="tsx">{`import { tv, type VariantProps } from 'tailwind-variants'
 
 export const datePickerVariants = tv({
   slots: {
@@ -135,7 +135,7 @@ export type DatePickerVariants = VariantProps<typeof datePickerVariants>`}</Pre>
       <div class="space-y-3">
         Create the component directory and files: First, create
         `src/components/date-picker/date-picker.base.tsx`:
-        <Pre>{`import { DatePicker as ArkDatePicker } from "@ark-ui/solid/date-picker";
+        <Pre lang="tsx">{`import { DatePicker as ArkDatePicker } from "@ark-ui/solid/date-picker";
 import { splitProps, type Component } from "solid-js";
 import { datePickerVariants } from "../../recipes/date-picker";
 
@@ -251,7 +251,7 @@ export const DatePickerBase = {
   ViewTrigger, TableCellTrigger,
 };`}</Pre>
         Then create `src/components/date-picker/index.tsx`:
-        <Pre>{`import { For, Show, splitProps, type Component, type JSX } from "solid-js";
+        <Pre lang="tsx">{`import { For, Show, splitProps, type Component, type JSX } from "solid-js";
 import { DatePicker as ArkDatePicker } from "@ark-ui/solid/date-picker";
 import type { UseDatePickerContext } from "@ark-ui/solid/date-picker";
 import type { DateValue } from "@internationalized/date";
@@ -537,12 +537,12 @@ export { datePickerVariants, type DatePickerVariants } from "../../recipes/date-
       <P>
         Import <InlineCode>DatePicker</InlineCode>:
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { DatePicker, DatePickerBase } from "~/components/date-picker";
       `}</Pre>
       <P>Basic usage:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 // label prop renders an accessible label above the control
 <DatePicker label="Birth date" />
@@ -563,7 +563,7 @@ import { DatePicker, DatePickerBase } from "~/components/date-picker";
       </P>
       <H3>Single (default)</H3>
       <P>Select one date at a time. This is the default mode.</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <DatePicker label="Birth date" />
       `}</Pre>
@@ -571,7 +571,7 @@ import { DatePicker, DatePickerBase } from "~/components/date-picker";
       <P>
         Select a start and end date. The control renders two inputs — one for each end of the range.
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <DatePicker
   selectionMode="range"
@@ -583,7 +583,7 @@ import { DatePicker, DatePickerBase } from "~/components/date-picker";
       <P>
         Select multiple individual dates. The control renders selected dates as removable chips.
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <DatePicker
   selectionMode="multiple"
@@ -595,7 +595,7 @@ import { DatePicker, DatePickerBase } from "~/components/date-picker";
         Use <InlineCode>maxSelectedDates</InlineCode> to limit the number of selections in multiple
         mode:
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <DatePicker
   selectionMode="multiple"
@@ -613,7 +613,7 @@ import { DatePicker, DatePickerBase } from "~/components/date-picker";
         Control the selected date programmatically using <InlineCode>value</InlineCode> and{" "}
         <InlineCode>onValueChange</InlineCode>.
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { createSignal } from "solid-js";
 import { DatePicker } from "~/components/date-picker";

@@ -29,7 +29,7 @@ function BreadcrumbPage() {
       </P>
       <DocsLink href="https://ui.shadcn.com/docs/components/breadcrumb" />
       <BreadcrumbBasicDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import {
   Breadcrumb,
@@ -93,14 +93,14 @@ import { Menu, MenuBase, MenuContent, MenuItem } from "~/components/menu";
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add breadcrumb
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/breadcrumb.ts`:
-        <Pre>{`import { tv, type VariantProps } from 'tailwind-variants'
+        <Pre lang="tsx">{`import { tv, type VariantProps } from 'tailwind-variants'
 
 export const breadcrumbVariants = tv({
   slots: {
@@ -117,7 +117,7 @@ export type BreadcrumbVariants = VariantProps<typeof breadcrumbVariants>`}</Pre>
       </div>
       <div class="space-y-3">
         Create the component file at `src/components/breadcrumb/index.tsx`:
-        <Pre>{`import { splitProps, type Component } from 'solid-js'
+        <Pre lang="tsx">{`import { splitProps, type Component } from 'solid-js'
 import { breadcrumbVariants } from '../recipes/breadcrumb'
 import { ark, type HTMLArkProps } from '@ark-ui/solid/factory'
 
@@ -193,7 +193,7 @@ export {
       </div>
       <H2>Usage</H2>
       <P>Import the components:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import {
   Breadcrumb,
@@ -206,7 +206,7 @@ import {
 } from "@fan-ui/solid";
       `}</Pre>
       <P>Basic breadcrumb:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Breadcrumb>
   <BreadcrumbList>
@@ -221,7 +221,7 @@ import {
 </Breadcrumb>
       `}</Pre>
       <P>With link and current page:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Breadcrumb>
   <BreadcrumbList>
@@ -240,7 +240,7 @@ import {
 </Breadcrumb>
       `}</Pre>
       <P>Long path with ellipsis:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import {
   Breadcrumb,
@@ -284,7 +284,7 @@ import { Menu, MenuBase, MenuContent, MenuItem } from "~/components/menu"
 </Breadcrumb>
       `}</Pre>
       <P>Custom separator:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Breadcrumb>
   <BreadcrumbList>

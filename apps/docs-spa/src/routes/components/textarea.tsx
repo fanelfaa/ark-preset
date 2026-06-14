@@ -29,7 +29,7 @@ function TextareaPage() {
       <div class="rounded-lg border border-border p-6">
         <TextareaBasicDemo />
       </div>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Textarea } from "~/components/textarea";
 
@@ -51,14 +51,14 @@ export function TextareaDemo() {
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add textarea
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/textarea.ts`:
-        <Pre>{`import { tv, type VariantProps } from 'tailwind-variants'
+        <Pre lang="tsx">{`import { tv, type VariantProps } from 'tailwind-variants'
 
 export const textareaVariants = tv({
   slots: {
@@ -85,7 +85,7 @@ export type TextareaVariants = VariantProps<typeof textareaVariants>`}</Pre>
       </div>
       <div class="space-y-3">
         Create the component directory and files: `src/components/textarea/textarea.base.tsx`:
-        <Pre>{`import { Field as ArkField } from "@ark-ui/solid/field";
+        <Pre lang="tsx">{`import { Field as ArkField } from "@ark-ui/solid/field";
 import { splitProps, type Component } from "solid-js";
 import { textareaVariants } from "../recipes/textarea";
 
@@ -129,7 +129,7 @@ export const Textarea = {
   ErrorText: TextareaErrorText,
 };`}</Pre>
         `src/components/textarea/index.tsx`:
-        <Pre>{`import { Field as ArkField } from "@ark-ui/solid/field";
+        <Pre lang="tsx">{`import { Field as ArkField } from "@ark-ui/solid/field";
 import { splitProps, type Component } from "solid-js";
 import { Textarea as TextareaBase } from "./textarea.base";
 import { TextareaVariants } from "../recipes/textarea";
@@ -161,27 +161,27 @@ export { textareaVariants, type TextareaVariants } from "../recipes/textarea";`}
       </div>
       <H2>Usage</H2>
       <P>Import the component:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Textarea } from "@fan-ui/solid";
       `}</Pre>
       <P>Basic textarea:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Textarea placeholder="Enter text..." />
       `}</Pre>
       <P>With label:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Textarea label="Bio" placeholder="Tell us about yourself" />
       `}</Pre>
       <P>With description:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Textarea label="Bio" description="Write a short introduction." placeholder="Enter your bio" />
       `}</Pre>
       <P>With error state:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Textarea label="Bio" error="This field is required" />
       `}</Pre>

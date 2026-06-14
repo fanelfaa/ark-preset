@@ -12,7 +12,7 @@ function ToastPage() {
       <P>A notification component for displaying transient messages with multiple variants.</P>
       <DocsLink href="https://ark-ui.com/docs/components/toast" />
       <ToastBasicDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { createToaster, Toaster } from "~/components/toast";
 
@@ -38,14 +38,14 @@ export function ToastDemo() {
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add toast
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/toast.ts`:
-        <Pre>{`import { tv, type VariantProps } from 'tailwind-variants'
+        <Pre lang="tsx">{`import { tv, type VariantProps } from 'tailwind-variants'
 
 export const toastVariants = tv({
   slots: {
@@ -74,7 +74,7 @@ export type ToastVariants = VariantProps<typeof toastVariants>`}</Pre>
       </div>
       <div class="space-y-3">
         Create the component directory at `src/components/toast/`: `toast.base.tsx`:
-        <Pre>{`import { Toast as ArkToast } from "@ark-ui/solid/toast";
+        <Pre lang="tsx">{`import { Toast as ArkToast } from "@ark-ui/solid/toast";
 import { splitProps, type Component } from "solid-js";
 import { toastVariants } from "../recipes/toast";
 
@@ -107,7 +107,7 @@ const ActionTrigger: Component<ArkToast.ActionTriggerProps> = (props) => {
 
 export const Toast = { Root, Title, Description, CloseTrigger, ActionTrigger };`}</Pre>
         `index.tsx`:
-        <Pre>{`import { Toaster as ArkToaster, createToaster, type CreateToasterReturn } from "@ark-ui/solid/toast";
+        <Pre lang="tsx">{`import { Toaster as ArkToaster, createToaster, type CreateToasterReturn } from "@ark-ui/solid/toast";
 import { splitProps, type Component } from "solid-js";
 import { Toast as ToastBase } from "./toast.base";
 import { toastVariants, type ToastVariants } from "../recipes/toast";
@@ -154,12 +154,12 @@ export { toastVariants, type ToastVariants } from "../recipes/toast";`}</Pre>
       </Blockquote>
       <H2>Usage</H2>
       <P>Import the components:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { createToaster, Toaster } from "~/components/toast";
       `}</Pre>
       <P>Basic toast:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 const toaster = createToaster({
   placement: "bottom-end",
@@ -173,7 +173,7 @@ const toaster = createToaster({
 <Toaster toaster={toaster} />
       `}</Pre>
       <P>With action:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 toaster.create({
   title: "File deleted",
@@ -185,7 +185,7 @@ toaster.create({
       <P>
         Use the <InlineCode>type</InlineCode> property to change the visual style.
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 toaster.create({ title: "Default toast", description: "This is a default message" });
 toaster.create({ title: "Info toast", type: "info" });
@@ -195,7 +195,7 @@ toaster.create({ title: "Error toast", type: "error" });
       `}</Pre>
       <H2>Advanced Usage</H2>
       <P>When you need more control, import raw primitive parts directly from the base file:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Toast } from "~/components/toast/toast.base";
       `}</Pre>
@@ -203,7 +203,7 @@ import { Toast } from "~/components/toast/toast.base";
         Or import <InlineCode>ToastBase</InlineCode> (the raw parts namespace) from the composite
         entry point:
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { ToastBase } from "~/components/toast";
       `}</Pre>

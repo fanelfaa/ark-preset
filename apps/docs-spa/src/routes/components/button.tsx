@@ -34,7 +34,7 @@ function ButtonPage() {
           <Button variant="ghost">Ghost</Button>
           <Button variant="link">Link</Button>
         </div>
-        <Pre>{`
+        <Pre lang="tsx">{`
 
 import { Button } from "~/components/button"
 
@@ -55,14 +55,14 @@ export function ButtonDemo() {
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add button
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/button.ts`:
-        <Pre>{`import { tv } from 'tailwind-variants'
+        <Pre lang="tsx">{`import { tv } from 'tailwind-variants'
 
 export const buttonVariants = tv({
   base: 'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
@@ -90,7 +90,7 @@ export const buttonVariants = tv({
       </div>
       <div class="space-y-3">
         Create the component file at `src/components/button.tsx`:
-        <Pre>{`import { splitProps, type Component, Show, children } from 'solid-js'
+        <Pre lang="tsx">{`import { splitProps, type Component, Show, children } from 'solid-js'
 import { buttonVariants } from '../recipes/button'
 import type { VariantProps } from 'tailwind-variants'
 import { ark, HTMLArkProps } from '@ark-ui/solid/factory'
@@ -127,29 +127,29 @@ export { Button, buttonVariants }`}</Pre>
       </Blockquote>
       <H2>Usage</H2>
       <P>Import the component:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Button } from "~/components/button";
       `}</Pre>
       <P>Basic usage:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Button>Click me</Button>
       `}</Pre>
       <P>With event handler:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Button onClick={() => console.log("clicked!")}>Submit</Button>
       `}</Pre>
       <P>Combining variant and size:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Button variant="destructive" size="lg">
   Delete Account
 </Button>
       `}</Pre>
       <P>With icon:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Button variant="outline" size="icon">
   <svg
@@ -169,7 +169,7 @@ import { Button } from "~/components/button";
 </Button>
       `}</Pre>
       <P>Custom class override:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Button class="w-full">Full Width Button</Button>
       `}</Pre>
@@ -256,7 +256,7 @@ import { Button } from "~/components/button";
         </Button>
       </div>
       <P>Useful for async operations like form submissions:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { createSignal } from "solid-js";
 import { Button } from "~/components/button";
@@ -282,7 +282,7 @@ export function SubmitDemo() {
         Use the <InlineCode>buttonVariants</InlineCode> helper to render a link that looks like a
         button.
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Button, buttonVariants } from "~/components/button";
 

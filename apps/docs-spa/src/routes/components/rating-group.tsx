@@ -19,7 +19,7 @@ function RatingGroupPage() {
       </P>
       <DocsLink href="https://ark-ui.com/docs/components/rating-group" />
       <RatingGroupBasicDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { RatingGroup, RatingGroupLabel } from "~/components/rating-group";
 
@@ -37,14 +37,14 @@ export default function RatingGroupBasicDemo() {
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add rating-group
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/rating-group.ts`:
-        <Pre>{`import { tv, type VariantProps } from "tailwind-variants";
+        <Pre lang="tsx">{`import { tv, type VariantProps } from "tailwind-variants";
 
 export const ratingGroupVariants = tv({
   slots: {
@@ -93,7 +93,7 @@ export type RatingGroupVariants = VariantProps<typeof ratingGroupVariants>;`}</P
       </div>
       <div class="space-y-3">
         Create the base component file at `src/components/rating-group/rating-group.base.tsx`:
-        <Pre>{`import { RatingGroup as ArkRatingGroup } from "@ark-ui/solid/rating-group";
+        <Pre lang="tsx">{`import { RatingGroup as ArkRatingGroup } from "@ark-ui/solid/rating-group";
 import { createContext, useContext, splitProps, type Component } from "solid-js";
 import { ratingGroupVariants, type RatingGroupVariants } from "../recipes/rating-group";
 
@@ -188,7 +188,7 @@ export { RatingGroupVariantContext, useRatingGroupVariant };`}</Pre>
       </div>
       <div class="space-y-3">
         Create the component file at `src/components/rating-group/index.tsx`:
-        <Pre>{`import { Index, splitProps, type Component } from "solid-js";
+        <Pre lang="tsx">{`import { Index, splitProps, type Component } from "solid-js";
 import { RatingGroup as RatingGroupBase } from "./rating-group.base";
 import { RatingGroup as ArkRatingGroup } from "@ark-ui/solid/rating-group";
 import { ratingGroupVariants, type RatingGroupVariants } from "../recipes/rating-group";
@@ -288,12 +288,12 @@ export { ratingGroupVariants, type RatingGroupVariants } from "../recipes/rating
       </div>
       <H2>Usage</H2>
       <P>Import the component and use it inline:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { RatingGroup, RatingGroupLabel } from "~/components/rating-group";
       `}</Pre>
       <P>Basic star rating with 5 stars:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <RatingGroup count={5} defaultValue={3}>
   <RatingGroupLabel>Rate this</RatingGroupLabel>
@@ -305,7 +305,7 @@ import { RatingGroup, RatingGroupLabel } from "~/components/rating-group";
         Use <InlineCode>value</InlineCode> and <InlineCode>onValueChange</InlineCode> to control the
         rating value externally:
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { createSignal } from "solid-js";
 import { RatingGroup } from "~/components/rating-group";
@@ -330,7 +330,7 @@ export function ControlledDemo() {
         Allow <InlineCode>0.5</InlineCode> value steps by setting the{" "}
         <InlineCode>allowHalf</InlineCode> prop to <InlineCode>true</InlineCode>:
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <RatingGroup count={5} defaultValue={2.5} allowHalf>
   <RatingGroupLabel>Rate this</RatingGroupLabel>
@@ -342,7 +342,7 @@ export function ControlledDemo() {
         To make the rating group disabled, set the <InlineCode>disabled</InlineCode> prop to{" "}
         <InlineCode>true</InlineCode>:
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <RatingGroup count={5} defaultValue={4} disabled>
   <RatingGroupLabel>Rate this</RatingGroupLabel>
@@ -353,7 +353,7 @@ export function ControlledDemo() {
         When the composite <InlineCode>RatingGroup</InlineCode> doesn't provide enough control,
         import the raw primitive parts from the base file directly:
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { RatingGroup, useRatingGroupVariant } from "~/components/rating-group/rating-group.base";
       `}</Pre>
@@ -361,7 +361,7 @@ import { RatingGroup, useRatingGroupVariant } from "~/components/rating-group/ra
         Or import <InlineCode>RatingGroupBase</InlineCode> (the raw parts namespace) from the
         composite entry point:
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { RatingGroupBase } from "~/components/rating-group";
       `}</Pre>
@@ -371,7 +371,7 @@ import { RatingGroupBase } from "~/components/rating-group";
         For full control over the rating group machine, use <InlineCode>useRatingGroup</InlineCode>{" "}
         with <InlineCode>RatingGroup.RootProvider</InlineCode>:
       </P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { useRatingGroup } from "@ark-ui/solid/rating-group";
 import { RatingGroup } from "~/components/rating-group/rating-group.base";

@@ -18,7 +18,7 @@ function PasswordInputPage() {
       </P>
       <DocsLink href="https://ark-ui.com/docs/components/password-input" />
       <PasswordInputBasicDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { PasswordInput } from "~/components/password-input";
 
@@ -35,14 +35,14 @@ export function PasswordInputDemo() {
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add password-input
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/password-input.ts`:
-        <Pre>{`import { tv, type VariantProps } from 'tailwind-variants'
+        <Pre lang="tsx">{`import { tv, type VariantProps } from 'tailwind-variants'
 
 export const passwordInputVariants = tv({
   slots: {
@@ -79,7 +79,7 @@ export type PasswordInputVariants = VariantProps<typeof passwordInputVariants>`}
       <div class="space-y-3">
         Create the component directory and files:
         `src/components/password-input/password-input.base.tsx`:
-        <Pre>{`import { PasswordInput as ArkPasswordInput } from "@ark-ui/solid/password-input";
+        <Pre lang="tsx">{`import { PasswordInput as ArkPasswordInput } from "@ark-ui/solid/password-input";
 import { splitProps, type Component } from "solid-js";
 import { passwordInputVariants } from "../recipes/password-input";
 
@@ -138,7 +138,7 @@ export const PasswordInput = {
 };
 
 \`src/components/password-input/index.tsx\`:`}</Pre>
-        <Pre>{`import { PasswordInput as ArkPasswordInput } from "@ark-ui/solid/password-input";
+        <Pre lang="tsx">{`import { PasswordInput as ArkPasswordInput } from "@ark-ui/solid/password-input";
 import { splitProps, type Component } from "solid-js";
 import { PasswordInput as PasswordInputBase } from "./password-input.base";
 
@@ -193,22 +193,22 @@ export { passwordInputVariants, type PasswordInputVariants } from "../recipes/pa
       </div>
       <H2>Usage</H2>
       <P>Import the component:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { PasswordInput } from "~/components/password-input";
       `}</Pre>
       <P>Basic:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <PasswordInput />
       `}</Pre>
       <P>With label:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <PasswordInput label="Password" />
       `}</Pre>
       <P>With placeholder:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <PasswordInput label="Password" placeholder="Enter your password" />
       `}</Pre>
@@ -218,7 +218,7 @@ import { PasswordInput } from "~/components/password-input";
         input state externally.
       </P>
       <PasswordInputRootProviderDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { usePasswordInput } from "@ark-ui/solid/password-input";
 import { Button } from "~/components/button";

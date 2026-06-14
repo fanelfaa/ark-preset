@@ -28,7 +28,7 @@ function SpinnerPage() {
       </P>
       <DocsLink href="https://ui.shadcn.com/docs/components/spinner" />
       <SpinnerBasicDemo />
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Spinner } from "~/components/spinner";
 
@@ -46,14 +46,14 @@ export function SpinnerDemo() {
       <H2>Installation</H2>
       <H3>CLI</H3>
       <P>Run the following command to add the component to your project:</P>
-      <Pre>{`
+      <Pre lang="bash">{`
 
 npx @fan-ui/cli@latest add spinner
       `}</Pre>
       <H3>Manual</H3>
       <div class="space-y-3">
         Create the recipe file at `src/components/recipes/spinner.ts`:
-        <Pre>{`import { tv, type VariantProps } from 'tailwind-variants'
+        <Pre lang="tsx">{`import { tv, type VariantProps } from 'tailwind-variants'
 
 export const spinnerVariants = tv({
   base: "animate-spin text-muted-foreground",
@@ -74,7 +74,7 @@ export type SpinnerVariants = VariantProps<typeof spinnerVariants>`}</Pre>
       </div>
       <div class="space-y-3">
         Create the component file at `src/components/spinner.tsx`:
-        <Pre>{`import { splitProps, type Component } from 'solid-js'
+        <Pre lang="tsx">{`import { splitProps, type Component } from 'solid-js'
 import { spinnerVariants, type SpinnerVariants } from '../recipes/spinner'
 import { ark, type HTMLArkProps } from '@ark-ui/solid/factory'
 
@@ -107,17 +107,17 @@ export { Spinner, spinnerVariants }`}</Pre>
       </div>
       <H2>Usage</H2>
       <P>Import the component:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 import { Spinner } from "@fan-ui/solid";
       `}</Pre>
       <P>Basic spinner:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Spinner />
       `}</Pre>
       <P>With size:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <Spinner size="sm" />
 <Spinner size="md" />
@@ -125,7 +125,7 @@ import { Spinner } from "@fan-ui/solid";
 <Spinner size="xl" />
       `}</Pre>
       <P>With text:</P>
-      <Pre>{`
+      <Pre lang="tsx">{`
 
 <div class="flex items-center gap-2">
   <Spinner size="sm" />
