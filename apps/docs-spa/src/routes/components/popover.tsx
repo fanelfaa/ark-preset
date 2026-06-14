@@ -30,7 +30,7 @@ import { Button } from "~/components/button";
 export function PopoverDemo() {
   return (
     <Popover>
-      <PopoverTrigger asChild={(props) => <Button {...props()} />}>Open Popover</PopoverTrigger>
+      <PopoverTrigger>Open Popover</PopoverTrigger>
       <PopoverContent>
         <PopoverTitle>Popover Title</PopoverTitle>
         <PopoverDescription>
@@ -201,13 +201,12 @@ import {
   PopoverTitle,
   PopoverDescription,
 } from "~/components/popover";
-import { Button } from "~/components/button";
       `}</Pre>
       <P>Basic usage:</P>
       <Pre>{`
 
 <Popover>
-  <PopoverTrigger asChild={(props) => <Button {...props()} />}>Open Popover</PopoverTrigger>
+  <PopoverTrigger>Open Popover</PopoverTrigger>
   <PopoverContent>
     <PopoverTitle>Title</PopoverTitle>
     <PopoverDescription>Description text</PopoverDescription>
@@ -238,8 +237,6 @@ import {
   PopoverDescription,
   PopoverBase,
 } from "~/components/popover";
-import { Button } from "~/components/button";
-
 export function PopoverWithExternalControl() {
   const popover = usePopover();
 
@@ -248,7 +245,7 @@ export function PopoverWithExternalControl() {
       <output>Open: {JSON.stringify(popover().open)}</output>
 
       <PopoverBase.RootProvider value={popover}>
-        <PopoverTrigger asChild={(props) => <Button {...props()} />}>Open Popover</PopoverTrigger>
+        <PopoverTrigger>Open Popover</PopoverTrigger>
         <PopoverContent>
           <PopoverTitle>Popover Title</PopoverTitle>
           <PopoverDescription>

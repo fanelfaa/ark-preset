@@ -50,9 +50,7 @@ import { Button } from "~/components/button";
 export function AlertDialogDemo() {
   return (
     <AlertDialog>
-      <AlertDialogTrigger asChild={(props) => <Button {...props()} />}>
-        Delete Account
-      </AlertDialogTrigger>
+      <AlertDialogTrigger>Delete Account</AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
@@ -231,7 +229,7 @@ import {
       <Pre>{`
 
 <AlertDialog>
-  <AlertDialogTrigger asChild={(props) => <Button {...props()}>Open</Button>}>
+  <AlertDialogTrigger>Open</AlertDialogTrigger>
   <AlertDialogContent>
     <AlertDialogHeader>
       <AlertDialogTitle>Are you sure?</AlertDialogTitle>

@@ -35,7 +35,7 @@ import { Separator } from "~/components/separator";
 export function DialogDemo() {
   return (
     <Dialog>
-      <DialogTrigger asChild={(props) => <Button {...props()} />}>Edit Profile</DialogTrigger>
+      <DialogTrigger>Edit Profile</DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Edit Profile</DialogTitle>
@@ -218,7 +218,7 @@ import {
       <Pre>{`
 
 <Dialog>
-  <DialogTrigger asChild={(props) => <Button {...props()} />}>Open Dialog</DialogTrigger>
+  <DialogTrigger>Open Dialog</DialogTrigger>
   <DialogContent>
     <DialogHeader>
       <DialogTitle>Title</DialogTitle>
@@ -232,7 +232,7 @@ import {
       <Pre>{`
 
 <Dialog>
-  <DialogTrigger asChild={(props) => <Button {...props()} />}>Open</DialogTrigger>
+  <DialogTrigger>Open</DialogTrigger>
   <DialogContent>
     <DialogHeader>
       <DialogTitle>Confirm Action</DialogTitle>
@@ -292,7 +292,7 @@ export function ExternalControlExample() {
       <Button onClick={() => dialog().setOpen(true)}>Open Dialog</Button>
 
       <DialogBase.RootProvider value={dialog}>
-        <DialogTrigger asChild={(props) => <Button {...props()} style="display:none" />}>
+        <DialogTrigger style="display:none">
           Hidden Trigger
         </DialogTrigger>
         <DialogContent>

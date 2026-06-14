@@ -30,7 +30,7 @@ import { Button, Input, Separator } from "~/components/button";
 export function DrawerDemo() {
   return (
     <Drawer>
-      <DrawerTrigger asChild={(props) => <Button {...props()} />}>Edit Profile</DrawerTrigger>
+      <DrawerTrigger>Edit Profile</DrawerTrigger>
       <DrawerContent>
         <DrawerGrabber />
         <div class="flex flex-col gap-1 px-4 pt-2 pb-4">
@@ -213,7 +213,7 @@ import {
       <Pre>{`
 
 <Drawer swipeDirection="start">
-  <DrawerTrigger asChild={(props) => <Button {...props()} />}>Open Drawer</DrawerTrigger>
+  <DrawerTrigger>Open Drawer</DrawerTrigger>
   <DrawerContent>
     <DrawerTitle>Title</DrawerTitle>
     <DrawerDescription>Description text</DrawerDescription>
@@ -225,7 +225,7 @@ import {
       <Pre>{`
 
 <Drawer swipeDirection="start">
-  <DrawerTrigger asChild={(props) => <Button {...props()} />}>Edit Profile</DrawerTrigger>
+  <DrawerTrigger>Edit Profile</DrawerTrigger>
   <DrawerContent>
     <div class="flex flex-col gap-1 px-4 pt-2 pb-4">
       <DrawerTitle>Edit Profile</DrawerTitle>
@@ -258,9 +258,7 @@ export function ExternalControlExample() {
       <Button onClick={() => drawer().setOpen(true)}>Open Drawer</Button>
 
       <DrawerBase.RootProvider value={drawer}>
-        <DrawerTrigger asChild={(props) => <Button {...props()} />}>
-          Hidden Trigger
-        </DrawerTrigger>
+        <DrawerTrigger style="display:none">Hidden Trigger</DrawerTrigger>
         <DrawerContent>
           <DrawerTitle>Externally Controlled Drawer</DrawerTitle>
           <DrawerDescription>This drawer is controlled via useDrawer.</DrawerDescription>
@@ -299,7 +297,7 @@ import { Drawer, DrawerTrigger, DrawerContent, DrawerBase } from "~/components/d
 import { Button } from "~/components/button";
 
 <Drawer>
-  <DrawerTrigger asChild={(props) => <Button {...props()} />}>Open</DrawerTrigger>
+  <DrawerTrigger>Open</DrawerTrigger>
   <DrawerContent>
     <DrawerBase.Context>
       {(drawer) => <p>Drawer is {drawer().open ? "open" : "closed"}</p>}
