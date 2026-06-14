@@ -9,15 +9,11 @@ import {
   AlertDialogCancel,
   AlertDialogAction,
 } from "@fan-ui/solid";
-import { Button } from "@fan-ui/solid";
-
 export default function AlertDialogBasicDemo() {
   return (
     <div class="rounded-lg border border-border p-6">
       <AlertDialog>
-        <AlertDialogTrigger asChild={(props) => <Button {...props()} />}>
-          Delete Account
-        </AlertDialogTrigger>
+        <AlertDialogTrigger>Delete Account</AlertDialogTrigger>
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>

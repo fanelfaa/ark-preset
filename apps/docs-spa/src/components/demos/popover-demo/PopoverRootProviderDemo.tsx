@@ -6,8 +6,6 @@ import {
   PopoverDescription,
   PopoverBase,
 } from "@fan-ui/solid";
-import { Button } from "@fan-ui/solid";
-
 export default function PopoverRootProviderDemo() {
   const popover = usePopover();
 
@@ -18,7 +16,7 @@ export default function PopoverRootProviderDemo() {
       </output>
 
       <PopoverBase.RootProvider value={popover}>
-        <PopoverTrigger asChild={(props) => <Button {...props()} />}>Open Popover</PopoverTrigger>
+        <PopoverTrigger>Open Popover</PopoverTrigger>
         <PopoverContent>
           <PopoverTitle>Popover Title</PopoverTitle>
           <PopoverDescription>

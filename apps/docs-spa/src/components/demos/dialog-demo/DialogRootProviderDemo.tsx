@@ -26,7 +26,7 @@ export default function DialogRootProviderDemo() {
       </div>
 
       <DialogBase.RootProvider value={dialog}>
-        <DialogTrigger asChild={(props) => <Button {...props()} />}>Open Dialog</DialogTrigger>
+        <DialogTrigger>Open Dialog</DialogTrigger>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Externally Controlled Dialog</DialogTitle>
