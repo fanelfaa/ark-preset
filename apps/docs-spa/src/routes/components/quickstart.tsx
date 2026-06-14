@@ -94,6 +94,12 @@ function QuickstartPage() {
 npm install tailwindcss tailwind-variants @tailwindcss/vite
       `}</Pre>
 
+      <P>Install <InlineCode>@ark-ui/solid</InlineCode> (used by all components) and its peer dependency <InlineCode>solid-js</InlineCode>:</P>
+
+      <Pre>{`
+npm install @ark-ui/solid solid-js
+      `}</Pre>
+
       <P>Optionally install the animation plugin (used by toast, dialog, and other components):</P>
 
       <Pre>{`
@@ -113,6 +119,11 @@ npm install tw-animate-css
       </P>
 
       <Pre>{themeCssContent}</Pre>
+
+      <Blockquote>
+        <strong>Note:</strong> The <InlineCode>[data-scope="toast"]</InlineCode> block at the bottom is
+        specific to the Toast component — you can omit it if you're not using Toast.
+      </Blockquote>
 
       <H2>Using a component</H2>
 
