@@ -8,6 +8,9 @@ import solidPlugin from "vite-plugin-solid";
 
 export default defineConfig({
   resolve: { tsconfigPaths: true },
+  optimizeDeps: {
+    exclude: ["@fan-ui/solid", "@fan-ui/core"],
+  },
   plugins: [
     devtools(),
     tailwindcss(),

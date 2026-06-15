@@ -7,8 +7,6 @@ dependsOn:
 tasks:
   dev:
     command: "pnpm dev"
-    deps:
-      - "solid:build"
   typecheck:
     command: "pnpm typecheck"
     deps:

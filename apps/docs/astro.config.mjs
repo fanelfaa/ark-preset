@@ -13,5 +13,8 @@ export default defineConfig({
 
   vite: {
     plugins: [tailwindcss()],
+    optimizeDeps: {
+      exclude: ["@fan-ui/solid", "@fan-ui/core"],
+    },
   },
 });
