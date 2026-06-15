@@ -51,6 +51,7 @@ import { Route as ComponentsCollapsibleRouteImport } from './routes/components/c
 import { Route as ComponentsCheckboxRouteImport } from './routes/components/checkbox'
 import { Route as ComponentsCarouselRouteImport } from './routes/components/carousel'
 import { Route as ComponentsCardRouteImport } from './routes/components/card'
+import { Route as ComponentsButton2RouteImport } from './routes/components/button-2'
 import { Route as ComponentsButtonRouteImport } from './routes/components/button'
 import { Route as ComponentsBreadcrumbRouteImport } from './routes/components/breadcrumb'
 import { Route as ComponentsBadgeRouteImport } from './routes/components/badge'
@@ -270,6 +271,11 @@ const ComponentsCardRoute = ComponentsCardRouteImport.update({
   path: '/card',
   getParentRoute: () => ComponentsRoute,
 } as any)
+const ComponentsButton2Route = ComponentsButton2RouteImport.update({
+  id: '/button-2',
+  path: '/button-2',
+  getParentRoute: () => ComponentsRoute,
+} as any)
 const ComponentsButtonRoute = ComponentsButtonRouteImport.update({
   id: '/button',
   path: '/button',
@@ -323,6 +329,7 @@ export interface FileRoutesByFullPath {
   '/components/badge': typeof ComponentsBadgeRoute
   '/components/breadcrumb': typeof ComponentsBreadcrumbRoute
   '/components/button': typeof ComponentsButtonRoute
+  '/components/button-2': typeof ComponentsButton2Route
   '/components/card': typeof ComponentsCardRoute
   '/components/carousel': typeof ComponentsCarouselRoute
   '/components/checkbox': typeof ComponentsCheckboxRoute
@@ -375,6 +382,7 @@ export interface FileRoutesByTo {
   '/components/badge': typeof ComponentsBadgeRoute
   '/components/breadcrumb': typeof ComponentsBreadcrumbRoute
   '/components/button': typeof ComponentsButtonRoute
+  '/components/button-2': typeof ComponentsButton2Route
   '/components/card': typeof ComponentsCardRoute
   '/components/carousel': typeof ComponentsCarouselRoute
   '/components/checkbox': typeof ComponentsCheckboxRoute
@@ -428,6 +436,7 @@ export interface FileRoutesById {
   '/components/badge': typeof ComponentsBadgeRoute
   '/components/breadcrumb': typeof ComponentsBreadcrumbRoute
   '/components/button': typeof ComponentsButtonRoute
+  '/components/button-2': typeof ComponentsButton2Route
   '/components/card': typeof ComponentsCardRoute
   '/components/carousel': typeof ComponentsCarouselRoute
   '/components/checkbox': typeof ComponentsCheckboxRoute
@@ -482,6 +491,7 @@ export interface FileRouteTypes {
     | '/components/badge'
     | '/components/breadcrumb'
     | '/components/button'
+    | '/components/button-2'
     | '/components/card'
     | '/components/carousel'
     | '/components/checkbox'
@@ -534,6 +544,7 @@ export interface FileRouteTypes {
     | '/components/badge'
     | '/components/breadcrumb'
     | '/components/button'
+    | '/components/button-2'
     | '/components/card'
     | '/components/carousel'
     | '/components/checkbox'
@@ -586,6 +597,7 @@ export interface FileRouteTypes {
     | '/components/badge'
     | '/components/breadcrumb'
     | '/components/button'
+    | '/components/button-2'
     | '/components/card'
     | '/components/carousel'
     | '/components/checkbox'
@@ -929,6 +941,13 @@ declare module '@tanstack/solid-router' {
       preLoaderRoute: typeof ComponentsCardRouteImport
       parentRoute: typeof ComponentsRoute
     }
+    '/components/button-2': {
+      id: '/components/button-2'
+      path: '/button-2'
+      fullPath: '/components/button-2'
+      preLoaderRoute: typeof ComponentsButton2RouteImport
+      parentRoute: typeof ComponentsRoute
+    }
     '/components/button': {
       id: '/components/button'
       path: '/button'
@@ -997,6 +1016,7 @@ interface ComponentsRouteChildren {
   ComponentsBadgeRoute: typeof ComponentsBadgeRoute
   ComponentsBreadcrumbRoute: typeof ComponentsBreadcrumbRoute
   ComponentsButtonRoute: typeof ComponentsButtonRoute
+  ComponentsButton2Route: typeof ComponentsButton2Route
   ComponentsCardRoute: typeof ComponentsCardRoute
   ComponentsCarouselRoute: typeof ComponentsCarouselRoute
   ComponentsCheckboxRoute: typeof ComponentsCheckboxRoute
@@ -1047,6 +1067,7 @@ const ComponentsRouteChildren: ComponentsRouteChildren = {
   ComponentsBadgeRoute: ComponentsBadgeRoute,
   ComponentsBreadcrumbRoute: ComponentsBreadcrumbRoute,
   ComponentsButtonRoute: ComponentsButtonRoute,
+  ComponentsButton2Route: ComponentsButton2Route,
   ComponentsCardRoute: ComponentsCardRoute,
   ComponentsCarouselRoute: ComponentsCarouselRoute,
   ComponentsCheckboxRoute: ComponentsCheckboxRoute,
