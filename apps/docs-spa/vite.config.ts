@@ -5,6 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
 
 import solidPlugin from "vite-plugin-solid";
+import solidMarkedPlugin from "vite-plugin-solid-marked";
 
 export default defineConfig({
   resolve: { tsconfigPaths: true },
@@ -15,6 +16,9 @@ export default defineConfig({
     devtools(),
     tailwindcss(),
     tanstackRouter({ target: "solid", autoCodeSplitting: true }),
+    solidMarkedPlugin({
+      source: "/src/mdx-provider",
+    }),
     solidPlugin(),
   ],
 });

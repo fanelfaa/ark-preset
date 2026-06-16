@@ -23,6 +23,7 @@ import { Route as ComponentsTabsRouteImport } from './routes/components/tabs'
 import { Route as ComponentsTableRouteImport } from './routes/components/table'
 import { Route as ComponentsSwitchRouteImport } from './routes/components/switch'
 import { Route as ComponentsSpinnerRouteImport } from './routes/components/spinner'
+import { Route as ComponentsSolidMarkedTestRouteImport } from './routes/components/solid-marked-test'
 import { Route as ComponentsSliderRouteImport } from './routes/components/slider'
 import { Route as ComponentsSkeletonRouteImport } from './routes/components/skeleton'
 import { Route as ComponentsSeparatorRouteImport } from './routes/components/separator'
@@ -131,6 +132,12 @@ const ComponentsSpinnerRoute = ComponentsSpinnerRouteImport.update({
   path: '/spinner',
   getParentRoute: () => ComponentsRoute,
 } as any)
+const ComponentsSolidMarkedTestRoute =
+  ComponentsSolidMarkedTestRouteImport.update({
+    id: '/solid-marked-test',
+    path: '/solid-marked-test',
+    getParentRoute: () => ComponentsRoute,
+  } as any)
 const ComponentsSliderRoute = ComponentsSliderRouteImport.update({
   id: '/slider',
   path: '/slider',
@@ -358,6 +365,7 @@ export interface FileRoutesByFullPath {
   '/components/separator': typeof ComponentsSeparatorRoute
   '/components/skeleton': typeof ComponentsSkeletonRoute
   '/components/slider': typeof ComponentsSliderRoute
+  '/components/solid-marked-test': typeof ComponentsSolidMarkedTestRoute
   '/components/spinner': typeof ComponentsSpinnerRoute
   '/components/switch': typeof ComponentsSwitchRoute
   '/components/table': typeof ComponentsTableRoute
@@ -411,6 +419,7 @@ export interface FileRoutesByTo {
   '/components/separator': typeof ComponentsSeparatorRoute
   '/components/skeleton': typeof ComponentsSkeletonRoute
   '/components/slider': typeof ComponentsSliderRoute
+  '/components/solid-marked-test': typeof ComponentsSolidMarkedTestRoute
   '/components/spinner': typeof ComponentsSpinnerRoute
   '/components/switch': typeof ComponentsSwitchRoute
   '/components/table': typeof ComponentsTableRoute
@@ -465,6 +474,7 @@ export interface FileRoutesById {
   '/components/separator': typeof ComponentsSeparatorRoute
   '/components/skeleton': typeof ComponentsSkeletonRoute
   '/components/slider': typeof ComponentsSliderRoute
+  '/components/solid-marked-test': typeof ComponentsSolidMarkedTestRoute
   '/components/spinner': typeof ComponentsSpinnerRoute
   '/components/switch': typeof ComponentsSwitchRoute
   '/components/table': typeof ComponentsTableRoute
@@ -520,6 +530,7 @@ export interface FileRouteTypes {
     | '/components/separator'
     | '/components/skeleton'
     | '/components/slider'
+    | '/components/solid-marked-test'
     | '/components/spinner'
     | '/components/switch'
     | '/components/table'
@@ -573,6 +584,7 @@ export interface FileRouteTypes {
     | '/components/separator'
     | '/components/skeleton'
     | '/components/slider'
+    | '/components/solid-marked-test'
     | '/components/spinner'
     | '/components/switch'
     | '/components/table'
@@ -626,6 +638,7 @@ export interface FileRouteTypes {
     | '/components/separator'
     | '/components/skeleton'
     | '/components/slider'
+    | '/components/solid-marked-test'
     | '/components/spinner'
     | '/components/switch'
     | '/components/table'
@@ -743,6 +756,13 @@ declare module '@tanstack/solid-router' {
       path: '/spinner'
       fullPath: '/components/spinner'
       preLoaderRoute: typeof ComponentsSpinnerRouteImport
+      parentRoute: typeof ComponentsRoute
+    }
+    '/components/solid-marked-test': {
+      id: '/components/solid-marked-test'
+      path: '/solid-marked-test'
+      fullPath: '/components/solid-marked-test'
+      preLoaderRoute: typeof ComponentsSolidMarkedTestRouteImport
       parentRoute: typeof ComponentsRoute
     }
     '/components/slider': {
@@ -1045,6 +1065,7 @@ interface ComponentsRouteChildren {
   ComponentsSeparatorRoute: typeof ComponentsSeparatorRoute
   ComponentsSkeletonRoute: typeof ComponentsSkeletonRoute
   ComponentsSliderRoute: typeof ComponentsSliderRoute
+  ComponentsSolidMarkedTestRoute: typeof ComponentsSolidMarkedTestRoute
   ComponentsSpinnerRoute: typeof ComponentsSpinnerRoute
   ComponentsSwitchRoute: typeof ComponentsSwitchRoute
   ComponentsTableRoute: typeof ComponentsTableRoute
@@ -1096,6 +1117,7 @@ const ComponentsRouteChildren: ComponentsRouteChildren = {
   ComponentsSeparatorRoute: ComponentsSeparatorRoute,
   ComponentsSkeletonRoute: ComponentsSkeletonRoute,
   ComponentsSliderRoute: ComponentsSliderRoute,
+  ComponentsSolidMarkedTestRoute: ComponentsSolidMarkedTestRoute,
   ComponentsSpinnerRoute: ComponentsSpinnerRoute,
   ComponentsSwitchRoute: ComponentsSwitchRoute,
   ComponentsTableRoute: ComponentsTableRoute,
