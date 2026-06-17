@@ -5,7 +5,7 @@
 Run the following command to add the component to your project:
 
 ```bash
-npx @fan-ui/cli@latest add tooltip
+npx @ark-preset/cli@latest add tooltip
 ```
 
 ### Manual
@@ -38,7 +38,7 @@ Create the component directory and files.
 ```tsx
 import { Tooltip as ArkTooltip } from "@ark-ui/solid/tooltip";
 import { splitProps, type Component } from "solid-js";
-import { buttonVariants, tooltipVariants, type ButtonVariants } from "@fan-ui/core";
+import { buttonVariants, tooltipVariants, type ButtonVariants } from "@ark-preset/core";
 
 const styles = tooltipVariants();
 
@@ -126,7 +126,7 @@ const TooltipContent: Component<TooltipContentProps> = (props) => {
 
 export { Tooltip, TooltipTrigger, TooltipContent, TooltipBase };
 
-export { tooltipVariants, type TooltipVariants } from "@fan-ui/core";
+export { tooltipVariants, type TooltipVariants } from "@ark-preset/core";
 ```
 
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.

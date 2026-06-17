@@ -5,7 +5,7 @@
 Run the following command to add the component to your project:
 
 ```bash
-npx @fan-ui/cli@latest add segment-group
+npx @ark-preset/cli@latest add segment-group
 ```
 
 ### Manual
@@ -67,7 +67,7 @@ Create the component directory and files.
 ```tsx
 import { SegmentGroup as ArkSegmentGroup } from "@ark-ui/solid/segment-group";
 import { createContext, useContext, splitProps, type Component } from "solid-js";
-import { segmentGroupVariants, type SegmentGroupVariants } from "@fan-ui/core";
+import { segmentGroupVariants, type SegmentGroupVariants } from "@ark-preset/core";
 
 type SegmentGroupVariantContextValue = Pick<SegmentGroupVariants, "variant" | "orientation">;
 
@@ -185,7 +185,7 @@ export { SegmentGroupVariantContext, useSegmentGroupVariant };
 import { splitProps, type Component } from "solid-js";
 import { SegmentGroup as SegmentGroupBase } from "./segment-group.base";
 import { SegmentGroup as ArkSegmentGroup } from "@ark-ui/solid/segment-group";
-import type { SegmentGroupVariants } from "@fan-ui/core";
+import type { SegmentGroupVariants } from "@ark-preset/core";
 
 const SegmentGroup: Component<ArkSegmentGroup.RootProps & SegmentGroupVariants> = (props) => {
   const [local, others] = splitProps(props, ["variant", "orientation", "children"]);
@@ -210,7 +210,7 @@ const SegmentGroupItem: Component<ArkSegmentGroup.ItemProps & SegmentGroupVarian
 
 export { SegmentGroup, SegmentGroupItem, SegmentGroupBase };
 
-export { segmentGroupVariants, type SegmentGroupVariants } from "@fan-ui/core";
+export { segmentGroupVariants, type SegmentGroupVariants } from "@ark-preset/core";
 ```
 
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.

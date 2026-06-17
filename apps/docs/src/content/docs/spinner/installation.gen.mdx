@@ -5,7 +5,7 @@
 Run the following command to add the component to your project:
 
 ```bash
-npx @fan-ui/cli@latest add spinner
+npx @ark-preset/cli@latest add spinner
 ```
 
 ### Manual
@@ -37,7 +37,7 @@ Create the component file at `src/components/spinner/index.tsx`:
 
 ```tsx
 import { splitProps, type Component } from "solid-js";
-import { spinnerVariants, type SpinnerVariants } from "@fan-ui/core";
+import { spinnerVariants, type SpinnerVariants } from "@ark-preset/core";
 import { ark, type HTMLArkProps } from "@ark-ui/solid/factory";
 
 type SpinnerProps = HTMLArkProps<"span"> & SpinnerVariants;

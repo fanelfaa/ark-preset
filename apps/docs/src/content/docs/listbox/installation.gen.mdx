@@ -5,7 +5,7 @@
 Run the following command to add the component to your project:
 
 ```bash
-npx @fan-ui/cli@latest add listbox
+npx @ark-preset/cli@latest add listbox
 ```
 
 ### Manual
@@ -57,7 +57,7 @@ Create the component directory and files.
 ```tsx
 import { Listbox as ArkListbox, type CollectionItem } from "@ark-ui/solid/listbox";
 import { createContext, useContext, splitProps, type Component } from "solid-js";
-import { listboxVariants, type ListboxVariants } from "@fan-ui/core";
+import { listboxVariants, type ListboxVariants } from "@ark-preset/core";
 
 type ListboxVariantContextValue = Pick<ListboxVariants, "orientation">;
 
@@ -176,7 +176,7 @@ export { ListboxVariantContext, useListboxVariant };
 import { splitProps, type Component } from "solid-js";
 import { Listbox as ListboxBase } from "./listbox.base";
 import { Listbox as ArkListbox, type CollectionItem } from "@ark-ui/solid/listbox";
-import type { ListboxVariants } from "@fan-ui/core";
+import type { ListboxVariants } from "@ark-preset/core";
 
 const Listbox: Component<ArkListbox.RootProps<CollectionItem>> = (props) => {
   const [local, others] = splitProps(props, ["collection", "children"]);
@@ -224,7 +224,7 @@ const ListboxEmpty: Component<ArkListbox.EmptyProps> = (props) => {
 
 export { Listbox, ListboxItem, ListboxContent, ListboxEmpty, ListboxBase };
 
-export { listboxVariants, type ListboxVariants } from "@fan-ui/core";
+export { listboxVariants, type ListboxVariants } from "@ark-preset/core";
 ```
 
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.

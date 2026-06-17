@@ -5,7 +5,7 @@
 Run the following command to add the component to your project:
 
 ```bash
-npx @fan-ui/cli@latest add pagination
+npx @ark-preset/cli@latest add pagination
 ```
 
 ### Manual
@@ -58,7 +58,7 @@ Create the component directory and files.
 ```tsx
 import { Pagination as ArkPagination } from "@ark-ui/solid/pagination";
 import { createContext, useContext, splitProps, type Component } from "solid-js";
-import { paginationVariants, type PaginationVariants } from "@fan-ui/core";
+import { paginationVariants, type PaginationVariants } from "@ark-preset/core";
 
 type PaginationVariantContextValue = Pick<PaginationVariants, "size">;
 
@@ -150,7 +150,7 @@ export { PaginationVariantContext, usePaginationVariant };
 import { splitProps, For, type Component } from "solid-js";
 import { Pagination as PaginationBase } from "./pagination.base";
 import { Pagination as ArkPagination } from "@ark-ui/solid/pagination";
-import type { PaginationVariants } from "@fan-ui/core";
+import type { PaginationVariants } from "@ark-preset/core";
 
 const Pagination: Component<ArkPagination.RootProps & PaginationVariants> = (props) => {
   const [local, others] = splitProps(props, ["class", "size", "children"]);
@@ -207,7 +207,7 @@ export {
   PaginationBase,
 };
 
-export { paginationVariants, type PaginationVariants } from "@fan-ui/core";
+export { paginationVariants, type PaginationVariants } from "@ark-preset/core";
 ```
 
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.

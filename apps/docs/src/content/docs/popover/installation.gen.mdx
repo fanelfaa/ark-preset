@@ -5,7 +5,7 @@
 Run the following command to add the component to your project:
 
 ```bash
-npx @fan-ui/cli@latest add popover
+npx @ark-preset/cli@latest add popover
 ```
 
 ### Manual
@@ -42,7 +42,7 @@ Create the component directory and files.
 ```tsx
 import { Popover as ArkPopover } from "@ark-ui/solid/popover";
 import { splitProps, type Component } from "solid-js";
-import { buttonVariants, popoverVariants, type ButtonVariants } from "@fan-ui/core";
+import { buttonVariants, popoverVariants, type ButtonVariants } from "@ark-preset/core";
 
 const styles = popoverVariants();
 
@@ -126,7 +126,7 @@ import { Popover as ArkPopover } from "@ark-ui/solid/popover";
 import { Portal } from "solid-js/web";
 import { splitProps, type Component } from "solid-js";
 import { Popover as PopoverBase } from "./popover.base";
-import { popoverVariants, type PopoverVariants } from "@fan-ui/core";
+import { popoverVariants, type PopoverVariants } from "@ark-preset/core";
 
 const PopoverCloseTrigger: Component<ArkPopover.CloseTriggerProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);

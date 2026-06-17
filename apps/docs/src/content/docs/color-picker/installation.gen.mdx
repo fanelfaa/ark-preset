@@ -5,7 +5,7 @@
 Run the following command to add the component to your project:
 
 ```bash
-npx @fan-ui/cli@latest add color-picker
+npx @ark-preset/cli@latest add color-picker
 ```
 
 ### Manual
@@ -86,7 +86,7 @@ Create the component directory and files.
 ```tsx
 import { ColorPicker as ArkColorPicker } from "@ark-ui/solid/color-picker";
 import { splitProps, type Component } from "solid-js";
-import { colorPickerVariants } from "@fan-ui/core";
+import { colorPickerVariants } from "@ark-preset/core";
 
 const styles = colorPickerVariants();
 
@@ -463,7 +463,7 @@ const ColorPicker: Component<ColorPickerProps> = (props) => {
 
 export { ColorPicker, ColorPickerBase };
 
-export { colorPickerVariants, type ColorPickerVariants } from "@fan-ui/core";
+export { colorPickerVariants, type ColorPickerVariants } from "@ark-preset/core";
 ```
 
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.

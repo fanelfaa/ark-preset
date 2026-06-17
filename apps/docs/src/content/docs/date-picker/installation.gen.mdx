@@ -5,7 +5,7 @@
 Run the following command to add the component to your project:
 
 ```bash
-npx @fan-ui/cli@latest add date-picker
+npx @ark-preset/cli@latest add date-picker
 ```
 
 ### Manual
@@ -105,7 +105,7 @@ Create the component directory and files.
 ```tsx
 import { DatePicker as ArkDatePicker } from "@ark-ui/solid/date-picker";
 import { splitProps, type Component } from "solid-js";
-import { datePickerVariants } from "@fan-ui/core";
+import { datePickerVariants } from "@ark-preset/core";
 
 const styles = datePickerVariants();
 
@@ -277,7 +277,7 @@ import { DatePicker as ArkDatePicker } from "@ark-ui/solid/date-picker";
 import type { UseDatePickerContext } from "@ark-ui/solid/date-picker";
 import type { DateValue } from "@internationalized/date";
 import { Portal } from "solid-js/web";
-import { buttonVariants, datePickerVariants } from "@fan-ui/core";
+import { buttonVariants, datePickerVariants } from "@ark-preset/core";
 import { DatePickerBase } from "./date-picker.base";
 
 const styles = datePickerVariants();
@@ -602,7 +602,7 @@ const DatePicker: Component<DatePickerProps> = (props) => {
 
 export { DatePicker, DatePickerBase };
 
-export { datePickerVariants, type DatePickerVariants } from "@fan-ui/core";
+export { datePickerVariants, type DatePickerVariants } from "@ark-preset/core";
 ```
 
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.

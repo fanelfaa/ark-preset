@@ -5,7 +5,7 @@
 Run the following command to add the component to your project:
 
 ```bash
-npx @fan-ui/cli@latest add slider
+npx @ark-preset/cli@latest add slider
 ```
 
 ### Manual
@@ -52,7 +52,7 @@ Create the component directory and files.
 ```tsx
 import { Slider as ArkSlider } from "@ark-ui/solid/slider";
 import { splitProps, type Component } from "solid-js";
-import { sliderVariants } from "@fan-ui/core";
+import { sliderVariants } from "@ark-preset/core";
 
 const styles = sliderVariants();
 
@@ -198,7 +198,7 @@ export {
   SliderBase,
 };
 
-export { sliderVariants, type SliderVariants } from "@fan-ui/core";
+export { sliderVariants, type SliderVariants } from "@ark-preset/core";
 ```
 
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.

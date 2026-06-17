@@ -5,7 +5,7 @@
 Run the following command to add the component to your project:
 
 ```bash
-npx @fan-ui/cli@latest add hover-card
+npx @ark-preset/cli@latest add hover-card
 ```
 
 ### Manual
@@ -38,7 +38,7 @@ Create the component directory and files.
 ```tsx
 import { HoverCard as ArkHoverCard } from "@ark-ui/solid/hover-card";
 import { splitProps, type Component } from "solid-js";
-import { buttonVariants, hoverCardVariants, type ButtonVariants } from "@fan-ui/core";
+import { buttonVariants, hoverCardVariants, type ButtonVariants } from "@ark-preset/core";
 
 const styles = hoverCardVariants();
 
@@ -120,7 +120,7 @@ const HoverCardContent: Component<HoverCardContentProps> = (props) => {
 
 export { HoverCard, HoverCardTrigger, HoverCardContent, HoverCardBase };
 
-export { hoverCardVariants, type HoverCardVariants } from "@fan-ui/core";
+export { hoverCardVariants, type HoverCardVariants } from "@ark-preset/core";
 ```
 
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.

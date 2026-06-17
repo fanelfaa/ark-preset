@@ -5,7 +5,7 @@
 Run the following command to add the component to your project:
 
 ```bash
-npx @fan-ui/cli@latest add separator
+npx @ark-preset/cli@latest add separator
 ```
 
 ### Manual
@@ -35,7 +35,7 @@ Create the component file at `src/components/separator/index.tsx`:
 
 ```tsx
 import { splitProps, type Component } from "solid-js";
-import { separatorVariants, type SeparatorVariants } from "@fan-ui/core";
+import { separatorVariants, type SeparatorVariants } from "@ark-preset/core";
 import { ark, type HTMLArkProps } from "@ark-ui/solid/factory";
 
 type SeparatorProps = HTMLArkProps<"div"> & SeparatorVariants;

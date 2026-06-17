@@ -5,7 +5,7 @@
 Run the following command to add the component to your project:
 
 ```bash
-npx @fan-ui/cli@latest add checkbox
+npx @ark-preset/cli@latest add checkbox
 ```
 
 ### Manual
@@ -35,7 +35,7 @@ Create the component directory and files.
 ```tsx
 import { Checkbox as ArkCheckbox } from "@ark-ui/solid/checkbox";
 import { splitProps, type Component } from "solid-js";
-import { checkboxVariants } from "@fan-ui/core";
+import { checkboxVariants } from "@ark-preset/core";
 
 const styles = checkboxVariants();
 
@@ -147,7 +147,7 @@ const CheckboxRootProvider: Component<ArkCheckbox.RootProviderProps> = (props) =
 
 export { Checkbox, CheckboxRootProvider, CheckboxLabel, CheckboxBase };
 
-export { checkboxVariants, type CheckboxVariants } from "@fan-ui/core";
+export { checkboxVariants, type CheckboxVariants } from "@ark-preset/core";
 ```
 
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.

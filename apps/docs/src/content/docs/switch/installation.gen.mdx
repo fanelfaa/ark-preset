@@ -5,7 +5,7 @@
 Run the following command to add the component to your project:
 
 ```bash
-npx @fan-ui/cli@latest add switch
+npx @ark-preset/cli@latest add switch
 ```
 
 ### Manual
@@ -37,7 +37,7 @@ Create the component directory and files.
 ```tsx
 import { Switch as ArkSwitch } from "@ark-ui/solid/switch";
 import { splitProps, type Component } from "solid-js";
-import { switchVariants } from "@fan-ui/core";
+import { switchVariants } from "@ark-preset/core";
 
 const styles = switchVariants();
 
@@ -84,7 +84,7 @@ export const Switch = {
 import { Switch as ArkSwitch } from "@ark-ui/solid/switch";
 import { splitProps, type Component } from "solid-js";
 import { Switch as SwitchBase } from "./switch.base";
-import { switchVariants } from "@fan-ui/core";
+import { switchVariants } from "@ark-preset/core";
 
 const styles = switchVariants();
 
@@ -123,7 +123,7 @@ const SwitchRootProvider: Component<ArkSwitch.RootProviderProps> = (props) => {
 
 export { Switch, SwitchRootProvider, SwitchLabel, SwitchBase };
 
-export { switchVariants, type SwitchVariants } from "@fan-ui/core";
+export { switchVariants, type SwitchVariants } from "@ark-preset/core";
 ```
 
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.

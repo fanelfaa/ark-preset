@@ -5,7 +5,7 @@
 Run the following command to add the component to your project:
 
 ```bash
-npx @fan-ui/cli@latest add number-input
+npx @ark-preset/cli@latest add number-input
 ```
 
 ### Manual
@@ -64,7 +64,7 @@ Create the component directory and files.
 ```tsx
 import { NumberInput as ArkNumberInput } from "@ark-ui/solid/number-input";
 import { splitProps, type Component } from "solid-js";
-import { numberInputVariants } from "@fan-ui/core";
+import { numberInputVariants } from "@ark-preset/core";
 import { HTMLProps } from "@ark-ui/solid";
 
 const styles = numberInputVariants();
@@ -222,7 +222,7 @@ const NumberInput: Component<NumberInputProps> = (props) => {
 
 export { NumberInput, NumberInputBase };
 
-export { numberInputVariants, type NumberInputVariants } from "@fan-ui/core";
+export { numberInputVariants, type NumberInputVariants } from "@ark-preset/core";
 ```
 
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.

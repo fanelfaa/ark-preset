@@ -5,7 +5,7 @@
 Run the following command to add the component to your project:
 
 ```bash
-npx @fan-ui/cli@latest add dialog
+npx @ark-preset/cli@latest add dialog
 ```
 
 ### Manual
@@ -41,7 +41,7 @@ Create the component directory and files.
 ```tsx
 import { Dialog as ArkDialog } from "@ark-ui/solid/dialog";
 import { splitProps, type Component } from "solid-js";
-import { buttonVariants, dialogVariants, type ButtonVariants } from "@fan-ui/core";
+import { buttonVariants, dialogVariants, type ButtonVariants } from "@ark-preset/core";
 import { HTMLProps } from "@ark-ui/solid";
 
 const styles = dialogVariants();
@@ -168,7 +168,7 @@ export {
   DialogBase,
 };
 
-export { dialogVariants, type DialogVariants } from "@fan-ui/core";
+export { dialogVariants, type DialogVariants } from "@ark-preset/core";
 ```
 
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.

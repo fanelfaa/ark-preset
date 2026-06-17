@@ -5,7 +5,7 @@
 Run the following command to add the component to your project:
 
 ```bash
-npx @fan-ui/cli@latest add collapsible
+npx @ark-preset/cli@latest add collapsible
 ```
 
 ### Manual
@@ -36,7 +36,7 @@ Create the component directory and files.
 ```tsx
 import { Collapsible as ArkCollapsible } from "@ark-ui/solid/collapsible";
 import { splitProps, type Component } from "solid-js";
-import { collapsibleVariants } from "@fan-ui/core";
+import { collapsibleVariants } from "@ark-preset/core";
 
 const styles = collapsibleVariants();
 
@@ -108,7 +108,7 @@ export {
   CollapsibleBase,
 };
 
-export { collapsibleVariants, type CollapsibleVariants } from "@fan-ui/core";
+export { collapsibleVariants, type CollapsibleVariants } from "@ark-preset/core";
 ```
 
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.

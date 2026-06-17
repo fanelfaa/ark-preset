@@ -5,7 +5,7 @@
 Run the following command to add the component to your project:
 
 ```bash
-npx @fan-ui/cli@latest add toast
+npx @ark-preset/cli@latest add toast
 ```
 
 ### Manual
@@ -54,7 +54,7 @@ Create the component directory and files.
 ```tsx
 import { Toast as ArkToast } from "@ark-ui/solid/toast";
 import { splitProps, type Component } from "solid-js";
-import { type ToastVariants, toastVariants } from "@fan-ui/core";
+import { type ToastVariants, toastVariants } from "@ark-preset/core";
 
 const styles = toastVariants();
 
@@ -103,7 +103,7 @@ import {
 } from "@ark-ui/solid/toast";
 import { splitProps, type Component } from "solid-js";
 import { Toast as ToastBase } from "./toast.base";
-import { type ToastVariants } from "@fan-ui/core";
+import { type ToastVariants } from "@ark-preset/core";
 import { Portal } from "solid-js/web";
 
 type ToasterProps = {
@@ -137,7 +137,7 @@ const Toaster: Component<ToasterProps> = (props) => {
 
 export { Toaster, createToaster, ToastBase };
 
-export { toastVariants, type ToastVariants } from "@fan-ui/core";
+export { toastVariants, type ToastVariants } from "@ark-preset/core";
 ```
 
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.

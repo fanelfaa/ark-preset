@@ -5,7 +5,7 @@
 Run the following command to add the component to your project:
 
 ```bash
-npx @fan-ui/cli@latest add tags-input
+npx @ark-preset/cli@latest add tags-input
 ```
 
 ### Manual
@@ -67,7 +67,7 @@ Create the component directory and files.
 ```tsx
 import { TagsInput as ArkTagsInput } from "@ark-ui/solid/tags-input";
 import { createContext, useContext, splitProps, type Component } from "solid-js";
-import { tagsInputVariants } from "@fan-ui/core";
+import { tagsInputVariants } from "@ark-preset/core";
 
 type TagsInputVariantContextValue = {
   disabled?: boolean;
@@ -190,7 +190,7 @@ export { TagsInputVariantContext, useTagsInputVariant };
 import { Index, splitProps, type Component } from "solid-js";
 import { TagsInput as TagsInputBase } from "./tags-input.base";
 import { TagsInput as ArkTagsInput } from "@ark-ui/solid/tags-input";
-import type { TagsInputVariants } from "@fan-ui/core";
+import type { TagsInputVariants } from "@ark-preset/core";
 
 const TagsInputItem: Component<ArkTagsInput.ItemProps & TagsInputVariants> = (props) => {
   const [local, others] = splitProps(props, ["children"]);
@@ -272,7 +272,7 @@ const TagsInput: Component<TagsInputProps> = (props) => {
 
 export { TagsInput, TagsInputItem, TagsInputBase };
 
-export { tagsInputVariants, type TagsInputVariants } from "@fan-ui/core";
+export { tagsInputVariants, type TagsInputVariants } from "@ark-preset/core";
 ```
 
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.

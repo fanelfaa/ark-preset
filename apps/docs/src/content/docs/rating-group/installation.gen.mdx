@@ -5,7 +5,7 @@
 Run the following command to add the component to your project:
 
 ```bash
-npx @fan-ui/cli@latest add rating-group
+npx @ark-preset/cli@latest add rating-group
 ```
 
 ### Manual
@@ -68,7 +68,7 @@ Create the component directory and files.
 ```tsx
 import { RatingGroup as ArkRatingGroup } from "@ark-ui/solid/rating-group";
 import { createContext, useContext, splitProps, type Component } from "solid-js";
-import { ratingGroupVariants, type RatingGroupVariants } from "@fan-ui/core";
+import { ratingGroupVariants, type RatingGroupVariants } from "@ark-preset/core";
 
 type RatingGroupVariantContextValue = Pick<RatingGroupVariants, "size" | "orientation">;
 
@@ -165,7 +165,7 @@ export { RatingGroupVariantContext, useRatingGroupVariant };
 import { Index, splitProps, type Component } from "solid-js";
 import { RatingGroup as RatingGroupBase } from "./rating-group.base";
 import { RatingGroup as ArkRatingGroup } from "@ark-ui/solid/rating-group";
-import { ratingGroupVariants, type RatingGroupVariants } from "@fan-ui/core";
+import { ratingGroupVariants, type RatingGroupVariants } from "@ark-preset/core";
 
 const styles = ratingGroupVariants();
 
@@ -256,7 +256,7 @@ export {
   RatingGroupBase,
 };
 
-export { ratingGroupVariants, type RatingGroupVariants } from "@fan-ui/core";
+export { ratingGroupVariants, type RatingGroupVariants } from "@ark-preset/core";
 ```
 
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.

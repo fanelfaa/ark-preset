@@ -5,7 +5,7 @@
 Run the following command to add the component to your project:
 
 ```bash
-npx @fan-ui/cli@latest add textarea
+npx @ark-preset/cli@latest add textarea
 ```
 
 ### Manual
@@ -46,7 +46,7 @@ Create the component directory and files.
 ```tsx
 import { Field as ArkField } from "@ark-ui/solid/field";
 import { splitProps, type Component } from "solid-js";
-import { textareaVariants, type TextareaVariants } from "@fan-ui/core";
+import { textareaVariants, type TextareaVariants } from "@ark-preset/core";
 
 const styles = textareaVariants();
 
@@ -94,7 +94,7 @@ export const Textarea = {
 ```tsx
 import { splitProps, type Component } from "solid-js";
 import { Textarea as TextareaBase } from "./textarea.base";
-import { type TextareaVariants } from "@fan-ui/core";
+import { type TextareaVariants } from "@ark-preset/core";
 import { Field as ArkField } from "@ark-ui/solid/field";
 
 type TextareaProps = {
@@ -119,7 +119,7 @@ const Textarea: Component<TextareaProps> = (props) => {
 };
 
 export { Textarea, TextareaBase };
-export { textareaVariants, type TextareaVariants } from "@fan-ui/core";
+export { textareaVariants, type TextareaVariants } from "@ark-preset/core";
 ```
 
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.

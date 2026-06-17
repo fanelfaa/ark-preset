@@ -5,7 +5,7 @@
 Run the following command to add the component to your project:
 
 ```bash
-npx @fan-ui/cli@latest add scroll-area
+npx @ark-preset/cli@latest add scroll-area
 ```
 
 ### Manual
@@ -49,7 +49,7 @@ Create the component directory and files.
 `src/components/scroll-area/scroll-area.base.tsx`:
 
 ```tsx
-import { scrollAreaVariants } from "@fan-ui/core";
+import { scrollAreaVariants } from "@ark-preset/core";
 import { ScrollArea as ArkScrollArea } from "@ark-ui/solid/scroll-area";
 import { splitProps, type Component } from "solid-js";
 
@@ -134,7 +134,7 @@ const ScrollArea: Component<ScrollAreaProps> = (props) => {
 
 export { ScrollArea, ScrollAreaBase };
 
-export { scrollAreaVariants, type ScrollAreaVariants } from "@fan-ui/core";
+export { scrollAreaVariants, type ScrollAreaVariants } from "@ark-preset/core";
 ```
 
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.
