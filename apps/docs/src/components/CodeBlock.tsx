@@ -1,26 +1,85 @@
 import { Button } from "@fan-ui/solid";
 import {
-  children,
   createSignal,
+  createMemo,
   type ParentProps,
   Show,
   onMount,
   onCleanup,
   splitProps,
+  type JSX,
+  children,
+  createEffect,
 } from "solid-js";
+import hljs from "highlight.js/lib/core";
+import typescript from "highlight.js/lib/languages/typescript";
+import javascript from "highlight.js/lib/languages/javascript";
+import xml from "highlight.js/lib/languages/xml";
+import css from "highlight.js/lib/languages/css";
+import bash from "highlight.js/lib/languages/bash";
+
+// Register languages at module scope so they're available when createEffect runs
+hljs.registerLanguage("typescript", typescript);
+hljs.registerLanguage("javascript", javascript);
+hljs.registerLanguage("xml", xml);
+hljs.registerLanguage("css", css);
+hljs.registerLanguage("bash", bash);
+
+// Common language alias mappings
+// Note: tsx uses javascript grammar because highlight.js typescript has no JSX support
+const LANG_MAP: Record<string, string> = {
+  ts: "typescript",
+  tsx: "javascript",
+  js: "javascript",
+  jsx: "javascript",
+  sh: "bash",
+  shell: "bash",
+  json: "javascript",
+  yaml: "bash",
+  md: "bash",
+  zsh: "bash",
+  fish: "bash",
+};
 
 const MAX_HEIGHT = 200;
 
-export default function CodeBlock(
-  props: ParentProps<Pick<HTMLPreElement, "className" | "classList" | "style">>,
-) {
+/** Strip common leading whitespace from each line. */
+function dedent(s: string): string {
+  const lines = s.split("\n");
+  const minIndent = lines
+    .filter((l) => l.trim().length > 0)
+    .reduce((min, l) => Math.min(min, l.length - l.trimStart().length), Infinity);
+  if (!isFinite(minIndent) || minIndent === 0) return s;
+  return lines.map((l) => l.slice(minIndent)).join("\n");
+}
+
+/** Normalize a code string: trim + dedent */
+function normalize(code: string): string {
+  return dedent(code.trim());
+}
+
+interface CodeBlockProps extends ParentProps<JSX.HTMLAttributes<HTMLPreElement>> {
+  /** Language for syntax highlighting (required). */
+  lang: string;
+}
+
+export default function CodeBlock(props: CodeBlockProps) {
   const [copied, setCopied] = createSignal(false);
   const [expanded, setExpanded] = createSignal(false);
   const [overflowing, setOverflowing] = createSignal(false);
+  // oxlint-disable-next-line no-unassigned-vars
   let preRef: HTMLPreElement | undefined;
+  // oxlint-disable-next-line no-unassigned-vars
+  let codeRef: HTMLElement | undefined;
 
-  const resolvedChildren = children(() => props.children);
-  const [local, rest] = splitProps(props, ["className", "style", "classList"]);
+  const [local, rest] = splitProps(props, ["class", "style", "classList", "children", "lang"]);
+
+  // Reactive code content — tracks children reactively
+  const code = createMemo(() => {
+    const resolved = children(() => local.children)();
+    if (typeof resolved !== "string") throw Error("the children of codeblocks should be a string");
+    return normalize(resolved);
+  });
 
   const checkOverflow = () => {
     if (preRef && preRef.scrollHeight > MAX_HEIGHT) {
@@ -28,13 +87,38 @@ export default function CodeBlock(
     }
   };
 
+  // Track previous content to avoid redundant re-highlighting
+  let prevCode: string | undefined;
+
+  createEffect(() => {
+    // Apply syntax highlighting
+    if (codeRef) {
+      const content = code();
+      // Skip if content hasn't changed since last highlight
+      if (content === prevCode) return;
+      prevCode = content;
+
+      const lang = LANG_MAP[local.lang] || local.lang;
+      try {
+        const result = hljs.highlight(content, { language: lang });
+        codeRef.innerHTML = result.value;
+      } catch {
+        // Fallback to plain text if highlighting fails (e.g. unknown language)
+        codeRef.textContent = content;
+      }
+
+      // Re-check overflow after highlighting changes DOM height
+      requestAnimationFrame(checkOverflow);
+    }
+  });
+
   onMount(() => {
-    // Defer measurement until after paint + syntax highlighting
+    // Defer overflow measurement until after highlighting is applied
     const raf = requestAnimationFrame(() => {
       requestAnimationFrame(checkOverflow);
     });
 
-    // Watch for content changes (e.g. syntax highlighting applied async)
+    // Watch for content changes
     const observer = new ResizeObserver(checkOverflow);
     if (preRef) observer.observe(preRef);
 
@@ -48,21 +132,26 @@ export default function CodeBlock(
     <div class="relative isolate">
       <pre
         ref={preRef}
-        classList={{ "cursor-pointer": overflowing() && !expanded() }}
+        class={`whitespace-pre-wrap ${local.class ? ` ${local.class}` : ""}`}
+        classList={{
+          "cursor-pointer": overflowing() && !expanded(),
+          "overflow-hidden": overflowing() && !expanded(),
+        }}
         style={{
           ...(local.style as any),
-          "max-height": expanded() ? "10000px" : `${MAX_HEIGHT}px`,
-          "overflow-y": expanded() ? "auto" : "hidden",
-          "overflow-x": "hidden",
-          "white-space": "pre-wrap",
+          ...(overflowing() && !expanded()
+            ? { "max-height": `${MAX_HEIGHT}px`, "overflow-y": "hidden" }
+            : {}),
           "word-break": "break-word",
           transition: "max-height 0.3s ease",
         }}
         {...rest}
-      />
+      >
+        <code ref={codeRef}>{code()}</code>
+      </pre>
       <Show when={overflowing()}>
         <Show when={!expanded()}>
-          <div class="pointer-events-none absolute bottom-0 left-0 right-0 h-20 bg-linear-to-t from-black/80 to-transparent" />
+          <div class="pointer-events-none absolute bottom-0 left-0 right-0 h-20 bg-linear-to-t from-black/80 dark:from-black/40 to-transparent" />
         </Show>
         <Button
           variant="outline"
@@ -74,10 +163,10 @@ export default function CodeBlock(
         </Button>
       </Show>
       <button
-        class="absolute top-3 right-3 rounded-md p-1.5 text-muted-foreground hover:text-white hover:bg-muted-foreground/10 transition-colors"
-        on:click={() => {
-          const text = (resolvedChildren() as HTMLElement)?.innerText || "";
-          navigator.clipboard.writeText(text);
+        class="absolute top-3 right-3 rounded-md p-1.5 text-muted-foreground hover:text-foreground hover:bg-muted-foreground/10 dark:hover:text-foreground transition-colors"
+        onClick={() => {
+          const resolved = code();
+          navigator.clipboard.writeText(resolved);
           setCopied(true);
           setTimeout(() => setCopied(false), 1500);
         }}

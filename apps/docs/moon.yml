@@ -10,14 +10,18 @@ tasks:
   typecheck:
     command: "pnpm typecheck"
     deps:
+      - "generate-routes"
+  generate-routes:
+    command: "pnpm generate-routes"
+    deps:
       - "solid:build"
   build:
     command: "pnpm build"
     deps:
-      - "solid:build"
+      - "typecheck"
     inputs:
       - "src/**/*"
-      - "astro.config.mjs"
+      - "vite.config.ts"
     outputs:
       - "dist"
   preview:
