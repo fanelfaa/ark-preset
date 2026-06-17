@@ -76,7 +76,10 @@ function camelToKebab(name: string): string {
 }
 
 /** Scan imports in a source file to detect cross-dependencies */
-function detectDependencies(filePath: string, ownComponent?: string): {
+function detectDependencies(
+  filePath: string,
+  ownComponent?: string,
+): {
   recipeDependencies: string[];
   componentDependencies: string[];
 } {
@@ -140,10 +143,7 @@ function detectDependencies(filePath: string, ownComponent?: string): {
 }
 
 /** Copy source files to templates directory */
-function copyComponentSource(
-  framework: string,
-  component: string,
-): string[] {
+function copyComponentSource(framework: string, component: string): string[] {
   const sourceDir = path.join(repoRoot, `${SOLID_SOURCE_BASE}/${component}`);
   const targetDir = path.join(TEMPLATES_DIR, framework, component);
   const copiedFiles: string[] = [];
@@ -221,7 +221,10 @@ async function main() {
       }
 
       // Detect dependencies by scanning ALL copied source files
-      const allDeps = { recipeDependencies: new Set<string>(), componentDependencies: new Set<string>() };
+      const allDeps = {
+        recipeDependencies: new Set<string>(),
+        componentDependencies: new Set<string>(),
+      };
       for (const file of files) {
         const templatePath = path.join(TEMPLATES_DIR, file);
         if (fs.existsSync(templatePath)) {
@@ -254,9 +257,7 @@ async function main() {
     for (const [comp, entry] of Object.entries(manifest[framework])) {
       for (const dep of entry.componentDependencies) {
         if (!manifest[framework][dep]) {
-          console.warn(
-            `  ⚠ ${comp} depends on "${dep}" which is not in the current manifest set`,
-          );
+          console.warn(`  ⚠ ${comp} depends on "${dep}" which is not in the current manifest set`);
         }
       }
     }
@@ -277,11 +278,15 @@ async function main() {
 
   // Summary
   const totalComponents = Object.keys(manifest.solid).length;
-  const totalFiles = fs.readdirSync(TEMPLATES_DIR, { recursive: true }).filter(
-    (f) => typeof f === "string" && fs.statSync(path.join(TEMPLATES_DIR, f as string)).isFile(),
-  ).length;
+  const totalFiles = fs
+    .readdirSync(TEMPLATES_DIR, { recursive: true })
+    .filter(
+      (f) => typeof f === "string" && fs.statSync(path.join(TEMPLATES_DIR, f as string)).isFile(),
+    ).length;
 
-  console.log(`\n✅ Done! ${totalComponents} components, ${totalFiles} template files generated.\n`);
+  console.log(
+    `\n✅ Done! ${totalComponents} components, ${totalFiles} template files generated.\n`,
+  );
 }
 
 main().catch((err) => {

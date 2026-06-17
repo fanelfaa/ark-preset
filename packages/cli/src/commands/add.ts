@@ -43,7 +43,7 @@ function findPackageRoot(): string {
   }
   console.error(
     "❌ component-manifest.json not found. Run the build script first:\n" +
-    "  moon run @fan-ui/cli:generate-manifest"
+      "  moon run @fan-ui/cli:generate-manifest",
   );
   process.exit(1);
 }
@@ -183,10 +183,7 @@ async function copyWithImportRewrite(
   await fs.writeFile(targetPath, content, "utf-8");
 }
 
-async function updateIndexFile(
-  indexFile: string,
-  exportLine: string,
-): Promise<void> {
+async function updateIndexFile(indexFile: string, exportLine: string): Promise<void> {
   if (await fs.pathExists(indexFile)) {
     const content = await fs.readFile(indexFile, "utf-8");
     if (!content.includes(exportLine)) {
@@ -217,7 +214,9 @@ export async function addComponent(
   const fwManifest = getFrameworkManifest(manifest, fw);
   if (!fwManifest) {
     console.error(`❌ Unknown framework: "${fw}"`);
-    const available = Object.keys(manifest).filter((k) => k !== "version").sort();
+    const available = Object.keys(manifest)
+      .filter((k) => k !== "version")
+      .sort();
     console.log(`  Available frameworks: ${available.join(", ")}`);
     process.exit(1);
   }
@@ -323,7 +322,9 @@ export async function addComponent(
     for (const file of writtenFiles) {
       try {
         await fs.remove(file);
-      } catch { /* ignore cleanup errors */ }
+      } catch {
+        /* ignore cleanup errors */
+      }
     }
     process.exit(1);
   }

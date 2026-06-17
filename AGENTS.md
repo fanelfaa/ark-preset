@@ -1,46 +1,52 @@
 # PROJECT KNOWLEDGE BASE
 
-**Generated:** 2026-05-27 02:47:19 UTC
-**Commit:** f3d6548f
+**Generated:** 2026-06-17 10:01:41 UTC
+**Commit:** 4c03836b
 **Branch:** main
 
 ## OVERVIEW
 
-Monorepo UI library with Ark UI primitives, Solid.js implementations, CLI tool, and documentation site.
+Monorepo UI library with Ark UI primitives, Solid.js implementations, CLI tool, and documentation site. 51/88 components done.
 
 ## STRUCTURE
 
 ```
 .
 ├── packages/          # UI libraries and CLI
-│   ├── core/          # Styling primitives (Ark UI recipes)
-│   ├── solid/         # Solid.js component library
-│   └── cli/           # CLI for component generation
+│   ├── core/          # 47 styling recipes (tailwind-variants)
+│   ├── solid/         # 46 Solid.js component wrappers
+│   └── cli/           # CLI for component generation (create-ui)
 ├── apps/              # Applications
-│   └── docs/          # Documentation site (Astro + Solid.js)
+│   └── docs/          # Documentation site (Astro + Solid.js + TanStack Router)
 ├── .sisyphus/         # Agentic coding framework artifacts
-└── .moon/             # Moonrepo configuration
+├── .moon/             # Moonrepo configuration
+├── .agents/           # Agent rule files (moon, solid conventions)
+└── COMPONENT_TODOS.md # Implementation progress tracker
 ```
 
 ## WHERE TO LOOK
 
-| Task                     | Location                   | Notes                                               |
-| ------------------------ | -------------------------- | --------------------------------------------------- |
-| Add new component recipe | packages/core/src/recipes/ | Create \*.ts file with tv() slots and variants      |
-| Add Solid.js component   | packages/solid/src/        | Create \*.tsx wrapper around Ark UI Solid component |
-| Add React component      | (temporarily removed)      | Focus on Solid.js components first                  |
-| Update CLI templates     | packages/cli/src/          | Modify command templates                            |
-| Update documentation     | apps/docs/src/             | Edit MDX, TSX, or Astro files                       |
-| Check component status   | COMPONENT_TODOS.md         | Track implementation progress                       |
+| Task                          | Location                        | Notes                                                    |
+| ----------------------------- | ------------------------------- | -------------------------------------------------------- |
+| Add new component recipe      | packages/core/src/recipes/      | Create *.ts file with tv() slots and variants            |
+| Add Solid.js component        | packages/solid/src/<component>/ | Create directory with .base.tsx + index.tsx              |
+| Update CLI templates          | packages/cli/src/               | Run `generate-manifest` after source changes             |
+| Update documentation          | apps/docs/src/content/docs/     | Edit MDX files per component                             |
+| Add component demo            | apps/docs/src/components/demos/ | Create demo directory with island component              |
+| Check component status        | COMPONENT_TODOS.md              | 51 done, 37 pending                                      |
+| Check .agents rules           | .agents/rules/                  | moon/, solid/ subdirectories with convention files       |
 
 ## CODE MAP
 
-| Symbol         | Type      | Location                            | Refs | Role                       |
-| -------------- | --------- | ----------------------------------- | ---- | -------------------------- |
-| buttonVariants | variable  | packages/core/src/recipes/button.ts | 3    | Styling variant for Button |
-| inputVariants  | variable  | packages/core/src/recipes/input.ts  | 3    | Styling variant for Input  |
-| Button         | component | packages/solid/src/button/          | 3    | Solid.js Button wrapper    |
-| @fan-ui/cli        | binary    | packages/cli/src/index.ts           | 1    | CLI entry point            |
+| Symbol              | Type      | Location                                | Refs | Role                              |
+| ------------------- | --------- | --------------------------------------- | ---- | --------------------------------- |
+| buttonVariants      | variable  | packages/core/src/recipes/button.ts     | 3    | Button styling (tv)               |
+| inputVariants       | variable  | packages/core/src/recipes/input.ts      | 3    | Input styling (tv)                |
+| Button              | component | packages/solid/src/button/              | 3    | Solid.js Button wrapper           |
+| @fan-ui/cli         | binary    | packages/cli/src/index.ts               | 1    | CLI entry (bin: ui)               |
+| createToaster       | function  | packages/solid/src/toast/               | 1    | Re-exported from @ark-ui/solid    |
+| generate-content.ts | module    | apps/docs/src/shared/                   | 2    | Shared between Vite plugin + CLI  |
+| routeTree.gen.ts    | generated | apps/docs/src/routeTree.gen.ts          | 1    | Auto-generated by TanStack Router |
 
 ## CONVENTIONS
 
@@ -48,52 +54,66 @@ Monorepo UI library with Ark UI primitives, Solid.js implementations, CLI tool, 
 - Style with tailwind-variants tv() function in core recipes
 - Framework wrappers (solid) delegate to Ark UI with minimal props
 - Export variants from core/index.ts and components from framework/index.ts
-- Keep CLI bin unscoped (`ui`) despite @fan-ui/\* package naming
-- All configuration in package.json, vite.config.ts, tsconfig.json
+- Keep CLI bin unscoped (`ui`) despite @fan-ui/* package naming
+- Lint with oxlint, format with oxfmt (no ESLint/Prettier)
+- Moonrepo for task orchestration instead of conventional npm scripts
+- pnpm workspaces with shamefully-hoist=true
 
 ## ANTI-PATTERNS (THIS PROJECT)
 
-- No test infrastructure whatsoever
-- Root package name mismatch (solid-ark-ui vs @fan-ui/\* scope)
-- Deep exports in @fan-ui/core/package.json incomplete (only 2/35 recipes exported)
-- 3 flat `.tsx` files in solid/src inconsistent with directory component pattern
+- No test infrastructure whatsoever (vitest declared but unused)
+- Root package.json description says "Solid.js component library" but this is a monorepo
+- Root `pnpm -r` scripts bypass moonrepo dependency ordering
+- Node version mismatch: root says >=18, moon says >=23
+- No CI platform config (no GitHub Actions, no Makefile)
+- `shamefully-hoist=true` enables phantom dependencies
+- Core build script pipes through `grep`, suppressing warnings
+- No deep exports in @fan-ui/core/package.json (47 built entries, only 2 export paths)
+- `time-picker.ts` recipe exists in core but not exported from barrel or wrapped in Solid
+- `label` recipe exists in core but has no Solid.js wrapper
 
 ## UNIQUE STYLES
 
 - Recipe-first approach: styling primitives defined before framework wrappers
-- Moonrepo for task orchestration instead of conventional npm scripts
+- Each Solid component ships two levels: composite (index.tsx) + base (.base.tsx)
+- 5 component patterns (A-E) for different wrapper complexity levels
+- Moonrepo for task orchestration with dependency-aware builds
 - Sisyphus agent framework for AI-assisted development tracking
 - Component tracking via COMPONENT_TODOS.md with 88 total targets
+- .agents/ directory for AI coding convention rules
 
 ## COMMANDS
 
-\`\`\`bash
-
+```bash
 # Development
+moon run docs:dev              # Run docs site
+moon run solid:dev             # Solid package watch mode
 
-moon run docs:dev # Run docs site
-pnpm build # Build all packages
-pnpm test # Not implemented yet
+# Build
+moon run core:build            # Build core recipes
+moon run solid:build           # Build Solid components (depends on core:build)
+moon run cli:build             # Build CLI (generate manifest + tsup + copy)
+moon run docs:build            # Build docs site (depends on typecheck)
 
-# Package-specific
-
-moon run core:build
-moon run solid:dev
-moon run create-ui:dev
-
-# Moonrepo
-
-moon run # Run moon tasks
-moon ci # CI pipeline
-\`\`\`
+# Other
+pnpm lint                      # oxlint (entire monorepo)
+pnpm fmt                       # oxfmt formatting
+pnpm typecheck                 # TypeScript type checking
+moon run cli:generate-manifest # Regenerate CLI manifest after source changes
+moon ci                        # CI pipeline
+```
 
 ## NOTES
 
-- The .sisyphus/ directory contains agent plans, drafts, and evidence - do not modify manually
-- Component completeness tracked in COMPONENT_TODOS.md (31/88 done as of May 2026)
+- The .sisyphus/ directory contains agent plans, drafts, and evidence — do not modify manually
+- Component completeness tracked in COMPONENT_TODOS.md (51/88 done as of June 2026)
 - Ark UI version locked via dependencies; check package.json for exact version
 - Solid.js components use inline SVG icons to avoid extra dependencies
 - React package temporarily removed — focus on Solid.js components first
+- All 3 formerly flat .tsx files (combobox, select, drawer) refactored to directory pattern
+- TypeScript version: ^5.0.0 in packages, ^6.0.2 in docs
+- Vite version: ^6 in solid, ^8 in docs
+- apps/docs/ has no AGENTS.md yet — it's documented separately
 
 ## graphify
 

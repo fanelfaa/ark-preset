@@ -1,20 +1,20 @@
-# PROJECT KNOWLEDGE BASE
+# PACKAGES/SOLID/SRC KNOWLEDGE
 
-**Generated:** 2026-05-27 02:47:19 UTC
-**Commit:** f3d6548f
+**Generated:** 2026-06-17
+**Commit:** 4c03836b
 **Branch:** main
 
 ## OVERVIEW
 
-Solid.js component library wrapping Ark UI primitives. Components follow a recipe-first, directory-based architecture.
+Solid.js component source — 46 directory-based components wrapping Ark UI primitives. Detailed component architecture documentation below.
 
 ## WHERE TO LOOK
 
 | Task                       | Location             | Notes                                          |
 | -------------------------- | -------------------- | ---------------------------------------------- |
 | Add new Solid.js component | src/<component>/     | Create directory with .base.tsx + index.tsx    |
-| Add recipe                 | ../core/src/recipes/ | Create \*.ts file with tv() slots and variants |
-| Update component index     | index.ts             | Add `export * from "./<component>"`            |
+| Add recipe                 | ../core/src/recipes/ | Create *.ts file with tv() slots and variants |
+| Update component index     | index.ts             | Add `export * from "./<component>"`             |
 | Update core index          | ../core/src/index.ts | Export new recipe variants + types             |
 
 ## COMPONENT ARCHITECTURE
@@ -274,16 +274,13 @@ export { <component>Variants, type <component>Variants } from "@fan-ui/core";
 | Context/hooks in barrel | Yes (via `export *`)                           | No — must import from base file directly                     |
 
 **When to use Pattern E:**
-
 - Composite component has automatic parts wrapping (e.g., `SegmentGroupItem` auto-adds `ItemText`/`ItemControl`/`ItemHiddenInput`)
-- Exposing raw base parts through the barrel would be confusing (users might mix composite and raw parts)
+- Exposing raw base parts through the barrel would be confusing
 - The component has context providers that should stay internal to base
 
 **When NOT to use Pattern E:**
-
 - Component is a simple re-export (use Pattern A)
 - All users need is the composite component (use Pattern A)
-- Raw parts are commonly used alongside composite (use Pattern B/CD and keep `export *`)
 
 ## DOCS PATTERN
 
@@ -300,7 +297,7 @@ apps/docs/
 
 ### MDX Page Layout
 
-````mdx
+```mdx
 ---
 title: ComponentName
 description: ...
@@ -308,7 +305,7 @@ category: Layout
 updatedDate: YYYY-MM-DD
 ---
 
-import DocsLink from "@components/DocsLink.astro";
+import DocsLink from "@components/DocsLink.tsx";
 import NameBasicDemo from "@components/name-demo/NameBasicDemo.tsx";
 
 # ComponentName
@@ -319,7 +316,7 @@ Brief description.
 
 <NameBasicDemo client:load />
 
-<-- Inline code block using simple import: import { Name } from "~/components/name" -->
+import { Name } from "~/components/name"
 
 ## Installation
 
@@ -328,7 +325,6 @@ Brief description.
 ```bash
 npx @fan-ui/cli@latest add <name>
 ```
-````
 
 ### Manual
 
@@ -345,8 +341,7 @@ Link to Manual section for primitive parts.
 ## API Reference
 
 See the [Ark UI Name](https://ark-ui.com/docs/components/<name>) documentation.
-
-````
+```
 
 ### Imports Convention
 
@@ -355,50 +350,13 @@ See the [Ark UI Name](https://ark-ui.com/docs/components/<name>) documentation.
 | MDX top (live demo) | `@fan-ui/solid` |
 | User-facing code blocks | `~/components/<name>` |
 
-### ⚠️ Critical Rule: Basic Demo Import Constraint
+### Basic Demo Import Constraint
 
-**Basic demo MUST NOT import from `.base.tsx` or `<ComponentBase>`.**
-It must only import **named composite exports** from `index.tsx`.
-
-```
-// ❌ WRONG — basic demo imports ComponentBase
-import { Dialog, DialogContent, DialogBase } from "@fan-ui/solid";
-// then uses DialogBase.Trigger, DialogBase.Header, etc.
-
-// ✅ CORRECT — basic demo imports named composites only
-import { SegmentGroup, SegmentGroupItem } from "@fan-ui/solid";
-```
-
-**How to satisfy this rule**: If the basic demo needs a part (e.g., Trigger, Header, Title, Description, Footer), `index.tsx` **must export a composite version** of that part — a named export that internally uses the base namespace. Never force the basic demo to reach for `ComponentBase.*`.
-
-**Example** — segment-group pattern:
-
-```tsx
-// index.tsx — composite named exports for basic use
-const SegmentGroup: Component<...> = (props) => (
-  <SegmentGroupBase.Root ...>
-    <SegmentGroupBase.Indicator />
-    {local.children}
-  </SegmentGroupBase.Root>
-);
-
-const SegmentGroupItem: Component<...> = (props) => (
-  <SegmentGroupBase.Item {...others}>
-    <SegmentGroupBase.ItemText>{local.children}</SegmentGroupBase.ItemText>
-    <SegmentGroupBase.ItemControl />
-    <SegmentGroupBase.ItemHiddenInput />
-  </SegmentGroupBase.Item>
-);
-
-export { SegmentGroup, SegmentGroupItem };
-export { SegmentGroupBase }; // Only exported for advanced use (RootProvider)
-```
+Basic demo MUST NOT import from `.base.tsx` or `<ComponentBase>`. It must only import **named composite exports** from `index.tsx`.
 
 **When is `ComponentBase` allowed?**
-
-- Only in **RootProvider demos** (advanced usage)
-- Only for accessing base parts that don't have composite wrappers (rare)
-- Never in basic demo code blocks in docs
+- Only in RootProvider demos (advanced usage)
+- Never in basic demo code blocks
 
 ## CONVENTIONS
 
@@ -408,7 +366,7 @@ export { SegmentGroupBase }; // Only exported for advanced use (RootProvider)
 | **Module-level styles** | `const styles = <component>Variants();` — declared at module scope, NOT inside a component |
 | **No `createMemo`** | Call `styles.slotName({ class: local.class })` directly in JSX, never wrap in `createMemo` |
 | **Class application** | Always: `class={styles.slotName({ class: local.class })}` |
-| **tv() variants** | When recipe has variants (e.g., `error`, `disabled`), the base component extends props to accept them: `Component<ArkField.InputProps & { error?: boolean }>` and passes to tv: `styles.input({ class: local.class, error: local.error })` |
+| **tv() variants** | When recipe has variants (e.g., `error`, `disabled`), the base component extends props to accept them |
 
 ### `splitProps` Rules
 | Location | Split | Reason |
@@ -417,61 +375,35 @@ export { SegmentGroupBase }; // Only exported for advanced use (RootProvider)
 | Base components with variants | `["class", "variantName"]` | Only variant props needed by tv() |
 | Composite `index.tsx` | `["class", "label", "children", "disabled", "error"]` | Composite owns children + custom props |
 
-### Props Typing
-| Location | Type |
-|----------|------|
-| Base components | Direct Ark UI prop type: `ArkComponentName.PartProps` |
-| Custom HTML wrappers | `HTMLProps<"div">` from `@ark-ui/solid` |
-| Composite (optional) | `ArkComponentName.RootProps & { label?, class?, error? }` |
-
 ### Exports
 | Export | Source | Pattern |
 |--------|--------|---------|
 | Base parts (Pattern A-D) | `<component>.base.tsx` | Individual named exports (`export const Part`) |
 | Base parts (Pattern E) | `<component>.base.tsx` | Single namespace (`export { Component }`) |
 | Composite component | `index.tsx` | Named export |
-| Recipe variants | `@fan-ui/core` | `export { <component>Variants, type <component>Variants } from "@fan-ui/core"` |
+| Recipe variants | `@fan-ui/core` | `export { variants, type variants } from "@fan-ui/core"` |
 | Re-export base (Pattern A-D) | `index.tsx` | `export * from "./<component>.base"` |
-| Re-export base (Pattern E) | `index.tsx` | **None** — raw parts not exposed via barrel |
 | Base namespace (Pattern E) | `index.tsx` | `export { Component as ComponentBase }` |
 
 ### Folder -> Export Resolution
-When a component is refactored from flat file to directory, `packages/solid/src/index.ts` already has:
+When a component is refactored from flat file to directory:
 ```ts
 export * from "./<component>";
-````
-
-This resolves to `./<component>/index.tsx` automatically. No index.ts change needed.
+// resolves to ./<component>/index.tsx automatically
+```
 
 ## VARIANT HANDLING
 
 When a recipe defines tv() variant overrides (e.g., `variants: { error: { true: { input: "border-destructive..." } } }`):
 
-1. The base component must accept the variant as a prop
-2. The variant is passed to the tv() call in the class expression
-3. The composite component computes the variant value from its props and passes it down
-
-**Example** (input with error variant):
-
-```tsx
-// base.tsx
-export const InputField: Component<ArkField.InputProps & { error?: boolean }> = (props) => {
-  const [local, others] = splitProps(props, ["class", "error"]);
-  return (
-    <ArkField.Input class={styles.input({ class: local.class, error: local.error })} {...others} />
-  );
-};
-
-// index.tsx
-<InputField error={!!local.error} {...others} />;
-```
+1. Base component accepts variant as prop
+2. Variant passed to tv() in class expression
+3. Composite computes variant from its props and passes down
 
 ## NOTES
 
-- Components that are self-contained (render their own controls/triggers) use **Pattern B** — users just pass props, no manual composition needed
-- Simple wrapper components (no extra UI beyond what Ark provides) use **Pattern A**
-- When both Root and RootProvider variants exist, export both. Alias the RootProvider import in index.tsx: `import { ComponentRootProvider as BaseRootProvider } from "./<component>.base"`
-- Inline SVG icons are used to avoid extra icon dependencies
-- **Pattern E** (namespace base): Use when composite auto-wraps parts and exposing raw parts via barrel would cause confusion. Raw parts are only accessible via `~/components/<name>/<name>.base`, not from the barrel
-- In Pattern E, the namespace object is also exported from `index.tsx` as `ComponentBase` (e.g., `SegmentGroupBase`) so users who need raw parts can import from the barrel if they prefer, but the primary entry point for composite usage stays clean
-- See the root AGENTS.md for project-wide information
+- No flat .tsx files remain — all 46 components are directory-based (combobox, select, drawer refactored)
+- `createToaster` is re-exported from @ark-ui/solid/toast via toast/index.tsx
+- Variant contexts used in 5 components: segment-group, tags-input, pagination, listbox, rating-group
+- Known cross-component deps: button→spinner, select→scroll-area, alert-dialog→button, date-picker→button, menu→button, hover-card→button, popover→button, dialog→button, drawer→button, tooltip→button
+- `label` recipe exists in core but has NO Solid wrapper — only gap

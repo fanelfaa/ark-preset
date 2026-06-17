@@ -14,10 +14,16 @@ export const toastVariants = tv({
     variant: {
       default: { root: "bg-background border-border" },
       loading: { root: "bg-background border-border" },
-      error: { root: "border-red-500 bg-red-50 text-red-950 dark:border-red-900 dark:bg-red-950/60 dark:text-red-50" },
-      success: { root: "border-green-500 bg-green-50 text-green-950 dark:border-green-900 dark:bg-green-950/60 dark:text-green-50" },
+      error: {
+        root: "border-red-500 bg-red-50 text-red-950 dark:border-red-900 dark:bg-red-950/60 dark:text-red-50",
+      },
+      success: {
+        root: "border-green-500 bg-green-50 text-green-950 dark:border-green-900 dark:bg-green-950/60 dark:text-green-50",
+      },
       info: { root: "bg-background border-border" },
-      warning: { root: "border-yellow-500 bg-yellow-50 text-yellow-950 dark:border-yellow-900 dark:bg-yellow-950/60 dark:text-yellow-50" },
+      warning: {
+        root: "border-yellow-500 bg-yellow-50 text-yellow-950 dark:border-yellow-900 dark:bg-yellow-950/60 dark:text-yellow-50",
+      },
     },
   },
   defaultVariants: { variant: "default" },

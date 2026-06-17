@@ -1,0 +1,110 @@
+import { InlineCode } from "@fan-ui/solid";
+import ToggleIndicatorDemo from "@demos/toggle-demo/ToggleIndicatorDemo.tsx";
+import { Toggle } from "@fan-ui/solid";
+
+## With Indicator
+
+<InlineCode>ToggleIndicator</InlineCode> renders different content based on the toggle state — the <InlineCode>fallback</InlineCode> is shown when off, and the children are shown when on.
+
+<ToggleIndicatorDemo />
+
+```tsx
+import { Toggle, ToggleIndicator } from "~/components/toggle";
+
+export function ToggleIndicatorDemo() {
+  return (
+    <div class="flex items-center gap-4">
+      <Toggle>
+        <ToggleIndicator fallback={<SunIcon />}>
+          <MoonIcon />
+        </ToggleIndicator>
+      </Toggle>
+      <Toggle defaultPressed>
+        <ToggleIndicator fallback={<SunIcon />}>
+          <MoonIcon />
+        </ToggleIndicator>
+      </Toggle>
+    </div>
+  );
+}
+```
+
+## Sizes
+
+Use the <code>size</code> prop to change the toggle size.
+
+<div class="rounded-lg border border-border p-6 not-prose">
+  <div class="flex flex-wrap items-center gap-4">
+    <Toggle size="sm">Sm</Toggle>
+    <Toggle size="md">Md</Toggle>
+    <Toggle size="lg">Lg</Toggle>
+  </div>
+</div>
+
+```tsx
+import { Toggle } from "~/components/toggle";
+
+export function ToggleSizesDemo() {
+  return (
+    <div class="flex items-center gap-4">
+      <Toggle size="sm">Sm</Toggle>
+      <Toggle size="md">Md</Toggle>
+      <Toggle size="lg">Lg</Toggle>
+    </div>
+  );
+}
+```
+
+## Usage
+
+Import the components:
+
+```tsx
+import { Toggle, ToggleIndicator } from "~/components/toggle";
+```
+
+Basic:
+
+```tsx
+<Toggle>
+  <BoldIcon />
+</Toggle>
+```
+
+Default pressed:
+
+```tsx
+<Toggle defaultPressed>
+  <BoldIcon />
+</Toggle>
+```
+
+Controlled:
+
+```tsx
+const [pressed, setPressed] = createSignal(false);
+
+<Toggle pressed={pressed()} onPressedChange={setPressed}>
+  <BoldIcon />
+</Toggle>
+```
+
+Disabled:
+
+```tsx
+<Toggle disabled>
+  <BoldIcon />
+</Toggle>
+```
+
+With Indicator:
+
+<InlineCode>ToggleIndicator</InlineCode> renders different content based on the toggle state — the <InlineCode>fallback</InlineCode> is shown when off, and the children are shown when on.
+
+```tsx
+<Toggle>
+  <ToggleIndicator fallback={<SunIcon />}>
+    <MoonIcon />
+  </ToggleIndicator>
+</Toggle>
+```

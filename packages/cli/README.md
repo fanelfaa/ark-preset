@@ -50,10 +50,10 @@ node dist/index.js add button --framework solid
 
 ## Commands
 
-| Command | Description |
-|---------|-------------|
-| `add <component>` | Add a UI component to your project |
-| `-o, --output <path>` | Output directory (default: `./src/components/ui`) |
+| Command                  | Description                                               |
+| ------------------------ | --------------------------------------------------------- |
+| `add <component>`        | Add a UI component to your project                        |
+| `-o, --output <path>`    | Output directory (default: `./src/components/ui`)         |
 | `-f, --framework <type>` | Framework: `solid` \| `react` \| `vue` (default: `solid`) |
 
 ## Output Structure

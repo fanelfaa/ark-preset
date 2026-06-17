@@ -5,6 +5,7 @@
     "correctness": "error"
   },
   "rules": {},
+  "ignorePatterns": ["node_modules", ".moon", "dist", ".git"],
   "env": {
     "builtin": true
   }

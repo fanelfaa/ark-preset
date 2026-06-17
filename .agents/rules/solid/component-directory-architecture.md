@@ -133,12 +133,12 @@ Same as Pattern B but wraps the inner content in `<Portal>` from `solid-js/web`.
 
 ### Exports
 
-| Artifact            | From                   | Pattern                                      |
-| ------------------- | ---------------------- | -------------------------------------------- |
-| All base parts      | `<component>.base.tsx` | Named exports only                           |
-| Composite component | `index.tsx`            | Named export                                 |
-| Recipe variants     | `@fan-ui/core`             | `export { vars, type Vars } from "@fan-ui/core"` |
-| Re-export base      | `index.tsx`            | `export * from "./<component>.base"`         |
+| Artifact            | From                   | Pattern                                          |
+| ------------------- | ---------------------- | ------------------------------------------------ |
+| All base parts      | `<component>.base.tsx` | Named exports only                               |
+| Composite component | `index.tsx`            | Named export                                     |
+| Recipe variants     | `@fan-ui/core`         | `export { vars, type Vars } from "@fan-ui/core"` |
+| Re-export base      | `index.tsx`            | `export * from "./<component>.base"`             |
 
 ### Variant Handling
 

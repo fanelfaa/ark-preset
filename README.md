@@ -25,17 +25,17 @@ You can use just the recipes to style your own Ark UI components, or take the fu
 
 - Not a component library you install and consume from npm (yet)
 - Not a design system — it's a style preset for Ark UI
-- Not a replacement for Ark UI — it's a layer *on top*
+- Not a replacement for Ark UI — it's a layer _on top_
 
 ---
 
 ## Packages
 
-| Package | What |
-|---|---|
-| `@fan-ui/core` | Tailwind-variants recipes — one per component. Pure styling, no framework deps. |
+| Package         | What                                                                                  |
+| --------------- | ------------------------------------------------------------------------------------- |
+| `@fan-ui/core`  | Tailwind-variants recipes — one per component. Pure styling, no framework deps.       |
 | `@fan-ui/solid` | Solid.js wrappers around `@ark-ui/solid`. Delegates to Ark UI, applies recipe styles. |
-| `create-ui` | CLI to scaffold new components (not ready). |
+| `create-ui`     | CLI to scaffold new components (not ready).                                           |
 
 ### `@fan-ui/core` — recipes
 
@@ -75,14 +75,23 @@ Wraps Ark UI Solid primitives with the recipe styles. Components are minimal —
 ```tsx
 // packages/solid/src/button/index.tsx
 const Button: Component<ButtonProps> = (props) => {
-  const [local, others] = splitProps(props, ["class", "variant", "size", "loading", "disabled", "children"]);
+  const [local, others] = splitProps(props, [
+    "class",
+    "variant",
+    "size",
+    "loading",
+    "disabled",
+    "children",
+  ]);
   return (
     <ark.button
       class={buttonVariants({ variant: local.variant, size: local.size, class: local.class })}
       disabled={local.loading || local.disabled}
       {...others}
     >
-      <Show when={local.loading}><Spinner size="sm" /></Show>
+      <Show when={local.loading}>
+        <Spinner size="sm" />
+      </Show>
       {resolvedChildren()}
     </ark.button>
   );
@@ -95,10 +104,10 @@ const Button: Component<ButtonProps> = (props) => {
 
 Every component ships two entry points — a **composite** (high-level) and a **base** (primitive):
 
-| Level | File | What |
-|---|---|---|
-| Composite | `index.tsx` | Ready-to-use component — handles labels, errors, layout for you |
-| Base | `<component>.base.tsx` | Raw Ark UI part wrappers — for custom composition |
+| Level     | File                   | What                                                            |
+| --------- | ---------------------- | --------------------------------------------------------------- |
+| Composite | `index.tsx`            | Ready-to-use component — handles labels, errors, layout for you |
+| Base      | `<component>.base.tsx` | Raw Ark UI part wrappers — for custom composition               |
 
 ```tsx
 // Composite — auto-wires label, description, error text
@@ -178,6 +187,7 @@ Uses [Moonrepo](https://moonrepo.dev) for task orchestration — `moon run` hand
 ## Why recipe-first?
 
 Separating styling (recipes) from framework wrappers means:
+
 - **You can use the recipes without Solid.js** — drop them into any Ark UI framework
 - **Framework packages are thin** — just wiring + minimal composition
 - **Future React/Vue/Svelte packages** only need to write wrappers, not restyle everything
