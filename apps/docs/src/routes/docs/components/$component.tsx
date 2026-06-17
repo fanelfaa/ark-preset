@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/solid-router";
 import { docs } from "../../../content/docs";
-import { DocsLayout } from "../../../components/DocsLayout";
+import { DocsLayout } from "../../../components";
 
 export const Route = createFileRoute("/docs/components/$component")({
   component: DocPage,

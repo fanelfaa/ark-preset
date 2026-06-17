@@ -5,7 +5,7 @@
     "correctness": "error"
   },
   "rules": {},
-  "ignorePatterns": [".astro", "node_modules", ".moon", "dist", ".git"],
+  "ignorePatterns": ["node_modules", ".moon", "dist", ".git"],
   "env": {
     "builtin": true
   }
