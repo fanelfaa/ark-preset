@@ -1,0 +1,7 @@
+[build]
+  command = "pnpm netlify:build"
+  publish = "apps/docs-spa/dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+  NODE_OPTIONS = "--max_old_space_size=4096"
