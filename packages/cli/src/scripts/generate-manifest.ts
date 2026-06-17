@@ -9,7 +9,7 @@
  * 4. Copies template files into packages/cli/templates/
  * 5. Generates component-manifest.json for the CLI to consume at runtime
  *
- * Run via: moon run @fan-ui/cli:build (wired as pre-build step)
+ * Run via: moon run @ark-preset/cli:build (wired as pre-build step)
  */
 
 import fs from "fs-extra";
@@ -57,7 +57,7 @@ interface ComponentEntry {
   files: string[];
   /** Recipe filenames relative to templates/recipes/ */
   recipes: string[];
-  /** Other component recipes this component imports from @fan-ui/core */
+  /** Other component recipes this component imports from @ark-preset/core */
   recipeDependencies: string[];
   /** Other framework components this component imports via relative import */
   componentDependencies: string[];
@@ -91,9 +91,9 @@ function detectDependencies(
     const lines = content.split("\n");
 
     for (const line of lines) {
-      // Detect recipe dependencies: import { *Variants } from "@fan-ui/core"
+      // Detect recipe dependencies: import { *Variants } from "@ark-preset/core"
       // Maps Variants name → recipe file name (e.g., buttonVariants → button)
-      const uiCoreMatch = line.match(/from\s+['"]@fan-ui\/core['"]/);
+      const uiCoreMatch = line.match(/from\s+['"]@ark-preset\/core['"]/);
       if (uiCoreMatch) {
         // Extract all imported identifiers
         const imports = line.match(/\{[^}]+\}/);

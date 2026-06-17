@@ -1,6 +1,6 @@
 import { Popover as ArkPopover } from "@ark-ui/solid/popover";
 import { splitProps, type Component } from "solid-js";
-import { buttonVariants, popoverVariants, type ButtonVariants } from "@fan-ui/core";
+import { buttonVariants, popoverVariants, type ButtonVariants } from "@ark-preset/core";
 
 const styles = popoverVariants();
 

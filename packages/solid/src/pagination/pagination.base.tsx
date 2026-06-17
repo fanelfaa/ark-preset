@@ -1,6 +1,6 @@
 import { Pagination as ArkPagination } from "@ark-ui/solid/pagination";
 import { createContext, useContext, splitProps, type Component } from "solid-js";
-import { paginationVariants, type PaginationVariants } from "@fan-ui/core";
+import { paginationVariants, type PaginationVariants } from "@ark-preset/core";
 
 type PaginationVariantContextValue = Pick<PaginationVariants, "size">;
 

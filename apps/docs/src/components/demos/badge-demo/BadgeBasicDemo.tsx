@@ -1,4 +1,4 @@
-import { Badge } from "@fan-ui/solid";
+import { Badge } from "@ark-preset/solid";
 
 export default function BadgeBasicDemo() {
   return (

@@ -1,6 +1,6 @@
 import { createListCollection } from "@ark-ui/solid";
 import { Index } from "solid-js";
-import { Select, SelectLabel, SelectTrigger, SelectContent, SelectItem } from "@fan-ui/solid";
+import { Select, SelectLabel, SelectTrigger, SelectContent, SelectItem } from "@ark-preset/solid";
 
 const frameworks = createListCollection({
   items: [

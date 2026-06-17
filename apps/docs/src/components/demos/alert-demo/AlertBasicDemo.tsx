@@ -1,4 +1,4 @@
-import { Alert, AlertTitle, AlertDescription } from "@fan-ui/solid";
+import { Alert, AlertTitle, AlertDescription } from "@ark-preset/solid";
 
 export default function AlertBasicDemo() {
   return (

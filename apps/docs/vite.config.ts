@@ -11,7 +11,7 @@ import { installationWatcher } from "./src/plugins/installation-watcher";
 export default defineConfig({
   resolve: { tsconfigPaths: true },
   optimizeDeps: {
-    exclude: ["@fan-ui/solid", "@fan-ui/core"],
+    exclude: ["@ark-preset/solid", "@ark-preset/core"],
   },
   plugins: [
     devtools(),

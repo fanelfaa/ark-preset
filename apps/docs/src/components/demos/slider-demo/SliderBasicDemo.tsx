@@ -1,4 +1,4 @@
-import { Slider, SliderLabel, SliderValueText, SliderControl, SliderThumb } from "@fan-ui/solid";
+import { Slider, SliderLabel, SliderValueText, SliderControl, SliderThumb } from "@ark-preset/solid";
 
 export default function SliderBasicDemo() {
   return (

@@ -1,6 +1,6 @@
 # docs
 
-SolidJS + Vite + TanStack Router documentation site for the @fan-ui component library.
+SolidJS + Vite + TanStack Router documentation site for the @ark-preset component library.
 
 ## Architecture
 
@@ -104,7 +104,7 @@ Each `.mdx` file can import components directly:
 
 ```mdx
 import { DocsLink } from "../../../components/DocsLink";
-import { Button } from "@fan-ui/solid";
+import { Button } from "@ark-preset/solid";
 ```
 
 > Relative imports from `src/content/docs/<name>/` to `src/components/` need `../../../components/` (3 levels up from the nested directory).

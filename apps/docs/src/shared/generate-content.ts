@@ -99,7 +99,7 @@ export function getComponentSourceFiles(
  *
  * Sections:
  *   1. Installation heading
- *   2. CLI command block (npx @fan-ui/cli)
+ *   2. CLI command block (npx @ark-preset/cli)
  *   3. Manual install heading
  *   4. Recipe code block (from packages/core/src/recipes/)
  *   5. Component source code block(s) (from packages/solid/src/)
@@ -122,7 +122,7 @@ export function generateInstallationContent(component: string): string | null {
   sections.push("### CLI\n");
   sections.push("Run the following command to add the component to your project:\n");
   sections.push("```bash");
-  sections.push(`npx @fan-ui/cli@latest add ${component}`);
+  sections.push(`npx @ark-preset/cli@latest add ${component}`);
   sections.push("```\n");
 
   // ── Manual ─────────────────────────────────────────────────────────

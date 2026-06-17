@@ -6,7 +6,7 @@ import {
   MenuSeparator,
   NestedMenuContent,
   Menu,
-} from "@fan-ui/solid";
+} from "@ark-preset/solid";
 
 export default function MenuNestedDemo() {
   return (

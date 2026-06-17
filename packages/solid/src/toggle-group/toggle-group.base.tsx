@@ -1,6 +1,6 @@
 import { ToggleGroup as ArkToggleGroup } from "@ark-ui/solid/toggle-group";
 import { splitProps, type Component } from "solid-js";
-import { toggleGroupVariants, type ToggleGroupVariants } from "@fan-ui/core";
+import { toggleGroupVariants, type ToggleGroupVariants } from "@ark-preset/core";
 
 const styles = toggleGroupVariants();
 

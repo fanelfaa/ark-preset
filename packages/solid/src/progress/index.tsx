@@ -27,4 +27,4 @@ export {
   ProgressBase,
 };
 
-export { progressVariants, type ProgressVariants } from "@fan-ui/core";
+export { progressVariants, type ProgressVariants } from "@ark-preset/core";

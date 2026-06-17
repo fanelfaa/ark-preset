@@ -1,6 +1,6 @@
 import { Listbox as ArkListbox, type CollectionItem } from "@ark-ui/solid/listbox";
 import { createContext, useContext, splitProps, type Component } from "solid-js";
-import { listboxVariants, type ListboxVariants } from "@fan-ui/core";
+import { listboxVariants, type ListboxVariants } from "@ark-preset/core";
 
 type ListboxVariantContextValue = Pick<ListboxVariants, "orientation">;
 

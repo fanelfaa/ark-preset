@@ -1,6 +1,6 @@
 import CodeBlock from "./components/CodeBlock";
 import { ark } from "@ark-ui/solid/factory";
-import { H1, H2, H3, H4, InlineCode, Blockquote, P } from "@fan-ui/solid";
+import { H1, H2, H3, H4, InlineCode, Blockquote, P } from "@ark-preset/solid";
 import { Dynamic } from "solid-js/web";
 import { children, splitProps, type Component } from "solid-js";
 

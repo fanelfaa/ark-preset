@@ -56,4 +56,4 @@ export {
   DrawerBase,
 };
 
-export { drawerVariants, type DrawerVariants } from "@fan-ui/core";
+export { drawerVariants, type DrawerVariants } from "@ark-preset/core";

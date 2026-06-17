@@ -1,6 +1,6 @@
 import { useFilter, useListCollection } from "@ark-ui/solid";
 import { Index } from "solid-js";
-import { Select, SelectLabel, SelectTrigger, SelectContent, SelectItem } from "@fan-ui/solid";
+import { Select, SelectLabel, SelectTrigger, SelectContent, SelectItem } from "@ark-preset/solid";
 
 export default function SelectSearchableDemo() {
   const filterFn = useFilter({ sensitivity: "base" });

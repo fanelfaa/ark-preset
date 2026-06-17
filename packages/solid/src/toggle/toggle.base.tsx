@@ -1,6 +1,6 @@
 import { Toggle as ArkToggle } from "@ark-ui/solid/toggle";
 import { splitProps, type Component } from "solid-js";
-import { toggleVariants, type ToggleVariants } from "@fan-ui/core";
+import { toggleVariants, type ToggleVariants } from "@ark-preset/core";
 
 const styles = toggleVariants();
 

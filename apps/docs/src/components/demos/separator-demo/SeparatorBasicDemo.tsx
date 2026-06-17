@@ -1,4 +1,4 @@
-import { Separator } from "@fan-ui/solid";
+import { Separator } from "@ark-preset/solid";
 
 export default function SeparatorBasicDemo() {
   return (

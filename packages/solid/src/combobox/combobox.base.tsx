@@ -1,6 +1,6 @@
 import { Combobox as ArkCombobox } from "@ark-ui/solid/combobox";
 import { splitProps, type Component } from "solid-js";
-import { comboboxVariants } from "@fan-ui/core";
+import { comboboxVariants } from "@ark-preset/core";
 
 const styles = comboboxVariants();
 

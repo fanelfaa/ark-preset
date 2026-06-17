@@ -6,7 +6,7 @@ import {
   ComboboxInputTrigger,
   ComboboxContent,
   ComboboxItem,
-} from "@fan-ui/solid";
+} from "@ark-preset/solid";
 
 export default function ComboboxBasicDemo() {
   const filterFn = useFilter({ sensitivity: "base" });

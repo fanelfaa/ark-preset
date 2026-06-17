@@ -54,4 +54,4 @@ export {
   AlertDialogBase,
 };
 
-export { alertDialogVariants, type AlertDialogVariants } from "@fan-ui/core";
+export { alertDialogVariants, type AlertDialogVariants } from "@ark-preset/core";

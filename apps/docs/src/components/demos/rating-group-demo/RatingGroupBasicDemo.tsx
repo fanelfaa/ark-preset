@@ -1,4 +1,4 @@
-import { RatingGroup, RatingGroupLabel } from "@fan-ui/solid";
+import { RatingGroup, RatingGroupLabel } from "@ark-preset/solid";
 
 export default function RatingGroupBasicDemo() {
   return (

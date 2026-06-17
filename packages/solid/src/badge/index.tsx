@@ -1,5 +1,5 @@
 import { splitProps, type Component } from "solid-js";
-import { badgeVariants, type BadgeVariants } from "@fan-ui/core";
+import { badgeVariants, type BadgeVariants } from "@ark-preset/core";
 import { ark, type HTMLArkProps } from "@ark-ui/solid/factory";
 
 type BadgeProps = HTMLArkProps<"span"> & BadgeVariants;

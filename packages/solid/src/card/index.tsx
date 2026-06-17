@@ -1,5 +1,5 @@
 import { splitProps, type Component } from "solid-js";
-import { cardVariants } from "@fan-ui/core";
+import { cardVariants } from "@ark-preset/core";
 import { ark, type HTMLArkProps } from "@ark-ui/solid/factory";
 
 const styles = cardVariants();

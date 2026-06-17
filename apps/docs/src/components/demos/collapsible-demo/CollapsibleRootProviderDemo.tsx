@@ -4,7 +4,7 @@ import {
   CollapsibleIndicator,
   CollapsibleTrigger,
   CollapsibleContent,
-} from "@fan-ui/solid";
+} from "@ark-preset/solid";
 
 export default function CollapsibleRootProviderDemo() {
   const collapsible = useCollapsible({ defaultOpen: true });

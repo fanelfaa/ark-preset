@@ -5,7 +5,7 @@
 
 ## OVERVIEW
 
-Solid.js component library (@fan-ui/solid). 46 directory-based components wrapping Ark UI primitives with recipe styles from @fan-ui/core.
+Solid.js component library (@ark-preset/solid). 46 directory-based components wrapping Ark UI primitives with recipe styles from @ark-preset/core.
 
 ## STRUCTURE
 
@@ -13,7 +13,7 @@ Solid.js component library (@fan-ui/solid). 46 directory-based components wrappi
 packages/solid/
 ├── package.json       # Exports "." only, peer deps on solid-js + tailwindcss
 ├── tsconfig.json      # Extends base, adds composite + jsx: preserve + jsxImportSource: solid-js
-├── vite.config.ts     # Library mode, ES + CJS, externals: solid-js, @ark-ui/solid, @fan-ui/core
+├── vite.config.ts     # Library mode, ES + CJS, externals: solid-js, @ark-ui/solid, @ark-preset/core
 ├── dist/              # Compiled output
 └── src/
     ├── index.ts       # Barrel: 46 directory re-exports (export *)
@@ -27,7 +27,7 @@ packages/solid/
 | Add new component  | src/<component>/  | Create dir with index.tsx + <component>.base.tsx    |
 | Update barrel      | src/index.ts      | Add `export * from "./<component>"`                  |
 | Update exports     | package.json      | If adding new entry point                           |
-| Recipe source      | @fan-ui/core      | Import `<component>Variants` from core              |
+| Recipe source      | @ark-preset/core      | Import `<component>Variants` from core              |
 
 ## CONVENTIONS
 

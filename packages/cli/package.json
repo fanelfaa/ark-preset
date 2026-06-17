@@ -1,9 +1,9 @@
 {
-  "name": "@fan-ui/cli",
+  "name": "@ark-preset/cli",
   "version": "0.1.0",
   "private": true,
   "bin": {
-    "ui": "./dist/index.js"
+    "ark-preset": "./dist/index.js"
   },
   "type": "module",
   "scripts": {
@@ -13,8 +13,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@fan-ui/core": "workspace:*",
-    "@fan-ui/solid": "workspace:*",
+    "@ark-preset/core": "workspace:*",
+    "@ark-preset/solid": "workspace:*",
     "commander": "^13.0.0",
     "fs-extra": "^11.0.0"
   },

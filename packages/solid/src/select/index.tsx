@@ -10,7 +10,7 @@ import {
   splitProps,
   type Component,
 } from "solid-js";
-import { selectVariants } from "@fan-ui/core";
+import { selectVariants } from "@ark-preset/core";
 import { ScrollArea } from "../scroll-area";
 
 const styles = selectVariants();
@@ -190,4 +190,4 @@ export {
   SelectRootProvider,
   SelectBase,
 };
-export { selectVariants, type SelectVariants } from "@fan-ui/core";
+export { selectVariants, type SelectVariants } from "@ark-preset/core";

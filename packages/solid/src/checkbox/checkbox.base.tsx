@@ -1,6 +1,6 @@
 import { Checkbox as ArkCheckbox } from "@ark-ui/solid/checkbox";
 import { splitProps, type Component } from "solid-js";
-import { checkboxVariants } from "@fan-ui/core";
+import { checkboxVariants } from "@ark-preset/core";
 
 const styles = checkboxVariants();
 

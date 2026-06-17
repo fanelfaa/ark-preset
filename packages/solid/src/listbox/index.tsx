@@ -1,7 +1,7 @@
 import { splitProps, type Component } from "solid-js";
 import { Listbox as ListboxBase } from "./listbox.base";
 import { Listbox as ArkListbox, type CollectionItem } from "@ark-ui/solid/listbox";
-import type { ListboxVariants } from "@fan-ui/core";
+import type { ListboxVariants } from "@ark-preset/core";
 
 const Listbox: Component<ArkListbox.RootProps<CollectionItem>> = (props) => {
   const [local, others] = splitProps(props, ["collection", "children"]);
@@ -49,4 +49,4 @@ const ListboxEmpty: Component<ArkListbox.EmptyProps> = (props) => {
 
 export { Listbox, ListboxItem, ListboxContent, ListboxEmpty, ListboxBase };
 
-export { listboxVariants, type ListboxVariants } from "@fan-ui/core";
+export { listboxVariants, type ListboxVariants } from "@ark-preset/core";

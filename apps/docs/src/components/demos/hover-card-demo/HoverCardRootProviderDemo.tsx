@@ -1,5 +1,5 @@
 import { useHoverCard } from "@ark-ui/solid/hover-card";
-import { HoverCardBase } from "@fan-ui/solid";
+import { HoverCardBase } from "@ark-preset/solid";
 
 export default function HoverCardRootProviderDemo() {
   const machine = useHoverCard({ openDelay: 200, closeDelay: 100 });

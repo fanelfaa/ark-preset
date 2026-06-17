@@ -10,7 +10,7 @@ import {
   MenuBase,
   MenuContent,
   MenuItem,
-} from "@fan-ui/solid";
+} from "@ark-preset/solid";
 
 export default function BreadcrumbBasicDemo() {
   return (

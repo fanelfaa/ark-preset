@@ -5,7 +5,7 @@ import {
   PaginationPrevTrigger,
   PaginationNextTrigger,
   PaginationLastTrigger,
-} from "@fan-ui/solid";
+} from "@ark-preset/solid";
 
 export default function PaginationBasicDemo() {
   return (

@@ -1,6 +1,6 @@
 import { SegmentGroup as ArkSegmentGroup } from "@ark-ui/solid/segment-group";
 import { createContext, useContext, splitProps, type Component } from "solid-js";
-import { segmentGroupVariants, type SegmentGroupVariants } from "@fan-ui/core";
+import { segmentGroupVariants, type SegmentGroupVariants } from "@ark-preset/core";
 
 type SegmentGroupVariantContextValue = Pick<SegmentGroupVariants, "variant" | "orientation">;
 

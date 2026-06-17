@@ -1,7 +1,7 @@
 import { splitProps, type Component } from "solid-js";
 import { SegmentGroup as SegmentGroupBase } from "./segment-group.base";
 import { SegmentGroup as ArkSegmentGroup } from "@ark-ui/solid/segment-group";
-import type { SegmentGroupVariants } from "@fan-ui/core";
+import type { SegmentGroupVariants } from "@ark-preset/core";
 
 const SegmentGroup: Component<ArkSegmentGroup.RootProps & SegmentGroupVariants> = (props) => {
   const [local, others] = splitProps(props, ["variant", "orientation", "children"]);
@@ -26,4 +26,4 @@ const SegmentGroupItem: Component<ArkSegmentGroup.ItemProps & SegmentGroupVarian
 
 export { SegmentGroup, SegmentGroupItem, SegmentGroupBase };
 
-export { segmentGroupVariants, type SegmentGroupVariants } from "@fan-ui/core";
+export { segmentGroupVariants, type SegmentGroupVariants } from "@ark-preset/core";

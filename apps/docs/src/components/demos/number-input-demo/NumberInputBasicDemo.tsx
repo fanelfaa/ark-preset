@@ -1,4 +1,4 @@
-import { NumberInput } from "@fan-ui/solid";
+import { NumberInput } from "@ark-preset/solid";
 
 export default function NumberInputBasicDemo() {
   return (

@@ -5,7 +5,7 @@ import {
   SliderValueText,
   SliderControl,
   SliderThumb,
-} from "@fan-ui/solid";
+} from "@ark-preset/solid";
 
 export default function SliderRootProviderDemo() {
   const slider = useSlider({ defaultValue: [50], min: 0, max: 100 });

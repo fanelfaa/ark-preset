@@ -1,4 +1,4 @@
-import { AspectRatio } from "@fan-ui/solid";
+import { AspectRatio } from "@ark-preset/solid";
 
 export default function AspectRatioBasicDemo() {
   return (

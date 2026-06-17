@@ -1,4 +1,4 @@
-import { PasswordInput } from "@fan-ui/solid";
+import { PasswordInput } from "@ark-preset/solid";
 
 export default function PasswordInputBasicDemo() {
   return (

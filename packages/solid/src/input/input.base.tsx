@@ -1,6 +1,6 @@
 import { Field as ArkField } from "@ark-ui/solid/field";
 import { splitProps, type Component } from "solid-js";
-import { inputVariants, type InputVariants } from "@fan-ui/core";
+import { inputVariants, type InputVariants } from "@ark-preset/core";
 
 const styles = inputVariants();
 

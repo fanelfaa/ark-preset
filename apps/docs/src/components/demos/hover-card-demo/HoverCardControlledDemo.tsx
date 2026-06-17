@@ -1,5 +1,5 @@
 import { createSignal } from "solid-js";
-import { HoverCard, HoverCardTrigger, HoverCardContent } from "@fan-ui/solid";
+import { HoverCard, HoverCardTrigger, HoverCardContent } from "@ark-preset/solid";
 
 export default function HoverCardControlledDemo() {
   const [open, setOpen] = createSignal(false);

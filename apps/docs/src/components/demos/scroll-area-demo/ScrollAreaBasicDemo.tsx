@@ -1,4 +1,4 @@
-import { ScrollArea } from "@fan-ui/solid";
+import { ScrollArea } from "@ark-preset/solid";
 
 export default function ScrollAreaBasicDemo() {
   return (

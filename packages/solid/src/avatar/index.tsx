@@ -6,4 +6,4 @@ const AvatarImage = AvatarBase.Image;
 
 export { Avatar, AvatarFallback, AvatarImage, AvatarBase };
 
-export { avatarVariants, type AvatarVariants } from "@fan-ui/core";
+export { avatarVariants, type AvatarVariants } from "@ark-preset/core";

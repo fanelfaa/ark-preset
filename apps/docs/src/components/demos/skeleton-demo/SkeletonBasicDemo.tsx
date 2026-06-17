@@ -1,4 +1,4 @@
-import { Skeleton } from "@fan-ui/solid";
+import { Skeleton } from "@ark-preset/solid";
 
 export default function SkeletonBasicDemo() {
   return (

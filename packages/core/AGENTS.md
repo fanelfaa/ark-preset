@@ -5,7 +5,7 @@
 
 ## OVERVIEW
 
-Styling primitives (@fan-ui/core). 47 tailwind-variants recipes, zero framework dependencies.
+Styling primitives (@ark-preset/core). 47 tailwind-variants recipes, zero framework dependencies.
 
 ## WHERE TO LOOK
 
@@ -27,7 +27,7 @@ Styling primitives (@fan-ui/core). 47 tailwind-variants recipes, zero framework 
 ## ANTI-PATTERNS (THIS DIRECTORY)
 
 - `time-picker.ts` is in tsup.config.ts but NOT in src/index.ts — unreachable via barrel
-- Deep imports (`@fan-ui/core/recipes/button`) not exposed in package.json exports
+- Deep imports (`@ark-preset/core/recipes/button`) not exposed in package.json exports
 - Build script pipes through `grep` filtering ('⚡️|error'), suppressing tsup warnings
 - No test infrastructure
 

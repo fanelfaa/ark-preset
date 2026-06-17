@@ -8,7 +8,7 @@ import {
   AlertDialogDescription,
   AlertDialogCancel,
   AlertDialogAction,
-} from "@fan-ui/solid";
+} from "@ark-preset/solid";
 export default function AlertDialogBasicDemo() {
   return (
     <div class="rounded-lg border border-border p-6">

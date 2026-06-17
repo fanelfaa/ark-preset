@@ -6,7 +6,7 @@ import {
   PaginationPrevTrigger,
   PaginationNextTrigger,
   PaginationLastTrigger,
-} from "@fan-ui/solid";
+} from "@ark-preset/solid";
 
 export default function PaginationControlledDemo() {
   const [page, setPage] = createSignal(5);

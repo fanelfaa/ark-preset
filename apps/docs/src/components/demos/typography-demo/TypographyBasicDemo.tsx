@@ -11,7 +11,7 @@ import {
   InlineCode,
   Blockquote,
   List,
-} from "@fan-ui/solid";
+} from "@ark-preset/solid";
 
 export default function TypographyBasicDemo() {
   return (

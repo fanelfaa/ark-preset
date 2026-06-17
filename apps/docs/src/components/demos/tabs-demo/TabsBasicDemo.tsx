@@ -1,4 +1,4 @@
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@fan-ui/solid";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@ark-preset/solid";
 
 export default function TabsBasicDemo() {
   return (

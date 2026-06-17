@@ -13,8 +13,8 @@
   },
   "dependencies": {
     "@ark-ui/solid": "^5.36.2",
-    "@fan-ui/core": "workspace:*",
-    "@fan-ui/solid": "workspace:*",
+    "@ark-preset/core": "workspace:*",
+    "@ark-preset/solid": "workspace:*",
     "@tailwindcss/vite": "^4.1.18",
     "@tanstack/router-plugin": "^1.133.21",
     "@tanstack/solid-router": "latest",

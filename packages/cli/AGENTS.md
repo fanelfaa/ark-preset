@@ -5,7 +5,7 @@
 
 ## OVERVIEW
 
-CLI for component generation (`@fan-ui/cli` / `ui` bin). Manifest-driven, multi-framework architecture.
+CLI for component generation (`@ark-preset/cli` / `ark-preset` bin). Manifest-driven, multi-framework architecture.
 
 ## ARCHITECTURE
 
@@ -15,14 +15,14 @@ packages/{framework}/src/  ──  generate-manifest.ts  ──  templates/ + co
 packages/core/src/recipes/ ──                        ──       ↓
                                                        ──  add.ts reads manifest
                                                        ──  copies files to user project
-                                                       ──  rewrites @fan-ui/core → ../recipes
+                                                       ──  rewrites @ark-preset/core → ../recipes
 ```
 
 ### Key Design Decisions
 
 1. **Manifest-driven**: CLI reads `component-manifest.json` (generated at build time) instead of hardcoded lists or direct FS reads.
 2. **Bundled templates**: Component source files copied into `templates/` at build time — CLI is self-contained.
-3. **Auto-detected dependencies**: Build script scans imports for recipeDependencies (`@fan-ui/core` imports) and componentDependencies (`../<component>` relative imports).
+3. **Auto-detected dependencies**: Build script scans imports for recipeDependencies (`@ark-preset/core` imports) and componentDependencies (`../<component>` relative imports).
 4. **Multi-framework**: `templates/solid/`, `templates/react/`, `templates/vue/` directories. CLI selects via `--framework` flag.
 
 ## WHERE TO LOOK
@@ -40,8 +40,8 @@ packages/core/src/recipes/ ──                        ──       ↓
 ```bash
 npm run generate-manifest    # Generate templates + manifest from source
 npm run build                # Full build (generate-manifest + tsup + copy to dist)
-moon run @fan-ui/cli:build   # Same via moonrepo
-moon run @fan-ui/cli:dev     # Watch mode
+moon run @ark-preset/cli:build   # Same via moonrepo
+moon run @ark-preset/cli:dev     # Watch mode
 ```
 
 ## IMPORTANT NOTES
@@ -49,10 +49,10 @@ moon run @fan-ui/cli:dev     # Watch mode
 - `templates/` and `component-manifest.json` are generated artifacts — do not edit manually
 - They are gitignored; regenerate after changing packages/solid/ or packages/core/recipes/
 - The build script (`generate-manifest.ts`) is NOT bundled into dist/ — build-time tool only
-- Cross-dependency detection handles: `@fan-ui/core` imports (recipe deps) and `../<component>` relative imports (component deps)
+- Cross-dependency detection handles: `@ark-preset/core` imports (recipe deps) and `../<component>` relative imports (component deps)
 - Known cross-dependencies: button→spinner, select→scroll-area, alert-dialog→button, date-picker→button, menu→button, hover-card→button, popover→button, dialog→button, drawer→button, tooltip→button
 - add.ts (331 lines) is the largest source file — packs 6 responsibilities: manifest loading, dep resolution, file copy, import rewriting, index updates, rollback
-- @fan-ui/core and @fan-ui/solid are listed as runtime deps but only needed at build time
+- @ark-preset/core and @ark-preset/solid are listed as runtime deps but only needed at build time
 - No test infrastructure
 
 ## ANTI-PATTERNS (THIS DIRECTORY)

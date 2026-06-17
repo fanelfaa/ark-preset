@@ -1,5 +1,5 @@
 import { Index, createSignal } from "solid-js";
-import { RadioGroup, RadioGroupItem } from "@fan-ui/solid";
+import { RadioGroup, RadioGroupItem } from "@ark-preset/solid";
 
 const paymentMethods = [
   { value: "1", label: "Credit Card" },

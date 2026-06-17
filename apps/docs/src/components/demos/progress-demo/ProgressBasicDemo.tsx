@@ -1,4 +1,4 @@
-import { Progress, ProgressLabel, ProgressTrack, ProgressValueText } from "@fan-ui/solid";
+import { Progress, ProgressLabel, ProgressTrack, ProgressValueText } from "@ark-preset/solid";
 
 export default function ProgressBasicDemo() {
   return (

@@ -35,4 +35,4 @@ export {
   CollapsibleBase,
 };
 
-export { collapsibleVariants, type CollapsibleVariants } from "@fan-ui/core";
+export { collapsibleVariants, type CollapsibleVariants } from "@ark-preset/core";

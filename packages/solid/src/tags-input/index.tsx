@@ -1,7 +1,7 @@
 import { Index, splitProps, type Component } from "solid-js";
 import { TagsInput as TagsInputBase } from "./tags-input.base";
 import { TagsInput as ArkTagsInput } from "@ark-ui/solid/tags-input";
-import type { TagsInputVariants } from "@fan-ui/core";
+import type { TagsInputVariants } from "@ark-preset/core";
 
 const TagsInputItem: Component<ArkTagsInput.ItemProps & TagsInputVariants> = (props) => {
   const [local, others] = splitProps(props, ["children"]);
@@ -83,4 +83,4 @@ const TagsInput: Component<TagsInputProps> = (props) => {
 
 export { TagsInput, TagsInputItem, TagsInputBase };
 
-export { tagsInputVariants, type TagsInputVariants } from "@fan-ui/core";
+export { tagsInputVariants, type TagsInputVariants } from "@ark-preset/core";

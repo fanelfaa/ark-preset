@@ -73,4 +73,4 @@ const PasswordInputRootProvider: Component<
 
 export { PasswordInput, PasswordInputRootProvider, PasswordInputBase };
 
-export { passwordInputVariants, type PasswordInputVariants } from "@fan-ui/core";
+export { passwordInputVariants, type PasswordInputVariants } from "@ark-preset/core";

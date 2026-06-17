@@ -1,5 +1,5 @@
 import { createSignal } from "solid-js";
-import { TagsInput } from "@fan-ui/solid";
+import { TagsInput } from "@ark-preset/solid";
 
 export default function TagsInputControlledDemo() {
   const [value, setValue] = createSignal(["Solid"]);

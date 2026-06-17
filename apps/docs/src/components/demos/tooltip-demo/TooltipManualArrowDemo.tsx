@@ -1,4 +1,4 @@
-import { Tooltip, TooltipBase } from "@fan-ui/solid";
+import { Tooltip, TooltipBase } from "@ark-preset/solid";
 
 export default function TooltipManualArrowDemo() {
   return (

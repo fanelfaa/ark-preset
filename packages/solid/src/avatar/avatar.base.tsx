@@ -1,6 +1,6 @@
 import { Avatar as ArkAvatar } from "@ark-ui/solid/avatar";
 import { splitProps, type Component } from "solid-js";
-import { avatarVariants } from "@fan-ui/core";
+import { avatarVariants } from "@ark-preset/core";
 
 const styles = avatarVariants();
 

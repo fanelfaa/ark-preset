@@ -8,8 +8,8 @@ import {
   AlertDialogCancel,
   AlertDialogAction,
   AlertDialogBase,
-} from "@fan-ui/solid";
-import { Button } from "@fan-ui/solid";
+} from "@ark-preset/solid";
+import { Button } from "@ark-preset/solid";
 import { type Component, createSignal } from "solid-js";
 
 interface DeleteAlertDialogProps {

@@ -1,4 +1,4 @@
-import { Checkbox, CheckboxLabel } from "@fan-ui/solid";
+import { Checkbox, CheckboxLabel } from "@ark-preset/solid";
 
 export default function CheckboxBasicDemo() {
   return (

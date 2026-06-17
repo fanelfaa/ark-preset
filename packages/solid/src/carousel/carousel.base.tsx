@@ -1,6 +1,6 @@
 import { Carousel as ArkCarousel } from "@ark-ui/solid/carousel";
 import { splitProps, type Component } from "solid-js";
-import { carouselVariants } from "@fan-ui/core";
+import { carouselVariants } from "@ark-preset/core";
 
 const styles = carouselVariants();
 

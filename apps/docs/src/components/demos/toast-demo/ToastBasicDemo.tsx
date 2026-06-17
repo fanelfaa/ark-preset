@@ -1,4 +1,4 @@
-import { Button, createToaster, Toaster } from "@fan-ui/solid";
+import { Button, createToaster, Toaster } from "@ark-preset/solid";
 
 const toaster = createToaster({
   placement: "bottom-end",

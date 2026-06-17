@@ -23,4 +23,4 @@ const ScrollArea: Component<ScrollAreaProps> = (props) => {
 
 export { ScrollArea, ScrollAreaBase };
 
-export { scrollAreaVariants, type ScrollAreaVariants } from "@fan-ui/core";
+export { scrollAreaVariants, type ScrollAreaVariants } from "@ark-preset/core";

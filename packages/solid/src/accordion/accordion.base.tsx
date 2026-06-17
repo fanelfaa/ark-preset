@@ -1,6 +1,6 @@
 import { Accordion as ArkAccordion } from "@ark-ui/solid/accordion";
 import { splitProps, type Component } from "solid-js";
-import { accordionVariants } from "@fan-ui/core";
+import { accordionVariants } from "@ark-preset/core";
 
 const styles = accordionVariants();
 

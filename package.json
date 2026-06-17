@@ -1,5 +1,5 @@
 {
-  "name": "@fan-ui/monorepo",
+  "name": "@ark-preset/monorepo",
   "version": "0.0.0",
   "private": true,
   "description": "Solid.js component library built on Ark UI",
@@ -7,7 +7,7 @@
     "build": "pnpm -r run build",
     "dev": "pnpm -r run dev",
     "typecheck": "pnpm -r run typecheck",
-    "netlify:build": "pnpm --filter @fan-ui/core build && pnpm --filter @fan-ui/solid build && pnpm --filter docs-spa generate-routes && pnpm --filter docs-spa build",
+    "netlify:build": "pnpm --filter @ark-preset/core build && pnpm --filter @ark-preset/solid build && pnpm --filter docs-spa generate-routes && pnpm --filter docs-spa build",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
     "fmt": "oxfmt",

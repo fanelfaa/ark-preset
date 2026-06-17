@@ -1,5 +1,5 @@
 import { usePasswordInput } from "@ark-ui/solid/password-input";
-import { Button, PasswordInputRootProvider } from "@fan-ui/solid";
+import { Button, PasswordInputRootProvider } from "@ark-preset/solid";
 
 export default function PasswordInputRootProviderDemo() {
   const passwordInput = usePasswordInput();

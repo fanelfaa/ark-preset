@@ -1,5 +1,5 @@
 import { createSignal } from "solid-js";
-import { RatingGroup } from "@fan-ui/solid";
+import { RatingGroup } from "@ark-preset/solid";
 
 export default function RatingGroupControlledDemo() {
   const [value, setValue] = createSignal(3);

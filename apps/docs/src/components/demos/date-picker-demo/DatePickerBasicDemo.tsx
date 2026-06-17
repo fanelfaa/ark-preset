@@ -1,4 +1,4 @@
-import { DatePicker, Separator } from "@fan-ui/solid";
+import { DatePicker, Separator } from "@ark-preset/solid";
 
 export default function DatePickerBasicDemo() {
   return (

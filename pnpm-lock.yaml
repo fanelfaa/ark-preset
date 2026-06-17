@@ -17,15 +17,15 @@ importers:
 
   apps/docs:
     dependencies:
+      '@ark-preset/core':
+        specifier: workspace:*
+        version: link:../../packages/core
+      '@ark-preset/solid':
+        specifier: workspace:*
+        version: link:../../packages/solid
       '@ark-ui/solid':
         specifier: ^5.36.2
         version: 5.37.1(solid-js@1.9.13)
-      '@fan-ui/core':
-        specifier: workspace:*
-        version: link:../../packages/core
-      '@fan-ui/solid':
-        specifier: workspace:*
-        version: link:../../packages/solid
       '@tailwindcss/vite':
         specifier: ^4.1.18
         version: 4.3.1(vite@8.0.16(@types/node@25.9.3)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.22.4)(yaml@2.9.0))
@@ -87,10 +87,10 @@ importers:
 
   packages/cli:
     dependencies:
-      '@fan-ui/core':
+      '@ark-preset/core':
         specifier: workspace:*
         version: link:../core
-      '@fan-ui/solid':
+      '@ark-preset/solid':
         specifier: workspace:*
         version: link:../solid
       commander:
@@ -131,12 +131,12 @@ importers:
 
   packages/solid:
     dependencies:
+      '@ark-preset/core':
+        specifier: workspace:*
+        version: link:../core
       '@ark-ui/solid':
         specifier: ^5.0.0
         version: 5.37.1(solid-js@1.9.13)
-      '@fan-ui/core':
-        specifier: workspace:*
-        version: link:../core
       solid-js:
         specifier: ^1.9.0
         version: 1.9.13

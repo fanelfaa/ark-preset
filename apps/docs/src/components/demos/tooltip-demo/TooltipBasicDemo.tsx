@@ -1,4 +1,4 @@
-import { Tooltip, TooltipTrigger, TooltipContent } from "@fan-ui/solid";
+import { Tooltip, TooltipTrigger, TooltipContent } from "@ark-preset/solid";
 
 export default function TooltipBasicDemo() {
   return (

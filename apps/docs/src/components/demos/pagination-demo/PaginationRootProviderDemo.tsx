@@ -1,6 +1,6 @@
 import { For } from "solid-js";
 import { usePagination } from "@ark-ui/solid/pagination";
-import { PaginationBase } from "@fan-ui/solid";
+import { PaginationBase } from "@ark-preset/solid";
 
 export default function PaginationRootProviderDemo() {
   const pagination = usePagination({ count: 100, pageSize: 10 });

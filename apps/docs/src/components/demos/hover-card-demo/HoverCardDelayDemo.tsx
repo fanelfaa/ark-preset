@@ -1,4 +1,4 @@
-import { HoverCard, HoverCardTrigger, HoverCardContent } from "@fan-ui/solid";
+import { HoverCard, HoverCardTrigger, HoverCardContent } from "@ark-preset/solid";
 
 export default function HoverCardDelayDemo() {
   return (

@@ -1,4 +1,4 @@
-import { TagsInput } from "@fan-ui/solid";
+import { TagsInput } from "@ark-preset/solid";
 
 export default function TagsInputInvalidDemo() {
   return (

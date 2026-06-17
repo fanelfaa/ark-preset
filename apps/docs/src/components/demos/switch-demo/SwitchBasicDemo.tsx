@@ -1,4 +1,4 @@
-import { Switch, SwitchLabel } from "@fan-ui/solid";
+import { Switch, SwitchLabel } from "@ark-preset/solid";
 
 export default function SwitchBasicDemo() {
   return (

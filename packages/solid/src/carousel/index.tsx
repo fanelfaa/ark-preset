@@ -25,4 +25,4 @@ export {
   CarouselBase,
 };
 
-export { carouselVariants, type CarouselVariants } from "@fan-ui/core";
+export { carouselVariants, type CarouselVariants } from "@ark-preset/core";

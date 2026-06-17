@@ -4,7 +4,7 @@ import {
   AccordionItem,
   AccordionItemTrigger,
   AccordionItemContent,
-} from "@fan-ui/solid";
+} from "@ark-preset/solid";
 
 export default function AccordionRootProviderDemo() {
   const accordion = useAccordion({ multiple: true, defaultValue: ["item-1"] });

@@ -1,5 +1,5 @@
 import { useSwitch } from "@ark-ui/solid/switch";
-import { SwitchRootProvider, SwitchLabel } from "@fan-ui/solid";
+import { SwitchRootProvider, SwitchLabel } from "@ark-preset/solid";
 
 export default function SwitchRootProviderDemo() {
   const sw = useSwitch({ defaultChecked: true });

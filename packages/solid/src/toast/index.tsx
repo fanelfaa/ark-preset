@@ -5,7 +5,7 @@ import {
 } from "@ark-ui/solid/toast";
 import { splitProps, type Component } from "solid-js";
 import { Toast as ToastBase } from "./toast.base";
-import { type ToastVariants } from "@fan-ui/core";
+import { type ToastVariants } from "@ark-preset/core";
 import { Portal } from "solid-js/web";
 
 type ToasterProps = {
@@ -39,4 +39,4 @@ const Toaster: Component<ToasterProps> = (props) => {
 
 export { Toaster, createToaster, ToastBase };
 
-export { toastVariants, type ToastVariants } from "@fan-ui/core";
+export { toastVariants, type ToastVariants } from "@ark-preset/core";

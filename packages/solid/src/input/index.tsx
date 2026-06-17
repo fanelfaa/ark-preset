@@ -1,7 +1,7 @@
 import { Field as ArkField } from "@ark-ui/solid/field";
 import { splitProps, type Component } from "solid-js";
 import { Input as InputBase } from "./input.base";
-import { InputVariants } from "@fan-ui/core";
+import { InputVariants } from "@ark-preset/core";
 
 type InputProps = {
   label?: string;
@@ -26,4 +26,4 @@ const Input: Component<InputProps> = (props) => {
 
 export { Input, InputBase };
 
-export { inputVariants, type InputVariants } from "@fan-ui/core";
+export { inputVariants, type InputVariants } from "@ark-preset/core";

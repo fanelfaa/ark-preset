@@ -1,5 +1,5 @@
 import { useRatingGroup } from "@ark-ui/solid/rating-group";
-import { RatingGroupBase } from "@fan-ui/solid";
+import { RatingGroupBase } from "@ark-preset/solid";
 import { Index } from "solid-js";
 
 export default function RatingGroupRootProviderDemo() {

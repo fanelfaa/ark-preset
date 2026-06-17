@@ -1,5 +1,5 @@
 import { useCheckbox } from "@ark-ui/solid/checkbox";
-import { CheckboxRootProvider, CheckboxLabel } from "@fan-ui/solid";
+import { CheckboxRootProvider, CheckboxLabel } from "@ark-preset/solid";
 
 export default function CheckboxRootProviderDemo() {
   const checkbox = useCheckbox({ defaultChecked: true });

@@ -1,4 +1,4 @@
-import { ToggleGroup, ToggleGroupItem } from "@fan-ui/solid";
+import { ToggleGroup, ToggleGroupItem } from "@ark-preset/solid";
 
 export default function ToggleGroupSizesDemo() {
   return (

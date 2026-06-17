@@ -29,4 +29,4 @@ const TooltipContent: Component<TooltipContentProps> = (props) => {
 
 export { Tooltip, TooltipTrigger, TooltipContent, TooltipBase };
 
-export { tooltipVariants, type TooltipVariants } from "@fan-ui/core";
+export { tooltipVariants, type TooltipVariants } from "@ark-preset/core";

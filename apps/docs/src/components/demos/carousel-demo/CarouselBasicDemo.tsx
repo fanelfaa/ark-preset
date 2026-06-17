@@ -8,7 +8,7 @@ import {
   CarouselNextTrigger,
   CarouselIndicatorGroup,
   CarouselIndicator,
-} from "@fan-ui/solid";
+} from "@ark-preset/solid";
 
 const images = [
   { src: "https://picsum.photos/seed/carousel-1/600/400", alt: "Mountain landscape" },

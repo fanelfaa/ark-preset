@@ -1,5 +1,5 @@
 import { splitProps, type Component } from "solid-js";
-import { spinnerVariants, type SpinnerVariants } from "@fan-ui/core";
+import { spinnerVariants, type SpinnerVariants } from "@ark-preset/core";
 import { ark, type HTMLArkProps } from "@ark-ui/solid/factory";
 
 type SpinnerProps = HTMLArkProps<"span"> & SpinnerVariants;

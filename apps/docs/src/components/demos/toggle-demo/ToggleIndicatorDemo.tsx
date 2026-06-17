@@ -1,4 +1,4 @@
-import { Toggle, ToggleIndicator } from "@fan-ui/solid";
+import { Toggle, ToggleIndicator } from "@ark-preset/solid";
 
 export default function ToggleIndicatorDemo() {
   return (

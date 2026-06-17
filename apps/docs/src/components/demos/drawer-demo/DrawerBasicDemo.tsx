@@ -4,8 +4,8 @@ import {
   DrawerContent,
   DrawerTitle,
   DrawerDescription,
-} from "@fan-ui/solid";
-import { Input, Separator } from "@fan-ui/solid";
+} from "@ark-preset/solid";
+import { Input, Separator } from "@ark-preset/solid";
 
 export default function DrawerBasicDemo() {
   return (

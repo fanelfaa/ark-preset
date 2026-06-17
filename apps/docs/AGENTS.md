@@ -5,7 +5,7 @@
 
 ## OVERVIEW
 
-Documentation site for @fan-ui component library. Built with Solid.js + TanStack Router + Tailwind CSS v4. Renders 46 component documentation pages with live demos.
+Documentation site for @ark-preset component library. Built with Solid.js + TanStack Router + Tailwind CSS v4. Renders 46 component documentation pages with live demos.
 
 ## STRUCTURE
 
@@ -35,9 +35,9 @@ apps/docs/
     │   └── generate-content.ts # Content generator — shared between Vite plugin + CLI installation script
     ├── plugins/
     │   └── installation-watcher.ts # Vite plugin for dev-mode install doc regeneration
-    ├── mdx-provider.tsx   # MDX render provider (maps markdown to @fan-ui/solid typography)
+    ├── mdx-provider.tsx   # MDX render provider (maps markdown to @ark-preset/solid typography)
     ├── sidebar-nav.ts     # Navigation data for all component docs
-    └── styles.css         # Imports @fan-ui/core/src/theme.css
+    └── styles.css         # Imports @ark-preset/core/src/theme.css
 ```
 
 ## WHERE TO LOOK
@@ -47,7 +47,7 @@ apps/docs/
 | Add component docs page            | src/content/docs/<name>.mdx   | Follow existing MDX layout pattern              |
 | Add component demo                 | src/components/demos/<name>-demo/ | Create island component directory           |
 | Update shared navigation           | src/sidebar-nav.ts            | Add new component to sidebar                    |
-| Modify MDX rendering               | src/mdx-provider.tsx          | Maps markdown elements to @fan-ui/solid         |
+| Modify MDX rendering               | src/mdx-provider.tsx          | Maps markdown elements to @ark-preset/solid         |
 | Modify code block rendering        | src/components/CodeBlock.tsx  | highlight.js, copy button, style injection      |
 | Add/edit build-time content gen    | src/shared/generate-content.ts| Shared with CLI generate-manifest               |
 | Modify Vite configuration          | vite.config.ts                | MDX, Tailwind, TanStack Router, watcher plugin  |
@@ -55,8 +55,8 @@ apps/docs/
 ## CONVENTIONS
 
 - Component docs: one MDX page per component with demo imports
-- Demo components: island pattern (client:load), import from `@fan-ui/solid`
-- User-facing code blocks: import from `~/components/<name>` (not `@fan-ui/solid`)
+- Demo components: island pattern (client:load), import from `@ark-preset/solid`
+- User-facing code blocks: import from `~/components/<name>` (not `@ark-preset/solid`)
 - Navigation sidebar auto-generated from component inventory
 - Content generation shared between Vite plugin and CLI
 - TypeScript v6, Vite v8 — newer than packages (v5, v6)

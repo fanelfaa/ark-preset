@@ -4,7 +4,7 @@ import {
   PopoverContent,
   PopoverTitle,
   PopoverDescription,
-} from "@fan-ui/solid";
+} from "@ark-preset/solid";
 
 export default function PopoverBasicDemo() {
   return (

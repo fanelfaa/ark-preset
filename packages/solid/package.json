@@ -1,5 +1,5 @@
 {
-  "name": "@fan-ui/solid",
+  "name": "@ark-preset/solid",
   "version": "0.1.0",
   "private": true,
   "files": [
@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "@ark-ui/solid": "^5.0.0",
-    "@fan-ui/core": "workspace:*",
+    "@ark-preset/core": "workspace:*",
     "tailwind-merge": "^3.5.0",
     "tailwind-variants": "^3.0.0"
   },

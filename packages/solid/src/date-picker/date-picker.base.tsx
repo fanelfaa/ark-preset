@@ -1,6 +1,6 @@
 import { DatePicker as ArkDatePicker } from "@ark-ui/solid/date-picker";
 import { splitProps, type Component } from "solid-js";
-import { datePickerVariants } from "@fan-ui/core";
+import { datePickerVariants } from "@ark-preset/core";
 
 const styles = datePickerVariants();
 

@@ -1,4 +1,4 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@fan-ui/solid";
+import { Avatar, AvatarFallback, AvatarImage } from "@ark-preset/solid";
 
 export default function AvatarBasicDemo() {
   return (

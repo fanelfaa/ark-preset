@@ -1,4 +1,4 @@
-import { Textarea } from "@fan-ui/solid";
+import { Textarea } from "@ark-preset/solid";
 
 export default function TextareaBasicDemo() {
   return (

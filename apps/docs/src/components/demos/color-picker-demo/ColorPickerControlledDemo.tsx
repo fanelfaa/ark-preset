@@ -1,5 +1,5 @@
 import { createSignal } from "solid-js";
-import { ColorPicker } from "@fan-ui/solid";
+import { ColorPicker } from "@ark-preset/solid";
 import { parseColor } from "@ark-ui/solid/color-picker";
 
 export default function ColorPickerControlledDemo() {

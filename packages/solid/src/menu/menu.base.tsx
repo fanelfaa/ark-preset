@@ -1,6 +1,6 @@
 import { Menu as ArkMenu } from "@ark-ui/solid/menu";
 import { splitProps, type Component } from "solid-js";
-import { buttonVariants, menuVariants, type ButtonVariants } from "@fan-ui/core";
+import { buttonVariants, menuVariants, type ButtonVariants } from "@ark-preset/core";
 
 const styles = menuVariants();
 

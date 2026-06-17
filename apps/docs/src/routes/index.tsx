@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/solid-router";
-import { buttonVariants } from "@fan-ui/core";
-import { H2, P, InlineCode } from "@fan-ui/solid";
+import { buttonVariants } from "@ark-preset/core";
+import { H2, P, InlineCode } from "@ark-preset/solid";
 
 export const Route = createFileRoute("/")({ component: Home });
 
@@ -85,7 +85,7 @@ function Home() {
       <section class="mb-16 text-center">
         <H2>Quick Start</H2>
         <P class="mb-6">
-          Follow the step-by-step guide to add <InlineCode>@fan-ui</InlineCode> to your project.
+          Follow the step-by-step guide to add <InlineCode>@ark-preset/solid</InlineCode> to your project.
         </P>
         <Link
           to="/docs/components/$component"

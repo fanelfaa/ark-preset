@@ -1,5 +1,5 @@
 import { splitProps, type Component } from "solid-js";
-import { typographyVariants } from "@fan-ui/core";
+import { typographyVariants } from "@ark-preset/core";
 import { ark, type HTMLArkProps } from "@ark-ui/solid/factory";
 
 const styles = typographyVariants();

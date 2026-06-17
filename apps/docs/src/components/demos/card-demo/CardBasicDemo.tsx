@@ -5,8 +5,8 @@ import {
   CardDescription,
   CardContent,
   CardFooter,
-} from "@fan-ui/solid";
-import { Button } from "@fan-ui/solid";
+} from "@ark-preset/solid";
+import { Button } from "@ark-preset/solid";
 
 export default function CardBasicDemo() {
   return (

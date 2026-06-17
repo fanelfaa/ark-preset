@@ -1,4 +1,4 @@
-import { Input } from "@fan-ui/solid";
+import { Input } from "@ark-preset/solid";
 
 export default function InputBasicDemo() {
   return (

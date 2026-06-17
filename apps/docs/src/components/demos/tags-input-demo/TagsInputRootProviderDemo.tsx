@@ -1,5 +1,5 @@
 import { Index } from "solid-js";
-import { TagsInputBase } from "@fan-ui/solid";
+import { TagsInputBase } from "@ark-preset/solid";
 import { useTagsInput } from "@ark-ui/solid/tags-input";
 
 export default function TagsInputRootProviderDemo() {

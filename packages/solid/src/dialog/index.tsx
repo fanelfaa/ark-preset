@@ -50,4 +50,4 @@ export {
   DialogBase,
 };
 
-export { dialogVariants, type DialogVariants } from "@fan-ui/core";
+export { dialogVariants, type DialogVariants } from "@ark-preset/core";

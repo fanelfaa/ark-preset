@@ -1,6 +1,6 @@
 import { Drawer as ArkDrawer } from "@ark-ui/solid/drawer";
 import { splitProps, type Component } from "solid-js";
-import { buttonVariants, drawerVariants, type ButtonVariants } from "@fan-ui/core";
+import { buttonVariants, drawerVariants, type ButtonVariants } from "@ark-preset/core";
 
 const styles = drawerVariants();
 

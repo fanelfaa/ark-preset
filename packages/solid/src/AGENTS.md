@@ -40,7 +40,7 @@ Use when the component just wraps the Ark UI Root and re-exports parts.
 ```tsx
 import { ComponentName as ArkComponentName } from "@ark-ui/solid/<package>";
 import { splitProps, type Component } from "solid-js";
-import { <component>Variants } from "@fan-ui/core";
+import { <component>Variants } from "@ark-preset/core";
 
 const styles = <component>Variants();
 
@@ -59,7 +59,7 @@ export const Component = ComponentRoot;
 
 export * from "./<component>.base";
 
-export { <component>Variants, type <component>Variants } from "@fan-ui/core";
+export { <component>Variants, type <component>Variants } from "@ark-preset/core";
 ```
 
 ### Pattern B — With InnerComponent (composite with inline SVGs)
@@ -104,7 +104,7 @@ export const Component: Component<ArkComponentName.RootProps> = (props) => {
 
 export * from "./<component>.base";
 
-export { <component>Variants, type <component>Variants } from "@fan-ui/core";
+export { <component>Variants, type <component>Variants } from "@ark-preset/core";
 ```
 
 ### Pattern C — With Portal (composite wrapping content in Portal)
@@ -126,7 +126,7 @@ Use when component should work out-of-the-box without manual sub-part compositio
 ```tsx
 import { ComponentName as ArkComponentName } from "@ark-ui/solid/<package>";
 import { splitProps, type Component } from "solid-js";
-import { <component>Variants } from "@fan-ui/core";
+import { <component>Variants } from "@ark-preset/core";
 
 const styles = <component>Variants();
 
@@ -182,7 +182,7 @@ const ScrollArea: Component<ScrollAreaProps> = (props) => {
 export { ScrollArea };
 
 export * from "./<component>.base";
-export { <component>Variants, type <component>Variants } from "@fan-ui/core";
+export { <component>Variants, type <component>Variants } from "@ark-preset/core";
 ```
 
 Usage:
@@ -238,7 +238,7 @@ export { VariantContext, useVariant };
 import { splitProps, type Component } from "solid-js";
 import { Component as ComponentBase } from "./<component>.base";
 import { ComponentName as ArkComponentName } from "@ark-ui/solid/<package>";
-import type { ComponentVariants } from "@fan-ui/core";
+import type { ComponentVariants } from "@ark-preset/core";
 
 // Import namespace as alias
 // Uses ComponentBase.Root, ComponentBase.Indicator, etc. in JSX
@@ -260,7 +260,7 @@ export const CompositeItem: Component<ArkComponentName.ItemProps & ComponentVari
   // wraps ComponentBase.Item with auto ItemText/ItemControl/ItemHiddenInput
 };
 
-export { <component>Variants, type <component>Variants } from "@fan-ui/core";
+export { <component>Variants, type <component>Variants } from "@ark-preset/core";
 ```
 
 **Key differences from Pattern A/B/C/D:**
@@ -323,7 +323,7 @@ import { Name } from "~/components/name"
 ### CLI
 
 ```bash
-npx @fan-ui/cli@latest add <name>
+npx @ark-preset/cli@latest add <name>
 ```
 
 ### Manual
@@ -347,7 +347,7 @@ See the [Ark UI Name](https://ark-ui.com/docs/components/<name>) documentation.
 
 | Context | Import path |
 |---------|-------------|
-| MDX top (live demo) | `@fan-ui/solid` |
+| MDX top (live demo) | `@ark-preset/solid` |
 | User-facing code blocks | `~/components/<name>` |
 
 ### Basic Demo Import Constraint
@@ -381,7 +381,7 @@ Basic demo MUST NOT import from `.base.tsx` or `<ComponentBase>`. It must only i
 | Base parts (Pattern A-D) | `<component>.base.tsx` | Individual named exports (`export const Part`) |
 | Base parts (Pattern E) | `<component>.base.tsx` | Single namespace (`export { Component }`) |
 | Composite component | `index.tsx` | Named export |
-| Recipe variants | `@fan-ui/core` | `export { variants, type variants } from "@fan-ui/core"` |
+| Recipe variants | `@ark-preset/core` | `export { variants, type variants } from "@ark-preset/core"` |
 | Re-export base (Pattern A-D) | `index.tsx` | `export * from "./<component>.base"` |
 | Base namespace (Pattern E) | `index.tsx` | `export { Component as ComponentBase }` |
 

@@ -1,5 +1,5 @@
 import { Index, createMemo } from "solid-js";
-import { ToggleGroupBase, ToggleGroupItem } from "@fan-ui/solid";
+import { ToggleGroupBase, ToggleGroupItem } from "@ark-preset/solid";
 import { useToggleGroup } from "@ark-ui/solid/toggle-group";
 
 const alignments = [

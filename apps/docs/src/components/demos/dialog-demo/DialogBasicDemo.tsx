@@ -7,7 +7,7 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-} from "@fan-ui/solid";
+} from "@ark-preset/solid";
 import {
   Button,
   Input,
@@ -15,7 +15,7 @@ import {
   RadioGroupItem,
   RadioGroupBase,
   Separator,
-} from "@fan-ui/solid";
+} from "@ark-preset/solid";
 
 export default function DialogBasicDemo() {
   return (

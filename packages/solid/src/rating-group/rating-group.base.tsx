@@ -1,6 +1,6 @@
 import { RatingGroup as ArkRatingGroup } from "@ark-ui/solid/rating-group";
 import { createContext, useContext, splitProps, type Component } from "solid-js";
-import { ratingGroupVariants, type RatingGroupVariants } from "@fan-ui/core";
+import { ratingGroupVariants, type RatingGroupVariants } from "@ark-preset/core";
 
 type RatingGroupVariantContextValue = Pick<RatingGroupVariants, "size" | "orientation">;
 

@@ -1,6 +1,6 @@
 import { HoverCard as ArkHoverCard } from "@ark-ui/solid/hover-card";
 import { splitProps, type Component } from "solid-js";
-import { buttonVariants, hoverCardVariants, type ButtonVariants } from "@fan-ui/core";
+import { buttonVariants, hoverCardVariants, type ButtonVariants } from "@ark-preset/core";
 
 const styles = hoverCardVariants();
 
