@@ -18,7 +18,6 @@ import { tv, type VariantProps } from "tailwind-variants";
 export const sliderVariants = tv({
   slots: {
     root: "flex flex-col gap-1.5 w-full",
-    label: "text-sm font-medium text-foreground",
     valueText: "text-sm font-medium",
     control: "relative flex items-center w-full h-5",
     track: "h-1.5 w-full rounded-full bg-muted overflow-hidden",
@@ -52,7 +51,7 @@ Create the component directory and files.
 ```tsx
 import { Slider as ArkSlider } from "@ark-ui/solid/slider";
 import { splitProps, type Component } from "solid-js";
-import { sliderVariants } from "@ark-preset/core";
+import { sliderVariants, labelVariants } from "@ark-preset/core";
 
 const styles = sliderVariants();
 
@@ -68,7 +67,7 @@ const RootProvider: Component<ArkSlider.RootProviderProps> = (props) => {
 
 const Label: Component<ArkSlider.LabelProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
-  return <ArkSlider.Label class={styles.label({ class: local.class })} {...others} />;
+  return <ArkSlider.Label class={labelVariants({ class: local.class })} {...others} />;
 };
 
 const ValueText: Component<ArkSlider.ValueTextProps> = (props) => {
@@ -202,3 +201,5 @@ export { sliderVariants, type SliderVariants } from "@ark-preset/core";
 ```
 
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.
+
+> **Dependencies:** This component imports shared recipes or sub-components from other packages. Make sure the following are also installed: [label](/docs/components/label).

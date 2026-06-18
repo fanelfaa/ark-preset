@@ -1,6 +1,6 @@
 import { Field as ArkField } from "@ark-ui/solid/field";
 import { splitProps, type Component } from "solid-js";
-import { textareaVariants, type TextareaVariants } from "@ark-preset/core";
+import { textareaVariants, labelVariants, type TextareaVariants } from "@ark-preset/core";
 
 const styles = textareaVariants();
 
@@ -11,7 +11,7 @@ const TextareaRoot: Component<ArkField.RootProps> = (props) => {
 
 const TextareaLabel: Component<ArkField.LabelProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
-  return <ArkField.Label class={styles.label({ class: local.class })} {...others} />;
+  return <ArkField.Label class={labelVariants({ class: local.class })} {...others} />;
 };
 
 const TextareaField: Component<ArkField.TextareaProps & TextareaVariants> = (props) => {

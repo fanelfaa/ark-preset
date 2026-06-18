@@ -18,7 +18,6 @@ import { tv, type VariantProps } from "tailwind-variants";
 export const passwordInputVariants = tv({
   slots: {
     root: "grid gap-1.5 w-fit",
-    label: "text-sm font-medium text-foreground",
     control: "relative",
     input:
       "flex h-8 w-full rounded-md border border-input bg-background px-2.5 py-1.5 pr-8 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 data-[invalid]:border-destructive data-[invalid]:focus-visible:ring-destructive",
@@ -33,15 +32,9 @@ export const passwordInputVariants = tv({
         visibilityTrigger: "pointer-events-none",
       },
     },
-    invalid: {
-      true: {
-        label: "text-destructive",
-      },
-    },
   },
   defaultVariants: {
     disabled: false,
-    invalid: false,
   },
 });
 
@@ -55,7 +48,7 @@ Create the component directory and files.
 ```tsx
 import { PasswordInput as ArkPasswordInput } from "@ark-ui/solid/password-input";
 import { splitProps, type Component } from "solid-js";
-import { passwordInputVariants } from "@ark-preset/core";
+import { passwordInputVariants, labelVariants } from "@ark-preset/core";
 
 const styles = passwordInputVariants();
 
@@ -69,9 +62,9 @@ const PasswordInputRootProvider: Component<ArkPasswordInput.RootProviderProps> =
   return <ArkPasswordInput.RootProvider class={styles.root({ class: local.class })} {...others} />;
 };
 
-const PasswordInputLabel: Component<ArkPasswordInput.LabelProps> = (props) => {
-  const [local, others] = splitProps(props, ["class"]);
-  return <ArkPasswordInput.Label class={styles.label({ class: local.class })} {...others} />;
+const PasswordInputLabel: Component<ArkPasswordInput.LabelProps & { error?: boolean }> = (props) => {
+  const [local, others] = splitProps(props, ["class", "error"]);
+  return <ArkPasswordInput.Label class={labelVariants({ class: local.class, error: local.error })} {...others} />;
 };
 
 const PasswordInputControl: Component<ArkPasswordInput.ControlProps> = (props) => {
@@ -167,24 +160,24 @@ const PasswordInputControl: Component<ArkPasswordInput.InputProps> = (props) => 
 );
 
 const PasswordInput: Component<
-  ArkPasswordInput.RootProps & { label?: string; placeholder?: string }
+  ArkPasswordInput.RootProps & { label?: string; placeholder?: string; error?: boolean }
 > = (props) => {
-  const [local, others] = splitProps(props, ["class", "label", "children", "placeholder"]);
+  const [local, others] = splitProps(props, ["class", "label", "children", "placeholder", "error"]);
   return (
     <PasswordInputBase.Root class={local.class} {...others}>
-      {local.label && <PasswordInputBase.Label>{local.label}</PasswordInputBase.Label>}
+      {local.label && <PasswordInputBase.Label error={local.error}>{local.label}</PasswordInputBase.Label>}
       <PasswordInputControl placeholder={local.placeholder} />
     </PasswordInputBase.Root>
   );
 };
 
 const PasswordInputRootProvider: Component<
-  ArkPasswordInput.RootProviderProps & { label?: string; placeholder?: string }
+  ArkPasswordInput.RootProviderProps & { label?: string; placeholder?: string; error?: boolean }
 > = (props) => {
-  const [local, others] = splitProps(props, ["class", "label", "children", "placeholder"]);
+  const [local, others] = splitProps(props, ["class", "label", "children", "placeholder", "error"]);
   return (
     <PasswordInputBase.RootProvider class={local.class} {...others}>
-      {local.label && <PasswordInputBase.Label>{local.label}</PasswordInputBase.Label>}
+      {local.label && <PasswordInputBase.Label error={local.error}>{local.label}</PasswordInputBase.Label>}
       <PasswordInputControl placeholder={local.placeholder} />
     </PasswordInputBase.RootProvider>
   );
@@ -196,3 +189,5 @@ export { passwordInputVariants, type PasswordInputVariants } from "@ark-preset/c
 ```
 
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.
+
+> **Dependencies:** This component imports shared recipes or sub-components from other packages. Make sure the following are also installed: [label](/docs/components/label).

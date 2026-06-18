@@ -18,7 +18,6 @@ import { tv, type VariantProps } from "tailwind-variants";
 export const segmentGroupVariants = tv({
   slots: {
     root: "relative inline-flex items-center p-1 rounded-md bg-muted isolation-inline",
-    label: "text-sm font-medium text-foreground",
     item: [
       "relative z-10 inline-flex items-center justify-center gap-2 px-3 py-1.5 h-full rounded-sm cursor-pointer select-none transition-colors duration-150 ease-out",
       "data-[state=checked]:text-foreground data-[disabled]:opacity-50 data-[disabled]:cursor-not-allowed",
@@ -67,7 +66,7 @@ Create the component directory and files.
 ```tsx
 import { SegmentGroup as ArkSegmentGroup } from "@ark-ui/solid/segment-group";
 import { createContext, useContext, splitProps, type Component } from "solid-js";
-import { segmentGroupVariants, type SegmentGroupVariants } from "@ark-preset/core";
+import { segmentGroupVariants, labelVariants, type SegmentGroupVariants } from "@ark-preset/core";
 
 type SegmentGroupVariantContextValue = Pick<SegmentGroupVariants, "variant" | "orientation">;
 
@@ -118,7 +117,7 @@ const RootProvider: Component<ArkSegmentGroup.RootProviderProps & SegmentGroupVa
 
 const Label: Component<ArkSegmentGroup.LabelProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
-  return <ArkSegmentGroup.Label class={styles.label({ class: local.class })} {...others} />;
+  return <ArkSegmentGroup.Label class={labelVariants({ class: local.class })} {...others} />;
 };
 
 const Item: Component<ArkSegmentGroup.ItemProps & SegmentGroupVariants> = (props) => {
@@ -214,3 +213,5 @@ export { segmentGroupVariants, type SegmentGroupVariants } from "@ark-preset/cor
 ```
 
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.
+
+> **Dependencies:** This component imports shared recipes or sub-components from other packages. Make sure the following are also installed: [label](/docs/components/label).

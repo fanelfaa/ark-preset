@@ -1,6 +1,6 @@
 import { Checkbox as ArkCheckbox } from "@ark-ui/solid/checkbox";
 import { splitProps, type Component } from "solid-js";
-import { checkboxVariants } from "@ark-preset/core";
+import { checkboxVariants, labelVariants } from "@ark-preset/core";
 
 const styles = checkboxVariants();
 
@@ -21,7 +21,7 @@ const CheckboxControl: Component<ArkCheckbox.ControlProps> = (props) => {
 
 const CheckboxLabel: Component<ArkCheckbox.LabelProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
-  return <ArkCheckbox.Label class={styles.label({ class: local.class })} {...others} />;
+  return <ArkCheckbox.Label class={labelVariants({ class: local.class })} {...others} />;
 };
 
 const CheckboxIndicator: Component<ArkCheckbox.IndicatorProps> = (props) => {

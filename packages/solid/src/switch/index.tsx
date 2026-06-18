@@ -1,9 +1,7 @@
 import { Switch as ArkSwitch } from "@ark-ui/solid/switch";
 import { splitProps, type Component } from "solid-js";
 import { Switch as SwitchBase } from "./switch.base";
-import { switchVariants } from "@ark-preset/core";
-
-const styles = switchVariants();
+import { labelVariants } from "@ark-preset/core";
 
 const SwitchControl = () => (
   <>
@@ -15,7 +13,7 @@ const SwitchControl = () => (
 );
 
 const SwitchLabel: Component<ArkSwitch.LabelProps> = (props) => (
-  <SwitchBase.Label class={styles.label({ class: props.class })} {...props} />
+  <SwitchBase.Label class={labelVariants({ class: props.class })} {...props} />
 );
 
 const Switch: Component<ArkSwitch.RootProps> = (props) => {

@@ -1,0 +1,19 @@
+## Usage
+
+The `labelVariants` recipe is used internally by all components that have a Label sub-component. It is not meant to be used standalone in most cases — instead, use the Label sub-component of the relevant form component.
+
+### Direct usage
+
+If you need to apply label styling to a custom element:
+
+```tsx
+import { labelVariants } from "@ark-preset/core";
+
+<label class={labelVariants()}>Custom Label</label>
+```
+
+### With error state
+
+```tsx
+<label class={labelVariants({ error: true })}>Invalid Field</label>
+```

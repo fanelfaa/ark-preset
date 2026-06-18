@@ -1,6 +1,6 @@
 import { RadioGroup as ArkRadioGroup } from "@ark-ui/solid/radio-group";
 import { splitProps, type Component } from "solid-js";
-import { radioGroupVariants, type RadioGroupVariants } from "@ark-preset/core";
+import { radioGroupVariants, labelVariants, type RadioGroupVariants } from "@ark-preset/core";
 
 const styles = radioGroupVariants();
 
@@ -27,7 +27,7 @@ const RootProvider: Component<ArkRadioGroup.RootProviderProps & RadioGroupVarian
 
 const Label: Component<ArkRadioGroup.LabelProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
-  return <ArkRadioGroup.Label class={styles.label({ class: local.class })} {...others} />;
+  return <ArkRadioGroup.Label class={labelVariants({ class: local.class })} {...others} />;
 };
 
 const Item: Component<ArkRadioGroup.ItemProps> = (props) => {

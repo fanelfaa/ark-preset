@@ -1,0 +1,26 @@
+# Label
+
+A shared label recipe used by all form components. Provides consistent typography and error state styling across the design system.
+
+The `labelVariants` recipe from `@ark-preset/core` is the single source of truth for label styling. Every component's Label sub-component (Input.Label, Select.Label, Checkbox.Label, etc.) applies it automatically — you don't need to configure it per component.
+
+## Base content
+
+```ts
+"text-sm font-medium text-foreground leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+```
+
+## Error variant
+
+When the `error` prop is `true`, the label color changes to `text-destructive`:
+
+```tsx
+<Input.Label error={true}>Field Label</Input.Label>
+```
+
+This is handled automatically by composite components that accept an `error` prop:
+
+```tsx
+<Input label="Email" error="Email is required" />
+<DatePicker label="Date" error={true} />
+```

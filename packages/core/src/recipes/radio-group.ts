@@ -3,7 +3,6 @@ import { tv, type VariantProps } from "tailwind-variants";
 export const radioGroupVariants = tv({
   slots: {
     root: "flex gap-2",
-    label: "text-sm font-medium text-foreground",
     item: [
       "inline-flex items-center gap-2",
       "data-[disabled]:opacity-80 data-[disabled]:cursor-not-allowed",

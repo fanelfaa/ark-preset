@@ -3,7 +3,6 @@ import { tv, type VariantProps } from "tailwind-variants";
 export const numberInputVariants = tv({
   slots: {
     root: "inline-flex flex-col gap-2",
-    label: "text-sm font-medium text-foreground",
     control:
       "inline-flex items-center rounded-md border border-input bg-background text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
     input: "flex h-8 w-20 flex-1 appearance-none text-start text-sm font-medium px-2",

@@ -1,6 +1,6 @@
 import { SegmentGroup as ArkSegmentGroup } from "@ark-ui/solid/segment-group";
 import { createContext, useContext, splitProps, type Component } from "solid-js";
-import { segmentGroupVariants, type SegmentGroupVariants } from "@ark-preset/core";
+import { segmentGroupVariants, labelVariants, type SegmentGroupVariants } from "@ark-preset/core";
 
 type SegmentGroupVariantContextValue = Pick<SegmentGroupVariants, "variant" | "orientation">;
 
@@ -51,7 +51,7 @@ const RootProvider: Component<ArkSegmentGroup.RootProviderProps & SegmentGroupVa
 
 const Label: Component<ArkSegmentGroup.LabelProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
-  return <ArkSegmentGroup.Label class={styles.label({ class: local.class })} {...others} />;
+  return <ArkSegmentGroup.Label class={labelVariants({ class: local.class })} {...others} />;
 };
 
 const Item: Component<ArkSegmentGroup.ItemProps & SegmentGroupVariants> = (props) => {

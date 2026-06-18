@@ -17,16 +17,8 @@ function DocPage() {
   const Doc = docs[component()];
 
   if (!Doc) {
-    return (
-      <DocsLayout>
-        <p class="text-destructive">Component "{component()}" not found.</p>
-      </DocsLayout>
-    );
+    return <p class="text-destructive">Component "{component()}" not found.</p>;
   }
 
-  return (
-    <DocsLayout>
-      <Doc />
-    </DocsLayout>
-  );
+  return <Doc />;
 }

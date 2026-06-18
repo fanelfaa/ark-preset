@@ -1,6 +1,7 @@
 import CodeBlock from "./components/CodeBlock";
 import { ark } from "@ark-ui/solid/factory";
 import { H1, H2, H3, H4, InlineCode, Blockquote, P } from "@ark-preset/solid";
+import { Link } from "@tanstack/solid-router";
 import { Dynamic } from "solid-js/web";
 import { children, splitProps, type Component } from "solid-js";
 
@@ -55,15 +56,25 @@ export function useMDX() {
 
       Link: (props: any) => {
         const url = props.url ?? props.href ?? "";
+        if (url.startsWith("http")) {
+          return (
+            <a
+              href={url}
+              class="font-medium text-primary underline underline-offset-4 hover:text-primary/80 transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {props.children}
+            </a>
+          );
+        }
         return (
-          <a
-            href={url}
+          <Link
+            to={url}
             class="font-medium text-primary underline underline-offset-4 hover:text-primary/80 transition-colors"
-            target={url.startsWith("http") ? "_blank" : undefined}
-            rel={url.startsWith("http") ? "noopener noreferrer" : undefined}
           >
             {props.children}
-          </a>
+          </Link>
         );
       },
 
@@ -115,6 +126,7 @@ export function useMDX() {
     // - Uppercase tags (Switch, Callout, etc.) must be added to the map explicitly.
     components: new Proxy(
       {
+        InlineCode,
         // User components imported directly in .md files don't need registration here
       } as Record<string, Component<any>>,
       {

@@ -18,7 +18,6 @@ import { tv, type VariantProps } from "tailwind-variants";
 export const datePickerVariants = tv({
   slots: {
     root: "w-full",
-    label: "text-sm font-medium text-foreground",
     control: "inline-flex items-center gap-1",
     input:
       "h-8 rounded-md border border-input bg-background px-2.5 py-1.5 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50",
@@ -86,7 +85,6 @@ export const datePickerVariants = tv({
         control: "border-destructive focus-within:ring-destructive",
         input: "border-destructive focus-visible:ring-destructive",
         selectedValue: "border-destructive",
-        label: "text-destructive",
       },
     },
   },
@@ -105,7 +103,7 @@ Create the component directory and files.
 ```tsx
 import { DatePicker as ArkDatePicker } from "@ark-ui/solid/date-picker";
 import { splitProps, type Component } from "solid-js";
-import { datePickerVariants } from "@ark-preset/core";
+import { datePickerVariants, labelVariants } from "@ark-preset/core";
 
 const styles = datePickerVariants();
 
@@ -118,7 +116,7 @@ const Label: Component<ArkDatePicker.LabelProps & { error?: boolean }> = (props)
   const [local, others] = splitProps(props, ["class", "error"]);
   return (
     <ArkDatePicker.Label
-      class={styles.label({ class: local.class, error: local.error })}
+      class={labelVariants({ class: local.class, error: local.error })}
       {...others}
     />
   );
@@ -606,3 +604,5 @@ export { datePickerVariants, type DatePickerVariants } from "@ark-preset/core";
 ```
 
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.
+
+> **Dependencies:** This component imports shared recipes or sub-components from other packages. Make sure the following are also installed: [button](/docs/components/button), [label](/docs/components/label).

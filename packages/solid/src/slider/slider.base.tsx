@@ -1,6 +1,6 @@
 import { Slider as ArkSlider } from "@ark-ui/solid/slider";
 import { splitProps, type Component } from "solid-js";
-import { sliderVariants } from "@ark-preset/core";
+import { sliderVariants, labelVariants } from "@ark-preset/core";
 
 const styles = sliderVariants();
 
@@ -16,7 +16,7 @@ const RootProvider: Component<ArkSlider.RootProviderProps> = (props) => {
 
 const Label: Component<ArkSlider.LabelProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
-  return <ArkSlider.Label class={styles.label({ class: local.class })} {...others} />;
+  return <ArkSlider.Label class={labelVariants({ class: local.class })} {...others} />;
 };
 
 const ValueText: Component<ArkSlider.ValueTextProps> = (props) => {

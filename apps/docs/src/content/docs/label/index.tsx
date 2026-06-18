@@ -4,7 +4,7 @@ import Usage from "./usage.mdx";
 import Api from "./api.mdx";
 import type { Component } from "solid-js";
 
-const CardDoc: Component = () => {
+const LabelDoc: Component = () => {
   return (
     <>
       <Intro />
@@ -15,4 +15,4 @@ const CardDoc: Component = () => {
   );
 };
 
-export default CardDoc;
+export default LabelDoc;

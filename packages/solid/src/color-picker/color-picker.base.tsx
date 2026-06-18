@@ -1,6 +1,6 @@
 import { ColorPicker as ArkColorPicker } from "@ark-ui/solid/color-picker";
 import { splitProps, type Component } from "solid-js";
-import { colorPickerVariants } from "@ark-preset/core";
+import { colorPickerVariants, labelVariants } from "@ark-preset/core";
 
 const styles = colorPickerVariants();
 
@@ -16,7 +16,7 @@ const RootProvider = ArkColorPicker.RootProvider;
 
 const Label: Component<ArkColorPicker.LabelProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
-  return <ArkColorPicker.Label class={styles.label({ class: local.class })} {...others} />;
+  return <ArkColorPicker.Label class={labelVariants({ class: local.class })} {...others} />;
 };
 
 // ── Control ──────────────────────────────────────────────────

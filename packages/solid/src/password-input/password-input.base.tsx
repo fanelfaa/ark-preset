@@ -1,6 +1,6 @@
 import { PasswordInput as ArkPasswordInput } from "@ark-ui/solid/password-input";
 import { splitProps, type Component } from "solid-js";
-import { passwordInputVariants } from "@ark-preset/core";
+import { passwordInputVariants, labelVariants } from "@ark-preset/core";
 
 const styles = passwordInputVariants();
 
@@ -14,9 +14,9 @@ const PasswordInputRootProvider: Component<ArkPasswordInput.RootProviderProps> =
   return <ArkPasswordInput.RootProvider class={styles.root({ class: local.class })} {...others} />;
 };
 
-const PasswordInputLabel: Component<ArkPasswordInput.LabelProps> = (props) => {
-  const [local, others] = splitProps(props, ["class"]);
-  return <ArkPasswordInput.Label class={styles.label({ class: local.class })} {...others} />;
+const PasswordInputLabel: Component<ArkPasswordInput.LabelProps & { error?: boolean }> = (props) => {
+  const [local, others] = splitProps(props, ["class", "error"]);
+  return <ArkPasswordInput.Label class={labelVariants({ class: local.class, error: local.error })} {...others} />;
 };
 
 const PasswordInputControl: Component<ArkPasswordInput.ControlProps> = (props) => {

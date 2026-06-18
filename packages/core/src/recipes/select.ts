@@ -3,7 +3,6 @@ import { tv, type VariantProps } from "tailwind-variants";
 export const selectVariants = tv({
   slots: {
     root: "grid gap-1.5 w-full",
-    label: "text-sm font-medium text-foreground",
     control:
       "flex h-8 w-full items-center justify-between rounded-md border border-input bg-background px-2.5 py-1.5 text-sm ring-offset-background focus-within:outline-none focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2",
     trigger: "flex flex-1 items-center justify-start size-4 [&[data-state=open]>svg]:rotate-180",
@@ -24,7 +23,6 @@ export const selectVariants = tv({
     error: {
       true: {
         control: "border-destructive focus-within:ring-destructive",
-        label: "text-destructive",
       },
     },
   },

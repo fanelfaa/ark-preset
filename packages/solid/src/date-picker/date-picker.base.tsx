@@ -1,6 +1,6 @@
 import { DatePicker as ArkDatePicker } from "@ark-ui/solid/date-picker";
 import { splitProps, type Component } from "solid-js";
-import { datePickerVariants } from "@ark-preset/core";
+import { datePickerVariants, labelVariants } from "@ark-preset/core";
 
 const styles = datePickerVariants();
 
@@ -13,7 +13,7 @@ const Label: Component<ArkDatePicker.LabelProps & { error?: boolean }> = (props)
   const [local, others] = splitProps(props, ["class", "error"]);
   return (
     <ArkDatePicker.Label
-      class={styles.label({ class: local.class, error: local.error })}
+      class={labelVariants({ class: local.class, error: local.error })}
       {...others}
     />
   );

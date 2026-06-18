@@ -22,8 +22,7 @@ export const switchVariants = tv({
       "inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input",
     thumb:
       "pointer-events-none block size-4 rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-4 data-[state=unchecked]:translate-x-0",
-    label:
-      "text-sm font-medium text-foreground leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
+
   },
 });
 
@@ -37,7 +36,7 @@ Create the component directory and files.
 ```tsx
 import { Switch as ArkSwitch } from "@ark-ui/solid/switch";
 import { splitProps, type Component } from "solid-js";
-import { switchVariants } from "@ark-preset/core";
+import { switchVariants, labelVariants } from "@ark-preset/core";
 
 const styles = switchVariants();
 
@@ -63,7 +62,7 @@ const SwitchThumb: Component<ArkSwitch.ThumbProps> = (props) => {
 
 const SwitchLabel: Component<ArkSwitch.LabelProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
-  return <ArkSwitch.Label class={styles.label({ class: local.class })} {...others} />;
+  return <ArkSwitch.Label class={labelVariants({ class: local.class })} {...others} />;
 };
 
 const SwitchHiddenInput = ArkSwitch.HiddenInput;
@@ -84,9 +83,7 @@ export const Switch = {
 import { Switch as ArkSwitch } from "@ark-ui/solid/switch";
 import { splitProps, type Component } from "solid-js";
 import { Switch as SwitchBase } from "./switch.base";
-import { switchVariants } from "@ark-preset/core";
-
-const styles = switchVariants();
+import { labelVariants } from "@ark-preset/core";
 
 const SwitchControl = () => (
   <>
@@ -98,7 +95,7 @@ const SwitchControl = () => (
 );
 
 const SwitchLabel: Component<ArkSwitch.LabelProps> = (props) => (
-  <SwitchBase.Label class={styles.label({ class: props.class })} {...props} />
+  <SwitchBase.Label class={labelVariants({ class: props.class })} {...props} />
 );
 
 const Switch: Component<ArkSwitch.RootProps> = (props) => {
@@ -127,3 +124,5 @@ export { switchVariants, type SwitchVariants } from "@ark-preset/core";
 ```
 
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.
+
+> **Dependencies:** This component imports shared recipes or sub-components from other packages. Make sure the following are also installed: [label](/docs/components/label).
