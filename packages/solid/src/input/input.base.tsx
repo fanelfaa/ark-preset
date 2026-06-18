@@ -1,6 +1,6 @@
 import { Field as ArkField } from "@ark-ui/solid/field";
 import { splitProps, type Component } from "solid-js";
-import { inputVariants, type InputVariants } from "@ark-preset/core";
+import { inputVariants, labelVariants, type InputVariants } from "@ark-preset/core";
 
 const styles = inputVariants();
 
@@ -11,7 +11,7 @@ const InputRoot: Component<ArkField.RootProps> = (props) => {
 
 const InputLabel: Component<ArkField.LabelProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
-  return <ArkField.Label class={styles.label({ class: local.class })} {...others} />;
+  return <ArkField.Label class={labelVariants({ class: local.class })} {...others} />;
 };
 
 const InputField: Component<ArkField.InputProps & InputVariants> = (props) => {

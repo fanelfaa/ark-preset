@@ -1,6 +1,6 @@
 import { Combobox as ArkCombobox } from "@ark-ui/solid/combobox";
 import { splitProps, type Component } from "solid-js";
-import { comboboxVariants } from "@ark-preset/core";
+import { comboboxVariants, labelVariants } from "@ark-preset/core";
 
 const styles = comboboxVariants();
 
@@ -21,9 +21,9 @@ const RootProvider: Component<ComboboxRootProviderProps> = (props) => {
   return <ArkCombobox.RootProvider class={styles.root({ class: local.class })} {...others} />;
 };
 
-const Label: Component<ArkCombobox.LabelProps> = (props) => {
-  const [local, others] = splitProps(props, ["class"]);
-  return <ArkCombobox.Label class={styles.label({ class: local.class })} {...others} />;
+const Label: Component<ArkCombobox.LabelProps & { error?: boolean }> = (props) => {
+  const [local, others] = splitProps(props, ["class", "error"]);
+  return <ArkCombobox.Label class={labelVariants({ class: local.class, error: local.error })} {...others} />;
 };
 
 const Input: Component<ArkCombobox.InputProps> = (props) => {

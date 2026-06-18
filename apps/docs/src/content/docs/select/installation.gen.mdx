@@ -18,7 +18,6 @@ import { tv, type VariantProps } from "tailwind-variants";
 export const selectVariants = tv({
   slots: {
     root: "grid gap-1.5 w-full",
-    label: "text-sm font-medium text-foreground",
     control:
       "flex h-8 w-full items-center justify-between rounded-md border border-input bg-background px-2.5 py-1.5 text-sm ring-offset-background focus-within:outline-none focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2",
     trigger: "flex flex-1 items-center justify-start size-4 [&[data-state=open]>svg]:rotate-180",
@@ -39,7 +38,6 @@ export const selectVariants = tv({
     error: {
       true: {
         control: "border-destructive focus-within:ring-destructive",
-        label: "text-destructive",
       },
     },
   },
@@ -58,7 +56,7 @@ Create the component directory and files.
 ```tsx
 import { Select as ArkSelect } from "@ark-ui/solid/select";
 import { splitProps, type Component } from "solid-js";
-import { selectVariants } from "@ark-preset/core";
+import { selectVariants, labelVariants } from "@ark-preset/core";
 
 const styles = selectVariants();
 
@@ -79,9 +77,9 @@ const RootProvider: Component<SelectRootProviderProps> = (props) => {
   return <ArkSelect.RootProvider class={styles.root({ class: local.class })} {...others} />;
 };
 
-const Label: Component<ArkSelect.LabelProps> = (props) => {
-  const [local, others] = splitProps(props, ["class"]);
-  return <ArkSelect.Label class={styles.label({ class: local.class })} {...others} />;
+const Label: Component<ArkSelect.LabelProps & { error?: boolean }> = (props) => {
+  const [local, others] = splitProps(props, ["class", "error"]);
+  return <ArkSelect.Label class={labelVariants({ class: local.class, error: local.error })} {...others} />;
 };
 
 const Trigger: Component<ArkSelect.TriggerProps> = (props) => {
@@ -352,3 +350,5 @@ export { selectVariants, type SelectVariants } from "@ark-preset/core";
 ```
 
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.
+
+> **Dependencies:** This component imports shared recipes or sub-components from other packages. Make sure the following are also installed: [label](/docs/components/label), [scroll-area](/docs/components/scroll-area).

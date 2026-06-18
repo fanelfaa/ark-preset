@@ -18,7 +18,6 @@ import { tv, type VariantProps } from "tailwind-variants";
 export const textareaVariants = tv({
   slots: {
     root: "grid gap-1.5",
-    label: "text-sm font-medium text-foreground",
     textarea:
       "flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50",
     description: "text-sm text-muted-foreground",
@@ -46,7 +45,7 @@ Create the component directory and files.
 ```tsx
 import { Field as ArkField } from "@ark-ui/solid/field";
 import { splitProps, type Component } from "solid-js";
-import { textareaVariants, type TextareaVariants } from "@ark-preset/core";
+import { textareaVariants, labelVariants, type TextareaVariants } from "@ark-preset/core";
 
 const styles = textareaVariants();
 
@@ -57,7 +56,7 @@ const TextareaRoot: Component<ArkField.RootProps> = (props) => {
 
 const TextareaLabel: Component<ArkField.LabelProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
-  return <ArkField.Label class={styles.label({ class: local.class })} {...others} />;
+  return <ArkField.Label class={labelVariants({ class: local.class })} {...others} />;
 };
 
 const TextareaField: Component<ArkField.TextareaProps & TextareaVariants> = (props) => {
@@ -123,3 +122,5 @@ export { textareaVariants, type TextareaVariants } from "@ark-preset/core";
 ```
 
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.
+
+> **Dependencies:** This component imports shared recipes or sub-components from other packages. Make sure the following are also installed: [label](/docs/components/label).

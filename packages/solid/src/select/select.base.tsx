@@ -1,6 +1,6 @@
 import { Select as ArkSelect } from "@ark-ui/solid/select";
 import { splitProps, type Component } from "solid-js";
-import { selectVariants } from "@ark-preset/core";
+import { selectVariants, labelVariants } from "@ark-preset/core";
 
 const styles = selectVariants();
 
@@ -21,9 +21,9 @@ const RootProvider: Component<SelectRootProviderProps> = (props) => {
   return <ArkSelect.RootProvider class={styles.root({ class: local.class })} {...others} />;
 };
 
-const Label: Component<ArkSelect.LabelProps> = (props) => {
-  const [local, others] = splitProps(props, ["class"]);
-  return <ArkSelect.Label class={styles.label({ class: local.class })} {...others} />;
+const Label: Component<ArkSelect.LabelProps & { error?: boolean }> = (props) => {
+  const [local, others] = splitProps(props, ["class", "error"]);
+  return <ArkSelect.Label class={labelVariants({ class: local.class, error: local.error })} {...others} />;
 };
 
 const Trigger: Component<ArkSelect.TriggerProps> = (props) => {

@@ -3,7 +3,6 @@ import { tv, type VariantProps } from "tailwind-variants";
 export const sliderVariants = tv({
   slots: {
     root: "flex flex-col gap-1.5 w-full",
-    label: "text-sm font-medium text-foreground",
     valueText: "text-sm font-medium",
     control: "relative flex items-center w-full h-5",
     track: "h-1.5 w-full rounded-full bg-muted overflow-hidden",

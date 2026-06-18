@@ -48,24 +48,24 @@ const PasswordInputControl: Component<ArkPasswordInput.InputProps> = (props) => 
 );
 
 const PasswordInput: Component<
-  ArkPasswordInput.RootProps & { label?: string; placeholder?: string }
+  ArkPasswordInput.RootProps & { label?: string; placeholder?: string; error?: boolean }
 > = (props) => {
-  const [local, others] = splitProps(props, ["class", "label", "children", "placeholder"]);
+  const [local, others] = splitProps(props, ["class", "label", "children", "placeholder", "error"]);
   return (
     <PasswordInputBase.Root class={local.class} {...others}>
-      {local.label && <PasswordInputBase.Label>{local.label}</PasswordInputBase.Label>}
+      {local.label && <PasswordInputBase.Label error={local.error}>{local.label}</PasswordInputBase.Label>}
       <PasswordInputControl placeholder={local.placeholder} />
     </PasswordInputBase.Root>
   );
 };
 
 const PasswordInputRootProvider: Component<
-  ArkPasswordInput.RootProviderProps & { label?: string; placeholder?: string }
+  ArkPasswordInput.RootProviderProps & { label?: string; placeholder?: string; error?: boolean }
 > = (props) => {
-  const [local, others] = splitProps(props, ["class", "label", "children", "placeholder"]);
+  const [local, others] = splitProps(props, ["class", "label", "children", "placeholder", "error"]);
   return (
     <PasswordInputBase.RootProvider class={local.class} {...others}>
-      {local.label && <PasswordInputBase.Label>{local.label}</PasswordInputBase.Label>}
+      {local.label && <PasswordInputBase.Label error={local.error}>{local.label}</PasswordInputBase.Label>}
       <PasswordInputControl placeholder={local.placeholder} />
     </PasswordInputBase.RootProvider>
   );

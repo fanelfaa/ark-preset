@@ -18,7 +18,6 @@ import { tv, type VariantProps } from "tailwind-variants";
 export const ratingGroupVariants = tv({
   slots: {
     root: "flex items-center gap-2",
-    label: "text-sm font-medium text-foreground",
     control: "flex items-center gap-0.5",
     item: [
       "group cursor-pointer transition-colors duration-150 ease-out",
@@ -31,15 +30,12 @@ export const ratingGroupVariants = tv({
   variants: {
     size: {
       sm: {
-        label: "text-xs",
         item: "size-4",
       },
       md: {
-        label: "text-sm",
         item: "size-5",
       },
       lg: {
-        label: "text-base",
         item: "size-6",
       },
     },
@@ -68,7 +64,7 @@ Create the component directory and files.
 ```tsx
 import { RatingGroup as ArkRatingGroup } from "@ark-ui/solid/rating-group";
 import { createContext, useContext, splitProps, type Component } from "solid-js";
-import { ratingGroupVariants, type RatingGroupVariants } from "@ark-preset/core";
+import { ratingGroupVariants, labelVariants, type RatingGroupVariants } from "@ark-preset/core";
 
 type RatingGroupVariantContextValue = Pick<RatingGroupVariants, "size" | "orientation">;
 
@@ -116,7 +112,7 @@ const RootProvider: Component<ArkRatingGroup.RootProviderProps & RatingGroupVari
 
 const Label: Component<ArkRatingGroup.LabelProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
-  return <ArkRatingGroup.Label class={styles.label({ class: local.class })} {...others} />;
+  return <ArkRatingGroup.Label class={labelVariants({ class: local.class })} {...others} />;
 };
 
 const Control: Component<ArkRatingGroup.ControlProps> = (props) => {
@@ -260,3 +256,5 @@ export { ratingGroupVariants, type RatingGroupVariants } from "@ark-preset/core"
 ```
 
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.
+
+> **Dependencies:** This component imports shared recipes or sub-components from other packages. Make sure the following are also installed: [label](/docs/components/label).

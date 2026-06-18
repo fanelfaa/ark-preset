@@ -18,7 +18,6 @@ import { tv, type VariantProps } from "tailwind-variants";
 export const numberInputVariants = tv({
   slots: {
     root: "inline-flex flex-col gap-2",
-    label: "text-sm font-medium text-foreground",
     control:
       "inline-flex items-center rounded-md border border-input bg-background text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
     input: "flex h-8 w-20 flex-1 appearance-none text-start text-sm font-medium px-2",
@@ -64,7 +63,7 @@ Create the component directory and files.
 ```tsx
 import { NumberInput as ArkNumberInput } from "@ark-ui/solid/number-input";
 import { splitProps, type Component } from "solid-js";
-import { numberInputVariants } from "@ark-preset/core";
+import { numberInputVariants, labelVariants } from "@ark-preset/core";
 import { HTMLProps } from "@ark-ui/solid";
 
 const styles = numberInputVariants();
@@ -76,7 +75,7 @@ const NumberInputRoot: Component<ArkNumberInput.RootProps> = (props) => {
 
 const NumberInputLabel: Component<ArkNumberInput.LabelProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
-  return <ArkNumberInput.Label class={styles.label({ class: local.class })} {...others} />;
+  return <ArkNumberInput.Label class={labelVariants({ class: local.class })} {...others} />;
 };
 
 const NumberInputControl: Component<ArkNumberInput.ControlProps> = (props) => {
@@ -226,3 +225,5 @@ export { numberInputVariants, type NumberInputVariants } from "@ark-preset/core"
 ```
 
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.
+
+> **Dependencies:** This component imports shared recipes or sub-components from other packages. Make sure the following are also installed: [label](/docs/components/label).

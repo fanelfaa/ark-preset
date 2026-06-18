@@ -21,7 +21,7 @@ export const checkboxVariants = tv({
     control:
       "peer size-4 shrink-0 rounded-sm border border-input ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground data-[state=checked]:border-primary data-[state=indeterminate]:bg-primary data-[state=indeterminate]:text-primary-foreground data-[state=indeterminate]:border-primary",
     indicator: "flex items-center justify-center text-current",
-    label: "text-sm font-medium text-foreground leading-none",
+
   },
 });
 
@@ -35,7 +35,7 @@ Create the component directory and files.
 ```tsx
 import { Checkbox as ArkCheckbox } from "@ark-ui/solid/checkbox";
 import { splitProps, type Component } from "solid-js";
-import { checkboxVariants } from "@ark-preset/core";
+import { checkboxVariants, labelVariants } from "@ark-preset/core";
 
 const styles = checkboxVariants();
 
@@ -56,7 +56,7 @@ const CheckboxControl: Component<ArkCheckbox.ControlProps> = (props) => {
 
 const CheckboxLabel: Component<ArkCheckbox.LabelProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
-  return <ArkCheckbox.Label class={styles.label({ class: local.class })} {...others} />;
+  return <ArkCheckbox.Label class={labelVariants({ class: local.class })} {...others} />;
 };
 
 const CheckboxIndicator: Component<ArkCheckbox.IndicatorProps> = (props) => {
@@ -151,3 +151,5 @@ export { checkboxVariants, type CheckboxVariants } from "@ark-preset/core";
 ```
 
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.
+
+> **Dependencies:** This component imports shared recipes or sub-components from other packages. Make sure the following are also installed: [label](/docs/components/label).

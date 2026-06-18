@@ -3,7 +3,6 @@ import { tv, type VariantProps } from "tailwind-variants";
 export const comboboxVariants = tv({
   slots: {
     root: "grid gap-1.5 w-full",
-    label: "text-sm font-medium text-foreground",
     control:
       "flex h-8 w-full items-center justify-between rounded-md border border-input bg-background px-2.5 py-1 text-sm ring-offset-background focus-within:outline-none focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2",
     input:
@@ -25,7 +24,6 @@ export const comboboxVariants = tv({
     error: {
       true: {
         control: "border-destructive focus-within:ring-destructive",
-        label: "text-destructive",
       },
     },
   },

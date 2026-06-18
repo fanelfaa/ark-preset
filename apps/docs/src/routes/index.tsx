@@ -88,11 +88,10 @@ function Home() {
           Follow the step-by-step guide to add <InlineCode>@ark-preset/solid</InlineCode> to your project.
         </P>
         <Link
-          to="/docs/components/$component"
-          params={{ component: "button" }}
+          to="/docs/quickstart"
           class={buttonVariants({ size: "lg" })}
         >
-          Browse Components
+          View Quickstart Guide
         </Link>
       </section>
 

@@ -1,6 +1,6 @@
 import { Switch as ArkSwitch } from "@ark-ui/solid/switch";
 import { splitProps, type Component } from "solid-js";
-import { switchVariants } from "@ark-preset/core";
+import { switchVariants, labelVariants } from "@ark-preset/core";
 
 const styles = switchVariants();
 
@@ -26,7 +26,7 @@ const SwitchThumb: Component<ArkSwitch.ThumbProps> = (props) => {
 
 const SwitchLabel: Component<ArkSwitch.LabelProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
-  return <ArkSwitch.Label class={styles.label({ class: local.class })} {...others} />;
+  return <ArkSwitch.Label class={labelVariants({ class: local.class })} {...others} />;
 };
 
 const SwitchHiddenInput = ArkSwitch.HiddenInput;

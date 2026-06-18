@@ -1,6 +1,6 @@
 import { PinInput as ArkPinInput } from "@ark-ui/solid/pin-input";
 import { splitProps, type Component } from "solid-js";
-import { pinInputVariants } from "@ark-preset/core";
+import { pinInputVariants, labelVariants } from "@ark-preset/core";
 
 const styles = pinInputVariants();
 
@@ -26,7 +26,7 @@ const Input: Component<ArkPinInput.InputProps> = (props) => {
 
 const Label: Component<ArkPinInput.LabelProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
-  return <ArkPinInput.Label class={styles.label({ class: local.class })} {...others} />;
+  return <ArkPinInput.Label class={labelVariants({ class: local.class })} {...others} />;
 };
 
 export const PinInput = { Root, RootProvider, Control, Input, Label };

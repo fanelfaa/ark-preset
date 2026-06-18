@@ -2,6 +2,7 @@ import { type JSX, type Component, Index } from "solid-js";
 import { Link } from "@tanstack/solid-router";
 import { ScrollArea, DrawerContent, Drawer, DrawerTrigger, DrawerBase } from "@ark-preset/solid";
 import { sidebarNav } from "../sidebar-nav";
+import { GitHubIcon } from "./GitHubIcon";
 
 interface DocsLayoutProps {
   children?: JSX.Element;
@@ -9,26 +10,43 @@ interface DocsLayoutProps {
 
 export const DocsLayout: Component<DocsLayoutProps> = (props) => {
   return (
-    <div class="mx-auto max-w-7xl flex">
-      {/* Sidebar */}
-      <aside class="hidden lg:block w-64 shrink-0 border-r border-border bg-background sticky top-14 self-start h-[calc(100vh-3.5rem)]">
-        <SidebarNav />
-      </aside>
+    <div class="mx-auto max-w-7xl">
+      <div class="flex">
+        {/* Sidebar */}
+        <aside class="hidden lg:block w-64 shrink-0 border-r border-border bg-background sticky top-14 self-start h-[calc(100vh-3.5rem)]">
+          <SidebarNav />
+        </aside>
 
-      {/* Mobile drawer */}
-      <Drawer swipeDirection="start">
-        <DrawerTrigger id="drawer-trigger" class="hidden" />
-        <DrawerContent>
-          <DrawerBase.Context>
-            {(api) => <SidebarNav onLinkClick={() => api().setOpen(false)} />}
-          </DrawerBase.Context>
-        </DrawerContent>
-      </Drawer>
+        {/* Mobile drawer */}
+        <Drawer swipeDirection="start">
+          <DrawerTrigger id="drawer-trigger" class="hidden" />
+          <DrawerContent>
+            <DrawerBase.Context>
+              {(api) => <SidebarNav onLinkClick={() => api().setOpen(false)} />}
+            </DrawerBase.Context>
+          </DrawerContent>
+        </Drawer>
 
-      {/* Main content */}
-      <main class="flex-1 min-w-0 bg-background">
-        <div class="max-w-4xl mx-auto px-6 py-10 prose dark:prose-invert">{props.children}</div>
-      </main>
+        {/* Main content */}
+        <main class="flex-1 min-w-0 bg-background">
+          <div class="max-w-4xl mx-auto px-6 py-10 prose dark:prose-invert">{props.children}</div>
+          {/* Footer */}
+          <footer class="border-t border-border bg-background">
+            <div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between text-sm text-muted-foreground">
+              <a
+                href="https://github.com/fanelfaa/ark-preset"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center gap-2 hover:text-foreground transition-colors"
+              >
+                <GitHubIcon />
+                GitHub
+              </a>
+              <span>&copy; {new Date().getFullYear()} Ark Preset</span>
+            </div>
+          </footer>
+        </main>
+      </div>
     </div>
   );
 };

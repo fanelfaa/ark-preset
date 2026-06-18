@@ -68,9 +68,6 @@ function createWatcherState(): WatcherState {
 
 /**
  * Discover components that have docs directories under content/docs/.
- * Unlike discoverComponents() from the shared module, this checks only
- * for the presence of a docs directory — it doesn't require a recipe file,
- * so even pre-generation or partial-component docs get watched.
  */
 function getDocsComponents(): string[] {
   if (!existsSync(DOCS_DIR)) return [];

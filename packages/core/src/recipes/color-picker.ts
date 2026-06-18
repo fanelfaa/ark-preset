@@ -3,7 +3,6 @@ import { tv, type VariantProps } from "tailwind-variants";
 export const colorPickerVariants = tv({
   slots: {
     root: "flex flex-col gap-1.5",
-    label: "text-sm font-medium text-foreground",
     control: "flex items-center gap-2",
     trigger: [
       "inline-flex items-center justify-center rounded-md border border-input transition-colors",

@@ -1,6 +1,6 @@
 import { NumberInput as ArkNumberInput } from "@ark-ui/solid/number-input";
 import { splitProps, type Component } from "solid-js";
-import { numberInputVariants } from "@ark-preset/core";
+import { numberInputVariants, labelVariants } from "@ark-preset/core";
 import { HTMLProps } from "@ark-ui/solid";
 
 const styles = numberInputVariants();
@@ -12,7 +12,7 @@ const NumberInputRoot: Component<ArkNumberInput.RootProps> = (props) => {
 
 const NumberInputLabel: Component<ArkNumberInput.LabelProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
-  return <ArkNumberInput.Label class={styles.label({ class: local.class })} {...others} />;
+  return <ArkNumberInput.Label class={labelVariants({ class: local.class })} {...others} />;
 };
 
 const NumberInputControl: Component<ArkNumberInput.ControlProps> = (props) => {

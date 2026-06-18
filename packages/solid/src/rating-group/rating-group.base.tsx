@@ -1,6 +1,6 @@
 import { RatingGroup as ArkRatingGroup } from "@ark-ui/solid/rating-group";
 import { createContext, useContext, splitProps, type Component } from "solid-js";
-import { ratingGroupVariants, type RatingGroupVariants } from "@ark-preset/core";
+import { ratingGroupVariants, labelVariants, type RatingGroupVariants } from "@ark-preset/core";
 
 type RatingGroupVariantContextValue = Pick<RatingGroupVariants, "size" | "orientation">;
 
@@ -48,7 +48,7 @@ const RootProvider: Component<ArkRatingGroup.RootProviderProps & RatingGroupVari
 
 const Label: Component<ArkRatingGroup.LabelProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
-  return <ArkRatingGroup.Label class={styles.label({ class: local.class })} {...others} />;
+  return <ArkRatingGroup.Label class={labelVariants({ class: local.class })} {...others} />;
 };
 
 const Control: Component<ArkRatingGroup.ControlProps> = (props) => {

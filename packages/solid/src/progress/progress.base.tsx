@@ -1,6 +1,6 @@
 import { Progress as ArkProgress } from "@ark-ui/solid/progress";
 import { splitProps, type Component } from "solid-js";
-import { progressVariants } from "@ark-preset/core";
+import { progressVariants, labelVariants } from "@ark-preset/core";
 
 const styles = progressVariants();
 
@@ -16,7 +16,7 @@ const RootProvider: Component<ArkProgress.RootProviderProps> = (props) => {
 
 const Label: Component<ArkProgress.LabelProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
-  return <ArkProgress.Label class={styles.label({ class: local.class })} {...others} />;
+  return <ArkProgress.Label class={labelVariants({ class: local.class })} {...others} />;
 };
 
 const Track: Component<ArkProgress.TrackProps> = (props) => {

@@ -18,7 +18,6 @@ import { tv, type VariantProps } from "tailwind-variants";
 export const colorPickerVariants = tv({
   slots: {
     root: "flex flex-col gap-1.5",
-    label: "text-sm font-medium text-foreground",
     control: "flex items-center gap-2",
     trigger: [
       "inline-flex items-center justify-center rounded-md border border-input transition-colors",
@@ -86,7 +85,7 @@ Create the component directory and files.
 ```tsx
 import { ColorPicker as ArkColorPicker } from "@ark-ui/solid/color-picker";
 import { splitProps, type Component } from "solid-js";
-import { colorPickerVariants } from "@ark-preset/core";
+import { colorPickerVariants, labelVariants } from "@ark-preset/core";
 
 const styles = colorPickerVariants();
 
@@ -102,7 +101,7 @@ const RootProvider = ArkColorPicker.RootProvider;
 
 const Label: Component<ArkColorPicker.LabelProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
-  return <ArkColorPicker.Label class={styles.label({ class: local.class })} {...others} />;
+  return <ArkColorPicker.Label class={labelVariants({ class: local.class })} {...others} />;
 };
 
 // ── Control ──────────────────────────────────────────────────
@@ -467,3 +466,5 @@ export { colorPickerVariants, type ColorPickerVariants } from "@ark-preset/core"
 ```
 
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.
+
+> **Dependencies:** This component imports shared recipes or sub-components from other packages. Make sure the following are also installed: [label](/docs/components/label).
