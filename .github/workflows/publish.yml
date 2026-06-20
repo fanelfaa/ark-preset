@@ -27,18 +27,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      # ── Build in dependency order ──────────────────────────────
-
-      - name: Build @ark-preset/core
-        run: pnpm --filter @ark-preset/core build
-
-      - name: Build @ark-preset/solid
-        run: pnpm --filter @ark-preset/solid build
-
-      - name: Build @ark-preset/cli
-        run: pnpm --filter @ark-preset/cli build
-
       # ── Publish ────────────────────────────────────────────────
+      #
+      # Build is handled by prepublishOnly in each package.json.
+      # pnpm publish runs prepublishOnly before publishing.
       #
       # Each step:
       #   • Pre-checks if version is already on npm (skip if so)
