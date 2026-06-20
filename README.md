@@ -23,7 +23,6 @@ You can use just the recipes to style your own Ark UI components, or take the fu
 
 ## What this is NOT
 
-- Not a component library you install and consume from npm (yet)
 - Not a design system — it's a style preset for Ark UI
 - Not a replacement for Ark UI — it's a layer _on top_
 
@@ -35,7 +34,7 @@ You can use just the recipes to style your own Ark UI components, or take the fu
 | --------------- | ------------------------------------------------------------------------------------- |
 | `@ark-preset/core`  | Tailwind-variants recipes — one per component. Pure styling, no framework deps.       |
 | `@ark-preset/solid` | Solid.js wrappers around `@ark-ui/solid`. Delegates to Ark UI, applies recipe styles. |
-| `@ark-preset/cli`     | CLI to scaffold new components (not ready).                                           |
+| `@ark-preset/cli`     | CLI to generate components into your project.                                          |
 
 ### `@ark-preset/core` — recipes
 
@@ -66,7 +65,7 @@ export const buttonVariants = tv({
 
 Multi-slot recipes (e.g., accordion, dialog, card) use `tv({ slots: { ... } })` for per-part styling.
 
-**48 recipes** as of last count. Each exports a `*Variants` value + `*Variants` type.
+**47 recipes** as of last count. Each exports a `*Variants` value + `*Variants` type.
 
 ### `@ark-preset/solid` — Solid.js wrappers
 
@@ -98,7 +97,7 @@ const Button: Component<ButtonProps> = (props) => {
 };
 ```
 
-**~45 Solid.js components** implemented. See [COMPONENT_TODOS.md](./COMPONENT_TODOS.md) for the full status.
+**46 Solid.js components** implemented. See [COMPONENT_TODOS.md](./COMPONENT_TODOS.md) for the full status.
 
 #### Two levels per component
 
@@ -125,11 +124,14 @@ import { Input as InputBase } from "@ark-preset/solid";
 
 Both are exported from `@ark-preset/solid`. Use the composite for 80% of cases, drop to `*Base` when you need custom structure.
 
-### `@ark-preset/cli` — CLI (not ready)
+### `@ark-preset/cli` — CLI
 
-Scaffolds a new component (recipe + framework wrapper + docs boilerplate).
+Generates UI components into your project. Reads a pre-built manifest and copies component source files to the specified output directory.
 
-⚠️ Still being built. Does not work yet.
+```bash
+npx @ark-preset/cli add button
+npx @ark-preset/cli add card -o ./src/components/ui
+```
 
 ---
 
@@ -142,7 +144,7 @@ pnpm build
 # Package-specific builds
 moon run core:build
 moon run solid:build
-moon run @ark-preset/cli:build
+moon run cli:build
 
 # Development (watch mode)
 moon run solid:dev
@@ -164,20 +166,23 @@ Uses [Moonrepo](https://moonrepo.dev) for task orchestration — `moon run` hand
 ```
 .
 ├── packages/
-│   ├── core/          # 48 styling recipes (tv())
+│   ├── core/          # 47 styling recipes (tv())
 │   │   ├── src/
 │   │   │   ├── recipes/    # One *.ts per component
 │   │   │   └── index.ts    # Re-exports all recipes
 │   │   └── tsup.config.ts  # Entry list — add new recipes here
-│   ├── solid/         # ~45 Solid.js components
+│   ├── solid/         # 46 Solid.js components
 │   │   ├── src/
 │   │   │   ├── <component>/   # Directory per component
 │   │   │   │   ├── index.tsx           # Composite component
 │   │   │   │   └── <component>.base.tsx # Ark UI primitive wrappers
 │   │   │   └── index.ts      # Re-exports all components
 │   │   └── vite.config.ts
-│   └── cli/           # Component scaffolding CLI
-│       └── src/index.ts
+│   └── cli/           # Component generation CLI
+│       └── src/
+│           ├── commands/     # add command
+│           ├── scripts/      # manifest generation
+│           └── index.ts
 ├── COMPONENT_TODOS.md  # Implementation progress tracker
 └── .moon/              # Moonrepo configuration
 ```
