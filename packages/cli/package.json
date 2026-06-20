@@ -1,12 +1,37 @@
 {
   "name": "@ark-preset/cli",
   "version": "0.1.0",
-  "private": true,
+  "description": "CLI to generate Ark UI components into your Solid.js project",
+  "keywords": [
+    "ark-ui",
+    "solid-js",
+    "cli",
+    "ui-components",
+    "code-generator"
+  ],
+  "author": "Fandi <your-email@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VandeeFeng/ark-preset.git",
+    "directory": "packages/cli"
+  },
+  "bugs": {
+    "url": "https://github.com/VandeeFeng/ark-preset/issues"
+  },
+  "homepage": "https://github.com/VandeeFeng/ark-preset#readme",
   "bin": {
     "ark-preset": "./dist/index.js"
   },
+  "files": [
+    "dist/"
+  ],
   "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
+    "prepublishOnly": "pnpm run build",
     "generate-manifest": "tsx src/scripts/generate-manifest.ts",
     "build": "npm run generate-manifest && tsup && cp -r templates component-manifest.json dist/",
     "dev": "tsup --watch",
@@ -23,5 +48,8 @@
     "tsup": "^8.0.0",
     "tsx": "^4.22.4",
     "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }

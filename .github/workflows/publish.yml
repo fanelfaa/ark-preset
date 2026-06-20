@@ -1,0 +1,135 @@
+name: Publish to npm
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 23
+          cache: 'pnpm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # ── Build in dependency order ──────────────────────────────
+
+      - name: Build @ark-preset/core
+        run: pnpm --filter @ark-preset/core build
+
+      - name: Build @ark-preset/solid
+        run: pnpm --filter @ark-preset/solid build
+
+      - name: Build @ark-preset/cli
+        run: pnpm --filter @ark-preset/cli build
+
+      # ── Publish ────────────────────────────────────────────────
+      #
+      # Each step:
+      #   • Pre-checks if version is already on npm (skip if so)
+      #   • Uses continue-on-error so one failure doesn't block others
+      #   • On failure, you can fix the issue and retry by bumping
+      #     versions and pushing a new tag.
+      #
+      # npm has no practical rollback. If core publishes but solid
+      # fails, core@<version> is live and shouldn't be reused.
+      # Bump all three versions for the retry tag.
+
+      - name: Publish @ark-preset/core
+        id: core
+        continue-on-error: true
+        run: |
+          VERSION=$(jq -r .version packages/core/package.json)
+          if npm view "@ark-preset/core@$VERSION" version &>/dev/null; then
+            echo "status=skipped" >> "$GITHUB_OUTPUT"
+            echo "⏭️ @ark-preset/core@$VERSION already published, skipping"
+          else
+            pnpm publish --filter @ark-preset/core --access public --no-git-checks
+            echo "status=published" >> "$GITHUB_OUTPUT"
+          fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish @ark-preset/solid
+        id: solid
+        continue-on-error: true
+        run: |
+          VERSION=$(jq -r .version packages/solid/package.json)
+          if npm view "@ark-preset/solid@$VERSION" version &>/dev/null; then
+            echo "status=skipped" >> "$GITHUB_OUTPUT"
+            echo "⏭️ @ark-preset/solid@$VERSION already published, skipping"
+          else
+            pnpm publish --filter @ark-preset/solid --access public --no-git-checks
+            echo "status=published" >> "$GITHUB_OUTPUT"
+          fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish @ark-preset/cli
+        id: cli
+        continue-on-error: true
+        run: |
+          VERSION=$(jq -r .version packages/cli/package.json)
+          if npm view "@ark-preset/cli@$VERSION" version &>/dev/null; then
+            echo "status=skipped" >> "$GITHUB_OUTPUT"
+            echo "⏭️ @ark-preset/cli@$VERSION already published, skipping"
+          else
+            pnpm publish --filter @ark-preset/cli --access public --no-git-checks
+            echo "status=published" >> "$GITHUB_OUTPUT"
+          fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      # ── Summary ────────────────────────────────────────────────
+
+      - name: Publish summary
+        if: always()
+        run: |
+          echo "## 📦 Publish Results" >> $GITHUB_STEP_SUMMARY
+
+          STATUS_CORE="${{ steps.core.outputs.status }}"
+          STATUS_SOLID="${{ steps.solid.outputs.status }}"
+          STATUS_CLI="${{ steps.cli.outputs.status }}"
+          OUTCORE_CORE="${{ steps.core.outcome }}"
+          OUTCORE_SOLID="${{ steps.solid.outcome }}"
+          OUTCORE_CLI="${{ steps.cli.outcome }}"
+
+          declare -A ICONS=([published]="✅" [skipped]="⏭️")
+          for pair in "core:$STATUS_CORE:$OUTCORE_CORE" "solid:$STATUS_SOLID:$OUTCORE_SOLID" "cli:$STATUS_CLI:$OUTCORE_CLI"; do
+            pkg="${pair%%:*}"
+            rest="${pair#*:}"
+            status="${rest%%:*}"
+            outcome="${rest#*:}"
+            icon="${ICONS[$status]:-❌}"
+            if [ "$outcome" = "failure" ]; then
+              echo "❌ **@ark-preset/$pkg** — FAILED" >> $GITHUB_STEP_SUMMARY
+            else
+              echo "$icon **@ark-preset/$pkg** — ${status:-unknown}" >> $GITHUB_STEP_SUMMARY
+            fi
+          done
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### ⚠️  If any package failed" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Published versions are **live** — avoid reusing a version that was" >> $GITHUB_STEP_SUMMARY
+          echo "already published (npm discourages unpublishing after 72h)." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**To retry:**" >> $GITHUB_STEP_SUMMARY
+          echo "1. Fix the issue" >> $GITHUB_STEP_SUMMARY
+          echo "2. Bump versions in all three \`package.json\` files" >> $GITHUB_STEP_SUMMARY
+          echo "3. Push a new tag (e.g. \`v0.1.1\`)" >> $GITHUB_STEP_SUMMARY

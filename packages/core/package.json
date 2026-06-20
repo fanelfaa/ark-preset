@@ -1,7 +1,26 @@
 {
   "name": "@ark-preset/core",
   "version": "0.1.0",
-  "private": true,
+  "description": "Tailwind-variants styling recipes for Ark UI primitives",
+  "keywords": [
+    "tailwind-variants",
+    "tailwindcss",
+    "ark-ui",
+    "ui-components",
+    "design-system",
+    "styling"
+  ],
+  "author": "Fandi <your-email@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VandeeFeng/ark-preset.git",
+    "directory": "packages/core"
+  },
+  "bugs": {
+    "url": "https://github.com/VandeeFeng/ark-preset/issues"
+  },
+  "homepage": "https://github.com/VandeeFeng/ark-preset#readme",
   "files": [
     "dist/",
     "src/"
@@ -19,7 +38,11 @@
     },
     "./src/theme.css": "./src/theme.css"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
+    "prepublishOnly": "pnpm run build",
     "build": "tsup 2>&1 | grep -E '⚡️|error'",
     "dev": "tsup --watch",
     "clean": "rm -rf dist",
@@ -32,5 +55,8 @@
   "devDependencies": {
     "tsup": "^8.0.0",
     "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }

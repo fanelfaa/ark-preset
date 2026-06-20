@@ -1,7 +1,26 @@
 {
   "name": "@ark-preset/solid",
   "version": "0.1.0",
-  "private": true,
+  "description": "Solid.js component library — Ark UI primitives styled with tailwind-variants",
+  "keywords": [
+    "solid-js",
+    "ark-ui",
+    "tailwind-variants",
+    "tailwindcss",
+    "ui-components",
+    "design-system"
+  ],
+  "author": "Fandi <your-email@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VandeeFeng/ark-preset.git",
+    "directory": "packages/solid"
+  },
+  "bugs": {
+    "url": "https://github.com/VandeeFeng/ark-preset/issues"
+  },
+  "homepage": "https://github.com/VandeeFeng/ark-preset#readme",
   "files": [
     "dist/",
     "src/"
@@ -18,7 +37,11 @@
       "require": "./dist/index.cjs"
     }
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
+    "prepublishOnly": "pnpm run build",
     "build": "vite build && tsc --build --force",
     "dev": "vite build --watch",
     "clean": "rm -rf dist",
@@ -38,5 +61,8 @@
   "peerDependencies": {
     "solid-js": "^1.9.0",
     "tailwindcss": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }
