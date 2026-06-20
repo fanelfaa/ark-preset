@@ -38,3 +38,41 @@ npx @ark-preset/cli add button -f solid
     └── index.ts           # Barrel export
 ```
 
+## MCP Server (AI Agent Integration)
+
+Run a [Model Context Protocol](https://modelcontextprotocol.io) server so AI coding agents
+can discover components, inspect recipes, and generate files directly.
+
+```bash
+ark-preset mcp
+```
+
+Configure in your MCP client (`claude.json`, `cursor.json`, etc.):
+
+```json
+{
+  "mcpServers": {
+    "ark-preset": {
+      "command": "ark-preset",
+      "args": ["mcp"]
+    }
+  }
+}
+```
+
+### Available Tools
+
+| Tool | Description |
+|------|-------------|
+| `ark_preset_list_components` | List all 46 components with ✅/⬜ status and dependencies |
+| `ark_preset_get_component` | Full component details — recipe source, template files, deps |
+| `ark_preset_search_components` | Search components by keyword |
+| `ark_preset_add_component` | Generate component files into your project |
+| `ark_preset_get_recipe` | View raw `tv()` recipe source |
+| `ark_preset_get_dependency_graph` | Query dependency relationships between components |
+| `ark_preset_get_manifest` | Dump component manifest as JSON or text summary |
+
+> **Note:** Complementary to the Ark UI MCP server. Ark UI MCP provides upstream
+> component info (props, examples). Ark Preset MCP provides preset-specific info
+> (which components have wrappers, recipe styling, code generation).
+
