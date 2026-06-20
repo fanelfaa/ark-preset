@@ -4,7 +4,7 @@ import { Command } from "commander";
 const program = new Command()
   .name("ark-preset")
   .description("Add UI components to your Solid.js project")
-  .version("0.1.0");
+  .version("0.1.2");
 
 program
   .command("add")

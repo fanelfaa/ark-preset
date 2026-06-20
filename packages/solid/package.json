@@ -1,6 +1,6 @@
 {
   "name": "@ark-preset/solid",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Solid.js component library \u2014 Ark UI primitives styled with tailwind-variants",
   "keywords": [
     "solid-js",
