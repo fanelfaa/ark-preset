@@ -71,6 +71,7 @@ Configure in your MCP client (`claude.json`, `cursor.json`, etc.):
 | `ark_preset_get_recipe` | View raw `tv()` recipe source |
 | `ark_preset_get_dependency_graph` | Query dependency relationships between components |
 | `ark_preset_get_manifest` | Dump component manifest as JSON or text summary |
+| `ark_preset_get_component_usage` | Get JSX usage examples for a component (variants, event handlers, etc.) |
 
 > **Note:** Complementary to the Ark UI MCP server. Ark UI MCP provides upstream
 > component info (props, examples). Ark Preset MCP provides preset-specific info

@@ -263,6 +263,35 @@ async function main() {
     }
   }
 
+  // Copy usage examples from docs
+  const USAGE_DIR = path.join(TEMPLATES_DIR, "usage-examples");
+  const DOCS_DIR = path.join(repoRoot, "apps", "docs", "src", "content", "docs");
+  if (fs.existsSync(DOCS_DIR)) {
+    fs.ensureDirSync(USAGE_DIR);
+    let copiedCount = 0;
+    for (const framework of FRAMEWORKS) {
+      for (const comp of Object.keys(manifest[framework])) {
+        const usageFile = path.join(DOCS_DIR, comp, "usage.mdx");
+        if (fs.existsSync(usageFile)) {
+          // Strip frontmatter (---...---) and top-level package imports, keep only the JSX/content
+          // Only remove import lines that reference external packages, not relative imports in code blocks
+          const content = fs.readFileSync(usageFile, "utf-8");
+          const noFrontmatter = content.replace(/^---[\s\S]*?---\n*/, "");
+          const noImports = noFrontmatter.replace(/^import .*? from \"@[^\"]+\";\n*/gm, "");
+          fs.writeFileSync(
+            path.join(USAGE_DIR, `${comp}.md`),
+            noImports.trimStart(),
+            "utf-8",
+          );
+          copiedCount++;
+        }
+      }
+    }
+    console.log(`\n  ✓ Copied ${copiedCount} usage examples`);
+  } else {
+    console.warn(`\n  ⚠ Docs not found: ${DOCS_DIR} — usage examples skipped`);
+  }
+
   // Copy theme.css
   const themeSourcePath = path.join(repoRoot, THEME_SOURCE);
   if (fs.existsSync(themeSourcePath)) {

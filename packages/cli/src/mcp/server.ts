@@ -156,7 +156,8 @@ Ark Preset is an opinionated UI component library built on Ark UI primitives wit
 1. Use \`ark_preset_list_components\` to discover available components
 2. Use \`ark_preset_get_component\` to inspect a component's details
 3. Use \`ark_preset_add_component\` to generate component files into your project
-4. Use \`ark_preset_get_recipe\` to view the raw styling recipe source`,
+4. Use \`ark_preset_get_recipe\` to view the raw styling recipe source
+5. Use \`ark_preset_get_component_usage\` to get JSX usage examples for a component`,
     },
   );
 
@@ -276,6 +277,51 @@ Use this after ark_preset_list_components to inspect a component before generati
           {
             type: "text",
             text: sections.join("\n"),
+          },
+        ],
+      };
+    },
+  );
+
+  // ── Tool: get_component_usage ──────────────────────────────────
+
+  server.registerTool(
+    "ark_preset_get_component_usage",
+    {
+      description: `Get JSX usage examples for a specific ark-preset component.
+
+Returns code examples showing how to import and use the component in Solid.js, including variants, sizes, event handlers, and common patterns.
+
+Use this when you need to show a user how to use a component in their code.`,
+      inputSchema: {
+        component: z
+          .string()
+          .describe("Component name (kebab-case, e.g., 'button', 'alert-dialog')"),
+      },
+    },
+    async (args) => {
+      const name = args.component;
+      const usageDir = path.join(TEMPLATES_DIR, "usage-examples");
+      const usageFile = path.join(usageDir, `${name}.md`);
+      const content = readFileSafe(usageFile);
+
+      if (!content) {
+        return {
+          content: [
+            {
+              type: "text",
+              text: `❌ Usage example not found for "${name}".\n\nAvailable components with usage examples are the same as the component list. Use ark_preset_list_components first.`,
+            },
+          ],
+          isError: true,
+        };
+      }
+
+      return {
+        content: [
+          {
+            type: "text",
+            text: `# ${name} — Usage Examples\n\n${content}`,
           },
         ],
       };
