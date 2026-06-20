@@ -10,17 +10,17 @@
     "ui-components",
     "design-system"
   ],
-  "author": "Fandi <your-email@example.com>",
+  "author": "Fandi <fandi.ilham.bb@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/VandeeFeng/ark-preset.git",
+    "url": "git+https://github.com/fanelfaa/ark-preset.git",
     "directory": "packages/solid"
   },
   "bugs": {
-    "url": "https://github.com/VandeeFeng/ark-preset/issues"
+    "url": "https://github.com/fanelfaa/ark-preset/issues"
   },
-  "homepage": "https://github.com/VandeeFeng/ark-preset#readme",
+  "homepage": "https://github.com/fanelfaa/ark-preset#readme",
   "files": [
     "dist/",
     "src/"
