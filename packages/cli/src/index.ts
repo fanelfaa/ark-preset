@@ -16,4 +16,13 @@ program
     await addComponent(component, options.output, options.framework);
   });
 
+program
+  .command("mcp")
+  .description("Start MCP server for AI agent integration (stdio)")
+  .option("-t, --transport <type>", "Transport type (stdio)", "stdio")
+  .action(async (options) => {
+    const { mcpCommand } = await import("./commands/mcp.js");
+    await mcpCommand(options);
+  });
+
 program.parse();
