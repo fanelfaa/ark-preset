@@ -20,7 +20,7 @@ function App() {
 
 46 components available:
 
-`accordion`, `alert`, `alert-dialog`, `aspect-ratio`, `avatar`, `badge`, `breadcrumb`, `button`, `card`, `carousel`, `checkbox`, `collapsible`, `color-picker`, `combobox`, `date-picker`, `dialog`, `drawer`, `hover-card`, `input`, `listbox`, `menu`, `number-input`, `pagination`, `password-input`, `pin-input`, `popover`, `progress`, `radio-group`, `rating-group`, `scroll-area`, `segment-group`, `select`, `skeleton`, `slider`, `spinner`, `switch`, `table`, `tabs`, `tags-input`, `textarea`, `toast`, `toggle`, `toggle-group`, `tooltip`, `typography`.
+`accordion`, `alert`, `alert-dialog`, `aspect-ratio`, `avatar`, `badge`, `breadcrumb`, `button`, `card`, `carousel`, `checkbox`, `collapsible`, `color-picker`, `combobox`, `date-picker`, `dialog`, `drawer`, `hover-card`, `input`, `listbox`, `menu`, `number-input`, `pagination`, `password-input`, `pin-input`, `popover`, `progress`, `radio-group`, `rating-group`, `scroll-area`, `segment-group`, `select`, `separator`, `skeleton`, `slider`, `spinner`, `switch`, `table`, `tabs`, `tags-input`, `textarea`, `toast`, `toggle`, `toggle-group`, `tooltip`, `typography`.
 
 ## Peer Dependencies
 

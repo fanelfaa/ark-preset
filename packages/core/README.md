@@ -17,7 +17,7 @@ import { buttonVariants } from "@ark-preset/core";
 
 ## Contents
 
-48 recipe files in `src/recipes/`, each exporting a `tv()` variants object and its TypeScript type:
+47 recipe files in `src/recipes/`, each exporting a `tv()` variants object and its TypeScript type:
 
 `accordion`, `alert`, `alert-dialog`, `aspect-ratio`, `avatar`, `badge`, `breadcrumb`, `button`, `card`, `carousel`, `checkbox`, `collapsible`, `color-picker`, `combobox`, `date-picker`, `dialog`, `drawer`, `hover-card`, `input`, `label`, `listbox`, `menu`, `number-input`, `pagination`, `password-input`, `pin-input`, `popover`, `progress`, `radio-group`, `rating-group`, `scroll-area`, `segment-group`, `select`, `separator`, `skeleton`, `slider`, `spinner`, `switch`, `table`, `tabs`, `tags-input`, `textarea`, `toast`, `toggle`, `toggle-group`, `tooltip`, `typography`.
 

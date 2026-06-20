@@ -65,7 +65,7 @@ export const buttonVariants = tv({
 
 Multi-slot recipes (e.g., accordion, dialog, card) use `tv({ slots: { ... } })` for per-part styling.
 
-**48 recipes** as of last count. Each exports a `*Variants` value + `*Variants` type.
+**47 recipes** as of last count. Each exports a `*Variants` value + `*Variants` type.
 
 ### `@ark-preset/solid` — Solid.js wrappers
 
@@ -166,7 +166,7 @@ Uses [Moonrepo](https://moonrepo.dev) for task orchestration — `moon run` hand
 ```
 .
 ├── packages/
-│   ├── core/          # 48 styling recipes (tv())
+│   ├── core/          # 47 styling recipes (tv())
 │   │   ├── src/
 │   │   │   ├── recipes/    # One *.ts per component
 │   │   │   └── index.ts    # Re-exports all recipes
