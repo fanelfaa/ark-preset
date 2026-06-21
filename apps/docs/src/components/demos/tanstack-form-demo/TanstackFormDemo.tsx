@@ -154,6 +154,10 @@ export default function TanstackFormDemo() {
             if (value.length > 0 && value.length < 6) return "Password must be at least 6 characters";
             return undefined;
           },
+          onBlur: ({ value }) => {
+            if (value.length > 0 && value.length < 6) return "Password must be at least 6 characters";
+            return undefined;
+          },
         }}
         children={(field) => (
           <div class="not-prose flex flex-col gap-1">
