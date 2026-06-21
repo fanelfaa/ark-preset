@@ -23,3 +23,12 @@ tasks:
       - "core:build"
   typecheck:
     command: "tsc --noEmit"
+  test:
+    command: "vitest run"
+    inputs:
+      - "src/**"
+      - "test/**"
+      - "package.json"
+      - "vitest.config.ts"
+  test:watch:
+    command: "vitest"

@@ -1,7 +1,7 @@
 {
   "name": "@ark-preset/solid",
   "version": "0.1.2",
-  "description": "Solid.js component library \u2014 Ark UI primitives styled with tailwind-variants",
+  "description": "Solid.js component library — Ark UI primitives styled with tailwind-variants",
   "keywords": [
     "solid-js",
     "ark-ui",
@@ -45,18 +45,24 @@
     "build": "vite build && tsc --build --force",
     "dev": "vite build --watch",
     "clean": "rm -rf dist",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
-    "@ark-ui/solid": "^5.0.0",
     "@ark-preset/core": "workspace:*",
+    "@ark-ui/solid": "^5.0.0",
     "tailwind-merge": "^3.5.0",
     "tailwind-variants": "^3.0.0"
   },
   "devDependencies": {
+    "@solidjs/testing-library": "^0.8",
+    "@testing-library/jest-dom": "^6",
+    "happy-dom": "^16",
     "typescript": "^5.0.0",
     "vite": "^6.0.0",
-    "vite-plugin-solid": "^2.0.0"
+    "vite-plugin-solid": "^2.0.0",
+    "vitest": "^3"
   },
   "peerDependencies": {
     "solid-js": "^1.9.0",
