@@ -36,3 +36,11 @@ tasks:
       - "e2e/**/*"
       - "src/**/*"
       - "vite.config.ts"
+  test-e2e:
+    command: "pnpm test:e2e"
+    deps:
+      - "build"
+    inputs:
+      - "e2e/**/*"
+      - "src/**/*"
+      - "vite.config.ts"

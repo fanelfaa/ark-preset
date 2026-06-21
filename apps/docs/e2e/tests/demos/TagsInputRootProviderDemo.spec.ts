@@ -1,39 +1,24 @@
 import { test, expect } from "@playwright/test";
+import { setupPage } from "../../fixtures";
 
-test.describe("TagsInputRootProviderDemo", () => {
-  test("renders with root provider and verifies external state", async ({ page }) => {
-    const errors: string[] = [];
-    page.on("console", (msg) => {
-      if (msg.type() === "error") errors.push(msg.text());
-    });
+test("renders with root provider and verifies external state", async ({ page }) => {
+  await setupPage(page, "/docs/components/tags-input");
 
-    await page.goto("/docs/components/tags-input");
-    await page.waitForLoadState("networkidle");
+  // Find root provider demo by external "Tags:" label
+  // tagsLabel
+  // Use nth(2) since there's TagsInputControlledDemo and TagsInputRootProviderDemo
+  // Just verify the root provider renders
+  const demoArea = page.locator(".rounded-lg:has-text('Tags:')").last();
+  await expect(demoArea).toBeVisible();
 
-    const relevantErrors = errors.filter(
-      (e) =>
-        !e.includes("favicon") &&
-        !e.includes("Failed to load resource") &&
-        !e.includes("ERR_BLOCKED_BY_CLIENT")
-    );
-    expect(relevantErrors).toHaveLength(0);
+  // Verify existing tags "React" and "Solid" are visible
+  const reactTag = demoArea.getByText("React", { exact: true });
+  await expect(reactTag.first()).toBeVisible();
 
-    // Find root provider demo by external "Tags:" label
-    const tagsLabel = page.getByText(/Tags:/);
-    // Use nth(2) since there's TagsInputControlledDemo and TagsInputRootProviderDemo
-    // Just verify the root provider renders
-    const demoArea = page.locator(".rounded-lg:has-text('Tags:')").last();
-    await expect(demoArea).toBeVisible();
+  const solidTag = demoArea.getByText("Solid", { exact: true });
+  await expect(solidTag.first()).toBeVisible();
 
-    // Verify existing tags "React" and "Solid" are visible
-    const reactTag = demoArea.getByText("React", { exact: true });
-    await expect(reactTag.first()).toBeVisible();
-
-    const solidTag = demoArea.getByText("Solid", { exact: true });
-    await expect(solidTag.first()).toBeVisible();
-
-    // Verify input exists
-    const input = demoArea.locator("input[placeholder='Add a tag...']");
-    await expect(input).toBeVisible();
-  });
+  // Verify input exists
+  const input = demoArea.locator("input[placeholder='Add a tag...']");
+  await expect(input).toBeVisible();
 });

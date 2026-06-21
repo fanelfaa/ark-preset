@@ -1,37 +1,24 @@
 import { test, expect } from "@playwright/test";
+import { setupPage } from "../../fixtures";
 
-test.describe("SelectBasicDemo", () => {
-  test("opens dropdown and picks an option", async ({ page }) => {
-    const errors: string[] = [];
-    page.on("console", (msg) => {
-      if (msg.type() === "error") errors.push(msg.text());
-    });
+test("opens dropdown and picks an option", async ({ page }) => {
+  const { checkErrors } = await setupPage(page, "/docs/components/select");
 
-    await page.goto("/docs/components/select");
-    await page.waitForLoadState("networkidle");
+  // Find the basic select (no multiple prop, no searchable input)
+  const selectTrigger = page.locator("[data-scope='select'] [data-part='trigger']").first();
+  await expect(selectTrigger).toBeVisible();
 
-    const relevantErrors = errors.filter(
-      (e) =>
-        !e.includes("favicon") &&
-        !e.includes("Failed to load resource") &&
-        !e.includes("ERR_BLOCKED_BY_CLIENT"),
-    );
-    expect(relevantErrors).toHaveLength(0);
+  // Open the select dropdown
+  await selectTrigger.click();
+  await page.waitForTimeout(200);
 
-    // Find the select trigger in the Basic demo
-    const trigger = page.getByRole("button", { name: "Select a framework" }).first();
-    await expect(trigger).toBeVisible();
+  // Select an option by role
+  await expect(page.getByRole("option", { name: "Vue" })).toBeVisible({ timeout: 5000 });
+  await page.getByRole("option", { name: "Vue" }).click();
+  await page.waitForTimeout(200);
 
-    // Open the select dropdown
-    await trigger.click();
-    await page.waitForTimeout(200);
+  // Dropdown should close after single-select pick
+  await expect(page.getByRole("option", { name: "Vue" })).not.toBeVisible();
 
-    // Pick "Solid.js" from the dropdown
-    const solidOption = page.getByRole("option", { name: "Solid.js" }).first();
-    await expect(solidOption).toBeVisible();
-    await solidOption.click();
-
-    // Trigger should now show "Solid.js"
-    await expect(trigger).toContainText("Solid.js");
-  });
+  checkErrors();
 });

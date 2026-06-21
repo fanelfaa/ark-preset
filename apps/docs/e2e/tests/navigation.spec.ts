@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { getComponentSlugs, componentUrl } from "../fixtures";
+import { componentUrl } from "../fixtures";
 
 test.describe("Navigation", () => {
   test("clicking 'Components' nav link navigates to first component page", async ({ page }) => {
@@ -38,7 +38,6 @@ test.describe("Navigation", () => {
   });
 
   test("direct navigation to all component pages returns 200", async ({ page }) => {
-    const slugs = getComponentSlugs();
     // Test a representative subset to keep test fast
     const sampleSlugs = [
       "button",

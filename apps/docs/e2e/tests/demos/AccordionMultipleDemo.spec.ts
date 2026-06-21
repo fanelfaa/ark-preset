@@ -1,38 +1,32 @@
 import { test, expect } from "@playwright/test";
+import { setupPage } from "../../fixtures";
 
-test.describe("AccordionMultipleDemo", () => {
-  test("renders and allows multiple items open simultaneously", async ({ page }) => {
-    const errors: string[] = [];
-    page.on("console", (msg) => {
-      if (msg.type() === "error") errors.push(msg.text());
-    });
+test("renders and allows multiple items open simultaneously", async ({ page }) => {
+  await setupPage(page, "/docs/components/accordion");
 
-    await page.goto("/docs/components/accordion");
-    await page.waitForLoadState("networkidle");
+  // Use unique trigger texts only present in the multiple demo
+  const trigger1 = page.getByRole("button", { name: "Can I open multiple items?", exact: true }).first();
+  const trigger2 = page.getByRole("button", { name: "How does it work?", exact: true }).first();
+  await expect(trigger1).toBeVisible();
+  await expect(trigger2).toBeVisible();
 
-    const relevantErrors = errors.filter(
-      (e) =>
-        !e.includes("favicon") &&
-        !e.includes("Failed to load resource") &&
-        !e.includes("ERR_BLOCKED_BY_CLIENT")
-    );
-    expect(relevantErrors).toHaveLength(0);
+  // Both item-1 and item-2 open by default (defaultValue: ["item-1", "item-2"])
+  await expect(
+    page.locator("[data-scope='accordion']").getByText(/Yes. Just pass/).first()
+  ).toBeVisible();
+  await expect(
+    page.locator("[data-scope='accordion']").getByText(/Each item tracks/).first()
+  ).toBeVisible();
 
-    // Multiple demo items — two should be open by default (defaultValue=["item-1", "item-2"])
-    const trigger1 = page.getByRole("button", { name: "Can I open multiple items?" }).first();
-    const trigger2 = page.getByRole("button", { name: "How does it work?" }).first();
-    const trigger3 = page.getByRole("button", { name: "Is it accessible?" }).first();
+  // Close item-1 by clicking its trigger
+  await trigger1.click();
+  await page.waitForTimeout(300);
+  await expect(
+    page.locator("[data-scope='accordion']").getByText(/Yes. Just pass/).first()
+  ).not.toBeVisible();
 
-    await expect(trigger1).toBeVisible();
-    await expect(trigger2).toBeVisible();
-    await expect(trigger3).toBeVisible();
-
-    // Expand trigger3 — it should open without closing others (multiple mode)
-    await trigger3.click();
-    await page.waitForTimeout(300);
-
-    await expect(
-      page.locator("[data-scope='accordion']").getByText(/WAI-ARIA Accordion pattern/i)
-    ).toBeVisible();
-  });
+  // Item-2 should remain open
+  await expect(
+    page.locator("[data-scope='accordion']").getByText(/Each item tracks/).first()
+  ).toBeVisible();
 });

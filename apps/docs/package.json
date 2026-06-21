@@ -9,6 +9,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest run",
+    "test:e2e": "playwright test --config e2e/playwright.config.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

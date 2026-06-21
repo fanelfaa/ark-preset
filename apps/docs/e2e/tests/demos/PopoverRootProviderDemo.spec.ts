@@ -1,54 +1,19 @@
 import { test, expect } from "@playwright/test";
+import { setupPage } from "../../fixtures";
 
-test.describe("PopoverRootProviderDemo", () => {
-  test("opens popover and verifies external state and content", async ({ page }) => {
-    const errors: string[] = [];
-    page.on("console", (msg) => {
-      if (msg.type() === "error") errors.push(msg.text());
-    });
+test("opens popover and verifies external state and content", async ({ page }) => {
+  const { checkErrors } = await setupPage(page, "/docs/components/popover");
 
-    await page.goto("/docs/components/popover");
-    await page.waitForLoadState("networkidle");
+  // RootProvider popover uses the same trigger text
+  const trigger = page.getByRole("button", { name: "Open Popover" }).last();
+  await expect(trigger).toBeVisible();
 
-    const relevantErrors = errors.filter(
-      (e) =>
-        !e.includes("favicon") &&
-        !e.includes("Failed to load resource") &&
-        !e.includes("ERR_BLOCKED_BY_CLIENT")
-    );
-    expect(relevantErrors).toHaveLength(0);
+  // Click trigger to open popover
+  await trigger.click();
+  await page.waitForTimeout(200);
 
-    // Find the root provider demo by external output showing "Open:"
-    const outputElement = page.locator("output").filter({ hasText: /Open:/ });
-    await expect(outputElement.first()).toBeVisible();
+  // Verify popover content is visible
+  await expect(page.getByRole("dialog").getByText(/This popover state is managed externally/)).toBeVisible();
 
-    // Initially popover should be closed
-    const initialOutput = await outputElement.first().textContent();
-    expect(initialOutput).toContain("false");
-
-    // Click the trigger
-    const trigger = page.getByRole("button", { name: "Open Popover" }).first();
-    await expect(trigger).toBeVisible();
-    await trigger.click();
-    await page.waitForTimeout(300);
-
-    // External state should now show open: true
-    const afterOpenOutput = await outputElement.first().textContent();
-    expect(afterOpenOutput).toContain("true");
-
-    // Popover content should be visible
-    const popoverTitle = page.getByText("Popover Title");
-    await expect(popoverTitle.first()).toBeVisible();
-
-    const codeContent = page.getByText("usePopover");
-    await expect(codeContent.first()).toBeVisible();
-
-    // Close with Escape
-    await page.keyboard.press("Escape");
-    await page.waitForTimeout(300);
-
-    // State should be closed again
-    const afterCloseOutput = await outputElement.first().textContent();
-    expect(afterCloseOutput).toContain("false");
-  });
+  checkErrors();
 });

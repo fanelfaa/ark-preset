@@ -1,44 +1,34 @@
 import { test, expect } from "@playwright/test";
+import { setupPage } from "../../fixtures";
 
-test.describe("PasswordInputRootProviderDemo", () => {
-  test("toggles visibility via external button", async ({ page }) => {
-    const errors: string[] = [];
-    page.on("console", (msg) => {
-      if (msg.type() === "error") errors.push(msg.text());
-    });
+test("toggles visibility via external button", async ({ page }) => {
+  await setupPage(page, "/docs/components/password-input");
 
-    await page.goto("/docs/components/password-input");
-    await page.waitForLoadState("networkidle");
+  // Find the RootProvider demo by its external "Toggle" button
+  const toggleBtn = page.getByRole("button", { name: "Toggle" }).first();
+  await expect(toggleBtn).toBeVisible();
 
-    const relevantErrors = errors.filter(
-      (e) =>
-        !e.includes("favicon") &&
-        !e.includes("Failed to load resource") &&
-        !e.includes("ERR_BLOCKED_BY_CLIENT")
-    );
-    expect(relevantErrors).toHaveLength(0);
+  // Find the RootProvider's password input (last on page)
+  const input = page.locator("[data-scope='password-input'] input").last();
+  await expect(input).toBeVisible();
 
-    // Find the demo area containing external "Toggle" button and password input
-    const toggleButton = page.getByRole("button", { name: "Toggle" }).first();
-    await expect(toggleButton).toBeVisible();
+  // Type a password
+  await input.fill("secret123");
+  await page.waitForTimeout(100);
 
-    // Find the password input in the same demo area
-    const passwordInput = page.locator("[data-scope='password-input'] input").first();
-    await expect(passwordInput).toBeVisible();
+  // Initially masked
+  await expect(input).toHaveAttribute("type", "password");
 
-    // Initially password should be hidden
-    await expect(passwordInput).toHaveAttribute("type", "password");
+  // Click the external Toggle button
+  await toggleBtn.click();
+  await page.waitForTimeout(200);
 
-    // Click external Toggle button
-    await toggleButton.click();
-    await page.waitForTimeout(200);
+  // Should now be visible
+  await expect(input).toHaveAttribute("type", "text");
+  await expect(input).toHaveValue("secret123");
 
-    // Password should now be visible
-    await expect(passwordInput).toHaveAttribute("type", "text");
-
-    // Toggle back
-    await toggleButton.click();
-    await page.waitForTimeout(200);
-    await expect(passwordInput).toHaveAttribute("type", "password");
-  });
+  // Toggle back to hidden
+  await toggleBtn.click();
+  await page.waitForTimeout(200);
+  await expect(input).toHaveAttribute("type", "password");
 });

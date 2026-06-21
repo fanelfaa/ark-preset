@@ -1,40 +1,27 @@
 import { test, expect } from "@playwright/test";
+import { setupPage } from "../../fixtures";
 
-test.describe("SwitchRootProviderDemo", () => {
-  test("toggles switch and verifies external state", async ({ page }) => {
-    const errors: string[] = [];
-    page.on("console", (msg) => {
-      if (msg.type() === "error") errors.push(msg.text());
-    });
+test("toggles switch and verifies external state", async ({ page }) => {
+  await setupPage(page, "/docs/components/switch");
 
-    await page.goto("/docs/components/switch");
-    await page.waitForLoadState("networkidle");
+  // Find the RootProvider switch by its unique label
+  const switchLabel = page.getByText("Enable notifications", { exact: true }).first();
+  await expect(switchLabel).toBeVisible();
 
-    const relevantErrors = errors.filter(
-      (e) =>
-        !e.includes("favicon") &&
-        !e.includes("Failed to load resource") &&
-        !e.includes("ERR_BLOCKED_BY_CLIENT"),
-    );
-    expect(relevantErrors).toHaveLength(0);
+  // Find the switch input associated with this label
+  const switchRoot = page.locator("[data-scope='switch']").filter({ hasText: "Enable notifications" });
+  const switchInput = switchRoot.locator("input");
 
-    // External state shows "Checked: true" by default
-    const output = page.locator("output").first();
-    await expect(output).toContainText("Checked: true");
+  // RootProvider switch defaults to checked
+  await expect(switchInput).toBeChecked();
 
-    // Find the switch and toggle it off
-    const switchLabel = page.getByText("Enable notifications").first();
-    await switchLabel.click();
-    await page.waitForTimeout(100);
+  // Toggle off by clicking the label
+  await switchLabel.click();
+  await page.waitForTimeout(100);
+  await expect(switchInput).not.toBeChecked();
 
-    // External state should update to "Checked: false"
-    await expect(output).toContainText("Checked: false");
-
-    // Toggle back on
-    await switchLabel.click();
-    await page.waitForTimeout(100);
-
-    // Should be "Checked: true" again
-    await expect(output).toContainText("Checked: true");
-  });
+  // Toggle back on
+  await switchLabel.click();
+  await page.waitForTimeout(100);
+  await expect(switchInput).toBeChecked();
 });

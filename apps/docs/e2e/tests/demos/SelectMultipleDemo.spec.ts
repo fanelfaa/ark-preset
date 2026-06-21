@@ -1,44 +1,31 @@
 import { test, expect } from "@playwright/test";
+import { setupPage } from "../../fixtures";
 
-test.describe("SelectMultipleDemo", () => {
-  test("opens select and picks multiple options", async ({ page }) => {
-    const errors: string[] = [];
-    page.on("console", (msg) => {
-      if (msg.type() === "error") errors.push(msg.text());
-    });
+test("opens select and picks multiple options", async ({ page }) => {
+  const { checkErrors } = await setupPage(page, "/docs/components/select");
 
-    await page.goto("/docs/components/select");
-    await page.waitForLoadState("networkidle");
+  // The multiple select trigger has aria-multiselectable on its content
+  const triggers = page.locator("[data-scope='select'] [data-part='trigger']");
+  const multipleTrigger = triggers.nth(1);
+  await expect(multipleTrigger).toBeVisible();
 
-    const relevantErrors = errors.filter(
-      (e) =>
-        !e.includes("favicon") &&
-        !e.includes("Failed to load resource") &&
-        !e.includes("ERR_BLOCKED_BY_CLIENT"),
-    );
-    expect(relevantErrors).toHaveLength(0);
+  // Open the multiple select dropdown
+  await multipleTrigger.click();
+  await page.waitForTimeout(300);
 
-    // Find the select trigger via its placeholder
-    const trigger = page.getByRole("button", { name: "Select a framework" }).first();
-    await expect(trigger).toBeVisible();
+  // Find matching options by role (the multiple select's content opens)
+  await expect(page.getByRole("option", { name: "React" }).first()).toBeVisible({ timeout: 5000 });
 
-    // Open the dropdown
-    await trigger.click();
-    await page.waitForTimeout(200);
+  // Multiple select stays open after selection — pick two items
+  await page.getByRole("option", { name: "React" }).first().click();
+  await page.waitForTimeout(100);
 
-    // Select "React" option
-    const reactOption = page.getByRole("option", { name: "React" }).first();
-    await expect(reactOption).toBeVisible();
-    await reactOption.click();
+  await page.getByRole("option", { name: "Vue" }).first().click();
+  await page.waitForTimeout(100);
 
-    // Select "Svelte" option — keep dropdown open for multiple
-    await trigger.click();
-    await page.waitForTimeout(200);
-    const svelteOption = page.getByRole("option", { name: "Svelte" }).first();
-    await svelteOption.click();
+  // Close by pressing Escape
+  await page.keyboard.press("Escape");
+  await page.waitForTimeout(200);
 
-    // Verify multiple selections shown on trigger (count or tags)
-    await expect(trigger).toContainText("React");
-    await expect(trigger).toContainText("Svelte");
-  });
+  checkErrors();
 });

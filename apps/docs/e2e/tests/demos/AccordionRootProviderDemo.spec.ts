@@ -1,34 +1,38 @@
 import { test, expect } from "@playwright/test";
+import { setupPage } from "../../fixtures";
 
-test.describe("AccordionRootProviderDemo", () => {
-  test("renders and updates external state display on toggle", async ({ page }) => {
-    const errors: string[] = [];
-    page.on("console", (msg) => {
-      if (msg.type() === "error") errors.push(msg.text());
-    });
+test("renders and updates external state display on toggle", async ({ page }) => {
+  await setupPage(page, "/docs/components/accordion");
 
-    await page.goto("/docs/components/accordion");
-    await page.waitForLoadState("networkidle");
+  // Use unique trigger texts only present in the RootProvider demo
+  const trigger1 = page.getByRole("button", { name: "What is this demo showing?", exact: true }).first();
+  const trigger2 = page.getByRole("button", { name: "Why use RootProvider?", exact: true }).first();
+  await expect(trigger1).toBeVisible();
+  await expect(trigger2).toBeVisible();
 
-    const relevantErrors = errors.filter(
-      (e) =>
-        !e.includes("favicon") &&
-        !e.includes("Failed to load resource") &&
-        !e.includes("ERR_BLOCKED_BY_CLIENT")
-    );
-    expect(relevantErrors).toHaveLength(0);
+  // item-1 open by default — verify its content
+  await expect(
+    page.locator("[data-scope='accordion']").getByText(/The accordion state is managed externally/).first()
+  ).toBeVisible();
 
-    // RootProvider demo has an <output> with accordion value
-    const output = page.locator("[data-scope='accordion']").locator("output");
-    await expect(output).toBeVisible();
-    await expect(output).toContainText("item-1");
+  // item-2 should be closed
+  await expect(
+    page.locator("[data-scope='accordion']").getByText(/It gives you access to the accordion context/).first()
+  ).not.toBeVisible();
 
-    // Click second trigger to expand item-2
-    const trigger2 = page.getByRole("button", { name: "Why use RootProvider?" }).first();
-    await trigger2.click();
-    await page.waitForTimeout(300);
+  // Click trigger2 to open item-2
+  await trigger2.click();
+  await page.waitForTimeout(300);
 
-    // Output should now contain both item-1 and item-2
-    await expect(output).toContainText("item-2");
-  });
+  // Both items should now be open
+  await expect(
+    page.locator("[data-scope='accordion']").getByText(/It gives you access to the accordion context/).first()
+  ).toBeVisible();
+
+  // Close item-1
+  await trigger1.click();
+  await page.waitForTimeout(300);
+  await expect(
+    page.locator("[data-scope='accordion']").getByText(/The accordion state is managed externally/).first()
+  ).not.toBeVisible();
 });

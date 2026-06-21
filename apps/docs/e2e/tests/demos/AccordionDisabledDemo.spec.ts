@@ -1,38 +1,23 @@
 import { test, expect } from "@playwright/test";
+import { setupPage } from "../../fixtures";
 
-test.describe("AccordionDisabledDemo", () => {
-  test("renders with disabled items non-interactive and active items working", async ({ page }) => {
-    const errors: string[] = [];
-    page.on("console", (msg) => {
-      if (msg.type() === "error") errors.push(msg.text());
-    });
+test("renders with disabled items non-interactive and active items working", async ({ page }) => {
+  await setupPage(page, "/docs/components/accordion");
 
-    await page.goto("/docs/components/accordion");
-    await page.waitForLoadState("networkidle");
+  const activeTrigger = page.getByRole("button", { name: "Active Item" }).first();
+  const disabledTrigger = page.getByRole("button", { name: "Disabled Item" }).first();
 
-    const relevantErrors = errors.filter(
-      (e) =>
-        !e.includes("favicon") &&
-        !e.includes("Failed to load resource") &&
-        !e.includes("ERR_BLOCKED_BY_CLIENT")
-    );
-    expect(relevantErrors).toHaveLength(0);
+  await expect(activeTrigger).toBeVisible();
+  await expect(disabledTrigger).toBeVisible();
 
-    const activeTrigger = page.getByRole("button", { name: "Active Item" }).first();
-    const disabledTrigger = page.getByRole("button", { name: "Disabled Item" }).first();
+  // Disabled item should have disabled attribute
+  await expect(disabledTrigger).toBeDisabled();
 
-    await expect(activeTrigger).toBeVisible();
-    await expect(disabledTrigger).toBeVisible();
+  // Active item should be clickable
+  await activeTrigger.click();
+  await page.waitForTimeout(300);
 
-    // Disabled item should have disabled attribute
-    await expect(disabledTrigger).toBeDisabled();
-
-    // Active item should be clickable
-    await activeTrigger.click();
-    await page.waitForTimeout(300);
-
-    await expect(
-      page.locator("[data-scope='accordion']").getByText(/This item is interactive/i)
-    ).toBeVisible();
-  });
+  await expect(
+    page.locator("[data-scope='accordion']").getByText(/This item is interactive/i)
+  ).toBeVisible();
 });

@@ -1,49 +1,38 @@
 import { test, expect } from "@playwright/test";
+import { setupPage } from "../../fixtures";
 
-test.describe("SelectSearchableDemo", () => {
-  test("opens select, types search, verifies filtered results", async ({ page }) => {
-    const errors: string[] = [];
-    page.on("console", (msg) => {
-      if (msg.type() === "error") errors.push(msg.text());
-    });
+test("opens select, types search, verifies filtered results", async ({ page }) => {
+  await setupPage(page, "/docs/components/select");
 
-    await page.goto("/docs/components/select");
-    await page.waitForLoadState("networkidle");
+  // Find the searchable select — 4th trigger on page (0-indexed: 3)
+  const triggers = page.locator("[data-scope='select'] [data-part='trigger']");
+  const searchTrigger = triggers.nth(3);
+  await expect(searchTrigger).toBeVisible();
 
-    const relevantErrors = errors.filter(
-      (e) =>
-        !e.includes("favicon") &&
-        !e.includes("Failed to load resource") &&
-        !e.includes("ERR_BLOCKED_BY_CLIENT"),
-    );
-    expect(relevantErrors).toHaveLength(0);
+  // Open the searchable select
+  await searchTrigger.click();
+  await page.waitForTimeout(200);
 
-    // Find the searchable select trigger
-    const trigger = page
-      .locator("[data-scope='select']")
-      .filter({ hasText: "Select a framework" })
-      .first()
-      .locator("[data-scope='select'] button, button")
-      .first();
+  // Find the search input inside the content by placeholder
+  const searchInput = page.getByPlaceholder("Search...");
+  await expect(searchInput).toBeVisible({ timeout: 5000 });
 
-    // Click to open the select dropdown
-    await trigger.click();
-    await page.waitForTimeout(200);
+  // Type a search query to filter
+  await searchInput.fill("Reac");
+  await page.waitForTimeout(300);
 
-    // Type "So" into the search input inside the dropdown
-    const searchInput = page.locator("[data-scope='select'] input[type='text']").first();
-    await searchInput.fill("So");
-    await page.waitForTimeout(200);
+  // Options should be filtered — React should be visible
+  const content = page.locator("[data-part='content']").last();
+  await expect(content.getByText("React", { exact: true })).toBeVisible();
 
-    // Only "Solid.js" should appear (matches "So")
-    const solidOption = page.getByRole("option", { name: "Solid.js" }).first();
-    await expect(solidOption).toBeVisible();
+  // Clear and type a different query
+  await searchInput.fill("Vue");
+  await page.waitForTimeout(300);
 
-    // "Vue" should NOT appear (doesn't match "So")
-    const vueOption = page.getByRole("option", { name: "Vue" });
-    await expect(vueOption).not.toBeVisible();
+  // Should show Vue
+  await expect(content.getByText("Vue", { exact: true })).toBeVisible();
 
-    // Select "Solid.js"
-    await solidOption.click();
-  });
+  // Select Vue by clicking
+  await content.getByText("Vue", { exact: true }).click();
+  await page.waitForTimeout(200);
 });

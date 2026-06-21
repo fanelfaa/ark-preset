@@ -1,43 +1,23 @@
 import { test, expect } from "@playwright/test";
+import { setupPage } from "../../fixtures";
 
-test.describe("ScrollAreaBasicDemo", () => {
-  test("renders vertical and horizontal scroll areas with content", async ({ page }) => {
-    const errors: string[] = [];
-    page.on("console", (msg) => {
-      if (msg.type() === "error") errors.push(msg.text());
-    });
+test("renders vertical and horizontal scroll areas with content", async ({ page }) => {
+  await setupPage(page, "/docs/components/scroll-area");
 
-    await page.goto("/docs/components/scroll-area");
-    await page.waitForLoadState("networkidle");
+  // Find vertical scroll area
+  const verticalScroll = page.getByText("Vertical scroll", { exact: true }).first();
+  await expect(verticalScroll).toBeVisible();
 
-    const relevantErrors = errors.filter(
-      (e) =>
-        !e.includes("favicon") &&
-        !e.includes("Failed to load resource") &&
-        !e.includes("ERR_BLOCKED_BY_CLIENT")
-    );
-    expect(relevantErrors).toHaveLength(0);
+  // Find horizontal scroll area
+  const horizontalScroll = page.getByText("Horizontal scroll", { exact: true }).first();
+  await expect(horizontalScroll).toBeVisible();
 
-    // Verify both scroll area labels are visible
-    const verticalLabel = page.getByText("Vertical scroll");
-    await expect(verticalLabel.first()).toBeVisible();
+  // Verify scroll area viewports exist
+  const scrollAreas = page.locator("[data-scope='scroll-area']");
+  const count = await scrollAreas.count();
+  expect(count).toBeGreaterThanOrEqual(2);
 
-    const horizontalLabel = page.getByText("Horizontal scroll");
-    await expect(horizontalLabel.first()).toBeVisible();
-
-    // Find scroll area components
-    const scrollAreas = page.locator("[data-scope='scroll-area']");
-    const count = await scrollAreas.count();
-    expect(count).toBeGreaterThanOrEqual(2);
-
-    // Verify content exists in vertical scroll (first scroll area)
-    const firstScrollArea = scrollAreas.first();
-    const item1 = firstScrollArea.getByText("Item 1:");
-    await expect(item1).toBeVisible();
-
-    // Verify horizontal scroll area has card items
-    const secondScrollArea = scrollAreas.nth(1);
-    const card1 = secondScrollArea.getByText("Card 1");
-    await expect(card1).toBeVisible();
-  });
+  // Verify content items are rendered (20 vertical items, 12 horizontal cards)
+  await expect(page.getByText("Item 1:").first()).toBeVisible();
+  await expect(page.getByText("Card 1").first()).toBeVisible();
 });
