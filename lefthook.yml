@@ -1,0 +1,13 @@
+# lefthook.yml
+# Refer to https://github.com/evilmartians/lefthook/blob/master/docs/configuration.md
+
+pre-commit:
+  parallel: true
+  commands:
+    solid-tests:
+      root: "packages/solid/"
+      glob: "**/*.{ts,tsx}"
+      run: pnpm run test
+      skip:
+        - merge
+        - rebase

@@ -8,12 +8,14 @@
     "dev": "pnpm -r run dev",
     "typecheck": "pnpm -r run typecheck",
     "netlify:build": "pnpm --filter @ark-preset/core build && pnpm --filter @ark-preset/solid build && pnpm --filter docs generate-routes && pnpm --filter docs build",
+    "postinstall": "lefthook install",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
     "fmt": "oxfmt",
     "fmt:check": "oxfmt --check"
   },
   "devDependencies": {
+    "lefthook": "^2.1.9",
     "oxfmt": "^0.51.0",
     "oxlint": "^1.66.0"
   },
@@ -24,6 +26,7 @@
   "pnpm": {
     "onlyBuiltDependencies": [
       "esbuild",
+      "lefthook",
       "lightningcss"
     ]
   }
