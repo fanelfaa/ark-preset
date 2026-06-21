@@ -1,6 +1,8 @@
 import { createForm } from "@tanstack/solid-form";
 import { createListCollection } from "@ark-ui/solid";
 import { Index, Show } from "solid-js";
+import { parseDate } from "@internationalized/date";
+
 import { Input } from "@ark-preset/solid";
 import { Button } from "@ark-preset/solid";
 import { Textarea } from "@ark-preset/solid";
@@ -8,6 +10,31 @@ import { NumberInput } from "@ark-preset/solid";
 import { Select, SelectLabel, SelectTrigger, SelectContent, SelectItem } from "@ark-preset/solid";
 import { Checkbox, CheckboxLabel } from "@ark-preset/solid";
 import { Switch, SwitchLabel } from "@ark-preset/solid";
+
+import { Slider, SliderLabel, SliderControl, SliderThumb } from "@ark-preset/solid";
+import { RatingGroup, RatingGroupLabel } from "@ark-preset/solid";
+import { Combobox, ComboboxLabel, ComboboxInputTrigger, ComboboxContent, ComboboxItem } from "@ark-preset/solid";
+import { TagsInput } from "@ark-preset/solid";
+import { RadioGroup, RadioGroupItem } from "@ark-preset/solid";
+import { SegmentGroup, SegmentGroupItem } from "@ark-preset/solid";
+import { Toggle, ToggleIndicator } from "@ark-preset/solid";
+import { ToggleGroup, ToggleGroupItem } from "@ark-preset/solid";
+import { DatePicker } from "@ark-preset/solid";
+
+const countries = createListCollection({
+  items: [
+    { label: "Indonesia", value: "id" },
+    { label: "Malaysia", value: "my" },
+    { label: "Singapore", value: "sg" },
+    { label: "Thailand", value: "th" },
+    { label: "Vietnam", value: "vn" },
+    { label: "Japan", value: "jp" },
+    { label: "South Korea", value: "kr" },
+    { label: "United States", value: "us" },
+    { label: "United Kingdom", value: "gb" },
+    { label: "Australia", value: "au" },
+  ],
+});
 
 const roles = createListCollection({
   items: [
@@ -24,9 +51,18 @@ export default function TanstackFormDemo() {
       email: "",
       age: 0,
       role: "",
+      country: "",
       bio: "",
+      plan: "free",
+      rating: 0,
+      priority: "medium",
+      volume: 50,
       notifications: false,
+      skills: [] as string[],
       accepted: false,
+      startDate: "2026-06-01",
+      bold: false,
+      alignment: "left",
     },
     onSubmit: async ({ value }) => {
       alert(JSON.stringify(value, null, 2));
@@ -40,8 +76,9 @@ export default function TanstackFormDemo() {
         e.stopPropagation();
         form.handleSubmit();
       }}
-      class="flex flex-col gap-4"
+      class="flex flex-col gap-5"
     >
+      {/* ── Name ── */}
       <form.Field
         name="name"
         validators={{
@@ -61,6 +98,7 @@ export default function TanstackFormDemo() {
         )}
       />
 
+      {/* ── Email ── */}
       <form.Field
         name="email"
         validators={{
@@ -83,19 +121,30 @@ export default function TanstackFormDemo() {
         )}
       />
 
+      {/* ── Age ── */}
       <form.Field
         name="age"
+        validators={{
+          onChange: ({ value }) => {
+            if (value < 13) return "Must be at least 13 years old";
+            return undefined;
+          },
+        }}
         children={(field) => (
           <NumberInput
             name={field().name}
             label="Age"
             value={String(field().state.value)}
+            error={!!field().state.meta.errors[0]}
+            min={0}
+            max={150}
             onValueChange={(e) => field().handleChange(e.valueAsNumber)}
             onBlur={field().handleBlur}
           />
         )}
       />
 
+      {/* ── Role ── */}
       <form.Field
         name="role"
         validators={{
@@ -131,6 +180,124 @@ export default function TanstackFormDemo() {
         )}
       />
 
+      {/* ── Country (Combobox) ── */}
+      <form.Field
+        name="country"
+        children={(field) => (
+          <div class="not-prose flex flex-col gap-1">
+            <Combobox
+              name={field().name}
+              collection={countries}
+              value={field().state.value ? [field().state.value] : []}
+              onValueChange={(e) => field().handleChange(e.value[0])}
+              onOpenChange={(details) => {
+                if (!details.open) field().handleBlur();
+              }}
+            >
+              <ComboboxLabel>Country</ComboboxLabel>
+              <ComboboxInputTrigger placeholder="Search country..." />
+              <ComboboxContent>
+                <Index each={countries.items}>
+                  {(item) => <ComboboxItem item={item()}>{item().label}</ComboboxItem>}
+                </Index>
+              </ComboboxContent>
+            </Combobox>
+          </div>
+        )}
+      />
+
+      {/* ── Plan (RadioGroup) ── */}
+      <form.Field
+        name="plan"
+        children={(field) => (
+          <RadioGroup
+            name={field().name}
+            value={field().state.value}
+            onValueChange={(e) => field().handleChange(e.value ?? "")}
+            onBlur={field().handleBlur}
+          >
+            <RadioGroupItem value="free">Free</RadioGroupItem>
+            <RadioGroupItem value="pro">Pro</RadioGroupItem>
+            <RadioGroupItem value="enterprise">Enterprise</RadioGroupItem>
+          </RadioGroup>
+        )}
+      />
+
+      {/* ── Priority (SegmentGroup) ── */}
+      <form.Field
+        name="priority"
+        children={(field) => (
+          <SegmentGroup
+            name={field().name}
+            value={field().state.value}
+            onValueChange={(e) => field().handleChange(e.value ?? "")}
+            onBlur={field().handleBlur}
+          >
+            <SegmentGroupItem value="low">Low</SegmentGroupItem>
+            <SegmentGroupItem value="medium">Medium</SegmentGroupItem>
+            <SegmentGroupItem value="high">High</SegmentGroupItem>
+          </SegmentGroup>
+        )}
+      />
+
+      {/* ── Rating ── */}
+      <form.Field
+        name="rating"
+        children={(field) => (
+          <RatingGroup
+            name={field().name}
+            value={field().state.value}
+            count={5}
+            onValueChange={(e) => field().handleChange(e.value)}
+            onBlur={field().handleBlur}
+          >
+            <RatingGroupLabel>Rating</RatingGroupLabel>
+          </RatingGroup>
+        )}
+      />
+
+      {/* ── Volume (Slider) ── */}
+      <form.Field
+        name="volume"
+        children={(field) => (
+          <Slider
+            name={field().name}
+            value={[field().state.value]}
+            min={0}
+            max={100}
+            step={1}
+            onValueChange={(e) => field().handleChange(e.value[0])}
+            onBlur={field().handleBlur}
+          >
+            <SliderLabel>Volume: {field().state.value}%</SliderLabel>
+            <SliderControl>
+              <SliderThumb index={0} />
+            </SliderControl>
+          </Slider>
+        )}
+      />
+
+      {/* ── Start Date (DatePicker) ── */}
+      <form.Field
+        name="startDate"
+        validators={{
+          onChange: ({ value }) => {
+            if (!value) return "Start date is required";
+            return undefined;
+          },
+        }}
+        children={(field) => (
+          <DatePicker
+            name={field().name}
+            label="Start Date"
+            placeholder="Pick a date"
+            value={[parseDate(field().state.value)]}
+            onValueChange={(e) => field().handleChange(String(e.value[0]))}
+          />
+        )}
+      />
+
+      {/* ── Bio ── */}
       <form.Field
         name="bio"
         validators={{
@@ -150,6 +317,29 @@ export default function TanstackFormDemo() {
         )}
       />
 
+      {/* ── Skills (TagsInput) ── */}
+      <form.Field
+        name="skills"
+        validators={{
+          onBlur: ({ value }) => {
+            if (value.length > 10) return "Maximum 10 skills allowed";
+            return undefined;
+          },
+        }}
+        children={(field) => (
+          <div class="not-prose flex flex-col gap-1">
+            <TagsInput
+              name={field().name}
+              value={field().state.value}
+              label="Skills"
+              placeholder="Type skill and press Enter"
+              onValueChange={(e) => field().handleChange(e.value)}
+            />
+          </div>
+        )}
+      />
+
+      {/* ── Notifications (Switch) ── */}
       <form.Field
         name="notifications"
         children={(field) => (
@@ -164,6 +354,54 @@ export default function TanstackFormDemo() {
         )}
       />
 
+      {/* ── Bold (Toggle) ── */}
+      <form.Field
+        name="bold"
+        children={(field) => (
+          <Toggle
+            name={field().name}
+            pressed={field().state.value}
+            onPressedChange={(pressed) => field().handleChange(!!pressed)}
+            onBlur={field().handleBlur}
+          >
+            <ToggleIndicator>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z" />
+                <path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z" />
+              </svg>
+            </ToggleIndicator>
+            Bold
+          </Toggle>
+        )}
+      />
+
+      {/* ── Alignment (ToggleGroup) ── */}
+      <form.Field
+        name="alignment"
+        children={(field) => (
+          <ToggleGroup
+            value={[field().state.value]}
+            onValueChange={(e) => field().handleChange(e.value[0])}
+            onBlur={field().handleBlur}
+          >
+            <ToggleGroupItem value="left">Left</ToggleGroupItem>
+            <ToggleGroupItem value="center">Center</ToggleGroupItem>
+            <ToggleGroupItem value="right">Right</ToggleGroupItem>
+          </ToggleGroup>
+        )}
+      />
+
+      {/* ── Accepted (Checkbox) ── */}
       <form.Field
         name="accepted"
         validators={{
@@ -187,6 +425,7 @@ export default function TanstackFormDemo() {
         )}
       />
 
+      {/* ── Submit ── */}
       <form.Subscribe
         selector={(state) => ({
           canSubmit: state.canSubmit,
