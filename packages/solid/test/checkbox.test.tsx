@@ -1,4 +1,4 @@
-import { render } from "@solidjs/testing-library";
+import { render, fireEvent, screen, waitFor } from "@solidjs/testing-library";
 import {
   Checkbox,
   CheckboxRootProvider,
@@ -26,6 +26,47 @@ describe("Checkbox", () => {
       </CheckboxBase.Root>
     ));
     expect(getByText("Label")).toBeInTheDocument();
+  });
+
+  it("toggles checked state on click", async () => {
+    const { container } = render(() => (
+      <Checkbox>Toggle me</Checkbox>
+    ));
+    const input = container.querySelector('input[type="checkbox"]') as HTMLInputElement;
+    // Initially unchecked
+    expect(input.checked).toBe(false);
+    // Click the label text
+    fireEvent.click(screen.getByText("Toggle me"));
+    // Wait for state to update (Zag machine processes asynchronously)
+    await waitFor(() => {
+      expect(input.checked).toBe(true);
+    });
+  });
+
+  it("checked prop controls checked state", () => {
+    const { container } = render(() => <Checkbox checked>Checked</Checkbox>);
+    const input = container.querySelector('input[type="checkbox"]') as HTMLInputElement;
+    expect(input.checked).toBe(true);
+  });
+
+  it("defaultChecked works for uncontrolled", () => {
+    const { container } = render(() => (
+      <Checkbox defaultChecked>Default</Checkbox>
+    ));
+    const input = container.querySelector('input[type="checkbox"]') as HTMLInputElement;
+    expect(input.checked).toBe(true);
+  });
+
+  it("disabled prevents checking", () => {
+    const onCheckedChange = vi.fn();
+    const { getByText } = render(() => (
+      <Checkbox disabled onCheckedChange={onCheckedChange}>
+        Disabled
+      </Checkbox>
+    ));
+    const label = getByText("Disabled");
+    fireEvent.click(label);
+    expect(onCheckedChange).not.toHaveBeenCalled();
   });
 
   it("merges custom class", () => {
