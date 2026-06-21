@@ -18,6 +18,7 @@
     "@ark-ui/solid": "^5.36.2",
     "@tailwindcss/vite": "^4.1.18",
     "@tanstack/router-plugin": "^1.133.21",
+    "@tanstack/solid-form": "^1.33.0",
     "@tanstack/solid-router": "latest",
     "@tanstack/solid-router-devtools": "latest",
     "highlight.js": "^11.11.0",

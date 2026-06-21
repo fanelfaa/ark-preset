@@ -1,0 +1,581 @@
+## Installation
+
+Install TanStack Form:
+
+```bash
+npm install @tanstack/solid-form
+```
+
+Optionally install a schema validation library:
+
+```bash
+npm install zod
+# or
+npm install valibot
+# or
+npm install arktype
+```
+
+## Basic Usage
+
+Create a form with `createForm` and use `form.Field` to wire up Ark Preset components:
+
+```tsx
+import { createForm } from "@tanstack/solid-form";
+import { Input } from "~/components/input";
+import { Button } from "~/components/button";
+
+function SignupForm() {
+  const form = createForm(() => ({
+    defaultValues: {
+      name: "",
+      email: "",
+    },
+    onSubmit: async ({ value }) => {
+      console.log("Submit", value);
+    },
+  }));
+
+  return (
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        form.handleSubmit();
+      }}
+      class="flex flex-col gap-4 max-w-sm"
+    >
+      <form.Field
+        name="name"
+        children={(field) => (
+          <Input
+            name={field().name}
+            value={field().state.value}
+            label="Name"
+            placeholder="Enter your name"
+            onBlur={field().handleBlur}
+            onInput={(e) => field().handleChange(e.currentTarget.value)}
+          />
+        )}
+      />
+
+      <form.Field
+        name="email"
+        children={(field) => (
+          <Input
+            name={field().name}
+            value={field().state.value}
+            label="Email"
+            placeholder="Enter your email"
+            onBlur={field().handleBlur}
+            onInput={(e) => field().handleChange(e.currentTarget.value)}
+          />
+        )}
+      />
+
+      <Button type="submit">Submit</Button>
+    </form>
+  );
+}
+```
+
+## Validation
+
+### Inline Validators
+
+Pass synchronous or asynchronous validators directly to `form.Field`:
+
+```tsx
+<form.Field
+  name="email"
+  validators={{
+    onChange: ({ value }) => {
+      if (!value) return "Email is required";
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))
+        return "Invalid email format";
+      return undefined;
+    },
+    onChangeAsyncDebounceMs: 500,
+    onChangeAsync: async ({ value }) => {
+      // Simulate async check (e.g., email uniqueness)
+      await new Promise((r) => setTimeout(r, 300));
+      return value === "taken@example.com"
+        ? "Email is already in use"
+        : undefined;
+    },
+  }}
+  children={(field) => (
+    <Input
+      name={field().name}
+      value={field().state.value}
+      label="Email"
+      placeholder="Enter your email"
+      error={
+        field().state.meta.isTouched && field().state.meta.errors.length > 0
+          ? field().state.meta.errors.join(", ")
+          : undefined
+      }
+      onBlur={field().handleBlur}
+      onInput={(e) => field().handleChange(e.currentTarget.value)}
+    />
+  )}
+/>
+```
+
+### Schema Validation with Zod
+
+Use Zod schemas for declarative validation:
+
+```tsx
+import { z } from "zod";
+import { createForm } from "@tanstack/solid-form";
+
+const signupSchema = z.object({
+  name: z.string().min(3, "Name must be at least 3 characters"),
+  email: z.string().email("Invalid email address"),
+  age: z.coerce.number().min(18, "Must be at least 18"),
+});
+
+function SignupForm() {
+  const form = createForm(() => ({
+    defaultValues: {
+      name: "",
+      email: "",
+      age: 0,
+    },
+    validators: {
+      onChange: signupSchema,
+    },
+    onSubmit: async ({ value }) => {
+      console.log("Validated data:", value);
+    },
+  }));
+
+  return (
+    <form onSubmit={(e) => { e.preventDefault(); form.handleSubmit(); }}>
+      <form.Field
+        name="name"
+        children={(field) => (
+          <Input
+            name={field().name}
+            value={field().state.value}
+            label="Name"
+            error={
+              field().state.meta.isTouched && field().state.meta.errors[0]
+                ? field().state.meta.errors[0]
+                : undefined
+            }
+            onBlur={field().handleBlur}
+            onInput={(e) => field().handleChange(e.currentTarget.value)}
+          />
+        )}
+      />
+      {/* ... more fields */}
+    </form>
+  );
+}
+```
+
+TanStack Form also supports **Valibot**, **ArkType**, and **Effect** schemas via [Standard Schema](https://standardschema.dev/) — no adapter needed.
+
+## Subscribe to Form State
+
+Use `form.Subscribe` to reactively track form-level state:
+
+```tsx
+<form.Subscribe
+  selector={(state) => ({
+    canSubmit: state.canSubmit,
+    isSubmitting: state.isSubmitting,
+  })}
+  children={(state) => (
+    <Button type="submit" disabled={!state().canSubmit}>
+      {state().isSubmitting ? "Submitting..." : "Submit"}
+    </Button>
+  )}
+/>
+```
+
+## Working with Non-Input Components
+
+### Select
+
+```tsx
+import { createListCollection } from "@ark-ui/solid";
+import { Index } from "solid-js";
+import { Select, SelectLabel, SelectTrigger, SelectContent, SelectItem } from "~/components/select";
+
+const frameworks = createListCollection({
+  items: [
+    { label: "React", value: "react" },
+    { label: "Solid", value: "solid" },
+    { label: "Vue", value: "vue" },
+  ],
+});
+
+// Inside your form:
+<form.Field
+  name="framework"
+  validators={{
+    onBlur: ({ value }) => (!value ? "Please select a framework" : undefined),
+  }}
+  children={(field) => (
+    <>
+      <Select
+        name={field().name}
+        collection={frameworks}
+        value={field().state.value ? [field().state.value] : []}
+        onValueChange={(e) => field().handleChange(e.value[0])}
+        onOpenChange={(details) => {
+          if (!details.open) field().handleBlur();
+        }}
+      >
+        <SelectLabel>Framework</SelectLabel>
+        <SelectTrigger placeholder="Select a framework" />
+        <SelectContent>
+          <Index each={frameworks.items}>
+            {(item) => <SelectItem item={item()}>{item().label}</SelectItem>}
+          </Index>
+        </SelectContent>
+      </Select>
+      {field().state.meta.errors[0] && (
+        <div class="text-destructive text-sm mt-1">{field().state.meta.errors[0]}</div>
+      )}
+    </>
+  )}
+/>
+```
+
+### Checkbox
+
+```tsx
+import { Checkbox, CheckboxLabel } from "~/components/checkbox";
+
+<form.Field
+  name="accepted"
+  validators={{
+    onChange: ({ value }) => !value ? "You must accept the terms" : undefined,
+    onBlur: ({ value }) => !value ? "You must accept the terms" : undefined,
+  }}
+  children={(field) => (
+    <>
+      <Checkbox
+        name={field().name}
+        checked={field().state.value}
+        invalid={!!field().state.meta.errors[0]}
+        onCheckedChange={(e) => field().handleChange(!!e.checked)}
+        onBlur={field().handleBlur}
+      >
+        <CheckboxLabel>I accept the terms and conditions</CheckboxLabel>
+      </Checkbox>
+      {field().state.meta.errors[0] && (
+        <div class="text-destructive text-sm mt-1">{field().state.meta.errors[0]}</div>
+      )}
+    </>
+  )}
+/>
+```
+
+### Switch
+
+```tsx
+import { Switch } from "~/components/switch";
+
+<form.Field
+  name="notifications"
+  children={(field) => (
+    <Switch
+      name={field().name}
+      checked={field().state.value}
+      onCheckedChange={(e) => field().handleChange(!!e.checked)}
+      onBlur={field().handleBlur}
+    >
+      Enable notifications
+    </Switch>
+  )}
+/>
+```
+
+### Textarea
+
+```tsx
+import { Textarea } from "~/components/textarea";
+
+<form.Field
+  name="bio"
+  validators={{
+    onChange: ({ value }) =>
+      value.length > 500 ? "Bio must be under 500 characters" : undefined,
+  }}
+  children={(field) => (
+    <Textarea
+      name={field().name}
+      value={field().state.value}
+      label="Bio"
+      placeholder="Tell us about yourself"
+      error={
+        field().state.meta.errors[0]
+          ? field().state.meta.errors[0]
+          : undefined
+      }
+      onBlur={field().handleBlur}
+      onInput={(e) => field().handleChange(e.currentTarget.value)}
+    />
+  )}
+/>
+```
+
+### Radio Group
+
+```tsx
+import { RadioGroup } from "~/components/radio-group";
+
+<form.Field
+  name="plan"
+  validators={{
+    onChange: ({ value }) => (!value ? "Please select a plan" : undefined),
+    onBlur: ({ value }) => (!value ? "Please select a plan" : undefined),
+  }}
+  children={(field) => (
+    <RadioGroup
+      name={field().name}
+      value={field().state.value}
+      label="Subscription Plan"
+      error={field().state.meta.errors[0]}
+      onChange={(e) => field().handleChange(e.value)}
+      onBlur={field().handleBlur}
+      options={[
+        { value: "free", label: "Free" },
+        { value: "pro", label: "Pro" },
+        { value: "enterprise", label: "Enterprise" },
+      ]}
+    />
+  )}
+/>
+```
+
+## Custom Field Components
+
+For reusable field patterns, use `createFormHookContexts` and `createFormHook`:
+
+```tsx
+// src/hooks/form-context.tsx
+import { createFormHookContexts } from "@tanstack/solid-form";
+
+export const { fieldContext, formContext, useFieldContext } =
+  createFormHookContexts();
+```
+
+```tsx
+// src/components/text-field.tsx
+import { useFieldContext } from "../hooks/form-context";
+import { Input } from "~/components/input";
+
+export function TextField(props: { label: string; placeholder?: string }) {
+  const field = useFieldContext<string>();
+  return (
+    <Input
+      name={field().name}
+      value={field().state.value}
+      label={props.label}
+      placeholder={props.placeholder}
+      error={
+        field().state.meta.isTouched && field().state.meta.errors[0]
+          ? field().state.meta.errors[0]
+          : undefined
+      }
+      onBlur={field().handleBlur}
+      onInput={(e) => field().handleChange(e.currentTarget.value)}
+    />
+  );
+}
+```
+
+```tsx
+// src/hooks/form.ts
+import { createFormHook } from "@tanstack/solid-form";
+import { fieldContext, formContext } from "./form-context";
+import { TextField } from "../components/text-field";
+
+export const { useAppForm } = createFormHook({
+  fieldContext,
+  formContext,
+  fieldComponents: { TextField },
+  formComponents: {},
+});
+```
+
+```tsx
+// Usage
+import { useAppForm } from "../hooks/form";
+
+function ProfileForm() {
+  const form = useAppForm(() => ({
+    defaultValues: { firstName: "", lastName: "" },
+    onSubmit: async ({ value }) => console.log(value),
+  }));
+
+  return (
+    <form onSubmit={(e) => { e.preventDefault(); form.handleSubmit(); }}>
+      <form.AppField
+        name="firstName"
+        children={(field) => <field.TextField label="First Name" />}
+      />
+      <form.AppField
+        name="lastName"
+        children={(field) => <field.TextField label="Last Name" />}
+      />
+    </form>
+  );
+}
+```
+
+## Full Example
+
+Here's a complete signup form with validation — this is the same code used in the live demo at the top of this page:
+
+```tsx
+import { createForm } from "@tanstack/solid-form";
+import { createListCollection } from "@ark-ui/solid";
+import { Index, Show } from "solid-js";
+import { Input } from "~/components/input";
+import { Button } from "~/components/button";
+import {
+  Select, SelectLabel, SelectTrigger, SelectContent, SelectItem,
+} from "~/components/select";
+import { Checkbox, CheckboxLabel } from "~/components/checkbox";
+
+const roles = createListCollection({
+  items: [
+    { label: "Developer", value: "developer" },
+    { label: "Designer", value: "designer" },
+    { label: "Product Manager", value: "pm" },
+  ],
+});
+
+function SignupPage() {
+  const form = createForm(() => ({
+    defaultValues: { name: "", email: "", role: "", accepted: false },
+    onSubmit: async ({ value }) => {
+      console.log("Submit:", value);
+    },
+  }));
+
+  return (
+    <form
+      onSubmit={(e) => { e.preventDefault(); form.handleSubmit(); }}
+      class="flex flex-col gap-4"
+    >
+      <form.Field
+        name="name"
+        validators={{
+          onChange: ({ value }) =>
+            value.length < 2 ? "Name must be at least 2 characters" : undefined,
+        }}
+        children={(field) => (
+          <Input
+            name={field().name}
+            value={field().state.value}
+            label="Name"
+            placeholder="Enter your name"
+            error={field().state.meta.errors[0]}
+            onBlur={field().handleBlur}
+            onInput={(e) => field().handleChange(e.currentTarget.value)}
+          />
+        )}
+      />
+
+      <form.Field
+        name="email"
+        validators={{
+          onChange: ({ value }) => {
+            if (!value) return "Email is required";
+            if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(value))
+              return "Invalid email format";
+            return undefined;
+          },
+        }}
+        children={(field) => (
+          <Input
+            name={field().name}
+            value={field().state.value}
+            label="Email"
+            placeholder="email@example.com"
+            error={field().state.meta.errors[0]}
+            onBlur={field().handleBlur}
+            onInput={(e) => field().handleChange(e.currentTarget.value)}
+          />
+        )}
+      />
+
+      <form.Field
+        name="role"
+        validators={{
+          onChange: ({ value }) => (!value ? "Please select a role" : undefined),
+          onBlur: ({ value }) => (!value ? "Please select a role" : undefined),
+        }}
+        children={(field) => (
+          <>
+            <Select
+              name={field().name}
+              collection={roles}
+              value={field().state.value ? [field().state.value] : []}
+              onValueChange={(e) => field().handleChange(e.value[0])}
+              onOpenChange={(details) => {
+                if (!details.open) field().handleBlur();
+              }}
+            >
+              <SelectLabel>Role</SelectLabel>
+              <SelectTrigger placeholder="Select a role" />
+              <SelectContent>
+                <Index each={roles.items}>
+                  {(item) => <SelectItem item={item()}>{item().label}</SelectItem>}
+                </Index>
+              </SelectContent>
+            </Select>
+            <Show when={field().state.meta.errors[0]}>
+              {(msg) => <div class="text-destructive text-sm mt-1">{msg()}</div>}
+            </Show>
+          </>
+        )}
+      />
+
+      <form.Field
+        name="accepted"
+        validators={{
+          onChange: ({ value }) => (!value ? "You must accept the terms" : undefined),
+          onBlur: ({ value }) => (!value ? "You must accept the terms" : undefined),
+        }}
+        children={(field) => (
+          <>
+            <Checkbox
+              name={field().name}
+              checked={field().state.value}
+              invalid={!!field().state.meta.errors[0]}
+              onCheckedChange={(e) => field().handleChange(!!e.checked)}
+              onBlur={field().handleBlur}
+            >
+              <CheckboxLabel>I accept the terms and conditions</CheckboxLabel>
+            </Checkbox>
+            <Show when={field().state.meta.errors[0]}>
+              {(msg) => <div class="text-destructive text-sm mt-1">{msg()}</div>}
+            </Show>
+          </>
+        )}
+      />
+
+      <form.Subscribe
+        selector={(state) => ({
+          canSubmit: state.canSubmit,
+          isSubmitting: state.isSubmitting,
+        })}
+        children={(state) => (
+          <Button type="submit" disabled={!state().canSubmit}>
+            {state().isSubmitting ? "Submitting..." : "Submit"}
+          </Button>
+        )}
+      />
+    </form>
+  );
+}
+```
