@@ -1,4 +1,4 @@
-import { render } from "@solidjs/testing-library";
+import { render, fireEvent } from "@solidjs/testing-library";
 import { Input, InputBase, inputVariants } from "../src/input";
 
 describe("Input", () => {
@@ -54,6 +54,61 @@ describe("Input", () => {
     expect(inputVariants).toBeDefined();
     expect(typeof inputVariants).toBe("function");
   });
+
+  it("calls onInput when typing", () => {
+    const onInput = vi.fn();
+    const { container } = render(() => <Input onInput={onInput} />);
+    const input = container.querySelector("input")!;
+    fireEvent.input(input, { target: { value: "hello" } });
+    expect(onInput).toHaveBeenCalled();
+  });
+
+  it("calls onChange when value changes", () => {
+    const onChange = vi.fn();
+    const { container } = render(() => <Input onChange={onChange} />);
+    const input = container.querySelector("input")!;
+    fireEvent.change(input, { target: { value: "world" } });
+    expect(onChange).toHaveBeenCalled();
+  });
+
+  it("calls onFocus when focused", () => {
+    const onFocus = vi.fn();
+    const { container } = render(() => <Input onFocus={onFocus} />);
+    const input = container.querySelector("input")!;
+    fireEvent.focus(input);
+    expect(onFocus).toHaveBeenCalledTimes(1);
+  });
+
+  it("calls onBlur when blurred", () => {
+    const onBlur = vi.fn();
+    const { container } = render(() => <Input onBlur={onBlur} />);
+    const input = container.querySelector("input")!;
+    fireEvent.focus(input);
+    fireEvent.blur(input);
+    expect(onBlur).toHaveBeenCalledTimes(1);
+  });
+
+  it("applies value prop to input", () => {
+    const { container } = render(() => <Input value="test value" />);
+    const input = container.querySelector("input")!;
+    expect(input).toHaveValue("test value");
+  });
+
+  it("typing updates input value", () => {
+    const { container } = render(() => <Input />);
+    const input = container.querySelector("input")!;
+    fireEvent.input(input, { target: { value: "typed" } });
+    expect(input).toHaveValue("typed");
+  });
+
+  it("disabled input does not accept input", () => {
+    const onChange = vi.fn();
+    const { container } = render(() => <Input disabled onChange={onChange} />);
+    const input = container.querySelector("input")!;
+    expect(input).toBeDisabled();
+    fireEvent.input(input, { target: { value: "test" } });
+    expect(onChange).not.toHaveBeenCalled();
+  });
 });
 
 describe("InputBase", () => {
@@ -97,5 +152,13 @@ describe("InputBase", () => {
       </InputBase.Root>
     ));
     expect(getByText("Error")).toBeInTheDocument();
+  });
+
+  it("InputBase.Field fires input event", () => {
+    const onInput = vi.fn();
+    const { container } = render(() => <InputBase.Field onInput={onInput} />);
+    const input = container.querySelector("input")!;
+    fireEvent.input(input, { target: { value: "test" } });
+    expect(onInput).toHaveBeenCalled();
   });
 });

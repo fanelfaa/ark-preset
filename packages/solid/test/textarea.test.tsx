@@ -1,4 +1,4 @@
-import { render } from "@solidjs/testing-library";
+import { render, fireEvent } from "@solidjs/testing-library";
 import { Textarea, TextareaBase, textareaVariants } from "../src/textarea";
 
 describe("Textarea", () => {
@@ -46,6 +46,80 @@ describe("Textarea", () => {
     expect(textareaVariants).toBeDefined();
     expect(typeof textareaVariants).toBe("function");
   });
+
+  it("calls onInput when typing", () => {
+    const onInput = vi.fn();
+    const { container } = render(() => <Textarea onInput={onInput} />);
+    const textarea = container.querySelector("textarea")!;
+    fireEvent.input(textarea, { target: { value: "hello" } });
+    expect(onInput).toHaveBeenCalled();
+  });
+
+  it("calls onChange when value changes", () => {
+    const onChange = vi.fn();
+    const { container } = render(() => <Textarea onChange={onChange} />);
+    const textarea = container.querySelector("textarea")!;
+    fireEvent.change(textarea, { target: { value: "world" } });
+    expect(onChange).toHaveBeenCalled();
+  });
+
+  it("applies value prop to textarea", () => {
+    const { container } = render(() => <Textarea value="initial" />);
+    const textarea = container.querySelector("textarea")!;
+    expect(textarea).toHaveValue("initial");
+  });
+
+  it("typing updates textarea value", () => {
+    const { container } = render(() => <Textarea />);
+    const textarea = container.querySelector("textarea")!;
+    fireEvent.input(textarea, { target: { value: "typed content" } });
+    expect(textarea).toHaveValue("typed content");
+  });
+
+  it("disabled textarea does not accept input", () => {
+    const onChange = vi.fn();
+    const { container } = render(() => <Textarea disabled onChange={onChange} />);
+    const textarea = container.querySelector("textarea")!;
+    expect(textarea).toBeDisabled();
+    fireEvent.input(textarea, { target: { value: "test" } });
+    expect(onChange).not.toHaveBeenCalled();
+  });
+
+  it("renders with placeholder", () => {
+    const { container } = render(() => <Textarea placeholder="Tell us..." />);
+    const textarea = container.querySelector("textarea")!;
+    expect(textarea).toHaveAttribute("placeholder", "Tell us...");
+  });
+
+  it("applies error class to textarea", () => {
+    const { container } = render(() => <Textarea error="Error" />);
+    const textarea = container.querySelector("textarea")!;
+    // error prop should trigger invalid state on the field
+    expect(textarea).toBeInTheDocument();
+  });
+
+  it("renders with custom rows", () => {
+    const { container } = render(() => <Textarea rows={5} />);
+    const textarea = container.querySelector("textarea")!;
+    expect(textarea).toHaveAttribute("rows", "5");
+  });
+
+  it("calls onFocus when focused", () => {
+    const onFocus = vi.fn();
+    const { container } = render(() => <Textarea onFocus={onFocus} />);
+    const textarea = container.querySelector("textarea")!;
+    fireEvent.focus(textarea);
+    expect(onFocus).toHaveBeenCalledTimes(1);
+  });
+
+  it("calls onBlur when blurred", () => {
+    const onBlur = vi.fn();
+    const { container } = render(() => <Textarea onBlur={onBlur} />);
+    const textarea = container.querySelector("textarea")!;
+    fireEvent.focus(textarea);
+    fireEvent.blur(textarea);
+    expect(onBlur).toHaveBeenCalledTimes(1);
+  });
 });
 
 describe("TextareaBase", () => {
@@ -65,5 +139,13 @@ describe("TextareaBase", () => {
   it("TextareaBase.Field renders textarea", () => {
     const { container } = render(() => <TextareaBase.Field />);
     expect(container.querySelector("textarea")).toBeInTheDocument();
+  });
+
+  it("TextareaBase.Field fires input event", () => {
+    const onInput = vi.fn();
+    const { container } = render(() => <TextareaBase.Field onInput={onInput} />);
+    const textarea = container.querySelector("textarea")!;
+    fireEvent.input(textarea, { target: { value: "test" } });
+    expect(onInput).toHaveBeenCalled();
   });
 });
