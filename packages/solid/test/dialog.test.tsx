@@ -1,4 +1,4 @@
-import { render } from "@solidjs/testing-library";
+import { render, fireEvent, screen, waitFor } from "@solidjs/testing-library";
 import {
   Dialog,
   DialogTrigger,
@@ -43,6 +43,89 @@ describe("Dialog", () => {
     expect(dialogVariants).toBeDefined();
     expect(typeof dialogVariants).toBe("function");
   });
+
+  it("opens when trigger is clicked", () => {
+    render(() => (
+      <Dialog>
+        <DialogTrigger>Open</DialogTrigger>
+        <DialogContent>
+          <DialogTitle>Title</DialogTitle>
+        </DialogContent>
+      </Dialog>
+    ));
+
+    fireEvent.click(screen.getByText("Open"));
+    expect(screen.getByText("Title")).toBeInTheDocument();
+  });
+
+  it("shows content with defaultOpen", () => {
+    render(() => (
+      <Dialog defaultOpen>
+        <DialogTrigger>Open</DialogTrigger>
+        <DialogContent>
+          <DialogDescription>Desc</DialogDescription>
+        </DialogContent>
+      </Dialog>
+    ));
+    expect(screen.getByText("Desc")).toBeInTheDocument();
+  });
+
+  it("calls onOpenChange when toggled", async () => {
+    const onOpenChange = vi.fn();
+    render(() => (
+      <Dialog onOpenChange={onOpenChange}>
+        <DialogTrigger>Toggle</DialogTrigger>
+        <DialogContent>
+          <DialogTitle>Title</DialogTitle>
+        </DialogContent>
+      </Dialog>
+    ));
+    fireEvent.click(screen.getByText("Toggle"));
+    await waitFor(() => expect(onOpenChange).toHaveBeenCalledTimes(1));
+  });
+
+  it("trigger onClick fires", () => {
+    const onClick = vi.fn();
+    render(() => (
+      <Dialog>
+        <DialogTrigger onClick={onClick}>Click</DialogTrigger>
+      </Dialog>
+    ));
+    fireEvent.click(screen.getByText("Click"));
+    expect(onClick).toHaveBeenCalledTimes(1);
+  });
+
+  it("content renders with custom class via Portal", () => {
+    render(() => (
+      <Dialog defaultOpen>
+        <DialogTrigger>Open</DialogTrigger>
+        <DialogContent class="my-dialog-content">
+          <DialogTitle>Styled</DialogTitle>
+        </DialogContent>
+      </Dialog>
+    ));
+    // Content is in Portal — find via screen
+    const content = screen.getByText("Styled").closest('[class*="my-dialog-content"]');
+    expect(content).toHaveClass("my-dialog-content");
+  });
+
+  it("renders close trigger inside Portal content", () => {
+    render(() => (
+      <Dialog defaultOpen>
+        <DialogTrigger>Open</DialogTrigger>
+        <DialogContent>
+          <DialogTitle>HasCloseBtn</DialogTitle>
+        </DialogContent>
+      </Dialog>
+    ));
+    // DialogContent renders Backdrop + Positioner + Content + CloseTrigger via Portal
+    expect(screen.getByText("HasCloseBtn")).toBeInTheDocument();
+    // CloseTrigger renders an SVG button inside the Portal
+    const closeTrigger = document.querySelector(
+      '[data-scope="dialog"][data-part="close-trigger"]'
+    );
+    expect(closeTrigger).toBeInTheDocument();
+  });
 });
 
 describe("DialogHeader", () => {
@@ -70,6 +153,20 @@ describe("DialogTitle", () => {
       </DialogBase.Root>
     ));
     expect(getByText("Title")).toBeInTheDocument();
+  });
+
+  it("renders with defaultOpen in Dialog portal", () => {
+    render(() => (
+      <DialogBase.Root defaultOpen>
+        <DialogTitle>Portal Title</DialogTitle>
+        <DialogBase.Content>
+          <DialogDescription>Portal Desc</DialogDescription>
+        </DialogBase.Content>
+      </DialogBase.Root>
+    ));
+    // DialogBase.Content works at base level, but composite wraps in Portal
+    // So we check via screen
+    expect(screen.getByText("Portal Title")).toBeInTheDocument();
   });
 });
 

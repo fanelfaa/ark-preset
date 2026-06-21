@@ -1,8 +1,8 @@
-import { render } from "@solidjs/testing-library";
-import { Tooltip, TooltipBase, tooltipVariants } from "../src/tooltip";
-import { Popover, PopoverBase, popoverVariants } from "../src/popover";
-import { HoverCard, HoverCardBase, hoverCardVariants } from "../src/hover-card";
-import { AlertDialog, AlertDialogBase, alertDialogVariants } from "../src/alert-dialog";
+import { render, fireEvent, screen, waitFor } from "@solidjs/testing-library";
+import { Tooltip, TooltipTrigger, TooltipContent, TooltipBase, tooltipVariants } from "../src/tooltip";
+import { Popover, PopoverTrigger, PopoverContent, PopoverTitle, PopoverDescription, PopoverBase, popoverVariants } from "../src/popover";
+import { HoverCard, HoverCardTrigger, HoverCardContent, HoverCardBase, hoverCardVariants } from "../src/hover-card";
+import { AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogTitle, AlertDialogDescription, AlertDialogCancel, AlertDialogAction, AlertDialogBase, alertDialogVariants } from "../src/alert-dialog";
 
 // ------------------------------------------------------------------ //
 //  Tooltip
@@ -45,6 +45,37 @@ describe("TooltipBase", () => {
       </TooltipBase.Root>
     ));
     expect(getByText("Tooltip content")).toBeInTheDocument();
+  });
+
+  it("Tooltip shows content with defaultOpen", () => {
+    const { getByText } = render(() => (
+      <TooltipBase.Root defaultOpen>
+        <TooltipBase.Trigger>Hover me</TooltipBase.Trigger>
+        <TooltipBase.Content>Tooltip visible</TooltipBase.Content>
+      </TooltipBase.Root>
+    ));
+    expect(getByText("Tooltip visible")).toBeInTheDocument();
+  });
+
+  it("Tooltip composites render together", () => {
+    const { getByText } = render(() => (
+      <Tooltip defaultOpen>
+        <TooltipTrigger>Trigger</TooltipTrigger>
+        <TooltipContent>Composite content</TooltipContent>
+      </Tooltip>
+    ));
+    expect(getByText("Composite content")).toBeInTheDocument();
+  });
+
+  it("Tooltip trigger onClick fires", () => {
+    const onClick = vi.fn();
+    const { getByText } = render(() => (
+      <TooltipBase.Root>
+        <TooltipBase.Trigger onClick={onClick}>Click</TooltipBase.Trigger>
+      </TooltipBase.Root>
+    ));
+    fireEvent.click(getByText("Click"));
+    expect(onClick).toHaveBeenCalledTimes(1);
   });
 });
 
@@ -93,6 +124,60 @@ describe("PopoverBase", () => {
     ));
     expect(getByText("Content")).toBeInTheDocument();
   });
+
+  it("Popover shows content with defaultOpen (Portal)", () => {
+    render(() => (
+      <Popover defaultOpen>
+        <PopoverTrigger>Open</PopoverTrigger>
+        <PopoverContent>
+          <PopoverTitle>Popover Title</PopoverTitle>
+        </PopoverContent>
+      </Popover>
+    ));
+    // PopoverContent uses Portal — use screen
+    expect(screen.getByText("Popover Title")).toBeInTheDocument();
+  });
+
+  it("Popover opens when trigger is clicked", () => {
+    render(() => (
+      <Popover>
+        <PopoverTrigger>Show popover</PopoverTrigger>
+        <PopoverContent>
+          <PopoverDescription>Popover desc</PopoverDescription>
+        </PopoverContent>
+      </Popover>
+    ));
+    fireEvent.click(screen.getByText("Show popover"));
+    expect(screen.getByText("Popover desc")).toBeInTheDocument();
+  });
+
+  it("Popover trigger onClick fires", () => {
+    const onClick = vi.fn();
+    render(() => (
+      <Popover>
+        <PopoverTrigger onClick={onClick}>Click</PopoverTrigger>
+      </Popover>
+    ));
+    fireEvent.click(screen.getByText("Click"));
+    expect(onClick).toHaveBeenCalledTimes(1);
+  });
+
+  it("Popover renders close trigger inside Portal", () => {
+    render(() => (
+      <Popover defaultOpen>
+        <PopoverTrigger>Open</PopoverTrigger>
+        <PopoverContent>
+          <PopoverTitle>ClosablePopover</PopoverTitle>
+        </PopoverContent>
+      </Popover>
+    ));
+    expect(screen.getByText("ClosablePopover")).toBeInTheDocument();
+    // PopoverContent includes a CloseTrigger + Arrow inside Portal
+    const closeTrigger = document.querySelector(
+      '[data-scope="popover"][data-part="close-trigger"]'
+    );
+    expect(closeTrigger).toBeInTheDocument();
+  });
 });
 
 // ------------------------------------------------------------------ //
@@ -127,6 +212,26 @@ describe("HoverCardBase", () => {
       </HoverCardBase.Root>
     ));
     expect(getByText("Card content")).toBeInTheDocument();
+  });
+
+  it("HoverCard shows content with defaultOpen", () => {
+    const { getByText } = render(() => (
+      <HoverCard defaultOpen>
+        <HoverCardTrigger>Hover</HoverCardTrigger>
+        <HoverCardContent>Card visible</HoverCardContent>
+      </HoverCard>
+    ));
+    expect(getByText("Card visible")).toBeInTheDocument();
+  });
+
+  it("HoverCard composite renders trigger and content", () => {
+    const { getByText } = render(() => (
+      <HoverCard defaultOpen>
+        <HoverCardTrigger>Trigger</HoverCardTrigger>
+        <HoverCardContent useArrow>With arrow</HoverCardContent>
+      </HoverCard>
+    ));
+    expect(getByText("With arrow")).toBeInTheDocument();
   });
 });
 
@@ -174,5 +279,85 @@ describe("AlertDialogBase", () => {
       </AlertDialogBase.Root>
     ));
     expect(getByText("Open")).toBeInTheDocument();
+  });
+
+  it("AlertDialog shows content with defaultOpen (Portal)", () => {
+    render(() => (
+      <AlertDialog defaultOpen>
+        <AlertDialogTrigger>Open</AlertDialogTrigger>
+        <AlertDialogContent>
+          <AlertDialogTitle>Alert Title</AlertDialogTitle>
+        </AlertDialogContent>
+      </AlertDialog>
+    ));
+    expect(screen.getByText("Alert Title")).toBeInTheDocument();
+  });
+
+  it("AlertDialog opens when trigger is clicked", () => {
+    render(() => (
+      <AlertDialog>
+        <AlertDialogTrigger>Show alert</AlertDialogTrigger>
+        <AlertDialogContent>
+          <AlertDialogDescription>Alert desc</AlertDialogDescription>
+        </AlertDialogContent>
+      </AlertDialog>
+    ));
+    fireEvent.click(screen.getByText("Show alert"));
+    expect(screen.getByText("Alert desc")).toBeInTheDocument();
+  });
+
+  it("AlertDialog renders Cancel and Action buttons within Portal", () => {
+    render(() => (
+      <AlertDialog defaultOpen>
+        <AlertDialogTrigger>Open</AlertDialogTrigger>
+        <AlertDialogContent>
+          <AlertDialogTitle>Confirm</AlertDialogTitle>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction>Action</AlertDialogAction>
+        </AlertDialogContent>
+      </AlertDialog>
+    ));
+    expect(screen.getByText("Confirm")).toBeInTheDocument();
+    expect(screen.getByText("Cancel")).toBeInTheDocument();
+    expect(screen.getByText("Action")).toBeInTheDocument();
+  });
+
+  it("AlertDialogCancel onClick fires", () => {
+    const onClick = vi.fn();
+    render(() => (
+      <AlertDialog defaultOpen>
+        <AlertDialogTrigger>Open</AlertDialogTrigger>
+        <AlertDialogContent>
+          <AlertDialogTitle>Confirm</AlertDialogTitle>
+          <AlertDialogCancel onClick={onClick}>Cancel</AlertDialogCancel>
+        </AlertDialogContent>
+      </AlertDialog>
+    ));
+    // AlertDialogCancel renders a CloseTrigger with button styles — find via screen
+    fireEvent.click(screen.getByText("Cancel"));
+    expect(onClick).toHaveBeenCalledTimes(1);
+  });
+
+  it("AlertDialogBase.Backdrop renders with defaultOpen", () => {
+    const { container } = render(() => (
+      <AlertDialogBase.Root defaultOpen>
+        <AlertDialogBase.Backdrop />
+      </AlertDialogBase.Root>
+    ));
+    expect(container.firstChild).toBeInTheDocument();
+  });
+
+  it("AlertDialogBase.Cancel and Action render within context", () => {
+    const { getByText } = render(() => (
+      <AlertDialogBase.Root defaultOpen>
+        <AlertDialogBase.Content>
+          <AlertDialogBase.Cancel>No</AlertDialogBase.Cancel>
+          <AlertDialogBase.Action>Yes</AlertDialogBase.Action>
+        </AlertDialogBase.Content>
+      </AlertDialogBase.Root>
+    ));
+    // AlertDialogBase.Content does NOT use Portal — use getByText
+    expect(getByText("No")).toBeInTheDocument();
+    expect(getByText("Yes")).toBeInTheDocument();
   });
 });
