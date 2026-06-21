@@ -28,3 +28,11 @@ tasks:
     command: "pnpm preview"
     deps:
       - "build"
+  e2e:
+    command: "pnpm exec playwright test --config e2e/playwright.config.ts"
+    deps:
+      - "build"
+    inputs:
+      - "e2e/**/*"
+      - "src/**/*"
+      - "vite.config.ts"

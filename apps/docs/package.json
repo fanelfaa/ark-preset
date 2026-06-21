@@ -12,9 +12,9 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@ark-ui/solid": "^5.36.2",
     "@ark-preset/core": "workspace:*",
     "@ark-preset/solid": "workspace:*",
+    "@ark-ui/solid": "^5.36.2",
     "@tailwindcss/vite": "^4.1.18",
     "@tanstack/router-plugin": "^1.133.21",
     "@tanstack/solid-router": "latest",
@@ -27,6 +27,7 @@
     "vite-plugin-solid-marked": "^0.7.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.61.0",
     "@solidjs/testing-library": "^0.8.10",
     "@tailwindcss/typography": "^0.5.19",
     "@tanstack/devtools-vite": "latest",
