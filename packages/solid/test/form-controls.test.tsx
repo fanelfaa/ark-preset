@@ -1,4 +1,3 @@
-import { describe, it, expect } from "vitest";
 import { render } from "@solidjs/testing-library";
 import { Toggle, toggleVariants } from "../src/toggle";
 import { ToggleGroup, ToggleGroupBase, toggleGroupVariants } from "../src/toggle-group";

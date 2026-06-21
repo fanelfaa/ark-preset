@@ -1,4 +1,3 @@
-import { describe, it, expect } from "vitest";
 import { render } from "@solidjs/testing-library";
 import { Badge, badgeVariants } from "../src/badge";
 import { Spinner, spinnerVariants } from "../src/spinner";

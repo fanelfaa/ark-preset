@@ -1,4 +1,3 @@
-import { describe, it, expect } from "vitest";
 import { render } from "@solidjs/testing-library";
 import { Tooltip, TooltipBase, tooltipVariants } from "../src/tooltip";
 import { Popover, PopoverBase, popoverVariants } from "../src/popover";

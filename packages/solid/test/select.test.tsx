@@ -1,4 +1,3 @@
-import { describe, it, expect } from "vitest";
 import { render } from "@solidjs/testing-library";
 import { Select, SelectBase, selectVariants } from "../src/select";
 import { Combobox, ComboboxBase, comboboxVariants } from "../src/combobox";

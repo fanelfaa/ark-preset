@@ -1,4 +1,3 @@
-import { describe, it, expect } from "vitest";
 import { render } from "@solidjs/testing-library";
 import { NumberInput, NumberInputBase, numberInputVariants } from "../src/number-input";
 import { PinInput, PinInputBase, pinInputVariants } from "../src/pin-input";

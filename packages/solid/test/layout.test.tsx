@@ -1,4 +1,3 @@
-import { describe, it, expect } from "vitest";
 import { render } from "@solidjs/testing-library";
 import { Accordion, AccordionBase, accordionVariants } from "../src/accordion";
 import { Tabs, TabsBase, tabsVariants } from "../src/tabs";
@@ -33,12 +32,12 @@ describe("AccordionBase", () => {
   });
 
   it("AccordionBase.Root renders with children providing context", () => {
-    const { getByText } = render(() => (
+    const { container } = render(() => (
       <AccordionBase.Root>
         <AccordionBase.Item />
       </AccordionBase.Root>
     ));
-    expect(getByText).toBeDefined();
+    expect(container.firstChild).toBeInTheDocument();
   });
 });
 
