@@ -3,8 +3,11 @@ import { createListCollection } from "@ark-ui/solid";
 import { Index, Show } from "solid-js";
 import { Input } from "@ark-preset/solid";
 import { Button } from "@ark-preset/solid";
+import { Textarea } from "@ark-preset/solid";
+import { NumberInput } from "@ark-preset/solid";
 import { Select, SelectLabel, SelectTrigger, SelectContent, SelectItem } from "@ark-preset/solid";
 import { Checkbox, CheckboxLabel } from "@ark-preset/solid";
+import { Switch, SwitchLabel } from "@ark-preset/solid";
 
 const roles = createListCollection({
   items: [
@@ -19,7 +22,10 @@ export default function TanstackFormDemo() {
     defaultValues: {
       name: "",
       email: "",
+      age: 0,
       role: "",
+      bio: "",
+      notifications: false,
       accepted: false,
     },
     onSubmit: async ({ value }) => {
@@ -48,11 +54,7 @@ export default function TanstackFormDemo() {
             value={field().state.value}
             label="Name"
             placeholder="Enter your name"
-            error={
-              field().state.meta.isTouched && field().state.meta.errors[0]
-                ? field().state.meta.errors[0]
-                : undefined
-            }
+            error={field().state.meta.errors[0]}
             onBlur={field().handleBlur}
             onInput={(e) => field().handleChange(e.currentTarget.value)}
           />
@@ -74,11 +76,7 @@ export default function TanstackFormDemo() {
             value={field().state.value}
             label="Email"
             placeholder="email@example.com"
-            error={
-              field().state.meta.isTouched && field().state.meta.errors[0]
-                ? field().state.meta.errors[0]
-                : undefined
-            }
+            error={field().state.meta.errors[0]}
             onBlur={field().handleBlur}
             onInput={(e) => field().handleChange(e.currentTarget.value)}
           />
@@ -86,9 +84,21 @@ export default function TanstackFormDemo() {
       />
 
       <form.Field
+        name="age"
+        children={(field) => (
+          <NumberInput
+            name={field().name}
+            label="Age"
+            value={String(field().state.value)}
+            onValueChange={(e) => field().handleChange(e.valueAsNumber)}
+            onBlur={field().handleBlur}
+          />
+        )}
+      />
+
+      <form.Field
         name="role"
         validators={{
-          onChange: ({ value }) => (!value ? "Please select a role" : undefined),
           onBlur: ({ value }) => (!value ? "Please select a role" : undefined),
         }}
         children={(field) => (
@@ -97,7 +107,7 @@ export default function TanstackFormDemo() {
               name={field().name}
               collection={roles}
               value={field().state.value ? [field().state.value] : []}
-              error={field().state.meta.isTouched && !!field().state.meta.errors[0]}
+              error={!!field().state.meta.errors[0]}
               onValueChange={(e) => {
                 field().handleChange(e.value[0]);
                 field().handleBlur();
@@ -105,7 +115,6 @@ export default function TanstackFormDemo() {
               onOpenChange={(details) => {
                 if (!details.open) field().handleBlur();
               }}
-              onInteractOutside={() => field().handleBlur()}
             >
               <SelectLabel>Role</SelectLabel>
               <SelectTrigger placeholder="Select a role" />
@@ -123,9 +132,41 @@ export default function TanstackFormDemo() {
       />
 
       <form.Field
+        name="bio"
+        validators={{
+          onChange: ({ value }) =>
+            value.length > 200 ? "Bio must be under 200 characters" : undefined,
+        }}
+        children={(field) => (
+          <Textarea
+            name={field().name}
+            value={field().state.value}
+            label="Bio"
+            placeholder="Tell us about yourself"
+            error={field().state.meta.errors[0]}
+            onBlur={field().handleBlur}
+            onInput={(e) => field().handleChange(e.currentTarget.value)}
+          />
+        )}
+      />
+
+      <form.Field
+        name="notifications"
+        children={(field) => (
+          <Switch
+            name={field().name}
+            checked={field().state.value}
+            onCheckedChange={(e) => field().handleChange(!!e.checked)}
+            onBlur={field().handleBlur}
+          >
+            <SwitchLabel>Enable email notifications</SwitchLabel>
+          </Switch>
+        )}
+      />
+
+      <form.Field
         name="accepted"
         validators={{
-          onChange: ({ value }) => (!value ? "You must accept the terms" : undefined),
           onBlur: ({ value }) => (!value ? "You must accept the terms" : undefined),
         }}
         children={(field) => (
@@ -133,7 +174,7 @@ export default function TanstackFormDemo() {
             <Checkbox
               name={field().name}
               checked={field().state.value}
-              invalid={field().state.meta.isTouched && !!field().state.meta.errors[0]}
+              invalid={!!field().state.meta.errors[0]}
               onCheckedChange={(e) => field().handleChange(!!e.checked)}
               onBlur={field().handleBlur}
             >
