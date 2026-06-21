@@ -19,6 +19,7 @@ import { RadioGroup, RadioGroupItem } from "@ark-preset/solid";
 import { SegmentGroup, SegmentGroupItem } from "@ark-preset/solid";
 import { Toggle, ToggleIndicator } from "@ark-preset/solid";
 import { ToggleGroup, ToggleGroupItem } from "@ark-preset/solid";
+import { PasswordInputBase } from "@ark-preset/solid";
 import { DatePicker } from "@ark-preset/solid";
 
 const countries = createListCollection({
@@ -59,6 +60,7 @@ export default function TanstackFormDemo() {
       volume: 50,
       notifications: false,
       skills: [] as string[],
+      password: "",
       accepted: false,
       startDate: "2026-06-01",
       bold: false,
@@ -141,6 +143,50 @@ export default function TanstackFormDemo() {
             onValueChange={(e) => field().handleChange(e.valueAsNumber)}
             onBlur={field().handleBlur}
           />
+        )}
+      />
+
+      {/* ── Password ── */}
+      <form.Field
+        name="password"
+        validators={{
+          onChange: ({ value }) => {
+            if (value.length > 0 && value.length < 6) return "Password must be at least 6 characters";
+            return undefined;
+          },
+        }}
+        children={(field) => (
+          <div class="not-prose flex flex-col gap-1">
+            <PasswordInputBase.Root invalid={!!field().state.meta.isTouched && !!field().state.meta.errors[0]}>
+              <PasswordInputBase.Label>Password</PasswordInputBase.Label>
+              <PasswordInputBase.Control>
+                <PasswordInputBase.Field
+                  value={field().state.value}
+                  onInput={(e) => field().handleChange(e.currentTarget.value)}
+                  onBlur={field().handleBlur}
+                  placeholder="Enter password"
+                />
+                <PasswordInputBase.VisibilityTrigger>
+                  <PasswordInputBase.Indicator
+                    fallback={
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
+                        <line x1="1" y1="1" x2="23" y2="23" />
+                      </svg>
+                    }
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                      <circle cx="12" cy="12" r="3" />
+                    </svg>
+                  </PasswordInputBase.Indicator>
+                </PasswordInputBase.VisibilityTrigger>
+              </PasswordInputBase.Control>
+            </PasswordInputBase.Root>
+            <Show when={field().state.meta.errors[0]}>
+              {(msg) => <div class="text-destructive text-sm">{msg()}</div>}
+            </Show>
+          </div>
         )}
       />
 
