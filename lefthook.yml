@@ -4,6 +4,10 @@
 pre-commit:
   parallel: true
   commands:
+    lint:
+      run: pnpm exec oxlint {staged_files}
+    fmt:
+      run: pnpm exec oxfmt {staged_files}
     solid-tests:
       root: "packages/solid/"
       glob: "**/*.{ts,tsx}"
