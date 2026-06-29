@@ -18,7 +18,6 @@ Monorepo UI library with Ark UI primitives, Solid.js implementations, CLI tool, 
 │   └── cli/           # CLI for component generation (@ark-preset/cli)
 ├── apps/              # Applications
 │   └── docs/          # Documentation site (Astro + Solid.js + TanStack Router)
-├── .sisyphus/         # Agentic coding framework artifacts
 ├── .moon/             # Moonrepo configuration
 ├── .agents/           # Agent rule files (moon, solid conventions)
 └── COMPONENT_TODOS.md # Implementation progress tracker
@@ -78,7 +77,6 @@ Monorepo UI library with Ark UI primitives, Solid.js implementations, CLI tool, 
 - Each Solid component ships two levels: composite (index.tsx) + base (.base.tsx)
 - 5 component patterns (A-E) for different wrapper complexity levels
 - Moonrepo for task orchestration with dependency-aware builds
-- Sisyphus agent framework for AI-assisted development tracking
 - Component tracking via COMPONENT_TODOS.md with 88 total targets
 - .agents/ directory for AI coding convention rules
 
@@ -105,7 +103,6 @@ moon ci                        # CI pipeline
 
 ## NOTES
 
-- The .sisyphus/ directory contains agent plans, drafts, and evidence — do not modify manually
 - Component completeness tracked in COMPONENT_TODOS.md (51/88 done as of June 2026)
 - Ark UI version locked via dependencies; check package.json for exact version
 - Solid.js components use inline SVG icons to avoid extra dependencies
