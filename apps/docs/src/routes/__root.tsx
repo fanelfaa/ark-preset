@@ -1,12 +1,6 @@
 import { Link, Outlet, createRootRoute } from "@tanstack/solid-router";
 import { TanStackRouterDevtools } from "@tanstack/solid-router-devtools";
-import {
-  Button,
-  Drawer,
-  DrawerTrigger,
-  DrawerContent,
-  DrawerBase,
-} from "@ark-preset/solid";
+import { Button, Drawer, DrawerTrigger, DrawerContent, DrawerBase } from "@ark-preset/solid";
 import { ThemeToggle } from "../components/ThemeToggle";
 import { SidebarNav } from "../components/DocsLayout";
 
