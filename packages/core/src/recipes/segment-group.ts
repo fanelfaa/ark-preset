@@ -31,7 +31,7 @@ export const segmentGroupVariants = tv({
         item: "flex-1 justify-center",
       },
       vertical: {
-        root: "flex-col items-stretch",
+        root: "flex-col items-stretch h-auto",
         item: "w-full justify-center",
       },
     },
