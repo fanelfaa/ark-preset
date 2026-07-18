@@ -12,6 +12,67 @@ import {
 } from "solid-js";
 import { selectVariants } from "@ark-preset/core";
 import { ScrollArea } from "../scroll-area";
+// ── Inline SVG Icons ──
+
+function XIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="size-4"
+    >
+      <path d="M18 6 6 18" />
+      <path d="m6 6 12 12" />
+    </svg>
+  );
+}
+
+function ChevronDownIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="size-4"
+    >
+      <path d="m6 9 6 6 6-6" />
+    </svg>
+  );
+}
+
+function CheckIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="size-4"
+    >
+      <path d="M20 6 9 17l-5-5" />
+    </svg>
+  );
+}
+
+
 
 const styles = selectVariants();
 
@@ -96,37 +157,14 @@ const SelectTrigger: Component<SelectTriggerProps> = (props) => {
         <SelectBase.ValueText placeholder={local.placeholder ?? "Select..."} />
         <div class="flex items-center gap-1">
           <SelectBase.ClearTrigger>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="size-4"
-            >
-              <path d="M18 6 6 18" />
-              <path d="m6 6 12 12" />
-            </svg>
+          <SelectBase.ClearTrigger>
+            <XIcon />
+          </SelectBase.ClearTrigger>
           </SelectBase.ClearTrigger>
           <SelectBase.Indicator>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="size-4"
-            >
-              <path d="m6 9 6 6 6-6" />
-            </svg>
+          <SelectBase.Indicator>
+            <ChevronDownIcon />
+          </SelectBase.Indicator>
           </SelectBase.Indicator>
         </div>
       </SelectBase.Trigger>
@@ -170,20 +208,9 @@ const SelectItem: Component<ArkSelect.ItemProps> = (props) => {
         local.children
       )}
       <SelectBase.ItemIndicator>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="size-4"
-        >
-          <path d="M20 6 9 17l-5-5" />
-        </svg>
+      <SelectBase.ItemIndicator>
+        <CheckIcon />
+      </SelectBase.ItemIndicator>
       </SelectBase.ItemIndicator>
     </SelectBase.Item>
   );
