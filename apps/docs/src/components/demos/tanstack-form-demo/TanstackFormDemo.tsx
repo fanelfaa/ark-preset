@@ -304,6 +304,7 @@ export default function TanstackFormDemo() {
             name={field().name}
             value={field().state.value}
             count={5}
+            orientation="vertical"
             onValueChange={(e) => field().handleChange(e.value)}
             onBlur={field().handleBlur}
           >
