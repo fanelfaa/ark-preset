@@ -32,14 +32,22 @@ type SelectProps = ArkSelect.RootProps<{ label: string; value: string }> & {
 };
 
 const Select: Component<SelectProps> = (props) => {
-  const [local, others] = splitProps(props, [
+  const [local, rest] = splitProps(props, [
     "searchable",
     "onSearch",
     "onOpenChange",
     "class",
     "error",
   ]);
+  const [positioningProp, others] = splitProps(rest, ["positioning"]);
   const [searchValue, setSearchValue] = createSignal("");
+
+  // match dropdown width to trigger by default
+  const positioning = () => ({
+    placement: "bottom",
+    sameWidth: true,
+    ...positioningProp.positioning,
+  }) as const;
 
   const handleSearch = (value: string) => {
     setSearchValue(value);
@@ -66,6 +74,7 @@ const Select: Component<SelectProps> = (props) => {
         class={local.class}
         error={local.error}
         onOpenChange={handleOpenChange}
+        positioning={positioning()}
         {...others}
       />
     </SelectSearchableContext.Provider>
@@ -84,42 +93,42 @@ const SelectTrigger: Component<SelectTriggerProps> = (props) => {
     <SelectBase.Control class={local.class}>
       <SelectBase.Trigger {...others}>
         <SelectBase.ValueText placeholder={local.placeholder ?? "Select..."} />
+        <div class="flex items-center gap-1">
+          <SelectBase.ClearTrigger>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="size-4"
+            >
+              <path d="M18 6 6 18" />
+              <path d="m6 6 12 12" />
+            </svg>
+          </SelectBase.ClearTrigger>
+          <SelectBase.Indicator>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="size-4"
+            >
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </SelectBase.Indicator>
+        </div>
       </SelectBase.Trigger>
-      <div class="flex items-center gap-1">
-        <SelectBase.ClearTrigger>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="size-4"
-          >
-            <path d="M18 6 6 18" />
-            <path d="m6 6 12 12" />
-          </svg>
-        </SelectBase.ClearTrigger>
-        <SelectBase.Indicator>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="size-4"
-          >
-            <path d="m6 9 6 6 6-6" />
-          </svg>
-        </SelectBase.Indicator>
-      </div>
     </SelectBase.Control>
   );
 };

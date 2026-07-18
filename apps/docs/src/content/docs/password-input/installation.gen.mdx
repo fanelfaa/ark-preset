@@ -188,30 +188,15 @@ const PasswordInput: Component<
 };
 
 const PasswordInputRootProvider: Component<
-  ArkPasswordInput.RootProviderProps &
-    ArkPasswordInput.InputProps & { label?: string; error?: boolean }
+  ArkPasswordInput.RootProviderProps & { label?: string; error?: boolean; placeholder?: string }
 > = (props) => {
-  const [local, others] = splitProps(props, ["class", "label", "children", "error"]);
-  const [inputProps, rootProps] = splitProps(others, [
-    "value",
-    "onInput",
-    "onBlur",
-    "name",
-    "placeholder",
-    "disabled",
-    "readOnly",
-    "required",
-    "id",
-    "autocomplete",
-    "type",
-    "form",
-  ]);
+  const [local, others] = splitProps(props, ["class", "label", "children", "error", "placeholder"]);
   return (
-    <PasswordInputBase.RootProvider class={local.class} {...rootProps}>
+    <PasswordInputBase.RootProvider class={local.class} {...others}>
       {local.label && (
         <PasswordInputBase.Label error={local.error}>{local.label}</PasswordInputBase.Label>
       )}
-      <PasswordInputControl {...inputProps} />
+      <PasswordInputControl placeholder={local.placeholder} />
     </PasswordInputBase.RootProvider>
   );
 };
