@@ -1,6 +1,6 @@
-import { render, fireEvent, screen, waitFor } from "@solidjs/testing-library";
+import { render } from "@solidjs/testing-library";
 import { NumberInput, NumberInputBase, numberInputVariants } from "../src/number-input";
-import { PinInput, PinInputBase, pinInputVariants } from "../src/pin-input";
+import { PinInputBase, pinInputVariants } from "../src/pin-input";
 import { PasswordInput, passwordInputVariants } from "../src/password-input";
 import { Slider, sliderVariants } from "../src/slider";
 import { Progress, ProgressBase, progressVariants } from "../src/progress";
