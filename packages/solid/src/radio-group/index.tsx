@@ -17,8 +17,8 @@ const RadioGroupItem: Component<ArkRadioGroup.ItemProps> = (props) => {
   const [local, others] = splitProps(props, ["children"]);
   return (
     <RadioGroupBase.Item {...others}>
-      <RadioGroupBase.ItemText>{local.children}</RadioGroupBase.ItemText>
       <RadioGroupBase.ItemControl />
+      <RadioGroupBase.ItemText>{local.children}</RadioGroupBase.ItemText>
       <RadioGroupBase.ItemHiddenInput />
     </RadioGroupBase.Item>
   );

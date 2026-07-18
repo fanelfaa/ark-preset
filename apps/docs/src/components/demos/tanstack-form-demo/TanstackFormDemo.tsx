@@ -13,7 +13,13 @@ import { Switch, SwitchLabel } from "@ark-preset/solid";
 
 import { Slider, SliderLabel, SliderControl, SliderThumb } from "@ark-preset/solid";
 import { RatingGroup, RatingGroupLabel } from "@ark-preset/solid";
-import { Combobox, ComboboxLabel, ComboboxInputTrigger, ComboboxContent, ComboboxItem } from "@ark-preset/solid";
+import {
+  Combobox,
+  ComboboxLabel,
+  ComboboxInputTrigger,
+  ComboboxContent,
+  ComboboxItem,
+} from "@ark-preset/solid";
 import { TagsInput } from "@ark-preset/solid";
 import { RadioGroup, RadioGroupItem } from "@ark-preset/solid";
 import { SegmentGroup, SegmentGroupItem } from "@ark-preset/solid";
@@ -21,6 +27,7 @@ import { Toggle, ToggleIndicator } from "@ark-preset/solid";
 import { ToggleGroup, ToggleGroupItem } from "@ark-preset/solid";
 import { PasswordInput } from "@ark-preset/solid";
 import { DatePicker } from "@ark-preset/solid";
+import { labelVariants } from "@ark-preset/core";
 
 const countries = createListCollection({
   items: [
@@ -151,11 +158,13 @@ export default function TanstackFormDemo() {
         name="password"
         validators={{
           onChange: ({ value }) => {
-            if (value.length > 0 && value.length < 6) return "Password must be at least 6 characters";
+            if (value.length > 0 && value.length < 6)
+              return "Password must be at least 6 characters";
             return undefined;
           },
           onBlur: ({ value }) => {
-            if (value.length > 0 && value.length < 6) return "Password must be at least 6 characters";
+            if (value.length > 0 && value.length < 6)
+              return "Password must be at least 6 characters";
             return undefined;
           },
         }}
@@ -165,7 +174,9 @@ export default function TanstackFormDemo() {
             value={field().state.value}
             label="Password"
             placeholder="Enter password"
-            error={!!field().state.meta.isTouched && field().state.meta.errors[0] as string | undefined}
+            error={
+              !!field().state.meta.isTouched && (field().state.meta.errors[0] as string | undefined)
+            }
             onInput={(e) => field().handleChange(e.currentTarget.value)}
             onBlur={field().handleBlur}
           />
@@ -238,16 +249,21 @@ export default function TanstackFormDemo() {
       <form.Field
         name="plan"
         children={(field) => (
-          <RadioGroup
-            name={field().name}
-            value={field().state.value}
-            onValueChange={(e) => field().handleChange(e.value ?? "")}
-            onBlur={field().handleBlur}
-          >
-            <RadioGroupItem value="free">Free</RadioGroupItem>
-            <RadioGroupItem value="pro">Pro</RadioGroupItem>
-            <RadioGroupItem value="enterprise">Enterprise</RadioGroupItem>
-          </RadioGroup>
+          <fieldset>
+            <div class="not-prose flex flex-col gap-2">
+              <legend class={labelVariants()}>Plan</legend>
+              <RadioGroup
+                name={field().name}
+                value={field().state.value}
+                onValueChange={(e) => field().handleChange(e.value ?? "")}
+                onBlur={field().handleBlur}
+              >
+                <RadioGroupItem value="free">Free</RadioGroupItem>
+                <RadioGroupItem value="pro">Pro</RadioGroupItem>
+                <RadioGroupItem value="enterprise">Enterprise</RadioGroupItem>
+              </RadioGroup>
+            </div>
+          </fieldset>
         )}
       />
 
