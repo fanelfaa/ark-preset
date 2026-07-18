@@ -48,25 +48,35 @@ const PasswordInputControl: Component<ArkPasswordInput.InputProps> = (props) => 
 );
 
 const PasswordInput: Component<
-  ArkPasswordInput.RootProps & { label?: string; placeholder?: string; error?: boolean }
+  ArkPasswordInput.RootProps & ArkPasswordInput.InputProps & { label?: string; error?: boolean }
 > = (props) => {
-  const [local, others] = splitProps(props, ["class", "label", "children", "placeholder", "error"]);
+  const [local, others] = splitProps(props, ["class", "label", "children", "error"]);
+  const [inputProps, rootProps] = splitProps(others, [
+    "value", "onInput", "onBlur", "name",
+    "placeholder", "disabled", "readOnly", "required",
+    "id", "autocomplete", "type", "form",
+  ]);
   return (
-    <PasswordInputBase.Root class={local.class} {...others}>
+    <PasswordInputBase.Root class={local.class} {...rootProps}>
       {local.label && <PasswordInputBase.Label error={local.error}>{local.label}</PasswordInputBase.Label>}
-      <PasswordInputControl placeholder={local.placeholder} />
+      <PasswordInputControl {...inputProps} />
     </PasswordInputBase.Root>
   );
 };
 
 const PasswordInputRootProvider: Component<
-  ArkPasswordInput.RootProviderProps & { label?: string; placeholder?: string; error?: boolean }
+  ArkPasswordInput.RootProviderProps & ArkPasswordInput.InputProps & { label?: string; error?: boolean }
 > = (props) => {
-  const [local, others] = splitProps(props, ["class", "label", "children", "placeholder", "error"]);
+  const [local, others] = splitProps(props, ["class", "label", "children", "error"]);
+  const [inputProps, rootProps] = splitProps(others, [
+    "value", "onInput", "onBlur", "name",
+    "placeholder", "disabled", "readOnly", "required",
+    "id", "autocomplete", "type", "form",
+  ]);
   return (
-    <PasswordInputBase.RootProvider class={local.class} {...others}>
+    <PasswordInputBase.RootProvider class={local.class} {...rootProps}>
       {local.label && <PasswordInputBase.Label error={local.error}>{local.label}</PasswordInputBase.Label>}
-      <PasswordInputControl placeholder={local.placeholder} />
+      <PasswordInputControl {...inputProps} />
     </PasswordInputBase.RootProvider>
   );
 };

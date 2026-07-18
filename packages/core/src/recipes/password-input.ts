@@ -2,7 +2,7 @@ import { tv, type VariantProps } from "tailwind-variants";
 
 export const passwordInputVariants = tv({
   slots: {
-    root: "grid gap-1.5 w-fit",
+    root: "grid gap-1.5",
     control: "relative",
     input:
       "flex h-8 w-full rounded-md border border-input bg-background px-2.5 py-1.5 pr-8 text-base md:text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 data-[invalid]:border-destructive data-[invalid]:focus-visible:ring-destructive",
