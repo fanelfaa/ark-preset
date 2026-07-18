@@ -8,6 +8,7 @@ import {
   useContext,
   type Accessor,
   splitProps,
+  mergeProps,
   type Component,
 } from "solid-js";
 import { selectVariants } from "@ark-preset/core";
@@ -72,8 +73,6 @@ function CheckIcon() {
   );
 }
 
-
-
 const styles = selectVariants();
 
 type SearchableContextValue = {
@@ -102,15 +101,6 @@ const Select: Component<SelectProps> = (props) => {
   ]);
   const [positioningProp, others] = splitProps(rest, ["positioning"]);
   const [searchValue, setSearchValue] = createSignal("");
-
-  // match dropdown width to trigger by default
-  const positioning = () =>
-    ({
-      placement: "bottom",
-      sameWidth: true,
-      ...positioningProp.positioning,
-    }) as const;
-
   const handleSearch = (value: string) => {
     setSearchValue(value);
     local.onSearch?.(value);
@@ -136,7 +126,7 @@ const Select: Component<SelectProps> = (props) => {
         class={local.class}
         error={local.error}
         onOpenChange={handleOpenChange}
-        positioning={positioning()}
+        positioning={mergeProps({ placement: "bottom", sameWidth: true } as const, positioningProp.positioning)}
         {...others}
       />
     </SelectSearchableContext.Provider>
@@ -157,14 +147,10 @@ const SelectTrigger: Component<SelectTriggerProps> = (props) => {
         <SelectBase.ValueText placeholder={local.placeholder ?? "Select..."} />
         <div class="flex items-center gap-1">
           <SelectBase.ClearTrigger>
-          <SelectBase.ClearTrigger>
             <XIcon />
           </SelectBase.ClearTrigger>
-          </SelectBase.ClearTrigger>
-          <SelectBase.Indicator>
           <SelectBase.Indicator>
             <ChevronDownIcon />
-          </SelectBase.Indicator>
           </SelectBase.Indicator>
         </div>
       </SelectBase.Trigger>
@@ -208,9 +194,7 @@ const SelectItem: Component<ArkSelect.ItemProps> = (props) => {
         local.children
       )}
       <SelectBase.ItemIndicator>
-      <SelectBase.ItemIndicator>
         <CheckIcon />
-      </SelectBase.ItemIndicator>
       </SelectBase.ItemIndicator>
     </SelectBase.Item>
   );
