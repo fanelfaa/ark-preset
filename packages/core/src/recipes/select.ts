@@ -5,7 +5,8 @@ export const selectVariants = tv({
     root: "grid gap-1.5 w-full",
     control:
       "flex h-8 w-full items-center justify-between rounded-md border border-input bg-background text-sm ring-offset-background focus-within:outline-none focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2",
-    trigger: "flex flex-1 items-center justify-between self-stretch px-2.5 [&[data-state=open]>svg]:rotate-180",
+    trigger:
+      "flex flex-1 items-center justify-between self-stretch px-2.5 [&[data-state=open]>svg]:rotate-180",
     valueText: "text-base md:text-sm data-[placeholder-shown]:text-muted-foreground",
     indicator: "size-4 transition-transform text-muted-foreground",
     clearTrigger:

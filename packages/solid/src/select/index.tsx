@@ -43,11 +43,12 @@ const Select: Component<SelectProps> = (props) => {
   const [searchValue, setSearchValue] = createSignal("");
 
   // match dropdown width to trigger by default
-  const positioning = () => ({
-    placement: "bottom",
-    sameWidth: true,
-    ...positioningProp.positioning,
-  }) as const;
+  const positioning = () =>
+    ({
+      placement: "bottom",
+      sameWidth: true,
+      ...positioningProp.positioning,
+    }) as const;
 
   const handleSearch = (value: string) => {
     setSearchValue(value);

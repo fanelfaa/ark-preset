@@ -278,16 +278,21 @@ export default function TanstackFormDemo() {
       <form.Field
         name="priority"
         children={(field) => (
-          <SegmentGroup
-            name={field().name}
-            value={field().state.value}
-            onValueChange={(e) => field().handleChange(e.value ?? "")}
-            onBlur={field().handleBlur}
-          >
-            <SegmentGroupItem value="low">Low</SegmentGroupItem>
-            <SegmentGroupItem value="medium">Medium</SegmentGroupItem>
-            <SegmentGroupItem value="high">High</SegmentGroupItem>
-          </SegmentGroup>
+          <fieldset>
+            <div class="not-prose flex flex-col gap-2">
+              <legend class={labelVariants()}>Priority</legend>
+              <SegmentGroup
+                name={field().name}
+                value={field().state.value}
+                onValueChange={(e) => field().handleChange(e.value ?? "")}
+                onBlur={field().handleBlur}
+              >
+                <SegmentGroupItem value="low">Low</SegmentGroupItem>
+                <SegmentGroupItem value="medium">Medium</SegmentGroupItem>
+                <SegmentGroupItem value="high">High</SegmentGroupItem>
+              </SegmentGroup>
+            </div>
+          </fieldset>
         )}
       />
 
