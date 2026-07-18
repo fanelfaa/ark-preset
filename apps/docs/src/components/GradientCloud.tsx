@@ -14,10 +14,42 @@ interface BlobConfig {
 }
 
 const BLOBS: BlobConfig[] = [
-  { w: "700px", h: "700px", l: "-10%", t: "-10%", a: "cloud-a 25s ease-in-out infinite", light: "rgba(193,99,63,0.5)", dark: "rgba(193,99,63,0.30)" },
-  { w: "600px", h: "600px", l: "55%", t: "25%", a: "cloud-b 30s ease-in-out infinite", light: "rgba(59,130,246,0.45)", dark: "rgba(59,130,246,0.25)" },
-  { w: "500px", h: "500px", l: "25%", t: "-5%", a: "cloud-c 20s ease-in-out infinite", light: "rgba(236,72,153,0.4)", dark: "rgba(236,72,153,0.22)" },
-  { w: "400px", h: "400px", l: "70%", t: "55%", a: "cloud-a 35s ease-in-out infinite", light: "rgba(52,211,153,0.35)", dark: "rgba(52,211,153,0.18)" },
+  {
+    w: "700px",
+    h: "700px",
+    l: "-10%",
+    t: "-10%",
+    a: "cloud-a 25s ease-in-out infinite",
+    light: "rgba(193,99,63,0.5)",
+    dark: "rgba(193,99,63,0.30)",
+  },
+  {
+    w: "600px",
+    h: "600px",
+    l: "55%",
+    t: "25%",
+    a: "cloud-b 30s ease-in-out infinite",
+    light: "rgba(59,130,246,0.45)",
+    dark: "rgba(59,130,246,0.25)",
+  },
+  {
+    w: "500px",
+    h: "500px",
+    l: "25%",
+    t: "-5%",
+    a: "cloud-c 20s ease-in-out infinite",
+    light: "rgba(236,72,153,0.4)",
+    dark: "rgba(236,72,153,0.22)",
+  },
+  {
+    w: "400px",
+    h: "400px",
+    l: "70%",
+    t: "55%",
+    a: "cloud-a 35s ease-in-out infinite",
+    light: "rgba(52,211,153,0.35)",
+    dark: "rgba(52,211,153,0.18)",
+  },
 ];
 
 export function GradientCloud() {
