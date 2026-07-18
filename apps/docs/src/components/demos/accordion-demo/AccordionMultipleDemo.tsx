@@ -4,10 +4,11 @@ import {
   AccordionItemTrigger,
   AccordionItemContent,
 } from "@ark-preset/solid";
+import { DemoWrapper } from "../../DemoWrapper";
 
 export default function AccordionMultipleDemo() {
   return (
-    <div class="rounded-lg border border-border p-6">
+    <DemoWrapper>
       <Accordion multiple defaultValue={["item-1", "item-2"]}>
         <AccordionItem value="item-1">
           <AccordionItemTrigger>Can I open multiple items?</AccordionItemTrigger>
@@ -34,6 +35,6 @@ export default function AccordionMultipleDemo() {
           </AccordionItemContent>
         </AccordionItem>
       </Accordion>
-    </div>
+    </DemoWrapper>
   );
 }

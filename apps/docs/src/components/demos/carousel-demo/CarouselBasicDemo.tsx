@@ -9,6 +9,7 @@ import {
   CarouselIndicatorGroup,
   CarouselIndicator,
 } from "@ark-preset/solid";
+import { DemoWrapper } from "../../DemoWrapper";
 
 const images = [
   { src: "https://picsum.photos/seed/carousel-1/600/400", alt: "Mountain landscape" },
@@ -20,7 +21,7 @@ const images = [
 
 export default function CarouselBasicDemo() {
   return (
-    <div class="rounded-lg border border-border p-6">
+    <DemoWrapper>
       <Carousel slideCount={images.length} class="w-full max-w-lg mx-auto">
         <CarouselControl>
           <CarouselPrevTrigger class="inline-flex items-center justify-center size-9 rounded-md border border-input bg-background hover:bg-accent">
@@ -80,6 +81,6 @@ export default function CarouselBasicDemo() {
           </Index>
         </CarouselIndicatorGroup>
       </Carousel>
-    </div>
+    </DemoWrapper>
   );
 }

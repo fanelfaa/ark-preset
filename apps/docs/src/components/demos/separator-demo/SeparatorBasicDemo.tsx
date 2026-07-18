@@ -1,8 +1,9 @@
+import { DemoWrapper } from "../../DemoWrapper";
 import { Separator } from "@ark-preset/solid";
 
 export default function SeparatorBasicDemo() {
   return (
-    <div class="rounded-lg border border-border p-6 space-y-6">
+    <DemoWrapper class="space-y-6">
       <div>
         <p class="text-sm text-muted-foreground">Horizontal separator between content</p>
         <div class="space-y-2 mt-2">
@@ -21,6 +22,6 @@ export default function SeparatorBasicDemo() {
           <span class="text-sm">Right</span>
         </div>
       </div>
-    </div>
+    </DemoWrapper>
   );
 }

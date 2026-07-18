@@ -1,8 +1,9 @@
+import { DemoWrapper } from "../../DemoWrapper";
 import { Tooltip, TooltipBase } from "@ark-preset/solid";
 
 export default function TooltipManualArrowDemo() {
   return (
-    <div class="rounded-lg border border-border p-6">
+    <DemoWrapper>
       <div class="flex justify-center">
         <Tooltip>
           <TooltipBase.Trigger>Manual Arrow</TooltipBase.Trigger>
@@ -16,6 +17,6 @@ export default function TooltipManualArrowDemo() {
           </TooltipBase.Positioner>
         </Tooltip>
       </div>
-    </div>
+    </DemoWrapper>
   );
 }

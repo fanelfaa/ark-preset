@@ -1,3 +1,4 @@
+import { DemoWrapper } from "../../DemoWrapper";
 import { usePopover } from "@ark-ui/solid/popover";
 import {
   PopoverContent,
@@ -10,7 +11,7 @@ export default function PopoverRootProviderDemo() {
   const popover = usePopover();
 
   return (
-    <div class="rounded-lg border border-border p-6 space-y-4">
+    <DemoWrapper class="space-y-4">
       <output class="block text-sm text-muted-foreground">
         Open: {JSON.stringify(popover().open)}
       </output>
@@ -24,6 +25,6 @@ export default function PopoverRootProviderDemo() {
           </PopoverDescription>
         </PopoverContent>
       </PopoverBase.RootProvider>
-    </div>
+    </DemoWrapper>
   );
 }

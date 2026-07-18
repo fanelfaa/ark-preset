@@ -1,3 +1,4 @@
+import { DemoWrapper } from "../../DemoWrapper";
 import { DialogCloseTrigger } from "@ark-ui/solid";
 import {
   Dialog,
@@ -19,7 +20,7 @@ import {
 
 export default function DialogBasicDemo() {
   return (
-    <div class="rounded-lg border border-border p-6">
+    <DemoWrapper>
       <Dialog>
         <DialogTrigger>Edit Profile</DialogTrigger>
         <DialogContent>
@@ -61,6 +62,6 @@ export default function DialogBasicDemo() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-    </div>
+    </DemoWrapper>
   );
 }

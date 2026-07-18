@@ -1,15 +1,14 @@
 import { Index } from "solid-js";
+import { DemoWrapper } from "../../DemoWrapper";
 import { RadioGroup, RadioGroupItem } from "@ark-preset/solid";
-
 const paymentMethods = [
   { value: "1", label: "Credit Card" },
   { value: "2", label: "Paypal" },
   { value: "3", label: "Debit", disabled: true },
 ];
-
 export default function RadioGroupDisabledDemo() {
   return (
-    <div class="rounded-lg border border-border p-6">
+    <DemoWrapper>
       <RadioGroup defaultValue="1" orientation="horizontal">
         <Index each={paymentMethods}>
           {(method) => (
@@ -19,6 +18,6 @@ export default function RadioGroupDisabledDemo() {
           )}
         </Index>
       </RadioGroup>
-    </div>
+    </DemoWrapper>
   );
 }

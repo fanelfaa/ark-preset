@@ -1,8 +1,9 @@
+import { DemoWrapper } from "../../DemoWrapper";
 import { ScrollArea } from "@ark-preset/solid";
 
 export default function ScrollAreaBasicDemo() {
   return (
-    <div class="rounded-lg border border-border p-6 space-y-6">
+    <DemoWrapper class="space-y-6">
       <div>
         <p class="text-sm text-muted-foreground mb-2">Vertical scroll</p>
         <ScrollArea class="h-[200px] w-full max-w-[400px]" orientation="vertical">
@@ -28,6 +29,6 @@ export default function ScrollAreaBasicDemo() {
           </div>
         </ScrollArea>
       </div>
-    </div>
+    </DemoWrapper>
   );
 }

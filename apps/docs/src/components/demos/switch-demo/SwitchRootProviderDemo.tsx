@@ -1,3 +1,4 @@
+import { DemoWrapper } from "../../DemoWrapper";
 import { useSwitch } from "@ark-ui/solid/switch";
 import { SwitchRootProvider, SwitchLabel } from "@ark-preset/solid";
 
@@ -5,7 +6,7 @@ export default function SwitchRootProviderDemo() {
   const sw = useSwitch({ defaultChecked: true });
 
   return (
-    <div class="rounded-lg border border-border p-6 space-y-4">
+    <DemoWrapper class="space-y-4">
       <output class="block text-sm text-muted-foreground">
         Checked: {JSON.stringify(sw().checked)}
       </output>
@@ -13,6 +14,6 @@ export default function SwitchRootProviderDemo() {
       <SwitchRootProvider value={sw}>
         <SwitchLabel>Enable notifications</SwitchLabel>
       </SwitchRootProvider>
-    </div>
+    </DemoWrapper>
   );
 }

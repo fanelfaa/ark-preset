@@ -1,10 +1,11 @@
+import { DemoWrapper } from "../../DemoWrapper";
 import { useHoverCard } from "@ark-ui/solid/hover-card";
 import { HoverCardBase } from "@ark-preset/solid";
 
 export default function HoverCardRootProviderDemo() {
   const machine = useHoverCard({ openDelay: 200, closeDelay: 100 });
   return (
-    <div class="rounded-lg border border-border p-6">
+    <DemoWrapper>
       <div class="flex flex-col items-center gap-4">
         <p class="text-sm text-muted-foreground mb-2">RootProvider pattern</p>
         <HoverCardBase.RootProvider value={machine}>
@@ -16,6 +17,6 @@ export default function HoverCardRootProviderDemo() {
           </HoverCardBase.Positioner>
         </HoverCardBase.RootProvider>
       </div>
-    </div>
+    </DemoWrapper>
   );
 }

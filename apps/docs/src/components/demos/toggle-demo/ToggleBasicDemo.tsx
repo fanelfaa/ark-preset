@@ -1,8 +1,9 @@
+import { DemoWrapper } from "../../DemoWrapper";
 import { Toggle } from "@ark-preset/solid";
 
 export default function ToggleBasicDemo() {
   return (
-    <div class="rounded-lg border border-border p-6">
+    <DemoWrapper>
       <div class="flex items-center gap-4">
         <Toggle>
           <svg
@@ -53,6 +54,6 @@ export default function ToggleBasicDemo() {
           </svg>
         </Toggle>
       </div>
-    </div>
+    </DemoWrapper>
   );
 }

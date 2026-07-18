@@ -6,6 +6,7 @@ import {
   PaginationNextTrigger,
   PaginationLastTrigger,
 } from "@ark-preset/solid";
+import { DemoWrapper } from "../../DemoWrapper";
 
 function PaginationSized(props: { size: "sm" | "md" | "lg"; label: string }) {
   return (
@@ -84,10 +85,10 @@ function PaginationSized(props: { size: "sm" | "md" | "lg"; label: string }) {
 
 export default function PaginationSizeDemo() {
   return (
-    <div class="rounded-lg border border-border p-6 flex flex-col gap-6">
+    <DemoWrapper class="flex flex-col gap-6">
       <PaginationSized size="sm" label="sm" />
       <PaginationSized size="md" label="md" />
       <PaginationSized size="lg" label="lg" />
-    </div>
+    </DemoWrapper>
   );
 }

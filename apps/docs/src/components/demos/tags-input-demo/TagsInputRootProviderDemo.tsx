@@ -1,3 +1,4 @@
+import { DemoWrapper } from "../../DemoWrapper";
 import { Index } from "solid-js";
 import { TagsInputBase } from "@ark-preset/solid";
 import { useTagsInput } from "@ark-ui/solid/tags-input";
@@ -5,7 +6,7 @@ import { useTagsInput } from "@ark-ui/solid/tags-input";
 export default function TagsInputRootProviderDemo() {
   const tagsInput = useTagsInput({ defaultValue: ["React", "Solid"] });
   return (
-    <div class="rounded-lg border border-border p-6 space-y-6">
+    <DemoWrapper class="space-y-6">
       <div>
         <p class="text-sm text-muted-foreground mb-2">Tags: {tagsInput().value.join(", ")}</p>
         <TagsInputBase.RootProvider value={tagsInput}>
@@ -61,6 +62,6 @@ export default function TagsInputRootProviderDemo() {
           </TagsInputBase.Control>
         </TagsInputBase.RootProvider>
       </div>
-    </div>
+    </DemoWrapper>
   );
 }

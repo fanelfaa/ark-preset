@@ -1,8 +1,9 @@
+import { DemoWrapper } from "../../DemoWrapper";
 import { HoverCard, HoverCardTrigger, HoverCardContent } from "@ark-preset/solid";
 
 export default function HoverCardBasicDemo() {
   return (
-    <div class="rounded-lg border border-border p-6">
+    <DemoWrapper>
       <div class="flex justify-center">
         <HoverCard>
           <HoverCardTrigger>Hover me</HoverCardTrigger>
@@ -13,6 +14,6 @@ export default function HoverCardBasicDemo() {
           </HoverCardContent>
         </HoverCard>
       </div>
-    </div>
+    </DemoWrapper>
   );
 }

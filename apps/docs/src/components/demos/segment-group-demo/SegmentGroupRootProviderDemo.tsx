@@ -1,4 +1,5 @@
 import { Index, createMemo } from "solid-js";
+import { DemoWrapper } from "../../DemoWrapper";
 import { SegmentGroupBase } from "@ark-preset/solid";
 import { useSegmentGroup } from "@ark-ui/solid/segment-group";
 
@@ -9,7 +10,7 @@ export default function SegmentGroupRootProviderDemo() {
   const value = createMemo(() => segmentGroup().value);
 
   return (
-    <div class="rounded-lg border border-border p-6 space-y-4">
+    <DemoWrapper class="space-y-4">
       <p class="text-sm text-muted-foreground">Selected: {value()}</p>
       <SegmentGroupBase.RootProvider value={segmentGroup}>
         <SegmentGroupBase.Indicator />
@@ -23,6 +24,6 @@ export default function SegmentGroupRootProviderDemo() {
           )}
         </Index>
       </SegmentGroupBase.RootProvider>
-    </div>
+    </DemoWrapper>
   );
 }

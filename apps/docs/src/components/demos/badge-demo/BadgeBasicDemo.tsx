@@ -1,8 +1,9 @@
 import { Badge } from "@ark-preset/solid";
+import { DemoWrapper } from "../../DemoWrapper";
 
 export default function BadgeBasicDemo() {
   return (
-    <div class="rounded-lg border border-border p-6">
+    <DemoWrapper>
       <div class="flex flex-wrap items-center gap-4">
         <Badge variant="default">Default</Badge>
         <Badge variant="secondary">Secondary</Badge>
@@ -11,6 +12,6 @@ export default function BadgeBasicDemo() {
         <Badge variant="ghost">Ghost</Badge>
         <Badge variant="link">Link</Badge>
       </div>
-    </div>
+    </DemoWrapper>
   );
 }

@@ -1,9 +1,10 @@
+import { DemoWrapper } from "../../DemoWrapper";
 import { PinInput, PinInputControl, PinInputInput, PinInputLabel } from "@ark-preset/solid";
 import { Index } from "solid-js";
 
 export default function PinInputBasicDemo() {
   return (
-    <div class="rounded-lg border border-border p-6">
+    <DemoWrapper>
       <div class="flex flex-col gap-4">
         <PinInput>
           <PinInputLabel>Label</PinInputLabel>
@@ -18,6 +19,6 @@ export default function PinInputBasicDemo() {
           </PinInputControl>
         </PinInput>
       </div>
-    </div>
+    </DemoWrapper>
   );
 }

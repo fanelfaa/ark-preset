@@ -1,8 +1,9 @@
+import { DemoWrapper } from "../../DemoWrapper";
 import { Toggle, ToggleIndicator } from "@ark-preset/solid";
 
 export default function ToggleIndicatorDemo() {
   return (
-    <div class="rounded-lg border border-border p-6">
+    <DemoWrapper>
       <div class="flex items-center gap-4">
         <Toggle>
           <ToggleIndicator
@@ -87,6 +88,6 @@ export default function ToggleIndicatorDemo() {
           </ToggleIndicator>
         </Toggle>
       </div>
-    </div>
+    </DemoWrapper>
   );
 }

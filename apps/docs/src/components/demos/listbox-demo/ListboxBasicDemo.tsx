@@ -1,6 +1,7 @@
 import { createListCollection } from "@ark-ui/solid";
 import { Index } from "solid-js";
 import { Listbox, ListboxItem } from "@ark-preset/solid";
+import { DemoWrapper } from "../../DemoWrapper";
 
 const frameworks = createListCollection({
   items: [
@@ -13,7 +14,7 @@ const frameworks = createListCollection({
 
 export default function ListboxBasicDemo() {
   return (
-    <div class="rounded-lg border border-border p-6 space-y-6">
+    <DemoWrapper class="space-y-6">
       <div>
         <p class="text-sm text-muted-foreground mb-2">Basic listbox</p>
         <Listbox collection={frameworks}>
@@ -22,6 +23,6 @@ export default function ListboxBasicDemo() {
           </Index>
         </Listbox>
       </div>
-    </div>
+    </DemoWrapper>
   );
 }

@@ -9,9 +9,10 @@ import {
   AlertDialogCancel,
   AlertDialogAction,
 } from "@ark-preset/solid";
+import { DemoWrapper } from "../../DemoWrapper";
 export default function AlertDialogBasicDemo() {
   return (
-    <div class="rounded-lg border border-border p-6">
+    <DemoWrapper>
       <AlertDialog>
         <AlertDialogTrigger>Delete Account</AlertDialogTrigger>
         <AlertDialogContent>
@@ -28,6 +29,6 @@ export default function AlertDialogBasicDemo() {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-    </div>
+    </DemoWrapper>
   );
 }

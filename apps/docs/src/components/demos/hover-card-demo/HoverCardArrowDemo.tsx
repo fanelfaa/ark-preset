@@ -1,8 +1,9 @@
+import { DemoWrapper } from "../../DemoWrapper";
 import { HoverCard, HoverCardTrigger, HoverCardBase } from "@ark-preset/solid";
 
 export default function HoverCardArrowDemo() {
   return (
-    <div class="rounded-lg border border-border p-6">
+    <DemoWrapper>
       <div class="flex flex-col items-center gap-4">
         <p class="text-sm text-muted-foreground mb-2">Custom arrow size</p>
         <HoverCard>
@@ -17,6 +18,6 @@ export default function HoverCardArrowDemo() {
           </HoverCardBase.Positioner>
         </HoverCard>
       </div>
-    </div>
+    </DemoWrapper>
   );
 }

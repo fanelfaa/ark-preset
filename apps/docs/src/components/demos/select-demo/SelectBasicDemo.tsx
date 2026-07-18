@@ -1,3 +1,4 @@
+import { DemoWrapper } from "../../DemoWrapper";
 import { createListCollection } from "@ark-ui/solid";
 import { Index } from "solid-js";
 import { Select, SelectLabel, SelectTrigger, SelectContent, SelectItem } from "@ark-preset/solid";
@@ -13,7 +14,7 @@ const frameworks = createListCollection({
 
 export default function SelectBasicDemo() {
   return (
-    <div class="rounded-lg border border-border p-6">
+    <DemoWrapper>
       <Select collection={frameworks}>
         <SelectLabel>Framework</SelectLabel>
         <SelectTrigger placeholder="Select a framework" />
@@ -23,6 +24,6 @@ export default function SelectBasicDemo() {
           </Index>
         </SelectContent>
       </Select>
-    </div>
+    </DemoWrapper>
   );
 }

@@ -1,8 +1,9 @@
+import { DemoWrapper } from "../../DemoWrapper";
 import { Skeleton } from "@ark-preset/solid";
 
 export default function SkeletonBasicDemo() {
   return (
-    <div class="rounded-lg border border-border p-6">
+    <DemoWrapper>
       <div class="flex flex-col gap-4">
         {/* Avatar + text line */}
         <div class="flex items-center gap-4">
@@ -13,7 +14,7 @@ export default function SkeletonBasicDemo() {
           </div>
         </div>
         {/* Card skeleton */}
-        <div class="flex flex-col gap-3 rounded-lg border border-border p-4">
+        <div class="flex flex-col gap-3 rounded-lg border border-border bg-background/70 backdrop-blur-3xl p-4">
           <Skeleton class="h-5 w-[250px]" />
           <Skeleton class="h-4 w-full" />
           <Skeleton class="h-4 w-[80%]" />
@@ -23,6 +24,6 @@ export default function SkeletonBasicDemo() {
           </div>
         </div>
       </div>
-    </div>
+    </DemoWrapper>
   );
 }

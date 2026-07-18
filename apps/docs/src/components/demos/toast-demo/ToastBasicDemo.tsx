@@ -1,3 +1,4 @@
+import { DemoWrapper } from "../../DemoWrapper";
 import { Button, createToaster, Toaster } from "@ark-preset/solid";
 
 const toaster = createToaster({
@@ -7,7 +8,7 @@ const toaster = createToaster({
 
 export default function ToastBasicDemo() {
   return (
-    <div class="rounded-lg border border-border p-6">
+    <DemoWrapper>
       <div class="flex flex-col gap-4">
         <div class="flex flex-wrap gap-2">
           <Button
@@ -56,6 +57,6 @@ export default function ToastBasicDemo() {
         </div>
         <Toaster toaster={toaster} />
       </div>
-    </div>
+    </DemoWrapper>
   );
 }

@@ -5,12 +5,13 @@ import {
   AccordionItemTrigger,
   AccordionItemContent,
 } from "@ark-preset/solid";
+import { DemoWrapper } from "../../DemoWrapper";
 
 export default function AccordionRootProviderDemo() {
   const accordion = useAccordion({ multiple: true, defaultValue: ["item-1"] });
 
   return (
-    <div class="rounded-lg border border-border p-6 space-y-4">
+    <DemoWrapper class="space-y-4">
       <output class="block text-sm text-muted-foreground">
         Value: {JSON.stringify(accordion().value)}
       </output>
@@ -36,6 +37,6 @@ export default function AccordionRootProviderDemo() {
           </AccordionItemContent>
         </AccordionItem>
       </AccordionBase.RootProvider>
-    </div>
+    </DemoWrapper>
   );
 }
