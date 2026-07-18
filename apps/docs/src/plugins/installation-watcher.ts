@@ -53,7 +53,7 @@ import {
 } from "../shared/generate-content";
 
 /** Discover components that have docs directories AND a recipe file in packages/core. */
-function getDocsComponents(): string[] {
+function getRecipeDocsComponents(): string[] {
   if (!existsSync(DOCS_DIR)) return [];
   return readdirSync(DOCS_DIR, { withFileTypes: true })
     .filter((e) => e.isDirectory())
@@ -105,7 +105,7 @@ function restartWatchers(state: WatcherState, logger: { info: (m: string) => voi
   for (const w of state.watchers) w.close();
   state.watchers = [];
 
-  const components = getDocsComponents();
+  const components = getRecipeDocsComponents();
   const componentSet = new Set(components);
 
   // ── Recipe watcher ────────────────────────────────────────────────
@@ -163,7 +163,7 @@ export function installationWatcher(): Plugin {
     },
 
     buildStart() {
-      const components = getDocsComponents();
+      const components = getRecipeDocsComponents();
       let count = 0;
       for (const c of components) {
         const content = generateInstallationContent(c);
