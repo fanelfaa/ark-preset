@@ -5,7 +5,7 @@ import { splitProps, type Component } from "solid-js";
 const styles = scrollAreaVariants();
 
 const ScrollAreaRoot: Component<ArkScrollArea.RootProps> = (props) => {
-  return <ArkScrollArea.Root {...props} />;
+  return <ArkScrollArea.Root class="h-full" {...props} />;
 };
 
 const ScrollAreaViewport: Component<ArkScrollArea.ViewportProps> = (props) => {
