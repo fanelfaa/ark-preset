@@ -2,6 +2,7 @@ import { Combobox as ComboboxBase } from "./combobox.base";
 import type { Combobox as ArkCombobox } from "@ark-ui/solid/combobox";
 import { Portal } from "solid-js/web";
 import { splitProps, type Component, type JSX } from "solid-js";
+import { ScrollArea } from "../scroll-area";
 
 const Combobox = ComboboxBase.Root;
 
@@ -62,7 +63,11 @@ const Content: Component<ContentProps> = (props) => {
     <Portal>
       <ComboboxBase.Positioner>
         <ComboboxBase.Content class={local.class} {...others}>
-          <ComboboxBase.List>{local.children}</ComboboxBase.List>
+          <ComboboxBase.List>
+            <ScrollArea class="max-h-60" orientation="vertical">
+              {local.children}
+            </ScrollArea>
+          </ComboboxBase.List>
         </ComboboxBase.Content>
       </ComboboxBase.Positioner>
     </Portal>
