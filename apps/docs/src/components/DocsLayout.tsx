@@ -13,15 +13,15 @@ export const DocsLayout: Component<DocsLayoutProps> = (props) => {
     <div class="mx-auto max-w-7xl">
       <div class="flex">
         {/* Sidebar */}
-        <aside class="hidden lg:block w-64 shrink-0 border-r border-border bg-background sticky top-14 self-start h-[calc(100vh-3.5rem)]">
+        <aside class="hidden lg:block w-64 shrink-0 border-r border-border bg-background/30 backdrop-blur-3xl sticky top-14 self-start h-[calc(100vh-3.5rem)]">
           <SidebarNav />
         </aside>
 
         {/* Main content */}
-        <main class="flex-1 min-w-0 bg-background">
+        <main class="flex-1 min-w-0 bg-background/30 backdrop-blur-3xl">
           <div class="max-w-4xl mx-auto px-6 py-10 prose dark:prose-invert">{props.children}</div>
           {/* Footer */}
-          <footer class="border-t border-border bg-background">
+          <footer class="border-t border-border bg-background/30 backdrop-blur-3xl">
             <div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between text-sm text-muted-foreground">
               <a
                 href="https://github.com/fanelfaa/ark-preset"

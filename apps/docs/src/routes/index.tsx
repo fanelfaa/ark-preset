@@ -58,7 +58,7 @@ const quickLinks = [
 
 function Home() {
   return (
-    <div class="mx-auto max-w-4xl px-6 py-12">
+    <div class="mx-auto max-w-4xl px-6 py-12 min-h-screen bg-background/30 backdrop-blur-3xl">
       {/* Hero */}
       <section class="mb-16 text-center">
         <h1 class="mb-4 text-5xl font-bold tracking-tight">UI Component Library</h1>
