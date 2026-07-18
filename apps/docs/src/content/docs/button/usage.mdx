@@ -1,4 +1,5 @@
 import { Button } from "@ark-preset/solid";
+import { DemoWrapper } from "../../../components/DemoWrapper";
 
 ## Usage
 
@@ -49,20 +50,20 @@ Custom class override:
 
 Use the <code>variant</code> prop to change the visual style.
 
-<div class="flex flex-wrap gap-4 not-prose">
+<DemoWrapper class="flex flex-wrap gap-4 not-prose">
   <Button>Default</Button>
   <Button variant="secondary">Secondary</Button>
   <Button variant="destructive">Destructive</Button>
   <Button variant="outline">Outline</Button>
   <Button variant="ghost">Ghost</Button>
   <Button variant="link">Link</Button>
-</div>
+</DemoWrapper>
 
 ### Sizes
 
 Use the <code>size</code> prop to change the button size.
 
-<div class="flex flex-wrap items-center gap-4 not-prose">
+<DemoWrapper class="flex flex-wrap items-center gap-4 not-prose">
   <Button size="sm">Sm</Button>
   <Button size="md">Md</Button>
   <Button size="lg">Lg</Button>
@@ -72,33 +73,33 @@ Use the <code>size</code> prop to change the button size.
       <path d="M12 5v14" />
     </svg>
   </Button>
-</div>
+</DemoWrapper>
 
 ### Disabled
 
 Add the <code>disabled</code> prop to disable interaction.
 
-<div class="flex flex-wrap gap-4 not-prose">
+<DemoWrapper class="flex flex-wrap gap-4 not-prose">
   <Button disabled>Default</Button>
   <Button variant="secondary" disabled>Secondary</Button>
   <Button variant="destructive" disabled>Destructive</Button>
   <Button variant="outline" disabled>Outline</Button>
   <Button variant="ghost" disabled>Ghost</Button>
   <Button variant="link" disabled>Link</Button>
-</div>
+</DemoWrapper>
 
 ### Loading
 
 Add the <code>loading</code> prop to show a spinner alongside the button label and automatically disable interaction.
 
-<div class="flex flex-wrap gap-4 not-prose">
+<DemoWrapper class="flex flex-wrap gap-4 not-prose">
   <Button loading>Default</Button>
   <Button variant="secondary" loading>Secondary</Button>
   <Button variant="destructive" loading>Destructive</Button>
   <Button variant="outline" loading>Outline</Button>
   <Button variant="ghost" loading>Ghost</Button>
   <Button variant="link" loading>Link</Button>
-</div>
+</DemoWrapper>
 
 Useful for async operations like form submissions:
 

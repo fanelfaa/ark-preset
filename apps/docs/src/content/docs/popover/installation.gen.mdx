@@ -19,9 +19,9 @@ export const popoverVariants = tv({
   slots: {
     root: "relative inline-flex",
     trigger: "inline-flex",
-    positioner: "fixed z-50",
+    positioner: "fixed",
     content:
-      "z-50 w-72 rounded-lg border border-border bg-popover p-4 text-popover-foreground shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 relative",
+      "z-50 w-72 rounded-lg border border-border bg-popover p-4 text-popover-foreground shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
     title: "text-lg font-semibold leading-none tracking-tight mb-1",
     description: "text-sm text-muted-foreground",
     closeTrigger:
