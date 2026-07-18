@@ -2,6 +2,7 @@ import { Link, Outlet, createRootRoute } from "@tanstack/solid-router";
 import { TanStackRouterDevtools } from "@tanstack/solid-router-devtools";
 import { Button, Drawer, DrawerTrigger, DrawerContent, DrawerBase } from "@ark-preset/solid";
 import { ThemeToggle } from "../components/ThemeToggle";
+import { GradientCloud } from "../components/GradientCloud";
 import { SidebarNav } from "../components/DocsLayout";
 
 import "../styles.css";
@@ -13,8 +14,10 @@ export const Route = createRootRoute({
 function RootComponent() {
   return (
     <>
+      <GradientCloud />
+      <div style="position:relative;z-index:1;min-height:100vh">
       {/* Header */}
-      <header class="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
+      <header class="sticky top-0 z-50 border-b border-border bg-background/40 backdrop-blur-2xl">
         <div class="mx-auto flex h-14 max-w-7xl items-center gap-4 px-6">
           <Button
             size="icon"
@@ -69,6 +72,7 @@ function RootComponent() {
 
       <Outlet />
       <TanStackRouterDevtools position="bottom-right" />
+      </div>
     </>
   );
 }
