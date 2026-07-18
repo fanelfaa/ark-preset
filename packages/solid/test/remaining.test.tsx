@@ -199,9 +199,7 @@ describe("Slider", () => {
 
   it("fires onValueChange on slide", () => {
     const onChange = vi.fn();
-    const { container } = render(() => (
-      <Slider value={[30]} onValueChange={onChange} />
-    ));
+    const { container } = render(() => <Slider value={[30]} onValueChange={onChange} />);
     expect(container.firstChild).toBeInTheDocument();
     // Slider uses pointer events; value is controlled
     expect(onChange).not.toHaveBeenCalled();
@@ -308,9 +306,7 @@ describe("TagsInputBase", () => {
   });
 
   it("renders with defaultValue", () => {
-    const { container } = render(() => (
-      <TagsInput defaultValue={["apple", "banana"]} />
-    ));
+    const { container } = render(() => <TagsInput defaultValue={["apple", "banana"]} />);
     expect(container.firstChild).toBeInTheDocument();
   });
 
@@ -556,9 +552,7 @@ describe("ScrollArea", () => {
   });
 
   it("renders with variant", () => {
-    const { container } = render(() => (
-      <ScrollArea variant="hover">Content</ScrollArea>
-    ));
+    const { container } = render(() => <ScrollArea variant="hover">Content</ScrollArea>);
     expect(container.firstChild).toBeInTheDocument();
   });
 
@@ -568,16 +562,12 @@ describe("ScrollArea", () => {
   });
 
   it("merges custom class", () => {
-    const { container } = render(() => (
-      <ScrollArea class="my-scroll">Content</ScrollArea>
-    ));
-    expect(container.firstChild).toHaveClass("my-scroll");
+    const { container } = render(() => <ScrollArea class="my-scroll">Content</ScrollArea>);
+    expect(container.querySelector('[data-part="viewport"]')).toHaveClass("my-scroll");
   });
 
   it("renders with variant='scroll'", () => {
-    const { container } = render(() => (
-      <ScrollArea variant="scroll">Scrollable</ScrollArea>
-    ));
+    const { container } = render(() => <ScrollArea variant="scroll">Scrollable</ScrollArea>);
     expect(container.firstChild).toBeInTheDocument();
   });
 });
@@ -624,9 +614,7 @@ describe("AvatarBase", () => {
   });
 
   it("forwards additional props", () => {
-    const { container } = render(() => (
-      <Avatar data-testid="avatar-1" />
-    ));
+    const { container } = render(() => <Avatar data-testid="avatar-1" />);
     expect(container.firstChild).toHaveAttribute("data-testid", "avatar-1");
   });
 });

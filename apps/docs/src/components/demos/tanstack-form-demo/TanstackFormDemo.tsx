@@ -49,6 +49,13 @@ const roles = createListCollection({
     { label: "Developer", value: "developer" },
     { label: "Designer", value: "designer" },
     { label: "Product Manager", value: "pm" },
+    { label: "QA Engineer", value: "qa" },
+    { label: "Data Analyst", value: "analyst" },
+    { label: "DevOps Engineer", value: "devops" },
+    { label: "Tech Lead", value: "tech-lead" },
+    { label: "Engineering Manager", value: "eng-manager" },
+    { label: "CTO", value: "cto" },
+    { label: "VP of Engineering", value: "vp-eng" },
   ],
 });
 
