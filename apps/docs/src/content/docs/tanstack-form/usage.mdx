@@ -488,9 +488,10 @@ const formSchema = z.object({
 // ── Field helpers ──
 
 function fieldError(field: any): string | undefined {
-  return field.state.meta.isTouched && field.state.meta.errors[0]
-    ? (field.state.meta.errors[0] as string)
-    : undefined;
+  const err = field.state.meta.errors[0];
+  if (!err) return undefined;
+  if (typeof err === "string") return err;
+  return (err as { message?: string }).message;
 }
 
 function FieldHint(props: { field: any }) {

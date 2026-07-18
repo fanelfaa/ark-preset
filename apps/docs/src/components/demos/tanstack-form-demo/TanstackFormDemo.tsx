@@ -60,23 +60,20 @@ const formSchema = z.object({
   skills: z.array(z.string()).max(10, "Maximum 10 skills allowed"),
   password: z
     .string()
-    .refine(
-      (v) => v.length === 0 || v.length >= 6,
-      "Password must be at least 6 characters",
-    ),
+    .refine((v) => v.length === 0 || v.length >= 6, "Password must be at least 6 characters"),
   accepted: z.boolean().refine((v) => v, { message: "You must accept the terms" }),
   startDate: z.string().min(1, "Start date is required"),
   bold: z.boolean(),
   alignment: z.string(),
 });
 
-
 // ── Field helpers ──
 
 function fieldError(field: any): string | undefined {
-  return field.state.meta.isTouched && field.state.meta.errors[0]
-    ? (field.state.meta.errors[0] as string)
-    : undefined;
+  const err = field.state.meta.errors[0];
+  if (!err) return undefined;
+  if (typeof err === "string") return err;
+  return (err as { message?: string }).message;
 }
 
 function FieldHint(props: { field: any }) {
