@@ -348,8 +348,8 @@ export default function TanstackFormDemo() {
             name={field().name}
             label="Start Date"
             placeholder="Pick a date"
-            value={[parseDate(field().state.value)]}
-            onValueChange={(e) => field().handleChange(String(e.value[0]))}
+            value={field().state.value ? [parseDate(field().state.value)] : []}
+            onValueChange={(e) => field().handleChange(e.value[0] ? String(e.value[0]) : "")}
           />
         )}
       />
