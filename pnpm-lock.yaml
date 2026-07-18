@@ -62,6 +62,9 @@ importers:
       vite-plugin-solid-marked:
         specifier: ^0.7.0
         version: 0.7.0(solid-js@1.9.13)(solid-marked@0.7.0(solid-js@1.9.13))(vite@8.0.16(@types/node@25.9.3)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.22.4)(yaml@2.9.0))
+      zod:
+        specifier: ^4.4.3
+        version: 4.4.3
     devDependencies:
       '@playwright/test':
         specifier: ^1.61.0
