@@ -85,12 +85,10 @@ function Home() {
       <section class="mb-16 text-center">
         <H2>Quick Start</H2>
         <P class="mb-6">
-          Follow the step-by-step guide to add <InlineCode>@ark-preset/solid</InlineCode> to your project.
+          Follow the step-by-step guide to add <InlineCode>@ark-preset/solid</InlineCode> to your
+          project.
         </P>
-        <Link
-          to="/docs/quickstart"
-          class={buttonVariants({ size: "lg" })}
-        >
+        <Link to="/docs/quickstart" class={buttonVariants({ size: "lg" })}>
           View Quickstart Guide
         </Link>
       </section>

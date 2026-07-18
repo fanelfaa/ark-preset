@@ -1,5 +1,11 @@
 import { DemoWrapper } from "../../DemoWrapper";
-import { Slider, SliderLabel, SliderValueText, SliderControl, SliderThumb } from "@ark-preset/solid";
+import {
+  Slider,
+  SliderLabel,
+  SliderValueText,
+  SliderControl,
+  SliderThumb,
+} from "@ark-preset/solid";
 
 export default function SliderBasicDemo() {
   return (
