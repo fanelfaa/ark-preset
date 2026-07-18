@@ -1,6 +1,6 @@
 import { type JSX, type Component, Index } from "solid-js";
 import { Link } from "@tanstack/solid-router";
-import { ScrollArea, DrawerContent, Drawer, DrawerTrigger, DrawerBase } from "@ark-preset/solid";
+import { ScrollArea } from "@ark-preset/solid";
 import { sidebarNav } from "../sidebar-nav";
 import { GitHubIcon } from "./GitHubIcon";
 
@@ -16,16 +16,6 @@ export const DocsLayout: Component<DocsLayoutProps> = (props) => {
         <aside class="hidden lg:block w-64 shrink-0 border-r border-border bg-background sticky top-14 self-start h-[calc(100vh-3.5rem)]">
           <SidebarNav />
         </aside>
-
-        {/* Mobile drawer */}
-        <Drawer swipeDirection="start">
-          <DrawerTrigger id="drawer-trigger" class="hidden" />
-          <DrawerContent>
-            <DrawerBase.Context>
-              {(api) => <SidebarNav onLinkClick={() => api().setOpen(false)} />}
-            </DrawerBase.Context>
-          </DrawerContent>
-        </Drawer>
 
         {/* Main content */}
         <main class="flex-1 min-w-0 bg-background">
@@ -51,7 +41,7 @@ export const DocsLayout: Component<DocsLayoutProps> = (props) => {
   );
 };
 
-function SidebarNav(props: { onLinkClick?: () => void }) {
+export function SidebarNav(props: { onLinkClick?: () => void }) {
   return (
     <ScrollArea class="h-full">
       <nav class="p-4">

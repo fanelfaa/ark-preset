@@ -1,7 +1,14 @@
 import { Link, Outlet, createRootRoute } from "@tanstack/solid-router";
 import { TanStackRouterDevtools } from "@tanstack/solid-router-devtools";
-import { Button } from "@ark-preset/solid";
+import {
+  Button,
+  Drawer,
+  DrawerTrigger,
+  DrawerContent,
+  DrawerBase,
+} from "@ark-preset/solid";
 import { ThemeToggle } from "../components/ThemeToggle";
+import { SidebarNav } from "../components/DocsLayout";
 
 import "../styles.css";
 
@@ -56,6 +63,15 @@ function RootComponent() {
           </div>
         </div>
       </header>
+
+      <Drawer swipeDirection="start">
+        <DrawerTrigger id="drawer-trigger" class="hidden" />
+        <DrawerContent>
+          <DrawerBase.Context>
+            {(api) => <SidebarNav onLinkClick={() => api().setOpen(false)} />}
+          </DrawerBase.Context>
+        </DrawerContent>
+      </Drawer>
 
       <Outlet />
       <TanStackRouterDevtools position="bottom-right" />
