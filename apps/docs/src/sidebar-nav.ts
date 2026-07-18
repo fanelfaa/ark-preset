@@ -91,4 +91,10 @@ export const sidebarNav: SidebarCategory[] = [
       { href: "/docs/components/separator", label: "Separator" },
     ],
   },
+  {
+    category: "Integration",
+    links: [
+      { href: "/docs/integrations/form", label: "TanStack Form" },
+    ],
+  },
 ];

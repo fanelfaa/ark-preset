@@ -13,6 +13,7 @@ import { Route as DocsRouteImport } from './routes/docs'
 import { Route as SplatRouteImport } from './routes/$'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DocsQuickstartRouteImport } from './routes/docs/quickstart'
+import { Route as DocsIntegrationsFormRouteImport } from './routes/docs/integrations/form'
 import { Route as DocsComponentsComponentRouteImport } from './routes/docs/components/$component'
 
 const DocsRoute = DocsRouteImport.update({
@@ -35,6 +36,11 @@ const DocsQuickstartRoute = DocsQuickstartRouteImport.update({
   path: '/quickstart',
   getParentRoute: () => DocsRoute,
 } as any)
+const DocsIntegrationsFormRoute = DocsIntegrationsFormRouteImport.update({
+  id: '/integrations/form',
+  path: '/integrations/form',
+  getParentRoute: () => DocsRoute,
+} as any)
 const DocsComponentsComponentRoute = DocsComponentsComponentRouteImport.update({
   id: '/components/$component',
   path: '/components/$component',
@@ -47,6 +53,7 @@ export interface FileRoutesByFullPath {
   '/docs': typeof DocsRouteWithChildren
   '/docs/quickstart': typeof DocsQuickstartRoute
   '/docs/components/$component': typeof DocsComponentsComponentRoute
+  '/docs/integrations/form': typeof DocsIntegrationsFormRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +61,7 @@ export interface FileRoutesByTo {
   '/docs': typeof DocsRouteWithChildren
   '/docs/quickstart': typeof DocsQuickstartRoute
   '/docs/components/$component': typeof DocsComponentsComponentRoute
+  '/docs/integrations/form': typeof DocsIntegrationsFormRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,6 +70,7 @@ export interface FileRoutesById {
   '/docs': typeof DocsRouteWithChildren
   '/docs/quickstart': typeof DocsQuickstartRoute
   '/docs/components/$component': typeof DocsComponentsComponentRoute
+  '/docs/integrations/form': typeof DocsIntegrationsFormRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -71,8 +80,15 @@ export interface FileRouteTypes {
     | '/docs'
     | '/docs/quickstart'
     | '/docs/components/$component'
+    | '/docs/integrations/form'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/$' | '/docs' | '/docs/quickstart' | '/docs/components/$component'
+  to:
+    | '/'
+    | '/$'
+    | '/docs'
+    | '/docs/quickstart'
+    | '/docs/components/$component'
+    | '/docs/integrations/form'
   id:
     | '__root__'
     | '/'
@@ -80,6 +96,7 @@ export interface FileRouteTypes {
     | '/docs'
     | '/docs/quickstart'
     | '/docs/components/$component'
+    | '/docs/integrations/form'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -118,6 +135,13 @@ declare module '@tanstack/solid-router' {
       preLoaderRoute: typeof DocsQuickstartRouteImport
       parentRoute: typeof DocsRoute
     }
+    '/docs/integrations/form': {
+      id: '/docs/integrations/form'
+      path: '/integrations/form'
+      fullPath: '/docs/integrations/form'
+      preLoaderRoute: typeof DocsIntegrationsFormRouteImport
+      parentRoute: typeof DocsRoute
+    }
     '/docs/components/$component': {
       id: '/docs/components/$component'
       path: '/components/$component'
@@ -131,11 +155,13 @@ declare module '@tanstack/solid-router' {
 interface DocsRouteChildren {
   DocsQuickstartRoute: typeof DocsQuickstartRoute
   DocsComponentsComponentRoute: typeof DocsComponentsComponentRoute
+  DocsIntegrationsFormRoute: typeof DocsIntegrationsFormRoute
 }
 
 const DocsRouteChildren: DocsRouteChildren = {
   DocsQuickstartRoute: DocsQuickstartRoute,
   DocsComponentsComponentRoute: DocsComponentsComponentRoute,
+  DocsIntegrationsFormRoute: DocsIntegrationsFormRoute,
 }
 
 const DocsRouteWithChildren = DocsRoute._addFileChildren(DocsRouteChildren)

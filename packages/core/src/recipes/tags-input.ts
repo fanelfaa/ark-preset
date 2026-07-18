@@ -2,7 +2,7 @@ import { tv, type VariantProps } from "tailwind-variants";
 
 export const tagsInputVariants = tv({
   slots: {
-    root: "flex flex-col gap-1.5 w-full max-w-sm",
+    root: "flex flex-col gap-1.5 w-full",
     label: "text-sm font-medium text-foreground select-none data-[disabled]:opacity-50",
     control: [
       "relative flex flex-wrap items-center gap-1 min-h-8 w-full rounded-md border border-input bg-background px-2.5 py-0.5 text-sm ring-offset-background",
@@ -12,7 +12,7 @@ export const tagsInputVariants = tv({
       "data-[invalid]:border-destructive data-[invalid]:focus-within:ring-destructive",
     ],
     input: [
-      "flex-1 min-w-16 h-auto px-1 text-base md:text-sm bg-transparent border-none outline-none",
+      "flex-1 min-w-16 h-auto text-base md:text-sm bg-transparent border-none outline-none",
       "placeholder:text-muted-foreground text-foreground",
     ],
     clearTrigger: [

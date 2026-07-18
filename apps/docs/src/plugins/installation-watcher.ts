@@ -52,6 +52,15 @@ import {
   DOCS_DIR,
 } from "../shared/generate-content";
 
+/** Discover components that have docs directories AND a recipe file in packages/core. */
+function getRecipeDocsComponents(): string[] {
+  if (!existsSync(DOCS_DIR)) return [];
+  return readdirSync(DOCS_DIR, { withFileTypes: true })
+    .filter((e) => e.isDirectory())
+    .map((e) => e.name)
+    .filter((name) => existsSync(resolve(CORE_RECIPES_DIR, `${name}.ts`)));
+}
+
 // ── Watcher state helpers ──────────────────────────────────────────────
 // Wrapped in a factory so each plugin instance gets its own isolated state.
 
@@ -65,16 +74,6 @@ function createWatcherState(): WatcherState {
 }
 
 // ── Dev-mode watchers ─────────────────────────────────────────────────
-
-/**
- * Discover components that have docs directories under content/docs/.
- */
-function getDocsComponents(): string[] {
-  if (!existsSync(DOCS_DIR)) return [];
-  return readdirSync(DOCS_DIR, { withFileTypes: true })
-    .filter((e) => e.isDirectory())
-    .map((e) => e.name);
-}
 
 /** Read current source for `component`, generate the mdx content, and write it to disk. */
 function regenerateWatcherFile(component: string) {
@@ -106,7 +105,7 @@ function restartWatchers(state: WatcherState, logger: { info: (m: string) => voi
   for (const w of state.watchers) w.close();
   state.watchers = [];
 
-  const components = getDocsComponents();
+  const components = getRecipeDocsComponents();
   const componentSet = new Set(components);
 
   // ── Recipe watcher ────────────────────────────────────────────────
@@ -164,7 +163,7 @@ export function installationWatcher(): Plugin {
     },
 
     buildStart() {
-      const components = getDocsComponents();
+      const components = getRecipeDocsComponents();
       let count = 0;
       for (const c of components) {
         const content = generateInstallationContent(c);

@@ -48,29 +48,46 @@ const PasswordInputControl: Component<ArkPasswordInput.InputProps> = (props) => 
 );
 
 const PasswordInput: Component<
-  ArkPasswordInput.RootProps & { label?: string; placeholder?: string; error?: boolean }
+  ArkPasswordInput.RootProps & ArkPasswordInput.InputProps & { label?: string; error?: boolean }
 > = (props) => {
-  const [local, others] = splitProps(props, ["class", "label", "children", "placeholder", "error"]);
+  const [local, others] = splitProps(props, ["class", "label", "children", "error"]);
+  const [inputProps, rootProps] = splitProps(others, [
+    "value",
+    "onInput",
+    "onBlur",
+    "name",
+    "placeholder",
+    "disabled",
+    "readOnly",
+    "required",
+    "id",
+    "autocomplete",
+    "type",
+    "form",
+  ]);
   return (
-    <PasswordInputBase.Root class={local.class} {...others}>
-      {local.label && <PasswordInputBase.Label error={local.error}>{local.label}</PasswordInputBase.Label>}
-      <PasswordInputControl placeholder={local.placeholder} />
+    <PasswordInputBase.Root class={local.class} {...rootProps}>
+      {local.label && (
+        <PasswordInputBase.Label error={local.error}>{local.label}</PasswordInputBase.Label>
+      )}
+      <PasswordInputControl {...inputProps} />
     </PasswordInputBase.Root>
   );
 };
 
 const PasswordInputRootProvider: Component<
-  ArkPasswordInput.RootProviderProps & { label?: string; placeholder?: string; error?: boolean }
+  ArkPasswordInput.RootProviderProps & { label?: string; error?: boolean; placeholder?: string }
 > = (props) => {
-  const [local, others] = splitProps(props, ["class", "label", "children", "placeholder", "error"]);
+  const [local, others] = splitProps(props, ["class", "label", "children", "error", "placeholder"]);
   return (
     <PasswordInputBase.RootProvider class={local.class} {...others}>
-      {local.label && <PasswordInputBase.Label error={local.error}>{local.label}</PasswordInputBase.Label>}
+      {local.label && (
+        <PasswordInputBase.Label error={local.error}>{local.label}</PasswordInputBase.Label>
+      )}
       <PasswordInputControl placeholder={local.placeholder} />
     </PasswordInputBase.RootProvider>
   );
 };
-
 export { PasswordInput, PasswordInputRootProvider, PasswordInputBase };
 
 export { passwordInputVariants, type PasswordInputVariants } from "@ark-preset/core";

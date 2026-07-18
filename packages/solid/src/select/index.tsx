@@ -8,10 +8,70 @@ import {
   useContext,
   type Accessor,
   splitProps,
+  mergeProps,
   type Component,
 } from "solid-js";
 import { selectVariants } from "@ark-preset/core";
 import { ScrollArea } from "../scroll-area";
+// ── Inline SVG Icons ──
+
+function XIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="size-4"
+    >
+      <path d="M18 6 6 18" />
+      <path d="m6 6 12 12" />
+    </svg>
+  );
+}
+
+function ChevronDownIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="size-4"
+    >
+      <path d="m6 9 6 6 6-6" />
+    </svg>
+  );
+}
+
+function CheckIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="size-4"
+    >
+      <path d="M20 6 9 17l-5-5" />
+    </svg>
+  );
+}
 
 const styles = selectVariants();
 
@@ -32,15 +92,15 @@ type SelectProps = ArkSelect.RootProps<{ label: string; value: string }> & {
 };
 
 const Select: Component<SelectProps> = (props) => {
-  const [local, others] = splitProps(props, [
+  const [local, rest] = splitProps(props, [
     "searchable",
     "onSearch",
     "onOpenChange",
     "class",
     "error",
   ]);
+  const [positioningProp, others] = splitProps(rest, ["positioning"]);
   const [searchValue, setSearchValue] = createSignal("");
-
   const handleSearch = (value: string) => {
     setSearchValue(value);
     local.onSearch?.(value);
@@ -66,6 +126,7 @@ const Select: Component<SelectProps> = (props) => {
         class={local.class}
         error={local.error}
         onOpenChange={handleOpenChange}
+        positioning={mergeProps({ placement: "bottom", sameWidth: true } as const, positioningProp.positioning)}
         {...others}
       />
     </SelectSearchableContext.Provider>
@@ -84,42 +145,15 @@ const SelectTrigger: Component<SelectTriggerProps> = (props) => {
     <SelectBase.Control class={local.class}>
       <SelectBase.Trigger {...others}>
         <SelectBase.ValueText placeholder={local.placeholder ?? "Select..."} />
+        <div class="flex items-center gap-1">
+          <SelectBase.ClearTrigger>
+            <XIcon />
+          </SelectBase.ClearTrigger>
+          <SelectBase.Indicator>
+            <ChevronDownIcon />
+          </SelectBase.Indicator>
+        </div>
       </SelectBase.Trigger>
-      <div class="flex items-center gap-1">
-        <SelectBase.ClearTrigger>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="size-4"
-          >
-            <path d="M18 6 6 18" />
-            <path d="m6 6 12 12" />
-          </svg>
-        </SelectBase.ClearTrigger>
-        <SelectBase.Indicator>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="size-4"
-          >
-            <path d="m6 9 6 6 6-6" />
-          </svg>
-        </SelectBase.Indicator>
-      </div>
     </SelectBase.Control>
   );
 };
@@ -160,20 +194,7 @@ const SelectItem: Component<ArkSelect.ItemProps> = (props) => {
         local.children
       )}
       <SelectBase.ItemIndicator>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="size-4"
-        >
-          <path d="M20 6 9 17l-5-5" />
-        </svg>
+        <CheckIcon />
       </SelectBase.ItemIndicator>
     </SelectBase.Item>
   );
