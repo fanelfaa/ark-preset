@@ -38,14 +38,28 @@ export function ThemeToggle() {
     return () => mql.removeEventListener("change", handler);
   });
 
-  const toggle = () => {
+  const toggle = (e: MouseEvent) => {
     const next = !isDark();
     const nextTheme = next ? "dark" : "light";
-    setIsDark(next);
-    applyTheme(nextTheme);
-    try {
-      localStorage.setItem(STORAGE_KEY, nextTheme);
-    } catch {}
+    const x = e.clientX;
+    const y = e.clientY;
+    const maxR = Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y));
+    const cb = () => { setIsDark(next); applyTheme(nextTheme); };
+    if (document.startViewTransition) {
+      const root = document.documentElement;
+      root.style.setProperty("--vt-x", `${x}px`);
+      root.style.setProperty("--vt-y", `${y}px`);
+      root.style.setProperty("--vt-r", `${maxR}px`);
+      const vt = document.startViewTransition(cb);
+      vt.finished.then(() => {
+        root.style.removeProperty("--vt-x");
+        root.style.removeProperty("--vt-y");
+        root.style.removeProperty("--vt-r");
+      });
+    } else {
+      cb();
+    }
+    try { localStorage.setItem(STORAGE_KEY, nextTheme); } catch {}
   };
 
   return (

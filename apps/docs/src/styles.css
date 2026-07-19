@@ -28,3 +28,23 @@ body,
 body {
   margin: 0;
 }
+/* ── View Transition API - expanding circle from toggle click ── */
+::view-transition-old(root) {
+  animation: none;
+}
+::view-transition-new(root) {
+  animation: 700ms ease-out both vt-grow;
+  mix-blend-mode: normal;
+}
+
+@keyframes vt-grow {
+  from { clip-path: circle(0% at var(--vt-x) var(--vt-y)); }
+  to   { clip-path: circle(var(--vt-r) at var(--vt-x) var(--vt-y)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}

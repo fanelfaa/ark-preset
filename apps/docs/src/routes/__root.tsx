@@ -17,7 +17,7 @@ function RootComponent() {
       <GradientCloud />
       <div class="relative z-1 min-h-dvh">
         {/* Header */}
-        <header class="sticky top-0 z-50 border-b border-border bg-background/40 backdrop-blur-2xl">
+        <header class="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-2xl">
           <div class="mx-auto flex h-14 max-w-7xl items-center gap-4 px-6">
             <Button
               size="icon"
