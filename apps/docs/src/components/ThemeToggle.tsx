@@ -51,18 +51,22 @@ export function ThemeToggle() {
       setIsDark(next);
       applyTheme(nextTheme);
     };
-    if (document.startViewTransition) {
-      const root = document.documentElement;
-      root.style.setProperty("--vt-x", `${x}px`);
-      root.style.setProperty("--vt-y", `${y}px`);
-      root.style.setProperty("--vt-r", `${maxR}px`);
-      const vt = document.startViewTransition(cb);
-      vt.finished.then(() => {
-        root.style.removeProperty("--vt-x");
-        root.style.removeProperty("--vt-y");
-        root.style.removeProperty("--vt-r");
-      });
-    } else {
+    try {
+      if (document.startViewTransition) {
+        const root = document.documentElement;
+        root.style.setProperty("--vt-x", `${x}px`);
+        root.style.setProperty("--vt-y", `${y}px`);
+        root.style.setProperty("--vt-r", `${maxR}px`);
+        const vt = document.startViewTransition(cb);
+        vt.finished.then(() => {
+          root.style.removeProperty("--vt-x");
+          root.style.removeProperty("--vt-y");
+          root.style.removeProperty("--vt-r");
+        });
+      } else {
+        cb();
+      }
+    } catch {
       cb();
     }
     try {

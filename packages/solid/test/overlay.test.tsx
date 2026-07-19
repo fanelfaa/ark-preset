@@ -1,8 +1,38 @@
-import { render, fireEvent, screen, waitFor } from "@solidjs/testing-library";
-import { Tooltip, TooltipTrigger, TooltipContent, TooltipBase, tooltipVariants } from "../src/tooltip";
-import { Popover, PopoverTrigger, PopoverContent, PopoverTitle, PopoverDescription, PopoverBase, popoverVariants } from "../src/popover";
-import { HoverCard, HoverCardTrigger, HoverCardContent, HoverCardBase, hoverCardVariants } from "../src/hover-card";
-import { AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogTitle, AlertDialogDescription, AlertDialogCancel, AlertDialogAction, AlertDialogBase, alertDialogVariants } from "../src/alert-dialog";
+import { render, fireEvent, screen } from "@solidjs/testing-library";
+import {
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+  TooltipBase,
+  tooltipVariants,
+} from "../src/tooltip";
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverTitle,
+  PopoverDescription,
+  PopoverBase,
+  popoverVariants,
+} from "../src/popover";
+import {
+  HoverCard,
+  HoverCardTrigger,
+  HoverCardContent,
+  HoverCardBase,
+  hoverCardVariants,
+} from "../src/hover-card";
+import {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogCancel,
+  AlertDialogAction,
+  AlertDialogBase,
+  alertDialogVariants,
+} from "../src/alert-dialog";
 
 // ------------------------------------------------------------------ //
 //  Tooltip
@@ -174,7 +204,7 @@ describe("PopoverBase", () => {
     expect(screen.getByText("ClosablePopover")).toBeInTheDocument();
     // PopoverContent includes a CloseTrigger + Arrow inside Portal
     const closeTrigger = document.querySelector(
-      '[data-scope="popover"][data-part="close-trigger"]'
+      '[data-scope="popover"][data-part="close-trigger"]',
     );
     expect(closeTrigger).toBeInTheDocument();
   });
@@ -215,23 +245,24 @@ describe("HoverCardBase", () => {
   });
 
   it("HoverCard shows content with defaultOpen", () => {
-    const { getByText } = render(() => (
+    render(() => (
       <HoverCard defaultOpen>
         <HoverCardTrigger>Hover</HoverCardTrigger>
         <HoverCardContent>Card visible</HoverCardContent>
       </HoverCard>
     ));
-    expect(getByText("Card visible")).toBeInTheDocument();
+    // HoverCardContent uses Portal — use screen
+    expect(screen.getByText("Card visible")).toBeInTheDocument();
   });
 
   it("HoverCard composite renders trigger and content", () => {
-    const { getByText } = render(() => (
+    render(() => (
       <HoverCard defaultOpen>
         <HoverCardTrigger>Trigger</HoverCardTrigger>
         <HoverCardContent useArrow>With arrow</HoverCardContent>
       </HoverCard>
     ));
-    expect(getByText("With arrow")).toBeInTheDocument();
+    expect(screen.getByText("With arrow")).toBeInTheDocument();
   });
 });
 

@@ -59,7 +59,7 @@ export function SidebarNav(props: { onLinkClick?: () => void }) {
                         to={link().href}
                         activeProps={{
                           class:
-                            "!text-foreground font-medium outline-2 outline-offset-1 outline-neutral-300 bg-background/60 backgdrop-blur",
+                            "!text-foreground font-medium outline-2 outline-offset-1 outline-neutral-300 bg-background/60 backdrop-blur",
                         }}
                         class="block rounded-md px-3 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground hover:outline-2 outline-neutral-200"
                         onClick={props.onLinkClick}

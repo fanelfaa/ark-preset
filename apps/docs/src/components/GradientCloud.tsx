@@ -56,6 +56,7 @@ export function GradientCloud() {
   let container: HTMLDivElement | undefined;
 
   onMount(() => {
+    if (typeof document === "undefined") return;
     if (!document.getElementById(STYLE_ID)) {
       const s = document.createElement("style");
       s.id = STYLE_ID;
@@ -65,12 +66,6 @@ export function GradientCloud() {
 @keyframes cloud-c { 0%{translate:0 0} 50%{translate:22vw 12vh} 100%{translate:0 0} }
 `;
       document.head.appendChild(s);
-    }
-
-    let el = document.getElementById(CONTAINER_ID);
-    if (el) {
-      container = el as HTMLDivElement;
-      return;
     }
 
     const div = document.createElement("div");
