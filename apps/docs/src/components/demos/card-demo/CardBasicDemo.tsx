@@ -7,10 +7,11 @@ import {
   CardFooter,
 } from "@ark-preset/solid";
 import { Button } from "@ark-preset/solid";
+import { DemoWrapper } from "../../DemoWrapper";
 
 export default function CardBasicDemo() {
   return (
-    <div class="not-prose rounded-lg border border-border p-6">
+    <DemoWrapper>
       <Card>
         <CardHeader>
           <CardTitle>Create Project</CardTitle>
@@ -27,6 +28,6 @@ export default function CardBasicDemo() {
           <Button variant="outline">Cancel</Button>
         </CardFooter>
       </Card>
-    </div>
+    </DemoWrapper>
   );
 }

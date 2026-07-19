@@ -1,8 +1,9 @@
+import { DemoWrapper } from "../../DemoWrapper";
 import { HoverCard, HoverCardTrigger, HoverCardContent } from "@ark-preset/solid";
 
 export default function HoverCardDelayDemo() {
   return (
-    <div class="rounded-lg border border-border p-6">
+    <DemoWrapper>
       <div class="flex flex-col items-center gap-4">
         <p class="text-sm text-muted-foreground mb-2">Custom delay (200ms open, 100ms close)</p>
         <HoverCard openDelay={200} closeDelay={100}>
@@ -12,6 +13,6 @@ export default function HoverCardDelayDemo() {
           </HoverCardContent>
         </HoverCard>
       </div>
-    </div>
+    </DemoWrapper>
   );
 }

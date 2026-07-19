@@ -4,10 +4,11 @@ import {
   AccordionItemTrigger,
   AccordionItemContent,
 } from "@ark-preset/solid";
+import { DemoWrapper } from "../../DemoWrapper";
 
 export default function AccordionDisabledDemo() {
   return (
-    <div class="rounded-lg border border-border p-6">
+    <DemoWrapper>
       <Accordion>
         <AccordionItem value="item-1">
           <AccordionItemTrigger>Active Item</AccordionItemTrigger>
@@ -22,6 +23,6 @@ export default function AccordionDisabledDemo() {
           </AccordionItemContent>
         </AccordionItem>
       </Accordion>
-    </div>
+    </DemoWrapper>
   );
 }

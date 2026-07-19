@@ -1,3 +1,4 @@
+import { DemoWrapper } from "../../DemoWrapper";
 import {
   Drawer,
   DrawerTrigger,
@@ -9,7 +10,7 @@ import { Input, Separator } from "@ark-preset/solid";
 
 export default function DrawerBasicDemo() {
   return (
-    <div class="rounded-lg border border-border p-6">
+    <DemoWrapper>
       <Drawer swipeDirection="start">
         <DrawerTrigger>Edit Profile</DrawerTrigger>
         <DrawerContent>
@@ -35,6 +36,6 @@ export default function DrawerBasicDemo() {
           </div>
         </DrawerContent>
       </Drawer>
-    </div>
+    </DemoWrapper>
   );
 }

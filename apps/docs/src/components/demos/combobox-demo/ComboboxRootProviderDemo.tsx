@@ -8,6 +8,7 @@ import {
   ComboboxContent,
   ComboboxItem,
 } from "@ark-preset/solid";
+import { DemoWrapper } from "../../DemoWrapper";
 
 export default function ComboboxRootProviderDemo() {
   const filterFn = useFilter({ sensitivity: "base" });
@@ -32,7 +33,7 @@ export default function ComboboxRootProviderDemo() {
   });
 
   return (
-    <div class="rounded-lg border border-border p-6 space-y-4">
+    <DemoWrapper class="space-y-4">
       <output class="block text-sm text-muted-foreground">
         Value: {JSON.stringify(combobox().value)}
       </output>
@@ -46,6 +47,6 @@ export default function ComboboxRootProviderDemo() {
           </Index>
         </ComboboxContent>
       </ComboboxRootProvider>
-    </div>
+    </DemoWrapper>
   );
 }

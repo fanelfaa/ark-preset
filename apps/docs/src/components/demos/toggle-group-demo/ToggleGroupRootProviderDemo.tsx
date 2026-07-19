@@ -1,3 +1,4 @@
+import { DemoWrapper } from "../../DemoWrapper";
 import { Index, createMemo } from "solid-js";
 import { ToggleGroupBase, ToggleGroupItem } from "@ark-preset/solid";
 import { useToggleGroup } from "@ark-ui/solid/toggle-group";
@@ -13,7 +14,7 @@ export default function ToggleGroupRootProviderDemo() {
   const value = createMemo(() => toggleGroup().value);
 
   return (
-    <div class="rounded-lg border border-border p-6 space-y-4">
+    <DemoWrapper>
       <p class="text-sm text-muted-foreground">Selected: {value().join(", ")}</p>
       <ToggleGroupBase.RootProvider value={toggleGroup}>
         <Index each={alignments}>
@@ -22,6 +23,6 @@ export default function ToggleGroupRootProviderDemo() {
           )}
         </Index>
       </ToggleGroupBase.RootProvider>
-    </div>
+    </DemoWrapper>
   );
 }

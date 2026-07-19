@@ -6,10 +6,11 @@ import {
   PaginationNextTrigger,
   PaginationLastTrigger,
 } from "@ark-preset/solid";
+import { DemoWrapper } from "../../DemoWrapper";
 
 export default function PaginationBasicDemo() {
   return (
-    <div class="rounded-lg border border-border p-6">
+    <DemoWrapper>
       <div>
         <p class="text-sm text-muted-foreground mb-3">Basic pagination (100 items, 10 per page)</p>
         <Pagination count={100} pageSize={10} class="gap-1">
@@ -78,6 +79,6 @@ export default function PaginationBasicDemo() {
           </PaginationLastTrigger>
         </Pagination>
       </div>
-    </div>
+    </DemoWrapper>
   );
 }

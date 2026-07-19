@@ -1,9 +1,10 @@
 import { NumberInput } from "@ark-preset/solid";
+import { DemoWrapper } from "../../DemoWrapper";
 
 export default function NumberInputBasicDemo() {
   return (
-    <div class="rounded-lg border border-border p-6">
+    <DemoWrapper>
       <NumberInput defaultValue="50" min={0} max={100} />
-    </div>
+    </DemoWrapper>
   );
 }

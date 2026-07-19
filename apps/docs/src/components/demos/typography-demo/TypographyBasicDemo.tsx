@@ -1,3 +1,4 @@
+import { DemoWrapper } from "../../DemoWrapper";
 import {
   H1,
   H2,
@@ -15,7 +16,7 @@ import {
 
 export default function TypographyBasicDemo() {
   return (
-    <div class="rounded-lg border border-border p-4 not-prose">
+    <DemoWrapper>
       <div class="space-y-4">
         <div>
           <H1>Heading 1</H1>
@@ -53,6 +54,6 @@ export default function TypographyBasicDemo() {
           <li>Unordered list item three</li>
         </List>
       </div>
-    </div>
+    </DemoWrapper>
   );
 }

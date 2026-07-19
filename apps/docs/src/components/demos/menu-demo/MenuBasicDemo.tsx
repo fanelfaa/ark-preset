@@ -1,5 +1,6 @@
 import { For } from "solid-js";
 import { MenuTrigger, MenuContent, MenuItem, Menu } from "@ark-preset/solid";
+import { DemoWrapper } from "../../DemoWrapper";
 
 const menuItems = [
   { value: "edit", label: "Edit" },
@@ -9,7 +10,7 @@ const menuItems = [
 
 export default function MenuBasicDemo() {
   return (
-    <div class="rounded-lg border border-border p-6">
+    <DemoWrapper>
       <Menu>
         <MenuTrigger>Actions</MenuTrigger>
         <MenuContent>
@@ -18,6 +19,6 @@ export default function MenuBasicDemo() {
           </For>
         </MenuContent>
       </Menu>
-    </div>
+    </DemoWrapper>
   );
 }

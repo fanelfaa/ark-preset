@@ -5,12 +5,13 @@ import {
   CollapsibleTrigger,
   CollapsibleContent,
 } from "@ark-preset/solid";
+import { DemoWrapper } from "../../DemoWrapper";
 
 export default function CollapsibleRootProviderDemo() {
   const collapsible = useCollapsible({ defaultOpen: true });
 
   return (
-    <div class="rounded-lg border border-border p-6 space-y-4">
+    <DemoWrapper class="space-y-4">
       <output class="block text-sm text-muted-foreground">
         Open: {JSON.stringify(collapsible().open)}
       </output>
@@ -28,6 +29,6 @@ export default function CollapsibleRootProviderDemo() {
           </div>
         </CollapsibleContent>
       </CollapsibleBase.RootProvider>
-    </div>
+    </DemoWrapper>
   );
 }

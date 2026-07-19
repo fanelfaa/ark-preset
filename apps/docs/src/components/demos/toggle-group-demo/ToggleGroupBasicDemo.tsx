@@ -1,8 +1,9 @@
+import { DemoWrapper } from "../../DemoWrapper";
 import { ToggleGroup, ToggleGroupItem } from "@ark-preset/solid";
 
 export default function ToggleGroupBasicDemo() {
   return (
-    <div class="rounded-lg border border-border p-6">
+    <DemoWrapper>
       <div class="flex flex-col gap-6">
         <ToggleGroup defaultValue={["left"]}>
           <ToggleGroupItem value="left">
@@ -113,6 +114,6 @@ export default function ToggleGroupBasicDemo() {
           </ToggleGroupItem>
         </ToggleGroup>
       </div>
-    </div>
+    </DemoWrapper>
   );
 }

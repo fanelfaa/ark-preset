@@ -4,10 +4,11 @@ import {
   AccordionItemTrigger,
   AccordionItemContent,
 } from "@ark-preset/solid";
+import { DemoWrapper } from "../../DemoWrapper";
 
 export default function AccordionBasicDemo() {
   return (
-    <div class="rounded-lg border border-border p-6">
+    <DemoWrapper>
       <Accordion defaultValue={["item-1"]}>
         <AccordionItem value="item-1">
           <AccordionItemTrigger>Is it accessible?</AccordionItemTrigger>
@@ -34,6 +35,6 @@ export default function AccordionBasicDemo() {
           </AccordionItemContent>
         </AccordionItem>
       </Accordion>
-    </div>
+    </DemoWrapper>
   );
 }

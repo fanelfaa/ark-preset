@@ -11,6 +11,7 @@ import {
 } from "@ark-preset/solid";
 import { Button } from "@ark-preset/solid";
 import { type Component, createSignal } from "solid-js";
+import { DemoWrapper } from "../../DemoWrapper";
 
 interface DeleteAlertDialogProps {
   dialog: UseDialogReturn;
@@ -48,7 +49,7 @@ export default function AlertDialogDeleteDemo() {
   };
 
   return (
-    <div class="rounded-lg border border-border p-6 space-y-4">
+    <DemoWrapper class="space-y-4">
       <p class="text-sm text-muted-foreground">Open: {JSON.stringify(dialog().open)}</p>
 
       <Button onClick={() => dialog().setOpen(true)} variant="destructive" disabled={deleted()}>
@@ -63,6 +64,6 @@ export default function AlertDialogDeleteDemo() {
         description="This will permanently delete your account and remove your data from our servers."
         onDelete={handleDelete}
       />
-    </div>
+    </DemoWrapper>
   );
 }

@@ -1,5 +1,6 @@
 import { HoverCard as ArkHoverCard } from "@ark-ui/solid/hover-card";
 import { splitProps, type Component } from "solid-js";
+import { Portal } from "solid-js/web";
 import { buttonVariants, hoverCardVariants, type ButtonVariants } from "@ark-preset/core";
 
 const styles = hoverCardVariants();
@@ -19,7 +20,11 @@ const Trigger: Component<ArkHoverCard.TriggerProps & ButtonVariants> = (props) =
 
 const Positioner: Component<ArkHoverCard.PositionerProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
-  return <ArkHoverCard.Positioner class={styles.positioner({ class: local.class })} {...others} />;
+  return (
+    <Portal>
+      <ArkHoverCard.Positioner class={styles.positioner({ class: local.class })} {...others} />
+    </Portal>
+  );
 };
 
 const Content: Component<ArkHoverCard.ContentProps> = (props) => {

@@ -21,6 +21,9 @@ const themeCssContent = `@theme {
   --color-ring: hsl(var(--ring));
   --color-card: hsl(var(--card));
   --color-card-foreground: hsl(var(--card-foreground));
+
+  --animate-accordion-expand: accordion-expand 200ms ease-in-out forwards;
+  --animate-accordion-collapse: accordion-collapse 200ms ease-in-out forwards;
 }
 
 :root {
@@ -54,6 +57,26 @@ const themeCssContent = `@theme {
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+.dark {
+  --background: 0 0% 7%;
+  --foreground: 210 40% 98%;
+  --primary: 210 40% 98%;
+  --primary-foreground: 222.2 47.4% 11.2%;
+  --secondary: 217.2 32.6% 17.5%;
+  --secondary-foreground: 210 40% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 70% 85%;
+  --muted: 217.2 32.6% 17.5%;
+  --muted-foreground: 215 20.2% 65.1%;
+  --accent: 217.2 32.6% 17.5%;
+  --accent-foreground: 210 40% 98%;
+  --border: 217.2 32.6% 25%;
+  --input: 217.2 32.6% 25%;
+  --ring: 212.7 26.8% 83.9%;
+  --card: 0 0% 3.9%;
+  --card-foreground: 210 40% 98%;
+}
+
 [data-scope="toast"][data-part="root"] {
   translate: var(--x) var(--y);
   scale: var(--scale);
@@ -66,7 +89,26 @@ const themeCssContent = `@theme {
     scale 400ms,
     opacity 400ms,
     height 400ms;
-}`;
+}
+
+@keyframes accordion-expand {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--height);
+  }
+}
+
+@keyframes accordion-collapse {
+  from {
+    height: var(--height);
+  }
+  to {
+    height: 0;
+  }
+}
+`;
 
 function QuickstartPage() {
   return (

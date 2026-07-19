@@ -1,8 +1,9 @@
+import { DemoWrapper } from "../../DemoWrapper";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@ark-preset/solid";
 
 export default function TabsBasicDemo() {
   return (
-    <div class="rounded-lg border border-border p-6">
+    <DemoWrapper>
       <Tabs defaultValue="account">
         <TabsList>
           <TabsTrigger value="account">Account</TabsTrigger>
@@ -19,6 +20,6 @@ export default function TabsBasicDemo() {
           </div>
         </TabsContent>
       </Tabs>
-    </div>
+    </DemoWrapper>
   );
 }

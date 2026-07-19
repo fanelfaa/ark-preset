@@ -1,13 +1,16 @@
 import { Menu as ArkMenu } from "@ark-ui/solid/menu";
-import { Portal } from "solid-js/web";
-import { splitProps, type Component } from "solid-js";
+import { Show, splitProps, type Component } from "solid-js";
 import type { ButtonVariants } from "@ark-preset/core";
 import { Menu as MenuBase } from "./menu.base";
 
 const Menu = MenuBase.Root;
 
-const MenuTrigger: Component<ArkMenu.TriggerProps & ButtonVariants> = (props) => {
-  const [local, others] = splitProps(props, ["class", "variant", "size"]);
+const MenuTrigger: Component<
+  ArkMenu.TriggerProps & ButtonVariants & { hideIndicator?: boolean }
+> = (props) => {
+  const [local, others] = splitProps(props, ["class", "variant", "size", "hideIndicator"]);
+  const hideIndicator = () => local.hideIndicator ?? false;
+
   return (
     <MenuBase.Trigger
       class={local.class}
@@ -16,22 +19,24 @@ const MenuTrigger: Component<ArkMenu.TriggerProps & ButtonVariants> = (props) =>
       {...others}
     >
       {props.children}
-      <MenuBase.Indicator>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="size-4"
-        >
-          <path d="m6 9 6 6 6-6" />
-        </svg>
-      </MenuBase.Indicator>
+      <Show when={!hideIndicator()}>
+        <MenuBase.Indicator>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="size-4"
+          >
+            <path d="m6 9 6 6 6-6" />
+          </svg>
+        </MenuBase.Indicator>
+      </Show>
     </MenuBase.Trigger>
   );
 };
@@ -39,14 +44,12 @@ const MenuTrigger: Component<ArkMenu.TriggerProps & ButtonVariants> = (props) =>
 const MenuContent: Component<ArkMenu.ContentProps> = (props) => {
   const [local, others] = splitProps(props, ["class", "children"]);
   return (
-    <Portal>
-      <MenuBase.Positioner>
-        <MenuBase.Content class={local.class} {...others}>
-          <MenuBase.Arrow />
-          {local.children}
-        </MenuBase.Content>
-      </MenuBase.Positioner>
-    </Portal>
+    <MenuBase.Positioner>
+      <MenuBase.Content class={local.class} {...others}>
+        <MenuBase.Arrow />
+        {local.children}
+      </MenuBase.Content>
+    </MenuBase.Positioner>
   );
 };
 

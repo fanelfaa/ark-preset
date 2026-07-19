@@ -1,8 +1,9 @@
+import { DemoWrapper } from "../../DemoWrapper";
 import { Switch, SwitchLabel } from "@ark-preset/solid";
 
 export default function SwitchBasicDemo() {
   return (
-    <div class="rounded-lg border border-border p-6">
+    <DemoWrapper>
       <div class="flex flex-col gap-4">
         <Switch>
           <SwitchLabel>Off</SwitchLabel>
@@ -14,6 +15,6 @@ export default function SwitchBasicDemo() {
           <SwitchLabel>Disabled</SwitchLabel>
         </Switch>
       </div>
-    </div>
+    </DemoWrapper>
   );
 }

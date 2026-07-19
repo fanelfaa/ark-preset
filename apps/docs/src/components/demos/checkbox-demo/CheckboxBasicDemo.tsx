@@ -1,8 +1,9 @@
 import { Checkbox, CheckboxLabel } from "@ark-preset/solid";
+import { DemoWrapper } from "../../DemoWrapper";
 
 export default function CheckboxBasicDemo() {
   return (
-    <div class="rounded-lg border border-border p-6">
+    <DemoWrapper>
       <div class="flex flex-col gap-4">
         <Checkbox defaultChecked>
           <CheckboxLabel>Checked</CheckboxLabel>
@@ -17,6 +18,6 @@ export default function CheckboxBasicDemo() {
           <CheckboxLabel>Disabled</CheckboxLabel>
         </Checkbox>
       </div>
-    </div>
+    </DemoWrapper>
   );
 }

@@ -2,7 +2,7 @@ import { tv, type VariantProps } from "tailwind-variants";
 
 export const toastVariants = tv({
   slots: {
-    root: "group pointer-events-auto relative flex w-full min-w-sm max-w-sm items-center justify-between gap-x-4 overflow-hidden rounded-md border border-border p-4 shadow-lg transition-all data-[state=open]:animate-in data-[state=closed]:animate-out data-[swipe=end]:animate-out",
+    root: "group pointer-events-auto relative flex w-full min-w-sm max-w-sm items-center justify-between gap-x-4 overflow-hidden rounded-md outline-2 outline-border p-4 shadow-lg transition-all data-[state=open]:animate-in data-[state=closed]:animate-out data-[swipe=end]:animate-out bg-background/80 backdrop-blur-3xl",
     title: "text-sm font-semibold",
     description: "text-sm opacity-90",
     closeTrigger:
@@ -12,17 +12,17 @@ export const toastVariants = tv({
   },
   variants: {
     variant: {
-      default: { root: "bg-background border-border" },
-      loading: { root: "bg-background border-border" },
+      default: { root: "outline-border" },
+      loading: { root: "outline-border" },
       error: {
-        root: "border-red-500 bg-red-50 text-red-950 dark:border-red-900 dark:bg-red-950/60 dark:text-red-50",
+        root: "outline-red-500 text-red-950 dark:outline-red-900 dark:text-red-50",
       },
       success: {
-        root: "border-green-500 bg-green-50 text-green-950 dark:border-green-900 dark:bg-green-950/60 dark:text-green-50",
+        root: "outline-green-500 text-green-950 dark:outline-green-900 dark:text-green-50",
       },
-      info: { root: "bg-background border-border" },
+      info: { root: "outline-border" },
       warning: {
-        root: "border-yellow-500 bg-yellow-50 text-yellow-950 dark:border-yellow-900 dark:bg-yellow-950/60 dark:text-yellow-50",
+        root: "outline-yellow-500 text-yellow-950 dark:outline-yellow-900 dark:text-yellow-50",
       },
     },
   },

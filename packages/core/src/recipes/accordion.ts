@@ -9,7 +9,7 @@ export const accordionVariants = tv({
     itemIndicator:
       "size-4 shrink-0 text-foreground transition-transform duration-200 data-[state=open]:rotate-180",
     itemContent:
-      "overflow-hidden transition-all duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0",
+      "overflow-hidden transition-all duration-200 data-[state=open]:animate-accordion-expand data-[state=closed]:animate-accordion-collapse",
     itemBody: "pb-4 text-sm text-foreground",
   },
 });

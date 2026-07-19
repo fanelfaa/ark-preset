@@ -1,8 +1,9 @@
 import { AspectRatio } from "@ark-preset/solid";
+import { DemoWrapper } from "../../DemoWrapper";
 
 export default function AspectRatioBasicDemo() {
   return (
-    <div class="rounded-lg border border-border p-6">
+    <DemoWrapper>
       <div class="grid grid-cols-2 gap-6">
         <div class="space-y-2">
           <p class="text-sm font-medium">16:9</p>
@@ -37,6 +38,6 @@ export default function AspectRatioBasicDemo() {
           </AspectRatio>
         </div>
       </div>
-    </div>
+    </DemoWrapper>
   );
 }

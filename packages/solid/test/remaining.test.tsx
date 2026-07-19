@@ -563,7 +563,7 @@ describe("ScrollArea", () => {
 
   it("merges custom class", () => {
     const { container } = render(() => <ScrollArea class="my-scroll">Content</ScrollArea>);
-    expect(container.querySelector('[data-part="viewport"]')).toHaveClass("my-scroll");
+    expect(container.querySelector('[data-part="root"]')).toHaveClass("my-scroll");
   });
 
   it("renders with variant='scroll'", () => {

@@ -3,7 +3,7 @@ import { tv, type VariantProps } from "tailwind-variants";
 export const dialogVariants = tv({
   slots: {
     backdrop:
-      "fixed inset-0 z-50 bg-black/80 dark:bg-black/60 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+      "fixed inset-0 z-50 bg-black/10 backdrop-blur-md backdrop-saturate-150 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
     positioner: "fixed inset-0 z-50 flex items-center justify-center",
     content:
       "relative z-50 grid w-full max-w-lg gap-4 border border-border bg-background p-6 shadow-lg rounded-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",

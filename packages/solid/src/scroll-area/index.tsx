@@ -9,8 +9,8 @@ type ScrollAreaProps = ArkScrollArea.RootProps & {
 const ScrollArea: Component<ScrollAreaProps> = (props) => {
   const [local, others] = splitProps(props, ["orientation", "children", "class"]);
   return (
-    <ScrollAreaBase.Root {...others}>
-      <ScrollAreaBase.Viewport class={local.class}>
+    <ScrollAreaBase.Root class={local.class} {...others}>
+      <ScrollAreaBase.Viewport>
         <ScrollAreaBase.Content>{local.children}</ScrollAreaBase.Content>
       </ScrollAreaBase.Viewport>
       <ScrollAreaBase.Scrollbar orientation={local.orientation ?? "vertical"}>

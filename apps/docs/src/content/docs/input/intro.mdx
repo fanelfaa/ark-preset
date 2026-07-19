@@ -1,4 +1,5 @@
 import { DocsLink } from "../../../components/DocsLink";
+import { DemoWrapper } from "../../../components/DemoWrapper";
 import InputBasicDemo from "@demos/input-demo/InputBasicDemo.tsx";
 
 # Input
@@ -7,8 +8,9 @@ A text input component with support for labels, descriptions, and error states.
 
 <DocsLink href="https://ark-ui.com/docs/components/field" />
 
-<div class="rounded-lg border border-border p-6">
+<DemoWrapper>
   <InputBasicDemo />
+</DemoWrapper>
 
 ```tsx
 import { Input } from "~/components/input"
@@ -24,4 +26,4 @@ export function InputDemo() {
   )
 }
 ```
-</div>
+
