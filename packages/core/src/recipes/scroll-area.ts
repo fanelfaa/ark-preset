@@ -2,8 +2,9 @@ import { tv, type VariantProps } from "tailwind-variants";
 
 export const scrollAreaVariants = tv({
   slots: {
+    root: "relative flex flex-col",
     viewport:
-      "h-full w-full rounded-[inherit] overflow-scroll [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden [&::-webkit-scrollbar]:size-0",
+      "flex-1 min-h-0 w-full rounded-[inherit] overflow-scroll [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden [&::-webkit-scrollbar]:size-0",
     scrollbar:
       "flex select-none touch-none transition-colors group [&[data-orientation=vertical]:not([data-overflow-y])]:hidden [&[data-orientation=horizontal]:not([data-overflow-x])]:hidden",
     thumb:
