@@ -7,9 +7,9 @@ import {
   BreadcrumbSeparator,
   BreadcrumbEllipsis,
   Menu,
-  MenuBase,
   MenuContent,
   MenuItem,
+  MenuTrigger,
 } from "@ark-preset/solid";
 import { DemoWrapper } from "../../DemoWrapper";
 
@@ -45,10 +45,13 @@ export default function BreadcrumbBasicDemo() {
             <BreadcrumbSeparator />
             <BreadcrumbItem>
               <Menu>
-                <MenuBase.Trigger class="flex size-8 items-center justify-center rounded-lg hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+                <MenuTrigger
+                  hideIndicator
+                  class="flex size-8 items-center justify-center rounded-lg"
+                >
                   <BreadcrumbEllipsis />
                   <span class="sr-only">Toggle menu</span>
-                </MenuBase.Trigger>
+                </MenuTrigger>
                 <MenuContent>
                   <MenuItem value="docs">Documentation</MenuItem>
                   <MenuItem value="themes">Themes</MenuItem>

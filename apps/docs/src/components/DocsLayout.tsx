@@ -13,12 +13,12 @@ export const DocsLayout: Component<DocsLayoutProps> = (props) => {
     <div class="mx-auto max-w-7xl">
       <div class="flex">
         {/* Sidebar */}
-        <aside class="hidden lg:block w-64 shrink-0 border-r border-border bg-background/30 backdrop-blur-3xl sticky top-14 self-start h-[calc(100vh-3.5rem)]">
+        <aside class="hidden lg:block w-64 shrink-0 border-r border-border bg-background/60 backdrop-blur-3xl sticky top-14 self-start h-[calc(100vh-3.5rem)]">
           <SidebarNav />
         </aside>
 
         {/* Main content */}
-        <main class="flex-1 min-w-0 bg-background/30 backdrop-blur-3xl">
+        <main class="flex-1 min-w-0 bg-background/60 backdrop-blur-3xl">
           <div class="max-w-4xl mx-auto px-6 py-10 prose dark:prose-invert">{props.children}</div>
           {/* Footer */}
           <footer class="border-t border-border bg-background/30 backdrop-blur-3xl">
@@ -51,14 +51,17 @@ export function SidebarNav(props: { onLinkClick?: () => void }) {
               <h4 class="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-2 px-3">
                 {category().category}
               </h4>
-              <ul class="space-y-0.5">
+              <ul class="space-y-1">
                 <Index each={category().links}>
                   {(link) => (
                     <li>
                       <Link
                         to={link().href}
-                        activeProps={{ class: "!text-foreground font-medium bg-muted/80" }}
-                        class="block rounded-md px-3 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground hover:bg-muted"
+                        activeProps={{
+                          class:
+                            "!text-foreground font-medium outline-2 outline-offset-1 outline-neutral-300 bg-background/60 backgdrop-blur",
+                        }}
+                        class="block rounded-md px-3 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground hover:outline-2 outline-neutral-200"
                         onClick={props.onLinkClick}
                       >
                         {link().label}
