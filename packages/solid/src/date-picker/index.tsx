@@ -196,18 +196,19 @@ const SingleControl: Component<{
 // ── Internal: RangeControl ───────────────────────────────────
 
 const RangeControl: Component<{
-  placeholder?: string;
   clearLabel?: string | JSX.Element;
   error?: boolean;
 }> = (props) => (
   <>
-    <DatePickerBase.Input placeholder={props.placeholder} error={props.error} index={0} />
-    <span class="text-sm text-muted-foreground select-none">—</span>
-    <DatePickerBase.Input placeholder={props.placeholder} error={props.error} index={1} />
-    <DatePickerBase.Trigger>
-      <CalendarIcon />
-    </DatePickerBase.Trigger>
-    <DatePickerBase.ClearTrigger>{props.clearLabel ?? "Clear"}</DatePickerBase.ClearTrigger>
+    <DatePickerBase.Input placeholder="Start date" error={props.error} index={0} />
+    <span class="text-sm text-muted-foreground select-none hidden sm:inline-block">—</span>
+    <DatePickerBase.Input placeholder="End date" error={props.error} index={1} />
+    <div class="flex w-full sm:w-fit gap-1">
+      <DatePickerBase.Trigger>
+        <CalendarIcon />
+      </DatePickerBase.Trigger>
+      <DatePickerBase.ClearTrigger>{props.clearLabel ?? "Clear"}</DatePickerBase.ClearTrigger>
+    </div>
   </>
 );
 
@@ -297,11 +298,7 @@ const DatePicker: Component<DatePickerProps> = (props) => {
           />
         </Show>
         <Show when={selectionMode() === "range"}>
-          <RangeControl
-            placeholder={local.placeholder}
-            clearLabel={local.clearLabel}
-            error={local.error}
-          />
+          <RangeControl clearLabel={local.clearLabel} error={local.error} />
         </Show>
         <Show when={selectionMode() === "multiple"}>
           <MultipleControl

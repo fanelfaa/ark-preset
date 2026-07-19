@@ -3,7 +3,7 @@ import { tv, type VariantProps } from "tailwind-variants";
 export const datePickerVariants = tv({
   slots: {
     root: "w-full flex flex-col gap-1.5",
-    control: "flex w-full items-center gap-1",
+    control: "flex w-full items-center gap-1 flex-wrap",
     input:
       "flex-1 h-8 rounded-md border border-input bg-background px-2.5 py-1.5 text-base md:text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50",
     trigger: [

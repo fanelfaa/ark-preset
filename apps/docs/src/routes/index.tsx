@@ -100,7 +100,7 @@ function Home() {
           {categories.map((cat) => (
             <Link
               to={cat.href}
-              class="group rounded-lg border border-border p-5 transition-colors hover:border-primary hover:bg-muted/30"
+              class="group rounded-lg border border-border p-5 transition-colors hover:border-primary bg-background/50 backdrop-blur-sm hover:bg-background/70"
             >
               <h3 class="text-lg font-semibold group-hover:text-primary transition-colors">
                 {cat.name}
@@ -126,10 +126,7 @@ function Home() {
         <H2>Popular Components</H2>
         <div class="flex flex-wrap gap-3">
           {quickLinks.map((link) => (
-            <Link
-              to={link.href}
-              class="rounded-md border border-border px-4 py-2 text-sm font-medium transition-colors hover:border-primary hover:text-primary"
-            >
+            <Link to={link.href} class={buttonVariants({ variant: "outline" })}>
               {link.label}
             </Link>
           ))}
