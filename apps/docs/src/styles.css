@@ -38,8 +38,12 @@ body {
 }
 
 @keyframes vt-grow {
-  from { clip-path: circle(0% at var(--vt-x) var(--vt-y)); }
-  to   { clip-path: circle(var(--vt-r) at var(--vt-x) var(--vt-y)); }
+  from {
+    clip-path: circle(0% at var(--vt-x) var(--vt-y));
+  }
+  to {
+    clip-path: circle(var(--vt-r) at var(--vt-x) var(--vt-y));
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

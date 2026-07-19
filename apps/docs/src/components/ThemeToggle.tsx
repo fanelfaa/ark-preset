@@ -43,8 +43,14 @@ export function ThemeToggle() {
     const nextTheme = next ? "dark" : "light";
     const x = e.clientX;
     const y = e.clientY;
-    const maxR = Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y));
-    const cb = () => { setIsDark(next); applyTheme(nextTheme); };
+    const maxR = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y),
+    );
+    const cb = () => {
+      setIsDark(next);
+      applyTheme(nextTheme);
+    };
     if (document.startViewTransition) {
       const root = document.documentElement;
       root.style.setProperty("--vt-x", `${x}px`);
@@ -59,7 +65,9 @@ export function ThemeToggle() {
     } else {
       cb();
     }
-    try { localStorage.setItem(STORAGE_KEY, nextTheme); } catch {}
+    try {
+      localStorage.setItem(STORAGE_KEY, nextTheme);
+    } catch {}
   };
 
   return (
