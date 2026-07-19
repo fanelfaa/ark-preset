@@ -17,6 +17,9 @@
   --color-ring: hsl(var(--ring));
   --color-card: hsl(var(--card));
   --color-card-foreground: hsl(var(--card-foreground));
+
+  --animate-accordion-expand: accordion-expand 200ms ease-in-out forwards;
+  --animate-accordion-collapse: accordion-collapse 200ms ease-in-out forwards;
 }
 
 :root {
@@ -82,4 +85,22 @@
     scale 400ms,
     opacity 400ms,
     height 400ms;
+}
+
+@keyframes accordion-expand {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--height);
+  }
+}
+
+@keyframes accordion-collapse {
+  from {
+    height: var(--height);
+  }
+  to {
+    height: 0;
+  }
 }
