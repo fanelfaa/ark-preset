@@ -3,24 +3,24 @@
   "version": "0.1.4",
   "description": "Solid.js component library — Ark UI primitives styled with tailwind-variants",
   "keywords": [
-    "solid-js",
     "ark-ui",
+    "design-system",
+    "solid-js",
     "tailwind-variants",
     "tailwindcss",
-    "ui-components",
-    "design-system"
+    "ui-components"
   ],
-  "author": "Fandi <fandi.ilham.bb@gmail.com>",
+  "homepage": "https://github.com/fanelfaa/ark-preset#readme",
+  "bugs": {
+    "url": "https://github.com/fanelfaa/ark-preset/issues"
+  },
   "license": "MIT",
+  "author": "Fandi <fandi.ilham.bb@gmail.com>",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fanelfaa/ark-preset.git",
     "directory": "packages/solid"
   },
-  "bugs": {
-    "url": "https://github.com/fanelfaa/ark-preset/issues"
-  },
-  "homepage": "https://github.com/fanelfaa/ark-preset#readme",
   "files": [
     "dist/",
     "src/"

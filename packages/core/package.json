@@ -3,24 +3,24 @@
   "version": "0.1.4",
   "description": "Tailwind-variants styling recipes for Ark UI primitives",
   "keywords": [
+    "ark-ui",
+    "design-system",
+    "styling",
     "tailwind-variants",
     "tailwindcss",
-    "ark-ui",
-    "ui-components",
-    "design-system",
-    "styling"
+    "ui-components"
   ],
-  "author": "Fandi <fandi.ilham.bb@gmail.com>",
+  "homepage": "https://github.com/fanelfaa/ark-preset#readme",
+  "bugs": {
+    "url": "https://github.com/fanelfaa/ark-preset/issues"
+  },
   "license": "MIT",
+  "author": "Fandi <fandi.ilham.bb@gmail.com>",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fanelfaa/ark-preset.git",
     "directory": "packages/core"
   },
-  "bugs": {
-    "url": "https://github.com/fanelfaa/ark-preset/issues"
-  },
-  "homepage": "https://github.com/fanelfaa/ark-preset#readme",
   "files": [
     "dist/",
     "src/"
@@ -43,7 +43,7 @@
   },
   "scripts": {
     "prepublishOnly": "pnpm run build",
-    "build": "tsup 2>&1 | grep -E '\u26a1\ufe0f|error'",
+    "build": "tsup 2>&1 | grep -E '⚡️|error'",
     "dev": "tsup --watch",
     "clean": "rm -rf dist",
     "typecheck": "tsc --noEmit"

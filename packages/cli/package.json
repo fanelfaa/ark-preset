@@ -4,22 +4,22 @@
   "description": "CLI to generate Ark UI components into your Solid.js project",
   "keywords": [
     "ark-ui",
-    "solid-js",
     "cli",
-    "ui-components",
-    "code-generator"
+    "code-generator",
+    "solid-js",
+    "ui-components"
   ],
-  "author": "Fandi <fandi.ilham.bb@gmail.com>",
+  "homepage": "https://github.com/fanelfaa/ark-preset#readme",
+  "bugs": {
+    "url": "https://github.com/fanelfaa/ark-preset/issues"
+  },
   "license": "MIT",
+  "author": "Fandi <fandi.ilham.bb@gmail.com>",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fanelfaa/ark-preset.git",
     "directory": "packages/cli"
   },
-  "bugs": {
-    "url": "https://github.com/fanelfaa/ark-preset/issues"
-  },
-  "homepage": "https://github.com/fanelfaa/ark-preset#readme",
   "bin": {
     "ark-preset": "./dist/index.js"
   },
