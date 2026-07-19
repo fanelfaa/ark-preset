@@ -17,8 +17,9 @@ import { tv, type VariantProps } from "tailwind-variants";
 
 export const scrollAreaVariants = tv({
   slots: {
+    root: "relative flex flex-col",
     viewport:
-      "h-full w-full rounded-[inherit] overflow-scroll [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden [&::-webkit-scrollbar]:size-0",
+      "flex-1 min-h-0 w-full rounded-[inherit] overflow-scroll [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden [&::-webkit-scrollbar]:size-0",
     scrollbar:
       "flex select-none touch-none transition-colors group [&[data-orientation=vertical]:not([data-overflow-y])]:hidden [&[data-orientation=horizontal]:not([data-overflow-x])]:hidden",
     thumb:
@@ -57,7 +58,8 @@ import { splitProps, type Component } from "solid-js";
 const styles = scrollAreaVariants();
 
 const ScrollAreaRoot: Component<ArkScrollArea.RootProps> = (props) => {
-  return <ArkScrollArea.Root class="h-full" {...props} />;
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkScrollArea.Root class={styles.root({ class: local.class })} {...others} />;
 };
 
 const ScrollAreaViewport: Component<ArkScrollArea.ViewportProps> = (props) => {
@@ -124,8 +126,8 @@ type ScrollAreaProps = ArkScrollArea.RootProps & {
 const ScrollArea: Component<ScrollAreaProps> = (props) => {
   const [local, others] = splitProps(props, ["orientation", "children", "class"]);
   return (
-    <ScrollAreaBase.Root {...others}>
-      <ScrollAreaBase.Viewport class={local.class}>
+    <ScrollAreaBase.Root class={local.class} {...others}>
+      <ScrollAreaBase.Viewport>
         <ScrollAreaBase.Content>{local.children}</ScrollAreaBase.Content>
       </ScrollAreaBase.Viewport>
       <ScrollAreaBase.Scrollbar orientation={local.orientation ?? "vertical"}>
