@@ -9,13 +9,7 @@ import {
   DialogDescription,
   DialogFooter,
 } from "@ark-preset/solid";
-import {
-  Button,
-  Input,
-  RadioGroup,
-  RadioGroupItem,
-  RadioGroupBase,
-} from "@ark-preset/solid";
+import { Button, Input, RadioGroup, RadioGroupItem, RadioGroupBase } from "@ark-preset/solid";
 
 export default function DialogBasicDemo() {
   return (
