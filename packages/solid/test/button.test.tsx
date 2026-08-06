@@ -57,10 +57,16 @@ describe("Button", () => {
     expect(container.firstChild).toBeDisabled();
   });
 
-  it("hides children text when loading but still renders", () => {
-    const { getByText } = render(() => <Button loading>Submit</Button>);
-    // Children should still be present even when loading
+  it("renders with custom spinner or icon composition when disabled", () => {
+    const { getByText, container } = render(() => (
+      <Button disabled>
+        <span data-testid="spinner">Loading</span>
+        Submit
+      </Button>
+    ));
     expect(getByText("Submit")).toBeInTheDocument();
+    expect(container.querySelector('[data-testid="spinner"]')).toBeInTheDocument();
+    expect(container.firstChild).toBeDisabled();
   });
 
   it("calls onClick when clicked", () => {

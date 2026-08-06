@@ -16,7 +16,7 @@ Create the recipe file at `src/components/recipes/button.ts`:
 import { tv, type VariantProps } from "tailwind-variants";
 
 export const buttonVariants = tv({
-  base: "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  base: "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&>svg]:pointer-events-none [&>svg]:size-4 [&>svg]:shrink-0 [[data-icon]]:pointer-events-none [[data-icon=inline-start]]:-me-0.5 [[data-icon=inline-end]]:-ms-0.5",
   variants: {
     variant: {
       default: "bg-primary text-primary-foreground hover:bg-primary/90",
@@ -27,10 +27,15 @@ export const buttonVariants = tv({
       link: "text-primary underline-offset-4 hover:underline",
     },
     size: {
+      xs: "h-7 px-2 text-xs",
       sm: "h-8 px-2.5 text-sm",
       md: "h-9 px-3 py-1.5",
       lg: "h-10 px-6",
       icon: "size-8",
+      "icon-xs": "size-7 [&>svg]:size-4",
+      "icon-sm": "size-8 [&>svg]:size-4",
+      "icon-md": "size-9 [&>svg]:size-5",
+      "icon-lg": "size-10 [&>svg]:size-6",
     },
   },
   defaultVariants: {
@@ -45,26 +50,14 @@ export type ButtonVariants = VariantProps<typeof buttonVariants>;
 Create the component file at `src/components/button/index.tsx`:
 
 ```tsx
-import { splitProps, type Component, Show, children } from "solid-js";
+import { splitProps, type Component, children } from "solid-js";
 import { ButtonVariants, buttonVariants } from "@ark-preset/core";
 import { ark, HTMLArkProps } from "@ark-ui/solid/factory";
-import { Spinner } from "../spinner";
 
-type ButtonProps = HTMLArkProps<"button"> &
-  ButtonVariants & {
-    loading?: boolean;
-  };
+type ButtonProps = HTMLArkProps<"button"> & ButtonVariants;
 
 const Button: Component<ButtonProps> = (props) => {
-  const [local, others] = splitProps(props, [
-    "class",
-    "variant",
-    "size",
-    "loading",
-    "disabled",
-    "children",
-  ]);
-  const isDisabled = () => local.loading || local.disabled;
+  const [local, others] = splitProps(props, ["class", "variant", "size", "children"]);
 
   const resolvedChildren = children(() => local.children);
   return (
@@ -74,12 +67,8 @@ const Button: Component<ButtonProps> = (props) => {
         size: local.size,
         class: local.class,
       })}
-      disabled={isDisabled()}
       {...others}
     >
-      <Show when={local.loading}>
-        <Spinner size="sm" />
-      </Show>
       {resolvedChildren()}
     </ark.button>
   );
@@ -89,5 +78,3 @@ export { Button, buttonVariants };
 ```
 
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.
-
-> **Dependencies:** This component imports shared recipes or sub-components from other packages. Make sure the following are also installed: [spinner](/docs/components/spinner).
