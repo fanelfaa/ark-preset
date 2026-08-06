@@ -1,4 +1,4 @@
-import { Button } from "@ark-preset/solid";
+import { Button, Spinner, buttonVariants } from "@ark-preset/solid";
 import { DemoWrapper } from "../../../components/DemoWrapper";
 
 ## Usage
@@ -15,36 +15,9 @@ Basic usage:
 <Button>Click me</Button>
 ```
 
-With event handler:
-
-```tsx
-<Button onClick={() => console.log("clicked!")}>Submit</Button>
-```
-
-Combining variant and size:
-
-```tsx
-<Button variant="destructive" size="lg">
-  Delete Account
-</Button>
-```
-
-With icon:
-
-```tsx
-<Button variant="outline" size="icon">
-  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M5 12h14" />
-    <path d="M12 5v14" />
-  </svg>
-</Button>
-```
-
-Custom class override:
-
-```tsx
-<Button class="w-full">Full Width Button</Button>
-```
+<DemoWrapper class="flex flex-wrap gap-4 not-prose">
+  <Button>Click me</Button>
+</DemoWrapper>
 
 ### Variants
 
@@ -64,10 +37,29 @@ Use the <code>variant</code> prop to change the visual style.
 Use the <code>size</code> prop to change the button size.
 
 <DemoWrapper class="flex flex-wrap items-center gap-4 not-prose">
+  <Button size="xs">Xs</Button>
   <Button size="sm">Sm</Button>
   <Button size="md">Md</Button>
   <Button size="lg">Lg</Button>
-  <Button size="icon">
+  <Button size="icon-xs">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5 12h14" />
+      <path d="M12 5v14" />
+    </svg>
+  </Button>
+  <Button size="icon-sm">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5 12h14" />
+      <path d="M12 5v14" />
+    </svg>
+  </Button>
+  <Button size="icon-md">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5 12h14" />
+      <path d="M12 5v14" />
+    </svg>
+  </Button>
+  <Button size="icon-lg">
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <path d="M5 12h14" />
       <path d="M12 5v14" />
@@ -88,41 +80,93 @@ Add the <code>disabled</code> prop to disable interaction.
   <Button variant="link" disabled>Link</Button>
 </DemoWrapper>
 
-### Loading
-
-Add the <code>loading</code> prop to show a spinner alongside the button label and automatically disable interaction.
-
-<DemoWrapper class="flex flex-wrap gap-4 not-prose">
-  <Button loading>Default</Button>
-  <Button variant="secondary" loading>Secondary</Button>
-  <Button variant="destructive" loading>Destructive</Button>
-  <Button variant="outline" loading>Outline</Button>
-  <Button variant="ghost" loading>Ghost</Button>
-  <Button variant="link" loading>Link</Button>
-</DemoWrapper>
-
-Useful for async operations like form submissions:
+### With Icon
 
 ```tsx
-import { createSignal } from "solid-js";
-import { Button } from "~/components/button";
+{/* Icon button */}
+<Button variant="outline" size="icon">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M5 12h14" />
+    <path d="M12 5v14" />
+  </svg>
+</Button>
 
-export function SubmitDemo() {
-  const [loading, setLoading] = createSignal(false);
+{/* Icon at start */}
+<Button variant="outline">
+  <svg data-icon="inline-start" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M5 12h14" />
+    <path d="M12 5v14" />
+  </svg>
+  New Branch
+</Button>
 
-  async function handleSubmit() {
-    setLoading(true);
-    await new Promise((r) => setTimeout(r, 2000));
-    setLoading(false);
-  }
-
-  return (
-    <Button loading={loading()} onClick={handleSubmit}>
-      Submit
-    </Button>
-  );
-}
+{/* Icon at end */}
+<Button variant="outline">
+  Fork
+  <svg data-icon="inline-end" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M5 12h14" />
+    <path d="M12 5v14" />
+  </svg>
+</Button>
 ```
+
+<DemoWrapper class="flex flex-wrap items-center gap-4 not-prose">
+  <Button variant="outline" size="icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M5 12h14" />
+      <path d="M12 5v14" />
+    </svg>
+  </Button>
+  <Button variant="outline">
+    <svg data-icon="inline-start" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M5 12h14" />
+      <path d="M12 5v14" />
+    </svg>
+    New Branch
+  </Button>
+  <Button variant="outline">
+    Fork
+    <svg data-icon="inline-end" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M5 12h14" />
+      <path d="M12 5v14" />
+    </svg>
+  </Button>
+</DemoWrapper>
+
+### Spinner
+
+```tsx
+{/* Icon button with spinner */}
+<Button disabled variant="outline" size="icon">
+  <Spinner />
+</Button>
+
+{/* Spinner at start */}
+<Button disabled variant="outline">
+  <Spinner data-icon="inline-start" />
+  Loading...
+</Button>
+
+{/* Spinner at end */}
+<Button disabled variant="outline">
+  Saving
+  <Spinner data-icon="inline-end" />
+</Button>
+```
+
+<DemoWrapper class="flex flex-wrap items-center gap-4 not-prose">
+  <Button disabled variant="outline" size="icon">
+    <Spinner />
+  </Button>
+  <Button disabled variant="outline">
+    <Spinner data-icon="inline-start" />
+    Loading...
+  </Button>
+  <Button disabled variant="outline">
+    Saving
+    <Spinner data-icon="inline-end" />
+  </Button>
+</DemoWrapper>
 
 ### Link
 
@@ -131,7 +175,7 @@ Use the <code>buttonVariants</code> helper to render a link that looks like a bu
 ```tsx
 import { Button, buttonVariants } from "~/components/button";
 
-<a class={buttonVariants({ variant: "outline" })} href="/docs">
+<a class={buttonVariants({ variant: "outline" })} href="#">
   Click here
 </a>;
 
@@ -140,3 +184,9 @@ import { Button, buttonVariants } from "~/components/button";
   Click Here
 </Button>
 ```
+
+<DemoWrapper class="flex flex-wrap gap-4 not-prose mb-8">
+  <a class={buttonVariants({ variant: "outline" })} href="#">
+    Click here
+  </a>
+</DemoWrapper>

@@ -4,7 +4,7 @@ export const radioGroupVariants = tv({
   slots: {
     root: "flex gap-2",
     item: [
-      "inline-flex items-center gap-2",
+      "inline-flex items-center gap-2 cursor-pointer",
       "data-[disabled]:opacity-80 data-[disabled]:cursor-not-allowed",
     ],
     itemControl: [

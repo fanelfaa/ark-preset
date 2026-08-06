@@ -1,4 +1,4 @@
-import { render, fireEvent, screen } from "@solidjs/testing-library";
+import { render, fireEvent } from "@solidjs/testing-library";
 import { Button, buttonVariants } from "../src/button";
 
 describe("Button", () => {
@@ -13,9 +13,7 @@ describe("Button", () => {
   });
 
   it("renders with variant styles", () => {
-    const { container } = render(() => (
-      <Button variant="secondary">Secondary</Button>
-    ));
+    const { container } = render(() => <Button variant="secondary">Secondary</Button>);
     expect(container.firstChild).toBeInTheDocument();
   });
 
@@ -54,26 +52,21 @@ describe("Button", () => {
     expect(container.firstChild).toBeInTheDocument();
   });
 
-  it("shows spinner when loading", () => {
-    const { container } = render(() => <Button loading>Loading</Button>);
-    const spinner = container.querySelector('[role="status"]');
-    expect(spinner).toBeInTheDocument();
-  });
-
-  it("is disabled when loading", () => {
-    const { container } = render(() => <Button loading>Loading</Button>);
-    expect(container.firstChild).toBeDisabled();
-  });
-
   it("is disabled when disabled prop is set", () => {
     const { container } = render(() => <Button disabled>Disabled</Button>);
     expect(container.firstChild).toBeDisabled();
   });
 
-  it("hides children text when loading but still renders", () => {
-    const { getByText } = render(() => <Button loading>Submit</Button>);
-    // Children should still be present even when loading
+  it("renders with custom spinner or icon composition when disabled", () => {
+    const { getByText, container } = render(() => (
+      <Button disabled>
+        <span data-testid="spinner">Loading</span>
+        Submit
+      </Button>
+    ));
     expect(getByText("Submit")).toBeInTheDocument();
+    expect(container.querySelector('[data-testid="spinner"]')).toBeInTheDocument();
+    expect(container.firstChild).toBeDisabled();
   });
 
   it("calls onClick when clicked", () => {
@@ -87,17 +80,6 @@ describe("Button", () => {
     const onClick = vi.fn();
     const { getByText } = render(() => (
       <Button disabled onClick={onClick}>
-        Click
-      </Button>
-    ));
-    fireEvent.click(getByText("Click"));
-    expect(onClick).not.toHaveBeenCalled();
-  });
-
-  it("does not call onClick when loading", () => {
-    const onClick = vi.fn();
-    const { getByText } = render(() => (
-      <Button loading onClick={onClick}>
         Click
       </Button>
     ));

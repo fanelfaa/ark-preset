@@ -9,14 +9,7 @@ import {
   DialogDescription,
   DialogFooter,
 } from "@ark-preset/solid";
-import {
-  Button,
-  Input,
-  RadioGroup,
-  RadioGroupItem,
-  RadioGroupBase,
-  Separator,
-} from "@ark-preset/solid";
+import { Button, Input, RadioGroup, RadioGroupItem, RadioGroupBase } from "@ark-preset/solid";
 
 export default function DialogBasicDemo() {
   return (
@@ -30,7 +23,7 @@ export default function DialogBasicDemo() {
               Make changes to your profile here. You can save your changes when done.
             </DialogDescription>
           </DialogHeader>
-          <div class="flex flex-col gap-4 py-4">
+          <div class="flex flex-col gap-4">
             <Input
               label="Name"
               placeholder="Your name"
@@ -46,14 +39,13 @@ export default function DialogBasicDemo() {
               <RadioGroupBase.Label class="text-sm font-medium">
                 Notification preferences
               </RadioGroupBase.Label>
-              <div class="flex flex-row gap-6">
+              <div class="flex flex-col sm:flex-row gap-2 sm:gap-6">
                 <RadioGroupItem value="all">All notifications</RadioGroupItem>
                 <RadioGroupItem value="mentions">Mentions only</RadioGroupItem>
                 <RadioGroupItem value="none">No notifications</RadioGroupItem>
               </div>
             </RadioGroup>
           </div>
-          <Separator />
           <DialogFooter>
             <DialogCloseTrigger asChild={(props) => <Button variant="outline" {...props()} />}>
               Cancel
