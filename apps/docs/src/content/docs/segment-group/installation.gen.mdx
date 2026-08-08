@@ -26,7 +26,7 @@ export const segmentGroupVariants = tv({
     itemText: "relative z-10 text-sm font-medium",
     itemControl: "hidden",
     indicator:
-      "absolute z-0 rounded-sm bg-background shadow-sm transition-[left,top,width,height] duration-150 ease-out w-(--width) h-(--height) left-(--left)",
+      "absolute z-0 rounded-sm bg-background shadow-sm w-(--width) h-(--height) left-(--left) transition-[left,top,width,height] duration-150 ease-out will-change-[left,top,width,height]",
   },
   variants: {
     variant: {
@@ -37,7 +37,8 @@ export const segmentGroupVariants = tv({
       outline: {
         root: "bg-transparent border border-border",
         item: "text-muted-foreground data-[state=checked]:text-foreground",
-        indicator: "border border-border shadow-none",
+        indicator:
+          "border border-border shadow-none will-change-[left,top,width,height]",
       },
     },
     orientation: {
