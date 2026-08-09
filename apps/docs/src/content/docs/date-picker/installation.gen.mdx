@@ -557,7 +557,11 @@ const DatePicker: Component<DatePickerProps> = (props) => {
   const selectionMode = () => props.selectionMode ?? "single";
 
   return (
-    <DatePickerBase.Root class={local.class} {...others}>
+    <DatePickerBase.Root
+      class={local.class}
+      positioning={{ placement: "bottom-end", ...props.positioning }}
+      {...others}
+    >
       {local.label && (
         <DatePickerBase.Label error={local.error}>{local.label}</DatePickerBase.Label>
       )}
