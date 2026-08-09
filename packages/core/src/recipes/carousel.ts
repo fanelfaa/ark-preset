@@ -7,9 +7,9 @@ export const carouselVariants = tv({
     itemGroup: "flex flex-1 overflow-hidden rounded-lg",
     item: "flex-0 flex-shrink-0 min-w-0",
     prevTrigger:
-      "inline-flex items-center justify-center size-9 rounded-md border border-input bg-background transition duration-300 motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0.5 active:duration-150 hover:bg-accent",
+      "inline-flex items-center justify-center size-9 cursor-pointer rounded-md border border-input bg-background transition duration-300 motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0.5 active:duration-150 hover:bg-accent disabled:pointer-events-none disabled:opacity-50",
     nextTrigger:
-      "inline-flex items-center justify-center size-9 rounded-md border border-input bg-background transition duration-300 motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0.5 active:duration-150 hover:bg-accent",
+      "inline-flex items-center justify-center size-9 cursor-pointer rounded-md border border-input bg-background transition duration-300 motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0.5 active:duration-150 hover:bg-accent disabled:pointer-events-none disabled:opacity-50",
     indicatorGroup: "flex justify-center gap-2",
     indicator:
       "size-2.5 rounded-full bg-muted data-[current]:bg-foreground cursor-pointer transition-colors",
