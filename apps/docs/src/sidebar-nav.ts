@@ -11,9 +11,7 @@ export interface SidebarCategory {
 export const sidebarNav: SidebarCategory[] = [
   {
     category: "Getting Started",
-    links: [
-      { href: "/docs/quickstart", label: "Quickstart" },
-    ],
+    links: [{ href: "/docs/quickstart", label: "Quickstart" }],
   },
   {
     category: "Form & Input",
@@ -93,8 +91,6 @@ export const sidebarNav: SidebarCategory[] = [
   },
   {
     category: "Integration",
-    links: [
-      { href: "/docs/integrations/form", label: "TanStack Form" },
-    ],
+    links: [{ href: "/docs/integrations/form", label: "TanStack Form" }],
   },
 ];
