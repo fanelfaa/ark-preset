@@ -5,7 +5,7 @@ export const ratingGroupVariants = tv({
     root: "flex items-center gap-2",
     control: "flex items-center gap-0.5",
     item: [
-      "group cursor-pointer transition-colors duration-150 ease-out",
+      "group cursor-pointer transition duration-300 motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0.5 active:duration-150 ease-out",
       "data-[disabled]:opacity-50 data-[disabled]:cursor-not-allowed",
       "data-[readonly]:cursor-default",
       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm",
