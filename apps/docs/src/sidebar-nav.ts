@@ -11,15 +11,14 @@ export interface SidebarCategory {
 export const sidebarNav: SidebarCategory[] = [
   {
     category: "Getting Started",
-    links: [
-      { href: "/docs/quickstart", label: "Quickstart" },
-    ],
+    links: [{ href: "/docs/quickstart", label: "Quickstart" }],
   },
   {
     category: "Form & Input",
     links: [
       { href: "/docs/components/button", label: "Button" },
       { href: "/docs/components/checkbox", label: "Checkbox" },
+      { href: "/docs/components/color-picker", label: "Color Picker" },
       { href: "/docs/components/combobox", label: "Combobox" },
       { href: "/docs/components/date-picker", label: "Date Picker" },
       { href: "/docs/components/input", label: "Input" },
@@ -43,7 +42,6 @@ export const sidebarNav: SidebarCategory[] = [
     category: "Overlay",
     links: [
       { href: "/docs/components/alert-dialog", label: "Alert Dialog" },
-      { href: "/docs/components/color-picker", label: "Color Picker" },
       { href: "/docs/components/dialog", label: "Dialog" },
       { href: "/docs/components/drawer", label: "Drawer" },
       { href: "/docs/components/hover-card", label: "Hover Card" },
@@ -93,8 +91,6 @@ export const sidebarNav: SidebarCategory[] = [
   },
   {
     category: "Integration",
-    links: [
-      { href: "/docs/integrations/form", label: "TanStack Form" },
-    ],
+    links: [{ href: "/docs/integrations/form", label: "TanStack Form" }],
   },
 ];

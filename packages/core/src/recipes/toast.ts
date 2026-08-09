@@ -8,7 +8,7 @@ export const toastVariants = tv({
     closeTrigger:
       "absolute right-1 top-1 p-1 text-foreground/50 transition-opacity group-hover:text-foreground focus:outline-none focus:ring-2 size-5 cursor-pointer grid place-content-center rounded",
     actionTrigger:
-      "inline-flex h-8 shrink-0 items-center justify-center rounded-md border bg-transparent px-3 text-xs font-medium transition-colors group-hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-ring",
+      "inline-flex h-8 shrink-0 items-center justify-center rounded-md border bg-transparent px-3 text-xs font-medium transition duration-300 motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0.5 active:duration-150 group-hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-ring",
   },
   variants: {
     variant: {

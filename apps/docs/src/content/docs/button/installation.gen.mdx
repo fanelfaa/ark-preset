@@ -16,7 +16,7 @@ Create the recipe file at `src/components/recipes/button.ts`:
 import { tv, type VariantProps } from "tailwind-variants";
 
 export const buttonVariants = tv({
-  base: "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&>svg]:pointer-events-none [&>svg]:size-4 [&>svg]:shrink-0 [[data-icon]]:pointer-events-none [[data-icon=inline-start]]:-me-0.5 [[data-icon=inline-end]]:-ms-0.5",
+  base: "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition duration-300 motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0.5 active:duration-150 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&>svg]:pointer-events-none [&>svg]:size-4 [&>svg]:shrink-0 [[data-icon]]:pointer-events-none [[data-icon=inline-start]]:-me-0.5 [[data-icon=inline-end]]:-ms-0.5",
   variants: {
     variant: {
       default: "bg-primary text-primary-foreground hover:bg-primary/90",
