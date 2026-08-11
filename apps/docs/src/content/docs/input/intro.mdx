@@ -1,6 +1,7 @@
 import { DocsLink } from "../../../components/DocsLink";
-import { DemoWrapper } from "../../../components/DemoWrapper";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import InputBasicDemo from "@demos/input-demo/InputBasicDemo.tsx";
+import InputBasicDemoCode from "@demos/input-demo/InputBasicDemo.tsx?code";
 
 # Input
 
@@ -8,22 +9,7 @@ A text input component with support for labels, descriptions, and error states.
 
 <DocsLink href="https://ark-ui.com/docs/components/field" />
 
-<DemoWrapper>
+<ComponentPreview code={InputBasicDemoCode}>
   <InputBasicDemo />
-</DemoWrapper>
-
-```tsx
-import { Input } from "~/components/input"
-
-export function InputDemo() {
-  return (
-    <div class="flex flex-col gap-4">
-      <Input placeholder="Basic input" />
-      <Input label="Email" placeholder="Enter your email" />
-      <Input label="With Description" description="We'll never share your email." placeholder="email@example.com" />
-      <Input label="Error State" error="This field is required" placeholder="Enter value" />
-    </div>
-  )
-}
-```
+</ComponentPreview>
 
