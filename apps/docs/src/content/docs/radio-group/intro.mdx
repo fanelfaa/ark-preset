@@ -1,5 +1,7 @@
 import { DocsLink } from "../../../components/DocsLink";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import RadioGroupBasicDemo from "@demos/radio-group-demo/RadioGroupBasicDemo.tsx";
+import RadioGroupBasicDemoCode from "@demos/radio-group-demo/RadioGroupBasicDemo.tsx?code";
 
 # Radio Group
 
@@ -7,18 +9,6 @@ A component that allows users to select a single option from a set of mutually e
 
 <DocsLink href="https://ark-ui.com/docs/components/radio-group" />
 
-<RadioGroupBasicDemo />
-
-```tsx
-import { RadioGroup, RadioGroupItem } from "~/components/radio-group";
-
-export function RadioGroupDemo() {
-  return (
-    <RadioGroup defaultValue="1" orientation="horizontal">
-      <RadioGroupItem value="1">Credit Card</RadioGroupItem>
-      <RadioGroupItem value="2">Paypal</RadioGroupItem>
-      <RadioGroupItem value="3">Debit</RadioGroupItem>
-    </RadioGroup>
-  );
-}
-```
+<ComponentPreview code={RadioGroupBasicDemoCode}>
+  <RadioGroupBasicDemo />
+</ComponentPreview>
