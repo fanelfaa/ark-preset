@@ -1,7 +1,11 @@
 import { InlineCode } from "@ark-preset/solid";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import AccordionMultipleDemo from "@demos/accordion-demo/AccordionMultipleDemo.tsx";
+import AccordionMultipleDemoCode from "@demos/accordion-demo/AccordionMultipleDemo.tsx?code";
 import AccordionRootProviderDemo from "@demos/accordion-demo/AccordionRootProviderDemo.tsx";
+import AccordionRootProviderDemoCode from "@demos/accordion-demo/AccordionRootProviderDemo.tsx?code";
 import AccordionDisabledDemo from "@demos/accordion-demo/AccordionDisabledDemo.tsx";
+import AccordionDisabledDemoCode from "@demos/accordion-demo/AccordionDisabledDemo.tsx?code";
 
 ## Usage
 
@@ -59,23 +63,9 @@ With multiple items:
 
 Use the <InlineCode>multiple</InlineCode> prop to allow more than one item to be expanded at the same time.
 
-<AccordionMultipleDemo />
-
-```tsx
-<Accordion multiple defaultValue={["item-1", "item-2"]}>
-  <AccordionItem value="item-1">
-    <AccordionItemTrigger>
-      Can I open multiple items?
-    </AccordionItemTrigger>
-    <AccordionItemContent>
-      <div class="pb-4 text-sm">
-        Yes. Just pass the <code>multiple</code> prop.
-      </div>
-    </AccordionItemContent>
-  </AccordionItem>
-  {/* ... more items */}
-</Accordion>
-```
+<ComponentPreview code={AccordionMultipleDemoCode}>
+  <AccordionMultipleDemo />
+</ComponentPreview>
 
 ### Controlled
 
@@ -112,46 +102,9 @@ export function AccordionControlled() {
 
 Use <InlineCode>AccordionRootProvider</InlineCode> when you need to access the accordion state outside of the accordion tree. This pattern uses the <InlineCode>useAccordion</InlineCode> hook from Ark UI to create a shared context that both the accordion and external elements can reference.
 
-<AccordionRootProviderDemo />
-
-```tsx
-import { useAccordion } from "@ark-ui/solid/accordion";
-import {
-  AccordionBase,
-  AccordionItem,
-  AccordionItemTrigger,
-  AccordionItemContent,
-} from "~/components/accordion";
-
-export function AccordionWithExternalControl() {
-  const accordion = useAccordion({ multiple: true, defaultValue: ["item-1"] });
-
-  return (
-    <div>
-      <output>Value: {JSON.stringify(accordion().value)}</output>
-
-      <AccordionBase.RootProvider value={accordion}>
-        <AccordionItem value="item-1">
-          <AccordionItemTrigger>
-            Section One
-          </AccordionItemTrigger>
-          <AccordionItemContent>
-            <div class="pb-4 text-sm">Content for section one.</div>
-          </AccordionItemContent>
-        </AccordionItem>
-        <AccordionItem value="item-2">
-          <AccordionItemTrigger>
-            Section Two
-          </AccordionItemTrigger>
-          <AccordionItemContent>
-            <div class="pb-4 text-sm">Content for section two.</div>
-          </AccordionItemContent>
-        </AccordionItem>
-      </AccordionBase.RootProvider>
-    </div>
-  );
-}
-```
+<ComponentPreview code={AccordionRootProviderDemoCode}>
+  <AccordionRootProviderDemo />
+</ComponentPreview>
 
 The key difference:
 
@@ -162,23 +115,8 @@ The key difference:
 
 Disable individual items or the entire accordion.
 
-<AccordionDisabledDemo />
-
-```tsx
-<Accordion>
-  <AccordionItem value="item-1">
-    <AccordionItemTrigger>Active Item</AccordionItemTrigger>
-    <AccordionItemContent>
-      <div class="pb-4 text-sm">This item is interactive.</div>
-    </AccordionItemContent>
-  </AccordionItem>
-  <AccordionItem value="item-2" disabled>
-    <AccordionItemTrigger>Disabled Item</AccordionItemTrigger>
-    <AccordionItemContent>
-      <div class="pb-4 text-sm">This item is disabled.</div>
-    </AccordionItemContent>
-  </AccordionItem>
-</Accordion>
-```
+<ComponentPreview code={AccordionDisabledDemoCode}>
+  <AccordionDisabledDemo />
+</ComponentPreview>
 
 To disable all items at once, pass <InlineCode>disabled</InlineCode> to the <InlineCode>{"<Accordion>"}</InlineCode> root.
