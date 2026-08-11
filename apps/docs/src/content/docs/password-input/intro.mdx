@@ -1,5 +1,7 @@
 import { DocsLink } from "../../../components/DocsLink";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import PasswordInputBasicDemo from "@demos/password-input-demo/PasswordInputBasicDemo.tsx";
+import PasswordInputBasicDemoCode from "@demos/password-input-demo/PasswordInputBasicDemo.tsx?code";
 
 # Password Input
 
@@ -7,18 +9,6 @@ A password input component with a visibility toggle button and support for label
 
 <DocsLink href="https://ark-ui.com/docs/components/password-input" />
 
-<PasswordInputBasicDemo />
-
-```tsx
-import { PasswordInput } from "~/components/password-input";
-
-export function PasswordInputDemo() {
-  return (
-    <div class="flex flex-col gap-4">
-      <PasswordInput />
-      <PasswordInput label="Password" />
-      <PasswordInput label="Password" placeholder="Enter your password" />
-    </div>
-  );
-}
-```
+<ComponentPreview code={PasswordInputBasicDemoCode}>
+  <PasswordInputBasicDemo />
+</ComponentPreview>

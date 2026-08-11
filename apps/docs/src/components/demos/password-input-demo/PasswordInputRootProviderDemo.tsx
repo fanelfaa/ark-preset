@@ -1,4 +1,3 @@
-import { DemoWrapper } from "../../DemoWrapper";
 import { usePasswordInput } from "@ark-ui/solid/password-input";
 import { Button, PasswordInputRootProvider } from "@ark-preset/solid";
 
@@ -6,7 +5,7 @@ export default function PasswordInputRootProviderDemo() {
   const passwordInput = usePasswordInput();
 
   return (
-    <DemoWrapper class="space-y-4">
+    <div class="space-y-4">
       <Button
         onClick={() => {
           passwordInput().toggleVisible();
@@ -16,6 +15,6 @@ export default function PasswordInputRootProviderDemo() {
       </Button>
 
       <PasswordInputRootProvider value={passwordInput} />
-    </DemoWrapper>
+    </div>
   );
 }
