@@ -1,5 +1,7 @@
 import { DocsLink } from "../../../components/DocsLink";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import ColorPickerBasicDemo from "@demos/color-picker-demo/ColorPickerBasicDemo.tsx";
+import ColorPickerBasicDemoCode from "@demos/color-picker-demo/ColorPickerBasicDemo.tsx?code";
 
 # Color Picker
 
@@ -7,14 +9,6 @@ A color selection component that allows users to pick a color using a saturation
 
 <DocsLink href="https://ark-ui.com/docs/components/color-picker" />
 
-<ColorPickerBasicDemo />
-
-```tsx
-import { ColorPicker, ColorPickerBase } from "~/components/color-picker";
-
-// Self-contained — label, control, area, sliders, and swatches all built in
-<ColorPicker label="Color" presets={["#ff0000", "#00ff00", "#0000ff"]} />
-
-// Inline layout (no popover)
-<ColorPicker inline label="Color" presets={["#ff0000", "#00ff00", "#0000ff"]} />
-```
+<ComponentPreview code={ColorPickerBasicDemoCode}>
+  <ColorPickerBasicDemo />
+</ComponentPreview>
