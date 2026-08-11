@@ -1,7 +1,11 @@
 import { InlineCode } from "@ark-preset/solid";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import PaginationControlledDemo from "@demos/pagination-demo/PaginationControlledDemo.tsx";
+import PaginationControlledDemoCode from "@demos/pagination-demo/PaginationControlledDemo.tsx?code";
 import PaginationRootProviderDemo from "@demos/pagination-demo/PaginationRootProviderDemo.tsx";
+import PaginationRootProviderDemoCode from "@demos/pagination-demo/PaginationRootProviderDemo.tsx?code";
 import PaginationSizeDemo from "@demos/pagination-demo/PaginationSizeDemo.tsx";
+import PaginationSizeDemoCode from "@demos/pagination-demo/PaginationSizeDemo.tsx?code";
 
 ## Usage
 
@@ -9,84 +13,22 @@ import PaginationSizeDemo from "@demos/pagination-demo/PaginationSizeDemo.tsx";
 
 Use <InlineCode>page</InlineCode> and <InlineCode>onPageChange</InlineCode> to control the current page externally.
 
-<PaginationControlledDemo />
-
-```tsx
-import { createSignal } from "solid-js";
-import { Pagination, PaginationPageList, PaginationFirstTrigger, PaginationPrevTrigger, PaginationNextTrigger, PaginationLastTrigger } from "~/components/pagination";
-
-export function ControlledDemo() {
-  const [page, setPage] = createSignal(5);
-
-  return (
-    <div>
-      <p class="text-sm text-muted-foreground mb-2">Current page: {page()}</p>
-      <Pagination count={100} pageSize={10} page={page()} onPageChange={(e) => setPage(e.page)} class="gap-1">
-        <PaginationFirstTrigger>{'<<'}</PaginationFirstTrigger>
-        <PaginationPrevTrigger>{'<'}</PaginationPrevTrigger>
-        <PaginationPageList />
-        <PaginationNextTrigger>{'>'}</PaginationNextTrigger>
-        <PaginationLastTrigger>{'>>'}</PaginationLastTrigger>
-      </Pagination>
-    </div>
-  );
-}
-```
+<ComponentPreview code={PaginationControlledDemoCode}>
+  <PaginationControlledDemo />
+</ComponentPreview>
 
 ### RootProvider Pattern
 
 For full control over the pagination machine state, use <InlineCode>usePagination</InlineCode> with <InlineCode>PaginationBase.RootProvider</InlineCode>.
 
-<PaginationRootProviderDemo />
-
-```tsx
-import { For } from "solid-js";
-import { usePagination } from "@ark-ui/solid/pagination";
-import { PaginationBase } from "~/components/pagination";
-
-export function RootProviderDemo() {
-  const pagination = usePagination({ count: 100, pageSize: 10 });
-
-  return (
-    <PaginationBase.RootProvider value={pagination} class="gap-1">
-      <PaginationBase.FirstTrigger>{'<<'}</PaginationBase.FirstTrigger>
-      <PaginationBase.PrevTrigger>{'<'}</PaginationBase.PrevTrigger>
-      <For each={pagination().pages}>
-        {(page, _index) =>
-          page.type === "page" ? (
-            <PaginationBase.Item type="page" value={page.value}>
-              {page.value}
-            </PaginationBase.Item>
-          ) : (
-            <PaginationBase.Ellipsis index={_index()}>...</PaginationBase.Ellipsis>
-          )
-        }
-      </For>
-      <PaginationBase.NextTrigger>{'>'}</PaginationBase.NextTrigger>
-      <PaginationBase.LastTrigger>{'>>'}</PaginationBase.LastTrigger>
-    </PaginationBase.RootProvider>
-  );
-}
-```
+<ComponentPreview code={PaginationRootProviderDemoCode}>
+  <PaginationRootProviderDemo />
+</ComponentPreview>
 
 ### Size Variants
 
 Use the <InlineCode>size</InlineCode> prop to control button dimensions — <InlineCode>sm</InlineCode> (h-7 min-w-7), <InlineCode>md</InlineCode> (h-8 min-w-8), <InlineCode>lg</InlineCode> (h-9 min-w-9).
 
-<PaginationSizeDemo />
-
-```tsx
-import { Pagination, PaginationPageList, PaginationFirstTrigger, PaginationPrevTrigger, PaginationNextTrigger, PaginationLastTrigger } from "~/components/pagination";
-
-<Pagination count={100} pageSize={10} size="sm">
-  {/* ... */}
-</Pagination>
-
-<Pagination count={100} pageSize={10} size="md">
-  {/* ... */}
-</Pagination>
-
-<Pagination count={100} pageSize={10} size="lg">
-  {/* ... */}
-</Pagination>
-```
+<ComponentPreview code={PaginationSizeDemoCode}>
+  <PaginationSizeDemo />
+</ComponentPreview>

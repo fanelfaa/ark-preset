@@ -7,13 +7,12 @@ import {
   PaginationNextTrigger,
   PaginationLastTrigger,
 } from "@ark-preset/solid";
-import { DemoWrapper } from "../../DemoWrapper";
 
 export default function PaginationControlledDemo() {
   const [page, setPage] = createSignal(5);
 
   return (
-    <DemoWrapper>
+    <div>
       <div>
         <p class="text-sm text-muted-foreground mb-3">
           Controlled page: <span class="font-medium text-foreground">{page()}</span>
@@ -90,6 +89,6 @@ export default function PaginationControlledDemo() {
           </PaginationLastTrigger>
         </Pagination>
       </div>
-    </DemoWrapper>
+    </div>
   );
 }

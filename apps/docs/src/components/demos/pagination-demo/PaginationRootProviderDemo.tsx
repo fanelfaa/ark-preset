@@ -1,13 +1,12 @@
 import { For } from "solid-js";
 import { usePagination } from "@ark-ui/solid/pagination";
 import { PaginationBase } from "@ark-preset/solid";
-import { DemoWrapper } from "../../DemoWrapper";
 
 export default function PaginationRootProviderDemo() {
   const pagination = usePagination({ count: 100, pageSize: 10 });
 
   return (
-    <DemoWrapper>
+    <div>
       <div>
         <p class="text-sm text-muted-foreground mb-3">RootProvider pattern</p>
         <PaginationBase.RootProvider value={pagination} class="gap-1">
@@ -86,6 +85,6 @@ export default function PaginationRootProviderDemo() {
           </PaginationBase.LastTrigger>
         </PaginationBase.RootProvider>
       </div>
-    </DemoWrapper>
+    </div>
   );
 }
