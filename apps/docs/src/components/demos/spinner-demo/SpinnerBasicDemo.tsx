@@ -1,9 +1,8 @@
-import { DemoWrapper } from "../../DemoWrapper";
 import { Spinner } from "@ark-preset/solid";
 
 export default function SpinnerBasicDemo() {
   return (
-    <DemoWrapper class="space-y-6">
+    <div class="space-y-6">
       <div>
         <p class="text-sm text-muted-foreground mb-3">Spinner sizes</p>
         <div class="flex items-center gap-4">
@@ -20,6 +19,6 @@ export default function SpinnerBasicDemo() {
           <span class="text-sm text-muted-foreground">Loading...</span>
         </div>
       </div>
-    </DemoWrapper>
+    </div>
   );
 }

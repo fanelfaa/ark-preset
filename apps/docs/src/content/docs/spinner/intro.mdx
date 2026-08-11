@@ -1,5 +1,7 @@
 import { DocsLink } from "../../../components/DocsLink";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import SpinnerBasicDemo from "@demos/spinner-demo/SpinnerBasicDemo.tsx";
+import SpinnerBasicDemoCode from "@demos/spinner-demo/SpinnerBasicDemo.tsx?code";
 
 # Spinner
 
@@ -7,19 +9,6 @@ An animated loading indicator used to show content is being processed. Displays 
 
 <DocsLink href="https://ui.shadcn.com/docs/components/spinner" />
 
-<SpinnerBasicDemo />
-
-```tsx
-import { Spinner } from "~/components/spinner";
-
-export function SpinnerDemo() {
-  return (
-    <div class="flex items-center gap-4">
-      <Spinner size="sm" />
-      <Spinner size="md" />
-      <Spinner size="lg" />
-      <Spinner size="xl" />
-    </div>
-  );
-}
-```
+<ComponentPreview code={SpinnerBasicDemoCode}>
+  <SpinnerBasicDemo />
+</ComponentPreview>
