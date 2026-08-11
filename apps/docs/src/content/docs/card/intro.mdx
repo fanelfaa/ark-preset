@@ -1,5 +1,7 @@
 import { DocsLink } from "../../../components/DocsLink";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import CardBasicDemo from "@demos/card-demo/CardBasicDemo.tsx";
+import CardBasicDemoCode from "@demos/card-demo/CardBasicDemo.tsx?code";
 
 # Card
 
@@ -8,32 +10,6 @@ structured layout with distinct sections for headers, content, and actions.
 
 <DocsLink href="https://ui.shadcn.com/docs/components/card" />
 
-<CardBasicDemo />
-
-```tsx
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "~/components/card";
-import { Button } from "~/components/button";
-
-export function CardDemo() {
-  return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Create Project</CardTitle>
-        <CardDescription>
-          Deploy your new project in one-click.
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <p class="text-sm text-muted-foreground">
-          Your project will be deployed to a global network of servers
-          and available within minutes.
-        </p>
-      </CardContent>
-      <CardFooter class="flex gap-2">
-        <Button>Deploy</Button>
-        <Button variant="outline">Cancel</Button>
-      </CardFooter>
-    </Card>
-  );
-}
-```
+<ComponentPreview code={CardBasicDemoCode}>
+  <CardBasicDemo />
+</ComponentPreview>
