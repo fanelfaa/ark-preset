@@ -1,4 +1,3 @@
-import { DemoWrapper } from "../../DemoWrapper";
 import { Index, createMemo } from "solid-js";
 import { TabsBase, TabsList, TabsTrigger, TabsContent } from "@ark-preset/solid";
 import { useTabs } from "@ark-ui/solid/tabs";
@@ -21,7 +20,7 @@ export default function TabsRootProviderDemo() {
   const value = createMemo(() => tabs().value);
 
   return (
-    <DemoWrapper class="space-y-4">
+    <div class="space-y-4">
       <output class="block text-sm text-muted-foreground">Value: {JSON.stringify(value())}</output>
       <TabsBase.RootProvider value={tabs}>
         <TabsList>
@@ -33,6 +32,6 @@ export default function TabsRootProviderDemo() {
           {(tab) => <TabsContent value={tab().value}>{tab().content}</TabsContent>}
         </Index>
       </TabsBase.RootProvider>
-    </DemoWrapper>
+    </div>
   );
 }

@@ -1,6 +1,9 @@
 import { InlineCode } from "@ark-preset/solid";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import TabsDisabledDemo from "@demos/tabs-demo/TabsDisabledDemo.tsx";
+import TabsDisabledDemoCode from "@demos/tabs-demo/TabsDisabledDemo.tsx?code";
 import TabsRootProviderDemo from "@demos/tabs-demo/TabsRootProviderDemo.tsx";
+import TabsRootProviderDemoCode from "@demos/tabs-demo/TabsRootProviderDemo.tsx?code";
 
 ## Usage
 
@@ -55,63 +58,17 @@ Access raw parts via <InlineCode>TabsBase.Root</InlineCode>, <InlineCode>TabsBas
 
 Use the <InlineCode>disabled</InlineCode> prop on a <InlineCode>TabsTrigger</InlineCode> to disable that specific tab.
 
-<TabsDisabledDemo />
-
-```tsx
-import { Index } from "solid-js";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "~/components/tabs";
-
-const tabs = [
-  { value: "active", label: "Active", content: "This tab is enabled and functional." },
-  { value: "settings", label: "Settings", content: "Configure your preferences here." },
-  { value: "disabled", label: "Disabled", content: "This content is not accessible.", disabled: true },
-];
-
-export function DisabledDemo() {
-  return (
-    <Tabs defaultValue="active">
-      <TabsList>
-        <Index each={tabs}>
-          {(tab) => (
-            <TabsTrigger value={tab().value} disabled={tab().disabled}>
-              {tab().label}
-            </TabsTrigger>
-          )}
-        </Index>
-      </TabsList>
-      <Index each={tabs}>
-        {(tab) => (
-          <TabsContent value={tab().value}>
-            <div class="text-sm text-foreground">{tab().content}</div>
-          </TabsContent>
-        )}
-      </Index>
-    </Tabs>
-  );
-}
-```
+<ComponentPreview code={TabsDisabledDemoCode}>
+  <TabsDisabledDemo />
+</ComponentPreview>
 
 ## Root Provider
 
 Use <InlineCode>TabsBase.RootProvider</InlineCode> when you need to access the tabs state outside of the tabs tree. This pattern uses the <InlineCode>useTabs</InlineCode> hook from Ark UI to create a shared context that both the tabs and external elements can reference.
 
-<TabsRootProviderDemo />
-
-```tsx
-import { TabsBase, TabsList, TabsTrigger, TabsContent } from "~/components/tabs";
-import { useTabs } from "@ark-ui/solid/tabs";
-
-const tabs = useTabs({ defaultValue: "overview" });
-
-<TabsBase.RootProvider value={tabs}>
-  <TabsList>
-    <TabsTrigger value="overview">Overview</TabsTrigger>
-    <TabsTrigger value="usage">Usage</TabsTrigger>
-  </TabsList>
-  <TabsContent value="overview">...</TabsContent>
-  <TabsContent value="usage">...</TabsContent>
-</TabsBase.RootProvider>
-```
+<ComponentPreview code={TabsRootProviderDemoCode}>
+  <TabsRootProviderDemo />
+</ComponentPreview>
 
 The key difference:
 
