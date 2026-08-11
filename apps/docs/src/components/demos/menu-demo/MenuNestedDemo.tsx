@@ -7,11 +7,10 @@ import {
   NestedMenuContent,
   Menu,
 } from "@ark-preset/solid";
-import { DemoWrapper } from "../../DemoWrapper";
 
 export default function MenuNestedDemo() {
   return (
-    <DemoWrapper>
+    <div>
       <Menu>
         <MenuTrigger>Actions</MenuTrigger>
         <MenuContent>
@@ -29,6 +28,6 @@ export default function MenuNestedDemo() {
           <MenuItem value="delete">Delete</MenuItem>
         </MenuContent>
       </Menu>
-    </DemoWrapper>
+    </div>
   );
 }

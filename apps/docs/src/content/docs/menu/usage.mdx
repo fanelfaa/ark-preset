@@ -1,5 +1,7 @@
 import { InlineCode } from "@ark-preset/solid";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import MenuNestedDemo from "@demos/menu-demo/MenuNestedDemo.tsx";
+import MenuNestedDemoCode from "@demos/menu-demo/MenuNestedDemo.tsx?code";
 
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--accent`, `--border`, `--popover`, etc.) or override the utility classes to match your design system.
 
@@ -35,24 +37,9 @@ import { MenuTrigger, MenuContent, MenuItem, Menu } from "~/components/menu";
 
 Nested submenus:
 
-<MenuNestedDemo />
-
-```tsx
-import { MenuTrigger, MenuContent, MenuTriggerItem, MenuItem, MenuSeparator, NestedMenuContent, Menu } from "~/components/menu";
-
-<Menu>
-  <MenuTrigger>Actions</MenuTrigger>
-  <MenuContent>
-    <MenuItem value="new">New...</MenuItem>
-    <Menu>
-      <MenuTriggerItem>Share</MenuTriggerItem>
-      <NestedMenuContent>
-        <MenuItem value="email">Email</MenuItem>
-      </NestedMenuContent>
-    </Menu>
-  </MenuContent>
-</Menu>
-```
+<ComponentPreview code={MenuNestedDemoCode}>
+  <MenuNestedDemo />
+</ComponentPreview>
 
 With separator:
 
