@@ -1,5 +1,7 @@
 import { DocsLink } from "../../../components/DocsLink";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import SeparatorBasicDemo from "@demos/separator-demo/SeparatorBasicDemo.tsx";
+import SeparatorBasicDemoCode from "@demos/separator-demo/SeparatorBasicDemo.tsx?code";
 
 # Separator
 
@@ -8,18 +10,6 @@ forms, and lists.
 
 <DocsLink href="https://ui.shadcn.com/docs/components/separator" />
 
-<SeparatorBasicDemo />
-
-```tsx
-import { Separator } from "~/components/separator";
-
-export function SeparatorDemo() {
-  return (
-    <div class="space-y-2">
-      <p class="text-sm">Content above the separator</p>
-      <Separator />
-      <p class="text-sm">Content below the separator</p>
-    </div>
-  );
-}
-```
+<ComponentPreview code={SeparatorBasicDemoCode}>
+  <SeparatorBasicDemo />
+</ComponentPreview>
