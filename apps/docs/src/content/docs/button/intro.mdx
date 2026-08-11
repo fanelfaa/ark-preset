@@ -1,6 +1,7 @@
 import { DocsLink } from "../../../components/DocsLink";
-import { DemoWrapper } from "../../../components/DemoWrapper";
-import { Button } from "@ark-preset/solid";
+import { ComponentPreview } from "../../../components/ComponentPreview";
+import ButtonVariantsDemo from "@demos/button-demo/ButtonVariantsDemo.tsx";
+import ButtonVariantsDemoCode from "@demos/button-demo/ButtonVariantsDemo.tsx?code";
 
 # Button
 
@@ -8,28 +9,6 @@ Displays a button or a component that looks like a button.
 
 <DocsLink href="https://ark-ui.com/docs/guides/composition" />
 
-<DemoWrapper class="flex flex-wrap gap-4">
-    <Button>Default</Button>
-    <Button variant="secondary">Secondary</Button>
-    <Button variant="destructive">Destructive</Button>
-    <Button variant="outline">Outline</Button>
-    <Button variant="ghost">Ghost</Button>
-    <Button variant="link">Link</Button>
-  </DemoWrapper>
-
-```tsx
-import { Button } from "~/components/button"
-
-export function ButtonDemo() {
-  return (
-    <div class="flex flex-wrap gap-4">
-      <Button>Primary</Button>
-      <Button variant="secondary">Secondary</Button>
-      <Button variant="destructive">Destructive</Button>
-      <Button variant="outline">Outline</Button>
-      <Button variant="ghost">Ghost</Button>
-      <Button variant="link">Link</Button>
-    </div>
-  )
-}
-```
+<ComponentPreview code={ButtonVariantsDemoCode}>
+  <ButtonVariantsDemo />
+</ComponentPreview>

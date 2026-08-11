@@ -1,5 +1,16 @@
-import { Button, Spinner, buttonVariants } from "@ark-preset/solid";
-import { DemoWrapper } from "../../../components/DemoWrapper";
+import { ComponentPreview } from "../../../components/ComponentPreview";
+import ButtonVariantsDemo from "@demos/button-demo/ButtonVariantsDemo.tsx";
+import ButtonVariantsDemoCode from "@demos/button-demo/ButtonVariantsDemo.tsx?code";
+import ButtonSizesDemo from "@demos/button-demo/ButtonSizesDemo.tsx";
+import ButtonSizesDemoCode from "@demos/button-demo/ButtonSizesDemo.tsx?code";
+import ButtonDisabledDemo from "@demos/button-demo/ButtonDisabledDemo.tsx";
+import ButtonDisabledDemoCode from "@demos/button-demo/ButtonDisabledDemo.tsx?code";
+import ButtonIconsDemo from "@demos/button-demo/ButtonIconsDemo.tsx";
+import ButtonIconsDemoCode from "@demos/button-demo/ButtonIconsDemo.tsx?code";
+import ButtonSpinnerDemo from "@demos/button-demo/ButtonSpinnerDemo.tsx";
+import ButtonSpinnerDemoCode from "@demos/button-demo/ButtonSpinnerDemo.tsx?code";
+import ButtonLinkDemo from "@demos/button-demo/ButtonLinkDemo.tsx";
+import ButtonLinkDemoCode from "@demos/button-demo/ButtonLinkDemo.tsx?code";
 
 ## Usage
 
@@ -15,178 +26,46 @@ Basic usage:
 <Button>Click me</Button>
 ```
 
-<DemoWrapper class="flex flex-wrap gap-4 not-prose">
-  <Button>Click me</Button>
-</DemoWrapper>
-
 ### Variants
 
 Use the <code>variant</code> prop to change the visual style.
 
-<DemoWrapper class="flex flex-wrap gap-4 not-prose">
-  <Button>Default</Button>
-  <Button variant="secondary">Secondary</Button>
-  <Button variant="destructive">Destructive</Button>
-  <Button variant="outline">Outline</Button>
-  <Button variant="ghost">Ghost</Button>
-  <Button variant="link">Link</Button>
-</DemoWrapper>
+<ComponentPreview code={ButtonVariantsDemoCode}>
+  <ButtonVariantsDemo />
+</ComponentPreview>
 
 ### Sizes
 
 Use the <code>size</code> prop to change the button size.
 
-<DemoWrapper class="flex flex-wrap items-center gap-4 not-prose">
-  <Button size="xs">Xs</Button>
-  <Button size="sm">Sm</Button>
-  <Button size="md">Md</Button>
-  <Button size="lg">Lg</Button>
-  <Button size="icon-xs">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M5 12h14" />
-      <path d="M12 5v14" />
-    </svg>
-  </Button>
-  <Button size="icon-sm">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M5 12h14" />
-      <path d="M12 5v14" />
-    </svg>
-  </Button>
-  <Button size="icon-md">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M5 12h14" />
-      <path d="M12 5v14" />
-    </svg>
-  </Button>
-  <Button size="icon-lg">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M5 12h14" />
-      <path d="M12 5v14" />
-    </svg>
-  </Button>
-</DemoWrapper>
+<ComponentPreview code={ButtonSizesDemoCode}>
+  <ButtonSizesDemo />
+</ComponentPreview>
 
 ### Disabled
 
 Add the <code>disabled</code> prop to disable interaction.
 
-<DemoWrapper class="flex flex-wrap gap-4 not-prose">
-  <Button disabled>Default</Button>
-  <Button variant="secondary" disabled>Secondary</Button>
-  <Button variant="destructive" disabled>Destructive</Button>
-  <Button variant="outline" disabled>Outline</Button>
-  <Button variant="ghost" disabled>Ghost</Button>
-  <Button variant="link" disabled>Link</Button>
-</DemoWrapper>
+<ComponentPreview code={ButtonDisabledDemoCode}>
+  <ButtonDisabledDemo />
+</ComponentPreview>
 
 ### With Icon
 
-```tsx
-{/* Icon button */}
-<Button variant="outline" size="icon">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-    <path d="M5 12h14" />
-    <path d="M12 5v14" />
-  </svg>
-</Button>
-
-{/* Icon at start */}
-<Button variant="outline">
-  <svg data-icon="inline-start" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-    <path d="M5 12h14" />
-    <path d="M12 5v14" />
-  </svg>
-  New Branch
-</Button>
-
-{/* Icon at end */}
-<Button variant="outline">
-  Fork
-  <svg data-icon="inline-end" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-    <path d="M5 12h14" />
-    <path d="M12 5v14" />
-  </svg>
-</Button>
-```
-
-<DemoWrapper class="flex flex-wrap items-center gap-4 not-prose">
-  <Button variant="outline" size="icon">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M5 12h14" />
-      <path d="M12 5v14" />
-    </svg>
-  </Button>
-  <Button variant="outline">
-    <svg data-icon="inline-start" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M5 12h14" />
-      <path d="M12 5v14" />
-    </svg>
-    New Branch
-  </Button>
-  <Button variant="outline">
-    Fork
-    <svg data-icon="inline-end" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M5 12h14" />
-      <path d="M12 5v14" />
-    </svg>
-  </Button>
-</DemoWrapper>
+<ComponentPreview code={ButtonIconsDemoCode}>
+  <ButtonIconsDemo />
+</ComponentPreview>
 
 ### Spinner
 
-```tsx
-{/* Icon button with spinner */}
-<Button disabled variant="outline" size="icon">
-  <Spinner />
-</Button>
-
-{/* Spinner at start */}
-<Button disabled variant="outline">
-  <Spinner data-icon="inline-start" />
-  Loading...
-</Button>
-
-{/* Spinner at end */}
-<Button disabled variant="outline">
-  Saving
-  <Spinner data-icon="inline-end" />
-</Button>
-```
-
-<DemoWrapper class="flex flex-wrap items-center gap-4 not-prose">
-  <Button disabled variant="outline" size="icon">
-    <Spinner />
-  </Button>
-  <Button disabled variant="outline">
-    <Spinner data-icon="inline-start" />
-    Loading...
-  </Button>
-  <Button disabled variant="outline">
-    Saving
-    <Spinner data-icon="inline-end" />
-  </Button>
-</DemoWrapper>
+<ComponentPreview code={ButtonSpinnerDemoCode}>
+  <ButtonSpinnerDemo />
+</ComponentPreview>
 
 ### Link
 
 Use the <code>buttonVariants</code> helper to render a link that looks like a button.
 
-```tsx
-import { Button, buttonVariants } from "~/components/button";
-
-<a class={buttonVariants({ variant: "outline" })} href="#">
-  Click here
-</a>;
-
-// or
-<Button asChild={(props)=><a {...props()}/>}>
-  Click Here
-</Button>
-```
-
-<DemoWrapper class="flex flex-wrap gap-4 not-prose mb-8">
-  <a class={buttonVariants({ variant: "outline" })} href="#">
-    Click here
-  </a>
-</DemoWrapper>
+<ComponentPreview code={ButtonLinkDemoCode}>
+  <ButtonLinkDemo />
+</ComponentPreview>
