@@ -154,9 +154,7 @@ export default function CodeBlock(props: CodeBlockProps) {
         style={{
           ...(overflowing()
             ? {
-                height: expanded()
-                  ? `${expandedHeight() + BUTTON_STRIP}px`
-                  : `${MAX_HEIGHT}px`,
+                height: expanded() ? `${expandedHeight() + BUTTON_STRIP}px` : `${MAX_HEIGHT}px`,
                 "overflow-y": "hidden",
                 // Match the code panel background so the reserved strip blends in
                 background: "var(--tw-prose-pre-bg)",
