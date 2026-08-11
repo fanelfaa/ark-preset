@@ -1,5 +1,7 @@
 import { DocsLink } from "../../../components/DocsLink";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import MenuBasicDemo from "@demos/menu-demo/MenuBasicDemo.tsx";
+import MenuBasicDemoCode from "@demos/menu-demo/MenuBasicDemo.tsx?code";
 
 # Menu
 
@@ -9,30 +11,6 @@ Displays a list of options that appears when a user interacts with a trigger but
 
 ## Basic Usage
 
-<MenuBasicDemo />
-
-```tsx
-import { For } from "solid-js";
-import { MenuTrigger, MenuContent, MenuItem, Menu } from "@ark-preset/solid";
-
-const menuItems = [
-  { value: "edit", label: "Edit" },
-  { value: "duplicate", label: "Duplicate" },
-  { value: "delete", label: "Delete" },
-];
-
-export default function MenuDemo() {
-  return (
-    <Menu>
-      <MenuTrigger>Actions</MenuTrigger>
-      <MenuContent>
-        <For each={menuItems}>
-          {(item) => (
-            <MenuItem value={item.value}>{item.label}</MenuItem>
-          )}
-        </For>
-      </MenuContent>
-    </Menu>
-  );
-}
-```
+<ComponentPreview code={MenuBasicDemoCode}>
+  <MenuBasicDemo />
+</ComponentPreview>

@@ -1,7 +1,11 @@
 import { InlineCode } from "@ark-preset/solid";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import TooltipArrowDemo from "@demos/tooltip-demo/TooltipArrowDemo.tsx";
+import TooltipArrowDemoCode from "@demos/tooltip-demo/TooltipArrowDemo.tsx?code";
 import TooltipManualArrowDemo from "@demos/tooltip-demo/TooltipManualArrowDemo.tsx";
+import TooltipManualArrowDemoCode from "@demos/tooltip-demo/TooltipManualArrowDemo.tsx?code";
 import TooltipControlledDemo from "@demos/tooltip-demo/TooltipControlledDemo.tsx";
+import TooltipControlledDemoCode from "@demos/tooltip-demo/TooltipControlledDemo.tsx?code";
 
 ## Usage
 
@@ -24,18 +28,9 @@ Basic tooltip:
 
 Add an arrow pointing to the trigger element.
 
-<TooltipArrowDemo />
-
-```tsx
-import { Tooltip, TooltipTrigger, TooltipContent } from "~/components/tooltip";
-
-<Tooltip>
-  <TooltipTrigger>Hover me</TooltipTrigger>
-  <TooltipContent useArrow>
-    Tooltip with arrow
-  </TooltipContent>
-</Tooltip>
-```
+<ComponentPreview code={TooltipArrowDemoCode}>
+  <TooltipArrowDemo />
+</ComponentPreview>
 
 ## Advanced Usage
 
@@ -55,46 +50,14 @@ import { Tooltip } from "~/components/tooltip/tooltip.base";
 
 For custom arrow styling or positioning, compose the parts manually using <InlineCode>TooltipBase</InlineCode>:
 
-<TooltipManualArrowDemo />
-
-```tsx
-import { Tooltip, TooltipBase } from "~/components/tooltip";
-
-<Tooltip>
-  <TooltipBase.Trigger>Hover me</TooltipBase.Trigger>
-  <TooltipBase.Positioner>
-    <TooltipBase.Content>
-      <TooltipBase.Arrow class="[--arrow-size:14px]">
-        <TooltipBase.ArrowTip />
-      </TooltipBase.Arrow>
-      Custom arrow size
-    </TooltipBase.Content>
-  </TooltipBase.Positioner>
-</Tooltip>
-```
+<ComponentPreview code={TooltipManualArrowDemoCode}>
+  <TooltipManualArrowDemo />
+</ComponentPreview>
 
 ### Controlled Open State
 
 Use <InlineCode>open</InlineCode> and <InlineCode>onOpenChange</InlineCode> to control the tooltip visibility externally:
 
-<TooltipControlledDemo />
-
-```tsx
-import { createSignal } from "solid-js";
-import { Tooltip, TooltipTrigger, TooltipContent } from "~/components/tooltip";
-
-export function ControlledTooltip() {
-  const [open, setOpen] = createSignal(false);
-  return (
-    <div class="space-y-2">
-      <button onClick={() => setOpen((v) => !v)}>
-        {open() ? "Close" : "Open"} tooltip
-      </button>
-      <Tooltip open={open()} onOpenChange={(e) => setOpen(e.open)}>
-        <TooltipTrigger>Hover or click above</TooltipTrigger>
-        <TooltipContent>Controlled tooltip</TooltipContent>
-      </Tooltip>
-    </div>
-  );
-}
-```
+<ComponentPreview code={TooltipControlledDemoCode}>
+  <TooltipControlledDemo />
+</ComponentPreview>

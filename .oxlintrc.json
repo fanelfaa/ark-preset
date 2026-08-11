@@ -5,7 +5,7 @@
     "correctness": "error"
   },
   "rules": {},
-  "ignorePatterns": ["node_modules", ".moon", "dist", ".git"],
+  "ignorePatterns": ["node_modules", ".moon", "dist", ".git", "apps/docs/src/routeTree.gen.ts"],
   "env": {
     "builtin": true
   }

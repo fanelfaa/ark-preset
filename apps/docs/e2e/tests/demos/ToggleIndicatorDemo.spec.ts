@@ -9,7 +9,7 @@ test("verifies toggle indicator shows different icons for on/off state", async (
   const toggleCount = await toggles.count();
   expect(toggleCount).toBeGreaterThanOrEqual(5);
 
-  // The second toggle (index 1 in the overall collection, actually 3rd toggle) 
+  // The second toggle (index 1 in the overall collection, actually 3rd toggle)
   // has defaultPressed, so it should show data-pressed
   // Find toggles with indicators - they have ToggleIndicator inside
   // The indicator demos use the same toggle buttons with different icons

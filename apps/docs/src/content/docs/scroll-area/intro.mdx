@@ -1,5 +1,7 @@
 import { DocsLink } from "../../../components/DocsLink";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import ScrollAreaBasicDemo from "@demos/scroll-area-demo/ScrollAreaBasicDemo.tsx";
+import ScrollAreaBasicDemoCode from "@demos/scroll-area-demo/ScrollAreaBasicDemo.tsx?code";
 
 # ScrollArea
 
@@ -8,22 +10,6 @@ browsers.
 
 <DocsLink href="https://ark-ui.com/docs/components/scroll-area" />
 
-<ScrollAreaBasicDemo />
-
-```tsx
-import { ScrollArea } from "~/components/scroll-area";
-
-export function ScrollAreaDemo() {
-  return (
-    <ScrollArea class="h-[200px] w-[350px]" orientation="vertical">
-      <div class="p-4 space-y-4">
-        {Array.from({ length: 20 }, (_, i) => (
-          <p key={i} class="text-sm">
-            Item {i + 1}: Lorem ipsum dolor sit amet...
-          </p>
-        ))}
-      </div>
-    </ScrollArea>
-  );
-}
-```
+<ComponentPreview code={ScrollAreaBasicDemoCode}>
+  <ScrollAreaBasicDemo />
+</ComponentPreview>

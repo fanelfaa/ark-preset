@@ -7,6 +7,7 @@ import { tanstackRouter } from "@tanstack/router-plugin/vite";
 import solidPlugin from "vite-plugin-solid";
 import solidMarkedPlugin from "vite-plugin-solid-marked";
 import { installationWatcher } from "./src/plugins/installation-watcher";
+import { demoCodePlugin } from "./src/plugins/demo-code";
 
 export default defineConfig({
   resolve: { tsconfigPaths: true },
@@ -21,6 +22,7 @@ export default defineConfig({
       source: "/src/mdx-provider",
     }),
     installationWatcher(),
+    demoCodePlugin(),
     solidPlugin(),
   ],
 });

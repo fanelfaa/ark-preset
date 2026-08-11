@@ -1,59 +1,25 @@
 import { InlineCode } from "@ark-preset/solid";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import ToggleIndicatorDemo from "@demos/toggle-demo/ToggleIndicatorDemo.tsx";
-import { Toggle } from "@ark-preset/solid";
+import ToggleIndicatorDemoCode from "@demos/toggle-demo/ToggleIndicatorDemo.tsx?code";
+import ToggleSizesDemo from "@demos/toggle-demo/ToggleSizesDemo.tsx";
+import ToggleSizesDemoCode from "@demos/toggle-demo/ToggleSizesDemo.tsx?code";
 
 ## With Indicator
 
 <InlineCode>ToggleIndicator</InlineCode> renders different content based on the toggle state — the <InlineCode>fallback</InlineCode> is shown when off, and the children are shown when on.
 
-<ToggleIndicatorDemo />
-
-```tsx
-import { Toggle, ToggleIndicator } from "~/components/toggle";
-
-export function ToggleIndicatorDemo() {
-  return (
-    <div class="flex items-center gap-4">
-      <Toggle>
-        <ToggleIndicator fallback={<SunIcon />}>
-          <MoonIcon />
-        </ToggleIndicator>
-      </Toggle>
-      <Toggle defaultPressed>
-        <ToggleIndicator fallback={<SunIcon />}>
-          <MoonIcon />
-        </ToggleIndicator>
-      </Toggle>
-    </div>
-  );
-}
-```
+<ComponentPreview code={ToggleIndicatorDemoCode}>
+  <ToggleIndicatorDemo />
+</ComponentPreview>
 
 ## Sizes
 
 Use the <code>size</code> prop to change the toggle size.
 
-<div class="rounded-lg border border-border bg-background/70 backdrop-blur-3xl p-6 not-prose">
-  <div class="flex flex-wrap items-center gap-4">
-    <Toggle size="sm">Sm</Toggle>
-    <Toggle size="md">Md</Toggle>
-    <Toggle size="lg">Lg</Toggle>
-  </div>
-</div>
-
-```tsx
-import { Toggle } from "~/components/toggle";
-
-export function ToggleSizesDemo() {
-  return (
-    <div class="flex items-center gap-4">
-      <Toggle size="sm">Sm</Toggle>
-      <Toggle size="md">Md</Toggle>
-      <Toggle size="lg">Lg</Toggle>
-    </div>
-  );
-}
-```
+<ComponentPreview code={ToggleSizesDemoCode}>
+  <ToggleSizesDemo />
+</ComponentPreview>
 
 ## Usage
 

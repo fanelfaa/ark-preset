@@ -23,7 +23,12 @@ const RootProvider: Component<ComboboxRootProviderProps> = (props) => {
 
 const Label: Component<ArkCombobox.LabelProps & { error?: boolean }> = (props) => {
   const [local, others] = splitProps(props, ["class", "error"]);
-  return <ArkCombobox.Label class={labelVariants({ class: local.class, error: local.error })} {...others} />;
+  return (
+    <ArkCombobox.Label
+      class={labelVariants({ class: local.class, error: local.error })}
+      {...others}
+    />
+  );
 };
 
 const Input: Component<ArkCombobox.InputProps> = (props) => {

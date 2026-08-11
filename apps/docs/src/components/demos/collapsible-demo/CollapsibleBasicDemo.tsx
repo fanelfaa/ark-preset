@@ -4,11 +4,10 @@ import {
   CollapsibleTrigger,
   CollapsibleContent,
 } from "@ark-preset/solid";
-import { DemoWrapper } from "../../DemoWrapper";
 
 export default function CollapsibleBasicDemo() {
   return (
-    <DemoWrapper>
+    <div>
       <Collapsible>
         <CollapsibleTrigger>
           Click to expand
@@ -20,6 +19,6 @@ export default function CollapsibleBasicDemo() {
           </div>
         </CollapsibleContent>
       </Collapsible>
-    </DemoWrapper>
+    </div>
   );
 }

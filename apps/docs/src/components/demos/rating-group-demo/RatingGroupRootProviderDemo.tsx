@@ -1,4 +1,3 @@
-import { DemoWrapper } from "../../DemoWrapper";
 import { useRatingGroup } from "@ark-ui/solid/rating-group";
 import { RatingGroupBase } from "@ark-preset/solid";
 import { Index } from "solid-js";
@@ -7,7 +6,7 @@ export default function RatingGroupRootProviderDemo() {
   const ratingGroup = useRatingGroup({ count: 5, defaultValue: 3 });
 
   return (
-    <DemoWrapper>
+    <div>
       <p class="text-sm text-muted-foreground mb-2">RootProvider: {ratingGroup().value}</p>
       <RatingGroupBase.RootProvider value={ratingGroup}>
         <RatingGroupBase.Label>Rate this</RatingGroupBase.Label>
@@ -55,6 +54,6 @@ export default function RatingGroupRootProviderDemo() {
           )}
         </RatingGroupBase.Context>
       </RatingGroupBase.RootProvider>
-    </DemoWrapper>
+    </div>
   );
 }

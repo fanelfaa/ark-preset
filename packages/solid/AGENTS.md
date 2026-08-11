@@ -22,12 +22,12 @@ packages/solid/
 
 ## WHERE TO LOOK
 
-| Task               | Location          | Notes                                               |
-| ------------------ | ----------------- | --------------------------------------------------- |
-| Add new component  | src/<component>/  | Create dir with index.tsx + <component>.base.tsx    |
-| Update barrel      | src/index.ts      | Add `export * from "./<component>"`                  |
-| Update exports     | package.json      | If adding new entry point                           |
-| Recipe source      | @ark-preset/core      | Import `<component>Variants` from core              |
+| Task              | Location         | Notes                                            |
+| ----------------- | ---------------- | ------------------------------------------------ |
+| Add new component | src/<component>/ | Create dir with index.tsx + <component>.base.tsx |
+| Update barrel     | src/index.ts     | Add `export * from "./<component>"`              |
+| Update exports    | package.json     | If adding new entry point                        |
+| Recipe source     | @ark-preset/core | Import `<component>Variants` from core           |
 
 ## CONVENTIONS
 

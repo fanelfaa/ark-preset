@@ -1,5 +1,7 @@
 import { DocsLink } from "../../../components/DocsLink";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import TanstackFormDemo from "@demos/tanstack-form-demo/TanstackFormDemo.tsx";
+import TanstackFormDemoCode from "@demos/tanstack-form-demo/TanstackFormDemo.tsx?code";
 
 # TanStack Form
 
@@ -9,9 +11,9 @@ Integrate Ark Preset components with [TanStack Form](https://tanstack.com/form/l
 
 TanStack Form provides a headless form library with first-class Solid.js support. Combined with Ark Preset's accessible form components, you get a complete form solution with proper styling, validation, and accessibility.
 
-<div class="rounded-lg border border-border bg-background/70 backdrop-blur-3xl p-6">
+<ComponentPreview code={TanstackFormDemoCode}>
   <TanstackFormDemo />
-</div>
+</ComponentPreview>
 
 ## Key Features
 

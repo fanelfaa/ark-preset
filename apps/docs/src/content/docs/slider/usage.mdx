@@ -1,4 +1,6 @@
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import SliderRootProviderDemo from "@demos/slider-demo/SliderRootProviderDemo.tsx";
+import SliderRootProviderDemoCode from "@demos/slider-demo/SliderRootProviderDemo.tsx?code";
 
 ## Usage
 
@@ -33,39 +35,9 @@ Basic usage:
 
 Use `SliderRootProvider` when you need to access the slider state outside of the component tree. This pattern uses the `useSlider` hook from Ark UI to create a shared context that both the slider and external elements can reference.
 
-<SliderRootProviderDemo />
-
-```tsx
-import { useSlider } from "@ark-ui/solid/slider";
-import {
-  SliderRootProvider,
-  SliderLabel,
-  SliderValueText,
-  SliderControl,
-  SliderThumb,
-} from "~/components/slider";
-
-export function SliderWithExternalControl() {
-  const slider = useSlider({ defaultValue: [50], min: 0, max: 100 });
-
-  return (
-    <div>
-      {/* Access slider state outside the tree */}
-      <output>Value: {JSON.stringify(slider().value)}</output>
-
-      <SliderRootProvider value={slider}>
-        <div class="flex items-center justify-between gap-4">
-          <SliderLabel>Volume</SliderLabel>
-          <SliderValueText />
-        </div>
-        <SliderControl>
-          <SliderThumb index={0} />
-        </SliderControl>
-      </SliderRootProvider>
-    </div>
-  );
-}
-```
+<ComponentPreview code={SliderRootProviderDemoCode}>
+  <SliderRootProviderDemo />
+</ComponentPreview>
 
 The key difference:
 

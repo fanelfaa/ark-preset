@@ -1,4 +1,3 @@
-import { DemoWrapper } from "../../DemoWrapper";
 import { useSelect, createListCollection } from "@ark-ui/solid/select";
 import { Index } from "solid-js";
 import {
@@ -22,7 +21,7 @@ export default function SelectRootProviderDemo() {
   const select = useSelect({ collection: frameworks, defaultValue: ["solid"] });
 
   return (
-    <DemoWrapper class="space-y-4">
+    <div class="space-y-4">
       <output class="block text-sm text-muted-foreground">
         Value: {JSON.stringify(select().value)}
       </output>
@@ -36,6 +35,6 @@ export default function SelectRootProviderDemo() {
           </Index>
         </SelectContent>
       </SelectRootProvider>
-    </DemoWrapper>
+    </div>
   );
 }

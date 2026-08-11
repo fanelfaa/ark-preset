@@ -1,6 +1,9 @@
 import { InlineCode } from "@ark-preset/solid";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import ColorPickerInlineDemo from "@demos/color-picker-demo/ColorPickerInlineDemo.tsx";
+import ColorPickerInlineDemoCode from "@demos/color-picker-demo/ColorPickerInlineDemo.tsx?code";
 import ColorPickerControlledDemo from "@demos/color-picker-demo/ColorPickerControlledDemo.tsx";
+import ColorPickerControlledDemoCode from "@demos/color-picker-demo/ColorPickerControlledDemo.tsx?code";
 
 ## Usage
 
@@ -20,46 +23,15 @@ Basic usage:
 
 For inline rendering (no popover), use the <InlineCode>inline</InlineCode> prop:
 
-<ColorPickerInlineDemo />
-
-```tsx
-import { parseColor } from "@ark-ui/solid/color-picker";
-
-<ColorPicker
-  inline
-  label="Inline Color Picker"
-  defaultValue={parseColor("#eb5e41")}
-  presets={["#ff0000", "#00ff00", "#0000ff"]}
-/>
-```
+<ComponentPreview code={ColorPickerInlineDemoCode}>
+  <ColorPickerInlineDemo />
+</ComponentPreview>
 
 ### Controlled
 
-<ColorPickerControlledDemo />
-
-```tsx
-import { createSignal } from "solid-js";
-import { parseColor } from "@ark-ui/solid/color-picker";
-import { ColorPicker } from "~/components/color-picker";
-
-export function ColorPickerControlled() {
-  const [color, setColor] = createSignal(parseColor("#eb5e41"));
-
-  return (
-    <div>
-      <ColorPicker
-        label="Color"
-        value={color()}
-        onValueChange={(e) => setColor(e.value)}
-        presets={["#ff0000", "#00ff00", "#0000ff"]}
-      />
-      <p class="text-sm text-muted-foreground mt-3">
-        Current color: <span class="font-mono">{color()}</span>
-      </p>
-    </div>
-  );
-}
-```
+<ComponentPreview code={ColorPickerControlledDemoCode}>
+  <ColorPickerControlledDemo />
+</ComponentPreview>
 
 For fully controlled mode, use <InlineCode>value</InlineCode> and <InlineCode>onValueChange</InlineCode>:
 

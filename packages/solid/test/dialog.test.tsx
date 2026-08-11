@@ -121,9 +121,7 @@ describe("Dialog", () => {
     // DialogContent renders Backdrop + Positioner + Content + CloseTrigger via Portal
     expect(screen.getByText("HasCloseBtn")).toBeInTheDocument();
     // CloseTrigger renders an SVG button inside the Portal
-    const closeTrigger = document.querySelector(
-      '[data-scope="dialog"][data-part="close-trigger"]'
-    );
+    const closeTrigger = document.querySelector('[data-scope="dialog"][data-part="close-trigger"]');
     expect(closeTrigger).toBeInTheDocument();
   });
 });

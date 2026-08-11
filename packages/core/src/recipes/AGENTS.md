@@ -63,10 +63,10 @@ packages/core/src/recipes/
 
 ## WHERE TO LOOK
 
-| Task                | Location          | Notes                                          |
-| ------------------- | ----------------- | ---------------------------------------------- |
-| Add new recipe      | Current directory | Create *.ts file with tv() slots and variants  |
-| View recipe pattern | button.ts or card.ts | Good examples of tv() with/without slots     |
+| Task                | Location             | Notes                                          |
+| ------------------- | -------------------- | ---------------------------------------------- |
+| Add new recipe      | Current directory    | Create \*.ts file with tv() slots and variants |
+| View recipe pattern | button.ts or card.ts | Good examples of tv() with/without slots       |
 
 ## CONVENTIONS
 

@@ -12,10 +12,12 @@ test("selects toggle items and verifies external state display", async ({ page }
   await expect(selectedLabel.first()).toContainText("left");
 
   // Find the demo area
-  const demoArea = page.locator(".rounded-lg:has-text('Selected:')").first();
+  const demoArea = page.locator(".rounded-2xl:has-text('Selected:')").first();
 
   // Click "Center" item
-  const centerItem = demoArea.locator("[data-scope='toggle-group'] [data-part='item']").filter({ hasText: "Center" });
+  const centerItem = demoArea
+    .locator("[data-scope='toggle-group'] [data-part='item']")
+    .filter({ hasText: "Center" });
   await centerItem.click();
   await page.waitForTimeout(100);
 
@@ -23,7 +25,9 @@ test("selects toggle items and verifies external state display", async ({ page }
   await expect(selectedLabel.first()).toContainText("center");
 
   // Click "Right" item
-  const rightItem = demoArea.locator("[data-scope='toggle-group'] [data-part='item']").filter({ hasText: "Right" });
+  const rightItem = demoArea
+    .locator("[data-scope='toggle-group'] [data-part='item']")
+    .filter({ hasText: "Right" });
   await rightItem.click();
   await page.waitForTimeout(100);
 

@@ -1,4 +1,3 @@
-import { DemoWrapper } from "../../DemoWrapper";
 import { useFilter, useListCollection } from "@ark-ui/solid";
 import { Index } from "solid-js";
 import { Select, SelectLabel, SelectTrigger, SelectContent, SelectItem } from "@ark-preset/solid";
@@ -20,7 +19,7 @@ export default function SelectSearchableDemo() {
   });
 
   return (
-    <DemoWrapper>
+    <div>
       <Select collection={collection()} searchable onSearch={(value) => filter(value)}>
         <SelectLabel>Framework</SelectLabel>
         <SelectTrigger placeholder="Select a framework" />
@@ -30,6 +29,6 @@ export default function SelectSearchableDemo() {
           </Index>
         </SelectContent>
       </Select>
-    </DemoWrapper>
+    </div>
   );
 }

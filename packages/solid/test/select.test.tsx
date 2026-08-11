@@ -1,4 +1,4 @@
-import { render, fireEvent, waitFor } from "@solidjs/testing-library";
+import { render } from "@solidjs/testing-library";
 import { Select, SelectBase, selectVariants } from "../src/select";
 import { Combobox, ComboboxBase, comboboxVariants } from "../src/combobox";
 import { Listbox, ListboxBase, listboxVariants } from "../src/listbox";
@@ -60,10 +60,7 @@ describe("SelectBase", () => {
   it("renders with defaultValue and fires onValueChange", () => {
     const onChange = vi.fn();
     const { container } = render(() => (
-      <SelectBase.Root
-        defaultValue={[{ label: "Apple", value: "apple" }]}
-        onValueChange={onChange}
-      >
+      <SelectBase.Root defaultValue={[{ label: "Apple", value: "apple" }]} onValueChange={onChange}>
         <SelectBase.Label>Fruits</SelectBase.Label>
       </SelectBase.Root>
     ));
@@ -207,16 +204,12 @@ describe("ListboxBase", () => {
   });
 
   it("Listbox renders with orientation", () => {
-    const { container } = render(() => (
-      <ListboxBase.Root orientation="horizontal" />
-    ));
+    const { container } = render(() => <ListboxBase.Root orientation="horizontal" />);
     expect(container.firstChild).toBeInTheDocument();
   });
 
   it("renders with collection", () => {
-    const { container } = render(() => (
-      <ListboxBase.Root />
-    ));
+    const { container } = render(() => <ListboxBase.Root />);
     expect(container.firstChild).toBeInTheDocument();
   });
 });

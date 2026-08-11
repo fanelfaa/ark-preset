@@ -1,5 +1,7 @@
 import { DocsLink } from "../../../components/DocsLink";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import ProgressBasicDemo from "@demos/progress-demo/ProgressBasicDemo.tsx";
+import ProgressBasicDemoCode from "@demos/progress-demo/ProgressBasicDemo.tsx?code";
 
 # Progress
 
@@ -7,23 +9,6 @@ A progress bar used to show the completion status of an ongoing operation.
 
 <DocsLink href="https://ark-ui.com/docs/components/progress" />
 
-<ProgressBasicDemo />
-
-```tsx
-import {
-  Progress,
-  ProgressLabel,
-  ProgressTrack,
-  ProgressValueText,
-} from "~/components/progress";
-
-export function ProgressDemo() {
-  return (
-    <Progress value={65} class="space-y-2">
-      <ProgressLabel>Loading</ProgressLabel>
-      <ProgressTrack />
-      <ProgressValueText />
-    </Progress>
-  );
-}
-```
+<ComponentPreview code={ProgressBasicDemoCode}>
+  <ProgressBasicDemo />
+</ComponentPreview>

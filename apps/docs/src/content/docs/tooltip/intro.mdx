@@ -1,5 +1,7 @@
 import { DocsLink } from "../../../components/DocsLink";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import TooltipBasicDemo from "@demos/tooltip-demo/TooltipBasicDemo.tsx";
+import TooltipBasicDemoCode from "@demos/tooltip-demo/TooltipBasicDemo.tsx?code";
 
 # Tooltip
 
@@ -7,17 +9,6 @@ A popup component that displays contextual information when hovering or focusing
 
 <DocsLink href="https://ark-ui.com/docs/components/tooltip" />
 
-<TooltipBasicDemo />
-
-```tsx
-import { Tooltip, TooltipTrigger, TooltipContent } from "~/components/tooltip";
-
-export function TooltipDemo() {
-  return (
-    <Tooltip>
-      <TooltipTrigger>Hover me</TooltipTrigger>
-      <TooltipContent>This is a basic tooltip</TooltipContent>
-    </Tooltip>
-  );
-}
-```
+<ComponentPreview code={TooltipBasicDemoCode}>
+  <TooltipBasicDemo />
+</ComponentPreview>

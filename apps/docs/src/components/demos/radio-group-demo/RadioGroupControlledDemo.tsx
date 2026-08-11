@@ -1,5 +1,4 @@
 import { Index, createSignal } from "solid-js";
-import { DemoWrapper } from "../../DemoWrapper";
 import { RadioGroup, RadioGroupItem } from "@ark-preset/solid";
 const paymentMethods = [
   { value: "1", label: "Credit Card" },
@@ -9,7 +8,7 @@ const paymentMethods = [
 export default function RadioGroupControlledDemo() {
   const [value, setValue] = createSignal("1");
   return (
-    <DemoWrapper class="space-y-4">
+    <div class="space-y-4">
       <p class="text-sm text-muted-foreground">Selected: {value()}</p>
       <RadioGroup
         value={value()}
@@ -20,6 +19,6 @@ export default function RadioGroupControlledDemo() {
           {(method) => <RadioGroupItem value={method().value}>{method().label}</RadioGroupItem>}
         </Index>
       </RadioGroup>
-    </DemoWrapper>
+    </div>
   );
 }

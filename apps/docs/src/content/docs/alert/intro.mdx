@@ -1,5 +1,7 @@
 import { DocsLink } from "../../../components/DocsLink";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import AlertBasicDemo from "@demos/alert-demo/AlertBasicDemo.tsx";
+import AlertBasicDemoCode from "@demos/alert-demo/AlertBasicDemo.tsx?code";
 
 # Alert
 
@@ -7,20 +9,6 @@ A callout that conveys important information to the user, such as system message
 
 <DocsLink href="https://ui.shadcn.com/docs/components/alert" />
 
-<AlertBasicDemo />
-
-```tsx
-import { Alert, AlertTitle, AlertDescription, AlertAction } from "~/components/alert";
-
-export function AlertDemo() {
-  return (
-    <Alert>
-      <svg xmlns="..." class="size-4">{/* icon */}</svg>
-      <AlertTitle>Heads up!</AlertTitle>
-      <AlertDescription>
-        You can add components and dependencies to your app using the cli.
-      </AlertDescription>
-    </Alert>
-  );
-}
-```
+<ComponentPreview code={AlertBasicDemoCode}>
+  <AlertBasicDemo />
+</ComponentPreview>

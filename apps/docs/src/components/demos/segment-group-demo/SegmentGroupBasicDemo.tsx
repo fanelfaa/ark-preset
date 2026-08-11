@@ -1,12 +1,11 @@
 import { Index } from "solid-js";
-import { DemoWrapper } from "../../DemoWrapper";
 import { SegmentGroup, SegmentGroupItem } from "@ark-preset/solid";
 
 const frameworks = ["React", "Solid", "Svelte", "Vue"];
 
 export default function SegmentGroupBasicDemo() {
   return (
-    <DemoWrapper class="space-y-6">
+    <div class="space-y-6">
       <div>
         <p class="text-sm text-muted-foreground mb-2">Basic horizontal</p>
         <SegmentGroup defaultValue="React">
@@ -24,6 +23,6 @@ export default function SegmentGroupBasicDemo() {
           </Index>
         </SegmentGroup>
       </div>
-    </DemoWrapper>
+    </div>
   );
 }

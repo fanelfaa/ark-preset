@@ -1,5 +1,4 @@
 import { Index } from "solid-js";
-import { DemoWrapper } from "../../DemoWrapper";
 import { RadioGroup, RadioGroupItem } from "@ark-preset/solid";
 const paymentMethods = [
   { value: "1", label: "Credit Card" },
@@ -8,12 +7,12 @@ const paymentMethods = [
 ];
 export default function RadioGroupBasicDemo() {
   return (
-    <DemoWrapper>
+    <div>
       <RadioGroup defaultValue="1" orientation="horizontal">
         <Index each={paymentMethods}>
           {(method) => <RadioGroupItem value={method().value}>{method().label}</RadioGroupItem>}
         </Index>
       </RadioGroup>
-    </DemoWrapper>
+    </div>
   );
 }

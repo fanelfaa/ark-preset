@@ -9,12 +9,12 @@ Styling primitives (@ark-preset/core). 47 tailwind-variants recipes, zero framew
 
 ## WHERE TO LOOK
 
-| Task                          | Location       | Notes                                                |
-| ----------------------------- | -------------- | ---------------------------------------------------- |
-| Add new component recipe      | src/recipes/   | Create *.ts file with tv() slots and variants        |
-| Update core barrel            | src/index.ts   | Export new recipe + type (47/48 currently exported)  |
-| Update build entries          | tsup.config.ts | Add new recipe to entry list                         |
-| Update theme CSS              | src/theme.css  | Tailwind v4 @theme directive with CSS custom props   |
+| Task                     | Location       | Notes                                               |
+| ------------------------ | -------------- | --------------------------------------------------- |
+| Add new component recipe | src/recipes/   | Create \*.ts file with tv() slots and variants      |
+| Update core barrel       | src/index.ts   | Export new recipe + type (47/48 currently exported) |
+| Update build entries     | tsup.config.ts | Add new recipe to entry list                        |
+| Update theme CSS         | src/theme.css  | Tailwind v4 @theme directive with CSS custom props  |
 
 ## CONVENTIONS
 

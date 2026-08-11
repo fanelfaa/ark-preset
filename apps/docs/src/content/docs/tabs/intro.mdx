@@ -1,5 +1,7 @@
 import { DocsLink } from "../../../components/DocsLink";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import TabsBasicDemo from "@demos/tabs-demo/TabsBasicDemo.tsx";
+import TabsBasicDemoCode from "@demos/tabs-demo/TabsBasicDemo.tsx?code";
 
 # Tabs
 
@@ -7,25 +9,6 @@ A navigable component that organizes content into separate views where only one 
 
 <DocsLink href="https://ark-ui.com/docs/components/tabs" />
 
-<TabsBasicDemo />
-
-```tsx
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "~/components/tabs";
-
-export function TabsDemo() {
-  return (
-    <Tabs defaultValue="account">
-      <TabsList>
-        <TabsTrigger value="account">Account</TabsTrigger>
-        <TabsTrigger value="password">Password</TabsTrigger>
-      </TabsList>
-      <TabsContent value="account">
-        <div class="text-sm text-foreground">Make changes to your account here.</div>
-      </TabsContent>
-      <TabsContent value="password">
-        <div class="text-sm text-foreground">Change your password here.</div>
-      </TabsContent>
-    </Tabs>
-  );
-}
-```
+<ComponentPreview code={TabsBasicDemoCode}>
+  <TabsBasicDemo />
+</ComponentPreview>

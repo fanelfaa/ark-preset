@@ -52,10 +52,7 @@ function camelToKebab(str: string): string {
  *
  * Filters out the component's own recipe imports (self-references).
  */
-export function findDependencies(
-  component: string,
-  files: { content: string }[],
-): string[] {
+export function findDependencies(component: string, files: { content: string }[]): string[] {
   const deps = new Set<string>();
 
   for (const file of files) {
@@ -79,7 +76,7 @@ export function findDependencies(
     }
 
     // 2. Relative imports to sibling component dirs
-    const relImportRe = /from\s+["']\.\.\/([^\/"']+)["']/g;
+    const relImportRe = /from\s+["']\.\.\/([^/"']+)["']/g;
     while ((match = relImportRe.exec(content)) !== null) {
       deps.add(match[1]);
     }

@@ -1,4 +1,3 @@
-import { DemoWrapper } from "../../DemoWrapper";
 import {
   Slider,
   SliderLabel,
@@ -9,7 +8,7 @@ import {
 
 export default function SliderBasicDemo() {
   return (
-    <DemoWrapper>
+    <div>
       <Slider defaultValue={[50]} min={0} max={100}>
         <div class="flex items-center justify-between gap-4">
           <SliderLabel>Volume</SliderLabel>
@@ -19,6 +18,6 @@ export default function SliderBasicDemo() {
           <SliderThumb index={0} />
         </SliderControl>
       </Slider>
-    </DemoWrapper>
+    </div>
   );
 }

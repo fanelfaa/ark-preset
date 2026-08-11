@@ -1,4 +1,3 @@
-import { DemoWrapper } from "../../DemoWrapper";
 import { useSlider } from "@ark-ui/solid/slider";
 import {
   SliderRootProvider,
@@ -12,7 +11,7 @@ export default function SliderRootProviderDemo() {
   const slider = useSlider({ defaultValue: [50], min: 0, max: 100 });
 
   return (
-    <DemoWrapper class="space-y-4">
+    <div class="space-y-4">
       <output class="block text-sm text-muted-foreground">
         Value: {JSON.stringify(slider().value)}
       </output>
@@ -26,6 +25,6 @@ export default function SliderRootProviderDemo() {
           <SliderThumb index={0} />
         </SliderControl>
       </SliderRootProvider>
-    </DemoWrapper>
+    </div>
   );
 }

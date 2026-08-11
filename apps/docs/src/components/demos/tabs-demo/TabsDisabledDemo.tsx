@@ -1,4 +1,3 @@
-import { DemoWrapper } from "../../DemoWrapper";
 import { Index } from "solid-js";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@ark-preset/solid";
 
@@ -15,7 +14,7 @@ const tabs = [
 
 export default function TabsDisabledDemo() {
   return (
-    <DemoWrapper>
+    <div>
       <Tabs defaultValue="active">
         <TabsList>
           <Index each={tabs}>
@@ -34,6 +33,6 @@ export default function TabsDisabledDemo() {
           )}
         </Index>
       </Tabs>
-    </DemoWrapper>
+    </div>
   );
 }

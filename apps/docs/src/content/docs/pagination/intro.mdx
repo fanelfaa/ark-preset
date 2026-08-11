@@ -1,5 +1,7 @@
 import { DocsLink } from "../../../components/DocsLink";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import PaginationBasicDemo from "@demos/pagination-demo/PaginationBasicDemo.tsx";
+import PaginationBasicDemoCode from "@demos/pagination-demo/PaginationBasicDemo.tsx?code";
 
 # Pagination
 
@@ -9,20 +11,6 @@ A navigation component for moving between pages of content. Built on Ark UI's Pa
 
 ## Basic
 
-<PaginationBasicDemo />
-
-```tsx
-import { Pagination, PaginationPageList, PaginationFirstTrigger, PaginationPrevTrigger, PaginationNextTrigger, PaginationLastTrigger } from "~/components/pagination";
-
-export function PaginationDemo() {
-  return (
-    <Pagination count={100} pageSize={10} class="gap-1">
-      <PaginationFirstTrigger>{'<<'}</PaginationFirstTrigger>
-      <PaginationPrevTrigger>{'<'}</PaginationPrevTrigger>
-      <PaginationPageList />
-      <PaginationNextTrigger>{'>'}</PaginationNextTrigger>
-      <PaginationLastTrigger>{'>>'}</PaginationLastTrigger>
-    </Pagination>
-  );
-}
-```
+<ComponentPreview code={PaginationBasicDemoCode}>
+  <PaginationBasicDemo />
+</ComponentPreview>

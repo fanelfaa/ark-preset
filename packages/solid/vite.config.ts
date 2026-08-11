@@ -12,7 +12,13 @@ export default defineConfig({
       formats: ["es", "cjs"],
     },
     rollupOptions: {
-      external: ["solid-js", "@ark-ui/solid", "tailwind-variants", "@ark-preset/core", /^solid-js\/.*/],
+      external: [
+        "solid-js",
+        "@ark-ui/solid",
+        "tailwind-variants",
+        "@ark-preset/core",
+        /^solid-js\/.*/,
+      ],
     },
     sourcemap: true,
   },

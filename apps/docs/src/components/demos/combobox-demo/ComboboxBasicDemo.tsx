@@ -7,7 +7,6 @@ import {
   ComboboxContent,
   ComboboxItem,
 } from "@ark-preset/solid";
-import { DemoWrapper } from "../../DemoWrapper";
 
 export default function ComboboxBasicDemo() {
   const filterFn = useFilter({ sensitivity: "base" });
@@ -26,7 +25,7 @@ export default function ComboboxBasicDemo() {
   };
 
   return (
-    <DemoWrapper>
+    <div>
       <Combobox collection={collection()} onInputValueChange={handleInputChange}>
         <ComboboxLabel>Framework</ComboboxLabel>
         <ComboboxInputTrigger placeholder="Search frameworks..." />
@@ -36,6 +35,6 @@ export default function ComboboxBasicDemo() {
           </Index>
         </ComboboxContent>
       </Combobox>
-    </DemoWrapper>
+    </div>
   );
 }

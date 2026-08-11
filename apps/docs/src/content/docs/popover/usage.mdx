@@ -1,5 +1,7 @@
 import { InlineCode } from "@ark-preset/solid";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import PopoverRootProviderDemo from "@demos/popover-demo/PopoverRootProviderDemo.tsx";
+import PopoverRootProviderDemoCode from "@demos/popover-demo/PopoverRootProviderDemo.tsx?code";
 
 ## Usage
 
@@ -33,38 +35,9 @@ Basic usage:
 
 Use <InlineCode>PopoverRootProvider</InlineCode> when you need to access the popover state outside of the component tree. This pattern uses the <InlineCode>usePopover</InlineCode> hook from Ark UI to create a shared context that both the popover and external elements can reference.
 
-<PopoverRootProviderDemo />
-
-```tsx
-import { usePopover } from "@ark-ui/solid/popover";
-import {
-  PopoverContent,
-  PopoverTrigger,
-  PopoverTitle,
-  PopoverDescription,
-  PopoverBase,
-} from "~/components/popover";
-
-export function PopoverWithExternalControl() {
-  const popover = usePopover();
-
-  return (
-    <div>
-      <output>Open: {JSON.stringify(popover().open)}</output>
-
-      <PopoverBase.RootProvider value={popover}>
-        <PopoverTrigger>Open Popover</PopoverTrigger>
-        <PopoverContent>
-          <PopoverTitle>Popover Title</PopoverTitle>
-          <PopoverDescription>
-            This popover state is managed externally via <code>usePopover</code>.
-          </PopoverDescription>
-        </PopoverContent>
-      </PopoverBase.RootProvider>
-    </div>
-  );
-}
-```
+<ComponentPreview code={PopoverRootProviderDemoCode}>
+  <PopoverRootProviderDemo />
+</ComponentPreview>
 
 The key difference:
 

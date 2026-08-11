@@ -1,19 +1,16 @@
-import { DemoWrapper } from "../../DemoWrapper";
 import { HoverCard, HoverCardTrigger, HoverCardContent } from "@ark-preset/solid";
 
 export default function HoverCardBasicDemo() {
   return (
-    <DemoWrapper>
-      <div class="flex justify-center">
-        <HoverCard>
-          <HoverCardTrigger>Hover me</HoverCardTrigger>
-          <HoverCardContent useArrow>
-            <div class="text-sm">
-              The content of this hover card is displayed when you hover over the trigger element.
-            </div>
-          </HoverCardContent>
-        </HoverCard>
-      </div>
-    </DemoWrapper>
+    <div class="flex justify-center">
+      <HoverCard>
+        <HoverCardTrigger>Hover me</HoverCardTrigger>
+        <HoverCardContent useArrow>
+          <div class="text-sm">
+            The content of this hover card is displayed when you hover over the trigger element.
+          </div>
+        </HoverCardContent>
+      </HoverCard>
+    </div>
   );
 }

@@ -1,5 +1,7 @@
 import { DocsLink } from "../../../components/DocsLink";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import CollapsibleBasicDemo from "@demos/collapsible-demo/CollapsibleBasicDemo.tsx";
+import CollapsibleBasicDemoCode from "@demos/collapsible-demo/CollapsibleBasicDemo.tsx?code";
 
 # Collapsible
 
@@ -7,27 +9,6 @@ A component that allows users to expand or collapse content sections.
 
 <DocsLink href="https://ark-ui.com/docs/components/collapsible" />
 
-<CollapsibleBasicDemo />
-
-```tsx
-import {
-  Collapsible,
-  CollapsibleIndicator,
-  CollapsibleTrigger,
-  CollapsibleContent,
-} from "~/components/collapsible";
-
-export function CollapsibleDemo() {
-  return (
-    <Collapsible>
-      <CollapsibleTrigger>
-        Click to expand
-        <CollapsibleIndicator />
-      </CollapsibleTrigger>
-      <CollapsibleContent>
-        <div class="pt-4 text-sm">This is the collapsible content.</div>
-      </CollapsibleContent>
-    </Collapsible>
-  );
-}
-```
+<ComponentPreview code={CollapsibleBasicDemoCode}>
+  <CollapsibleBasicDemo />
+</ComponentPreview>

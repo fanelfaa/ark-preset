@@ -18,9 +18,7 @@ test("renders with disabled tab not selectable", async ({ page }) => {
   await expect(disabledTab).toBeDisabled();
 
   // Active panel content should be visible
-  await expect(
-    page.getByText(/this tab is enabled and functional/i).first(),
-  ).toBeVisible();
+  await expect(page.getByText(/this tab is enabled and functional/i).first()).toBeVisible();
 
   // Click "Settings" tab
   const settingsTab = page.getByRole("tab", { name: "Settings" }).first();
@@ -28,16 +26,12 @@ test("renders with disabled tab not selectable", async ({ page }) => {
   await page.waitForTimeout(100);
 
   // Settings content should be visible
-  await expect(
-    page.getByText(/configure your preferences/i).first(),
-  ).toBeVisible();
+  await expect(page.getByText(/configure your preferences/i).first()).toBeVisible();
 
   // Clicking disabled tab should not change anything — content stays
   await disabledTab.click({ force: true });
   await page.waitForTimeout(100);
 
   // Settings content should still be visible (disabled tab ignored)
-  await expect(
-    page.getByText(/configure your preferences/i).first(),
-  ).toBeVisible();
+  await expect(page.getByText(/configure your preferences/i).first()).toBeVisible();
 });

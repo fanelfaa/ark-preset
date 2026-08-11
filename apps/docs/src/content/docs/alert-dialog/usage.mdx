@@ -1,5 +1,7 @@
 import { InlineCode } from "@ark-preset/solid";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import AlertDialogDeleteDemo from "@demos/alert-dialog-demo/AlertDialogDeleteDemo.tsx";
+import AlertDialogDeleteDemoCode from "@demos/alert-dialog-demo/AlertDialogDeleteDemo.tsx?code";
 
 ## Usage
 
@@ -41,58 +43,9 @@ Basic usage:
 
 Use <InlineCode>AlertDialogBase.RootProvider</InlineCode> when you need to control the dialog state from outside its component tree. This pattern uses the <InlineCode>useDialog</InlineCode> hook from Ark UI and is useful for utility dialogs like delete confirmations that can be triggered from any element.
 
-<AlertDialogDeleteDemo />
-
-```tsx
-import { useDialog, type UseDialogReturn } from "@ark-ui/solid/dialog";
-import { AlertDialogContent, AlertDialogHeader, AlertDialogFooter, AlertDialogTitle, AlertDialogDescription, AlertDialogCancel, AlertDialogAction, AlertDialogBase } from "~/components/alert-dialog";
-import { Button } from "~/components/button";
-import { type Component } from "solid-js";
-
-interface DeleteAlertDialogProps {
-  dialog: UseDialogReturn;
-  title: string;
-  description: string;
-  onDelete: () => void;
-}
-
-const DeleteAlertDialog: Component<DeleteAlertDialogProps> = (props) => {
-  return (
-    <AlertDialogBase.RootProvider value={props.dialog}>
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle>{props.title}</AlertDialogTitle>
-          <AlertDialogDescription>{props.description}</AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel variant="outline">Cancel</AlertDialogCancel>
-          <AlertDialogAction variant="destructive" onClick={() => props.onDelete()}>
-            Delete
-          </AlertDialogAction>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialogBase.RootProvider>
-  );
-};
-
-export function DeleteConfirmation() {
-  const dialog = useDialog({ defaultOpen: false });
-
-  return (
-    <div>
-      <Button onClick={() => dialog().setOpen(true)} variant="destructive">
-        Delete Account
-      </Button>
-      <DeleteAlertDialog
-        dialog={dialog}
-        title="Delete Account"
-        description="This will permanently delete your account and remove your data from our servers."
-        onDelete={() => dialog().setOpen(false)}
-      />
-    </div>
-  );
-}
-```
+<ComponentPreview code={AlertDialogDeleteDemoCode}>
+  <AlertDialogDeleteDemo />
+</ComponentPreview>
 
 The key difference:
 

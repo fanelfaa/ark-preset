@@ -1,8 +1,13 @@
 import { InlineCode } from "@ark-preset/solid";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import RatingGroupControlledDemo from "@demos/rating-group-demo/RatingGroupControlledDemo.tsx";
+import RatingGroupControlledDemoCode from "@demos/rating-group-demo/RatingGroupControlledDemo.tsx?code";
 import RatingGroupHalfStarDemo from "@demos/rating-group-demo/RatingGroupHalfStarDemo.tsx";
+import RatingGroupHalfStarDemoCode from "@demos/rating-group-demo/RatingGroupHalfStarDemo.tsx?code";
 import RatingGroupDisabledDemo from "@demos/rating-group-demo/RatingGroupDisabledDemo.tsx";
+import RatingGroupDisabledDemoCode from "@demos/rating-group-demo/RatingGroupDisabledDemo.tsx?code";
 import RatingGroupRootProviderDemo from "@demos/rating-group-demo/RatingGroupRootProviderDemo.tsx";
+import RatingGroupRootProviderDemoCode from "@demos/rating-group-demo/RatingGroupRootProviderDemo.tsx?code";
 
 ## Usage
 
@@ -22,32 +27,17 @@ Basic star rating with 5 stars:
 
 ### Controlled
 
-<RatingGroupControlledDemo />
+<ComponentPreview code={RatingGroupControlledDemoCode}>
+  <RatingGroupControlledDemo />
+</ComponentPreview>
 
 Use <InlineCode>value</InlineCode> and <InlineCode>onValueChange</InlineCode> to control the rating value externally:
 
-```tsx
-import { createSignal } from "solid-js";
-import { RatingGroup } from "~/components/rating-group";
-
-export function ControlledDemo() {
-  const [value, setValue] = createSignal(3);
-  return (
-    <div>
-      <p class="text-sm text-muted-foreground mb-2">Value: {value()}</p>
-      <RatingGroup
-        count={5}
-        value={value()}
-        onValueChange={(e) => setValue(e.value)}
-      />
-    </div>
-  );
-}
-```
-
 ### Half Star
 
-<RatingGroupHalfStarDemo />
+<ComponentPreview code={RatingGroupHalfStarDemoCode}>
+  <RatingGroupHalfStarDemo />
+</ComponentPreview>
 
 Allow <InlineCode>0.5</InlineCode> value steps by setting the <InlineCode>allowHalf</InlineCode> prop to <InlineCode>true</InlineCode>:
 
@@ -59,7 +49,9 @@ Allow <InlineCode>0.5</InlineCode> value steps by setting the <InlineCode>allowH
 
 ### Disabled
 
-<RatingGroupDisabledDemo />
+<ComponentPreview code={RatingGroupDisabledDemoCode}>
+  <RatingGroupDisabledDemo />
+</ComponentPreview>
 
 To make the rating group disabled, set the <InlineCode>disabled</InlineCode> prop to <InlineCode>true</InlineCode>:
 
@@ -85,67 +77,8 @@ import { RatingGroupBase } from "~/components/rating-group";
 
 ### RootProvider Pattern
 
-<RatingGroupRootProviderDemo />
+<ComponentPreview code={RatingGroupRootProviderDemoCode}>
+  <RatingGroupRootProviderDemo />
+</ComponentPreview>
 
 For full control over the rating group machine, use <InlineCode>useRatingGroup</InlineCode> with <InlineCode>RatingGroup.RootProvider</InlineCode>:
-
-```tsx
-import { useRatingGroup } from "@ark-ui/solid/rating-group";
-import { RatingGroup } from "~/components/rating-group/rating-group.base";
-
-export function RootProviderDemo() {
-  const ratingGroup = useRatingGroup({ count: 5, defaultValue: 3 });
-
-  return (
-    <div class="space-y-2">
-      <p class="text-sm text-muted-foreground">Value: {ratingGroup().value}</p>
-      <RatingGroup.RootProvider value={ratingGroup} size="md">
-        <RatingGroup.Label>Rate this</RatingGroup.Label>
-        <RatingGroup.Context>
-          {(context) => (
-            <RatingGroup.Control>
-              <Index each={context().items}>
-                {(item) => (
-                  <RatingGroup.Item index={item()}>
-                    <RatingGroup.ItemContext>
-                      {(ctx) => (
-                        <span class="relative inline-flex items-center justify-center">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="size-5"
-                          >
-                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                          </svg>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            fill="currentColor"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="absolute inset-0 size-5 opacity-0 group-data-[highlighted]:opacity-100 group-data-[half]:[clip-path:inset(0_50%_0_0)]"
-                          >
-                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                          </svg>
-                        </span>
-                      )}
-                    </RatingGroup.ItemContext>
-                  </RatingGroup.Item>
-                )}
-              </Index>
-              <RatingGroup.HiddenInput />
-            </RatingGroup.Control>
-          )}
-        </RatingGroup.Context>
-      </RatingGroup.RootProvider>
-    </div>
-  );
-}
-```

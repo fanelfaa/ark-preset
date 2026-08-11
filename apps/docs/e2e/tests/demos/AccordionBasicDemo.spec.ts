@@ -16,9 +16,7 @@ test("renders and expands/collapses items correctly", async ({ page }) => {
   await page.waitForTimeout(300);
 
   // Content should be visible
-  await expect(
-    page.locator("[data-scope='accordion']").getByText(/default styles/i)
-  ).toBeVisible();
+  await expect(page.locator("[data-scope='accordion']").getByText(/default styles/i)).toBeVisible();
 
   // Click trigger2 again to collapse
   await trigger2.click();

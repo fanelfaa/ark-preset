@@ -42,15 +42,15 @@ apps/docs/
 
 ## WHERE TO LOOK
 
-| Task                               | Location                      | Notes                                           |
-| ---------------------------------- | ----------------------------- | ----------------------------------------------- |
-| Add component docs page            | src/content/docs/<name>.mdx   | Follow existing MDX layout pattern              |
-| Add component demo                 | src/components/demos/<name>-demo/ | Create island component directory           |
-| Update shared navigation           | src/sidebar-nav.ts            | Add new component to sidebar                    |
-| Modify MDX rendering               | src/mdx-provider.tsx          | Maps markdown elements to @ark-preset/solid         |
-| Modify code block rendering        | src/components/CodeBlock.tsx  | highlight.js, copy button, style injection      |
-| Add/edit build-time content gen    | src/shared/generate-content.ts| Shared with CLI generate-manifest               |
-| Modify Vite configuration          | vite.config.ts                | MDX, Tailwind, TanStack Router, watcher plugin  |
+| Task                            | Location                          | Notes                                          |
+| ------------------------------- | --------------------------------- | ---------------------------------------------- |
+| Add component docs page         | src/content/docs/<name>.mdx       | Follow existing MDX layout pattern             |
+| Add component demo              | src/components/demos/<name>-demo/ | Create island component directory              |
+| Update shared navigation        | src/sidebar-nav.ts                | Add new component to sidebar                   |
+| Modify MDX rendering            | src/mdx-provider.tsx              | Maps markdown elements to @ark-preset/solid    |
+| Modify code block rendering     | src/components/CodeBlock.tsx      | highlight.js, copy button, style injection     |
+| Add/edit build-time content gen | src/shared/generate-content.ts    | Shared with CLI generate-manifest              |
+| Modify Vite configuration       | vite.config.ts                    | MDX, Tailwind, TanStack Router, watcher plugin |
 
 ## CONVENTIONS
 

@@ -112,7 +112,7 @@ describe("ToggleGroupBase", () => {
       </ToggleGroupBase.Root>
     ));
     const selectedBtn = document.body.querySelector(
-      '[data-scope="toggle-group"] button[data-state="on"]'
+      '[data-scope="toggle-group"] button[data-state="on"]',
     );
     expect(selectedBtn).toBeTruthy();
     expect(selectedBtn?.textContent).toBe("A");
@@ -218,7 +218,7 @@ describe("RadioGroup", () => {
       </RadioGroup>
     ));
     const checkedItem = document.body.querySelector(
-      '[data-scope="radio-group"] [data-state="checked"]'
+      '[data-scope="radio-group"] [data-state="checked"]',
     );
     expect(checkedItem).toBeTruthy();
   });
@@ -275,7 +275,7 @@ describe("SegmentGroup", () => {
       </SegmentGroup>
     ));
     const checkedItem = document.body.querySelector(
-      '[data-scope="segment-group"] [data-state="checked"]'
+      '[data-scope="segment-group"] [data-state="checked"]',
     );
     expect(checkedItem).toBeTruthy();
   });

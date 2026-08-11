@@ -6,7 +6,7 @@ test("opens select and picks multiple options", async ({ page }) => {
 
   // The multiple select trigger has aria-multiselectable on its content
   const triggers = page.locator("[data-scope='select'] [data-part='trigger']");
-  const multipleTrigger = triggers.nth(1);
+  const multipleTrigger = triggers.nth(2);
   await expect(multipleTrigger).toBeVisible();
 
   // Open the multiple select dropdown

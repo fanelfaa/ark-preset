@@ -29,7 +29,7 @@ packages/core/src/recipes/ ──                        ──       ↓
 
 | Task                     | Location                         | Notes                                                |
 | ------------------------ | -------------------------------- | ---------------------------------------------------- |
-| Add new CLI command      | src/commands/                    | Create *.ts file implementing the command            |
+| Add new CLI command      | src/commands/                    | Create \*.ts file implementing the command           |
 | Update CLI index         | src/index.ts                     | Export new command                                   |
 | Add new framework        | src/scripts/generate-manifest.ts | Add to FRAMEWORKS, COMPONENTS constants              |
 | Fix dependency detection | src/scripts/generate-manifest.ts | detectDependencies() function                        |

@@ -1,4 +1,6 @@
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import SwitchRootProviderDemo from "@demos/switch-demo/SwitchRootProviderDemo.tsx";
+import SwitchRootProviderDemoCode from "@demos/switch-demo/SwitchRootProviderDemo.tsx?code";
 
 ## Usage
 
@@ -32,27 +34,9 @@ Disabled:
 
 Use `SwitchRootProvider` when you need to access the switch state outside of the switch tree. This pattern uses the `useSwitch` hook from Ark UI to create a shared context that both the switch and external elements can reference.
 
-<SwitchRootProviderDemo />
-
-```tsx
-import { useSwitch } from "@ark-ui/solid/switch";
-import { SwitchRootProvider, SwitchLabel } from "~/components/switch";
-
-export function SwitchWithExternalControl() {
-  const sw = useSwitch({ defaultChecked: true });
-
-  return (
-    <div>
-      {/* Access switch state outside the tree */}
-      <output>Checked: {JSON.stringify(sw().checked)}</output>
-
-      <SwitchRootProvider value={sw}>
-        <SwitchLabel>Enable notifications</SwitchLabel>
-      </SwitchRootProvider>
-    </div>
-  );
-}
-```
+<ComponentPreview code={SwitchRootProviderDemoCode}>
+  <SwitchRootProviderDemo />
+</ComponentPreview>
 
 The key difference:
 

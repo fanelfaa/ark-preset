@@ -1,5 +1,7 @@
 import { InlineCode } from "@ark-preset/solid";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import PasswordInputRootProviderDemo from "@demos/password-input-demo/PasswordInputRootProviderDemo.tsx";
+import PasswordInputRootProviderDemoCode from "@demos/password-input-demo/PasswordInputRootProviderDemo.tsx?code";
 
 ## Usage
 
@@ -31,29 +33,9 @@ With placeholder:
 
 Use <InlineCode>PasswordInputRootProvider</InlineCode> when you need to control the password input state externally.
 
-<PasswordInputRootProviderDemo />
-
-```tsx
-import { usePasswordInput } from "@ark-ui/solid/password-input";
-import { Button } from "~/components/button";
-import { PasswordInputRootProvider } from "~/components/password-input";
-
-export function PasswordInputWithExternalControl() {
-  const passwordInput = usePasswordInput();
-
-  return (
-    <div>
-      <output>Value: {JSON.stringify(passwordInput().value)}</output>
-
-      <Button onClick={() => passwordInput().toggleVisible()}>
-        Toggle
-      </Button>
-
-      <PasswordInputRootProvider value={passwordInput} />
-    </div>
-  );
-}
-```
+<ComponentPreview code={PasswordInputRootProviderDemoCode}>
+  <PasswordInputRootProviderDemo />
+</ComponentPreview>
 
 The key difference:
 

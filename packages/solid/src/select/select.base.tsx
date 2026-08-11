@@ -23,7 +23,12 @@ const RootProvider: Component<SelectRootProviderProps> = (props) => {
 
 const Label: Component<ArkSelect.LabelProps & { error?: boolean }> = (props) => {
   const [local, others] = splitProps(props, ["class", "error"]);
-  return <ArkSelect.Label class={labelVariants({ class: local.class, error: local.error })} {...others} />;
+  return (
+    <ArkSelect.Label
+      class={labelVariants({ class: local.class, error: local.error })}
+      {...others}
+    />
+  );
 };
 
 const Trigger: Component<ArkSelect.TriggerProps> = (props) => {

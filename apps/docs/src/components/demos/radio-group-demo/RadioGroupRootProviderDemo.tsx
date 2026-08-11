@@ -1,5 +1,4 @@
 import { Index, createMemo } from "solid-js";
-import { DemoWrapper } from "../../DemoWrapper";
 import { RadioGroupBase, RadioGroupItem } from "@ark-preset/solid";
 import { useRadioGroup } from "@ark-ui/solid/radio-group";
 const paymentMethods = [
@@ -11,7 +10,7 @@ export default function RadioGroupRootProviderDemo() {
   const radioGroup = useRadioGroup({ defaultValue: "1" });
   const value = createMemo(() => radioGroup().value);
   return (
-    <DemoWrapper class="space-y-4">
+    <div class="space-y-4">
       <output class="block text-sm text-muted-foreground">Value: {JSON.stringify(value())}</output>
       <RadioGroupBase.RootProvider value={radioGroup} orientation="horizontal">
         <RadioGroupBase.Label>Payment Method</RadioGroupBase.Label>
@@ -19,6 +18,6 @@ export default function RadioGroupRootProviderDemo() {
           {(method) => <RadioGroupItem value={method().value}>{method().label} </RadioGroupItem>}
         </Index>
       </RadioGroupBase.RootProvider>
-    </DemoWrapper>
+    </div>
   );
 }

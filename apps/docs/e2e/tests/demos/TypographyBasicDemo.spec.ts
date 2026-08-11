@@ -32,7 +32,13 @@ test("renders all typography variants without errors", async ({ page }) => {
   await expect(page.getByText(/A blockquote/).first()).toBeVisible();
 
   // Verify list items
-  await expect(page.locator(".not-prose").getByText("Unordered list item one").first()).toBeVisible();
-  await expect(page.locator(".not-prose").getByText("Unordered list item two").first()).toBeVisible();
-  await expect(page.locator(".not-prose").getByText("Unordered list item three").first()).toBeVisible();
+  await expect(
+    page.locator(".not-prose").getByText("Unordered list item one").first(),
+  ).toBeVisible();
+  await expect(
+    page.locator(".not-prose").getByText("Unordered list item two").first(),
+  ).toBeVisible();
+  await expect(
+    page.locator(".not-prose").getByText("Unordered list item three").first(),
+  ).toBeVisible();
 });

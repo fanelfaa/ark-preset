@@ -1,5 +1,7 @@
 import { DocsLink } from "../../../components/DocsLink";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import CarouselBasicDemo from "@demos/carousel-demo/CarouselBasicDemo.tsx";
+import CarouselBasicDemoCode from "@demos/carousel-demo/CarouselBasicDemo.tsx?code";
 
 # Carousel
 
@@ -8,48 +10,6 @@ content.
 
 <DocsLink href="https://ark-ui.com/docs/components/carousel" />
 
-<CarouselBasicDemo />
-
-```tsx
-import {
-  Carousel,
-  CarouselControl,
-  CarouselItemGroup,
-  CarouselItem,
-  CarouselPrevTrigger,
-  CarouselNextTrigger,
-  CarouselIndicatorGroup,
-  CarouselIndicator,
-} from "@ark-preset/solid";
-
-const images = [
-  { src: "https://picsum.photos/seed/carousel-1/600/400", alt: "Mountain landscape" },
-  { src: "https://picsum.photos/seed/carousel-2/600/400", alt: "Ocean view" },
-  { src: "https://picsum.photos/seed/carousel-3/600/400", alt: "Forest trail" },
-  { src: "https://picsum.photos/seed/carousel-4/600/400", alt: "Cityscape" },
-  { src: "https://picsum.photos/seed/carousel-5/600/400", alt: "Desert dunes" },
-];
-
-export function CarouselDemo() {
-  return (
-    <Carousel slideCount={images.length}>
-      <CarouselControl>
-        <CarouselPrevTrigger>Prev</CarouselPrevTrigger>
-        <CarouselItemGroup>
-          {images.map((image, index) => (
-            <CarouselItem index={index}>
-              <img src={image.src} alt={image.alt} />
-            </CarouselItem>
-          ))}
-        </CarouselItemGroup>
-        <CarouselNextTrigger>Next</CarouselNextTrigger>
-      </CarouselControl>
-      <CarouselIndicatorGroup>
-        {images.map((_, index) => (
-          <CarouselIndicator index={index} />
-        ))}
-      </CarouselIndicatorGroup>
-    </Carousel>
-  );
-}
-```
+<ComponentPreview code={CarouselBasicDemoCode}>
+  <CarouselBasicDemo />
+</ComponentPreview>

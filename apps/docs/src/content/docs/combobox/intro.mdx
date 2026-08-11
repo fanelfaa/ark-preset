@@ -1,5 +1,7 @@
 import { DocsLink } from "../../../components/DocsLink";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import ComboboxBasicDemo from "@demos/combobox-demo/ComboboxBasicDemo.tsx";
+import ComboboxBasicDemoCode from "@demos/combobox-demo/ComboboxBasicDemo.tsx?code";
 
 # Combobox
 
@@ -7,39 +9,6 @@ An autocomplete input component that allows users to filter and select options f
 
 <DocsLink href="https://ark-ui.com/docs/components/combobox" />
 
-<ComboboxBasicDemo />
-
-```tsx
-import { useFilter } from "@ark-ui/solid";
-import { useListCollection } from "@ark-ui/solid/combobox";
-import { Index } from "solid-js";
-import { Combobox, ComboboxLabel, ComboboxInputTrigger, ComboboxContent, ComboboxItem } from "~/components/combobox";
-
-const filterFn = useFilter({ sensitivity: "base" });
-const { collection, filter } = useListCollection({
-  initialItems: [
-    { label: "React", value: "react" },
-    { label: "Solid.js", value: "solid" },
-    { label: "Vue", value: "vue" },
-    { label: "Svelte", value: "svelte" },
-  ],
-  filter: filterFn().contains,
-});
-
-function ComboboxDemo() {
-  return (
-    <Combobox
-      collection={collection()}
-      onInputValueChange={(details) => filter(details.inputValue)}
-    >
-      <ComboboxLabel>Framework</ComboboxLabel>
-      <ComboboxInputTrigger placeholder="Search frameworks..." />
-      <ComboboxContent>
-        <Index each={collection().items}>
-          {(item) => <ComboboxItem item={item()}>{item().label}</ComboboxItem>}
-        </Index>
-      </ComboboxContent>
-    </Combobox>
-  );
-}
-```
+<ComponentPreview code={ComboboxBasicDemoCode}>
+  <ComboboxBasicDemo />
+</ComponentPreview>

@@ -33,11 +33,19 @@ test.describe("Theme toggle", () => {
 
     // Click to toggle
     await toggle.click();
-    expect(await html.evaluate((el) => el.classList.contains("dark"))).toBe(!initialDark);
+    if (initialDark) {
+      await expect(html).not.toHaveClass(/dark/);
+    } else {
+      await expect(html).toHaveClass(/dark/);
+    }
 
     // Click again to revert
     await toggle.click();
-    expect(await html.evaluate((el) => el.classList.contains("dark"))).toBe(initialDark);
+    if (initialDark) {
+      await expect(html).toHaveClass(/dark/);
+    } else {
+      await expect(html).not.toHaveClass(/dark/);
+    }
   });
 
   test("theme persists after page reload", async ({ page }) => {
@@ -47,16 +55,23 @@ test.describe("Theme toggle", () => {
     const html = page.locator("html");
 
     // Toggle away from initial
+    const initialDark = await html.evaluate((el) => el.classList.contains("dark"));
     await toggle.click();
-    await page.waitForTimeout(100);
-    const afterToggle = await html.evaluate((el) => el.classList.contains("dark"));
+    if (initialDark) {
+      await expect(html).not.toHaveClass(/dark/);
+    } else {
+      await expect(html).toHaveClass(/dark/);
+    }
 
     // Reload
     await page.reload();
     await page.waitForLoadState("networkidle");
 
     // Theme should still match
-    const afterReload = await html.evaluate((el) => el.classList.contains("dark"));
-    expect(afterReload).toBe(afterToggle);
+    if (initialDark) {
+      await expect(html).not.toHaveClass(/dark/);
+    } else {
+      await expect(html).toHaveClass(/dark/);
+    }
   });
 });

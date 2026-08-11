@@ -1,5 +1,7 @@
 import { DocsLink } from "../../../components/DocsLink";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import DrawerBasicDemo from "@demos/drawer-demo/DrawerBasicDemo.tsx";
+import DrawerBasicDemoCode from "@demos/drawer-demo/DrawerBasicDemo.tsx?code";
 
 # Drawer
 
@@ -7,38 +9,6 @@ A drawer panel that slides in from the left edge of the screen, used for navigat
 
 <DocsLink href="https://ark-ui.com/docs/components/drawer" />
 
-<DrawerBasicDemo />
-
-```tsx
-import {
-  Drawer,
-  DrawerTrigger,
-  DrawerContent,
-  DrawerTitle,
-  DrawerDescription,
-  DrawerGrabber,
-} from "~/components/drawer";
-import { Input, Separator } from "~/components/button";
-
-export function DrawerDemo() {
-  return (
-    <Drawer>
-      <DrawerTrigger>Edit Profile</DrawerTrigger>
-      <DrawerContent>
-        <DrawerGrabber />
-        <div class="flex flex-col gap-1 px-4 pt-2 pb-4">
-          <DrawerTitle>Edit Profile</DrawerTitle>
-          <DrawerDescription>
-            Make changes to your profile here. You can save your changes when done.
-          </DrawerDescription>
-        </div>
-        <Separator />
-        <div class="flex flex-col gap-4 p-4">
-          <Input label="Name" placeholder="Your name" />
-          <Input label="Email" type="email" placeholder="your@email.com" />
-        </div>
-      </DrawerContent>
-    </Drawer>
-  );
-}
-```
+<ComponentPreview code={DrawerBasicDemoCode}>
+  <DrawerBasicDemo />
+</ComponentPreview>

@@ -247,9 +247,7 @@ Use this after ark_preset_list_components to inspect a component before generati
         };
       }
 
-      const recipeContent = component.recipePath
-        ? readFileSafe(component.recipePath)
-        : null;
+      const recipeContent = component.recipePath ? readFileSafe(component.recipePath) : null;
 
       const sections: string[] = [
         `# ${component.name}`,
@@ -384,9 +382,7 @@ Returns the full TypeScript source of the tv() styling recipe, including all var
 
 This is useful for understanding the available style options, slot names, and variant values for a component.`,
       inputSchema: {
-        component: z
-          .string()
-          .describe("Component name (kebab-case, e.g., 'button', 'dialog')"),
+        component: z.string().describe("Component name (kebab-case, e.g., 'button', 'dialog')"),
       },
     },
     async (args) => {
@@ -429,9 +425,7 @@ Copies the component's Solid.js wrapper, recipe styling, and all dependency file
 
 The files are generated with import paths rewritten from \`@ark-preset/core\` to relative imports pointing at a local \`recipes/\` directory, making them self-contained in your project.`,
       inputSchema: {
-        component: z
-          .string()
-          .describe("Component name to generate (kebab-case)"),
+        component: z.string().describe("Component name to generate (kebab-case)"),
         output: z
           .string()
           .optional()
@@ -537,6 +531,7 @@ The files are generated with import paths rewritten from \`@ark-preset/core\` to
       const compTargetDir = path.resolve(outputDir);
       const recipeTargetDir = path.join(path.dirname(compTargetDir), "recipes");
 
+      // oxlint-disable-next-line unicorn/no-useless-spread
       for (const file of [...new Set(allFiles)]) {
         const templatePath = path.join(TEMPLATES_DIR, file);
         const relativeToFramework = file.split("/").slice(1).join("/");
@@ -550,15 +545,9 @@ The files are generated with import paths rewritten from \`@ark-preset/core\` to
         try {
           await fs.ensureDir(path.dirname(targetPath));
           let content = fs.readFileSync(templatePath, "utf-8");
-          const relPath = path.relative(
-            path.dirname(targetPath),
-            recipeTargetDir,
-          );
+          const relPath = path.relative(path.dirname(targetPath), recipeTargetDir);
           const importPath = relPath.startsWith(".") ? relPath : `./${relPath}`;
-          content = content.replace(
-            /from\s+['"]@ark-preset\/core['"]/g,
-            `from '${importPath}'`,
-          );
+          content = content.replace(/from\s+['"]@ark-preset\/core['"]/g, `from '${importPath}'`);
           fs.writeFileSync(targetPath, content, "utf-8");
           writtenFiles.push(targetPath);
         } catch (err) {
@@ -566,6 +555,7 @@ The files are generated with import paths rewritten from \`@ark-preset/core\` to
         }
       }
 
+      // oxlint-disable-next-line unicorn/no-useless-spread
       for (const recipe of [...new Set(allRecipes)]) {
         const templatePath = path.join(RECIPES_DIR, recipe);
         const targetPath = path.join(recipeTargetDir, recipe);
@@ -664,8 +654,7 @@ Useful for understanding which components need to be generated together and what
           .filter(
             ([name, e]) =>
               name !== focus &&
-              (e.recipeDependencies.includes(focus) ||
-                e.componentDependencies.includes(focus)),
+              (e.recipeDependencies.includes(focus) || e.componentDependencies.includes(focus)),
           )
           .map(([name]) => `  \`${name}\` → \`${focus}\``);
 
@@ -749,33 +738,26 @@ Returns the complete component-manifest.json as structured data, showing every c
       }
 
       const components = Object.keys(manifest.solid);
-      const totalFiles = components.reduce(
-        (acc, c) => acc + manifest.solid[c].files.length,
-        0,
-      );
-      const totalRecipes = components.reduce(
-        (acc, c) => acc + manifest.solid[c].recipes.length,
-        0,
-      );
+      const totalFiles = components.reduce((acc, c) => acc + manifest.solid[c].files.length, 0);
+      const totalRecipes = components.reduce((acc, c) => acc + manifest.solid[c].recipes.length, 0);
 
       return {
         content: [
           {
             type: "text",
-            text:
-              [
-                `# Manifest Summary`,
-                `**Version:** ${manifest.version}`,
-                `**Components:** ${components.length}`,
-                `**Template files:** ${totalFiles}`,
-                `**Recipes:** ${totalRecipes}`,
-                ``,
-                `**Components:**`,
-                ...components.map((c) => {
-                  const e = manifest.solid[c];
-                  return `- \`${c}\` (${e.files.length} files, ${e.recipes.length} recipes)`;
-                }),
-              ].join("\n"),
+            text: [
+              `# Manifest Summary`,
+              `**Version:** ${manifest.version}`,
+              `**Components:** ${components.length}`,
+              `**Template files:** ${totalFiles}`,
+              `**Recipes:** ${totalRecipes}`,
+              ``,
+              `**Components:**`,
+              ...components.map((c) => {
+                const e = manifest.solid[c];
+                return `- \`${c}\` (${e.files.length} files, ${e.recipes.length} recipes)`;
+              }),
+            ].join("\n"),
           },
         ],
       };

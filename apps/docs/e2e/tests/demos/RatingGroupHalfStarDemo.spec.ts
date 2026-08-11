@@ -9,7 +9,7 @@ test("verifies half-star rating renders with correct initial value", async ({ pa
   await expect(halfStarLabel.first()).toBeVisible();
 
   // Find the rating group in this demo area
-  const demoArea = page.locator(".rounded-lg:has-text('Half stars allowed')").first();
+  const demoArea = page.locator(".rounded-2xl:has-text('Half stars allowed')").first();
   const ratingGroup = demoArea.locator("[data-scope='rating-group']").first();
   await expect(ratingGroup).toBeVisible();
 
@@ -24,6 +24,6 @@ test("verifies half-star rating renders with correct initial value", async ({ pa
   await expect(thirdStar).toHaveAttribute("data-half", "");
 
   // Verify label "Rate this" is visible
-  const rateLabel = demoArea.getByText("Rate this");
+  const rateLabel = demoArea.getByText("Rate this", { exact: true });
   await expect(rateLabel).toBeVisible();
 });

@@ -17,9 +17,7 @@ test.describe("Navigation", () => {
     // Click brand link
     await page.getByRole("link", { name: "UI", exact: true }).click();
     await page.waitForURL("/");
-    await expect(
-      page.getByRole("heading", { name: "UI Component Library" })
-    ).toBeVisible();
+    await expect(page.getByRole("heading", { name: "UI Component Library" })).toBeVisible();
   });
 
   test("sidebar links navigate to correct component pages", async ({ page }) => {
@@ -67,9 +65,7 @@ test.describe("Navigation", () => {
     await page.goto("/docs/components/nonexistent-component");
     await page.waitForLoadState("networkidle");
     await expect(page.locator(".text-destructive")).toBeVisible();
-    await expect(page.locator(".text-destructive")).toContainText(
-      /not found/i
-    );
+    await expect(page.locator(".text-destructive")).toContainText(/not found/i);
   });
 
   test("quickstart page renders", async ({ page }) => {

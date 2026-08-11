@@ -42,6 +42,9 @@ const LANG_MAP: Record<string, string> = {
 };
 
 const MAX_HEIGHT = 200;
+// Reserved space (px) at the bottom of the expanded wrapper for the toggle
+// button, so it never overlays the code.
+const BUTTON_STRIP = 52;
 
 /** Strip common leading whitespace from each line. */
 function dedent(s: string): string {
@@ -67,6 +70,9 @@ export default function CodeBlock(props: CodeBlockProps) {
   const [copied, setCopied] = createSignal(false);
   const [expanded, setExpanded] = createSignal(false);
   const [overflowing, setOverflowing] = createSignal(false);
+  // Full height (px) the code animates to when expanded — measured from the DOM.
+  // An explicit px value (not `auto`) is required for a smooth height transition.
+  const [expandedHeight, setExpandedHeight] = createSignal(MAX_HEIGHT);
   // oxlint-disable-next-line no-unassigned-vars
   let preRef: HTMLPreElement | undefined;
   // oxlint-disable-next-line no-unassigned-vars
@@ -84,7 +90,15 @@ export default function CodeBlock(props: CodeBlockProps) {
   const checkOverflow = () => {
     if (preRef && preRef.scrollHeight > MAX_HEIGHT) {
       setOverflowing(true);
+      // Keep the expanded target in sync so content changes never clip
+      setExpandedHeight(preRef.scrollHeight + 2);
     }
+  };
+
+  const toggleExpanded = () => {
+    const next = !expanded();
+    if (next && preRef) setExpandedHeight(preRef.scrollHeight + 2);
+    setExpanded(next);
   };
 
   // Track previous content to avoid redundant re-highlighting
@@ -129,41 +143,59 @@ export default function CodeBlock(props: CodeBlockProps) {
   });
 
   return (
-    <div class="relative isolate">
-      <pre
-        ref={preRef}
-        class={`whitespace-pre-wrap ${local.class ? ` ${local.class}` : ""}`}
-        classList={{
-          "cursor-pointer": overflowing() && !expanded(),
-          "overflow-hidden": overflowing() && !expanded(),
-        }}
+    <div class="relative isolate rounded-2xl overflow-hidden">
+      {/* Animated wrapper — owns the height transition + clipping. The pre inside
+          stays at its natural full height, so the code never re-layouts during the
+          animation; only this wrapper's box animates (cheap and smooth).
+          When expanded, extra space (BUTTON_STRIP) is reserved at the bottom so
+          the toggle button sits below the code instead of overlaying it. */}
+      <div
+        classList={{ "overflow-hidden": overflowing() && !expanded() }}
         style={{
-          ...(local.style as any),
-          ...(overflowing() && !expanded()
-            ? { "max-height": `${MAX_HEIGHT}px`, "overflow-y": "hidden" }
+          ...(overflowing()
+            ? {
+                height: expanded() ? `${expandedHeight() + BUTTON_STRIP}px` : `${MAX_HEIGHT}px`,
+                "overflow-y": "hidden",
+                // Match the code panel background so the reserved strip blends in
+                background: "var(--tw-prose-pre-bg)",
+              }
             : {}),
-          "word-break": "break-word",
-          transition: "max-height 0.3s ease",
+          transition: "height 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
         }}
-        {...rest}
       >
-        <code ref={codeRef}>{code()}</code>
-      </pre>
+        <pre
+          ref={preRef}
+          class={`whitespace-pre-wrap my-0! ${local.class ? ` ${local.class}` : ""}`}
+          classList={{
+            "cursor-pointer": overflowing() && !expanded(),
+          }}
+          style={{
+            ...(local.style as any),
+            "word-break": "break-word",
+          }}
+          {...rest}
+        >
+          <code ref={codeRef}>{code()}</code>
+        </pre>
+      </div>
       <Show when={overflowing()}>
         <Show when={!expanded()}>
-          <div class="pointer-events-none absolute bottom-0 left-0 right-0 h-20 bg-linear-to-t from-black/80 dark:from-black/40 to-transparent" />
+          {/* Frosted footer strip — translucent bg + backdrop blur over the
+              clipped code. Replaces the old gradient fade (Firefox banded it)
+              and the solid fill, giving the collapsed panel a glassy end. */}
+          <div class="pointer-events-none absolute bottom-0 left-0 right-0 h-14 bg-background/10 backdrop-blur-[2px]" />
         </Show>
         <Button
           variant="outline"
           class="absolute bottom-3 left-1/2 -translate-x-1/2 z-10"
-          onClick={() => setExpanded(!expanded())}
+          onClick={toggleExpanded}
           aria-label={expanded() ? "Collapse code" : "Expand code"}
         >
           {expanded() ? "Show less" : "Show more"}
         </Button>
       </Show>
       <button
-        class="absolute top-3 right-3 rounded-md p-1.5 text-muted-foreground hover:text-foreground hover:bg-muted-foreground/10 dark:hover:text-foreground transition-colors"
+        class="absolute top-3 right-3 rounded-md p-1.5 text-muted-foreground hover:text-foreground hover:bg-background/30 transition-colors"
         onClick={() => {
           const resolved = code();
           navigator.clipboard.writeText(resolved);

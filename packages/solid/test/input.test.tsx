@@ -24,9 +24,7 @@ describe("Input", () => {
   });
 
   it("does not render description when error is present", () => {
-    const { queryByText } = render(() => (
-      <Input description="Helper text" error="Error text" />
-    ));
+    const { queryByText } = render(() => <Input description="Helper text" error="Error text" />);
     expect(queryByText("Helper text")).not.toBeInTheDocument();
     expect(queryByText("Error text")).toBeInTheDocument();
   });

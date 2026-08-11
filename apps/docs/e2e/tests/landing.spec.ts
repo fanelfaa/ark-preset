@@ -13,25 +13,15 @@ test.describe("Landing page", () => {
     await expect(page.getByRole("link", { name: "Components", exact: true }).first()).toBeVisible();
 
     // Hero heading
-    await expect(
-      page.getByRole("heading", { name: "UI Component Library" })
-    ).toBeVisible();
+    await expect(page.getByRole("heading", { name: "UI Component Library" })).toBeVisible();
 
     // "Browse Components" CTA button
-    await expect(
-      page.getByRole("link", { name: "Browse Components" })
-    ).toBeVisible();
+    await expect(page.getByRole("link", { name: "Browse Components" })).toBeVisible();
 
     // Component category sections
-    await expect(
-      page.getByRole("heading", { name: "Quick Start" })
-    ).toBeVisible();
-    await expect(
-      page.getByRole("heading", { name: "Components", exact: true })
-    ).toBeVisible();
-    await expect(
-      page.getByRole("heading", { name: "Popular Components" })
-    ).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Quick Start" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Components", exact: true })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Popular Components" })).toBeVisible();
   });
 
   test("does not have console errors", async ({ page }) => {

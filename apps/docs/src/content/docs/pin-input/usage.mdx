@@ -1,5 +1,7 @@
 import { InlineCode } from "@ark-preset/solid";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import PinInputRootProviderDemo from "@demos/pin-input-demo/PinInputRootProviderDemo.tsx";
+import PinInputRootProviderDemoCode from "@demos/pin-input-demo/PinInputRootProviderDemo.tsx?code";
 
 ## Usage
 
@@ -36,35 +38,9 @@ Masked (for sensitive codes):
 
 Use <InlineCode>PinInputRootProvider</InlineCode> when you need to control the pin input state externally.
 
-<PinInputRootProviderDemo />
-
-```tsx
-import { usePinInput } from "@ark-ui/solid/pin-input";
-import {
-  PinInputRootProvider,
-  PinInputControl,
-  PinInputInput,
-  PinInputLabel,
-} from "~/components/pin-input";
-import { Index } from "solid-js";
-
-export function PinInputWithExternalControl() {
-  const pinInput = usePinInput();
-
-  return (
-    <div>
-      <output>Value: {JSON.stringify(pinInput().value)}</output>
-
-      <PinInputRootProvider value={pinInput}>
-        <PinInputLabel>Code</PinInputLabel>
-        <PinInputControl>
-          <Index each={[0, 1, 2, 3]}>{(id) => <PinInputInput index={id()} />}</Index>
-        </PinInputControl>
-      </PinInputRootProvider>
-    </div>
-  );
-}
-```
+<ComponentPreview code={PinInputRootProviderDemoCode}>
+  <PinInputRootProviderDemo />
+</ComponentPreview>
 
 The key difference:
 

@@ -1,7 +1,11 @@
 import { InlineCode } from "@ark-preset/solid";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import SelectRootProviderDemo from "@demos/select-demo/SelectRootProviderDemo.tsx";
+import SelectRootProviderDemoCode from "@demos/select-demo/SelectRootProviderDemo.tsx?code";
 import SelectMultipleDemo from "@demos/select-demo/SelectMultipleDemo.tsx";
+import SelectMultipleDemoCode from "@demos/select-demo/SelectMultipleDemo.tsx?code";
 import SelectSearchableDemo from "@demos/select-demo/SelectSearchableDemo.tsx";
+import SelectSearchableDemoCode from "@demos/select-demo/SelectSearchableDemo.tsx?code";
 
 ## Usage
 
@@ -60,43 +64,9 @@ Add a label to describe the select field.
 
 Use <InlineCode>SelectRootProvider</InlineCode> when you need to access the select state outside of the component tree. This pattern uses the <InlineCode>useSelect</InlineCode> hook from Ark UI to create a shared context that both the select and external elements can reference.
 
-<SelectRootProviderDemo />
-
-```tsx
-import { useSelect, createListCollection } from "@ark-ui/solid/select";
-import { Index } from "solid-js";
-import { SelectRootProvider, SelectLabel, SelectTrigger, SelectContent, SelectItem } from "~/components/select";
-
-const frameworks = createListCollection({
-  items: [
-    { label: "React", value: "react" },
-    { label: "Solid.js", value: "solid" },
-    { label: "Vue", value: "vue" },
-    { label: "Svelte", value: "svelte" },
-  ],
-});
-
-export function SelectWithExternalControl() {
-  const select = useSelect({ collection: frameworks, defaultValue: ["solid"] });
-
-  return (
-    <div>
-      {/* Access select state outside the tree */}
-      <output>Value: {JSON.stringify(select().value)}</output>
-
-      <SelectRootProvider value={select}>
-        <SelectLabel>Framework</SelectLabel>
-        <SelectTrigger placeholder="Select a framework" />
-        <SelectContent>
-          <Index each={frameworks.items}>
-            {(item) => <SelectItem item={item()}>{item().label}</SelectItem>}
-          </Index>
-        </SelectContent>
-      </SelectRootProvider>
-    </div>
-  );
-}
-```
+<ComponentPreview code={SelectRootProviderDemoCode}>
+  <SelectRootProviderDemo />
+</ComponentPreview>
 
 The key difference:
 
@@ -107,89 +77,17 @@ The key difference:
 
 Use the <InlineCode>multiple</InlineCode> prop to allow selecting multiple options. The <InlineCode>SelectTrigger</InlineCode> composite includes a clear button to deselect all selections.
 
-<SelectMultipleDemo />
-
-```tsx
-import { createListCollection } from "@ark-ui/solid";
-import { Index } from "solid-js";
-import {
-  Select,
-  SelectLabel,
-  SelectTrigger,
-  SelectContent,
-  SelectItem,
-} from "~/components/select";
-
-const frameworks = createListCollection({
-  items: [
-    { label: "React", value: "react" },
-    { label: "Solid.js", value: "solid" },
-    { label: "Vue", value: "vue" },
-    { label: "Svelte", value: "svelte" },
-  ],
-});
-
-export function SelectMultipleDemo() {
-  return (
-    <Select collection={frameworks} multiple>
-      <SelectLabel>Framework</SelectLabel>
-      <SelectTrigger placeholder="Select frameworks" />
-      <SelectContent>
-        <Index each={frameworks.items}>
-          {(item) => <SelectItem item={item()}>{item().label}</SelectItem>}
-        </Index>
-      </SelectContent>
-    </Select>
-  );
-}
-```
+<ComponentPreview code={SelectMultipleDemoCode}>
+  <SelectMultipleDemo />
+</ComponentPreview>
 
 ### Searchable Selection
 
 Use the <InlineCode>searchable</InlineCode> prop to enable a search input inside the dropdown. Pass <InlineCode>onSearch</InlineCode> to filter the collection as the user types.
 
-<SelectSearchableDemo />
-
-```tsx
-import { useFilter, useListCollection } from "@ark-ui/solid";
-import { Index } from "solid-js";
-import {
-  Select,
-  SelectLabel,
-  SelectTrigger,
-  SelectContent,
-  SelectItem,
-} from "~/components/select";
-
-const filterFn = useFilter({ sensitivity: "base" });
-const { collection, filter } = useListCollection({
-  initialItems: [
-    { label: "React", value: "react" },
-    { label: "Solid.js", value: "solid" },
-    { label: "Vue", value: "vue" },
-    { label: "Svelte", value: "svelte" },
-  ],
-  filter: filterFn().contains,
-});
-
-export function SelectSearchableDemo() {
-  return (
-    <Select
-      collection={collection()}
-      searchable
-      onSearch={(value) => filter(value)}
-    >
-      <SelectLabel>Framework</SelectLabel>
-      <SelectTrigger placeholder="Select a framework" />
-      <SelectContent>
-        <Index each={collection().items}>
-          {(item) => <SelectItem item={item()}>{item().label}</SelectItem>}
-        </Index>
-      </SelectContent>
-    </Select>
-  );
-}
-```
+<ComponentPreview code={SelectSearchableDemoCode}>
+  <SelectSearchableDemo />
+</ComponentPreview>
 
 The <InlineCode>searchable</InlineCode> prop works with both single and <InlineCode>multiple</InlineCode> selection modes.
 

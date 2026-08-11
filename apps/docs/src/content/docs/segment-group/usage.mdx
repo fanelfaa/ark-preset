@@ -1,8 +1,13 @@
 import { InlineCode } from "@ark-preset/solid";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import SegmentGroupControlledDemo from "@demos/segment-group-demo/SegmentGroupControlledDemo.tsx";
+import SegmentGroupControlledDemoCode from "@demos/segment-group-demo/SegmentGroupControlledDemo.tsx?code";
 import SegmentGroupDisabledDemo from "@demos/segment-group-demo/SegmentGroupDisabledDemo.tsx";
+import SegmentGroupDisabledDemoCode from "@demos/segment-group-demo/SegmentGroupDisabledDemo.tsx?code";
 import SegmentGroupOutlineDemo from "@demos/segment-group-demo/SegmentGroupOutlineDemo.tsx";
+import SegmentGroupOutlineDemoCode from "@demos/segment-group-demo/SegmentGroupOutlineDemo.tsx?code";
 import SegmentGroupRootProviderDemo from "@demos/segment-group-demo/SegmentGroupRootProviderDemo.tsx";
+import SegmentGroupRootProviderDemoCode from "@demos/segment-group-demo/SegmentGroupRootProviderDemo.tsx?code";
 
 ## Usage
 
@@ -49,101 +54,30 @@ import { SegmentGroupBase } from "~/components/segment-group";
 
 Use <InlineCode>value</InlineCode> and <InlineCode>onValueChange</InlineCode> to control the selection state externally:
 
-<SegmentGroupControlledDemo />
-
-```tsx
-import { Index, createSignal } from "solid-js";
-import { SegmentGroupBase } from "~/components/segment-group";
-
-const frameworks = ["React", "Solid", "Vue"];
-
-export function ControlledDemo() {
-  const [value, setValue] = createSignal("Solid");
-  return (
-    <div>
-      <p class="text-sm text-muted-foreground mb-2">Selected: {value()}</p>
-      <SegmentGroupBase.Root value={value()} onValueChange={(e) => setValue(e.value)}>
-        <SegmentGroupBase.Indicator />
-        <Index each={frameworks}>
-          {(framework) => (
-            <SegmentGroupBase.Item value={framework()}>
-              <SegmentGroupBase.ItemText>{framework()}</SegmentGroupBase.ItemText>
-              <SegmentGroupBase.ItemControl />
-              <SegmentGroupBase.ItemHiddenInput />
-            </SegmentGroupBase.Item>
-          )}
-        </Index>
-      </SegmentGroupBase.Root>
-    </div>
-  );
-}
-```
+<ComponentPreview code={SegmentGroupControlledDemoCode}>
+  <SegmentGroupControlledDemo />
+</ComponentPreview>
 
 ### Disabled Item
 
 Individual items can be disabled using the <InlineCode>disabled</InlineCode> prop:
 
-<SegmentGroupDisabledDemo />
-
-```tsx
-import { SegmentGroup } from "~/components/segment-group/segment-group.base";
-
-export function DisabledDemo() {
-  return (
-    <SegmentGroup.Root defaultValue="React">
-      <SegmentGroup.Indicator />
-      <SegmentGroup.Item value="React">React</SegmentGroup.Item>
-      <SegmentGroup.Item value="Solid">Solid</SegmentGroup.Item>
-      <SegmentGroup.Item value="Vue" disabled>Vue</SegmentGroup.Item>
-    </SegmentGroup.Root>
-  );
-}
-```
+<ComponentPreview code={SegmentGroupDisabledDemoCode}>
+  <SegmentGroupDisabledDemo />
+</ComponentPreview>
 
 ### Outline Variant
 
 Use <InlineCode>{`variant="outline"`}</InlineCode> for a bordered style:
 
-<SegmentGroupOutlineDemo />
-
-```tsx
-import { SegmentGroup } from "~/components/segment-group/segment-group.base";
-
-export function OutlineDemo() {
-  return (
-    <SegmentGroup.Root defaultValue="React" variant="outline">
-      <SegmentGroup.Indicator />
-      <SegmentGroup.Item value="React">React</SegmentGroup.Item>
-      <SegmentGroup.Item value="Solid">Solid</SegmentGroup.Item>
-      <SegmentGroup.Item value="Vue">Vue</SegmentGroup.Item>
-    </SegmentGroup.Root>
-  );
-}
-```
+<ComponentPreview code={SegmentGroupOutlineDemoCode}>
+  <SegmentGroupOutlineDemo />
+</ComponentPreview>
 
 ### RootProvider Pattern
 
 For full control over the segment group machine, use <InlineCode>useSegmentGroup</InlineCode> with <InlineCode>SegmentGroup.RootProvider</InlineCode>. This allows reading the internal state (e.g., selected value) outside the root:
 
-<SegmentGroupRootProviderDemo />
-
-```tsx
-import { SegmentGroup } from "~/components/segment-group/segment-group.base";
-import { useSegmentGroup } from "@ark-ui/solid/segment-group";
-
-export function RootProviderDemo() {
-  const segmentGroup = useSegmentGroup({ defaultValue: "React" });
-
-  return (
-    <div class="space-y-2">
-      <p class="text-sm text-muted-foreground">Selected: {segmentGroup().value}</p>
-      <SegmentGroup.RootProvider value={segmentGroup}>
-        <SegmentGroup.Indicator />
-        <SegmentGroup.Item value="React">React</SegmentGroup.Item>
-        <SegmentGroup.Item value="Solid">Solid</SegmentGroup.Item>
-        <SegmentGroup.Item value="Vue">Vue</SegmentGroup.Item>
-      </SegmentGroup.RootProvider>
-    </div>
-  );
-}
-```
+<ComponentPreview code={SegmentGroupRootProviderDemoCode}>
+  <SegmentGroupRootProviderDemo />
+</ComponentPreview>

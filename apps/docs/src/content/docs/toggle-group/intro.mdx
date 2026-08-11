@@ -1,5 +1,7 @@
 import { DocsLink } from "../../../components/DocsLink";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import ToggleGroupBasicDemo from "@demos/toggle-group-demo/ToggleGroupBasicDemo.tsx";
+import ToggleGroupBasicDemoCode from "@demos/toggle-group-demo/ToggleGroupBasicDemo.tsx?code";
 
 # Toggle Group
 
@@ -7,40 +9,6 @@ A group of toggle buttons that allows single or multiple selection from a set of
 
 <DocsLink href="https://ark-ui.com/docs/components/toggle-group" />
 
-<ToggleGroupBasicDemo />
-
-```tsx
-import { ToggleGroup, ToggleGroupItem } from "~/components/toggle-group";
-
-export function ToggleGroupDemo() {
-  return (
-    <div class="flex flex-col gap-6">
-      {/* Single selection */}
-      <ToggleGroup defaultValue={["left"]}>
-        <ToggleGroupItem value="left">
-          <AlignLeftIcon />
-        </ToggleGroupItem>
-        <ToggleGroupItem value="center">
-          <AlignCenterIcon />
-        </ToggleGroupItem>
-        <ToggleGroupItem value="right">
-          <AlignRightIcon />
-        </ToggleGroupItem>
-      </ToggleGroup>
-
-      {/* Multiple selection */}
-      <ToggleGroup defaultValue={["bold"]} multiple>
-        <ToggleGroupItem value="bold">
-          <BoldIcon />
-        </ToggleGroupItem>
-        <ToggleGroupItem value="italic">
-          <ItalicIcon />
-        </ToggleGroupItem>
-        <ToggleGroupItem value="underline">
-          <UnderlineIcon />
-        </ToggleGroupItem>
-      </ToggleGroup>
-    </div>
-  );
-}
-```
+<ComponentPreview code={ToggleGroupBasicDemoCode}>
+  <ToggleGroupBasicDemo />
+</ComponentPreview>

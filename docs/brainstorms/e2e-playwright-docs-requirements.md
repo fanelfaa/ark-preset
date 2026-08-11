@@ -12,6 +12,7 @@ The `apps/docs` site (~45 component documentation pages + interactive demos) has
 ## Requirements
 
 **Scope**
+
 - R1. Playwright functional smoke tests (no visual regression) for `apps/docs`
 - R2. Run locally via CLI command; no CI integration in v1
 - R3. All ~45 component documentation pages must load without JS errors or 404s
@@ -22,6 +23,7 @@ The `apps/docs` site (~45 component documentation pages + interactive demos) has
 - R8. Key interactive demos (e.g., button variants, accordion expand/collapse) can be interacted with (click, toggle) without errors
 
 **Infrastructure**
+
 - R9. Playwright installed as `devDependencies` under `apps/docs/package.json`
 - R10. Playwright config lives at `apps/docs/e2e/playwright.config.ts`
 - R11. Test specs live under `apps/docs/e2e/tests/`

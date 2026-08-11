@@ -6,12 +6,12 @@ Applies when creating or editing documentation for UI components under `apps/doc
 
 ## Source of Truth
 
-| Artifact                          | Source Path                                              |
-| --------------------------------- | -------------------------------------------------------- |
-| Recipe (styling primitives)       | `packages/core/src/recipes/<component>.ts`               |
-| Component (Solid.js wrapper)      | `packages/solid/src/<component>/` (directory per comp)   |
-| Demo wrapper (interactive)        | `apps/docs/src/components/demos/<component>-demo/`       |
-| Documentation (section files)     | `apps/docs/src/content/docs/<component>/` (dir per comp) |
+| Artifact                      | Source Path                                              |
+| ----------------------------- | -------------------------------------------------------- |
+| Recipe (styling primitives)   | `packages/core/src/recipes/<component>.ts`               |
+| Component (Solid.js wrapper)  | `packages/solid/src/<component>/` (directory per comp)   |
+| Demo wrapper (interactive)    | `apps/docs/src/components/demos/<component>-demo/`       |
+| Documentation (section files) | `apps/docs/src/content/docs/<component>/` (dir per comp) |
 
 ## Docs Site Architecture
 
@@ -84,6 +84,7 @@ pnpm generate-installation <name>
 Creates `installation.gen.mdx` from `packages/core/src/recipes/<name>.ts` + `packages/solid/src/<name>/` files.
 
 > `installation.gen.mdx` is **auto-generated from source** and **stays in sync automatically**:
+>
 > - **Vite dev** — `installation-watcher` plugin watches `packages/core/src/recipes/` (`.ts`) and `packages/solid/src/` (`.tsx`) via `fs.watch`; any source edit triggers regeneration of the affected component's `installation.gen.mdx` in real time
 > - **Vite build** — `installation-watcher` plugin's `buildStart` hook regenerates ALL `installation.gen.mdx` files from current source, guaranteeing the production bundle is never stale
 > - **Manual** — `pnpm generate-installation <name>` regenerates a single component's file on demand
@@ -93,6 +94,7 @@ Creates `installation.gen.mdx` from `packages/core/src/recipes/<name>.ts` + `pac
 ### Step 4: Create optional demo files
 
 If the component benefits from extracted demo components:
+
 ```
 src/components/demos/<name>-demo/<Name>BasicDemo.tsx
 src/components/demos/<name>-demo/<Name>SecondaryDemo.tsx
@@ -105,31 +107,32 @@ Add the component to `src/sidebar-nav.ts` in the appropriate category.
 ### Step 6: Add to watcher (optional)
 
 Add component name to the `POC` set in:
+
 - `scripts/generate-installation.ts`
 - `src/plugins/installation-watcher.ts`
 
 ## Import Domains
 
-| Context            | Import Path                  | Example                                                   |
-| ------------------ | ---------------------------- | --------------------------------------------------------- |
-| **Demo files**     | `@ark-preset/solid`              | `import { Button } from "@ark-preset/solid"`                  |
-| **MDX top-level**  | `../../../components/X`      | `import { DocsLink } from "../../../components/DocsLink"` |
-| **MDX demo import**| `@demos/<name>-demo/X`       | `import Demo from "@demos/accordion-demo/AccordionDemo"`  |
-| **Code blocks**    | `@ark-preset/solid` or `~/components/<name>` | Both used in docs, see below              |
+| Context             | Import Path                                  | Example                                                   |
+| ------------------- | -------------------------------------------- | --------------------------------------------------------- |
+| **Demo files**      | `@ark-preset/solid`                          | `import { Button } from "@ark-preset/solid"`              |
+| **MDX top-level**   | `../../../components/X`                      | `import { DocsLink } from "../../../components/DocsLink"` |
+| **MDX demo import** | `@demos/<name>-demo/X`                       | `import Demo from "@demos/accordion-demo/AccordionDemo"`  |
+| **Code blocks**     | `@ark-preset/solid` or `~/components/<name>` | Both used in docs, see below                              |
 
 ### Code block import convention
 
-| Context                                    | Import Path                |
-| ------------------------------------------ | -------------------------- |
-| Usage code block (recommended reader path) | `@ark-preset/solid`            |
-| Advanced/RootProvider examples             | `~/components/<name>`      |
+| Context                                    | Import Path                                            |
+| ------------------------------------------ | ------------------------------------------------------ |
+| Usage code block (recommended reader path) | `@ark-preset/solid`                                    |
+| Advanced/RootProvider examples             | `~/components/<name>`                                  |
 | Manual install code blocks (auto-gen)      | `@ark-preset/core` + `@ark-ui/solid` (source verbatim) |
 
 ## MDX Section Details
 
 ### `intro.mdx` — Title, Demo, Basic Usage
 
-```mdx
+````mdx
 import { DocsLink } from "../../../components/DocsLink";
 import NameBasicDemo from "@demos/<name>-demo/NameBasicDemo.tsx";
 
@@ -144,9 +147,11 @@ Brief description.
 ```tsx
 import { ComponentName } from "@ark-preset/solid";
 
-<ComponentName>...</ComponentName>
+<ComponentName>...</ComponentName>;
 ```
-```
+````
+
+````
 
 Rules:
 - No YAML frontmatter — start with `# Title`
@@ -167,7 +172,7 @@ Import the components:
 
 ```tsx
 import { ComponentName } from "@ark-preset/solid";
-```
+````
 
 Basic usage:
 
@@ -186,11 +191,12 @@ Basic usage:
 
 ### Anatomy (optional)
 
-| Part | Element | Description |
-|------|---------|-------------|
-| `<ComponentName>` | — | Manages state |
-| `<ComponentNamePart>` | `button` | Description |
-```
+| Part                  | Element  | Description   |
+| --------------------- | -------- | ------------- |
+| `<ComponentName>`     | —        | Manages state |
+| `<ComponentNamePart>` | `button` | Description   |
+
+````
 
 Rules:
 - Import `{ InlineCode }` from `@ark-preset/solid` for inline references
@@ -207,9 +213,10 @@ import { InlineCode } from "@ark-preset/solid";
 See the [Ark UI ComponentName](https://ark-ui.com/docs/components/<name>) documentation.
 
 Optional additional notes specific to @ark-preset wrapper behavior.
-```
+````
 
 Rules:
+
 - API Reference links to Ark UI docs — do NOT duplicate full Ark UI prop tables
 - Only add notes for wrapper-specific behavior (e.g., "AlertDialog sets role=alertdialog")
 
@@ -249,6 +256,7 @@ The watcher plugin watches each recipe and component directory individually (no 
 ### When to create a demo file
 
 Create a demo directory under `src/components/demos/<name>-demo/` when:
+
 - The component has complex sub-structure (compound components like Accordion, Dialog, Select)
 - The demo is reused across multiple sections (basic + multiple + controlled)
 - The demo has its own state/event handling that would clutter the MDX
@@ -259,7 +267,12 @@ Create a demo directory under `src/components/demos/<name>-demo/` when:
 
 ```tsx
 // src/components/demos/accordion-demo/AccordionBasicDemo.tsx
-import { Accordion, AccordionItem, AccordionItemTrigger, AccordionItemContent } from "@ark-preset/solid";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionItemTrigger,
+  AccordionItemContent,
+} from "@ark-preset/solid";
 
 export default function AccordionBasicDemo() {
   return (
@@ -279,6 +292,7 @@ export default function AccordionBasicDemo() {
 ```
 
 Rules:
+
 - Import from `@ark-preset/solid` (not relative paths)
 - Default export a function (not named export)
 - Wrap in `<div class="rounded-lg border border-border p-6">` for visual consistency
@@ -289,21 +303,22 @@ Rules:
 
 Markdown is rendered by `vite-plugin-solid-marked` with a custom provider at `src/mdx-provider.tsx`. Builtin elements are mapped to component equivalents:
 
-| Markdown     | Rendered as                  |
-| ------------ | ---------------------------- |
-| `#` / `##`  | `<H1>` / `<H2>` from @ark-preset/solid typography |
-| Paragraph    | `<P>` from @ark-preset/solid     |
-| Inline `code` | `<InlineCode>` from @ark-preset/solid |
-| Code block   | `<CodeBlock>` (highlight.js + copy + expand) |
-| Blockquote   | `<Blockquote>` from @ark-preset/solid |
-| Table        | Styled table with border     |
-| Link         | Styled `<a>` with underline  |
+| Markdown      | Rendered as                                       |
+| ------------- | ------------------------------------------------- |
+| `#` / `##`    | `<H1>` / `<H2>` from @ark-preset/solid typography |
+| Paragraph     | `<P>` from @ark-preset/solid                      |
+| Inline `code` | `<InlineCode>` from @ark-preset/solid             |
+| Code block    | `<CodeBlock>` (highlight.js + copy + expand)      |
+| Blockquote    | `<Blockquote>` from @ark-preset/solid             |
+| Table         | Styled table with border                          |
+| Link          | Styled `<a>` with underline                       |
 
 All lowercase HTML elements (div, span, p, a, etc.) pass through as native. Uppercase custom components must be imported directly in the `.md` file or registered in the components map.
 
 ## CodeBlock Component
 
 Code blocks are rendered by `src/components/CodeBlock.tsx` which provides:
+
 - **Syntax highlighting** via highlight.js (registered: typescript, javascript, xml, css, bash)
 - **Language mapping**: tsx→javascript, ts→typescript, sh/bash→bash, json→javascript
 - **Copy button** in top-right corner (click to copy, shows checkmark for 1.5s)
@@ -345,12 +360,12 @@ No manual registration needed — creating `content/docs/<name>/index.tsx` auto-
 
 The following components from `src/components/` are available for use in `.mdx` files:
 
-| Component    | Import path                                            | Purpose                    |
-| ------------ | ------------------------------------------------------ | -------------------------- |
-| `DocsLink`   | `../../../components/DocsLink`                         | Link to Ark UI docs        |
-| `CodeBlock`  | (auto by marked)                                       | Rendered code blocks       |
-| `InlineCode` | `@ark-preset/solid`                                        | Inline code reference      |
-| `DocsLayout` | (auto by route)                                        | Page layout wrapper        |
+| Component    | Import path                    | Purpose               |
+| ------------ | ------------------------------ | --------------------- |
+| `DocsLink`   | `../../../components/DocsLink` | Link to Ark UI docs   |
+| `CodeBlock`  | (auto by marked)               | Rendered code blocks  |
+| `InlineCode` | `@ark-preset/solid`            | Inline code reference |
+| `DocsLayout` | (auto by route)                | Page layout wrapper   |
 
 ## Notes
 
