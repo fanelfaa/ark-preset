@@ -1,12 +1,11 @@
 import { Index } from "solid-js";
-import { DemoWrapper } from "../../DemoWrapper";
 import { SegmentGroupBase } from "@ark-preset/solid";
 
 const frameworks = ["React", "Solid", "Vue"];
 
 export default function SegmentGroupDisabledDemo() {
   return (
-    <DemoWrapper>
+    <div>
       <SegmentGroupBase.Root defaultValue="React">
         <SegmentGroupBase.Indicator />
         <Index each={frameworks}>
@@ -19,6 +18,6 @@ export default function SegmentGroupDisabledDemo() {
           )}
         </Index>
       </SegmentGroupBase.Root>
-    </DemoWrapper>
+    </div>
   );
 }

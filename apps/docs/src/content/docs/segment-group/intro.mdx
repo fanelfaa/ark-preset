@@ -1,5 +1,7 @@
 import { DocsLink } from "../../../components/DocsLink";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import SegmentGroupBasicDemo from "@demos/segment-group-demo/SegmentGroupBasicDemo.tsx";
+import SegmentGroupBasicDemoCode from "@demos/segment-group-demo/SegmentGroupBasicDemo.tsx?code";
 
 # Segment Group
 
@@ -8,18 +10,6 @@ options.
 
 <DocsLink href="https://ark-ui.com/docs/components/segment-group" />
 
-<SegmentGroupBasicDemo />
-
-```tsx
-import { SegmentGroup, SegmentGroupItem } from "~/components/segment-group";
-
-export function SegmentGroupDemo() {
-  return (
-    <SegmentGroup defaultValue="React">
-      <SegmentGroupItem value="React">React</SegmentGroupItem>
-      <SegmentGroupItem value="Solid">Solid</SegmentGroupItem>
-      <SegmentGroupItem value="Vue">Vue</SegmentGroupItem>
-    </SegmentGroup>
-  );
-}
-```
+<ComponentPreview code={SegmentGroupBasicDemoCode}>
+  <SegmentGroupBasicDemo />
+</ComponentPreview>
