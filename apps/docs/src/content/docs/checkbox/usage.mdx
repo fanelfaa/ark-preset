@@ -1,5 +1,7 @@
 import { InlineCode } from "@ark-preset/solid";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import CheckboxRootProviderDemo from "@demos/checkbox-demo/CheckboxRootProviderDemo.tsx";
+import CheckboxRootProviderDemoCode from "@demos/checkbox-demo/CheckboxRootProviderDemo.tsx?code";
 
 ## Usage
 
@@ -39,27 +41,9 @@ Indeterminate:
 
 Use <InlineCode>CheckboxRootProvider</InlineCode> when you need to access the checkbox state outside of the checkbox tree. This pattern uses the <InlineCode>useCheckbox</InlineCode> hook from Ark UI to create a shared context that both the checkbox and external elements can reference.
 
-<CheckboxRootProviderDemo />
-
-```tsx
-import { useCheckbox } from "@ark-ui/solid/checkbox";
-import { CheckboxRootProvider, CheckboxLabel } from "~/components/checkbox";
-
-export function CheckboxWithExternalControl() {
-  const checkbox = useCheckbox({ defaultChecked: true });
-
-  return (
-    <div>
-      {/* Access checkbox state outside the tree */}
-      <output>Checked: {JSON.stringify(checkbox().checked)}</output>
-
-      <CheckboxRootProvider value={checkbox}>
-        <CheckboxLabel>Subscribe to newsletter</CheckboxLabel>
-      </CheckboxRootProvider>
-    </div>
-  );
-}
-```
+<ComponentPreview code={CheckboxRootProviderDemoCode}>
+  <CheckboxRootProviderDemo />
+</ComponentPreview>
 
 The key difference:
 
