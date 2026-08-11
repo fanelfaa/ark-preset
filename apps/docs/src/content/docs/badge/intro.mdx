@@ -1,5 +1,7 @@
 import { DocsLink } from "../../../components/DocsLink";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import BadgeBasicDemo from "@demos/badge-demo/BadgeBasicDemo.tsx";
+import BadgeBasicDemoCode from "@demos/badge-demo/BadgeBasicDemo.tsx?code";
 
 # Badge
 
@@ -8,21 +10,6 @@ tables, cards, and lists.
 
 <DocsLink href="https://ui.shadcn.com/docs/components/badge" />
 
-<BadgeBasicDemo />
-
-```tsx
-import { Badge } from "~/components/badge";
-
-export function BadgeDemo() {
-  return (
-    <div class="flex flex-wrap items-center gap-4">
-      <Badge variant="default">Default</Badge>
-      <Badge variant="secondary">Secondary</Badge>
-      <Badge variant="destructive">Destructive</Badge>
-      <Badge variant="outline">Outline</Badge>
-      <Badge variant="ghost">Ghost</Badge>
-      <Badge variant="link">Link</Badge>
-    </div>
-  );
-}
-```
+<ComponentPreview code={BadgeBasicDemoCode}>
+  <BadgeBasicDemo />
+</ComponentPreview>
