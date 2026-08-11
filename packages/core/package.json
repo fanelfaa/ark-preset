@@ -1,6 +1,6 @@
 {
   "name": "@ark-preset/core",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Tailwind-variants styling recipes for Ark UI primitives",
   "keywords": [
     "ark-ui",

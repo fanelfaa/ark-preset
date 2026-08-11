@@ -1,6 +1,6 @@
 {
   "name": "@ark-preset/cli",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "CLI to generate Ark UI components into your Solid.js project",
   "keywords": [
     "ark-ui",
