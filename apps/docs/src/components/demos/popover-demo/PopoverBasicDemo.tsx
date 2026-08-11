@@ -1,4 +1,3 @@
-import { DemoWrapper } from "../../DemoWrapper";
 import {
   Popover,
   PopoverTrigger,
@@ -9,7 +8,7 @@ import {
 
 export default function PopoverBasicDemo() {
   return (
-    <DemoWrapper>
+    <div>
       <Popover>
         <PopoverTrigger>Open Popover</PopoverTrigger>
         <PopoverContent>
@@ -19,6 +18,6 @@ export default function PopoverBasicDemo() {
           </PopoverDescription>
         </PopoverContent>
       </Popover>
-    </DemoWrapper>
+    </div>
   );
 }
