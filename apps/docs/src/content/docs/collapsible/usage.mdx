@@ -1,5 +1,7 @@
 import { InlineCode } from "@ark-preset/solid";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import CollapsibleRootProviderDemo from "@demos/collapsible-demo/CollapsibleRootProviderDemo.tsx";
+import CollapsibleRootProviderDemoCode from "@demos/collapsible-demo/CollapsibleRootProviderDemo.tsx?code";
 
 ## Usage
 
@@ -54,37 +56,9 @@ import {
 
 Use <InlineCode>CollapsibleRootProvider</InlineCode> when you need to access the collapsible state outside of the component tree. This pattern uses the <InlineCode>useCollapsible</InlineCode> hook from Ark UI to create a shared context that both the component and external elements can reference.
 
-<CollapsibleRootProviderDemo />
-
-```tsx
-import { useCollapsible } from "@ark-ui/solid/collapsible";
-import {
-  CollapsibleBase,
-  CollapsibleIndicator,
-  CollapsibleTrigger,
-  CollapsibleContent,
-} from "~/components/collapsible";
-
-export function ExternalControlExample() {
-  const collapsible = useCollapsible({ defaultOpen: true });
-
-  return (
-    <div>
-      <output>Open: {JSON.stringify(collapsible().open)}</output>
-
-      <CollapsibleBase.RootProvider value={collapsible}>
-        <CollapsibleTrigger>
-          Click to expand
-          <CollapsibleIndicator />
-        </CollapsibleTrigger>
-        <CollapsibleContent>
-          <div class="pt-4 text-sm">Content goes here.</div>
-        </CollapsibleContent>
-      </CollapsibleBase.RootProvider>
-    </div>
-  );
-}
-```
+<ComponentPreview code={CollapsibleRootProviderDemoCode}>
+  <CollapsibleRootProviderDemo />
+</ComponentPreview>
 
 The key difference:
 
