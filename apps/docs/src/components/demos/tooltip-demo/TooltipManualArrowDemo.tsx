@@ -1,22 +1,19 @@
-import { DemoWrapper } from "../../DemoWrapper";
 import { Tooltip, TooltipBase } from "@ark-preset/solid";
 
 export default function TooltipManualArrowDemo() {
   return (
-    <DemoWrapper>
-      <div class="flex justify-center">
-        <Tooltip>
-          <TooltipBase.Trigger>Manual Arrow</TooltipBase.Trigger>
-          <TooltipBase.Positioner>
-            <TooltipBase.Content>
-              <TooltipBase.Arrow class="[--arrow-size:14px]">
-                <TooltipBase.ArrowTip />
-              </TooltipBase.Arrow>
-              Custom arrow size
-            </TooltipBase.Content>
-          </TooltipBase.Positioner>
-        </Tooltip>
-      </div>
-    </DemoWrapper>
+    <div class="flex justify-center">
+      <Tooltip>
+        <TooltipBase.Trigger>Manual Arrow</TooltipBase.Trigger>
+        <TooltipBase.Positioner>
+          <TooltipBase.Content>
+            <TooltipBase.Arrow class="[--arrow-size:14px]">
+              <TooltipBase.ArrowTip />
+            </TooltipBase.Arrow>
+            Custom arrow size
+          </TooltipBase.Content>
+        </TooltipBase.Positioner>
+      </Tooltip>
+    </div>
   );
 }
