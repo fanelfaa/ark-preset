@@ -1,5 +1,7 @@
 import { DocsLink } from "../../../components/DocsLink";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import SkeletonBasicDemo from "@demos/skeleton-demo/SkeletonBasicDemo.tsx";
+import SkeletonBasicDemoCode from "@demos/skeleton-demo/SkeletonBasicDemo.tsx?code";
 
 # Skeleton
 
@@ -7,20 +9,6 @@ A placeholder component used to indicate loading content. Skeletons mimic the sh
 
 <DocsLink href="https://ui.shadcn.com/docs/components/skeleton" />
 
-<SkeletonBasicDemo />
-
-```tsx
-import { Skeleton } from "~/components/skeleton";
-
-export function SkeletonDemo() {
-  return (
-    <div class="flex items-center gap-4">
-      <Skeleton class="size-10 rounded-full" />
-      <div class="flex flex-col gap-2">
-        <Skeleton class="h-4 w-[200px]" />
-        <Skeleton class="h-3 w-[160px]" />
-      </div>
-    </div>
-  );
-}
-```
+<ComponentPreview code={SkeletonBasicDemoCode}>
+  <SkeletonBasicDemo />
+</ComponentPreview>
