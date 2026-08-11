@@ -1,4 +1,3 @@
-import { DemoWrapper } from "../../DemoWrapper";
 import {
   Table,
   TableHeader,
@@ -11,7 +10,7 @@ import {
 
 export default function TableBasicDemo() {
   return (
-    <DemoWrapper>
+    <div>
       <Table>
         <TableCaption>A list of recent invoices.</TableCaption>
         <TableHeader>
@@ -49,6 +48,6 @@ export default function TableBasicDemo() {
           </TableRow>
         </TableBody>
       </Table>
-    </DemoWrapper>
+    </div>
   );
 }
