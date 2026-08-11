@@ -1,9 +1,8 @@
 import { DatePicker, Separator } from "@ark-preset/solid";
-import { DemoWrapper } from "../../DemoWrapper";
 
 export default function DatePickerBasicDemo() {
   return (
-    <DemoWrapper class="space-y-4">
+    <div class="space-y-4">
       <DatePicker class="flex flex-col gap-1.5" label="Birth date" />
       <DatePicker class="flex flex-col gap-1.5" label="Select date" placeholder="Pick a date" />
       <DatePicker class="flex flex-col gap-1.5" label="Birth date" error />
@@ -21,6 +20,6 @@ export default function DatePickerBasicDemo() {
         label="Multiple dates"
         placeholder="Select dates..."
       />
-    </DemoWrapper>
+    </div>
   );
 }

@@ -1,5 +1,7 @@
 import { DocsLink } from "../../../components/DocsLink";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import DatePickerBasicDemo from "@demos/date-picker-demo/DatePickerBasicDemo.tsx";
+import DatePickerBasicDemoCode from "@demos/date-picker-demo/DatePickerBasicDemo.tsx?code";
 
 # Date Picker
 
@@ -7,29 +9,6 @@ A date picker component that allows users to select a date or date range from a 
 
 <DocsLink href="https://ark-ui.com/docs/components/date-picker" />
 
-<DatePickerBasicDemo />
-
-```tsx
-import { DatePicker, DatePickerBase } from "~/components/date-picker";
-
-// Self-contained — label, control, and calendar all built in
-<DatePicker label="Birth date" />
-
-// With custom placeholder
-<DatePicker label="Select date" placeholder="Pick a date" />
-
-// Error state
-<DatePicker label="Birth date" error />
-
-// Custom clear button label
-<DatePicker label="Select date" clearLabel="清除" />
-
-// Range selection — two inputs for start/end
-<DatePicker selectionMode="range" label="Date range" />
-
-// Multiple selection — dates shown as removable chips
-<DatePicker selectionMode="multiple" label="Select dates" />
-
-// For advanced usage with custom composition, import DatePickerBase:
-import { DatePickerBase } from "~/components/date-picker";
-```
+<ComponentPreview code={DatePickerBasicDemoCode}>
+  <DatePickerBasicDemo />
+</ComponentPreview>
