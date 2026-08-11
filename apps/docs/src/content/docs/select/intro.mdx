@@ -1,5 +1,7 @@
 import { DocsLink } from "../../../components/DocsLink";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import SelectBasicDemo from "@demos/select-demo/SelectBasicDemo.tsx";
+import SelectBasicDemoCode from "@demos/select-demo/SelectBasicDemo.tsx?code";
 
 # Select
 
@@ -7,39 +9,6 @@ A dropdown component that allows users to select one or more options from a list
 
 <DocsLink href="https://ark-ui.com/docs/components/select" />
 
-<SelectBasicDemo />
-
-```tsx
-import { createListCollection } from "@ark-ui/solid";
-import { Index } from "solid-js";
-import {
-  Select,
-  SelectLabel,
-  SelectTrigger,
-  SelectContent,
-  SelectItem,
-} from "~/components/select";
-
-const frameworks = createListCollection({
-  items: [
-    { label: "React", value: "react" },
-    { label: "Solid.js", value: "solid" },
-    { label: "Vue", value: "vue" },
-    { label: "Svelte", value: "svelte" },
-  ],
-});
-
-export function SelectDemo() {
-  return (
-    <Select collection={frameworks}>
-      <SelectLabel>Framework</SelectLabel>
-      <SelectTrigger placeholder="Select a framework" />
-      <SelectContent>
-        <Index each={frameworks.items}>
-          {(item) => <SelectItem item={item()}>{item().label}</SelectItem>}
-        </Index>
-      </SelectContent>
-    </Select>
-  );
-}
-```
+<ComponentPreview code={SelectBasicDemoCode}>
+  <SelectBasicDemo />
+</ComponentPreview>
