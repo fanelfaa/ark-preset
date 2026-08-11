@@ -11,11 +11,10 @@ import {
   MenuItem,
   MenuTrigger,
 } from "@ark-preset/solid";
-import { DemoWrapper } from "../../DemoWrapper";
 
 export default function BreadcrumbBasicDemo() {
   return (
-    <DemoWrapper class="space-y-6">
+    <div class="space-y-6">
       <div>
         <h3 class="text-sm font-medium mb-3">Basic Breadcrumb</h3>
         <Breadcrumb>
@@ -70,6 +69,6 @@ export default function BreadcrumbBasicDemo() {
           </BreadcrumbList>
         </Breadcrumb>
       </div>
-    </DemoWrapper>
+    </div>
   );
 }
