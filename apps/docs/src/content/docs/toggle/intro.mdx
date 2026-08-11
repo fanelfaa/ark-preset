@@ -1,5 +1,7 @@
 import { DocsLink } from "../../../components/DocsLink";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import ToggleBasicDemo from "@demos/toggle-demo/ToggleBasicDemo.tsx";
+import ToggleBasicDemoCode from "@demos/toggle-demo/ToggleBasicDemo.tsx?code";
 
 # Toggle
 
@@ -7,24 +9,6 @@ A button-like component for toggling between on and off states, commonly used fo
 
 <DocsLink href="https://ark-ui.com/docs/components/toggle" />
 
-<ToggleBasicDemo />
-
-```tsx
-import { Toggle } from "~/components/toggle";
-
-export function ToggleDemo() {
-  return (
-    <div class="flex items-center gap-4">
-      <Toggle>
-        <BoldIcon />
-      </Toggle>
-      <Toggle defaultPressed>
-        <BoldIcon />
-      </Toggle>
-      <Toggle disabled>
-        <BoldIcon />
-      </Toggle>
-    </div>
-  );
-}
-```
+<ComponentPreview code={ToggleBasicDemoCode}>
+  <ToggleBasicDemo />
+</ComponentPreview>
