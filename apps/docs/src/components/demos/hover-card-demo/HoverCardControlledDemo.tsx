@@ -1,20 +1,17 @@
-import { DemoWrapper } from "../../DemoWrapper";
 import { createSignal } from "solid-js";
 import { HoverCard, HoverCardTrigger, HoverCardContent } from "@ark-preset/solid";
 
 export default function HoverCardControlledDemo() {
   const [open, setOpen] = createSignal(false);
   return (
-    <DemoWrapper>
-      <div class="flex flex-col items-center gap-4">
-        <p class="text-sm text-muted-foreground">Open: {open() ? "true" : "false"}</p>
-        <HoverCard open={open()} onOpenChange={(e) => setOpen(e.open)}>
-          <HoverCardTrigger>Hover me</HoverCardTrigger>
-          <HoverCardContent>
-            <div class="text-sm">Controlled hover card</div>
-          </HoverCardContent>
-        </HoverCard>
-      </div>
-    </DemoWrapper>
+    <div class="flex flex-col items-center gap-4">
+      <p class="text-sm text-muted-foreground">Open: {open() ? "true" : "false"}</p>
+      <HoverCard open={open()} onOpenChange={(e) => setOpen(e.open)}>
+        <HoverCardTrigger>Hover me</HoverCardTrigger>
+        <HoverCardContent>
+          <div class="text-sm">Controlled hover card</div>
+        </HoverCardContent>
+      </HoverCard>
+    </div>
   );
 }

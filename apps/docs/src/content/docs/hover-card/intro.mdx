@@ -1,5 +1,7 @@
 import { DocsLink } from "../../../components/DocsLink";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import HoverCardBasicDemo from "@demos/hover-card-demo/HoverCardBasicDemo.tsx";
+import HoverCardBasicDemoCode from "@demos/hover-card-demo/HoverCardBasicDemo.tsx?code";
 
 # Hover Card
 
@@ -7,25 +9,6 @@ A popup card that appears when the user hovers over a trigger element, displayin
 
 <DocsLink href="https://ark-ui.com/docs/components/hover-card" />
 
-<HoverCardBasicDemo />
-
-```tsx
-import { HoverCard, HoverCardTrigger, HoverCardContent } from "~/components/hover-card";
-
-export default function HoverCardBasicDemo() {
-  return (
-    <div class="rounded-lg border border-border bg-background/70 backdrop-blur-3xl p-6">
-      <div class="flex justify-center">
-        <HoverCard>
-          <HoverCardTrigger>Hover me</HoverCardTrigger>
-          <HoverCardContent useArrow>
-            <div class="text-sm">
-              The content of this hover card is displayed when you hover over the trigger element.
-            </div>
-          </HoverCardContent>
-        </HoverCard>
-      </div>
-    </div>
-  );
-}
-```
+<ComponentPreview code={HoverCardBasicDemoCode}>
+  <HoverCardBasicDemo />
+</ComponentPreview>
