@@ -24,9 +24,7 @@ describe("Textarea", () => {
   });
 
   it("hides description when error is present", () => {
-    const { queryByText } = render(() => (
-      <Textarea description="Helper" error="Error" />
-    ));
+    const { queryByText } = render(() => <Textarea description="Helper" error="Error" />);
     expect(queryByText("Helper")).not.toBeInTheDocument();
     expect(queryByText("Error")).toBeInTheDocument();
   });

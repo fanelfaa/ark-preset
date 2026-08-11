@@ -1,11 +1,28 @@
-import { render, fireEvent, screen, waitFor } from "@solidjs/testing-library";
+import { render, screen } from "@solidjs/testing-library";
 import { Accordion, AccordionBase, accordionVariants } from "../src/accordion";
 import { Tabs, TabsBase, tabsVariants } from "../src/tabs";
 import { Carousel, CarouselBase, carouselVariants } from "../src/carousel";
-import { Collapsible, CollapsibleTrigger, CollapsibleContent, CollapsibleBase } from "../src/collapsible";
-import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, breadcrumbVariants } from "../src/breadcrumb";
-import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell, tableVariants } from "../src/table";
-import { Pagination, PaginationBase, paginationVariants, PaginationPageList } from "../src/pagination";
+import {
+  Collapsible,
+  CollapsibleTrigger,
+  CollapsibleContent,
+  CollapsibleBase,
+} from "../src/collapsible";
+import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbSeparator,
+  breadcrumbVariants,
+} from "../src/breadcrumb";
+import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "../src/table";
+import {
+  Pagination,
+  PaginationBase,
+  paginationVariants,
+  PaginationPageList,
+} from "../src/pagination";
 
 // ------------------------------------------------------------------ //
 //  Accordion

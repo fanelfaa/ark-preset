@@ -1,11 +1,5 @@
 import { render } from "@solidjs/testing-library";
-import {
-  Alert,
-  AlertTitle,
-  AlertDescription,
-  AlertAction,
-  alertVariants,
-} from "../src/alert";
+import { Alert, AlertTitle, AlertDescription, AlertAction, alertVariants } from "../src/alert";
 
 describe("Alert", () => {
   it("renders children", () => {
@@ -28,9 +22,7 @@ describe("Alert", () => {
   });
 
   it("renders with destructive variant", () => {
-    const { container } = render(() => (
-      <Alert variant="destructive">Destructive</Alert>
-    ));
+    const { container } = render(() => <Alert variant="destructive">Destructive</Alert>);
     expect(container.firstChild).toBeInTheDocument();
   });
 
@@ -40,9 +32,7 @@ describe("Alert", () => {
   });
 
   it("forwards additional props", () => {
-    const { container } = render(() => (
-      <Alert data-testid="alert-1">Alert</Alert>
-    ));
+    const { container } = render(() => <Alert data-testid="alert-1">Alert</Alert>);
     expect(container.firstChild).toHaveAttribute("data-testid", "alert-1");
   });
 

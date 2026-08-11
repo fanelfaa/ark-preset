@@ -29,9 +29,7 @@ describe("Checkbox", () => {
   });
 
   it("toggles checked state on click", async () => {
-    const { container } = render(() => (
-      <Checkbox>Toggle me</Checkbox>
-    ));
+    const { container } = render(() => <Checkbox>Toggle me</Checkbox>);
     const input = container.querySelector('input[type="checkbox"]') as HTMLInputElement;
     // Initially unchecked
     expect(input.checked).toBe(false);
@@ -50,9 +48,7 @@ describe("Checkbox", () => {
   });
 
   it("defaultChecked works for uncontrolled", () => {
-    const { container } = render(() => (
-      <Checkbox defaultChecked>Default</Checkbox>
-    ));
+    const { container } = render(() => <Checkbox defaultChecked>Default</Checkbox>);
     const input = container.querySelector('input[type="checkbox"]') as HTMLInputElement;
     expect(input.checked).toBe(true);
   });
@@ -75,9 +71,7 @@ describe("Checkbox", () => {
   });
 
   it("forwards additional props", () => {
-    const { container } = render(() => (
-      <Checkbox disabled>Disabled</Checkbox>
-    ));
+    const { container } = render(() => <Checkbox disabled>Disabled</Checkbox>);
     const input = container.querySelector('input[type="checkbox"]');
     expect(input).toBeDisabled();
   });
