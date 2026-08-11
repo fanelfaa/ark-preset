@@ -1,9 +1,8 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@ark-preset/solid";
-import { DemoWrapper } from "../../DemoWrapper";
 
 export default function AvatarBasicDemo() {
   return (
-    <DemoWrapper class="flex items-center gap-4">
+    <div class="flex items-center gap-4">
       <Avatar>
         <AvatarFallback>JD</AvatarFallback>
         <AvatarImage src="https://i.pravatar.cc/150?u=john" alt="John Doe" />
@@ -15,6 +14,6 @@ export default function AvatarBasicDemo() {
       <Avatar>
         <AvatarFallback>+3</AvatarFallback>
       </Avatar>
-    </DemoWrapper>
+    </div>
   );
 }

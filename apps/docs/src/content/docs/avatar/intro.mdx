@@ -1,5 +1,7 @@
 import { DocsLink } from "../../../components/DocsLink";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import AvatarBasicDemo from "@demos/avatar-demo/AvatarBasicDemo.tsx";
+import AvatarBasicDemoCode from "@demos/avatar-demo/AvatarBasicDemo.tsx?code";
 
 # Avatar
 
@@ -7,30 +9,6 @@ An image element with a fallback for representing users or entities.
 
 <DocsLink href="https://ark-ui.com/docs/components/avatar" />
 
-<AvatarBasicDemo />
-
-```tsx
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "~/components/avatar";
-
-export function AvatarDemo() {
-  return (
-    <div class="flex items-center gap-4">
-      <Avatar>
-        <AvatarFallback>JD</AvatarFallback>
-        <AvatarImage src="https://i.pravatar.cc/150?u=john" alt="John Doe" />
-      </Avatar>
-      <Avatar>
-        <AvatarFallback>AB</AvatarFallback>
-        <AvatarImage src="https://i.pravatar.cc/150?u=jane" alt="Alice Brown" />
-      </Avatar>
-      <Avatar>
-        <AvatarFallback>+3</AvatarFallback>
-      </Avatar>
-    </div>
-  );
-}
-```
+<ComponentPreview code={AvatarBasicDemoCode}>
+  <AvatarBasicDemo />
+</ComponentPreview>
