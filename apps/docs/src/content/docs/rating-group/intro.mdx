@@ -1,5 +1,7 @@
 import { DocsLink } from "../../../components/DocsLink";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import RatingGroupBasicDemo from "@demos/rating-group-demo/RatingGroupBasicDemo.tsx";
+import RatingGroupBasicDemoCode from "@demos/rating-group-demo/RatingGroupBasicDemo.tsx?code";
 
 # Rating Group
 
@@ -7,19 +9,6 @@ Star-based rating input component supporting controlled/uncontrolled modes, half
 
 <DocsLink href="https://ark-ui.com/docs/components/rating-group" />
 
-<RatingGroupBasicDemo />
-
-```tsx
-import { RatingGroup, RatingGroupLabel } from "~/components/rating-group";
-
-export default function RatingGroupBasicDemo() {
-  return (
-    <div class="rounded-lg border border-border bg-background/70 backdrop-blur-3xl p-6">
-      <p class="text-sm text-muted-foreground mb-2">Basic horizontal</p>
-      <RatingGroup count={5} defaultValue={3}>
-        <RatingGroupLabel>Rate this</RatingGroupLabel>
-      </RatingGroup>
-    </div>
-  );
-}
-```
+<ComponentPreview code={RatingGroupBasicDemoCode}>
+  <RatingGroupBasicDemo />
+</ComponentPreview>
