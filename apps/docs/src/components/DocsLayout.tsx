@@ -19,7 +19,9 @@ export const DocsLayout: Component<DocsLayoutProps> = (props) => {
 
         {/* Main content */}
         <main class="flex-1 min-w-0 bg-background/60 backdrop-blur-3xl">
-          <div class="max-w-4xl mx-auto px-6 py-10 prose dark:prose-invert">{props.children}</div>
+          <div class="max-w-4xl mx-auto px-6 py-10 prose dark:prose-invert space-y-6">
+            {props.children}
+          </div>
           {/* Footer */}
           <footer class="border-t border-border bg-background/30 backdrop-blur-3xl">
             <div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between text-sm text-muted-foreground">
