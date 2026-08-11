@@ -1,5 +1,7 @@
 import { DocsLink } from "../../../components/DocsLink";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import PinInputBasicDemo from "@demos/pin-input-demo/PinInputBasicDemo.tsx";
+import PinInputBasicDemoCode from "@demos/pin-input-demo/PinInputBasicDemo.tsx?code";
 
 # Pin Input
 
@@ -7,28 +9,6 @@ A pin input component for entering one-time codes, PINs, and numeric sequences w
 
 <DocsLink href="https://ark-ui.com/docs/components/pin-input" />
 
-<PinInputBasicDemo />
-
-```tsx
-import { PinInput, PinInputControl, PinInputInput, PinInputLabel } from "~/components/pin-input";
-import { Index } from "solid-js";
-
-export function PinInputDemo() {
-  return (
-    <div class="flex flex-col gap-4">
-      <PinInput>
-        <PinInputLabel>Label</PinInputLabel>
-        <PinInputControl>
-          <Index each={[0, 1, 2, 3]}>{(id) => <PinInputInput index={id()} />}</Index>
-        </PinInputControl>
-      </PinInput>
-      <PinInput placeholder="\u2022" mask>
-        <PinInputLabel>Masked</PinInputLabel>
-        <PinInputControl>
-          <Index each={[0, 1, 2, 3]}>{(id) => <PinInputInput index={id()} />}</Index>
-        </PinInputControl>
-      </PinInput>
-    </div>
-  );
-}
-```
+<ComponentPreview code={PinInputBasicDemoCode}>
+  <PinInputBasicDemo />
+</ComponentPreview>

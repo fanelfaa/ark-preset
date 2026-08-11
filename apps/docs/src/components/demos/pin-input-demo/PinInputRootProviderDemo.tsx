@@ -1,4 +1,3 @@
-import { DemoWrapper } from "../../DemoWrapper";
 import { usePinInput } from "@ark-ui/solid/pin-input";
 import {
   PinInputRootProvider,
@@ -12,7 +11,7 @@ export default function PinInputRootProviderDemo() {
   const pinInput = usePinInput();
 
   return (
-    <DemoWrapper class="space-y-4">
+    <div class="space-y-4">
       <output class="block text-sm text-muted-foreground">
         Value: {JSON.stringify(pinInput().value)}
       </output>
@@ -23,6 +22,6 @@ export default function PinInputRootProviderDemo() {
           <Index each={[0, 1, 2, 3]}>{(id) => <PinInputInput index={id()} />}</Index>
         </PinInputControl>
       </PinInputRootProvider>
-    </DemoWrapper>
+    </div>
   );
 }
