@@ -21,9 +21,7 @@ test("switches tabs and verifies external state", async ({ page }) => {
   await expect(output).toContainText('"usage"');
 
   // Usage panel content should be visible
-  await expect(
-    page.getByText(/switch between different sections/i).first(),
-  ).toBeVisible();
+  await expect(page.getByText(/switch between different sections/i).first()).toBeVisible();
 
   // Click back to "Overview"
   await overviewTab.click();

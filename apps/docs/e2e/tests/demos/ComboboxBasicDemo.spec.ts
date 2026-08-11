@@ -15,7 +15,9 @@ test("renders combobox and filters results on input", async ({ page }) => {
   await page.waitForTimeout(200);
 
   // Verify filtered result appears
-  await expect(page.locator("[data-scope='combobox']").getByText("React", { exact: true }).first()).toBeVisible();
+  await expect(
+    page.locator("[data-scope='combobox']").getByText("React", { exact: true }).first(),
+  ).toBeVisible();
 
   // Verify non-matching items are not visible
   const content = page.locator("[data-scope='combobox'] [data-part='content']").first();

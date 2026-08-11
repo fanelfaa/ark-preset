@@ -14,7 +14,7 @@ test("renders sm, md, lg pagination sizes", async ({ page }) => {
   await expect(lgLabel.first()).toBeVisible();
 
   // Verify each size demo has pagination elements
-  const demoArea = page.locator(".rounded-lg:has-text('Size lg')").first();
+  const demoArea = page.locator(".rounded-2xl:has-text('Size lg')").first();
 
   // Verify first/last/prev/next triggers exist across all three variants
   const paginationInstances = demoArea.locator("[data-scope='pagination']");

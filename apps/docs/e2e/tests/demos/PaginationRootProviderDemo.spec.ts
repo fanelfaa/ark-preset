@@ -9,7 +9,7 @@ test("renders with root provider and navigates pages", async ({ page }) => {
   await expect(rootProviderLabel.first()).toBeVisible();
 
   // Scope to the demo containing "RootProvider pattern"
-  const demoArea = page.locator(".rounded-lg:has-text('RootProvider pattern')").first();
+  const demoArea = page.locator(".rounded-2xl:has-text('RootProvider pattern')").first();
   await expect(demoArea).toBeVisible();
 
   // Verify pagination renders with page items

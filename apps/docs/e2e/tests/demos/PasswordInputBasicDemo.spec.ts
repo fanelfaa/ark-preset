@@ -16,7 +16,9 @@ test("types password and toggles visibility", async ({ page }) => {
   await page.waitForTimeout(100);
 
   // Toggle visibility using the toggle button
-  const toggleBtn = page.locator("[data-scope='password-input'] [data-part='toggle-trigger']").first();
+  const toggleBtn = page
+    .locator("[data-scope='password-input'] [data-part='toggle-trigger']")
+    .first();
   if (await toggleBtn.isVisible()) {
     await toggleBtn.click();
     await page.waitForTimeout(200);

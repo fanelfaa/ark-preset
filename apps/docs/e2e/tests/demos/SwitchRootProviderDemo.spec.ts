@@ -9,7 +9,9 @@ test("toggles switch and verifies external state", async ({ page }) => {
   await expect(switchLabel).toBeVisible();
 
   // Find the switch input associated with this label
-  const switchRoot = page.locator("[data-scope='switch']").filter({ hasText: "Enable notifications" });
+  const switchRoot = page
+    .locator("[data-scope='switch']")
+    .filter({ hasText: "Enable notifications" });
   const switchInput = switchRoot.locator("input");
 
   // RootProvider switch defaults to checked

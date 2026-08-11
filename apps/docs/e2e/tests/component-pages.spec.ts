@@ -33,7 +33,7 @@ test.describe("Component pages", () => {
         (e) =>
           !e.includes("favicon") &&
           !e.includes("Failed to load resource") &&
-          !e.includes("ERR_BLOCKED_BY_CLIENT")
+          !e.includes("ERR_BLOCKED_BY_CLIENT"),
       );
       expect(relevantErrors).toHaveLength(0);
     });

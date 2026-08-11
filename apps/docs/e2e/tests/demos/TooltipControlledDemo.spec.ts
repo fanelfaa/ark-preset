@@ -14,7 +14,10 @@ test("controls tooltip open/close via external button", async ({ page }) => {
   await page.waitForTimeout(500);
 
   // Toggle back
-  const toggleBtn = page.locator("button").filter({ hasText: /tooltip/ }).first();
+  const toggleBtn = page
+    .locator("button")
+    .filter({ hasText: /tooltip/ })
+    .first();
   await toggleBtn.click();
   await page.waitForTimeout(500);
 });

@@ -1,0 +1,569 @@
+{"type":"message","message":"Detected an AI agent environment, printing as NDJSON. Trace logs are written to stderr, while user-facing logs are written to stdout."}
+core:build | > @ark-preset/core@0.1.4 build /home/fandi/Lab/Js/ark-preset/packages/core
+core:build | > tsup 2>&1 | grep -E '⚡️|error'
+core:build | 
+core:build | [32mCJS[39m ⚡️ Build success in 375ms
+core:build | [32mESM[39m ⚡️ Build success in 400ms
+core:build | [32mDTS[39m ⚡️ Build success in 10167ms
+▮▮▮▮ core:build (cached, 79ms, 033f7649)
+solid:build | > @ark-preset/solid@0.1.4 build /home/fandi/Lab/Js/ark-preset/packages/solid
+solid:build | > vite build && tsc --build --force
+solid:build | 
+solid:build | [36mvite v6.4.3 [32mbuilding for production...[36m[39m
+solid:build | transforming...
+solid:build | [32m✓[39m 613 modules transformed.
+solid:build | rendering chunks...
+solid:build | computing gzip size...
+solid:build | [2mdist/[22m[36mindex.js  [39m[1m[33m1,094.75 kB[39m[22m[2m │ gzip: 235.31 kB[22m[2m │ map: 3,116.07 kB[22m
+solid:build | [2mdist/[22m[36mindex.cjs  [39m[1m[33m776.49 kB[39m[22m[2m │ gzip: 200.69 kB[22m[2m │ map: 2,987.17 kB[22m
+solid:build | [32m✓ built in 14.82s[39m
+▮▮▮▮ solid:build (cached, 148ms, 5129132a)
+▮▮▮▮ docs:generate-routes (dc73c010)
+docs:generate-routes | > docs@ generate-routes /home/fandi/Lab/Js/ark-preset/apps/docs
+docs:generate-routes | > tsr generate
+▮▮▮▮ docs:generate-routes (2s 630ms, dc73c010)
+▮▮▮▮ docs:typecheck (b64b7f07)
+docs:typecheck | > docs@ typecheck /home/fandi/Lab/Js/ark-preset/apps/docs
+docs:typecheck | > tsc --noEmit
+▮▮▮▮ docs:typecheck (11s 273ms, b64b7f07)
+docs:build | > docs@ build /home/fandi/Lab/Js/ark-preset/apps/docs
+docs:build | > vite build
+docs:build | 
+docs:build | [36mvite v8.0.16 [32mbuilding client environment for production...[36m[39m
+docs:build | [iw] ✓ regenerated 47 installation files
+docs:build | [2Ktransforming...[32m✓[39m 1756 modules transformed.
+docs:build | rendering chunks...
+docs:build | computing gzip size...
+docs:build | [2mdist/[0m[32mindex.html                        [39m[2m[1m  1.76 kB[0m[0m[2m │ gzip:   0.79 kB[0m
+docs:build | [2mdist/[0m[2massets/[0m[35mindex-cTanps_Y.css         [39m[2m[1m 85.70 kB[0m[0m[2m │ gzip:  14.22 kB[0m
+docs:build | [2mdist/[0m[2massets/[0m[36mcomponents-Dg490jJd.js     [39m[2m[1m  0.06 kB[0m[0m[2m │ gzip:   0.07 kB[0m
+docs:build | [2mdist/[0m[2massets/[0m[36mform-CVfrkKnh.js           [39m[2m[1m  0.12 kB[0m[0m[2m │ gzip:   0.12 kB[0m
+docs:build | [2mdist/[0m[2massets/[0m[36mdocs-DAm2g_Q7.js           [39m[2m[1m  0.19 kB[0m[0m[2m │ gzip:   0.16 kB[0m
+docs:build | [2mdist/[0m[2massets/[0m[36m_component-dqSZgIFB.js     [39m[2m[1m  0.24 kB[0m[0m[2m │ gzip:   0.20 kB[0m
+docs:build | [2mdist/[0m[2massets/[0m[36m_-BCXkdSnp.js              [39m[2m[1m  0.88 kB[0m[0m[2m │ gzip:   0.51 kB[0m
+docs:build | [2mdist/[0m[2massets/[0m[36mroutes-CiDx7Wfd.js         [39m[2m[1m  3.75 kB[0m[0m[2m │ gzip:   1.51 kB[0m
+docs:build | [2mdist/[0m[2massets/[0m[36mquickstart-BNmysvdj.js     [39m[2m[1m  5.53 kB[0m[0m[2m │ gzip:   1.92 kB[0m
+docs:build | [2mdist/[0m[2massets/[0m[36mweb-OrI8iDA0.js            [39m[2m[1m 28.26 kB[0m[0m[2m │ gzip:  10.91 kB[0m
+docs:build | [2mdist/[0m[2massets/[0m[36mCodeBlock-BFQXFuRY.js      [39m[2m[1m 55.47 kB[0m[0m[2m │ gzip:  18.89 kB[0m
+docs:build | [2mdist/[0m[2massets/[0m[36mdist-CUoLWiKW.js           [39m[2m[1m 95.69 kB[0m[0m[2m │ gzip:  24.94 kB[0m
+docs:build | [2mdist/[0m[2massets/[0m[36mtanstack-form-N28Jh32D.js  [39m[2m[1m183.10 kB[0m[0m[2m │ gzip:  42.33 kB[0m
+docs:build | [2mdist/[0m[2massets/[0m[36mindex-Pt583CNe.js          [39m[33m[1m777.56 kB[0m[39m[2m │ gzip: 212.14 kB[0m
+docs:build | [2mdist/[0m[2massets/[0m[36m_component-CsOrUjCg.js     [39m[33m[1m777.91 kB[0m[39m[2m │ gzip:  95.97 kB[0m
+docs:build | 
+docs:build | [32m✓ built in 5.33s[39m
+▮▮▮▮ docs:build (cached, 5e2e9a5e)
+docs:build | [33m[33m[PLUGIN_TIMINGS] [0mYour build spent significant time in plugins. Here is a breakdown:
+docs:build |   - solid (84%)
+docs:build |   - solid-marked:post (6%)
+docs:build |   - @tanstack/devtools:remove-devtools-on-build (6%)
+docs:build | See https://rolldown.rs/options/checks#plugintimings for more details.
+docs:build | [39m
+docs:build | [33m[plugin builtin:vite-reporter] [33m[1m
+docs:build | (!) Some chunks are larger than 500 kB after minification. Consider:
+docs:build | - Using dynamic import() to code-split the application
+docs:build | - Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+docs:build | - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.[0m[33m[39m
+▮▮▮▮ docs:e2e (cb125a48)
+docs:e2e | [WebServer] (node:196762) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+docs:e2e | [WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+docs:e2e | [WebServer] (node:196776) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+docs:e2e | [WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+docs:e2e | 
+docs:e2e | Running 157 tests using 4 workers
+docs:e2e | 
+docs:e2e | (node:196823) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+docs:e2e | (Use `node --trace-warnings ...` to show where the warning was created)
+docs:e2e | (node:196830) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+docs:e2e | (Use `node --trace-warnings ...` to show where the warning was created)
+docs:e2e | (node:196824) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+docs:e2e | (Use `node --trace-warnings ...` to show where the warning was created)
+docs:e2e | (node:196831) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+docs:e2e | (Use `node --trace-warnings ...` to show where the warning was created)
+docs:e2e |   ✓    3 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › alert: page loads and renders all doc sections (4.8s)
+docs:e2e |   ✓    4 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › aspect-ratio: page loads and renders all doc sections (5.0s)
+docs:e2e |   ✓    2 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › alert-dialog: page loads and renders all doc sections (5.0s)
+docs:e2e |   ✓    1 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › accordion: page loads and renders all doc sections (5.4s)
+docs:e2e |   ✓    6 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › badge: page loads and renders all doc sections (4.5s)
+docs:e2e |   ✓    7 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › breadcrumb: page loads and renders all doc sections (4.6s)
+docs:e2e |   ✓    5 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › avatar: page loads and renders all doc sections (4.9s)
+docs:e2e |   ✓    8 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › button: page loads and renders all doc sections (5.2s)
+docs:e2e |   ✓    9 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › card: page loads and renders all doc sections (4.8s)
+docs:e2e |   ✓   11 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › checkbox: page loads and renders all doc sections (4.9s)
+docs:e2e |   ✓   10 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › carousel: page loads and renders all doc sections (5.7s)
+docs:e2e |   ✓   12 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › collapsible: page loads and renders all doc sections (4.9s)
+docs:e2e |   ✓   13 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › color-picker: page loads and renders all doc sections (4.7s)
+docs:e2e |   ✓   14 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › combobox: page loads and renders all doc sections (5.5s)
+▮▮▮▮ docs:e2e (running for 30s)
+docs:e2e |   ✓   16 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › dialog: page loads and renders all doc sections (5.7s)
+docs:e2e |   ✓   15 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › date-picker: page loads and renders all doc sections (6.8s)
+docs:e2e |   ✓   17 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › drawer: page loads and renders all doc sections (4.8s)
+docs:e2e |   ✓   18 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › hover-card: page loads and renders all doc sections (4.2s)
+docs:e2e |   ✓   19 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › input: page loads and renders all doc sections (3.7s)
+docs:e2e |   ✓   20 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › label: page loads and renders all doc sections (3.7s)
+docs:e2e |   ✓   21 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › listbox: page loads and renders all doc sections (3.8s)
+docs:e2e |   ✓   22 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › menu: page loads and renders all doc sections (3.9s)
+docs:e2e |   ✓   23 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › number-input: page loads and renders all doc sections (4.2s)
+docs:e2e |   ✓   24 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › pagination: page loads and renders all doc sections (4.2s)
+docs:e2e |   ✓   25 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › password-input: page loads and renders all doc sections (3.9s)
+docs:e2e |   ✓   26 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › pin-input: page loads and renders all doc sections (3.9s)
+docs:e2e |   ✓   27 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › popover: page loads and renders all doc sections (3.3s)
+docs:e2e |   ✓   28 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › progress: page loads and renders all doc sections (4.0s)
+docs:e2e |   ✓   29 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › radio-group: page loads and renders all doc sections (4.0s)
+docs:e2e |   ✓   31 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › scroll-area: page loads and renders all doc sections (3.6s)
+docs:e2e |   ✓   30 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › rating-group: page loads and renders all doc sections (4.0s)
+docs:e2e |   ✓   32 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › segment-group: page loads and renders all doc sections (4.7s)
+docs:e2e |   ✓   35 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › skeleton: page loads and renders all doc sections (4.7s)
+docs:e2e |   ✓   34 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › separator: page loads and renders all doc sections (4.9s)
+docs:e2e |   ✓   33 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › select: page loads and renders all doc sections (5.5s)
+docs:e2e |   ✓   36 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › slider: page loads and renders all doc sections (4.1s)
+docs:e2e |   ✓   37 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › spinner: page loads and renders all doc sections (3.4s)
+docs:e2e |   ✓   38 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › switch: page loads and renders all doc sections (3.8s)
+docs:e2e |   ✓   39 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › table: page loads and renders all doc sections (4.2s)
+docs:e2e |   ✓   40 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › tabs: page loads and renders all doc sections (3.5s)
+docs:e2e |   ✓   41 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › tags-input: page loads and renders all doc sections (3.6s)
+docs:e2e |   ✓   43 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › textarea: page loads and renders all doc sections (3.5s)
+docs:e2e |   ✓   42 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › tanstack-form: page loads and renders all doc sections (4.8s)
+▮▮▮▮ docs:e2e (running for 60s)
+docs:e2e |   ✓   44 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › toast: page loads and renders all doc sections (3.9s)
+docs:e2e |   ✓   45 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › toggle: page loads and renders all doc sections (3.8s)
+docs:e2e |   ✓   46 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › toggle-group: page loads and renders all doc sections (4.0s)
+docs:e2e |   ✓   47 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › tooltip: page loads and renders all doc sections (3.7s)
+docs:e2e |   ✓   48 [chromium] › e2e/tests/component-pages.spec.ts:10:5 › Component pages › typography: page loads and renders all doc sections (3.7s)
+docs:e2e |   ✓   49 [chromium] › e2e/tests/demos/AccordionBasicDemo.spec.ts:4:1 › renders and expands/collapses items correctly (5.4s)
+docs:e2e |   ✓   50 [chromium] › e2e/tests/demos/AccordionDisabledDemo.spec.ts:4:1 › renders with disabled items non-interactive and active items working (5.9s)
+docs:e2e |   ✓   51 [chromium] › e2e/tests/demos/AccordionMultipleDemo.spec.ts:4:1 › renders and allows multiple items open simultaneously (5.8s)
+docs:e2e |   ✓   52 [chromium] › e2e/tests/demos/AccordionRootProviderDemo.spec.ts:4:1 › renders and updates external state display on toggle (6.3s)
+docs:e2e |   ✓   53 [chromium] › e2e/tests/demos/AlertBasicDemo.spec.ts:4:1 › renders without errors (4.0s)
+docs:e2e |   ✓   54 [chromium] › e2e/tests/demos/AlertDialogBasicDemo.spec.ts:4:1 › renders without errors (3.4s)
+docs:e2e |   ✓   55 [chromium] › e2e/tests/demos/AlertDialogDeleteDemo.spec.ts:4:1 › renders without errors (3.5s)
+docs:e2e |   ✓   56 [chromium] › e2e/tests/demos/AspectRatioBasicDemo.spec.ts:4:1 › renders without errors (3.9s)
+docs:e2e |   ✓   57 [chromium] › e2e/tests/demos/AvatarBasicDemo.spec.ts:4:1 › renders avatars with images and fallbacks (4.1s)
+docs:e2e |   ✓   58 [chromium] › e2e/tests/demos/BadgeBasicDemo.spec.ts:4:1 › renders without errors (3.5s)
+docs:e2e |   ✓   59 [chromium] › e2e/tests/demos/BreadcrumbBasicDemo.spec.ts:4:1 › renders without errors (3.9s)
+docs:e2e |   ✓   60 [chromium] › e2e/tests/demos/CardBasicDemo.spec.ts:4:1 › renders card with header, content, footer and actionable buttons (4.5s)
+docs:e2e |   ✓   62 [chromium] › e2e/tests/demos/CheckboxBasicDemo.spec.ts:4:1 › renders checkbox variants and toggles correctly (4.7s)
+docs:e2e |   ✓   63 [chromium] › e2e/tests/demos/CheckboxRootProviderDemo.spec.ts:4:1 › toggles checkbox and verifies external state display (5.1s)
+docs:e2e |   ✓   64 [chromium] › e2e/tests/demos/CollapsibleBasicDemo.spec.ts:4:1 › expands and collapses on trigger click (3.5s)
+docs:e2e |   ✓   61 [chromium] › e2e/tests/demos/CarouselBasicDemo.spec.ts:4:1 › renders carousel and navigates via next/prev triggers (8.1s)
+docs:e2e |   ✓   65 [chromium] › e2e/tests/demos/CollapsibleRootProviderDemo.spec.ts:4:1 › toggles collapsible and verifies external state display (4.1s)
+docs:e2e |   ✓   66 [chromium] › e2e/tests/demos/ColorPickerBasicDemo.spec.ts:4:1 › renders color picker with trigger and opens on click (3.9s)
+docs:e2e |   ✓   68 [chromium] › e2e/tests/demos/ColorPickerInlineDemo.spec.ts:4:1 › renders inline color picker without trigger button (4.1s)
+docs:e2e |   ✓   67 [chromium] › e2e/tests/demos/ColorPickerControlledDemo.spec.ts:4:1 › renders controlled color picker with external state display (5.0s)
+▮▮▮▮ docs:e2e (running for 90s)
+docs:e2e |   ✓   69 [chromium] › e2e/tests/demos/ComboboxBasicDemo.spec.ts:4:1 › renders combobox and filters results on input (5.3s)
+docs:e2e |   ✓   70 [chromium] › e2e/tests/demos/ComboboxRootProviderDemo.spec.ts:4:1 › interacts with combobox and verifies external state (4.6s)
+docs:e2e |   ✓   71 [chromium] › e2e/tests/demos/DatePickerBasicDemo.spec.ts:4:1 › renders date pickers and opens calendar on trigger click (7.1s)
+docs:e2e |   ✓   72 [chromium] › e2e/tests/demos/DialogBasicDemo.spec.ts:4:1 › opens dialog, verifies content, and closes via Cancel button (7.0s)
+docs:e2e |   ✓   74 [chromium] › e2e/tests/demos/DrawerBasicDemo.spec.ts:4:1 › opens drawer, verifies content, and closes via Escape (5.7s)
+docs:e2e |   ✓   75 [chromium] › e2e/tests/demos/HoverCardArrowDemo.spec.ts:4:1 › shows hover card with custom arrow on hover (3.3s)
+docs:e2e |   ✓   73 [chromium] › e2e/tests/demos/DialogRootProviderDemo.spec.ts:4:1 › opens dialog from external button and verifies external state display (7.9s)
+docs:e2e |   ✓   76 [chromium] › e2e/tests/demos/HoverCardBasicDemo.spec.ts:4:1 › shows hover card content on hover (3.3s)
+docs:e2e |   ✓   77 [chromium] › e2e/tests/demos/HoverCardControlledDemo.spec.ts:4:1 › shows controlled hover card and updates state display (3.2s)
+docs:e2e |   ✓   78 [chromium] › e2e/tests/demos/HoverCardDelayDemo.spec.ts:4:1 › shows hover card after custom delay on hover (3.5s)
+docs:e2e |   ✓   79 [chromium] › e2e/tests/demos/HoverCardPositioningDemo.spec.ts:4:1 › shows hover card positioned to the right on hover (3.9s)
+docs:e2e |   ✓   80 [chromium] › e2e/tests/demos/HoverCardRootProviderDemo.spec.ts:4:1 › renders root provider hover card and shows content on hover (3.8s)
+docs:e2e |   ✓   81 [chromium] › e2e/tests/demos/InputBasicDemo.spec.ts:4:1 › renders without errors (3.6s)
+docs:e2e |   ✓   83 [chromium] › e2e/tests/demos/ListboxHorizontalDemo.spec.ts:4:1 › renders horizontal listbox and allows item selection (4.9s)
+docs:e2e |   ✓   82 [chromium] › e2e/tests/demos/ListboxBasicDemo.spec.ts:4:1 › renders listbox and allows item selection (6.4s)
+docs:e2e |   ✓   84 [chromium] › e2e/tests/demos/ListboxMultipleDemo.spec.ts:4:1 › renders multiple selection listbox and allows selecting multiple items (7.7s)
+docs:e2e |   ✓   85 [chromium] › e2e/tests/demos/MenuBasicDemo.spec.ts:4:1 › opens dropdown and selects menu item (7.7s)
+docs:e2e |   ✓   86 [chromium] › e2e/tests/demos/MenuNestedDemo.spec.ts:4:1 › opens nested menu and verifies submenu items (5.3s)
+docs:e2e |   ✓   87 [chromium] › e2e/tests/demos/NumberInputBasicDemo.spec.ts:4:1 › increments and decrements value via buttons (5.0s)
+docs:e2e |   ✓   89 [chromium] › e2e/tests/demos/PaginationControlledDemo.spec.ts:4:1 › verifies controlled page state and navigates (3.9s)
+docs:e2e |   ✓   88 [chromium] › e2e/tests/demos/PaginationBasicDemo.spec.ts:4:1 › navigates pages via next/prev/first/last buttons (7.0s)
+docs:e2e |   ✓   91 [chromium] › e2e/tests/demos/PaginationSizeDemo.spec.ts:4:1 › renders sm, md, lg pagination sizes (4.3s)
+docs:e2e |   ✓   90 [chromium] › e2e/tests/demos/PaginationRootProviderDemo.spec.ts:4:1 › renders with root provider and navigates pages (6.4s)
+docs:e2e |   ✓   92 [chromium] › e2e/tests/demos/PasswordInputBasicDemo.spec.ts:4:1 › types password and toggles visibility (4.0s)
+▮▮▮▮ docs:e2e (running for 120s)
+docs:e2e |   ✓   94 [chromium] › e2e/tests/demos/PinInputBasicDemo.spec.ts:4:1 › types pin code into individual inputs (4.2s)
+docs:e2e |   ✘   95 [chromium] › e2e/tests/demos/PinInputRootProviderDemo.spec.ts:4:1 › types pin and verifies external state display (4.2s)
+docs:e2e |   ✓   96 [chromium] › e2e/tests/demos/PopoverBasicDemo.spec.ts:4:1 › opens popover and verifies title and description (4.6s)
+docs:e2e |   ✓   93 [chromium] › e2e/tests/demos/PasswordInputRootProviderDemo.spec.ts:4:1 › toggles visibility via external button (6.4s)
+docs:e2e | (node:199040) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+docs:e2e | (Use `node --trace-warnings ...` to show where the warning was created)
+docs:e2e |   ✓   97 [chromium] › e2e/tests/demos/PopoverRootProviderDemo.spec.ts:4:1 › opens popover and verifies external state and content (4.2s)
+docs:e2e |   ✓   98 [chromium] › e2e/tests/demos/ProgressBasicDemo.spec.ts:4:1 › renders progress bar at 65% with label and value text (3.3s)
+docs:e2e |   ✓   99 [chromium] › e2e/tests/demos/RadioGroupBasicDemo.spec.ts:4:1 › selects radio options and verifies selection changes (4.8s)
+docs:e2e |   ✓  101 [chromium] › e2e/tests/demos/RadioGroupControlledDemo.spec.ts:4:1 › selects radio and verifies controlled state display (3.7s)
+docs:e2e |   ✓  102 [chromium] › e2e/tests/demos/RadioGroupDisabledDemo.spec.ts:4:1 › verifies disabled option cannot be selected (3.6s)
+docs:e2e |   ✘  100 [chromium] › e2e/tests/demos/PinInputRootProviderDemo.spec.ts:4:1 › types pin and verifies external state display (retry #1) (5.3s)
+docs:e2e |   ✓  103 [chromium] › e2e/tests/demos/RadioGroupRootProviderDemo.spec.ts:4:1 › selects radio and verifies external value display (3.7s)
+docs:e2e | (node:199262) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+docs:e2e | (Use `node --trace-warnings ...` to show where the warning was created)
+docs:e2e |   ✓  105 [chromium] › e2e/tests/demos/RatingGroupControlledDemo.spec.ts:4:1 › clicks stars and verifies controlled value display (3.9s)
+docs:e2e |   ✓  104 [chromium] › e2e/tests/demos/RatingGroupBasicDemo.spec.ts:4:1 › renders rating stars and verifies initial rating (4.6s)
+docs:e2e |   ✘  106 [chromium] › e2e/tests/demos/RatingGroupHalfStarDemo.spec.ts:4:1 › verifies half-star rating renders with correct initial value (5.0s)
+docs:e2e |   ✓  107 [chromium] › e2e/tests/demos/RatingGroupDisabledDemo.spec.ts:4:1 › verifies disabled rating cannot be changed (4.8s)
+docs:e2e |   ✓  109 [chromium] › e2e/tests/demos/ScrollAreaBasicDemo.spec.ts:4:1 › renders vertical and horizontal scroll areas with content (4.1s)
+docs:e2e |   ✓  108 [chromium] › e2e/tests/demos/RatingGroupRootProviderDemo.spec.ts:4:1 › renders with root provider and verifies external state display (4.5s)
+docs:e2e | (node:199413) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+docs:e2e | (Use `node --trace-warnings ...` to show where the warning was created)
+docs:e2e |   ✓  110 [chromium] › e2e/tests/demos/SegmentGroupBasicDemo.spec.ts:4:1 › renders and works correctly (3.6s)
+docs:e2e |   ✓  111 [chromium] › e2e/tests/demos/SegmentGroupControlledDemo.spec.ts:4:1 › renders and selects segments with controlled state (3.6s)
+docs:e2e |   ✓  112 [chromium] › e2e/tests/demos/SegmentGroupDisabledDemo.spec.ts:4:1 › renders with disabled segment not selectable (4.2s)
+docs:e2e |   ✘  113 [chromium] › e2e/tests/demos/RatingGroupHalfStarDemo.spec.ts:4:1 › verifies half-star rating renders with correct initial value (retry #1) (6.2s)
+docs:e2e |   ✓  115 [chromium] › e2e/tests/demos/SegmentGroupRootProviderDemo.spec.ts:4:1 › renders with external state and selects segments (4.3s)
+docs:e2e |   ✓  114 [chromium] › e2e/tests/demos/SegmentGroupOutlineDemo.spec.ts:4:1 › renders outline variant and selects segments (5.2s)
+docs:e2e | (node:199625) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+docs:e2e | (Use `node --trace-warnings ...` to show where the warning was created)
+▮▮▮▮ docs:e2e (running for 150s)
+docs:e2e |   ✓  116 [chromium] › e2e/tests/demos/SelectBasicDemo.spec.ts:4:1 › opens dropdown and picks an option (6.2s)
+docs:e2e |   ✓  117 [chromium] › e2e/tests/demos/SelectRootProviderDemo.spec.ts:4:1 › opens select, picks option, verifies external state (5.8s)
+docs:e2e |   ✓  120 [chromium] › e2e/tests/demos/SeparatorBasicDemo.spec.ts:4:1 › renders without errors (3.9s)
+docs:e2e |   ✓  118 [chromium] › e2e/tests/demos/SelectSearchableDemo.spec.ts:4:1 › opens select, types search, verifies filtered results (6.5s)
+docs:e2e |   ✓  121 [chromium] › e2e/tests/demos/SkeletonBasicDemo.spec.ts:4:1 › renders without errors (4.3s)
+docs:e2e |   ✓  119 [chromium] › e2e/tests/demos/SelectMultipleDemo.spec.ts:4:1 › opens select and picks multiple options (8.4s)
+docs:e2e |   ✓  122 [chromium] › e2e/tests/demos/SliderBasicDemo.spec.ts:4:1 › renders slider and verifies value display (4.1s)
+docs:e2e |   ✓  123 [chromium] › e2e/tests/demos/SliderRootProviderDemo.spec.ts:4:1 › renders slider with external state and changes value (4.2s)
+docs:e2e |   ✓  124 [chromium] › e2e/tests/demos/SpinnerBasicDemo.spec.ts:4:1 › renders without errors (3.6s)
+docs:e2e |   ✓  125 [chromium] › e2e/tests/demos/SwitchBasicDemo.spec.ts:4:1 › renders switches and toggles checked state (3.8s)
+docs:e2e |   ✓  127 [chromium] › e2e/tests/demos/TableBasicDemo.spec.ts:4:1 › renders without errors (4.1s)
+docs:e2e |   ✓  126 [chromium] › e2e/tests/demos/SwitchRootProviderDemo.spec.ts:4:1 › toggles switch and verifies external state (5.4s)
+docs:e2e |   ✓  128 [chromium] › e2e/tests/demos/TabsBasicDemo.spec.ts:4:1 › switches tabs and verifies content changes (4.1s)
+docs:e2e |   ✓  131 [chromium] › e2e/tests/demos/TagsInputBasicDemo.spec.ts:4:1 › renders tags and adds new tag (4.4s)
+docs:e2e |   ✓  129 [chromium] › e2e/tests/demos/TabsDisabledDemo.spec.ts:4:1 › renders with disabled tab not selectable (6.5s)
+docs:e2e |   ✓  132 [chromium] › e2e/tests/demos/TagsInputControlledDemo.spec.ts:4:1 › verifies controlled tags and external state (3.8s)
+docs:e2e |   ✓  130 [chromium] › e2e/tests/demos/TabsRootProviderDemo.spec.ts:4:1 › switches tabs and verifies external state (6.3s)
+docs:e2e |   ✓  133 [chromium] › e2e/tests/demos/TagsInputDisabledDemo.spec.ts:4:1 › verifies disabled tags input cannot be edited (3.5s)
+docs:e2e |   ✓  134 [chromium] › e2e/tests/demos/TagsInputInvalidDemo.spec.ts:4:1 › verifies invalid tags input renders with error styling (3.8s)
+docs:e2e |   ✓  136 [chromium] › e2e/tests/demos/TextareaBasicDemo.spec.ts:4:1 › renders textareas and types text (4.3s)
+docs:e2e |   ✓  138 [chromium] › e2e/tests/demos/ToggleBasicDemo.spec.ts:4:1 › toggles button states and verifies disabled toggle (4.0s)
+docs:e2e |   ✓  139 [chromium] › e2e/tests/demos/ToggleGroupBasicDemo.spec.ts:4:1 › selects toggle items and verifies state changes (3.8s)
+▮▮▮▮ docs:e2e (running for 180s)
+docs:e2e |   ✓  137 [chromium] › e2e/tests/demos/ToastBasicDemo.spec.ts:4:1 › creates toasts by clicking buttons (8.1s)
+docs:e2e |   ✓  140 [chromium] › e2e/tests/demos/ToggleGroupRootProviderDemo.spec.ts:4:1 › selects toggle items and verifies external state display (4.6s)
+docs:e2e |   ✓  141 [chromium] › e2e/tests/demos/ToggleGroupSizesDemo.spec.ts:4:1 › renders sm, md, lg toggle groups (3.7s)
+docs:e2e |   ✘  135 [chromium] › e2e/tests/demos/TagsInputRootProviderDemo.spec.ts:4:1 › renders with root provider and verifies external state (13.3s)
+docs:e2e |   ✓  142 [chromium] › e2e/tests/demos/ToggleIndicatorDemo.spec.ts:4:1 › verifies toggle indicator shows different icons for on/off state (3.0s)
+docs:e2e | (node:200257) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+docs:e2e | (Use `node --trace-warnings ...` to show where the warning was created)
+docs:e2e |   ✓  143 [chromium] › e2e/tests/demos/TooltipArrowDemo.spec.ts:4:1 › shows tooltip with arrow on hover (3.5s)
+docs:e2e |   ✓  144 [chromium] › e2e/tests/demos/TooltipBasicDemo.spec.ts:4:1 › shows tooltip content on hover (5.1s)
+docs:e2e |   ✓  147 [chromium] › e2e/tests/demos/TooltipManualArrowDemo.spec.ts:4:1 › shows tooltip with custom arrow size on hover (3.6s)
+docs:e2e |   ✓  145 [chromium] › e2e/tests/demos/TooltipControlledDemo.spec.ts:4:1 › controls tooltip open/close via external button (5.8s)
+docs:e2e |   ✓  148 [chromium] › e2e/tests/demos/TypographyBasicDemo.spec.ts:4:1 › renders all typography variants without errors (4.3s)
+docs:e2e |   ✓  149 [chromium] › e2e/tests/landing.spec.ts:4:3 › Landing page › renders with brand and navigation links (3.1s)
+docs:e2e |   ✓  150 [chromium] › e2e/tests/landing.spec.ts:27:3 › Landing page › does not have console errors (3.0s)
+docs:e2e |   ✓  151 [chromium] › e2e/tests/navigation.spec.ts:5:3 › Navigation › clicking 'Components' nav link navigates to first component page (3.0s)
+docs:e2e |   ✓  152 [chromium] › e2e/tests/navigation.spec.ts:12:3 › Navigation › clicking 'UI' brand link returns to home (4.2s)
+docs:e2e |   ✓  155 [chromium] › e2e/tests/navigation.spec.ts:64:3 › Navigation › unknown component shows not-found message (3.2s)
+docs:e2e |   ✘  146 [chromium] › e2e/tests/demos/TagsInputRootProviderDemo.spec.ts:4:1 › renders with root provider and verifies external state (retry #1) (14.2s)
+docs:e2e |   ✓  153 [chromium] › e2e/tests/navigation.spec.ts:23:3 › Navigation › sidebar links navigate to correct component pages (9.6s)
+docs:e2e | (node:200583) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+docs:e2e | (Use `node --trace-warnings ...` to show where the warning was created)
+docs:e2e |   ✓  156 [chromium] › e2e/tests/navigation.spec.ts:71:3 › Navigation › quickstart page renders (3.0s)
+docs:e2e |   ✓  158 [chromium] › e2e/tests/theme.spec.ts:12:3 › Theme toggle › toggle button is visible on landing page (4.4s)
+docs:e2e |   ✓  157 [chromium] › e2e/tests/theme.spec.ts:18:3 › Theme toggle › toggle button is visible on component pages (5.6s)
+docs:e2e |   ✘  159 [chromium] › e2e/tests/theme.spec.ts:25:3 › Theme toggle › clicking toggle switches the theme class on <html> (5.8s)
+docs:e2e |   ✓  154 [chromium] › e2e/tests/navigation.spec.ts:38:3 › Navigation › direct navigation to all component pages returns 200 (13.8s)
+docs:e2e | (node:200737) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+docs:e2e | (Use `node --trace-warnings ...` to show where the warning was created)
+▮▮▮▮ docs:e2e (running for 210s)
+docs:e2e |   ✘  160 [chromium] › e2e/tests/theme.spec.ts:43:3 › Theme toggle › theme persists after page reload (4.3s)
+docs:e2e | (node:200832) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+docs:e2e | (Use `node --trace-warnings ...` to show where the warning was created)
+docs:e2e |   ✘  161 [chromium] › e2e/tests/theme.spec.ts:25:3 › Theme toggle › clicking toggle switches the theme class on <html> (retry #1) (4.0s)
+docs:e2e |   ✘  162 [chromium] › e2e/tests/theme.spec.ts:43:3 › Theme toggle › theme persists after page reload (retry #1) (3.7s)
+docs:e2e | 
+docs:e2e | 
+docs:e2e |   1) [chromium] › e2e/tests/demos/PinInputRootProviderDemo.spec.ts:4:1 › types pin and verifies external state display 
+docs:e2e | 
+docs:e2e |     Error: expect(received).toContain(expected) // indexOf
+docs:e2e | 
+docs:e2e |     Expected substring: "5"
+docs:e2e |     Received string:    "Value: []"
+docs:e2e | 
+docs:e2e |       34 |   // Verify external state now shows the typed values
+docs:e2e |       35 |   const afterOutput = await outputElement.first().textContent();
+docs:e2e |     > 36 |   expect(afterOutput).toContain("5");
+docs:e2e |          |                       ^
+docs:e2e |       37 |   expect(afterOutput).toContain("6");
+docs:e2e |       38 |   expect(afterOutput).toContain("7");
+docs:e2e |       39 |   expect(afterOutput).toContain("8");
+docs:e2e |         at /home/fandi/Lab/Js/ark-preset/apps/docs/e2e/tests/demos/PinInputRootProviderDemo.spec.ts:36:23
+docs:e2e | 
+docs:e2e |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+docs:e2e |     test-results/demos-PinInputRootProvider-e36dd-fies-external-state-display-chromium/test-failed-1.png
+docs:e2e |     ────────────────────────────────────────────────────────────────────────────────────────────────
+docs:e2e | 
+docs:e2e |     Error Context: test-results/demos-PinInputRootProvider-e36dd-fies-external-state-display-chromium/error-context.md
+docs:e2e | 
+docs:e2e |     Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+docs:e2e | 
+docs:e2e |     Error: expect(received).toContain(expected) // indexOf
+docs:e2e | 
+docs:e2e |     Expected substring: "5"
+docs:e2e |     Received string:    "Value: []"
+docs:e2e | 
+docs:e2e |       34 |   // Verify external state now shows the typed values
+docs:e2e |       35 |   const afterOutput = await outputElement.first().textContent();
+docs:e2e |     > 36 |   expect(afterOutput).toContain("5");
+docs:e2e |          |                       ^
+docs:e2e |       37 |   expect(afterOutput).toContain("6");
+docs:e2e |       38 |   expect(afterOutput).toContain("7");
+docs:e2e |       39 |   expect(afterOutput).toContain("8");
+docs:e2e |         at /home/fandi/Lab/Js/ark-preset/apps/docs/e2e/tests/demos/PinInputRootProviderDemo.spec.ts:36:23
+docs:e2e | 
+docs:e2e |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+docs:e2e |     test-results/demos-PinInputRootProvider-e36dd-fies-external-state-display-chromium-retry1/test-failed-1.png
+docs:e2e |     ────────────────────────────────────────────────────────────────────────────────────────────────
+docs:e2e | 
+docs:e2e |     Error Context: test-results/demos-PinInputRootProvider-e36dd-fies-external-state-display-chromium-retry1/error-context.md
+docs:e2e | 
+docs:e2e |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+docs:e2e |     test-results/demos-PinInputRootProvider-e36dd-fies-external-state-display-chromium-retry1/trace.zip
+docs:e2e |     Usage:
+docs:e2e | 
+docs:e2e |         pnpm exec playwright show-trace test-results/demos-PinInputRootProvider-e36dd-fies-external-state-display-chromium-retry1/trace.zip
+docs:e2e | 
+docs:e2e |     ────────────────────────────────────────────────────────────────────────────────────────────────
+docs:e2e | 
+docs:e2e |   2) [chromium] › e2e/tests/demos/RatingGroupHalfStarDemo.spec.ts:4:1 › verifies half-star rating renders with correct initial value 
+docs:e2e | 
+docs:e2e |     Error: expect(locator).toBeVisible() failed
+docs:e2e | 
+docs:e2e |     Locator: locator('.rounded-2xl:has-text(\'Half stars allowed\')').first().getByText('Rate this')
+docs:e2e |     Expected: visible
+docs:e2e |     Error: strict mode violation: locator('.rounded-2xl:has-text(\'Half stars allowed\')').first().getByText('Rate this') resolved to 2 elements:
+docs:e2e |         1) <label dir="ltr" data-part="label" id="rating:cl-7:label" for="rating:cl-7:input" data-scope="rating-group" class="text-sm font-medium text-foreground leading-normal peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Rate this</label> aka getByText('Rate this').nth(3)
+docs:e2e |         2) <span class="language-xml">…</span> aka getByText('<div> <p class="text-sm text-muted-foreground mb-2">Half stars allowed</p> <')
+docs:e2e | 
+docs:e2e |     Call log:
+docs:e2e |       - Expect "toBeVisible" with timeout 10000ms
+docs:e2e |       - waiting for locator('.rounded-2xl:has-text(\'Half stars allowed\')').first().getByText('Rate this')
+docs:e2e | 
+docs:e2e | 
+docs:e2e |       26 |   // Verify label "Rate this" is visible
+docs:e2e |       27 |   const rateLabel = demoArea.getByText("Rate this");
+docs:e2e |     > 28 |   await expect(rateLabel).toBeVisible();
+docs:e2e |          |                           ^
+docs:e2e |       29 | });
+docs:e2e |       30 |
+docs:e2e |         at /home/fandi/Lab/Js/ark-preset/apps/docs/e2e/tests/demos/RatingGroupHalfStarDemo.spec.ts:28:27
+docs:e2e | 
+docs:e2e |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+docs:e2e |     test-results/demos-RatingGroupHalfStarD-79f44--with-correct-initial-value-chromium/test-failed-1.png
+docs:e2e |     ────────────────────────────────────────────────────────────────────────────────────────────────
+docs:e2e | 
+docs:e2e |     Error Context: test-results/demos-RatingGroupHalfStarD-79f44--with-correct-initial-value-chromium/error-context.md
+docs:e2e | 
+docs:e2e |     Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+docs:e2e | 
+docs:e2e |     Error: expect(locator).toBeVisible() failed
+docs:e2e | 
+docs:e2e |     Locator: locator('.rounded-2xl:has-text(\'Half stars allowed\')').first().getByText('Rate this')
+docs:e2e |     Expected: visible
+docs:e2e |     Error: strict mode violation: locator('.rounded-2xl:has-text(\'Half stars allowed\')').first().getByText('Rate this') resolved to 2 elements:
+docs:e2e |         1) <label dir="ltr" data-part="label" id="rating:cl-7:label" for="rating:cl-7:input" data-scope="rating-group" class="text-sm font-medium text-foreground leading-normal peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Rate this</label> aka getByText('Rate this').nth(3)
+docs:e2e |         2) <span class="language-xml">…</span> aka getByText('<div> <p class="text-sm text-muted-foreground mb-2">Half stars allowed</p> <')
+docs:e2e | 
+docs:e2e |     Call log:
+docs:e2e |       - Expect "toBeVisible" with timeout 10000ms
+docs:e2e |       - waiting for locator('.rounded-2xl:has-text(\'Half stars allowed\')').first().getByText('Rate this')
+docs:e2e | 
+docs:e2e | 
+docs:e2e |       26 |   // Verify label "Rate this" is visible
+docs:e2e |       27 |   const rateLabel = demoArea.getByText("Rate this");
+docs:e2e |     > 28 |   await expect(rateLabel).toBeVisible();
+docs:e2e |          |                           ^
+docs:e2e |       29 | });
+docs:e2e |       30 |
+docs:e2e |         at /home/fandi/Lab/Js/ark-preset/apps/docs/e2e/tests/demos/RatingGroupHalfStarDemo.spec.ts:28:27
+docs:e2e | 
+docs:e2e |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+docs:e2e |     test-results/demos-RatingGroupHalfStarD-79f44--with-correct-initial-value-chromium-retry1/test-failed-1.png
+docs:e2e |     ────────────────────────────────────────────────────────────────────────────────────────────────
+docs:e2e | 
+docs:e2e |     Error Context: test-results/demos-RatingGroupHalfStarD-79f44--with-correct-initial-value-chromium-retry1/error-context.md
+docs:e2e | 
+docs:e2e |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+docs:e2e |     test-results/demos-RatingGroupHalfStarD-79f44--with-correct-initial-value-chromium-retry1/trace.zip
+docs:e2e |     Usage:
+docs:e2e | 
+docs:e2e |         pnpm exec playwright show-trace test-results/demos-RatingGroupHalfStarD-79f44--with-correct-initial-value-chromium-retry1/trace.zip
+docs:e2e | 
+docs:e2e |     ────────────────────────────────────────────────────────────────────────────────────────────────
+docs:e2e | 
+docs:e2e |   3) [chromium] › e2e/tests/demos/TagsInputRootProviderDemo.spec.ts:4:1 › renders with root provider and verifies external state 
+docs:e2e | 
+docs:e2e |     Error: expect(locator).toBeVisible() failed
+docs:e2e | 
+docs:e2e |     Locator: locator('.rounded-2xl:has-text(\'Tags:\')').last().getByText('React', { exact: true }).first()
+docs:e2e |     Expected: visible
+docs:e2e |     Timeout: 10000ms
+docs:e2e |     Error: element(s) not found
+docs:e2e | 
+docs:e2e |     Call log:
+docs:e2e |       - Expect "toBeVisible" with timeout 10000ms
+docs:e2e |       - waiting for locator('.rounded-2xl:has-text(\'Tags:\')').last().getByText('React', { exact: true }).first()
+docs:e2e | 
+docs:e2e | 
+docs:e2e |       14 |   // Verify existing tags "React" and "Solid" are visible
+docs:e2e |       15 |   const reactTag = demoArea.getByText("React", { exact: true });
+docs:e2e |     > 16 |   await expect(reactTag.first()).toBeVisible();
+docs:e2e |          |                                  ^
+docs:e2e |       17 |
+docs:e2e |       18 |   const solidTag = demoArea.getByText("Solid", { exact: true });
+docs:e2e |       19 |   await expect(solidTag.first()).toBeVisible();
+docs:e2e |         at /home/fandi/Lab/Js/ark-preset/apps/docs/e2e/tests/demos/TagsInputRootProviderDemo.spec.ts:16:34
+docs:e2e | 
+docs:e2e |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+docs:e2e |     test-results/demos-TagsInputRootProvide-07c15-and-verifies-external-state-chromium/test-failed-1.png
+docs:e2e |     ────────────────────────────────────────────────────────────────────────────────────────────────
+docs:e2e | 
+docs:e2e |     Error Context: test-results/demos-TagsInputRootProvide-07c15-and-verifies-external-state-chromium/error-context.md
+docs:e2e | 
+docs:e2e |     Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+docs:e2e | 
+docs:e2e |     Error: expect(locator).toBeVisible() failed
+docs:e2e | 
+docs:e2e |     Locator: locator('.rounded-2xl:has-text(\'Tags:\')').last().getByText('React', { exact: true }).first()
+docs:e2e |     Expected: visible
+docs:e2e |     Timeout: 10000ms
+docs:e2e |     Error: element(s) not found
+docs:e2e | 
+docs:e2e |     Call log:
+docs:e2e |       - Expect "toBeVisible" with timeout 10000ms
+docs:e2e |       - waiting for locator('.rounded-2xl:has-text(\'Tags:\')').last().getByText('React', { exact: true }).first()
+docs:e2e | 
+docs:e2e | 
+docs:e2e |       14 |   // Verify existing tags "React" and "Solid" are visible
+docs:e2e |       15 |   const reactTag = demoArea.getByText("React", { exact: true });
+docs:e2e |     > 16 |   await expect(reactTag.first()).toBeVisible();
+docs:e2e |          |                                  ^
+docs:e2e |       17 |
+docs:e2e |       18 |   const solidTag = demoArea.getByText("Solid", { exact: true });
+docs:e2e |       19 |   await expect(solidTag.first()).toBeVisible();
+docs:e2e |         at /home/fandi/Lab/Js/ark-preset/apps/docs/e2e/tests/demos/TagsInputRootProviderDemo.spec.ts:16:34
+docs:e2e | 
+docs:e2e |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+docs:e2e |     test-results/demos-TagsInputRootProvide-07c15-and-verifies-external-state-chromium-retry1/test-failed-1.png
+docs:e2e |     ────────────────────────────────────────────────────────────────────────────────────────────────
+docs:e2e | 
+docs:e2e |     Error Context: test-results/demos-TagsInputRootProvide-07c15-and-verifies-external-state-chromium-retry1/error-context.md
+docs:e2e | 
+docs:e2e |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+docs:e2e |     test-results/demos-TagsInputRootProvide-07c15-and-verifies-external-state-chromium-retry1/trace.zip
+docs:e2e |     Usage:
+docs:e2e | 
+docs:e2e |         pnpm exec playwright show-trace test-results/demos-TagsInputRootProvide-07c15-and-verifies-external-state-chromium-retry1/trace.zip
+docs:e2e | 
+docs:e2e |     ────────────────────────────────────────────────────────────────────────────────────────────────
+docs:e2e | 
+docs:e2e |   4) [chromium] › e2e/tests/theme.spec.ts:25:3 › Theme toggle › clicking toggle switches the theme class on <html> 
+docs:e2e | 
+docs:e2e |     Error: expect(received).toBe(expected) // Object.is equality
+docs:e2e | 
+docs:e2e |     Expected: true
+docs:e2e |     Received: false
+docs:e2e | 
+docs:e2e |       34 |     // Click to toggle
+docs:e2e |       35 |     await toggle.click();
+docs:e2e |     > 36 |     expect(await html.evaluate((el) => el.classList.contains("dark"))).toBe(!initialDark);
+docs:e2e |          |                                                                        ^
+docs:e2e |       37 |
+docs:e2e |       38 |     // Click again to revert
+docs:e2e |       39 |     await toggle.click();
+docs:e2e |         at /home/fandi/Lab/Js/ark-preset/apps/docs/e2e/tests/theme.spec.ts:36:72
+docs:e2e | 
+docs:e2e |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+docs:e2e |     test-results/theme-Theme-toggle-clickin-01dfb-es-the-theme-class-on-html--chromium/test-failed-1.png
+docs:e2e |     ────────────────────────────────────────────────────────────────────────────────────────────────
+docs:e2e | 
+docs:e2e |     Error Context: test-results/theme-Theme-toggle-clickin-01dfb-es-the-theme-class-on-html--chromium/error-context.md
+docs:e2e | 
+docs:e2e |     Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+docs:e2e | 
+docs:e2e |     Error: expect(received).toBe(expected) // Object.is equality
+docs:e2e | 
+docs:e2e |     Expected: true
+docs:e2e |     Received: false
+docs:e2e | 
+docs:e2e |       34 |     // Click to toggle
+docs:e2e |       35 |     await toggle.click();
+docs:e2e |     > 36 |     expect(await html.evaluate((el) => el.classList.contains("dark"))).toBe(!initialDark);
+docs:e2e |          |                                                                        ^
+docs:e2e |       37 |
+docs:e2e |       38 |     // Click again to revert
+docs:e2e |       39 |     await toggle.click();
+docs:e2e |         at /home/fandi/Lab/Js/ark-preset/apps/docs/e2e/tests/theme.spec.ts:36:72
+docs:e2e | 
+docs:e2e |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+docs:e2e |     test-results/theme-Theme-toggle-clickin-01dfb-es-the-theme-class-on-html--chromium-retry1/test-failed-1.png
+docs:e2e |     ────────────────────────────────────────────────────────────────────────────────────────────────
+docs:e2e | 
+docs:e2e |     Error Context: test-results/theme-Theme-toggle-clickin-01dfb-es-the-theme-class-on-html--chromium-retry1/error-context.md
+docs:e2e | 
+docs:e2e |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+docs:e2e |     test-results/theme-Theme-toggle-clickin-01dfb-es-the-theme-class-on-html--chromium-retry1/trace.zip
+docs:e2e |     Usage:
+docs:e2e | 
+docs:e2e |         pnpm exec playwright show-trace test-results/theme-Theme-toggle-clickin-01dfb-es-the-theme-class-on-html--chromium-retry1/trace.zip
+docs:e2e | 
+docs:e2e |     ────────────────────────────────────────────────────────────────────────────────────────────────
+docs:e2e | 
+docs:e2e |   5) [chromium] › e2e/tests/theme.spec.ts:43:3 › Theme toggle › theme persists after page reload ───
+docs:e2e | 
+docs:e2e |     Error: expect(received).toBe(expected) // Object.is equality
+docs:e2e | 
+docs:e2e |     Expected: false
+docs:e2e |     Received: true
+docs:e2e | 
+docs:e2e |       58 |     // Theme should still match
+docs:e2e |       59 |     const afterReload = await html.evaluate((el) => el.classList.contains("dark"));
+docs:e2e |     > 60 |     expect(afterReload).toBe(afterToggle);
+docs:e2e |          |                         ^
+docs:e2e |       61 |   });
+docs:e2e |       62 | });
+docs:e2e |       63 |
+docs:e2e |         at /home/fandi/Lab/Js/ark-preset/apps/docs/e2e/tests/theme.spec.ts:60:25
+docs:e2e | 
+docs:e2e |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+docs:e2e |     test-results/theme-Theme-toggle-theme-persists-after-page-reload-chromium/test-failed-1.png
+docs:e2e |     ────────────────────────────────────────────────────────────────────────────────────────────────
+docs:e2e | 
+docs:e2e |     Error Context: test-results/theme-Theme-toggle-theme-persists-after-page-reload-chromium/error-context.md
+docs:e2e | 
+docs:e2e |     Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+docs:e2e | 
+docs:e2e |     Error: expect(received).toBe(expected) // Object.is equality
+docs:e2e | 
+docs:e2e |     Expected: false
+docs:e2e |     Received: true
+docs:e2e | 
+docs:e2e |       58 |     // Theme should still match
+docs:e2e |       59 |     const afterReload = await html.evaluate((el) => el.classList.contains("dark"));
+docs:e2e |     > 60 |     expect(afterReload).toBe(afterToggle);
+docs:e2e |          |                         ^
+docs:e2e |       61 |   });
+docs:e2e |       62 | });
+docs:e2e |       63 |
+docs:e2e |         at /home/fandi/Lab/Js/ark-preset/apps/docs/e2e/tests/theme.spec.ts:60:25
+docs:e2e | 
+docs:e2e |     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+docs:e2e |     test-results/theme-Theme-toggle-theme-persists-after-page-reload-chromium-retry1/test-failed-1.png
+docs:e2e |     ────────────────────────────────────────────────────────────────────────────────────────────────
+docs:e2e | 
+docs:e2e |     Error Context: test-results/theme-Theme-toggle-theme-persists-after-page-reload-chromium-retry1/error-context.md
+docs:e2e | 
+docs:e2e |     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+docs:e2e |     test-results/theme-Theme-toggle-theme-persists-after-page-reload-chromium-retry1/trace.zip
+docs:e2e |     Usage:
+docs:e2e | 
+docs:e2e |         pnpm exec playwright show-trace test-results/theme-Theme-toggle-theme-persists-after-page-reload-chromium-retry1/trace.zip
+docs:e2e | 
+docs:e2e |     ────────────────────────────────────────────────────────────────────────────────────────────────
+docs:e2e | 
+docs:e2e |   5 failed
+docs:e2e |     [chromium] › e2e/tests/demos/PinInputRootProviderDemo.spec.ts:4:1 › types pin and verifies external state display 
+docs:e2e |     [chromium] › e2e/tests/demos/RatingGroupHalfStarDemo.spec.ts:4:1 › verifies half-star rating renders with correct initial value 
+docs:e2e |     [chromium] › e2e/tests/demos/TagsInputRootProviderDemo.spec.ts:4:1 › renders with root provider and verifies external state 
+docs:e2e |     [chromium] › e2e/tests/theme.spec.ts:25:3 › Theme toggle › clicking toggle switches the theme class on <html> 
+docs:e2e |     [chromium] › e2e/tests/theme.spec.ts:43:3 › Theme toggle › theme persists after page reload ────
+docs:e2e |   152 passed (3.6m)
+▮▮▮▮ docs:e2e (3m 37s 547ms, cb125a48)
+Error: task_runner::run_failed
+
+  × Task docs:e2e failed to run.
+  ╰─▶ Process pnpm failed: exit code 1
+

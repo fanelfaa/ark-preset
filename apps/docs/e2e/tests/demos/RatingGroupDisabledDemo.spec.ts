@@ -9,7 +9,9 @@ test("verifies disabled rating cannot be changed", async ({ page }) => {
   await expect(disabledLabel).toBeVisible();
 
   // The disabled group — find it after the "Disabled" label
-  const disabledGroup = page.locator("[data-scope='rating-group']").filter({ has: page.getByText("Rate this") });
+  const disabledGroup = page
+    .locator("[data-scope='rating-group']")
+    .filter({ has: page.getByText("Rate this") });
   await expect(disabledGroup.first()).toBeVisible();
 
   // Verify items have disabled state

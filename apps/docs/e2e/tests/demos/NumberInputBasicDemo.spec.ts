@@ -13,7 +13,9 @@ test("increments and decrements value via buttons", async ({ page }) => {
   expect(initialValue).toBe("50");
 
   // Find increment button and click it
-  const incrementBtn = page.locator("[data-scope='number-input'] [data-part='increment-trigger']").first();
+  const incrementBtn = page
+    .locator("[data-scope='number-input'] [data-part='increment-trigger']")
+    .first();
   if (await incrementBtn.isVisible()) {
     await incrementBtn.click();
     await page.waitForTimeout(100);
@@ -22,7 +24,9 @@ test("increments and decrements value via buttons", async ({ page }) => {
   }
 
   // Find decrement button and click it
-  const decrementBtn = page.locator("[data-scope='number-input'] [data-part='decrement-trigger']").first();
+  const decrementBtn = page
+    .locator("[data-scope='number-input'] [data-part='decrement-trigger']")
+    .first();
   if (await decrementBtn.isVisible()) {
     await decrementBtn.click();
     await page.waitForTimeout(100);

@@ -13,7 +13,9 @@ test("opens popover and verifies external state and content", async ({ page }) =
   await page.waitForTimeout(200);
 
   // Verify popover content is visible
-  await expect(page.getByRole("dialog").getByText(/This popover state is managed externally/)).toBeVisible();
+  await expect(
+    page.getByRole("dialog").getByText(/This popover state is managed externally/),
+  ).toBeVisible();
 
   checkErrors();
 });

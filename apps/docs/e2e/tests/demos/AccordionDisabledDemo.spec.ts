@@ -18,6 +18,6 @@ test("renders with disabled items non-interactive and active items working", asy
   await page.waitForTimeout(300);
 
   await expect(
-    page.locator("[data-scope='accordion']").getByText(/This item is interactive/i)
+    page.locator("[data-scope='accordion']").getByText(/This item is interactive/i),
   ).toBeVisible();
 });

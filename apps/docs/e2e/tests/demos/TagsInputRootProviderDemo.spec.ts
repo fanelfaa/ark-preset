@@ -4,11 +4,8 @@ import { setupPage } from "../../fixtures";
 test("renders with root provider and verifies external state", async ({ page }) => {
   await setupPage(page, "/docs/components/tags-input");
 
-  // Find root provider demo by external "Tags:" label
-  // tagsLabel
-  // Use nth(2) since there's TagsInputControlledDemo and TagsInputRootProviderDemo
-  // Just verify the root provider renders
-  const demoArea = page.locator(".rounded-lg:has-text('Tags:')").last();
+  // Find root provider demo by external "Tags:" label with React and Solid
+  const demoArea = page.locator(".rounded-2xl").filter({ hasText: "Tags: React, Solid" }).first();
   await expect(demoArea).toBeVisible();
 
   // Verify existing tags "React" and "Solid" are visible
