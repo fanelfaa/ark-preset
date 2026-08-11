@@ -1,38 +1,17 @@
 import { InlineCode } from "@ark-preset/solid";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import ToggleGroupSizesDemo from "@demos/toggle-group-demo/ToggleGroupSizesDemo.tsx";
+import ToggleGroupSizesDemoCode from "@demos/toggle-group-demo/ToggleGroupSizesDemo.tsx?code";
 import ToggleGroupRootProviderDemo from "@demos/toggle-group-demo/ToggleGroupRootProviderDemo.tsx";
+import ToggleGroupRootProviderDemoCode from "@demos/toggle-group-demo/ToggleGroupRootProviderDemo.tsx?code";
 
 ## Sizes
 
 Use the <InlineCode>size</InlineCode> prop to change the toggle group item size.
 
-<ToggleGroupSizesDemo />
-
-```tsx
-import { ToggleGroup, ToggleGroupItem } from "~/components/toggle-group";
-
-export function ToggleGroupSizesDemo() {
-  return (
-    <div class="flex flex-col gap-6">
-      <ToggleGroup defaultValue={["sm"]}>
-        <ToggleGroupItem size="sm" value="sm">Sm</ToggleGroupItem>
-        <ToggleGroupItem size="sm" value="md">Sm</ToggleGroupItem>
-        <ToggleGroupItem size="sm" value="lg">Sm</ToggleGroupItem>
-      </ToggleGroup>
-      <ToggleGroup defaultValue={["md"]}>
-        <ToggleGroupItem size="md" value="sm">Md</ToggleGroupItem>
-        <ToggleGroupItem size="md" value="md">Md</ToggleGroupItem>
-        <ToggleGroupItem size="md" value="lg">Md</ToggleGroupItem>
-      </ToggleGroup>
-      <ToggleGroup defaultValue={["lg"]}>
-        <ToggleGroupItem size="lg" value="sm">Lg</ToggleGroupItem>
-        <ToggleGroupItem size="lg" value="md">Lg</ToggleGroupItem>
-        <ToggleGroupItem size="lg" value="lg">Lg</ToggleGroupItem>
-      </ToggleGroup>
-    </div>
-  );
-}
-```
+<ComponentPreview code={ToggleGroupSizesDemoCode}>
+  <ToggleGroupSizesDemo />
+</ComponentPreview>
 
 ## Usage
 
@@ -65,7 +44,9 @@ Multiple selection:
 
 Use <InlineCode>ToggleGroupBase.RootProvider</InlineCode> when you need to control the toggle group state externally.
 
-<ToggleGroupRootProviderDemo />
+<ComponentPreview code={ToggleGroupRootProviderDemoCode}>
+  <ToggleGroupRootProviderDemo />
+</ComponentPreview>
 
 ```tsx
 import { useToggleGroup } from "@ark-ui/solid/toggle-group";
