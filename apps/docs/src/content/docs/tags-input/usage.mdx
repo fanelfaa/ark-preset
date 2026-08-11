@@ -1,8 +1,13 @@
 import { InlineCode } from "@ark-preset/solid";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import TagsInputControlledDemo from "@demos/tags-input-demo/TagsInputControlledDemo.tsx";
+import TagsInputControlledDemoCode from "@demos/tags-input-demo/TagsInputControlledDemo.tsx?code";
 import TagsInputDisabledDemo from "@demos/tags-input-demo/TagsInputDisabledDemo.tsx";
+import TagsInputDisabledDemoCode from "@demos/tags-input-demo/TagsInputDisabledDemo.tsx?code";
 import TagsInputInvalidDemo from "@demos/tags-input-demo/TagsInputInvalidDemo.tsx";
+import TagsInputInvalidDemoCode from "@demos/tags-input-demo/TagsInputInvalidDemo.tsx?code";
 import TagsInputRootProviderDemo from "@demos/tags-input-demo/TagsInputRootProviderDemo.tsx";
+import TagsInputRootProviderDemoCode from "@demos/tags-input-demo/TagsInputRootProviderDemo.tsx?code";
 
 ## Usage
 
@@ -22,66 +27,25 @@ Basic tags input with a label:
 
 Use <InlineCode>value</InlineCode> and <InlineCode>onValueChange</InlineCode> to control the tag values externally:
 
-<TagsInputControlledDemo />
-
-```tsx
-import { createSignal } from "solid-js";
-import { TagsInput } from "~/components/tags-input";
-
-export function ControlledDemo() {
-  const [value, setValue] = createSignal(["Solid"]);
-  return (
-    <div>
-      <p class="text-sm text-muted-foreground mb-2">Tags: {value().join(", ")}</p>
-      <TagsInput
-        value={value()}
-        onValueChange={(e) => setValue(e.value)}
-        label="Frameworks"
-      />
-    </div>
-  );
-}
-```
+<ComponentPreview code={TagsInputControlledDemoCode}>
+  <TagsInputControlledDemo />
+</ComponentPreview>
 
 ### Disabled
 
 Use the <InlineCode>disabled</InlineCode> prop to disable the tags input:
 
-<TagsInputDisabledDemo />
-
-```tsx
-import { TagsInput } from "~/components/tags-input";
-
-export function DisabledDemo() {
-  return (
-    <TagsInput
-      defaultValue={["React", "Solid"]}
-      label="Frameworks"
-      disabled
-    />
-  );
-}
-```
+<ComponentPreview code={TagsInputDisabledDemoCode}>
+  <TagsInputDisabledDemo />
+</ComponentPreview>
 
 ### Invalid State
 
 Use the <InlineCode>invalid</InlineCode> prop (from Ark UI) to mark the input as invalid:
 
-<TagsInputInvalidDemo />
-
-```tsx
-import { TagsInput } from "~/components/tags-input";
-
-export function InvalidDemo() {
-  return (
-    <TagsInput
-      defaultValue={["React", "Solid"]}
-      label="Frameworks"
-      invalid
-    />
-  );
-}
-```
+<ComponentPreview code={TagsInputInvalidDemoCode}>
+  <TagsInputInvalidDemo />
+</ComponentPreview>
 
 ## Advanced Usage
 
@@ -101,74 +65,9 @@ import { TagsInputBase } from "~/components/tags-input";
 
 For full control over the tags input machine, use <InlineCode>useTagsInput</InlineCode> with <InlineCode>TagsInputBase.RootProvider</InlineCode>:
 
-<TagsInputRootProviderDemo />
-
-```tsx
-import { TagsInput } from "~/components/tags-input/tags-input.base";
-import { useTagsInput } from "@ark-ui/solid/tags-input";
-
-export function RootProviderDemo() {
-  const tagsInput = useTagsInput({ defaultValue: ["React", "Solid"] });
-
-  return (
-    <div class="space-y-2">
-      <p class="text-sm text-muted-foreground">Tags: {tagsInput().value.join(", ")}</p>
-      <TagsInput.RootProvider value={tagsInput}>
-        <TagsInput.Label>Frameworks</TagsInput.Label>
-        <TagsInput.Control>
-          <TagsInput.Context>
-            {(api) => (
-              <Index each={api().value}>
-                {(value, index) => (
-                  <TagsInput.Item index={index} value={value()}>
-                    <TagsInput.ItemPreview>
-                      <TagsInput.ItemText>{value()}</TagsInput.ItemText>
-                      <TagsInput.ItemDeleteTrigger>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="14"
-                          height="14"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <path d="M18 6 6 18" />
-                          <path d="m6 6 12 12" />
-                        </svg>
-                      </TagsInput.ItemDeleteTrigger>
-                    </TagsInput.ItemPreview>
-                    <TagsInput.ItemInput />
-                  </TagsInput.Item>
-                )}
-              </Index>
-            )}
-          </TagsInput.Context>
-          <TagsInput.Input placeholder="Add a tag..." />
-          <TagsInput.ClearTrigger>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M18 6 6 18" />
-              <path d="m6 6 12 12" />
-            </svg>
-          </TagsInput.ClearTrigger>
-        </TagsInput.Control>
-      </TagsInput.RootProvider>
-    </div>
-  );
-}
-```
+<ComponentPreview code={TagsInputRootProviderDemoCode}>
+  <TagsInputRootProviderDemo />
+</ComponentPreview>
 
 ### Custom Tag Rendering with TagsInputItem
 
