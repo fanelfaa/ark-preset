@@ -1,9 +1,8 @@
 import { Alert, AlertTitle, AlertDescription } from "@ark-preset/solid";
-import { DemoWrapper } from "../../DemoWrapper";
 
 export default function AlertBasicDemo() {
   return (
-    <DemoWrapper class="space-y-4">
+    <div class="space-y-4">
       <Alert>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -43,6 +42,6 @@ export default function AlertBasicDemo() {
           An error occurred while processing your request. Please try again.
         </AlertDescription>
       </Alert>
-    </DemoWrapper>
+    </div>
   );
 }
