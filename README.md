@@ -30,11 +30,11 @@ You can use just the recipes to style your own Ark UI components, or take the fu
 
 ## Packages
 
-| Package         | What                                                                                  |
-| --------------- | ------------------------------------------------------------------------------------- |
+| Package             | What                                                                                  |
+| ------------------- | ------------------------------------------------------------------------------------- |
 | `@ark-preset/core`  | Tailwind-variants recipes — one per component. Pure styling, no framework deps.       |
 | `@ark-preset/solid` | Solid.js wrappers around `@ark-ui/solid`. Delegates to Ark UI, applies recipe styles. |
-| `@ark-preset/cli`     | CLI to generate components into your project.                                          |
+| `@ark-preset/cli`   | CLI to generate components into your project.                                         |
 
 ### `@ark-preset/core` — recipes
 
