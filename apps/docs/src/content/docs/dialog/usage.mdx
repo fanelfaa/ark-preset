@@ -1,3 +1,7 @@
+import { ComponentPreview } from "../../../components/ComponentPreview";
+import DialogRootProviderDemo from "@demos/dialog-demo/DialogRootProviderDemo.tsx";
+import DialogRootProviderDemoCode from "@demos/dialog-demo/DialogRootProviderDemo.tsx?code";
+
 ## Usage
 
 Import the components:
@@ -77,45 +81,9 @@ export function ControlledDialog() {
 
 Use <InlineCode>DialogBase.RootProvider</InlineCode> when you need to access the dialog state outside of the component tree. This pattern uses the <InlineCode>useDialog</InlineCode> hook from Ark UI to create a shared context that both the component and external elements can reference.
 
-import DialogRootProviderDemo from "@demos/dialog-demo/DialogRootProviderDemo.tsx";
-
-<DialogRootProviderDemo />
-
-```tsx
-import { useDialog } from "@ark-ui/solid/dialog";
-import { DialogContent, DialogTrigger, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogBase } from "~/components/dialog";
-import { Button } from "~/components/button";
-
-export function ExternalControlExample() {
-  const dialog = useDialog({ defaultOpen: false });
-
-  return (
-    <div>
-      <output>Open: {JSON.stringify(dialog().open)}</output>
-
-      <Button onClick={() => dialog().setOpen(true)}>Open Dialog</Button>
-
-      <DialogBase.RootProvider value={dialog}>
-        <DialogTrigger style="display:none">
-          Hidden Trigger
-        </DialogTrigger>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Externally Controlled Dialog</DialogTitle>
-            <DialogDescription>This dialog is controlled via useDialog.</DialogDescription>
-          </DialogHeader>
-          <DialogFooter>
-            <Button variant="outline" onClick={() => dialog().setOpen(false)}>
-              Cancel
-            </Button>
-            <Button onClick={() => dialog().setOpen(false)}>Confirm</Button>
-          </DialogFooter>
-        </DialogContent>
-      </DialogBase.RootProvider>
-    </div>
-  );
-}
-```
+<ComponentPreview code={DialogRootProviderDemoCode}>
+  <DialogRootProviderDemo />
+</ComponentPreview>
 
 The key difference:
 

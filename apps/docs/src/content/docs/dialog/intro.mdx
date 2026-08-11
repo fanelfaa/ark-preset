@@ -1,5 +1,7 @@
 import { DocsLink } from "../../../components/DocsLink";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import DialogBasicDemo from "@demos/dialog-demo/DialogBasicDemo.tsx";
+import DialogBasicDemoCode from "@demos/dialog-demo/DialogBasicDemo.tsx?code";
 
 # Dialog
 
@@ -7,53 +9,6 @@ A modal dialog that overlays the page content, typically used for important acti
 
 <DocsLink href="https://ark-ui.com/docs/components/dialog" />
 
-<DialogBasicDemo />
-
-```tsx
-import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogFooter,
-} from "~/components/dialog";
-import { Button } from "~/components/button";
-import { Input } from "~/components/input";
-import { RadioGroup, RadioGroupItem, RadioGroupBase } from "~/components/radio-group";
-import { Separator } from "~/components/separator";
-
-export function DialogDemo() {
-  return (
-    <Dialog>
-      <DialogTrigger>Edit Profile</DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Edit Profile</DialogTitle>
-          <DialogDescription>
-            Make changes to your profile here. You can save your changes when done.
-          </DialogDescription>
-        </DialogHeader>
-        <div class="flex flex-col gap-4 py-4">
-          <Input label="Name" placeholder="Your name" />
-          <Input label="Email" type="email" placeholder="your@email.com" />
-          <RadioGroup>
-            <RadioGroupBase.Label class="text-sm font-medium">Notification preferences</RadioGroupBase.Label>
-            <div class="flex flex-row gap-6">
-              <RadioGroupItem value="all">All notifications</RadioGroupItem>
-              <RadioGroupItem value="mentions">Mentions only</RadioGroupItem>
-              <RadioGroupItem value="none">No notifications</RadioGroupItem>
-            </div>
-          </RadioGroup>
-        </div>
-        <Separator />
-        <DialogFooter>
-          <Button variant="outline">Cancel</Button>
-          <Button>Save Changes</Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
-  );
-}
-```
+<ComponentPreview code={DialogBasicDemoCode}>
+  <DialogBasicDemo />
+</ComponentPreview>

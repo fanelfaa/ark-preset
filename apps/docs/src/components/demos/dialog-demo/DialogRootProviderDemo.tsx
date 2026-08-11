@@ -1,4 +1,3 @@
-import { DemoWrapper } from "../../DemoWrapper";
 import { useDialog } from "@ark-ui/solid/dialog";
 import {
   DialogContent,
@@ -15,7 +14,7 @@ export default function DialogRootProviderDemo() {
   const dialog = useDialog({ defaultOpen: false });
 
   return (
-    <DemoWrapper class="space-y-4">
+    <div class="space-y-4">
       <output class="block text-sm text-muted-foreground">
         Open: {JSON.stringify(dialog().open)}
       </output>
@@ -44,6 +43,6 @@ export default function DialogRootProviderDemo() {
           </DialogFooter>
         </DialogContent>
       </DialogBase.RootProvider>
-    </DemoWrapper>
+    </div>
   );
 }

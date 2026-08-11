@@ -1,4 +1,3 @@
-import { DemoWrapper } from "../../DemoWrapper";
 import { DialogCloseTrigger } from "@ark-ui/solid";
 import {
   Dialog,
@@ -13,7 +12,7 @@ import { Button, Input, RadioGroup, RadioGroupItem, RadioGroupBase } from "@ark-
 
 export default function DialogBasicDemo() {
   return (
-    <DemoWrapper>
+    <div>
       <Dialog>
         <DialogTrigger>Edit Profile</DialogTrigger>
         <DialogContent>
@@ -54,6 +53,6 @@ export default function DialogBasicDemo() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-    </DemoWrapper>
+    </div>
   );
 }
