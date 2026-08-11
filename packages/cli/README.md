@@ -21,10 +21,10 @@ npx @ark-preset/cli add button -f solid
 
 ## Options
 
-| Option                     | Description                              | Default                 |
-| -------------------------- | ---------------------------------------- | ----------------------- |
-| `-o, --output <path>`      | Output directory                         | `./src/components/ui`   |
-| `-f, --framework <type>`   | Framework: `solid` \| `react` \| `vue`   | `solid`                 |
+| Option                   | Description                            | Default               |
+| ------------------------ | -------------------------------------- | --------------------- |
+| `-o, --output <path>`    | Output directory                       | `./src/components/ui` |
+| `-f, --framework <type>` | Framework: `solid` \| `react` \| `vue` | `solid`               |
 
 ## Output Structure
 
@@ -62,18 +62,17 @@ Configure in your MCP client (`claude.json`, `cursor.json`, etc.):
 
 ### Available Tools
 
-| Tool | Description |
-|------|-------------|
-| `ark_preset_list_components` | List all 46 components with ✅/⬜ status and dependencies |
-| `ark_preset_get_component` | Full component details — recipe source, template files, deps |
-| `ark_preset_search_components` | Search components by keyword |
-| `ark_preset_add_component` | Generate component files into your project |
-| `ark_preset_get_recipe` | View raw `tv()` recipe source |
-| `ark_preset_get_dependency_graph` | Query dependency relationships between components |
-| `ark_preset_get_manifest` | Dump component manifest as JSON or text summary |
-| `ark_preset_get_component_usage` | Get JSX usage examples for a component (variants, event handlers, etc.) |
+| Tool                              | Description                                                             |
+| --------------------------------- | ----------------------------------------------------------------------- |
+| `ark_preset_list_components`      | List all 46 components with ✅/⬜ status and dependencies               |
+| `ark_preset_get_component`        | Full component details — recipe source, template files, deps            |
+| `ark_preset_search_components`    | Search components by keyword                                            |
+| `ark_preset_add_component`        | Generate component files into your project                              |
+| `ark_preset_get_recipe`           | View raw `tv()` recipe source                                           |
+| `ark_preset_get_dependency_graph` | Query dependency relationships between components                       |
+| `ark_preset_get_manifest`         | Dump component manifest as JSON or text summary                         |
+| `ark_preset_get_component_usage`  | Get JSX usage examples for a component (variants, event handlers, etc.) |
 
 > **Note:** Complementary to the Ark UI MCP server. Ark UI MCP provides upstream
 > component info (props, examples). Ark Preset MCP provides preset-specific info
 > (which components have wrappers, recipe styling, code generation).
-

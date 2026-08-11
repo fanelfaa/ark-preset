@@ -126,7 +126,10 @@ const Select: Component<SelectProps> = (props) => {
         class={local.class}
         error={local.error}
         onOpenChange={handleOpenChange}
-        positioning={mergeProps({ placement: "bottom", sameWidth: true } as const, positioningProp.positioning)}
+        positioning={mergeProps(
+          { placement: "bottom", sameWidth: true } as const,
+          positioningProp.positioning,
+        )}
         {...others}
       />
     </SelectSearchableContext.Provider>

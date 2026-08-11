@@ -21,6 +21,85 @@ const __dirname = path.dirname(__filename);
 const cliRoot = path.resolve(__dirname, "../..");
 const repoRoot = path.resolve(cliRoot, "../..");
 
+// ── Demo Extraction ────────────────────────────────────────────
+
+const DEMOS_BASE = path.join(repoRoot, "apps", "docs", "src", "components", "demos");
+
+function findDemoFiles(component: string): Map<string, string> {
+  const demoDir = path.join(DEMOS_BASE, `${component}-demo`);
+  const files = new Map<string, string>();
+
+  if (!fs.existsSync(demoDir)) return files;
+
+  for (const entry of fs.readdirSync(demoDir)) {
+    if (entry.endsWith(".tsx")) {
+      const name = entry.replace(/\.tsx$/, "");
+      const content = fs.readFileSync(path.join(demoDir, entry), "utf-8");
+      files.set(name, content);
+    }
+  }
+
+  return files;
+}
+
+function rewriteDemoSource(source: string, component: string): string {
+  let out = source;
+
+  // `@ark-preset/solid` → `~/components/<component>`
+  out = out.replace(/from\s+["']@ark-preset\/solid["']/g, `from "~/components/${component}"`);
+
+  // Drop internal DemoWrapper import lines
+  out = out.replace(/^import [^\n]*DemoWrapper[^\n]*$/gm, "");
+
+  return out.trim();
+}
+
+function replaceComponentPreviewWithCode(
+  content: string,
+  component: string,
+  demoFiles: Map<string, string>,
+): string {
+  const componentPreviewRegex =
+    /<ComponentPreview\s+code=\{(\w+)}\s*>\s*<(\w+)\s*\/>\s*<\/ComponentPreview>\s*/gs;
+
+  return content.replace(componentPreviewRegex, (match, _codeVar, demoName) => {
+    const demoSource = demoFiles.get(demoName);
+
+    if (!demoSource) {
+      console.warn(`    ⚠ Demo file not found: ${demoName}`);
+      return match;
+    }
+
+    const rewritten = rewriteDemoSource(demoSource, component);
+    return `\`\`\`tsx\n${rewritten}\n\`\`\`\n`;
+  });
+}
+
+function processUsageExample(
+  content: string,
+  component: string,
+  demoFiles: Map<string, string>,
+): string {
+  // Strip frontmatter
+  let out = content.replace(/^---[\s\S]*?---\n*/, "");
+
+  // Drop specific known import lines we don't want (not all imports)
+  // Keep user-facing code block imports like `import { Button } from "~/components/..."`
+  const dropPatterns = [
+    /import [^\n]*ComponentPreview[^\n]* from "[^"]+";\n*/g,
+    /import [^\n]* from "@demos\/[^"]+";\n*/g,
+    /import [^\n]* from "@ark-preset\/solid";\n*/g,
+  ];
+  for (const pattern of dropPatterns) {
+    out = out.replace(pattern, "");
+  }
+
+  // Replace ComponentPreview blocks with actual demo code
+  out = replaceComponentPreviewWithCode(out, component, demoFiles);
+
+  return out.trimStart();
+}
+
 // ── Configuration ─────────────────────────────────────────────
 const FRAMEWORKS = ["solid"] as const;
 
@@ -269,25 +348,28 @@ async function main() {
   if (fs.existsSync(DOCS_DIR)) {
     fs.ensureDirSync(USAGE_DIR);
     let copiedCount = 0;
+    let skippedCount = 0;
     for (const framework of FRAMEWORKS) {
       for (const comp of Object.keys(manifest[framework])) {
         const usageFile = path.join(DOCS_DIR, comp, "usage.mdx");
         if (fs.existsSync(usageFile)) {
-          // Strip frontmatter (---...---) and top-level package imports, keep only the JSX/content
-          // Only remove import lines that reference external packages, not relative imports in code blocks
+          const demoFiles = findDemoFiles(comp);
           const content = fs.readFileSync(usageFile, "utf-8");
-          const noFrontmatter = content.replace(/^---[\s\S]*?---\n*/, "");
-          const noImports = noFrontmatter.replace(/^import .*? from \"@[^\"]+\";\n*/gm, "");
-          fs.writeFileSync(
-            path.join(USAGE_DIR, `${comp}.md`),
-            noImports.trimStart(),
-            "utf-8",
-          );
-          copiedCount++;
+          const processed = processUsageExample(content, comp, demoFiles);
+
+          if (processed.includes("```tsx")) {
+            fs.writeFileSync(path.join(USAGE_DIR, `${comp}.md`), processed, "utf-8");
+            copiedCount++;
+          } else {
+            console.warn(`    ⚠ ${comp}/usage.mdx has no ComponentPreview demos`);
+            fs.writeFileSync(path.join(USAGE_DIR, `${comp}.md`), processed, "utf-8");
+            skippedCount++;
+          }
         }
       }
     }
-    console.log(`\n  ✓ Copied ${copiedCount} usage examples`);
+    console.log(`\n  ✓ Copied ${copiedCount} usage examples with demo code`);
+    if (skippedCount > 0) console.log(`  ⚠ ${skippedCount} usage examples skipped (no demos)`);
   } else {
     console.warn(`\n  ⚠ Docs not found: ${DOCS_DIR} — usage examples skipped`);
   }

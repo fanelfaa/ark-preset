@@ -14,9 +14,16 @@ const PasswordInputRootProvider: Component<ArkPasswordInput.RootProviderProps> =
   return <ArkPasswordInput.RootProvider class={styles.root({ class: local.class })} {...others} />;
 };
 
-const PasswordInputLabel: Component<ArkPasswordInput.LabelProps & { error?: boolean }> = (props) => {
+const PasswordInputLabel: Component<ArkPasswordInput.LabelProps & { error?: boolean }> = (
+  props,
+) => {
   const [local, others] = splitProps(props, ["class", "error"]);
-  return <ArkPasswordInput.Label class={labelVariants({ class: local.class, error: local.error })} {...others} />;
+  return (
+    <ArkPasswordInput.Label
+      class={labelVariants({ class: local.class, error: local.error })}
+      {...others}
+    />
+  );
 };
 
 const PasswordInputControl: Component<ArkPasswordInput.ControlProps> = (props) => {

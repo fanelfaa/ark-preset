@@ -13,8 +13,8 @@ Solid.js component source — 46 directory-based components wrapping Ark UI prim
 | Task                       | Location             | Notes                                          |
 | -------------------------- | -------------------- | ---------------------------------------------- |
 | Add new Solid.js component | src/<component>/     | Create directory with .base.tsx + index.tsx    |
-| Add recipe                 | ../core/src/recipes/ | Create *.ts file with tv() slots and variants |
-| Update component index     | index.ts             | Add `export * from "./<component>"`             |
+| Add recipe                 | ../core/src/recipes/ | Create \*.ts file with tv() slots and variants |
+| Update component index     | index.ts             | Add `export * from "./<component>"`            |
 | Update core index          | ../core/src/index.ts | Export new recipe variants + types             |
 
 ## COMPONENT ARCHITECTURE
@@ -274,11 +274,13 @@ export { <component>Variants, type <component>Variants } from "@ark-preset/core"
 | Context/hooks in barrel | Yes (via `export *`)                           | No — must import from base file directly                     |
 
 **When to use Pattern E:**
+
 - Composite component has automatic parts wrapping (e.g., `SegmentGroupItem` auto-adds `ItemText`/`ItemControl`/`ItemHiddenInput`)
 - Exposing raw base parts through the barrel would be confusing
 - The component has context providers that should stay internal to base
 
 **When NOT to use Pattern E:**
+
 - Component is a simple re-export (use Pattern A)
 - All users need is the composite component (use Pattern A)
 
@@ -297,7 +299,7 @@ apps/docs/
 
 ### MDX Page Layout
 
-```mdx
+````mdx
 ---
 title: ComponentName
 description: ...
@@ -316,7 +318,7 @@ Brief description.
 
 <NameBasicDemo client:load />
 
-import { Name } from "~/components/name"
+import { Name } from "~/components/name";
 
 ## Installation
 
@@ -325,6 +327,7 @@ import { Name } from "~/components/name"
 ```bash
 npx @ark-preset/cli@latest add <name>
 ```
+````
 
 ### Manual
 
@@ -341,7 +344,8 @@ Link to Manual section for primitive parts.
 ## API Reference
 
 See the [Ark UI Name](https://ark-ui.com/docs/components/<name>) documentation.
-```
+
+````
 
 ### Imports Convention
 
@@ -390,7 +394,7 @@ When a component is refactored from flat file to directory:
 ```ts
 export * from "./<component>";
 // resolves to ./<component>/index.tsx automatically
-```
+````
 
 ## VARIANT HANDLING
 

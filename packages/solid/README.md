@@ -12,7 +12,11 @@ A set of pre-styled Solid.js UI components built on top of Ark UI headless primi
 import { Button } from "@ark-preset/solid";
 
 function App() {
-  return <Button variant="primary" size="md">Click me</Button>;
+  return (
+    <Button variant="primary" size="md">
+      Click me
+    </Button>
+  );
 }
 ```
 
@@ -26,4 +30,3 @@ function App() {
 
 - `solid-js` ^1.9.0
 - `tailwindcss` ^4.0.0
-
