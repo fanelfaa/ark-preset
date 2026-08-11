@@ -1,5 +1,7 @@
 import { DocsLink } from "../../../components/DocsLink";
+import { ComponentPreview } from "../../../components/ComponentPreview";
 import ToastBasicDemo from "@demos/toast-demo/ToastBasicDemo.tsx";
+import ToastBasicDemoCode from "@demos/toast-demo/ToastBasicDemo.tsx?code";
 
 # Toast
 
@@ -7,27 +9,6 @@ A notification component for displaying transient messages with multiple variant
 
 <DocsLink href="https://ark-ui.com/docs/components/toast" />
 
-<ToastBasicDemo />
-
-```tsx
-import { createToaster, Toaster } from "~/components/toast";
-
-const toaster = createToaster({
-  placement: "bottom-end",
-  timeout: 5000,
-});
-
-export function ToastDemo() {
-  return (
-    <div class="flex flex-col gap-4">
-      <button
-        class="px-3 py-1.5 text-sm bg-primary text-primary-foreground rounded-md"
-        onClick={() => toaster.create({ title: "Hello", description: "World" })}
-      >
-        Show Toast
-      </button>
-      <Toaster toaster={toaster} />
-    </div>
-  );
-}
-```
+<ComponentPreview code={ToastBasicDemoCode}>
+  <ToastBasicDemo />
+</ComponentPreview>
