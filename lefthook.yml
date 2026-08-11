@@ -5,8 +5,10 @@ pre-commit:
   parallel: true
   commands:
     lint:
+      glob: "*.{js,jsx,ts,tsx}"
       run: pnpm exec oxlint {staged_files}
     fmt:
+      glob: "*.{js,jsx,ts,tsx,json,md}"
       run: pnpm exec oxfmt {staged_files}
     solid-tests:
       root: "packages/solid/"
