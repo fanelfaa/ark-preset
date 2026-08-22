@@ -1,6 +1,177 @@
 ---
-title: Solid Button
-description: Button component for Solid
+title: Button
+description: Displays a button or a component that looks like a button.
 ---
-# Solid Button
-This is a button in solid.
+
+import ComponentPreview from '../../components/ComponentPreview.astro';
+import ButtonVariantsDemo from '../../components/demos/button-demo/ButtonVariantsDemo.tsx';
+import ButtonVariantsDemoCode from '../../components/demos/button-demo/ButtonVariantsDemo.tsx?raw';
+import ButtonSizesDemo from '../../components/demos/button-demo/ButtonSizesDemo.tsx';
+import ButtonSizesDemoCode from '../../components/demos/button-demo/ButtonSizesDemo.tsx?raw';
+import ButtonDisabledDemo from '../../components/demos/button-demo/ButtonDisabledDemo.tsx';
+import ButtonDisabledDemoCode from '../../components/demos/button-demo/ButtonDisabledDemo.tsx?raw';
+import ButtonIconsDemo from '../../components/demos/button-demo/ButtonIconsDemo.tsx';
+import ButtonIconsDemoCode from '../../components/demos/button-demo/ButtonIconsDemo.tsx?raw';
+import ButtonSpinnerDemo from '../../components/demos/button-demo/ButtonSpinnerDemo.tsx';
+import ButtonSpinnerDemoCode from '../../components/demos/button-demo/ButtonSpinnerDemo.tsx?raw';
+import ButtonLinkDemo from '../../components/demos/button-demo/ButtonLinkDemo.tsx';
+import ButtonLinkDemoCode from '../../components/demos/button-demo/ButtonLinkDemo.tsx?raw';
+
+# Button
+
+Displays a button or a component that looks like a button.
+
+[Ark UI Composition Guide](https://ark-ui.com/docs/guides/composition)
+
+<ComponentPreview code={ButtonVariantsDemoCode}>
+  <ButtonVariantsDemo client:load />
+</ComponentPreview>
+
+## Installation
+
+### CLI
+
+Run the following command to add the component to your project:
+
+```bash
+npx @ark-preset/cli@latest add button
+```
+
+### Manual
+
+Create the recipe file at `src/components/recipes/button.ts`:
+
+```ts
+import { tv, type VariantProps } from "tailwind-variants";
+
+export const buttonVariants = tv({
+  base: "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition duration-300 motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0.5 active:duration-150 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&>svg]:pointer-events-none [&>svg]:size-4 [&>svg]:shrink-0 [[data-icon]]:pointer-events-none [[data-icon=inline-start]]:-me-0.5 [[data-icon=inline-end]]:-ms-0.5",
+  variants: {
+    variant: {
+      default: "bg-primary text-primary-foreground hover:bg-primary/90",
+      destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+      outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+      secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+      ghost: "hover:bg-accent hover:text-accent-foreground",
+      link: "text-primary underline-offset-4 hover:underline",
+    },
+    size: {
+      xs: "h-7 px-2 text-xs",
+      sm: "h-8 px-2.5 text-sm",
+      md: "h-9 px-3 py-1.5",
+      lg: "h-10 px-6",
+      icon: "size-8",
+      "icon-xs": "size-7 [&>svg]:size-4",
+      "icon-sm": "size-8 [&>svg]:size-4",
+      "icon-md": "size-9 [&>svg]:size-5",
+      "icon-lg": "size-10 [&>svg]:size-6",
+    },
+  },
+  defaultVariants: {
+    variant: "default",
+    size: "sm",
+  },
+});
+
+export type ButtonVariants = VariantProps<typeof buttonVariants>;
+```
+
+Create the component file at `src/components/button/index.tsx`:
+
+```tsx
+import { splitProps, type Component, children } from "solid-js";
+import { ButtonVariants, buttonVariants } from "@ark-preset/core";
+import { ark, HTMLArkProps } from "@ark-ui/solid/factory";
+
+type ButtonProps = HTMLArkProps<"button"> & ButtonVariants;
+
+const Button: Component<ButtonProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "variant", "size", "children"]);
+
+  const resolvedChildren = children(() => local.children);
+  return (
+    <ark.button
+      class={buttonVariants({
+        variant: local.variant,
+        size: local.size,
+        class: local.class,
+      })}
+      {...others}
+    >
+      {resolvedChildren()}
+    </ark.button>
+  );
+};
+
+export { Button, buttonVariants };
+```
+
+> **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.
+
+## Usage
+
+Import the component:
+
+```tsx
+import { Button } from "~/components/button";
+```
+
+Basic usage:
+
+```tsx
+<Button>Click me</Button>
+```
+
+### Variants
+
+Use the `variant` prop to change the visual style.
+
+<ComponentPreview code={ButtonVariantsDemoCode}>
+  <ButtonVariantsDemo client:load />
+</ComponentPreview>
+
+### Sizes
+
+Use the `size` prop to change the button size.
+
+<ComponentPreview code={ButtonSizesDemoCode}>
+  <ButtonSizesDemo client:load />
+</ComponentPreview>
+
+### Disabled
+
+Add the `disabled` prop to disable interaction.
+
+<ComponentPreview code={ButtonDisabledDemoCode}>
+  <ButtonDisabledDemo client:load />
+</ComponentPreview>
+
+### With Icon
+
+<ComponentPreview code={ButtonIconsDemoCode}>
+  <ButtonIconsDemo client:load />
+</ComponentPreview>
+
+### Spinner
+
+<ComponentPreview code={ButtonSpinnerDemoCode}>
+  <ButtonSpinnerDemo client:load />
+</ComponentPreview>
+
+### Link
+
+Use the `buttonVariants` helper to render a link that looks like a button.
+
+<ComponentPreview code={ButtonLinkDemoCode}>
+  <ButtonLinkDemo client:load />
+</ComponentPreview>
+
+## API Reference
+
+| Prop | Type | Default |
+|------|------|---------|
+| variant | `"default" | "secondary" | "destructive" | "outline" | "ghost" | "link"` | `"default"` |
+| size | `"xs" | "sm" | "md" | "lg" | "icon" | "icon-xs" | "icon-sm" | "icon-md" | "icon-lg"` | `"sm"` |
+| disabled | `boolean` | `false` |
+| class | `string` | — |
+

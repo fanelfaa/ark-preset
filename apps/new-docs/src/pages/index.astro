@@ -1,20 +1,102 @@
 ---
 import { DocsLayout } from '../components/DocsLayout';
+import { buttonVariants } from '@ark-preset/core';
 import '../styles.css';
----
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Docs</title>
-	</head>
-	<body>
-		<DocsLayout client:load>
-			<h1>Welcome to Docs</h1>
-			<p>This is the new Astro-powered documentation site.</p>
-		</DocsLayout>
-	</body>
-</html>
+const categories = [
+  { name: "Form & Input", count: 19, href: "/solid/components/button", description: "Button, Input, Select, Checkbox, Switch, and more" },
+  { name: "Overlay", count: 8, href: "/solid/components/dialog", description: "Dialog, Drawer, Popover, Tooltip, Toast, and more" },
+  { name: "Navigation", count: 6, href: "/solid/components/accordion", description: "Accordion, Breadcrumb, Tabs, Menu, Pagination" },
+  { name: "Data Display", count: 6, href: "/solid/components/card", description: "Card, Table, Avatar, Badge, Carousel, Typography" },
+  { name: "Feedback", count: 4, href: "/solid/components/alert", description: "Alert, Progress, Skeleton, Spinner" },
+  { name: "Layout", count: 3, href: "/solid/components/scroll-area", description: "Scroll Area, Separator, Aspect Ratio" },
+];
+
+const totalCount = categories.reduce((sum, cat) => sum + cat.count, 0);
+
+const quickLinks = [
+  { href: "/solid/components/button", label: "Button" },
+  { href: "/solid/components/input", label: "Input" },
+  { href: "/solid/components/dialog", label: "Dialog" },
+  { href: "/solid/components/select", label: "Select" },
+  { href: "/solid/components/toast", label: "Toast" },
+  { href: "/solid/components/tabs", label: "Tabs" },
+  { href: "/solid/components/accordion", label: "Accordion" },
+  { href: "/solid/components/card", label: "Card" },
+];
+---
+<DocsLayout client:load>
+  <div class="mx-auto max-w-4xl px-6 py-12 min-h-screen bg-background/30 backdrop-blur-3xl">
+    {/* Hero */}
+    <section class="mb-16 text-center">
+      <h1 class="mb-4 text-5xl font-bold tracking-tight">UI Component Library</h1>
+      <p class="leading-7 [&:not(:first-child)]:mt-6">
+        A comprehensive collection of accessible, composable UI primitives built with{" "}
+        <code class="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">Ark UI</code> and <code class="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">Solid.js</code>. Ready to use, fully
+        typed, and styled with Tailwind CSS.
+      </p>
+      <div class="mt-8 flex items-center justify-center gap-4">
+        <a
+          href="/solid/components/button"
+          class={buttonVariants({ size: "lg" })}
+        >
+          Browse Components
+        </a>
+        <span class="text-sm text-muted-foreground">
+          {totalCount} components across {categories.length} categories
+        </span>
+      </div>
+    </section>
+
+    {/* Quick Start */}
+    <section class="mb-16 text-center">
+      <h2 class="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">Quick Start</h2>
+      <p class="leading-7 [&:not(:first-child)]:mt-6 mb-6">
+        Follow the step-by-step guide to add <code class="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">@ark-preset/solid</code> to your
+        project.
+      </p>
+      <a href="/setup" class={buttonVariants({ size: "lg" })}>
+        View Quickstart Guide
+      </a>
+    </section>
+
+    {/* Component Categories */}
+    <section class="mb-16">
+      <h2 class="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">Components</h2>
+      <div class="grid gap-4 sm:grid-cols-2 mt-6">
+        {categories.map((cat) => (
+          <a
+            href={cat.href}
+            class="group rounded-lg border border-border p-5 transition-colors hover:border-primary bg-background/50 backdrop-blur-sm hover:bg-background/70 block"
+          >
+            <h3 class="text-lg font-semibold group-hover:text-primary transition-colors">
+              {cat.name}
+            </h3>
+            <p class="mt-1 text-sm text-muted-foreground">{cat.description}</p>
+            <p class="mt-2 text-xs text-muted-foreground">{cat.count} components</p>
+          </a>
+        ))}
+      </div>
+      <div class="mt-6 text-center">
+        <a
+          href="/solid/components/button"
+          class={buttonVariants({ variant: "outline" })}
+        >
+          View All Components
+        </a>
+      </div>
+    </section>
+
+    {/* Quick Links */}
+    <section>
+      <h2 class="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">Popular Components</h2>
+      <div class="flex flex-wrap gap-3 mt-6">
+        {quickLinks.map((link) => (
+          <a href={link.href} class={buttonVariants({ variant: "outline" })}>
+            {link.label}
+          </a>
+        ))}
+      </div>
+    </section>
+  </div>
+</DocsLayout>
