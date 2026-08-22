@@ -17,7 +17,7 @@ const { code, lang = 'tsx', class: className } = Astro.props;
     <slot />
   </div>
 
-  <div class="[&_pre]:my-0">
+  <div class="[&_pre]:my-0 custom-code-block-preview">
     <custom-code-block>
       <Code code={code} lang={lang} theme="github-dark" />
     </custom-code-block>

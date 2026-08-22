@@ -83,3 +83,9 @@ custom-code-block.expanded pre {
   max-height: none;
   overflow: auto;
 }
+
+.custom-code-block-preview custom-code-block {
+  border: none;
+  margin: 0;
+  border-radius: 0;
+}

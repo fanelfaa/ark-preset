@@ -1,8 +1,7 @@
 ---
-import { DocsLayout } from '../components/DocsLayout';
+import Layout from '../layouts/Layout.astro';
 import { buttonVariants } from '@ark-preset/core';
 import { H2, P, InlineCode } from '@ark-preset/solid';
-import '../styles.css';
 
 const categories = [
   { name: "Form & Input", count: 19, href: "/solid/components/button", description: "Button, Input, Select, Checkbox, Switch, and more" },
@@ -26,7 +25,7 @@ const quickLinks = [
   { href: "/solid/components/card", label: "Card" },
 ];
 ---
-<DocsLayout client:load>
+<Layout currentFramework="solid">
   <div class="mx-auto max-w-4xl px-6 py-12 min-h-screen bg-background/30 backdrop-blur-3xl">
     {/* Hero */}
     <section class="mb-16 text-center">
@@ -100,4 +99,4 @@ const quickLinks = [
       </div>
     </section>
   </div>
-</DocsLayout>
+</Layout>
