@@ -1,0 +1,48 @@
+import { useDialog } from "@ark-ui/solid/dialog";
+import {
+  DialogContent,
+  DialogTrigger,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+  DialogBase,
+} from "@ark-preset/solid";
+import { Button } from "@ark-preset/solid";
+
+export default function DialogRootProviderDemo() {
+  const dialog = useDialog({ defaultOpen: false });
+
+  return (
+    <div class="space-y-4">
+      <output class="block text-sm text-muted-foreground">
+        Open: {JSON.stringify(dialog().open)}
+      </output>
+
+      <div class="flex gap-2">
+        <Button onClick={() => dialog().setOpen(true)} variant="secondary">
+          Open Dialog From Outside
+        </Button>
+      </div>
+
+      <DialogBase.RootProvider value={dialog}>
+        <DialogTrigger>Open Dialog</DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Externally Controlled Dialog</DialogTitle>
+            <DialogDescription>
+              This dialog is controlled via <code>useDialog</code>. The buttons and output above
+              manage the state from outside the dialog tree.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => dialog().setOpen(false)}>
+              Cancel
+            </Button>
+            <Button onClick={() => dialog().setOpen(false)}>Confirm</Button>
+          </DialogFooter>
+        </DialogContent>
+      </DialogBase.RootProvider>
+    </div>
+  );
+}

@@ -1,0 +1,205 @@
+## Installation
+
+### CLI
+
+Run the following command to add the component to your project:
+
+```bash
+npx @ark-preset/cli@latest add alert-dialog
+```
+
+### Manual
+
+Create the recipe file at `src/components/recipes/alert-dialog.ts`:
+
+```ts
+import { tv, type VariantProps } from "tailwind-variants";
+
+export const alertDialogVariants = tv({
+  slots: {
+    backdrop:
+      "fixed inset-0 z-50 bg-background/10 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+    positioner: "fixed inset-0 z-50 flex items-center justify-center",
+    content:
+      "relative z-50 grid w-full max-w-lg gap-4 border border-border bg-background p-4 shadow-lg rounded-2xl mx-2 sm:mx-0 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
+    header: "flex flex-col space-y-1.5 text-center sm:text-left",
+    footer:
+      "flex flex-col-reverse sm:flex-row sm:justify-end gap-2 bg-muted/50 p-4 -mx-4 -mb-4 rounded-b-2xl border-t border-border",
+    title: "text-lg font-semibold tracking-tight",
+    description: "text-sm text-muted-foreground",
+    closeTrigger:
+      "absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 p-1",
+  },
+});
+
+export type AlertDialogVariants = VariantProps<typeof alertDialogVariants>;
+```
+
+Create the component directory and files.
+
+`src/components/alert-dialog/alert-dialog.base.tsx`:
+
+```tsx
+import { Dialog as ArkDialog } from "@ark-ui/solid/dialog";
+import { splitProps, type Component } from "solid-js";
+import { alertDialogVariants, buttonVariants, type ButtonVariants } from "../recipes/alert-dialog";
+import { HTMLProps } from "@ark-ui/solid";
+import { ark, type HTMLArkProps } from "@ark-ui/solid/factory";
+
+const styles = alertDialogVariants();
+
+const AlertDialogRoot = ArkDialog.Root;
+const AlertDialogRootProvider = ArkDialog.RootProvider;
+const AlertDialogTrigger: Component<ArkDialog.TriggerProps & ButtonVariants> = (props) => {
+  const [local, others] = splitProps(props, ["class", "variant", "size"]);
+  return (
+    <ArkDialog.Trigger
+      class={buttonVariants({ variant: local.variant, size: local.size, class: local.class })}
+      {...others}
+    />
+  );
+};
+
+const AlertDialogBackdrop: Component<ArkDialog.BackdropProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkDialog.Backdrop class={styles.backdrop({ class: local.class })} {...others} />;
+};
+
+const AlertDialogPositioner: Component<ArkDialog.PositionerProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkDialog.Positioner class={styles.positioner({ class: local.class })} {...others} />;
+};
+
+const AlertDialogContent: Component<ArkDialog.ContentProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkDialog.Content class={styles.content({ class: local.class })} {...others} />;
+};
+
+const AlertDialogCloseTrigger: Component<ArkDialog.CloseTriggerProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkDialog.CloseTrigger class={styles.closeTrigger({ class: local.class })} {...others} />;
+};
+
+const AlertDialogTitle: Component<ArkDialog.TitleProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkDialog.Title class={styles.title({ class: local.class })} {...others} />;
+};
+
+const AlertDialogDescription: Component<ArkDialog.DescriptionProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkDialog.Description class={styles.description({ class: local.class })} {...others} />;
+};
+
+const AlertDialogHeader: Component<HTMLArkProps<"div">> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ark.div class={styles.header({ class: local.class })} {...others} />;
+};
+
+const AlertDialogFooter: Component<HTMLArkProps<"div">> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ark.div class={styles.footer({ class: local.class })} {...others} />;
+};
+
+const AlertDialogCancel: Component<
+  HTMLProps<"button"> & ArkDialog.CloseTriggerProps & ButtonVariants
+> = (props) => {
+  const [local, others] = splitProps(props, ["class", "variant", "size"]);
+  return (
+    <ArkDialog.CloseTrigger
+      class={buttonVariants({ variant: local.variant, size: local.size, class: local.class })}
+      {...others}
+    />
+  );
+};
+
+const AlertDialogAction: Component<HTMLArkProps<"button"> & ButtonVariants> = (props) => {
+  const [local, others] = splitProps(props, ["class", "variant", "size"]);
+  return (
+    <ark.button
+      type="button"
+      class={buttonVariants({ variant: local.variant, size: local.size, class: local.class })}
+      {...others}
+    />
+  );
+};
+
+export const AlertDialog = {
+  Root: AlertDialogRoot,
+  RootProvider: AlertDialogRootProvider,
+  Trigger: AlertDialogTrigger,
+  Backdrop: AlertDialogBackdrop,
+  Positioner: AlertDialogPositioner,
+  Content: AlertDialogContent,
+  CloseTrigger: AlertDialogCloseTrigger,
+  Title: AlertDialogTitle,
+  Description: AlertDialogDescription,
+  Header: AlertDialogHeader,
+  Footer: AlertDialogFooter,
+  Cancel: AlertDialogCancel,
+  Action: AlertDialogAction,
+};
+```
+
+`src/components/alert-dialog/index.tsx`:
+
+```tsx
+import { Dialog as ArkDialog } from "@ark-ui/solid/dialog";
+import { Portal } from "solid-js/web";
+import { splitProps, type Component } from "solid-js";
+import { AlertDialog as AlertDialogBase } from "./alert-dialog.base";
+
+const AlertDialogContent: Component<ArkDialog.ContentProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "children"]);
+  return (
+    <Portal>
+      <AlertDialogBase.Backdrop />
+      <AlertDialogBase.Positioner>
+        <AlertDialogBase.Content class={local.class} {...others}>
+          {local.children}
+          <AlertDialogBase.CloseTrigger>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              class="size-4"
+            >
+              <path d="M18 6L6 18" />
+              <path d="M6 6l12 12" />
+            </svg>
+          </AlertDialogBase.CloseTrigger>
+        </AlertDialogBase.Content>
+      </AlertDialogBase.Positioner>
+    </Portal>
+  );
+};
+
+const AlertDialog = AlertDialogBase.Root;
+const AlertDialogTrigger = AlertDialogBase.Trigger;
+const AlertDialogHeader = AlertDialogBase.Header;
+const AlertDialogTitle = AlertDialogBase.Title;
+const AlertDialogDescription = AlertDialogBase.Description;
+const AlertDialogFooter = AlertDialogBase.Footer;
+const AlertDialogCancel = AlertDialogBase.Cancel;
+const AlertDialogAction = AlertDialogBase.Action;
+
+export {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogContent,
+  AlertDialogCancel,
+  AlertDialogAction,
+  AlertDialogBase,
+};
+
+export { alertDialogVariants, type AlertDialogVariants } from "../recipes/alert-dialog";
+```
+
+> **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.

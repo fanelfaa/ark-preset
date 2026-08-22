@@ -1,0 +1,95 @@
+## Usage
+
+Import the components:
+
+```tsx
+import {
+  Drawer,
+  DrawerTrigger,
+  DrawerContent,
+  DrawerTitle,
+  DrawerDescription,
+} from "~/components/drawer";
+```
+
+Basic usage:
+
+```tsx
+<Drawer swipeDirection="start">
+  <DrawerTrigger>Open Drawer</DrawerTrigger>
+  <DrawerContent>
+    <DrawerTitle>Title</DrawerTitle>
+    <DrawerDescription>Description text</DrawerDescription>
+  </DrawerContent>
+</Drawer>
+```
+
+### With Form
+
+Combine with form elements for profile editing, settings, or data entry.
+
+```tsx
+<Drawer swipeDirection="start">
+  <DrawerTrigger>Edit Profile</DrawerTrigger>
+  <DrawerContent>
+    <div class="flex flex-col gap-1 px-4 pt-2 pb-4">
+      <DrawerTitle>Edit Profile</DrawerTitle>
+      <DrawerDescription>Update your personal information.</DrawerDescription>
+    </div>
+    <div class="flex flex-col gap-4 p-4">
+      <Input label="Name" placeholder="Your name" />
+      <Input label="Email" type="email" placeholder="your@email.com" />
+    </div>
+  </DrawerContent>
+</Drawer>
+```
+
+### Root Provider
+
+Use `DrawerBase.RootProvider` when you need to access the drawer state outside of the component tree. This pattern uses the `useDrawer` hook from Ark UI to create a shared context.
+
+```tsx
+import { useDrawer } from "@ark-ui/solid/drawer";
+import { DrawerContent, DrawerTrigger, DrawerTitle, DrawerDescription, DrawerBase } from "~/components/drawer";
+import { Button } from "~/components/button";
+
+export function ExternalControlExample() {
+  const drawer = useDrawer({ defaultOpen: false });
+
+  return (
+    <div>
+      <Button onClick={() => drawer().setOpen(true)}>Open Drawer</Button>
+
+      <DrawerBase.RootProvider value={drawer}>
+        <DrawerTrigger style="display:none">Hidden Trigger</DrawerTrigger>
+        <DrawerContent>
+          <DrawerTitle>Externally Controlled Drawer</DrawerTitle>
+          <DrawerDescription>This drawer is controlled via useDrawer.</DrawerDescription>
+        </DrawerContent>
+      </DrawerBase.RootProvider>
+    </div>
+  );
+}
+```
+
+The key difference:
+
+- **`Drawer`** — manages its own state internally. Use for simple, self-contained usage.
+- **`DrawerBase.RootProvider`** — accepts a pre-created context via `useDrawer`. Use when you need to read or control the drawer state from outside the component tree.
+- **`DrawerBase.Context`** — a render-prop component that provides access to the drawer state. Use when you need to read the open/close state inside the drawer tree.
+
+Example using `DrawerBase.Context`:
+
+```tsx
+import { Drawer, DrawerTrigger, DrawerContent, DrawerBase } from "~/components/drawer";
+import { Button } from "~/components/button";
+
+<Drawer>
+  <DrawerTrigger>Open</DrawerTrigger>
+  <DrawerContent>
+    <DrawerBase.Context>
+      {(drawer) => <p>Drawer is {drawer().open ? "open" : "closed"}</p>}
+    </DrawerBase.Context>
+  </DrawerContent>
+</Drawer>
+```

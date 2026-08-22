@@ -1,0 +1,45 @@
+
+import ComponentPreview from "../../../../components/ComponentPreview.astro";
+import PopoverRootProviderDemo from "@demos/popover-demo/PopoverRootProviderDemo.tsx";
+import PopoverRootProviderDemoCode from "@demos/popover-demo/PopoverRootProviderDemo.tsx?code";
+
+## Usage
+
+Import the components:
+
+```tsx
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverTitle,
+  PopoverDescription,
+} from "~/components/popover";
+```
+
+Basic usage:
+
+```tsx
+<Popover>
+  <PopoverTrigger>Open Popover</PopoverTrigger>
+  <PopoverContent>
+    <PopoverTitle>Title</PopoverTitle>
+    <PopoverDescription>Description text</PopoverDescription>
+  </PopoverContent>
+</Popover>
+```
+
+> **Note:** `PopoverArrow` and `PopoverCloseTrigger` are automatically included inside `PopoverContent`. You only need to import them separately for custom positioning or advanced use cases.
+
+## Root Provider
+
+Use `PopoverRootProvider` when you need to access the popover state outside of the component tree. This pattern uses the `usePopover` hook from Ark UI to create a shared context that both the popover and external elements can reference.
+
+<ComponentPreview code={PopoverRootProviderDemoCode}>
+  <PopoverRootProviderDemo client:load />
+</ComponentPreview>
+
+The key difference:
+
+- **`Popover`** — manages its own state internally. Use for simple, self-contained popovers.
+- **`PopoverBase.RootProvider`** — accepts a pre-created popover context via `usePopover`. Use when you need to read or control the popover state from outside the component tree.

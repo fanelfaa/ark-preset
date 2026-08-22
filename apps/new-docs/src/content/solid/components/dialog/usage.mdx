@@ -1,0 +1,91 @@
+import ComponentPreview from "../../../../components/ComponentPreview.astro";
+import DialogRootProviderDemo from "@demos/dialog-demo/DialogRootProviderDemo.tsx";
+import DialogRootProviderDemoCode from "@demos/dialog-demo/DialogRootProviderDemo.tsx?code";
+
+## Usage
+
+Import the components:
+
+```tsx
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from "~/components/dialog";
+```
+
+Basic usage:
+
+```tsx
+<Dialog>
+  <DialogTrigger>Open Dialog</DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Title</DialogTitle>
+      <DialogDescription>Description text</DialogDescription>
+    </DialogHeader>
+  </DialogContent>
+</Dialog>
+```
+
+### With Header and Footer
+
+Add header and footer sections for structured dialog content.
+
+```tsx
+<Dialog>
+  <DialogTrigger>Open</DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Confirm Action</DialogTitle>
+      <DialogDescription>Are you sure you want to proceed?</DialogDescription>
+    </DialogHeader>
+    <DialogFooter>
+      <Button variant="outline">Cancel</Button>
+      <Button>Confirm</Button>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
+```
+
+### Controlled Open
+
+Control the dialog open state programmatically.
+
+```tsx
+import { createSignal } from "solid-js";
+import { Dialog, DialogTrigger, DialogContent, DialogTitle } from "~/components/dialog";
+
+export function ControlledDialog() {
+  const [open, setOpen] = createSignal(false);
+
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Open Dialog</Button>
+      <Dialog open={open()} onOpenChange={setOpen}>
+        <DialogTrigger>Trigger</DialogTrigger>
+        <DialogContent>
+          <DialogTitle>Controlled Dialog</DialogTitle>
+        </DialogContent>
+      </Dialog>
+    </>
+  );
+}
+```
+
+### Root Provider
+
+Use `DialogBase.RootProvider` when you need to access the dialog state outside of the component tree. This pattern uses the `useDialog` hook from Ark UI to create a shared context that both the component and external elements can reference.
+
+<ComponentPreview code={DialogRootProviderDemoCode}>
+  <DialogRootProviderDemo client:load />
+</ComponentPreview>
+
+The key difference:
+
+- **`Dialog`** — manages its own state internally. Use for simple, self-contained usage.
+- **`DialogBase.RootProvider`** — accepts a pre-created context via `useDialog`. Use when you need to read or control the dialog state from outside the component tree.

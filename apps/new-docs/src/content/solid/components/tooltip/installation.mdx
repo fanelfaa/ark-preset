@@ -1,0 +1,132 @@
+## Installation
+
+### CLI
+
+Run the following command to add the component to your project:
+
+```bash
+npx @ark-preset/cli@latest add tooltip
+```
+
+### Manual
+
+Create the recipe file at `src/components/recipes/tooltip.ts`:
+
+```ts
+import { tv, type VariantProps } from "tailwind-variants";
+
+export const tooltipVariants = tv({
+  slots: {
+    root: "inline-flex",
+    trigger:
+      "inline-flex items-center justify-center gap-2 rounded-md border border-input bg-transparent px-4 py-2 text-sm font-medium text-foreground ring-offset-background transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+    positioner: "z-50",
+    content:
+      "z-50 overflow-hidden rounded-md border border-border bg-popover px-3 py-1.5 text-xs text-popover-foreground shadow-md animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+    arrow: "",
+    arrowTip: "h-2 w-2 border-t border-l border-border bg-popover",
+  },
+});
+
+export type TooltipVariants = VariantProps<typeof tooltipVariants>;
+```
+
+Create the component directory and files.
+
+`src/components/tooltip/tooltip.base.tsx`:
+
+```tsx
+import { Tooltip as ArkTooltip } from "@ark-ui/solid/tooltip";
+import { splitProps, type Component } from "solid-js";
+import { buttonVariants, tooltipVariants, type ButtonVariants } from "../recipes/tooltip";
+
+const styles = tooltipVariants();
+
+const Root = ArkTooltip.Root;
+const RootProvider = ArkTooltip.RootProvider;
+
+const Trigger: Component<ArkTooltip.TriggerProps & ButtonVariants> = (props) => {
+  const [local, others] = splitProps(props, ["class", "variant", "size"]);
+  return (
+    <ArkTooltip.Trigger
+      class={buttonVariants({ variant: local.variant, size: local.size, class: local.class })}
+      {...others}
+    />
+  );
+};
+
+const Positioner: Component<ArkTooltip.PositionerProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkTooltip.Positioner class={styles.positioner({ class: local.class })} {...others} />;
+};
+
+const Content: Component<ArkTooltip.ContentProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "style"]);
+  return (
+    <ArkTooltip.Content
+      class={styles.content({ class: local.class })}
+      {...others}
+      style={`--arrow-size: 10px; ${local.style}`}
+    />
+  );
+};
+
+const Arrow: Component<ArkTooltip.ArrowProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkTooltip.Arrow class={styles.arrow({ class: local.class })} {...others} />;
+};
+
+const ArrowTip: Component<ArkTooltip.ArrowTipProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkTooltip.ArrowTip class={styles.arrowTip({ class: local.class })} {...others} />;
+};
+
+export const Tooltip = {
+  Root,
+  RootProvider,
+  Trigger,
+  Positioner,
+  Content,
+  Arrow,
+  ArrowTip,
+};
+```
+
+`src/components/tooltip/index.tsx`:
+
+```tsx
+import { splitProps, type Component } from "solid-js";
+import { Tooltip as TooltipBase } from "./tooltip.base";
+import { Tooltip as ArkTooltip } from "@ark-ui/solid/tooltip";
+
+const Tooltip = TooltipBase.Root;
+
+const TooltipTrigger = TooltipBase.Trigger;
+
+type TooltipContentProps = ArkTooltip.ContentProps & {
+  /** When true, renders an arrow pointing to the trigger element */
+  useArrow?: boolean;
+};
+
+const TooltipContent: Component<TooltipContentProps> = (props) => {
+  const [local, others] = splitProps(props, ["useArrow", "children"]);
+  return (
+    <TooltipBase.Positioner>
+      <TooltipBase.Content {...others}>
+        {local.useArrow && (
+          <TooltipBase.Arrow>
+            <TooltipBase.ArrowTip />
+          </TooltipBase.Arrow>
+        )}
+        {local.children}
+      </TooltipBase.Content>
+    </TooltipBase.Positioner>
+  );
+};
+
+export { Tooltip, TooltipTrigger, TooltipContent, TooltipBase };
+
+export { tooltipVariants, type TooltipVariants } from "../recipes/tooltip";
+```
+
+> **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.

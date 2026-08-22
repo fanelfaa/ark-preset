@@ -86,7 +86,9 @@ function main() {
     }
 
     const outDir = resolve(DOCS_DIR, "components");
-    const compDir = resolve(outDir, component); if (!existsSync(compDir)) mkdirSync(compDir, { recursive: true }); const outPath = resolve(compDir, `installation.mdx`);
+    const compDir = resolve(outDir, component);
+    if (!existsSync(compDir)) mkdirSync(compDir, { recursive: true });
+    const outPath = resolve(compDir, `installation.mdx`);
 
     // Ensure output directory exists before writing
     if (!existsSync(outDir)) {
