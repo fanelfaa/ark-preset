@@ -1,0 +1,29 @@
+---
+import { DocsLayout } from '../components/DocsLayout';
+import '../styles.css';
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <script is:inline>
+      (function () {
+        if (typeof document === "undefined") return;
+        try {
+          var theme = localStorage.getItem("ui-theme");
+          if (theme === "dark") {
+            document.documentElement.classList.add("dark");
+          } else if (theme === "light") {
+            document.documentElement.classList.remove("dark");
+          } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            document.documentElement.classList.add("dark");
+          }
+        } catch {}
+      })();
+    </script>
+  </head>
+  <body>
+    <DocsLayout client:load>
+      <slot />
+    </DocsLayout>
+  </body>
+</html>

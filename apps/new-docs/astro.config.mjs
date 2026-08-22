@@ -8,5 +8,13 @@ export default defineConfig({
   integrations: [solidJs(), mdx()],
   vite: {
     plugins: [tailwindcss()]
+  },
+  markdown: {
+    shikiConfig: {
+      themes: {
+        light: 'github-light',
+        dark: 'github-dark',
+      }
+    }
   }
 });

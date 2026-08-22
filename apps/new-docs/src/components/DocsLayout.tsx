@@ -2,6 +2,7 @@ import { type JSX, type Component, Index } from "solid-js";
 import { ScrollArea } from "@ark-preset/solid";
 import { sidebarNav } from "../sidebar-nav";
 import { GitHubIcon } from "./GitHubIcon";
+import { ThemeToggle } from "./ThemeToggle";
 
 interface DocsLayoutProps {
   children?: JSX.Element;
@@ -21,6 +22,7 @@ export const DocsLayout: Component<DocsLayoutProps> = (props) => {
             </a>
           </div>
           <div class="flex items-center gap-4">
+            <ThemeToggle />
             <select
               id="framework-selector"
               class="bg-transparent border border-border rounded-md px-2 py-1 text-sm outline-none focus:ring-2 focus:ring-primary"
