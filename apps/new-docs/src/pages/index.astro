@@ -1,6 +1,7 @@
 ---
 import { DocsLayout } from '../components/DocsLayout';
 import { buttonVariants } from '@ark-preset/core';
+import { H2, P, InlineCode } from '@ark-preset/solid';
 import '../styles.css';
 
 const categories = [
@@ -30,11 +31,11 @@ const quickLinks = [
     {/* Hero */}
     <section class="mb-16 text-center">
       <h1 class="mb-4 text-5xl font-bold tracking-tight">UI Component Library</h1>
-      <p class="leading-7 [&:not(:first-child)]:mt-6">
+      <P>
         A comprehensive collection of accessible, composable UI primitives built with{" "}
-        <code class="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">Ark UI</code> and <code class="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">Solid.js</code>. Ready to use, fully
+        <InlineCode>Ark UI</InlineCode> and <InlineCode>Solid.js</InlineCode>. Ready to use, fully
         typed, and styled with Tailwind CSS.
-      </p>
+      </P>
       <div class="mt-8 flex items-center justify-center gap-4">
         <a
           href="/solid/components/button"
@@ -50,11 +51,11 @@ const quickLinks = [
 
     {/* Quick Start */}
     <section class="mb-16 text-center">
-      <h2 class="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">Quick Start</h2>
-      <p class="leading-7 [&:not(:first-child)]:mt-6 mb-6">
-        Follow the step-by-step guide to add <code class="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">@ark-preset/solid</code> to your
+      <H2>Quick Start</H2>
+      <P class="mb-6">
+        Follow the step-by-step guide to add <InlineCode>@ark-preset/solid</InlineCode> to your
         project.
-      </p>
+      </P>
       <a href="/setup" class={buttonVariants({ size: "lg" })}>
         View Quickstart Guide
       </a>
@@ -62,7 +63,7 @@ const quickLinks = [
 
     {/* Component Categories */}
     <section class="mb-16">
-      <h2 class="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">Components</h2>
+      <H2>Components</H2>
       <div class="grid gap-4 sm:grid-cols-2">
         {categories.map((cat) => (
           <a
@@ -89,7 +90,7 @@ const quickLinks = [
 
     {/* Quick Links */}
     <section>
-      <h2 class="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">Popular Components</h2>
+      <H2>Popular Components</H2>
       <div class="flex flex-wrap gap-3">
         {quickLinks.map((link) => (
           <a href={link.href} class={buttonVariants({ variant: "outline" })}>

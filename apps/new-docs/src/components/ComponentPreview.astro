@@ -4,16 +4,20 @@ import { Code } from 'astro:components';
 interface Props {
   code: string;
   lang?: any;
+  class?: string;
 }
 
-const { code, lang = 'tsx' } = Astro.props;
+const { code, lang = 'tsx', class: className } = Astro.props;
 ---
 
-<div class="component-preview flex flex-col border border-border rounded-lg overflow-hidden my-6">
-  <div class="demo-wrapper p-6 flex justify-center items-center bg-background min-h-[200px]">
+<div class="relative z-2 overflow-hidden rounded-2xl md:rounded-3xl border border-border">
+  <div
+    class:list={['not-prose bg-background/70 backdrop-blur-3xl p-4 relative z-10 md:p-6', className]}
+  >
     <slot />
   </div>
-  <div class="code-wrapper border-t border-border">
+
+  <div class="[&_pre]:my-0">
     <custom-code-block>
       <Code code={code} lang={lang} theme="github-dark" />
     </custom-code-block>

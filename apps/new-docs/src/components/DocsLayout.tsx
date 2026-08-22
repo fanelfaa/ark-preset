@@ -1,5 +1,12 @@
 import { type JSX, type Component, Index } from "solid-js";
-import { ScrollArea, Button, Drawer, DrawerTrigger, DrawerContent, DrawerBase } from "@ark-preset/solid";
+import {
+  ScrollArea,
+  Button,
+  Drawer,
+  DrawerTrigger,
+  DrawerContent,
+  DrawerBase,
+} from "@ark-preset/solid";
 import { sidebarNav } from "../sidebar-nav";
 import { GitHubIcon } from "./GitHubIcon";
 import { ThemeToggle } from "./ThemeToggle";
@@ -63,11 +70,13 @@ export const DocsLayout: Component<DocsLayoutProps> = (props) => {
         </div>
       </header>
 
-      <Drawer swipeDirection="start">
+      <Drawer swipeDirection="start" lazyMount unmountOnExit>
         <DrawerTrigger id="drawer-trigger" class="hidden" />
         <DrawerContent>
           <DrawerBase.Context>
-            {(api) => <SidebarNav currentFramework={framework()} onLinkClick={() => api().setOpen(false)} />}
+            {(api) => (
+              <SidebarNav currentFramework={framework()} onLinkClick={() => api().setOpen(false)} />
+            )}
           </DrawerBase.Context>
         </DrawerContent>
       </Drawer>
