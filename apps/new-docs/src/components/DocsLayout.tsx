@@ -16,6 +16,7 @@ interface DocsLayoutProps {
   children?: JSX.Element;
   currentFramework?: string;
   isHome?: boolean;
+  currentPath?: string;
 }
 
 export const DocsLayout: Component<DocsLayoutProps> = (props) => {
@@ -79,7 +80,7 @@ export const DocsLayout: Component<DocsLayoutProps> = (props) => {
           <DrawerContent>
             <DrawerBase.Context>
               {(api) => (
-                <SidebarNav
+                <SidebarNav currentPath={props.currentPath}
                   currentFramework={framework()}
                   onLinkClick={() => api().setOpen(false)}
                 />
@@ -92,7 +93,7 @@ export const DocsLayout: Component<DocsLayoutProps> = (props) => {
           {/* Sidebar */}
           {!props.isHome && (
             <aside class="hidden lg:block w-64 shrink-0 border-r border-border bg-background/60 backdrop-blur-3xl sticky top-14 self-start h-[calc(100vh-3.5rem)]">
-              <SidebarNav currentFramework={framework()} />
+              <SidebarNav currentPath={props.currentPath} currentFramework={framework()} />
             </aside>
           )}
 
@@ -127,13 +128,20 @@ export const DocsLayout: Component<DocsLayoutProps> = (props) => {
   );
 };
 
-export function SidebarNav(props: { onLinkClick?: () => void; currentFramework: string }) {
+export function SidebarNav(props: { onLinkClick?: () => void; currentFramework: string; currentPath?: string }) {
   const getHref = (originalHref: string) => {
     // If it's a docs link, map it to the current framework
     if (originalHref.startsWith("/docs/components/")) {
       return `/${props.currentFramework}/components/${originalHref.split("/").pop()}`;
     }
     return originalHref;
+  };
+
+  const isActive = (href: string) => {
+    if (!props.currentPath) return false;
+    const path = props.currentPath.replace(/\/$/, "");
+    const linkHref = getHref(href).replace(/\/$/, "");
+    return path === linkHref;
   };
 
   return (
@@ -151,7 +159,11 @@ export function SidebarNav(props: { onLinkClick?: () => void; currentFramework: 
                     <li>
                       <a
                         href={getHref(link().href)}
-                        class="block rounded-md px-3 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground hover:outline-2 outline-neutral-200"
+                        class={`block rounded-md px-3 py-1.5 text-sm transition-colors hover:text-foreground hover:outline-2 outline-neutral-200 ${
+                          isActive(link().href)
+                            ? "bg-primary/10 text-primary font-medium"
+                            : "text-muted-foreground"
+                        }`}
                         onClick={props.onLinkClick}
                       >
                         {link().label}

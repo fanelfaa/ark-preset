@@ -33,7 +33,7 @@ const { currentFramework = 'solid', isHome = false } = Astro.props;
     </script>
   </head>
   <body>
-    <DocsLayout client:load currentFramework={currentFramework} isHome={isHome}>
+    <DocsLayout client:load currentFramework={currentFramework} isHome={isHome} currentPath={Astro.url.pathname}>
       <slot />
     </DocsLayout>
   </body>
