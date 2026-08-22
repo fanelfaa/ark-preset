@@ -1,0 +1,76 @@
+import { InlineCode } from "@ark-preset/solid";
+import ComponentPreview from '../../../../components/ComponentPreview.astro';
+import ToggleIndicatorDemo from '../../../../components/demos/toggle-demo/ToggleIndicatorDemo.tsx';
+import ToggleIndicatorDemoCode from '../../../../components/demos/toggle-demo/ToggleIndicatorDemo.tsx?code';
+import ToggleSizesDemo from '../../../../components/demos/toggle-demo/ToggleSizesDemo.tsx';
+import ToggleSizesDemoCode from '../../../../components/demos/toggle-demo/ToggleSizesDemo.tsx?code';
+
+## With Indicator
+
+`ToggleIndicator` renders different content based on the toggle state — the `fallback` is shown when off, and the children are shown when on.
+
+<ComponentPreview code={ToggleIndicatorDemoCode}>
+  <ToggleIndicatorDemo  client:load />
+</ComponentPreview>
+
+## Sizes
+
+Use the <code>size</code> prop to change the toggle size.
+
+<ComponentPreview code={ToggleSizesDemoCode}>
+  <ToggleSizesDemo  client:load />
+</ComponentPreview>
+
+## Usage
+
+Import the components:
+
+```tsx
+import { Toggle, ToggleIndicator } from "~/components/toggle";
+```
+
+Basic:
+
+```tsx
+<Toggle>
+  <BoldIcon />
+</Toggle>
+```
+
+Default pressed:
+
+```tsx
+<Toggle defaultPressed>
+  <BoldIcon />
+</Toggle>
+```
+
+Controlled:
+
+```tsx
+const [pressed, setPressed] = createSignal(false);
+
+<Toggle pressed={pressed()} onPressedChange={setPressed}>
+  <BoldIcon />
+</Toggle>
+```
+
+Disabled:
+
+```tsx
+<Toggle disabled>
+  <BoldIcon />
+</Toggle>
+```
+
+With Indicator:
+
+`ToggleIndicator` renders different content based on the toggle state — the `fallback` is shown when off, and the children are shown when on.
+
+```tsx
+<Toggle>
+  <ToggleIndicator fallback={<SunIcon />}>
+    <MoonIcon />
+  </ToggleIndicator>
+</Toggle>
+```

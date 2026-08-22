@@ -1,0 +1,83 @@
+import { InlineCode } from "@ark-preset/solid";
+import ComponentPreview from '../../../../components/ComponentPreview.astro';
+import ColorPickerInlineDemo from '../../../../components/demos/color-picker-demo/ColorPickerInlineDemo.tsx';
+import ColorPickerInlineDemoCode from '../../../../components/demos/color-picker-demo/ColorPickerInlineDemo.tsx?code';
+import ColorPickerControlledDemo from '../../../../components/demos/color-picker-demo/ColorPickerControlledDemo.tsx';
+import ColorPickerControlledDemoCode from '../../../../components/demos/color-picker-demo/ColorPickerControlledDemo.tsx?code';
+
+## Usage
+
+Import `ColorPicker`:
+
+```tsx
+import { ColorPicker, ColorPickerBase } from "~/components/color-picker";
+```
+
+Basic usage:
+
+```tsx
+<ColorPicker label="Color" presets={["#ff0000", "#00ff00", "#0000ff"]} />
+```
+
+### Inline
+
+For inline rendering (no popover), use the `inline` prop:
+
+<ComponentPreview code={ColorPickerInlineDemoCode}>
+  <ColorPickerInlineDemo  client:load />
+</ComponentPreview>
+
+### Controlled
+
+<ComponentPreview code={ColorPickerControlledDemoCode}>
+  <ColorPickerControlledDemo  client:load />
+</ComponentPreview>
+
+For fully controlled mode, use `value` and `onValueChange`:
+
+```tsx
+import { createSignal } from "solid-js";
+import { parseColor } from "@ark-ui/solid/color-picker";
+import { ColorPicker } from "~/components/color-picker";
+
+export function ColorPickerControlled() {
+  const [value, setValue] = createSignal(parseColor("#eb5e41"));
+
+  return (
+    <ColorPicker
+      label="Color"
+      value={value()}
+      onValueChange={(details) => setValue(details.value)}
+    />
+  );
+}
+```
+
+### Advanced Usage
+
+For advanced layouts with custom composition, import `ColorPickerBase` to access individual parts:
+
+```tsx
+import { ColorPickerBase } from "~/components/color-picker";
+
+<ColorPickerBase.Root>
+  <ColorPickerBase.Label>Color</ColorPickerBase.Label>
+  <ColorPickerBase.Control>
+    <ColorPickerBase.ValueSwatch />
+    <ColorPickerBase.Trigger>{/* custom trigger icon */}</ColorPickerBase.Trigger>
+  </ColorPickerBase.Control>
+  <ColorPickerBase.Positioner>
+    <ColorPickerBase.Content>
+      <ColorPickerBase.Area>
+        <ColorPickerBase.AreaBackground />
+        <ColorPickerBase.AreaThumb />
+      </ColorPickerBase.Area>
+      <ColorPickerBase.ChannelSlider channel="hue">
+        <ColorPickerBase.ChannelSliderTrack />
+        <ColorPickerBase.ChannelSliderThumb />
+      </ColorPickerBase.ChannelSlider>
+    </ColorPickerBase.Content>
+  </ColorPickerBase.Positioner>
+  <ColorPickerBase.HiddenInput />
+</ColorPickerBase.Root>
+```

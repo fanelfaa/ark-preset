@@ -1,0 +1,88 @@
+---
+title: Install
+---
+
+## Installation
+
+### CLI
+
+Run the following command to add the component to your project:
+
+```bash
+npx @ark-preset/cli@latest add toggle-group
+```
+
+### Manual
+
+Create the recipe file at `src/components/recipes/toggle-group.ts`:
+
+```ts
+import { tv, type VariantProps } from "tailwind-variants";
+
+export const toggleGroupVariants = tv({
+  slots: {
+    root: "inline-flex items-center gap-1 data-[orientation=vertical]:flex-col",
+    item: "inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium border border-input bg-transparent text-foreground hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 transition duration-300 motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0.5 active:duration-150 data-[state=on]:bg-primary data-[state=on]:text-primary-foreground data-[state=on]:border-transparent data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+  },
+  variants: {
+    size: {
+      sm: { item: "h-8 p-2" },
+      md: { item: "h-9 p-2.5" },
+      lg: { item: "h-10 p-3" },
+    },
+  },
+  defaultVariants: {
+    size: "sm",
+  },
+});
+
+export type ToggleGroupVariants = VariantProps<typeof toggleGroupVariants>;
+```
+
+Create the component directory and files.
+
+`src/components/toggle-group/toggle-group.base.tsx`:
+
+```tsx
+import { ToggleGroup as ArkToggleGroup } from "@ark-ui/solid/toggle-group";
+import { splitProps, type Component } from "solid-js";
+import { toggleGroupVariants, type ToggleGroupVariants } from "../recipes/toggle-group";
+
+const styles = toggleGroupVariants();
+
+const Root: Component<ArkToggleGroup.RootProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkToggleGroup.Root class={styles.root({ class: local.class })} {...others} />;
+};
+
+const RootProvider: Component<ArkToggleGroup.RootProviderProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkToggleGroup.RootProvider class={styles.root({ class: local.class })} {...others} />;
+};
+
+const Item: Component<ArkToggleGroup.ItemProps & ToggleGroupVariants> = (props) => {
+  const [local, others] = splitProps(props, ["class", "size"]);
+  return (
+    <ArkToggleGroup.Item
+      class={styles.item({ class: local.class, size: local.size })}
+      {...others}
+    />
+  );
+};
+
+export const ToggleGroup = { Root, RootProvider, Item };
+```
+
+`src/components/toggle-group/index.tsx`:
+
+```tsx
+import { ToggleGroup as ToggleGroupBase } from "./toggle-group.base";
+
+const ToggleGroup = ToggleGroupBase.Root;
+const ToggleGroupItem = ToggleGroupBase.Item;
+export { ToggleGroup, ToggleGroupItem, ToggleGroupBase };
+
+export { toggleGroupVariants, type ToggleGroupVariants } from "../recipes/toggle-group";
+```
+
+> **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.

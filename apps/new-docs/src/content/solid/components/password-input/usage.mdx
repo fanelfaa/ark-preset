@@ -1,0 +1,43 @@
+import { InlineCode } from "@ark-preset/solid";
+import ComponentPreview from '../../../../components/ComponentPreview.astro';
+import PasswordInputRootProviderDemo from '../../../../components/demos/password-input-demo/PasswordInputRootProviderDemo.tsx';
+import PasswordInputRootProviderDemoCode from '../../../../components/demos/password-input-demo/PasswordInputRootProviderDemo.tsx?code';
+
+## Usage
+
+Import the component:
+
+```tsx
+import { PasswordInput } from "~/components/password-input";
+```
+
+Basic:
+
+```tsx
+<PasswordInput />
+```
+
+With label:
+
+```tsx
+<PasswordInput label="Password" />
+```
+
+With placeholder:
+
+```tsx
+<PasswordInput label="Password" placeholder="Enter your password" />
+```
+
+## Root Provider
+
+Use `PasswordInputRootProvider` when you need to control the password input state externally.
+
+<ComponentPreview code={PasswordInputRootProviderDemoCode}>
+  <PasswordInputRootProviderDemo  client:load />
+</ComponentPreview>
+
+The key difference:
+
+- **`PasswordInput` (Root)** — manages its own state internally. Use for simple, self-contained password inputs.
+- **`PasswordInputRootProvider`** — accepts a pre-created password input context via `usePasswordInput`. Use when you need to read or control the password input state from outside the component tree.

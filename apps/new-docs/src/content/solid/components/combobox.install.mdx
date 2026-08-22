@@ -1,0 +1,301 @@
+---
+title: Install
+---
+
+## Installation
+
+### CLI
+
+Run the following command to add the component to your project:
+
+```bash
+npx @ark-preset/cli@latest add combobox
+```
+
+### Manual
+
+Create the recipe file at `src/components/recipes/combobox.ts`:
+
+```ts
+import { tv, type VariantProps } from "tailwind-variants";
+
+export const comboboxVariants = tv({
+  slots: {
+    root: "grid gap-1.5 w-full",
+    control:
+      "flex h-8 w-full items-center justify-between rounded-md border border-input bg-background px-2.5 py-1 text-sm ring-offset-background focus-within:outline-none focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2",
+    input:
+      "flex flex-1 items-center justify-start bg-transparent text-base md:text-sm placeholder:text-muted-foreground outline-none disabled:cursor-not-allowed disabled:opacity-50",
+    trigger:
+      "flex size-4 items-center justify-center text-muted-foreground [&[data-state=open]>svg]:rotate-180",
+    clearTrigger:
+      "flex size-4 items-center justify-center text-muted-foreground hover:text-foreground",
+    positioner: "z-50",
+    content:
+      "z-50 min-w-[8rem] rounded-md border border-border bg-background p-1 shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+    list: "space-y-1",
+    item: "relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground",
+    itemText: "flex-1",
+    itemIndicator: "absolute right-2 flex size-4 items-center justify-center",
+    empty: "py-2 text-center text-sm text-muted-foreground",
+  },
+  variants: {
+    error: {
+      true: {
+        control: "border-destructive focus-within:ring-destructive",
+      },
+    },
+  },
+  defaultVariants: {
+    error: false,
+  },
+});
+
+export type ComboboxVariants = VariantProps<typeof comboboxVariants>;
+```
+
+Create the component directory and files.
+
+`src/components/combobox/combobox.base.tsx`:
+
+```tsx
+import { Combobox as ArkCombobox } from "@ark-ui/solid/combobox";
+import { splitProps, type Component } from "solid-js";
+import { comboboxVariants, labelVariants } from "../recipes/combobox";
+
+const styles = comboboxVariants();
+
+type ComboboxRootProps = ArkCombobox.RootProps<{ label: string; value: string }> & {
+  error?: boolean;
+};
+
+const Root: Component<ComboboxRootProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "error"]);
+  const localStyles = () => comboboxVariants({ error: !!local.error });
+  return <ArkCombobox.Root class={localStyles().root({ class: local.class })} {...others} />;
+};
+
+type ComboboxRootProviderProps = ArkCombobox.RootProviderProps<{ label: string; value: string }>;
+
+const RootProvider: Component<ComboboxRootProviderProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkCombobox.RootProvider class={styles.root({ class: local.class })} {...others} />;
+};
+
+const Label: Component<ArkCombobox.LabelProps & { error?: boolean }> = (props) => {
+  const [local, others] = splitProps(props, ["class", "error"]);
+  return (
+    <ArkCombobox.Label
+      class={labelVariants({ class: local.class, error: local.error })}
+      {...others}
+    />
+  );
+};
+
+const Input: Component<ArkCombobox.InputProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkCombobox.Input class={styles.input({ class: local.class })} {...others} />;
+};
+
+const Trigger: Component<ArkCombobox.TriggerProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkCombobox.Trigger class={styles.trigger({ class: local.class })} {...others} />;
+};
+
+const Positioner: Component<ArkCombobox.PositionerProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkCombobox.Positioner class={styles.positioner({ class: local.class })} {...others} />;
+};
+
+const List: Component<ArkCombobox.ListProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkCombobox.List class={styles.list({ class: local.class })} {...others} />;
+};
+
+const Item: Component<ArkCombobox.ItemProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkCombobox.Item class={styles.item({ class: local.class })} {...others} />;
+};
+
+const ItemText: Component<ArkCombobox.ItemTextProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkCombobox.ItemText class={styles.itemText({ class: local.class })} {...others} />;
+};
+
+const ItemIndicator: Component<ArkCombobox.ItemIndicatorProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return (
+    <ArkCombobox.ItemIndicator class={styles.itemIndicator({ class: local.class })} {...others} />
+  );
+};
+
+const Empty: Component<ArkCombobox.EmptyProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkCombobox.Empty class={styles.empty({ class: local.class })} {...others} />;
+};
+
+const Control: Component<ArkCombobox.ControlProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkCombobox.Control class={styles.control({ class: local.class })} {...others} />;
+};
+
+const ClearTrigger: Component<ArkCombobox.ClearTriggerProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return (
+    <ArkCombobox.ClearTrigger class={styles.clearTrigger({ class: local.class })} {...others} />
+  );
+};
+
+const Content: Component<ArkCombobox.ContentProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkCombobox.Content class={styles.content({ class: local.class })} {...others} />;
+};
+
+const ItemGroup = ArkCombobox.ItemGroup;
+const ItemGroupLabel = ArkCombobox.ItemGroupLabel;
+
+export const Combobox = {
+  Root,
+  RootProvider,
+  Label,
+  Input,
+  Trigger,
+  Positioner,
+  List,
+  Item,
+  ItemText,
+  ItemIndicator,
+  Empty,
+  Control,
+  ClearTrigger,
+  Content,
+  ItemGroup,
+  ItemGroupLabel,
+};
+```
+
+`src/components/combobox/index.tsx`:
+
+```tsx
+import { Combobox as ComboboxBase } from "./combobox.base";
+import type { Combobox as ArkCombobox } from "@ark-ui/solid/combobox";
+import { Portal } from "solid-js/web";
+import { splitProps, type Component, type JSX } from "solid-js";
+import { ScrollArea } from "../scroll-area";
+
+const Combobox = ComboboxBase.Root;
+
+const ComboboxLabel = ComboboxBase.Label;
+
+type InputTriggerProps = ArkCombobox.InputProps;
+
+const InputTrigger: Component<InputTriggerProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return (
+    <ComboboxBase.Control class={local.class}>
+      <ComboboxBase.Input {...others} />
+      <ComboboxBase.ClearTrigger>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="size-4"
+        >
+          <path d="M18 6 6 18" />
+          <path d="m6 6 12 12" />
+        </svg>
+      </ComboboxBase.ClearTrigger>
+      <ComboboxBase.Trigger>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="size-4"
+        >
+          <path d="m6 9 6 6 6-6" />
+        </svg>
+      </ComboboxBase.Trigger>
+    </ComboboxBase.Control>
+  );
+};
+
+type ContentProps = ArkCombobox.ContentProps & {
+  class?: string;
+  children?: JSX.Element;
+};
+
+const Content: Component<ContentProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "children"]);
+  return (
+    <Portal>
+      <ComboboxBase.Positioner>
+        <ComboboxBase.Content class={local.class} {...others}>
+          <ComboboxBase.List>
+            <ScrollArea class="max-h-60" orientation="vertical">
+              {local.children}
+            </ScrollArea>
+          </ComboboxBase.List>
+        </ComboboxBase.Content>
+      </ComboboxBase.Positioner>
+    </Portal>
+  );
+};
+
+type ItemProps = ArkCombobox.ItemProps & { class?: string; children?: JSX.Element };
+
+const Item: Component<ItemProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "children"]);
+  return (
+    <ComboboxBase.Item class={local.class} {...others}>
+      <ComboboxBase.ItemText>{local.children}</ComboboxBase.ItemText>
+      <ComboboxBase.ItemIndicator>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="size-4"
+        >
+          <path d="M20 6 9 17l-5-5" />
+        </svg>
+      </ComboboxBase.ItemIndicator>
+    </ComboboxBase.Item>
+  );
+};
+
+const ComboboxRootProvider = ComboboxBase.RootProvider;
+
+const ComboboxInputTrigger = InputTrigger;
+const ComboboxContent = Content;
+const ComboboxItem = Item;
+
+export {
+  Combobox,
+  ComboboxLabel,
+  ComboboxInputTrigger,
+  ComboboxContent,
+  ComboboxItem,
+  ComboboxRootProvider,
+  ComboboxBase,
+};
+export { comboboxVariants, type ComboboxVariants } from "../recipes/combobox";
+```
+
+> **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.

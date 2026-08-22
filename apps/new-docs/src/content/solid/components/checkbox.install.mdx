@@ -1,0 +1,159 @@
+---
+title: Install
+---
+## Installation
+
+### CLI
+
+Run the following command to add the component to your project:
+
+```bash
+npx @ark-preset/cli@latest add checkbox
+```
+
+### Manual
+
+Create the recipe file at `src/components/recipes/checkbox.ts`:
+
+```ts
+import { tv, type VariantProps } from "tailwind-variants";
+
+export const checkboxVariants = tv({
+  slots: {
+    root: "inline-flex items-center gap-2 data-disabled:opacity-50 data-disabled:cursor-not-allowed",
+    control:
+      "peer size-4 shrink-0 rounded-sm border border-input ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground data-[state=checked]:border-primary data-[state=indeterminate]:bg-primary data-[state=indeterminate]:text-primary-foreground data-[state=indeterminate]:border-primary",
+    indicator: "flex items-center justify-center text-current",
+  },
+});
+
+export type CheckboxVariants = VariantProps<typeof checkboxVariants>;
+```
+
+Create the component directory and files.
+
+`src/components/checkbox/checkbox.base.tsx`:
+
+```tsx
+import { Checkbox as ArkCheckbox } from "@ark-ui/solid/checkbox";
+import { splitProps, type Component } from "solid-js";
+import { checkboxVariants, labelVariants } from "../recipes/checkbox";
+
+const styles = checkboxVariants();
+
+const CheckboxRoot: Component<ArkCheckbox.RootProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkCheckbox.Root class={styles.root({ class: local.class })} {...others} />;
+};
+
+const CheckboxRootProvider: Component<ArkCheckbox.RootProviderProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkCheckbox.RootProvider class={styles.root({ class: local.class })} {...others} />;
+};
+
+const CheckboxControl: Component<ArkCheckbox.ControlProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkCheckbox.Control class={styles.control({ class: local.class })} {...others} />;
+};
+
+const CheckboxLabel: Component<ArkCheckbox.LabelProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkCheckbox.Label class={labelVariants({ class: local.class })} {...others} />;
+};
+
+const CheckboxIndicator: Component<ArkCheckbox.IndicatorProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkCheckbox.Indicator class={styles.indicator({ class: local.class })} {...others} />;
+};
+
+const CheckboxHiddenInput = ArkCheckbox.HiddenInput;
+const CheckboxGroup = ArkCheckbox.Group;
+const CheckboxGroupProvider = ArkCheckbox.GroupProvider;
+
+export const Checkbox = {
+  Root: CheckboxRoot,
+  RootProvider: CheckboxRootProvider,
+  Control: CheckboxControl,
+  Label: CheckboxLabel,
+  Indicator: CheckboxIndicator,
+  HiddenInput: CheckboxHiddenInput,
+  Group: CheckboxGroup,
+  GroupProvider: CheckboxGroupProvider,
+};
+```
+
+`src/components/checkbox/index.tsx`:
+
+```tsx
+import { Checkbox as ArkCheckbox } from "@ark-ui/solid/checkbox";
+import { splitProps, type Component } from "solid-js";
+import { Checkbox as CheckboxBase } from "./checkbox.base";
+
+const CheckboxLabel = CheckboxBase.Label;
+
+const CheckboxControl = () => (
+  <>
+    <CheckboxBase.Control>
+      <CheckboxBase.Indicator>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="size-3.5"
+        >
+          <path d="M20 6 9 17l-5-5" />
+        </svg>
+      </CheckboxBase.Indicator>
+      <CheckboxBase.Indicator indeterminate>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="size-3.5"
+        >
+          <path d="M5 12h14" />
+        </svg>
+      </CheckboxBase.Indicator>
+    </CheckboxBase.Control>
+    <CheckboxBase.HiddenInput />
+  </>
+);
+
+const Checkbox: Component<ArkCheckbox.RootProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "children"]);
+  return (
+    <CheckboxBase.Root class={local.class} {...others}>
+      <CheckboxControl />
+      {local.children}
+    </CheckboxBase.Root>
+  );
+};
+
+const CheckboxRootProvider: Component<ArkCheckbox.RootProviderProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "children"]);
+  return (
+    <CheckboxBase.RootProvider class={local.class} {...others}>
+      <CheckboxControl />
+      {local.children}
+    </CheckboxBase.RootProvider>
+  );
+};
+
+export { Checkbox, CheckboxRootProvider, CheckboxLabel, CheckboxBase };
+
+export { checkboxVariants, type CheckboxVariants } from "../recipes/checkbox";
+```
+
+> **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.

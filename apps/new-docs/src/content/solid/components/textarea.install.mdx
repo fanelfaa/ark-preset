@@ -1,0 +1,128 @@
+---
+title: Install
+---
+
+## Installation
+
+### CLI
+
+Run the following command to add the component to your project:
+
+```bash
+npx @ark-preset/cli@latest add textarea
+```
+
+### Manual
+
+Create the recipe file at `src/components/recipes/textarea.ts`:
+
+```ts
+import { tv, type VariantProps } from "tailwind-variants";
+
+export const textareaVariants = tv({
+  slots: {
+    root: "grid gap-1.5",
+    textarea:
+      "flex min-h-[80px] w-full rounded-md border border-input bg-background px-2.5 py-1.5 text-base md:text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50",
+    description: "text-sm text-muted-foreground",
+    error: "text-sm text-destructive",
+  },
+  variants: {
+    error: {
+      true: {
+        textarea: "border-destructive focus-visible:ring-destructive",
+      },
+    },
+  },
+  defaultVariants: {
+    error: false,
+  },
+});
+
+export type TextareaVariants = VariantProps<typeof textareaVariants>;
+```
+
+Create the component directory and files.
+
+`src/components/textarea/textarea.base.tsx`:
+
+```tsx
+import { Field as ArkField } from "@ark-ui/solid/field";
+import { splitProps, type Component } from "solid-js";
+import { textareaVariants, labelVariants, type TextareaVariants } from "../recipes/textarea";
+
+const styles = textareaVariants();
+
+const TextareaRoot: Component<ArkField.RootProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkField.Root class={styles.root({ class: local.class })} {...others} />;
+};
+
+const TextareaLabel: Component<ArkField.LabelProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkField.Label class={labelVariants({ class: local.class })} {...others} />;
+};
+
+const TextareaField: Component<ArkField.TextareaProps & TextareaVariants> = (props) => {
+  const [local, others] = splitProps(props, ["class", "error"]);
+  return (
+    <ArkField.Textarea
+      class={styles.textarea({ class: local.class, error: local.error })}
+      {...others}
+    />
+  );
+};
+
+const TextareaDescription: Component<ArkField.HelperTextProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkField.HelperText class={styles.description({ class: local.class })} {...others} />;
+};
+
+const TextareaErrorText: Component<ArkField.ErrorTextProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkField.ErrorText class={styles.error({ class: local.class })} {...others} />;
+};
+
+export const Textarea = {
+  Root: TextareaRoot,
+  Label: TextareaLabel,
+  Field: TextareaField,
+  Description: TextareaDescription,
+  ErrorText: TextareaErrorText,
+};
+```
+
+`src/components/textarea/index.tsx`:
+
+```tsx
+import { splitProps, type Component } from "solid-js";
+import { Textarea as TextareaBase } from "./textarea.base";
+import { type TextareaVariants } from "../recipes/textarea";
+import { Field as ArkField } from "@ark-ui/solid/field";
+
+type TextareaProps = {
+  label?: string;
+  description?: string;
+  error?: string;
+} & ArkField.TextareaProps &
+  Omit<TextareaVariants, "error">;
+
+const Textarea: Component<TextareaProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "label", "description", "error", "children"]);
+  return (
+    <TextareaBase.Root class={local.class} invalid={!!local.error}>
+      {local.label && <TextareaBase.Label>{local.label}</TextareaBase.Label>}
+      <TextareaBase.Field error={!!local.error} {...others} />
+      {local.description && !local.error && (
+        <TextareaBase.Description>{local.description}</TextareaBase.Description>
+      )}
+      {local.error && <TextareaBase.ErrorText>{local.error}</TextareaBase.ErrorText>}
+    </TextareaBase.Root>
+  );
+};
+
+export { Textarea, TextareaBase };
+export { textareaVariants, type TextareaVariants } from "../recipes/textarea";
+```
+
+> **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.

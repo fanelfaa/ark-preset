@@ -188,7 +188,11 @@ export function generateInstallationContent(component: string): string | null {
     sections.push(`Create the component file at \`${file.label}\`:\n`);
     const ext = extname(file.label);
     sections.push("```" + ext.slice(1));
-    sections.push(file.content.replace(/from\s+["']@ark-preset\/core["']/g, `from "../recipes/${component}"`).trimEnd());
+    sections.push(
+      file.content
+        .replace(/from\s+["']@ark-preset\/core["']/g, `from "../recipes/${component}"`)
+        .trimEnd(),
+    );
     sections.push("```\n");
   } else if (componentFiles.length > 1) {
     // Multi-file: detect the .base.tsx + index.tsx pattern for terser headings
@@ -208,7 +212,11 @@ export function generateInstallationContent(component: string): string | null {
       }
       const ext = extname(file.label);
       sections.push("```" + ext.slice(1));
-      sections.push(file.content.replace(/from\s+["']@ark-preset\/core["']/g, `from "../recipes/${component}"`).trimEnd());
+      sections.push(
+        file.content
+          .replace(/from\s+["']@ark-preset\/core["']/g, `from "../recipes/${component}"`)
+          .trimEnd(),
+      );
       sections.push("```\n");
     }
   }

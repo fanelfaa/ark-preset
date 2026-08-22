@@ -1,0 +1,44 @@
+import ComponentPreview from '../../../../components/ComponentPreview.astro';
+import SwitchRootProviderDemo from '../../../../components/demos/switch-demo/SwitchRootProviderDemo.tsx';
+import SwitchRootProviderDemoCode from '../../../../components/demos/switch-demo/SwitchRootProviderDemo.tsx?code';
+
+## Usage
+
+Import the component:
+
+```tsx
+import { Switch, SwitchLabel, SwitchRootProvider } from "~/components/switch";
+```
+
+Basic switch:
+
+```tsx
+<Switch />
+```
+
+With label:
+
+```tsx
+<Switch defaultChecked>
+  <SwitchLabel>Enable notifications</SwitchLabel>
+</Switch>
+```
+
+Disabled:
+
+```tsx
+<Switch disabled />
+```
+
+## Root Provider
+
+Use `SwitchRootProvider` when you need to access the switch state outside of the switch tree. This pattern uses the `useSwitch` hook from Ark UI to create a shared context that both the switch and external elements can reference.
+
+<ComponentPreview code={SwitchRootProviderDemoCode}>
+  <SwitchRootProviderDemo  client:load />
+</ComponentPreview>
+
+The key difference:
+
+- **`Switch` (Root)** — manages its own state internally. Use for simple, self-contained switches.
+- **`SwitchRootProvider`** — accepts a pre-created switch context via `useSwitch`. Use when you need to read or control the switch state from outside the component tree.

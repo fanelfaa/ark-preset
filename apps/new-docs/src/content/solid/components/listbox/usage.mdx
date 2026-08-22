@@ -1,0 +1,96 @@
+import { InlineCode } from "@ark-preset/solid";
+import ComponentPreview from '../../../../components/ComponentPreview.astro';
+import ListboxMultipleDemo from '../../../../components/demos/listbox-demo/ListboxMultipleDemo.tsx';
+import ListboxMultipleDemoCode from '../../../../components/demos/listbox-demo/ListboxMultipleDemo.tsx?code';
+import ListboxHorizontalDemo from '../../../../components/demos/listbox-demo/ListboxHorizontalDemo.tsx';
+import ListboxHorizontalDemoCode from '../../../../components/demos/listbox-demo/ListboxHorizontalDemo.tsx?code';
+
+## Usage
+
+Import the component and use it inline:
+
+```tsx
+import { createListCollection } from "@ark-ui/solid";
+import { Index } from "solid-js";
+import { Listbox, ListboxItem } from "~/components/listbox";
+```
+
+Basic listbox:
+
+```tsx
+const frameworks = createListCollection({
+  items: [
+    { label: "React", value: "react" },
+    { label: "Solid", value: "solid" },
+    { label: "Vue", value: "vue" },
+  ],
+});
+
+<Listbox collection={frameworks}>
+  <Index each={frameworks.items}>
+    {(item) => <ListboxItem item={item()}>{item().label}</ListboxItem>}
+  </Index>
+</Listbox>
+```
+
+### Multiple Selection
+
+Use `selectionMode="multiple"` to allow selecting multiple items:
+
+<ComponentPreview code={ListboxMultipleDemoCode}>
+  <ListboxMultipleDemo  client:load />
+</ComponentPreview>
+
+### Horizontal Orientation
+
+Use `orientation="horizontal"` for a horizontal layout:
+
+<ComponentPreview code={ListboxHorizontalDemoCode}>
+  <ListboxHorizontalDemo  client:load />
+</ComponentPreview>
+
+### Advanced Usage
+
+When the composite `Listbox` doesn't provide enough control, import the raw primitive parts from the base file directly:
+
+```tsx
+import { Listbox } from "~/components/listbox/listbox.base";
+```
+
+Or import `ListboxBase` (the raw parts namespace) from the composite entry point:
+
+```tsx
+import { ListboxBase } from "~/components/listbox";
+```
+
+### RootProvider Pattern
+
+For full control over the listbox machine, use `useListbox` with `ListboxBase.RootProvider`:
+
+```tsx
+import { ListboxBase, useListboxVariant } from "~/components/listbox/listbox.base";
+import { useListbox } from "@ark-ui/solid/listbox";
+
+export function RootProviderDemo() {
+  const listbox = useListbox({ collection: frameworks });
+
+  return (
+    <ListboxBase.RootProvider value={listbox}>
+      <ListboxBase.Content>
+        <Index each={frameworks.items}>
+          {(item) => (
+            <ListboxBase.Item item={item()}>
+              <ListboxBase.ItemText>{item().label}</ListboxBase.ItemText>
+              <ListboxBase.ItemIndicator>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4">
+                  <path d="M20 6 9 17l-5-5" />
+                </svg>
+              </ListboxBase.ItemIndicator>
+            </ListboxBase.Item>
+          )}
+        </Index>
+      </ListboxBase.Content>
+    </ListboxBase.RootProvider>
+  );
+}
+```

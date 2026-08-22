@@ -1,0 +1,97 @@
+import { InlineCode } from "@ark-preset/solid";
+import ComponentPreview from '../../../../components/ComponentPreview.astro';
+import TagsInputControlledDemo from '../../../../components/demos/tags-input-demo/TagsInputControlledDemo.tsx';
+import TagsInputControlledDemoCode from '../../../../components/demos/tags-input-demo/TagsInputControlledDemo.tsx?code';
+import TagsInputDisabledDemo from '../../../../components/demos/tags-input-demo/TagsInputDisabledDemo.tsx';
+import TagsInputDisabledDemoCode from '../../../../components/demos/tags-input-demo/TagsInputDisabledDemo.tsx?code';
+import TagsInputInvalidDemo from '../../../../components/demos/tags-input-demo/TagsInputInvalidDemo.tsx';
+import TagsInputInvalidDemoCode from '../../../../components/demos/tags-input-demo/TagsInputInvalidDemo.tsx?code';
+import TagsInputRootProviderDemo from '../../../../components/demos/tags-input-demo/TagsInputRootProviderDemo.tsx';
+import TagsInputRootProviderDemoCode from '../../../../components/demos/tags-input-demo/TagsInputRootProviderDemo.tsx?code';
+
+## Usage
+
+Import the component and use it inline:
+
+```tsx
+import { TagsInput } from "~/components/tags-input";
+```
+
+Basic tags input with a label:
+
+```tsx
+<TagsInput defaultValue={["React", "Solid"]} label="Frameworks" />
+```
+
+### Controlled Value
+
+Use `value` and `onValueChange` to control the tag values externally:
+
+<ComponentPreview code={TagsInputControlledDemoCode}>
+  <TagsInputControlledDemo  client:load />
+</ComponentPreview>
+
+### Disabled
+
+Use the `disabled` prop to disable the tags input:
+
+<ComponentPreview code={TagsInputDisabledDemoCode}>
+  <TagsInputDisabledDemo  client:load />
+</ComponentPreview>
+
+### Invalid State
+
+Use the `invalid` prop (from Ark UI) to mark the input as invalid:
+
+<ComponentPreview code={TagsInputInvalidDemoCode}>
+  <TagsInputInvalidDemo  client:load />
+</ComponentPreview>
+
+## Advanced Usage
+
+When the composite `TagsInput` doesn't provide enough control, import the raw primitive parts from the base file directly:
+
+```tsx
+import { TagsInput } from "~/components/tags-input/tags-input.base";
+```
+
+Or import `TagsInputBase` (the raw parts namespace) from the composite entry point:
+
+```tsx
+import { TagsInputBase } from "~/components/tags-input";
+```
+
+### RootProvider Pattern
+
+For full control over the tags input machine, use `useTagsInput` with `TagsInputBase.RootProvider`:
+
+<ComponentPreview code={TagsInputRootProviderDemoCode}>
+  <TagsInputRootProviderDemo  client:load />
+</ComponentPreview>
+
+### Custom Tag Rendering with TagsInputItem
+
+For custom tag rendering (e.g., custom delete icon), use `TagsInputItem`:
+
+```tsx
+import { Index } from "solid-js";
+import { TagsInput, TagsInputItem } from "~/components/tags-input";
+
+export function CustomItemDemo() {
+  return (
+    <TagsInput defaultValue={["React", "Solid"]}>
+      <TagsInputBase.Label>Frameworks</TagsInputBase.Label>
+      <TagsInputBase.Control>
+        <Index each={api().value}>
+          {(value, index) => (
+            <TagsInputItem index={index} value={value()}>
+              {value()}
+            </TagsInputItem>
+          )}
+        </Index>
+        <TagsInputBase.Input />
+      </TagsInputBase.Control>
+    </TagsInput>
+  );
+}
+```

@@ -1,0 +1,41 @@
+import { InlineCode } from "@ark-preset/solid";
+
+> **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--foreground`, `--input`, `--border`, etc.) or override the utility classes to match your design system.
+
+## Usage
+
+Import the component:
+
+```tsx
+import { NumberInput } from "~/components/number-input";
+```
+
+Basic usage:
+
+```tsx
+<NumberInput defaultValue={50} min={0} max={100} />
+```
+
+### With Label
+
+Add a label using the `label` prop.
+
+```tsx
+<NumberInput label="Quantity" defaultValue={1} min={1} max={10} />
+```
+
+### Error State
+
+Use the `error` prop to show an error state.
+
+```tsx
+<NumberInput label="Amount" defaultValue={0} error />
+```
+
+### Disabled
+
+Use the `disabled` prop to disable the input.
+
+```tsx
+<NumberInput defaultValue={50} disabled />
+```

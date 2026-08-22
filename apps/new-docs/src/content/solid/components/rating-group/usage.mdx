@@ -1,0 +1,84 @@
+import { InlineCode } from "@ark-preset/solid";
+import ComponentPreview from '../../../../components/ComponentPreview.astro';
+import RatingGroupControlledDemo from '../../../../components/demos/rating-group-demo/RatingGroupControlledDemo.tsx';
+import RatingGroupControlledDemoCode from '../../../../components/demos/rating-group-demo/RatingGroupControlledDemo.tsx?code';
+import RatingGroupHalfStarDemo from '../../../../components/demos/rating-group-demo/RatingGroupHalfStarDemo.tsx';
+import RatingGroupHalfStarDemoCode from '../../../../components/demos/rating-group-demo/RatingGroupHalfStarDemo.tsx?code';
+import RatingGroupDisabledDemo from '../../../../components/demos/rating-group-demo/RatingGroupDisabledDemo.tsx';
+import RatingGroupDisabledDemoCode from '../../../../components/demos/rating-group-demo/RatingGroupDisabledDemo.tsx?code';
+import RatingGroupRootProviderDemo from '../../../../components/demos/rating-group-demo/RatingGroupRootProviderDemo.tsx';
+import RatingGroupRootProviderDemoCode from '../../../../components/demos/rating-group-demo/RatingGroupRootProviderDemo.tsx?code';
+
+## Usage
+
+Import the component and use it inline:
+
+```tsx
+import { RatingGroup, RatingGroupLabel } from "~/components/rating-group";
+```
+
+Basic star rating with 5 stars:
+
+```tsx
+<RatingGroup count={5} defaultValue={3}>
+  <RatingGroupLabel>Rate this</RatingGroupLabel>
+</RatingGroup>
+```
+
+### Controlled
+
+<ComponentPreview code={RatingGroupControlledDemoCode}>
+  <RatingGroupControlledDemo  client:load />
+</ComponentPreview>
+
+Use `value` and `onValueChange` to control the rating value externally:
+
+### Half Star
+
+<ComponentPreview code={RatingGroupHalfStarDemoCode}>
+  <RatingGroupHalfStarDemo  client:load />
+</ComponentPreview>
+
+Allow `0.5` value steps by setting the `allowHalf` prop to `true`:
+
+```tsx
+<RatingGroup count={5} defaultValue={2.5} allowHalf>
+  <RatingGroupLabel>Rate this</RatingGroupLabel>
+</RatingGroup>
+```
+
+### Disabled
+
+<ComponentPreview code={RatingGroupDisabledDemoCode}>
+  <RatingGroupDisabledDemo  client:load />
+</ComponentPreview>
+
+To make the rating group disabled, set the `disabled` prop to `true`:
+
+```tsx
+<RatingGroup count={5} defaultValue={4} disabled>
+  <RatingGroupLabel>Rate this</RatingGroupLabel>
+</RatingGroup>
+```
+
+## Advanced Usage
+
+When the composite `RatingGroup` doesn't provide enough control, import the raw primitive parts from the base file directly:
+
+```tsx
+import { RatingGroup, useRatingGroupVariant } from "~/components/rating-group/rating-group.base";
+```
+
+Or import `RatingGroupBase` (the raw parts namespace) from the composite entry point:
+
+```tsx
+import { RatingGroupBase } from "~/components/rating-group";
+```
+
+### RootProvider Pattern
+
+<ComponentPreview code={RatingGroupRootProviderDemoCode}>
+  <RatingGroupRootProviderDemo  client:load />
+</ComponentPreview>
+
+For full control over the rating group machine, use `useRatingGroup` with `RatingGroup.RootProvider`:

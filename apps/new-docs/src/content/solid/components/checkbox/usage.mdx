@@ -1,0 +1,51 @@
+import { InlineCode } from "@ark-preset/solid";
+import ComponentPreview from '../../../../components/ComponentPreview.astro';
+import CheckboxRootProviderDemo from '../../../../components/demos/checkbox-demo/CheckboxRootProviderDemo.tsx';
+import CheckboxRootProviderDemoCode from '../../../../components/demos/checkbox-demo/CheckboxRootProviderDemo.tsx?code';
+
+## Usage
+
+Import the component:
+
+```tsx
+import { Checkbox, CheckboxLabel, CheckboxRootProvider } from "~/components/checkbox";
+```
+
+Basic checkbox:
+
+```tsx
+<Checkbox />
+```
+
+With label:
+
+```tsx
+<Checkbox defaultChecked>
+  <CheckboxLabel>Accept terms</CheckboxLabel>
+</Checkbox>
+```
+
+Disabled:
+
+```tsx
+<Checkbox disabled />
+```
+
+Indeterminate:
+
+```tsx
+<Checkbox checked="indeterminate" />
+```
+
+### Root Provider
+
+Use `CheckboxRootProvider` when you need to access the checkbox state outside of the checkbox tree. This pattern uses the `useCheckbox` hook from Ark UI to create a shared context that both the checkbox and external elements can reference.
+
+<ComponentPreview code={CheckboxRootProviderDemoCode}>
+  <CheckboxRootProviderDemo  client:load />
+</ComponentPreview>
+
+The key difference:
+
+- **`Checkbox` (Root)** — manages its own state internally. Use for simple, self-contained checkboxes.
+- **`CheckboxRootProvider`** — accepts a pre-created checkbox context via `useCheckbox`. Use when you need to read or control the checkbox state from outside the component tree.
