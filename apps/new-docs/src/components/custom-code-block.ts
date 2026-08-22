@@ -86,7 +86,7 @@ class CustomCodeBlock extends HTMLElement {
             expandBtn.textContent = "Show less";
             pre.style.paddingBottom = "52px";
             // Set explicit px value so CSS can animate it smoothly
-            pre.style.maxHeight = (pre.scrollHeight + 52) + "px";
+            pre.style.maxHeight = pre.scrollHeight + 52 + "px";
           } else {
             this.classList.remove("expanded");
             fade.style.opacity = "1";
