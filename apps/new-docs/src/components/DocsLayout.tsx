@@ -5,15 +5,45 @@ import { GitHubIcon } from "./GitHubIcon";
 
 interface DocsLayoutProps {
   children?: JSX.Element;
+  currentFramework?: string;
 }
 
 export const DocsLayout: Component<DocsLayoutProps> = (props) => {
+  const framework = () => props.currentFramework || "solid";
+
   return (
-    <div class="mx-auto max-w-7xl">
-      <div class="flex">
+    <div class="mx-auto max-w-7xl flex flex-col min-h-screen">
+      <header class="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div class="flex h-14 items-center justify-between px-6">
+          <div class="flex items-center gap-6">
+            <a class="font-bold hover:text-primary transition-colors" href="/">
+              Ark Preset Docs
+            </a>
+          </div>
+          <div class="flex items-center gap-4">
+            <select
+              id="framework-selector"
+              class="bg-transparent border border-border rounded-md px-2 py-1 text-sm outline-none focus:ring-2 focus:ring-primary"
+              data-testid="framework-selector"
+            >
+              <option value="solid" selected={framework() === "solid"}>
+                Solid
+              </option>
+              <option value="react" selected={framework() === "react"}>
+                React
+              </option>
+              <option value="vue" selected={framework() === "vue"}>
+                Vue
+              </option>
+            </select>
+          </div>
+        </div>
+      </header>
+
+      <div class="flex flex-1">
         {/* Sidebar */}
         <aside class="hidden lg:block w-64 shrink-0 border-r border-border bg-background/60 backdrop-blur-3xl sticky top-14 self-start h-[calc(100vh-3.5rem)]">
-          <SidebarNav />
+          <SidebarNav currentFramework={framework()} />
         </aside>
 
         {/* Main content */}
@@ -22,7 +52,7 @@ export const DocsLayout: Component<DocsLayoutProps> = (props) => {
             {props.children}
           </div>
           {/* Footer */}
-          <footer class="border-t border-border bg-background/30 backdrop-blur-3xl">
+          <footer class="border-t border-border bg-background/30 backdrop-blur-3xl mt-auto">
             <div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between text-sm text-muted-foreground">
               <a
                 href="https://github.com/fanelfaa/ark-preset"
@@ -42,7 +72,15 @@ export const DocsLayout: Component<DocsLayoutProps> = (props) => {
   );
 };
 
-export function SidebarNav(props: { onLinkClick?: () => void }) {
+export function SidebarNav(props: { onLinkClick?: () => void; currentFramework: string }) {
+  const getHref = (originalHref: string) => {
+    // If it's a docs link, map it to the current framework
+    if (originalHref.startsWith("/docs/components/")) {
+      return `/${props.currentFramework}/components/${originalHref.split("/").pop()}`;
+    }
+    return originalHref;
+  };
+
   return (
     <ScrollArea class="h-full">
       <nav class="p-4">
@@ -57,7 +95,7 @@ export function SidebarNav(props: { onLinkClick?: () => void }) {
                   {(link) => (
                     <li>
                       <a
-                        href={link().href}
+                        href={getHref(link().href)}
                         class="block rounded-md px-3 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground hover:outline-2 outline-neutral-200"
                         onClick={props.onLinkClick}
                       >
