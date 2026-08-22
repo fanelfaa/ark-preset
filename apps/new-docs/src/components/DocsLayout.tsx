@@ -10,17 +10,21 @@ import {
 import { sidebarNav } from "../sidebar-nav";
 import { GitHubIcon } from "./GitHubIcon";
 import { ThemeToggle } from "./ThemeToggle";
+import { GradientCloud } from "./GradientCloud";
 
 interface DocsLayoutProps {
   children?: JSX.Element;
   currentFramework?: string;
+  isHome?: boolean;
 }
 
 export const DocsLayout: Component<DocsLayoutProps> = (props) => {
   const framework = () => props.currentFramework || "solid";
 
   return (
-    <div class="mx-auto max-w-7xl flex flex-col min-h-screen">
+    <>
+      <GradientCloud />
+      <div class="mx-auto max-w-7xl flex flex-col min-h-screen relative z-1">
       <header class="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div class="flex h-14 items-center justify-between px-6">
           <div class="flex items-center gap-4">
@@ -83,15 +87,21 @@ export const DocsLayout: Component<DocsLayoutProps> = (props) => {
 
       <div class="flex flex-1">
         {/* Sidebar */}
-        <aside class="hidden lg:block w-64 shrink-0 border-r border-border bg-background/60 backdrop-blur-3xl sticky top-14 self-start h-[calc(100vh-3.5rem)]">
-          <SidebarNav currentFramework={framework()} />
-        </aside>
+        {!props.isHome && (
+          <aside class="hidden lg:block w-64 shrink-0 border-r border-border bg-background/60 backdrop-blur-3xl sticky top-14 self-start h-[calc(100vh-3.5rem)]">
+            <SidebarNav currentFramework={framework()} />
+          </aside>
+        )}
 
         {/* Main content */}
-        <main class="flex-1 min-w-0 bg-background/60 backdrop-blur-3xl">
-          <div class="max-w-4xl mx-auto px-6 py-10 prose dark:prose-invert space-y-6">
-            {props.children}
-          </div>
+        <main class="flex-1 min-w-0 bg-background/60 backdrop-blur-3xl flex flex-col">
+          {props.isHome ? (
+            props.children
+          ) : (
+            <div class="max-w-4xl mx-auto px-6 py-10 prose dark:prose-invert space-y-6 flex-1 w-full">
+              {props.children}
+            </div>
+          )}
           {/* Footer */}
           <footer class="border-t border-border bg-background/30 backdrop-blur-3xl mt-auto">
             <div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between text-sm text-muted-foreground">
@@ -110,6 +120,7 @@ export const DocsLayout: Component<DocsLayoutProps> = (props) => {
         </main>
       </div>
     </div>
+    </>
   );
 };
 

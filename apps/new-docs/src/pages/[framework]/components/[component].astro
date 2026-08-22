@@ -24,9 +24,7 @@ const { Content } = await render(entry);
 ---
 
 <Layout currentFramework={Astro.params.framework}>
-  <div class="px-6 py-8">
-    <Content />
-  </div>
+  <Content />
   <script is:inline>
     document.addEventListener('change', (e) => {
       if (e.target && e.target.id === 'framework-selector') {

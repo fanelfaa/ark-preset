@@ -4,9 +4,10 @@ import '../styles.css';
 
 interface Props {
   currentFramework?: string;
+  isHome?: boolean;
 }
 
-const { currentFramework = 'solid' } = Astro.props;
+const { currentFramework = 'solid', isHome = false } = Astro.props;
 ---
 <html lang="en">
   <head>
@@ -32,7 +33,7 @@ const { currentFramework = 'solid' } = Astro.props;
     </script>
   </head>
   <body>
-    <DocsLayout client:load currentFramework={currentFramework}>
+    <DocsLayout client:load currentFramework={currentFramework} isHome={isHome}>
       <slot />
     </DocsLayout>
   </body>
