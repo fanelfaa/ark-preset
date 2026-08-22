@@ -4,19 +4,18 @@ import tailwindcss from '@tailwindcss/vite';
 import mdx from '@astrojs/mdx';
 import { rehypeCustomCodeBlock } from './src/plugins/rehype-custom-code-block.mjs';
 
+import { demoCodePlugin } from './src/plugins/demo-code.ts';
+
 // https://astro.build/config
 export default defineConfig({
   integrations: [solidJs(), mdx()],
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss(), demoCodePlugin()]
   },
   markdown: {
     rehypePlugins: [rehypeCustomCodeBlock],
     shikiConfig: {
-      themes: {
-        light: 'github-light',
-        dark: 'github-dark',
-      }
+      theme: 'github-dark',
     }
   }
 });

@@ -53,15 +53,7 @@ body {
   }
 }
 
-/* Shiki Dual Theme Support */
-html.dark .astro-code,
-html.dark .astro-code span {
-  color: var(--shiki-dark) !important;
-  background-color: var(--shiki-dark-bg) !important;
-  font-style: var(--shiki-dark-font-style) !important;
-  font-weight: var(--shiki-dark-font-weight) !important;
-  text-decoration: var(--shiki-dark-text-decoration) !important;
-}
+
 
 /* Custom Code Block FOUC prevention */
 custom-code-block {
@@ -78,13 +70,14 @@ custom-code-block pre {
   padding: 1rem;
   max-height: 200px;
   overflow-y: hidden;
-  overflow-x: auto;
-  white-space: pre !important;
-  word-break: normal !important;
+  overflow-x: hidden;
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
+  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding-bottom 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 custom-code-block.expanded pre {
-  max-height: none;
-  overflow: auto;
+  /* max-height is now handled explicitly via inline styles in JS for animation */
+  overflow: hidden;
 }
 
 .custom-code-block-preview custom-code-block {

@@ -7,41 +7,54 @@ class CustomCodeBlock extends HTMLElement {
     const pre = this.querySelector("pre");
     if (!pre) return;
 
-    // Actions container (buttons)
-    const actions = document.createElement("div");
-    actions.className = "absolute top-2 right-2 flex gap-2 z-10";
-
-    // Copy button
+    // Copy button (matches old CodeBlock.tsx)
     const copyBtn = document.createElement("button");
     copyBtn.className =
-      "copy-btn p-1.5 rounded-md bg-zinc-800 text-zinc-300 hover:bg-zinc-700 hover:text-white transition-colors cursor-pointer text-xs flex items-center gap-1 opacity-0 group-hover:opacity-100 focus:opacity-100 border border-zinc-700";
+      "absolute top-3 right-3 rounded-md p-1.5 text-muted-foreground hover:text-foreground hover:bg-background/30 transition-colors cursor-pointer z-10";
     copyBtn.innerHTML = `
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+        <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+      </svg>
     `;
     copyBtn.setAttribute("aria-label", "Copy code");
     copyBtn.setAttribute("title", "Copy code");
     copyBtn.addEventListener("click", async () => {
       const code = pre.textContent || "";
       try {
-        await navigator.clipboard.writeText(code);
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(code);
+        } else {
+          // Fallback for non-secure contexts (e.g. testing over local IP)
+          const textarea = document.createElement("textarea");
+          textarea.value = code;
+          textarea.style.position = "absolute";
+          textarea.style.opacity = "0";
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand("copy");
+          document.body.removeChild(textarea);
+        }
+
         copyBtn.innerHTML = `
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
         `;
         setTimeout(() => {
           copyBtn.innerHTML = `
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+              <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+            </svg>
           `;
-        }, 2000);
+        }, 1500);
       } catch (err) {
         console.error("Failed to copy", err);
       }
     });
 
-    actions.appendChild(copyBtn);
-    this.appendChild(actions);
-
-    // Add group class for hover effects
-    this.classList.add("group");
+    this.appendChild(copyBtn);
 
     // Check if expandable
     requestAnimationFrame(() => {
@@ -62,6 +75,9 @@ class CustomCodeBlock extends HTMLElement {
 
         let isExpanded = false;
 
+        // Set initial explicit maxHeight for CSS transition
+        pre.style.maxHeight = "200px";
+
         expandBtn.addEventListener("click", () => {
           isExpanded = !isExpanded;
           if (isExpanded) {
@@ -69,11 +85,14 @@ class CustomCodeBlock extends HTMLElement {
             fade.style.opacity = "0";
             expandBtn.textContent = "Show less";
             pre.style.paddingBottom = "52px";
+            // Set explicit px value so CSS can animate it smoothly
+            pre.style.maxHeight = (pre.scrollHeight + 52) + "px";
           } else {
             this.classList.remove("expanded");
             fade.style.opacity = "1";
             expandBtn.textContent = "Show more";
             pre.style.paddingBottom = "1rem";
+            pre.style.maxHeight = "200px";
           }
         });
 

@@ -5,17 +5,17 @@ description: Displays a button or a component that looks like a button.
 
 import ComponentPreview from '../../components/ComponentPreview.astro';
 import ButtonVariantsDemo from '../../components/demos/button-demo/ButtonVariantsDemo.tsx';
-import ButtonVariantsDemoCode from '../../components/demos/button-demo/ButtonVariantsDemo.tsx?raw';
+import ButtonVariantsDemoCode from '../../components/demos/button-demo/ButtonVariantsDemo.tsx?code';
 import ButtonSizesDemo from '../../components/demos/button-demo/ButtonSizesDemo.tsx';
-import ButtonSizesDemoCode from '../../components/demos/button-demo/ButtonSizesDemo.tsx?raw';
+import ButtonSizesDemoCode from '../../components/demos/button-demo/ButtonSizesDemo.tsx?code';
 import ButtonDisabledDemo from '../../components/demos/button-demo/ButtonDisabledDemo.tsx';
-import ButtonDisabledDemoCode from '../../components/demos/button-demo/ButtonDisabledDemo.tsx?raw';
+import ButtonDisabledDemoCode from '../../components/demos/button-demo/ButtonDisabledDemo.tsx?code';
 import ButtonIconsDemo from '../../components/demos/button-demo/ButtonIconsDemo.tsx';
-import ButtonIconsDemoCode from '../../components/demos/button-demo/ButtonIconsDemo.tsx?raw';
+import ButtonIconsDemoCode from '../../components/demos/button-demo/ButtonIconsDemo.tsx?code';
 import ButtonSpinnerDemo from '../../components/demos/button-demo/ButtonSpinnerDemo.tsx';
-import ButtonSpinnerDemoCode from '../../components/demos/button-demo/ButtonSpinnerDemo.tsx?raw';
+import ButtonSpinnerDemoCode from '../../components/demos/button-demo/ButtonSpinnerDemo.tsx?code';
 import ButtonLinkDemo from '../../components/demos/button-demo/ButtonLinkDemo.tsx';
-import ButtonLinkDemoCode from '../../components/demos/button-demo/ButtonLinkDemo.tsx?raw';
+import ButtonLinkDemoCode from '../../components/demos/button-demo/ButtonLinkDemo.tsx?code';
 
 # Button
 
@@ -80,7 +80,7 @@ Create the component file at `src/components/button/index.tsx`:
 
 ```tsx
 import { splitProps, type Component, children } from "solid-js";
-import { ButtonVariants, buttonVariants } from "@ark-preset/core";
+import { ButtonVariants, buttonVariants } from "../recipes/button";
 import { ark, HTMLArkProps } from "@ark-ui/solid/factory";
 
 type ButtonProps = HTMLArkProps<"button"> & ButtonVariants;
