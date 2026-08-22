@@ -85,3 +85,9 @@ custom-code-block.expanded pre {
   margin: 0;
   border-radius: 0;
 }
+
+.prose table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+}
