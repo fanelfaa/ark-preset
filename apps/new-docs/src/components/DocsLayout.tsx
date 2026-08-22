@@ -1,0 +1,76 @@
+import { type JSX, type Component, Index } from "solid-js";
+import { ScrollArea } from "@ark-preset/solid";
+import { sidebarNav } from "../sidebar-nav";
+import { GitHubIcon } from "./GitHubIcon";
+
+interface DocsLayoutProps {
+  children?: JSX.Element;
+}
+
+export const DocsLayout: Component<DocsLayoutProps> = (props) => {
+  return (
+    <div class="mx-auto max-w-7xl">
+      <div class="flex">
+        {/* Sidebar */}
+        <aside class="hidden lg:block w-64 shrink-0 border-r border-border bg-background/60 backdrop-blur-3xl sticky top-14 self-start h-[calc(100vh-3.5rem)]">
+          <SidebarNav />
+        </aside>
+
+        {/* Main content */}
+        <main class="flex-1 min-w-0 bg-background/60 backdrop-blur-3xl">
+          <div class="max-w-4xl mx-auto px-6 py-10 prose dark:prose-invert space-y-6">
+            {props.children}
+          </div>
+          {/* Footer */}
+          <footer class="border-t border-border bg-background/30 backdrop-blur-3xl">
+            <div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between text-sm text-muted-foreground">
+              <a
+                href="https://github.com/fanelfaa/ark-preset"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center gap-2 hover:text-foreground transition-colors"
+              >
+                <GitHubIcon />
+                GitHub
+              </a>
+              <span>&copy; {new Date().getFullYear()} Ark Preset</span>
+            </div>
+          </footer>
+        </main>
+      </div>
+    </div>
+  );
+};
+
+export function SidebarNav(props: { onLinkClick?: () => void }) {
+  return (
+    <ScrollArea class="h-full">
+      <nav class="p-4">
+        <Index each={sidebarNav}>
+          {(category) => (
+            <div class="mb-6">
+              <h4 class="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-2 px-3">
+                {category().category}
+              </h4>
+              <ul class="space-y-1">
+                <Index each={category().links}>
+                  {(link) => (
+                    <li>
+                      <a
+                        href={link().href}
+                        class="block rounded-md px-3 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground hover:outline-2 outline-neutral-200"
+                        onClick={props.onLinkClick}
+                      >
+                        {link().label}
+                      </a>
+                    </li>
+                  )}
+                </Index>
+              </ul>
+            </div>
+          )}
+        </Index>
+      </nav>
+    </ScrollArea>
+  );
+}
