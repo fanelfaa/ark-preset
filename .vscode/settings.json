@@ -8,5 +8,6 @@
   "oxc.enable": true,
   "[typescriptreact]": {
     "editor.defaultFormatter": "oxc.oxc-vscode"
-  }
+  },
+  "typescript.tsdk": "node_modules/typescript/lib"
 }
