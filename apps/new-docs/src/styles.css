@@ -77,7 +77,10 @@ custom-code-block pre {
   margin: 0;
   padding: 1rem;
   max-height: 200px;
-  overflow: hidden; /* JavaScript will handle scroll/expansion */
+  overflow-y: hidden;
+  overflow-x: auto;
+  white-space: pre !important;
+  word-break: normal !important;
 }
 custom-code-block.expanded pre {
   max-height: none;

@@ -1,6 +1,6 @@
 ## What to build
 
-Migrate the Homepage, Installation/Setup pages, and exactly *one* complex component (e.g., `Button`) into the `solid` collection. Adapt its MDX to use the new `ComponentPreview.astro`. This acts as a tracer bullet to prove the entire new pipeline works on real content before bulk migrating.
+Migrate the Homepage, Installation/Setup pages, and exactly _one_ complex component (e.g., `Button`) into the `solid` collection. Adapt its MDX to use the new `ComponentPreview.astro`. This acts as a tracer bullet to prove the entire new pipeline works on real content before bulk migrating.
 
 ## Acceptance criteria
 

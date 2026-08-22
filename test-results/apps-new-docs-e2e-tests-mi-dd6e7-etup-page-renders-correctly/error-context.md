@@ -22,25 +22,25 @@ Call log:
 
 ```ts
   1  | import { test, expect } from '@playwright/test';
-  2  | 
+  2  |
   3  | test('Homepage renders correctly', async ({ page }) => {
   4  |   await page.goto('/');
   5  |   await expect(page.locator('h1')).toContainText('UI Component Library');
   6  |   await expect(page.locator('text=Browse Components')).toBeVisible();
   7  | });
-  8  | 
+  8  |
   9  | test('Setup page renders correctly', async ({ page }) => {
 > 10 |   await page.goto('/setup');
      |              ^ Error: page.goto: Protocol error (Page.navigate): Cannot navigate to invalid URL
   11 |   await expect(page.locator('h1')).toContainText('Quickstart');
   12 |   await expect(page.locator('text=Prerequisites')).toBeVisible();
   13 | });
-  14 | 
+  14 |
   15 | test('Button page renders correctly in solid collection', async ({ page }) => {
   16 |   await page.goto('/solid/components/button');
   17 |   await expect(page.locator('h1')).toContainText('Button');
   18 |   await expect(page.locator('text=Installation')).toBeVisible();
   19 |   await expect(page.locator('text=Usage')).toBeVisible();
   20 | });
-  21 | 
+  21 |
 ```

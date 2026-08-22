@@ -51,13 +51,13 @@ class CustomCodeBlock extends HTMLElement {
         // Fade overlay
         const fade = document.createElement("div");
         fade.className =
-          "fade-overlay absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[hsl(var(--background))] to-transparent pointer-events-none transition-opacity duration-300";
+          "fade-overlay pointer-events-none absolute bottom-0 left-0 right-0 h-14 bg-background/10 backdrop-blur-[2px] transition-opacity duration-300";
         this.appendChild(fade);
 
-        // Expand button
+        // Expand button (matches Button variant="outline")
         const expandBtn = document.createElement("button");
         expandBtn.className =
-          "expand-btn w-full py-2 text-sm font-medium border-t border-border bg-muted/50 hover:bg-muted transition-colors cursor-pointer text-center relative z-10";
+          "expand-btn absolute bottom-3 left-1/2 -translate-x-1/2 z-10 inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-border bg-background hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2 cursor-pointer shadow-sm";
         expandBtn.textContent = "Show more";
 
         let isExpanded = false;
@@ -68,10 +68,12 @@ class CustomCodeBlock extends HTMLElement {
             this.classList.add("expanded");
             fade.style.opacity = "0";
             expandBtn.textContent = "Show less";
+            pre.style.paddingBottom = "52px";
           } else {
             this.classList.remove("expanded");
             fade.style.opacity = "1";
             expandBtn.textContent = "Show more";
+            pre.style.paddingBottom = "1rem";
           }
         });
 
