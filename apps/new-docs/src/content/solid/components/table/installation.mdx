@@ -1,0 +1,97 @@
+## Installation
+
+### CLI
+
+Run the following command to add the component to your project:
+
+```bash
+npx @ark-preset/cli@latest add table
+```
+
+### Manual
+
+Create the recipe file at `src/components/recipes/table.ts`:
+
+```ts
+import { tv, type VariantProps } from "tailwind-variants";
+
+export const tableVariants = tv({
+  slots: {
+    table: "w-full caption-bottom text-sm",
+    header: "[&_tr]:border-b",
+    body: "[&_tr:last-child]:border-0",
+    row: "border-b border-muted transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted",
+    head: "h-10 px-2 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
+    cell: "p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
+    caption: "mt-4 text-sm text-muted-foreground",
+  },
+});
+
+export type TableVariants = VariantProps<typeof tableVariants>;
+```
+
+Create the component file at `src/components/table/index.tsx`:
+
+```tsx
+import { splitProps, type Component } from "solid-js";
+import { tableVariants } from "../recipes/table";
+import { ark, type HTMLArkProps } from "@ark-ui/solid/factory";
+
+const styles = tableVariants();
+
+type TableProps = HTMLArkProps<"table">;
+type TableHeaderProps = HTMLArkProps<"thead">;
+type TableBodyProps = HTMLArkProps<"tbody">;
+type TableRowProps = HTMLArkProps<"tr">;
+type TableHeadProps = HTMLArkProps<"th">;
+type TableCellProps = HTMLArkProps<"td">;
+type TableCaptionProps = HTMLArkProps<"caption">;
+
+const Table: Component<TableProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ark.table class={styles.table({ class: local.class })} {...others} />;
+};
+
+const TableHeader: Component<TableHeaderProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ark.thead class={styles.header({ class: local.class })} {...others} />;
+};
+
+const TableBody: Component<TableBodyProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ark.tbody class={styles.body({ class: local.class })} {...others} />;
+};
+
+const TableRow: Component<TableRowProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ark.tr class={styles.row({ class: local.class })} {...others} />;
+};
+
+const TableHead: Component<TableHeadProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ark.th class={styles.head({ class: local.class })} {...others} />;
+};
+
+const TableCell: Component<TableCellProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ark.td class={styles.cell({ class: local.class })} {...others} />;
+};
+
+const TableCaption: Component<TableCaptionProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ark.caption class={styles.caption({ class: local.class })} {...others} />;
+};
+
+export {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableHead,
+  TableCell,
+  TableCaption,
+  tableVariants,
+};
+```
+
+> **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.

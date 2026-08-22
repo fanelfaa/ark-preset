@@ -1,0 +1,42 @@
+## Installation
+
+### CLI
+
+Run the following command to add the component to your project:
+
+```bash
+npx @ark-preset/cli@latest add skeleton
+```
+
+### Manual
+
+Create the recipe file at `src/components/recipes/skeleton.ts`:
+
+```ts
+import { tv, type VariantProps } from "tailwind-variants";
+
+export const skeletonVariants = tv({
+  base: "animate-pulse rounded-md bg-muted",
+});
+
+export type SkeletonVariants = VariantProps<typeof skeletonVariants>;
+```
+
+Create the component file at `src/components/skeleton/index.tsx`:
+
+```tsx
+import { splitProps, type Component } from "solid-js";
+import { skeletonVariants } from "../recipes/skeleton";
+import { ark, type HTMLArkProps } from "@ark-ui/solid/factory";
+
+type SkeletonProps = HTMLArkProps<"div">;
+
+const Skeleton: Component<SkeletonProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ark.div class={skeletonVariants({ class: local.class })} {...others} />;
+};
+
+export { Skeleton, skeletonVariants };
+```
+
+> **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.

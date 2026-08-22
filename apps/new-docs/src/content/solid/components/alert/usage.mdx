@@ -1,0 +1,67 @@
+import { InlineCode, Alert, AlertTitle, AlertDescription } from "@ark-preset/solid";
+
+## Usage
+
+Import the components:
+
+```tsx
+import { Alert, AlertTitle, AlertDescription, AlertAction } from "@ark-preset/solid";
+```
+
+Basic:
+
+```tsx
+<Alert>
+  <AlertTitle>Heads up!</AlertTitle>
+  <AlertDescription>
+    You can add components to your app using the CLI.
+  </AlertDescription>
+</Alert>
+```
+
+Destructive variant:
+
+```tsx
+<Alert variant="destructive">
+  <AlertTitle>Error</AlertTitle>
+  <AlertDescription>
+    An error occurred while processing your request.
+  </AlertDescription>
+</Alert>
+```
+
+With icon:
+
+```tsx
+<Alert>
+  <svg xmlns="..." class="size-4">{/* icon */}</svg>
+  <AlertTitle>Heads up!</AlertTitle>
+  <AlertDescription>Message</AlertDescription>
+</Alert>
+```
+
+### Variants
+
+Use the `variant` prop to change the visual style.
+
+<div class="rounded-lg border border-border bg-background/70 backdrop-blur-3xl p-6 not-prose">
+  <div class="space-y-4">
+    <Alert>
+      <AlertTitle>Default Alert</AlertTitle>
+      <AlertDescription>This is the default alert style.</AlertDescription>
+    </Alert>
+    <Alert variant="destructive">
+      <AlertTitle>Destructive Alert</AlertTitle>
+      <AlertDescription>This is the destructive alert style.</AlertDescription>
+    </Alert>
+  </div>
+</div>
+
+### Anatomy
+
+| Part | Element | Description |
+|------|---------|-------------|
+| `Alert` | `div` | The root container with `role="alert"`. |
+| `AlertTitle` | `h5` | The title text. |
+| `AlertDescription` | `div` | The description text. |
+| `AlertAction` | `div` | Action element, positioned within the alert. |

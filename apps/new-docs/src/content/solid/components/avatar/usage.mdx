@@ -1,0 +1,32 @@
+## Usage
+
+> **Note:** Make sure your project has the Tailwind CSS theme variables set up or override the utility classes to match your design system.
+
+Import the components:
+
+```tsx
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "~/components/avatar";
+```
+
+Basic usage:
+
+```tsx
+<Avatar>
+  <AvatarFallback>JD</AvatarFallback>
+  <AvatarImage src="https://i.pravatar.cc/150?u=john" alt="John Doe" />
+</Avatar>
+```
+
+### With Fallback Only
+
+When no image is provided or the image fails to load, the fallback is shown:
+
+```tsx
+<Avatar>
+  <AvatarFallback>AB</AvatarFallback>
+</Avatar>
+```

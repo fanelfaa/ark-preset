@@ -1,0 +1,65 @@
+## Usage
+
+Import the components:
+
+```tsx
+import {
+  Carousel,
+  CarouselControl,
+  CarouselItemGroup,
+  CarouselItem,
+  CarouselPrevTrigger,
+  CarouselNextTrigger,
+  CarouselIndicatorGroup,
+  CarouselIndicator,
+} from "~/components/carousel";
+```
+
+Basic usage:
+
+```tsx
+const images = [
+  { src: "/image1.jpg", alt: "Image 1" },
+  { src: "/image2.jpg", alt: "Image 2" },
+  { src: "/image3.jpg", alt: "Image 3" },
+];
+
+<Carousel slideCount={images.length}>
+  <CarouselControl>
+    <CarouselPrevTrigger>Prev</CarouselPrevTrigger>
+    <CarouselItemGroup>
+      {images.map((image, index) => (
+        <CarouselItem index={index}>
+          <img src={image.src} alt={image.alt} />
+        </CarouselItem>
+      ))}
+    </CarouselItemGroup>
+    <CarouselNextTrigger>Next</CarouselNextTrigger>
+  </CarouselControl>
+  <CarouselIndicatorGroup>
+    {images.map((_, index) => (
+      <CarouselIndicator index={index} />
+    ))}
+  </CarouselIndicatorGroup>
+</Carousel>
+```
+
+### With Loop
+
+Enable looping to allow the carousel to wrap around:
+
+```tsx
+<Carousel slideCount={images.length} loop>
+  {/* ... */}
+</Carousel>
+```
+
+### With Autoplay
+
+Enable automatic scrolling:
+
+```tsx
+<Carousel slideCount={images.length} autoplay>
+  {/* ... */}
+</Carousel>
+```

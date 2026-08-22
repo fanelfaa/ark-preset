@@ -80,7 +80,8 @@ export const DocsLayout: Component<DocsLayoutProps> = (props) => {
           <DrawerContent>
             <DrawerBase.Context>
               {(api) => (
-                <SidebarNav currentPath={props.currentPath}
+                <SidebarNav
+                  currentPath={props.currentPath}
                   currentFramework={framework()}
                   onLinkClick={() => api().setOpen(false)}
                 />
@@ -128,7 +129,11 @@ export const DocsLayout: Component<DocsLayoutProps> = (props) => {
   );
 };
 
-export function SidebarNav(props: { onLinkClick?: () => void; currentFramework: string; currentPath?: string }) {
+export function SidebarNav(props: {
+  onLinkClick?: () => void;
+  currentFramework: string;
+  currentPath?: string;
+}) {
   const getHref = (originalHref: string) => {
     // If it's a docs link, map it to the current framework
     if (originalHref.startsWith("/docs/components/")) {

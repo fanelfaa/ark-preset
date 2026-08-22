@@ -1,0 +1,25 @@
+## Usage
+
+Import the component:
+
+```tsx
+import { AspectRatio } from "@ark-preset/solid";
+```
+
+Basic:
+
+```tsx
+<AspectRatio ratio={16 / 9}>
+  <img src="https://images.unsplash.com/photo-..." alt="Image" class="rounded-md object-cover" />
+</AspectRatio>
+```
+
+Square:
+
+```tsx
+<AspectRatio ratio={1 / 1}>
+  <div class="flex items-center justify-center bg-muted rounded-md">
+    Square Content
+  </div>
+</AspectRatio>
+```
