@@ -1,0 +1,21 @@
+---
+import { Code } from 'astro:components';
+
+interface Props {
+  code: string;
+  lang?: any;
+}
+
+const { code, lang = 'tsx' } = Astro.props;
+---
+
+<div class="component-preview flex flex-col border border-border rounded-lg overflow-hidden my-6">
+  <div class="demo-wrapper p-6 flex justify-center items-center bg-background min-h-[200px]">
+    <slot />
+  </div>
+  <div class="code-wrapper border-t border-border">
+    <custom-code-block>
+      <Code code={code} lang={lang} theme="github-dark" />
+    </custom-code-block>
+  </div>
+</div>
