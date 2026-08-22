@@ -62,3 +62,24 @@ html.dark .astro-code span {
   font-weight: var(--shiki-dark-font-weight) !important;
   text-decoration: var(--shiki-dark-text-decoration) !important;
 }
+
+/* Custom Code Block FOUC prevention */
+custom-code-block {
+  display: block;
+  position: relative;
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  margin: 1rem 0;
+  overflow: hidden;
+}
+
+custom-code-block pre {
+  margin: 0;
+  padding: 1rem;
+  max-height: 200px;
+  overflow: hidden; /* JavaScript will handle scroll/expansion */
+}
+custom-code-block.expanded pre {
+  max-height: none;
+  overflow: auto;
+}

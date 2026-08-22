@@ -5,7 +5,7 @@ test("ThemeToggle toggles html.dark and changes shiki codeblock styles", async (
   
   const root = page.locator("html");
   const toggleBtn = page.getByRole("button", { name: /switch to/i });
-  const codeBlock = page.locator(".astro-code");
+  const codeBlock = page.locator(".astro-code").first();
 
   // Wait for SolidJS hydration (client:load takes a moment)
   await page.waitForTimeout(3000);
