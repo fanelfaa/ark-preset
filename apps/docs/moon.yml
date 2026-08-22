@@ -7,40 +7,15 @@ dependsOn:
 tasks:
   dev:
     command: "pnpm dev"
-  typecheck:
-    command: "pnpm typecheck"
-    deps:
-      - "generate-routes"
-  generate-routes:
-    command: "pnpm generate-routes"
-    deps:
-      - "solid:build"
   build:
     command: "pnpm build"
-    deps:
-      - "typecheck"
     inputs:
       - "src/**/*"
-      - "vite.config.ts"
+      - "astro.config.mjs"
+      - "package.json"
     outputs:
       - "dist"
   preview:
     command: "pnpm preview"
     deps:
       - "build"
-  e2e:
-    command: "pnpm exec playwright test --config e2e/playwright.config.ts"
-    deps:
-      - "build"
-    inputs:
-      - "e2e/**/*"
-      - "src/**/*"
-      - "vite.config.ts"
-  test-e2e:
-    command: "pnpm test:e2e"
-    deps:
-      - "build"
-    inputs:
-      - "e2e/**/*"
-      - "src/**/*"
-      - "vite.config.ts"
