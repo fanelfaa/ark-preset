@@ -1,0 +1,29 @@
+{
+  "name": "apps-new-docs",
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev --port 4173 --host",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "test:e2e": "playwright test --config e2e/playwright.config.ts"
+  },
+  "dependencies": {
+    "@astrojs/solid-js": "^7.0.2",
+    "@astrojs/tailwind": "^6.0.2",
+    "@playwright/test": "^1.61.0",
+    "@solidjs/testing-library": "^0.8.10",
+    "@tailwindcss/typography": "^0.5.19",
+    "@tailwindcss/vite": "^4.1.18",
+    "astro": "^7.2.4",
+    "solid-js": "^1.9.12",
+    "tailwindcss": "^4.1.18"
+  },
+  "devDependencies": {
+    "@astrojs/mdx": "^7.0.7"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

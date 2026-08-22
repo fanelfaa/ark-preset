@@ -1,0 +1,21 @@
+---
+title: "Preview test"
+---
+
+import ComponentPreview from '../components/ComponentPreview.astro';
+import { Counter } from '../components/Counter.tsx';
+import counterCode from '../components/Counter.tsx?raw';
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <script type="module" src="/src/components/custom-code-block.ts"></script>
+  </head>
+  <body>
+    # Component Preview Test
+
+    <ComponentPreview code={counterCode}>
+      <Counter client:load />
+    </ComponentPreview>
+  </body>
+</html>

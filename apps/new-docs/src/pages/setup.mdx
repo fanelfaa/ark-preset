@@ -1,0 +1,170 @@
+---
+title: Quickstart
+---
+
+import { DocsLayout } from '../components/DocsLayout';
+
+<DocsLayout client:load>
+
+# Quickstart
+
+Get started using `@ark-preset/solid` components in your own project. This is a copy-paste component library — pick any component from the sidebar, copy the code, and paste it into your project.
+
+> **Framework support:** Currently only Solid.js is supported. Support for React, Vue, and other frameworks is coming in future releases. A CLI (`@ark-preset/cli`) to automate setup is also planned.
+
+## Prerequisites
+
+Install Tailwind CSS, `tailwind-variants` (required by all component recipes), and the Vite plugin if using Vite:
+
+```bash
+npm install tailwindcss tailwind-variants @tailwindcss/vite
+```
+
+Install `@ark-ui/solid` (used by all components) and its peer dependency `solid-js`:
+
+```bash
+npm install @ark-ui/solid solid-js
+```
+
+Optionally install the animation plugin (used by toast, dialog, and other components):
+
+```bash
+npm install tw-animate-css
+```
+
+Configure `src/index.css`:
+
+```css
+@import "tailwindcss";
+@import "tw-animate-css";
+```
+
+## Theme variables
+
+Add these CSS custom properties to your main CSS file. They define the design tokens used by all components.
+
+```css
+@theme {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-popover: hsl(var(--background));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --animate-accordion-expand: accordion-expand 200ms ease-in-out forwards;
+  --animate-accordion-collapse: accordion-collapse 200ms ease-in-out forwards;
+}
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --primary: 222.2 47.4% 11.2%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222.2 47.4% 11.2%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222.2 47.4% 11.2%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 240 5.9% 10%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+
+  /* Radius */
+  --radius: 0.625rem;
+  --radius-xs: 0.125rem;
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+.dark {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --primary: 0 0% 98%;
+  --primary-foreground: 240 5.9% 10%;
+  --secondary: 240 3.7% 16%;
+  --secondary-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --muted: 240 3.7% 16%;
+  --muted-foreground: 240 5% 70%;
+  --accent: 240 3.7% 16%;
+  --accent-foreground: 0 0% 98%;
+  --border: 240 3.7% 16%;
+  --input: 240 3.7% 16%;
+  --ring: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+}
+
+[data-scope="toast"][data-part="root"] {
+  translate: var(--x) var(--y);
+  scale: var(--scale);
+  z-index: var(--z-index);
+  height: var(--height);
+  opacity: var(--opacity);
+  will-change: translate, opacity, scale;
+  transition:
+    translate 400ms,
+    scale 400ms,
+    opacity 400ms,
+    height 400ms;
+}
+
+@keyframes accordion-expand {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--height);
+  }
+}
+
+@keyframes accordion-collapse {
+  from {
+    height: var(--height);
+  }
+  to {
+    height: 0;
+  }
+}
+```
+
+> **Note:** The `[data-scope="toast"]` block at the bottom is specific to the Toast component — you can omit it if you're not using Toast.
+
+## Using a component
+
+Browse the [component library](/solid/components/button), find the component you need, and copy the code. Each component page includes the recipe (styling) and the component source — paste both into your project and customize as needed.
+
+For example, to use the Button component, create `src/components/recipes/button.ts` with the recipe and `src/components/button.tsx` with the component code from the [Button page](/solid/components/button).
+
+> **Tip:** A CLI (`@ark-preset/cli`) to automate this setup will be available in a future release.
+
+## Next steps
+
+- Browse the [component library](/solid/components/button) to find components
+- Check the [Ark UI documentation](https://ark-ui.com/docs/guides/composition) for composability patterns
+
+</DocsLayout>
