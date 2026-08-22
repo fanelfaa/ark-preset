@@ -54,10 +54,10 @@ class CustomCodeBlock extends HTMLElement {
           "fade-overlay pointer-events-none absolute bottom-0 left-0 right-0 h-14 bg-background/10 backdrop-blur-[2px] transition-opacity duration-300";
         this.appendChild(fade);
 
-        // Expand button (matches Button variant="outline")
+        // Expand button (matches Button variant="outline" size="sm")
         const expandBtn = document.createElement("button");
         expandBtn.className =
-          "expand-btn absolute bottom-3 left-1/2 -translate-x-1/2 z-10 inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-border bg-background hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2 cursor-pointer shadow-sm";
+          "expand-btn absolute bottom-3 left-1/2 -translate-x-1/2 z-10 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition duration-300 motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0.5 active:duration-150 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-8 px-2.5 text-sm";
         expandBtn.textContent = "Show more";
 
         let isExpanded = false;
