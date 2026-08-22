@@ -1,10 +1,17 @@
 ---
 import { DocsLayout } from '../components/DocsLayout';
 import '../styles.css';
+
+interface Props {
+  currentFramework?: string;
+}
+
+const { currentFramework = 'solid' } = Astro.props;
 ---
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script is:inline>
       (function () {
         if (typeof document === "undefined") return;
@@ -25,7 +32,7 @@ import '../styles.css';
     </script>
   </head>
   <body>
-    <DocsLayout client:load>
+    <DocsLayout client:load currentFramework={currentFramework}>
       <slot />
     </DocsLayout>
   </body>

@@ -63,11 +63,11 @@ const quickLinks = [
     {/* Component Categories */}
     <section class="mb-16">
       <h2 class="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">Components</h2>
-      <div class="grid gap-4 sm:grid-cols-2 mt-6">
+      <div class="grid gap-4 sm:grid-cols-2">
         {categories.map((cat) => (
           <a
             href={cat.href}
-            class="group rounded-lg border border-border p-5 transition-colors hover:border-primary bg-background/50 backdrop-blur-sm hover:bg-background/70 block"
+            class="group rounded-lg border border-border p-5 transition-colors hover:border-primary bg-background/50 backdrop-blur-sm hover:bg-background/70"
           >
             <h3 class="text-lg font-semibold group-hover:text-primary transition-colors">
               {cat.name}
@@ -90,7 +90,7 @@ const quickLinks = [
     {/* Quick Links */}
     <section>
       <h2 class="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">Popular Components</h2>
-      <div class="flex flex-wrap gap-3 mt-6">
+      <div class="flex flex-wrap gap-3">
         {quickLinks.map((link) => (
           <a href={link.href} class={buttonVariants({ variant: "outline" })}>
             {link.label}

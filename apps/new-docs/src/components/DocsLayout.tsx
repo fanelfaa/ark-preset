@@ -1,5 +1,5 @@
 import { type JSX, type Component, Index } from "solid-js";
-import { ScrollArea } from "@ark-preset/solid";
+import { ScrollArea, Button, Drawer, DrawerTrigger, DrawerContent, DrawerBase } from "@ark-preset/solid";
 import { sidebarNav } from "../sidebar-nav";
 import { GitHubIcon } from "./GitHubIcon";
 import { ThemeToggle } from "./ThemeToggle";
@@ -16,7 +16,28 @@ export const DocsLayout: Component<DocsLayoutProps> = (props) => {
     <div class="mx-auto max-w-7xl flex flex-col min-h-screen">
       <header class="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div class="flex h-14 items-center justify-between px-6">
-          <div class="flex items-center gap-6">
+          <div class="flex items-center gap-4">
+            <Button
+              size="icon"
+              variant="outline"
+              class="lg:hidden"
+              asChild={(props) => <label for="drawer-trigger" {...props()} />}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                class="size-5"
+              >
+                <path d="M3 12h18" />
+                <path d="M3 6h18" />
+                <path d="M3 18h18" />
+              </svg>
+            </Button>
             <a class="font-bold hover:text-primary transition-colors" href="/">
               Ark Preset Docs
             </a>
@@ -41,6 +62,15 @@ export const DocsLayout: Component<DocsLayoutProps> = (props) => {
           </div>
         </div>
       </header>
+
+      <Drawer swipeDirection="start">
+        <DrawerTrigger id="drawer-trigger" class="hidden" />
+        <DrawerContent>
+          <DrawerBase.Context>
+            {(api) => <SidebarNav currentFramework={framework()} onLinkClick={() => api().setOpen(false)} />}
+          </DrawerBase.Context>
+        </DrawerContent>
+      </Drawer>
 
       <div class="flex flex-1">
         {/* Sidebar */}

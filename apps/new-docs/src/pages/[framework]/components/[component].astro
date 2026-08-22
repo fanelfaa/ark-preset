@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
 import { DocsLayout } from '../../../components/DocsLayout';
 
 export async function getStaticPaths() {
@@ -22,34 +23,25 @@ const { entry } = Astro.props;
 const { Content } = await render(entry);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{entry.data.title}</title>
-	</head>
-	<body>
-		<DocsLayout client:load currentFramework={Astro.params.framework}>
-			<Content />
-		</DocsLayout>
-		<script is:inline>
-		  document.addEventListener('change', (e) => {
-			if (e.target && e.target.id === 'framework-selector') {
-				const newFramework = e.target.value;
-				const path = window.location.pathname;
-				let newPath = path;
-				if (path.startsWith('/solid/') || path.startsWith('/react/') || path.startsWith('/vue/')) {
-				  newPath = path.replace(/^\/(solid|react|vue)/, `/${newFramework}`);
-				} else if (path.includes('/components/')) {
-				  newPath = `/${newFramework}${path.replace(/^\/docs/, '')}`;
-				} else {
-				  newPath = `/${newFramework}/components/button`;
-				}
-				window.location.href = newPath;
-			}
-		  });
-		</script>
-	</body>
-</html>
+<Layout currentFramework={Astro.params.framework}>
+  <div class="px-6 py-8">
+    <Content />
+  </div>
+  <script is:inline>
+    document.addEventListener('change', (e) => {
+      if (e.target && e.target.id === 'framework-selector') {
+        const newFramework = e.target.value;
+        const path = window.location.pathname;
+        let newPath = path;
+        if (path.startsWith('/solid/') || path.startsWith('/react/') || path.startsWith('/vue/')) {
+          newPath = path.replace(/^\/(solid|react|vue)/, `/${newFramework}`);
+        } else if (path.includes('/components/')) {
+          newPath = `/${newFramework}${path.replace(/^\/docs/, '')}`;
+        } else {
+          newPath = `/${newFramework}/components/button`;
+        }
+        window.location.href = newPath;
+      }
+    });
+  </script>
+</Layout>
