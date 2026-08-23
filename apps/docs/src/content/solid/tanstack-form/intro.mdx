@@ -1,0 +1,24 @@
+import { DocsLink } from "../../../components/DocsLink";
+import ComponentPreview from "../../../components/ComponentPreview.astro";
+import TanstackFormDemo from "../../../components/demos/tanstack-form-demo/TanstackFormDemo.tsx";
+import TanstackFormDemoCode from "../../../components/demos/tanstack-form-demo/TanstackFormDemo.tsx?code";
+
+# TanStack Form
+
+Integrate Ark Preset components with [TanStack Form](https://tanstack.com/form/latest) for powerful, type-safe form state management in Solid.js.
+
+<DocsLink href="https://tanstack.com/form/latest/docs/framework/solid/overview" />
+
+TanStack Form provides a headless form library with first-class Solid.js support. Combined with Ark Preset's accessible form components, you get a complete form solution with proper styling, validation, and accessibility.
+
+<ComponentPreview code={TanstackFormDemoCode}>
+  <TanstackFormDemo client:load />
+</ComponentPreview>
+
+## Key Features
+
+- **Type-safe form state** — Fully typed fields, values, and validation
+- **Schema validation** — Works with Zod, Valibot, ArkType, and Effect
+- **Fine-grained reactivity** — Solid.js signals for efficient re-renders
+- **Async validation** — Debounced and async validators built-in
+- **Custom field components** — Compose reusable field patterns with `createFormHook`
