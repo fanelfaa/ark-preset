@@ -3,12 +3,10 @@ import { createSignal, onMount } from "solid-js";
 const STORAGE_KEY = "ui-theme";
 
 function getSystemPref(): "dark" | "light" {
-  if (typeof window === "undefined") return "light";
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
 function getStored(): "dark" | "light" | null {
-  if (typeof window === "undefined") return null;
   try {
     const val = localStorage.getItem(STORAGE_KEY);
     if (val === "dark" || val === "light") return val;

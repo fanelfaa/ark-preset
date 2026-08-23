@@ -32,7 +32,7 @@ const __dirname = dirname(__filename);
 export const PROJECT_ROOT = resolve(__dirname, "../../../..");
 export const CORE_RECIPES_DIR = resolve(PROJECT_ROOT, "packages/core/src/recipes");
 export const SOLID_COMPONENTS_DIR = resolve(PROJECT_ROOT, "packages/solid/src");
-export const DOCS_DIR = resolve(PROJECT_ROOT, "apps/new-docs/src/content/solid");
+export const DOCS_DIR = resolve(PROJECT_ROOT, "apps/docs/src/content/docs");
 
 // ── Helpers ────────────────────────────────────────────────────────────
 
@@ -253,7 +253,8 @@ export function generateInstallationContent(component: string): string | null {
 export function discoverComponents(): string[] {
   if (!existsSync(DOCS_DIR)) return [];
   return readdirSync(DOCS_DIR, { withFileTypes: true })
-    .filter((e) => e.isFile() && e.name.endsWith(".mdx"))
-    .map((e) => e.name.replace(".mdx", ""))
+    .filter((e) => e.isDirectory())
+    .map((e) => e.name)
+    .filter((name) => name !== "node_modules" && name !== ".git")
     .filter((name) => existsSync(resolve(CORE_RECIPES_DIR, `${name}.ts`)));
 }

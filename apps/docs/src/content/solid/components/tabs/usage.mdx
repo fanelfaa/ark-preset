@@ -1,0 +1,75 @@
+import ComponentPreview from "../../../../components/ComponentPreview.astro";
+import TabsDisabledDemo from "@demos/tabs-demo/TabsDisabledDemo.tsx";
+import TabsDisabledDemoCode from "@demos/tabs-demo/TabsDisabledDemo.tsx?code";
+import TabsRootProviderDemo from "@demos/tabs-demo/TabsRootProviderDemo.tsx";
+import TabsRootProviderDemoCode from "@demos/tabs-demo/TabsRootProviderDemo.tsx?code";
+
+## Usage
+
+Import the components:
+
+```tsx
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "~/components/tabs";
+```
+
+Basic usage:
+
+```tsx
+<Tabs defaultValue="tab-1">
+  <TabsList>
+    <TabsTrigger value="tab-1">Tab One</TabsTrigger>
+    <TabsTrigger value="tab-2">Tab Two</TabsTrigger>
+  </TabsList>
+  <TabsContent value="tab-1">
+    <div class="text-sm">Content for tab one</div>
+  </TabsContent>
+  <TabsContent value="tab-2">
+    <div class="text-sm">Content for tab two</div>
+  </TabsContent>
+</Tabs>
+```
+
+## Advanced Usage
+
+When the composite `Tabs` doesn't provide enough control, import the raw primitive parts from `TabsBase`:
+
+```tsx
+import { TabsBase, TabsTrigger, TabsContent } from "~/components/tabs";
+```
+
+### Access Raw Parts
+
+Access raw parts via `TabsBase.Root`, `TabsBase.RootProvider`, `TabsBase.List`, `TabsBase.Trigger`, `TabsBase.Content`, and `TabsBase.Indicator`:
+
+```tsx
+<TabsBase.Root defaultValue="account">
+  <TabsBase.List>
+    <TabsBase.Indicator />
+    <TabsBase.Trigger value="account">Account</TabsBase.Trigger>
+    <TabsBase.Trigger value="password">Password</TabsBase.Trigger>
+  </TabsBase.List>
+  <TabsBase.Content value="account">...</TabsBase.Content>
+  <TabsBase.Content value="password">...</TabsBase.Content>
+</TabsBase.Root>
+```
+
+## Disabled Tab
+
+Use the `disabled` prop on a `TabsTrigger` to disable that specific tab.
+
+<ComponentPreview code={TabsDisabledDemoCode}>
+  <TabsDisabledDemo client:load />
+</ComponentPreview>
+
+## Root Provider
+
+Use `TabsBase.RootProvider` when you need to access the tabs state outside of the tabs tree. This pattern uses the `useTabs` hook from Ark UI to create a shared context that both the tabs and external elements can reference.
+
+<ComponentPreview code={TabsRootProviderDemoCode}>
+  <TabsRootProviderDemo client:load />
+</ComponentPreview>
+
+The key difference:
+
+- **`Tabs` (Root)** — manages its own state internally. Use for simple, self-contained tabs.
+- **`TabsBase.RootProvider`** — accepts a pre-created tabs context via `useTabs`. Use when you need to read or control the tabs state from outside the component tree.

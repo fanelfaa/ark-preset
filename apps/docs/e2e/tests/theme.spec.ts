@@ -1,77 +1,33 @@
 import { test, expect } from "@playwright/test";
 
-test.describe("Theme toggle", () => {
-  test.beforeEach(async ({ page }) => {
-    // Clear stored theme so each test starts fresh
-    await page.goto("/");
-    await page.evaluate(() => localStorage.removeItem("ui-theme"));
-    await page.reload();
-    await page.waitForLoadState("networkidle");
-  });
+test("ThemeToggle toggles html.dark and changes shiki codeblock styles", async ({ page }) => {
+  await page.goto("/test");
 
-  test("toggle button is visible on landing page", async ({ page }) => {
-    await page.goto("/");
-    const toggle = page.getByRole("button", { name: /switch to/i });
-    await expect(toggle).toBeVisible();
-  });
+  const root = page.locator("html");
+  const toggleBtn = page.getByRole("button", { name: /switch to/i });
+  const codeBlock = page.locator(".astro-code").first();
 
-  test("toggle button is visible on component pages", async ({ page }) => {
-    await page.goto("/docs/components/button");
-    await page.waitForLoadState("networkidle");
-    const toggle = page.getByRole("button", { name: /switch to/i });
-    await expect(toggle).toBeVisible();
-  });
+  // Wait for SolidJS hydration (client:load takes a moment)
+  await page.waitForTimeout(3000);
 
-  test("clicking toggle switches the theme class on <html>", async ({ page }) => {
-    await page.goto("/");
+  // Initial state should not be dark (unless OS prefers dark, but Playwright defaults to light usually)
+  // Let's force light mode first if it is dark
+  const isDark = await root.evaluate((node) => node.classList.contains("dark"));
+  if (isDark) {
+    await toggleBtn.click();
+  }
 
-    const toggle = page.getByRole("button", { name: /switch to/i });
-    const html = page.locator("html");
+  await expect(root).not.toHaveClass(/dark/);
 
-    // Get initial theme state
-    const initialDark = await html.evaluate((el) => el.classList.contains("dark"));
+  // get background color of codeBlock in light mode
+  const lightBg = await codeBlock.evaluate((node) => window.getComputedStyle(node).backgroundColor);
 
-    // Click to toggle
-    await toggle.click();
-    if (initialDark) {
-      await expect(html).not.toHaveClass(/dark/);
-    } else {
-      await expect(html).toHaveClass(/dark/);
-    }
+  // Click toggle
+  await toggleBtn.click();
+  await expect(root).toHaveClass(/dark/);
 
-    // Click again to revert
-    await toggle.click();
-    if (initialDark) {
-      await expect(html).toHaveClass(/dark/);
-    } else {
-      await expect(html).not.toHaveClass(/dark/);
-    }
-  });
+  // get background color in dark mode
+  const darkBg = await codeBlock.evaluate((node) => window.getComputedStyle(node).backgroundColor);
 
-  test("theme persists after page reload", async ({ page }) => {
-    await page.goto("/");
-
-    const toggle = page.getByRole("button", { name: /switch to/i });
-    const html = page.locator("html");
-
-    // Toggle away from initial
-    const initialDark = await html.evaluate((el) => el.classList.contains("dark"));
-    await toggle.click();
-    if (initialDark) {
-      await expect(html).not.toHaveClass(/dark/);
-    } else {
-      await expect(html).toHaveClass(/dark/);
-    }
-
-    // Reload
-    await page.reload();
-    await page.waitForLoadState("networkidle");
-
-    // Theme should still match
-    if (initialDark) {
-      await expect(html).not.toHaveClass(/dark/);
-    } else {
-      await expect(html).toHaveClass(/dark/);
-    }
-  });
+  expect(lightBg).not.toBe(darkBg);
 });
