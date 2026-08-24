@@ -53,8 +53,6 @@ body {
   }
 }
 
-
-
 /* Custom Code Block FOUC prevention */
 custom-code-block {
   display: block;
@@ -73,7 +71,9 @@ custom-code-block pre {
   overflow-x: hidden;
   white-space: pre-wrap !important;
   word-break: break-word !important;
-  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding-bottom 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    padding-bottom 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 custom-code-block.expanded pre {
   /* max-height is now handled explicitly via inline styles in JS for animation */

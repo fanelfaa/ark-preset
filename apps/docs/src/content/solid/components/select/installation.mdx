@@ -319,15 +319,13 @@ const SelectTrigger: Component<SelectTriggerProps> = (props) => {
     <SelectBase.Control class={local.class}>
       <SelectBase.Trigger {...others}>
         <SelectBase.ValueText placeholder={local.placeholder ?? "Select..."} />
-        <div class="flex items-center gap-1">
-          <SelectBase.ClearTrigger>
-            <XIcon />
-          </SelectBase.ClearTrigger>
-          <SelectBase.Indicator>
-            <ChevronDownIcon />
-          </SelectBase.Indicator>
-        </div>
+        <SelectBase.Indicator>
+          <ChevronDownIcon />
+        </SelectBase.Indicator>
       </SelectBase.Trigger>
+      <SelectBase.ClearTrigger class="absolute right-13">
+        <XIcon />
+      </SelectBase.ClearTrigger>
     </SelectBase.Control>
   );
 };
@@ -389,3 +387,5 @@ export { selectVariants, type SelectVariants } from "../recipes/select";
 ```
 
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.
+
+> **Dependencies:** This component imports shared recipes or sub-components from other packages. Make sure the following are also installed: [scroll-area](/docs/components/scroll-area).

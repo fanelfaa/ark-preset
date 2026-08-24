@@ -1,12 +1,12 @@
 export function rehypeCustomCodeBlock() {
   return (tree) => {
     function visit(node, index, parent) {
-      if (node.type === 'element' && node.tagName === 'pre') {
+      if (node.type === "element" && node.tagName === "pre") {
         const newNode = {
-          type: 'element',
-          tagName: 'custom-code-block',
+          type: "element",
+          tagName: "custom-code-block",
           properties: {},
-          children: [{...node}] // copy the node to avoid mutating the object we are replacing
+          children: [{ ...node }], // copy the node to avoid mutating the object we are replacing
         };
         parent.children[index] = newNode;
         return; // skip visiting children of this pre
@@ -18,7 +18,7 @@ export function rehypeCustomCodeBlock() {
         }
       }
     }
-    
+
     visit(tree, null, null);
   };
 }

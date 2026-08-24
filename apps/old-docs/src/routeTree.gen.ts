@@ -8,169 +8,169 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from './routes/__root'
-import { Route as DocsRouteImport } from './routes/docs'
-import { Route as SplatRouteImport } from './routes/$'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as DocsQuickstartRouteImport } from './routes/docs/quickstart'
-import { Route as DocsIntegrationsFormRouteImport } from './routes/docs/integrations/form'
-import { Route as DocsComponentsComponentRouteImport } from './routes/docs/components/$component'
+import { Route as rootRouteImport } from "./routes/__root";
+import { Route as DocsRouteImport } from "./routes/docs";
+import { Route as SplatRouteImport } from "./routes/$";
+import { Route as IndexRouteImport } from "./routes/index";
+import { Route as DocsQuickstartRouteImport } from "./routes/docs/quickstart";
+import { Route as DocsIntegrationsFormRouteImport } from "./routes/docs/integrations/form";
+import { Route as DocsComponentsComponentRouteImport } from "./routes/docs/components/$component";
 
 const DocsRoute = DocsRouteImport.update({
-  id: '/docs',
-  path: '/docs',
+  id: "/docs",
+  path: "/docs",
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const SplatRoute = SplatRouteImport.update({
-  id: '/$',
-  path: '/$',
+  id: "/$",
+  path: "/$",
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+  id: "/",
+  path: "/",
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const DocsQuickstartRoute = DocsQuickstartRouteImport.update({
-  id: '/quickstart',
-  path: '/quickstart',
+  id: "/quickstart",
+  path: "/quickstart",
   getParentRoute: () => DocsRoute,
-} as any)
+} as any);
 const DocsIntegrationsFormRoute = DocsIntegrationsFormRouteImport.update({
-  id: '/integrations/form',
-  path: '/integrations/form',
+  id: "/integrations/form",
+  path: "/integrations/form",
   getParentRoute: () => DocsRoute,
-} as any)
+} as any);
 const DocsComponentsComponentRoute = DocsComponentsComponentRouteImport.update({
-  id: '/components/$component',
-  path: '/components/$component',
+  id: "/components/$component",
+  path: "/components/$component",
   getParentRoute: () => DocsRoute,
-} as any)
+} as any);
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/$': typeof SplatRoute
-  '/docs': typeof DocsRouteWithChildren
-  '/docs/quickstart': typeof DocsQuickstartRoute
-  '/docs/components/$component': typeof DocsComponentsComponentRoute
-  '/docs/integrations/form': typeof DocsIntegrationsFormRoute
+  "/": typeof IndexRoute;
+  "/$": typeof SplatRoute;
+  "/docs": typeof DocsRouteWithChildren;
+  "/docs/quickstart": typeof DocsQuickstartRoute;
+  "/docs/components/$component": typeof DocsComponentsComponentRoute;
+  "/docs/integrations/form": typeof DocsIntegrationsFormRoute;
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/$': typeof SplatRoute
-  '/docs': typeof DocsRouteWithChildren
-  '/docs/quickstart': typeof DocsQuickstartRoute
-  '/docs/components/$component': typeof DocsComponentsComponentRoute
-  '/docs/integrations/form': typeof DocsIntegrationsFormRoute
+  "/": typeof IndexRoute;
+  "/$": typeof SplatRoute;
+  "/docs": typeof DocsRouteWithChildren;
+  "/docs/quickstart": typeof DocsQuickstartRoute;
+  "/docs/components/$component": typeof DocsComponentsComponentRoute;
+  "/docs/integrations/form": typeof DocsIntegrationsFormRoute;
 }
 export interface FileRoutesById {
-  __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/$': typeof SplatRoute
-  '/docs': typeof DocsRouteWithChildren
-  '/docs/quickstart': typeof DocsQuickstartRoute
-  '/docs/components/$component': typeof DocsComponentsComponentRoute
-  '/docs/integrations/form': typeof DocsIntegrationsFormRoute
+  __root__: typeof rootRouteImport;
+  "/": typeof IndexRoute;
+  "/$": typeof SplatRoute;
+  "/docs": typeof DocsRouteWithChildren;
+  "/docs/quickstart": typeof DocsQuickstartRoute;
+  "/docs/components/$component": typeof DocsComponentsComponentRoute;
+  "/docs/integrations/form": typeof DocsIntegrationsFormRoute;
 }
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
+  fileRoutesByFullPath: FileRoutesByFullPath;
   fullPaths:
-    | '/'
-    | '/$'
-    | '/docs'
-    | '/docs/quickstart'
-    | '/docs/components/$component'
-    | '/docs/integrations/form'
-  fileRoutesByTo: FileRoutesByTo
+    | "/"
+    | "/$"
+    | "/docs"
+    | "/docs/quickstart"
+    | "/docs/components/$component"
+    | "/docs/integrations/form";
+  fileRoutesByTo: FileRoutesByTo;
   to:
-    | '/'
-    | '/$'
-    | '/docs'
-    | '/docs/quickstart'
-    | '/docs/components/$component'
-    | '/docs/integrations/form'
+    | "/"
+    | "/$"
+    | "/docs"
+    | "/docs/quickstart"
+    | "/docs/components/$component"
+    | "/docs/integrations/form";
   id:
-    | '__root__'
-    | '/'
-    | '/$'
-    | '/docs'
-    | '/docs/quickstart'
-    | '/docs/components/$component'
-    | '/docs/integrations/form'
-  fileRoutesById: FileRoutesById
+    | "__root__"
+    | "/"
+    | "/$"
+    | "/docs"
+    | "/docs/quickstart"
+    | "/docs/components/$component"
+    | "/docs/integrations/form";
+  fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  SplatRoute: typeof SplatRoute
-  DocsRoute: typeof DocsRouteWithChildren
+  IndexRoute: typeof IndexRoute;
+  SplatRoute: typeof SplatRoute;
+  DocsRoute: typeof DocsRouteWithChildren;
 }
 
-declare module '@tanstack/solid-router' {
+declare module "@tanstack/solid-router" {
   interface FileRoutesByPath {
-    '/docs': {
-      id: '/docs'
-      path: '/docs'
-      fullPath: '/docs'
-      preLoaderRoute: typeof DocsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/$': {
-      id: '/$'
-      path: '/$'
-      fullPath: '/$'
-      preLoaderRoute: typeof SplatRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/docs/quickstart': {
-      id: '/docs/quickstart'
-      path: '/quickstart'
-      fullPath: '/docs/quickstart'
-      preLoaderRoute: typeof DocsQuickstartRouteImport
-      parentRoute: typeof DocsRoute
-    }
-    '/docs/integrations/form': {
-      id: '/docs/integrations/form'
-      path: '/integrations/form'
-      fullPath: '/docs/integrations/form'
-      preLoaderRoute: typeof DocsIntegrationsFormRouteImport
-      parentRoute: typeof DocsRoute
-    }
-    '/docs/components/$component': {
-      id: '/docs/components/$component'
-      path: '/components/$component'
-      fullPath: '/docs/components/$component'
-      preLoaderRoute: typeof DocsComponentsComponentRouteImport
-      parentRoute: typeof DocsRoute
-    }
+    "/docs": {
+      id: "/docs";
+      path: "/docs";
+      fullPath: "/docs";
+      preLoaderRoute: typeof DocsRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/$": {
+      id: "/$";
+      path: "/$";
+      fullPath: "/$";
+      preLoaderRoute: typeof SplatRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/": {
+      id: "/";
+      path: "/";
+      fullPath: "/";
+      preLoaderRoute: typeof IndexRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/docs/quickstart": {
+      id: "/docs/quickstart";
+      path: "/quickstart";
+      fullPath: "/docs/quickstart";
+      preLoaderRoute: typeof DocsQuickstartRouteImport;
+      parentRoute: typeof DocsRoute;
+    };
+    "/docs/integrations/form": {
+      id: "/docs/integrations/form";
+      path: "/integrations/form";
+      fullPath: "/docs/integrations/form";
+      preLoaderRoute: typeof DocsIntegrationsFormRouteImport;
+      parentRoute: typeof DocsRoute;
+    };
+    "/docs/components/$component": {
+      id: "/docs/components/$component";
+      path: "/components/$component";
+      fullPath: "/docs/components/$component";
+      preLoaderRoute: typeof DocsComponentsComponentRouteImport;
+      parentRoute: typeof DocsRoute;
+    };
   }
 }
 
 interface DocsRouteChildren {
-  DocsQuickstartRoute: typeof DocsQuickstartRoute
-  DocsComponentsComponentRoute: typeof DocsComponentsComponentRoute
-  DocsIntegrationsFormRoute: typeof DocsIntegrationsFormRoute
+  DocsQuickstartRoute: typeof DocsQuickstartRoute;
+  DocsComponentsComponentRoute: typeof DocsComponentsComponentRoute;
+  DocsIntegrationsFormRoute: typeof DocsIntegrationsFormRoute;
 }
 
 const DocsRouteChildren: DocsRouteChildren = {
   DocsQuickstartRoute: DocsQuickstartRoute,
   DocsComponentsComponentRoute: DocsComponentsComponentRoute,
   DocsIntegrationsFormRoute: DocsIntegrationsFormRoute,
-}
+};
 
-const DocsRouteWithChildren = DocsRoute._addFileChildren(DocsRouteChildren)
+const DocsRouteWithChildren = DocsRoute._addFileChildren(DocsRouteChildren);
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   SplatRoute: SplatRoute,
   DocsRoute: DocsRouteWithChildren,
-}
+};
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+  ._addFileTypes<FileRouteTypes>();

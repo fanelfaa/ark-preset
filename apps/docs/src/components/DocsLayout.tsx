@@ -10,7 +10,6 @@ import {
 import { sidebarNav } from "../sidebar-nav";
 import { GitHubIcon } from "./GitHubIcon";
 import { ThemeToggle } from "./ThemeToggle";
-import { GradientCloud } from "./GradientCloud";
 
 interface DocsLayoutProps {
   children?: JSX.Element;
@@ -24,7 +23,6 @@ export const DocsLayout: Component<DocsLayoutProps> = (props) => {
 
   return (
     <>
-      <GradientCloud />
       <div class="mx-auto max-w-7xl flex flex-col min-h-screen relative z-1">
         <header class="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
           <div class="flex h-14 items-center justify-between px-6">

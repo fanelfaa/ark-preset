@@ -5,10 +5,14 @@ dependsOn:
   - solid
 
 tasks:
+  typecheck:
+    command: "tsc --noEmit"
   dev:
     command: "pnpm dev"
   build:
     command: "pnpm build"
+    deps:
+      - "typecheck"
     inputs:
       - "src/**/*"
       - "astro.config.mjs"

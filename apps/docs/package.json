@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "astro dev --port 4173 --host",
     "build": "astro build",
-    "preview": "astro preview",
+    "preview": "astro preview --port 4173 --host",
+    "typecheck": "tsc --noEmit",
     "astro": "astro",
     "test:e2e": "playwright test --config e2e/playwright.config.ts"
   },

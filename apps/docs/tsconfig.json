@@ -3,10 +3,11 @@
   "include": [".astro/types.d.ts", "**/*"],
   "exclude": ["dist"],
   "compilerOptions": {
-    "baseUrl": ".",
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js",
     "paths": {
-      "@demos/*": ["src/components/demos/*"],
-      "~/*": ["src/*"]
+      "@demos/*": ["./src/content/solid/demos/*"],
+      "~/*": ["./src/*"]
     }
   }
 }
