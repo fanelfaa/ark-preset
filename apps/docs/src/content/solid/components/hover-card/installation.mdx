@@ -1,0 +1,133 @@
+## Installation
+
+### CLI
+
+Run the following command to add the component to your project:
+
+```bash
+npx @ark-preset/cli@latest add hover-card
+```
+
+### Manual
+
+Create the recipe file at `src/components/recipes/hover-card.ts`:
+
+```ts
+import { tv, type VariantProps } from "tailwind-variants";
+
+export const hoverCardVariants = tv({
+  slots: {
+    root: "inline-flex",
+    trigger:
+      "inline-flex items-center justify-center gap-2 rounded-md border border-input bg-transparent px-4 py-2 text-sm font-medium text-foreground ring-offset-background transition-colors hover:bg-accent max-sm:select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+    positioner: "",
+    content:
+      "z-[100] w-72 rounded-lg border border-border bg-popover p-4 text-popover-foreground shadow-lg animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+    arrow: "[--arrow-size:10px]",
+    arrowTip: "h-2 w-2 border-t border-l border-border bg-popover",
+  },
+});
+
+export type HoverCardVariants = VariantProps<typeof hoverCardVariants>;
+```
+
+Create the component directory and files.
+
+`src/components/hover-card/hover-card.base.tsx`:
+
+```tsx
+import { HoverCard as ArkHoverCard } from "@ark-ui/solid/hover-card";
+import { splitProps, type Component } from "solid-js";
+import { Portal } from "solid-js/web";
+import { buttonVariants, hoverCardVariants, type ButtonVariants } from "../recipes/hover-card";
+
+const styles = hoverCardVariants();
+
+const Root = ArkHoverCard.Root;
+const RootProvider = ArkHoverCard.RootProvider;
+
+const Trigger: Component<ArkHoverCard.TriggerProps & ButtonVariants> = (props) => {
+  const [local, others] = splitProps(props, ["class", "variant", "size"]);
+  return (
+    <ArkHoverCard.Trigger
+      class={buttonVariants({ variant: local.variant, size: local.size, class: local.class })}
+      {...others}
+    />
+  );
+};
+
+const Positioner: Component<ArkHoverCard.PositionerProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return (
+    <Portal>
+      <ArkHoverCard.Positioner class={styles.positioner({ class: local.class })} {...others} />
+    </Portal>
+  );
+};
+
+const Content: Component<ArkHoverCard.ContentProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkHoverCard.Content class={styles.content({ class: local.class })} {...others} />;
+};
+
+const Arrow: Component<ArkHoverCard.ArrowProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkHoverCard.Arrow class={styles.arrow({ class: local.class })} {...others} />;
+};
+
+const ArrowTip: Component<ArkHoverCard.ArrowTipProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkHoverCard.ArrowTip class={styles.arrowTip({ class: local.class })} {...others} />;
+};
+
+export const HoverCard = {
+  Root,
+  RootProvider,
+  Trigger,
+  Positioner,
+  Content,
+  Arrow,
+  ArrowTip,
+};
+```
+
+`src/components/hover-card/index.tsx`:
+
+```tsx
+import { splitProps, type Component } from "solid-js";
+import { HoverCard as HoverCardBase } from "./hover-card.base";
+import { HoverCard as ArkHoverCard } from "@ark-ui/solid/hover-card";
+
+const HoverCard = HoverCardBase.Root;
+
+const HoverCardTrigger = HoverCardBase.Trigger;
+
+type HoverCardContentProps = ArkHoverCard.ContentProps & {
+  /** When true, renders an arrow pointing to the trigger element */
+  useArrow?: boolean;
+};
+
+const HoverCardContent: Component<HoverCardContentProps> = (props) => {
+  const [local, others] = splitProps(props, ["useArrow", "children"]);
+  return (
+    <HoverCardBase.Positioner>
+      <HoverCardBase.Content {...others}>
+        {local.useArrow && (
+          <HoverCardBase.Arrow>
+            <HoverCardBase.ArrowTip />
+          </HoverCardBase.Arrow>
+        )}
+        {local.children}
+      </HoverCardBase.Content>
+    </HoverCardBase.Positioner>
+  );
+};
+
+export { HoverCard, HoverCardTrigger, HoverCardContent, HoverCardBase };
+
+export { hoverCardVariants, type HoverCardVariants } from "../recipes/hover-card";
+```
+
+> **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.
+
+> **Dependencies:** This component imports shared recipes or sub-components from other packages. Make sure the following are also installed: [button](/docs/components/button).

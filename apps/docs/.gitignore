@@ -3,10 +3,6 @@ dist/
 # generated types
 .astro/
 
-# generated docs (produced by installation-watcher at build time)
-src/content/solid/components/*/installation.mdx
-src/content/solid/components/*/implement.mdx
-
 # dependencies
 node_modules/
 

@@ -1,0 +1,125 @@
+## Installation
+
+### CLI
+
+Run the following command to add the component to your project:
+
+```bash
+npx @ark-preset/cli@latest add switch
+```
+
+### Manual
+
+Create the recipe file at `src/components/recipes/switch.ts`:
+
+```ts
+import { tv, type VariantProps } from "tailwind-variants";
+
+export const switchVariants = tv({
+  slots: {
+    root: "inline-flex items-center gap-2",
+    control:
+      "inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input",
+    thumb:
+      "pointer-events-none block size-4 rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-4 data-[state=unchecked]:translate-x-0",
+  },
+});
+
+export type SwitchVariants = VariantProps<typeof switchVariants>;
+```
+
+Create the component directory and files.
+
+`src/components/switch/switch.base.tsx`:
+
+```tsx
+import { Switch as ArkSwitch } from "@ark-ui/solid/switch";
+import { splitProps, type Component } from "solid-js";
+import { switchVariants, labelVariants } from "../recipes/switch";
+
+const styles = switchVariants();
+
+const SwitchRoot: Component<ArkSwitch.RootProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkSwitch.Root class={styles.root({ class: local.class })} {...others} />;
+};
+
+const SwitchRootProvider: Component<ArkSwitch.RootProviderProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkSwitch.RootProvider class={styles.root({ class: local.class })} {...others} />;
+};
+
+const SwitchControl: Component<ArkSwitch.ControlProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkSwitch.Control class={styles.control({ class: local.class })} {...others} />;
+};
+
+const SwitchThumb: Component<ArkSwitch.ThumbProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkSwitch.Thumb class={styles.thumb({ class: local.class })} {...others} />;
+};
+
+const SwitchLabel: Component<ArkSwitch.LabelProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkSwitch.Label class={labelVariants({ class: local.class })} {...others} />;
+};
+
+const SwitchHiddenInput = ArkSwitch.HiddenInput;
+
+export const Switch = {
+  Root: SwitchRoot,
+  RootProvider: SwitchRootProvider,
+  Control: SwitchControl,
+  Thumb: SwitchThumb,
+  Label: SwitchLabel,
+  HiddenInput: SwitchHiddenInput,
+};
+```
+
+`src/components/switch/index.tsx`:
+
+```tsx
+import { Switch as ArkSwitch } from "@ark-ui/solid/switch";
+import { splitProps, type Component } from "solid-js";
+import { Switch as SwitchBase } from "./switch.base";
+import { labelVariants } from "../recipes/switch";
+
+const SwitchControl = () => (
+  <>
+    <SwitchBase.Control>
+      <SwitchBase.Thumb />
+    </SwitchBase.Control>
+    <SwitchBase.HiddenInput />
+  </>
+);
+
+const SwitchLabel: Component<ArkSwitch.LabelProps> = (props) => (
+  <SwitchBase.Label class={labelVariants({ class: props.class })} {...props} />
+);
+
+const Switch: Component<ArkSwitch.RootProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "children"]);
+  return (
+    <SwitchBase.Root class={local.class} {...others}>
+      <SwitchControl />
+      {local.children}
+    </SwitchBase.Root>
+  );
+};
+
+const SwitchRootProvider: Component<ArkSwitch.RootProviderProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "children"]);
+  return (
+    <SwitchBase.RootProvider class={local.class} {...others}>
+      <SwitchControl />
+      {local.children}
+    </SwitchBase.RootProvider>
+  );
+};
+
+export { Switch, SwitchRootProvider, SwitchLabel, SwitchBase };
+
+export { switchVariants, type SwitchVariants } from "../recipes/switch";
+```
+
+> **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.

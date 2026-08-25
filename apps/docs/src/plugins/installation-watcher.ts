@@ -47,7 +47,6 @@ export function installationWatcherPlugin(): Plugin {
           const compDir = resolve(DOCS_DIR, component);
           if (!existsSync(compDir)) mkdirSync(compDir, { recursive: true });
           writeFileSync(resolve(compDir, "installation.mdx"), content, "utf-8");
-          writeFileSync(resolve(compDir, "implement.mdx"), content, "utf-8");
           count++;
         }
       }
@@ -78,7 +77,6 @@ export function installationWatcherPlugin(): Plugin {
         const compDir = resolve(DOCS_DIR, componentName);
         if (!existsSync(compDir)) mkdirSync(compDir, { recursive: true });
         writeFileSync(resolve(compDir, "installation.mdx"), content, "utf-8");
-        writeFileSync(resolve(compDir, "implement.mdx"), content, "utf-8");
         server.ws.send({ type: "full-reload", path: "*" });
         console.log(`[installation-watcher] Regenerated docs for ${componentName}`);
       }

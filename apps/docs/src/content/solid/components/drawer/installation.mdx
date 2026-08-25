@@ -1,0 +1,201 @@
+## Installation
+
+### CLI
+
+Run the following command to add the component to your project:
+
+```bash
+npx @ark-preset/cli@latest add drawer
+```
+
+### Manual
+
+Create the recipe file at `src/components/recipes/drawer.ts`:
+
+```ts
+import { tv, type VariantProps } from "tailwind-variants";
+
+export const drawerVariants = tv({
+  slots: {
+    root: "",
+    trigger:
+      "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition duration-300 motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0.5 active:duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border bg-background hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2",
+    backdrop:
+      "fixed inset-0 z-50 bg-black/50 dark:bg-black/60 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+    positioner:
+      "fixed inset-0 z-50 flex data-[swipe-direction=left]:justify-start data-[swipe-direction=right]:justify-end data-[swipe-direction=up]:items-start data-[swipe-direction=up]:justify-center data-[swipe-direction=down]:items-end data-[swipe-direction=down]:justify-center",
+    content:
+      "relative z-50 flex flex-col w-full max-w-md bg-background shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[swipe-direction=left]:data-[state=open]:slide-in-from-left data-[swipe-direction=left]:data-[state=closed]:slide-out-to-left data-[swipe-direction=right]:data-[state=open]:slide-in-from-right data-[swipe-direction=right]:data-[state=closed]:slide-out-to-right",
+    title: "text-lg font-semibold leading-none tracking-tight",
+    description: "text-sm text-muted-foreground",
+    closeTrigger:
+      "absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+    grabber:
+      "absolute right-0 top-1/2 -translate-y-1/2 flex items-center justify-center cursor-grab w-6 h-12 z-10",
+    grabberIndicator: "w-1 h-8 bg-muted-foreground/30 rounded-full",
+  },
+});
+
+export type DrawerVariants = VariantProps<typeof drawerVariants>;
+```
+
+Create the component directory and files.
+
+`src/components/drawer/drawer.base.tsx`:
+
+```tsx
+import { Drawer as ArkDrawer } from "@ark-ui/solid/drawer";
+import { splitProps, type Component } from "solid-js";
+import { buttonVariants, drawerVariants, type ButtonVariants } from "../recipes/drawer";
+
+const styles = drawerVariants();
+
+const Root = ArkDrawer.Root;
+const RootProvider = ArkDrawer.RootProvider;
+const Trigger: Component<ArkDrawer.TriggerProps & ButtonVariants> = (props) => {
+  const [local, others] = splitProps(props, ["class", "variant", "size"]);
+  return (
+    <ArkDrawer.Trigger
+      class={buttonVariants({ variant: local.variant, size: local.size, class: local.class })}
+      {...others}
+    />
+  );
+};
+
+const Backdrop: Component<ArkDrawer.BackdropProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkDrawer.Backdrop class={styles.backdrop({ class: local.class })} {...others} />;
+};
+
+const Positioner: Component<ArkDrawer.PositionerProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkDrawer.Positioner class={styles.positioner({ class: local.class })} {...others} />;
+};
+
+const Content: Component<ArkDrawer.ContentProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkDrawer.Content class={styles.content({ class: local.class })} {...others} />;
+};
+
+const CloseTrigger: Component<ArkDrawer.CloseTriggerProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkDrawer.CloseTrigger class={styles.closeTrigger({ class: local.class })} {...others} />;
+};
+
+const Title: Component<ArkDrawer.TitleProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkDrawer.Title class={styles.title({ class: local.class })} {...others} />;
+};
+
+const Description: Component<ArkDrawer.DescriptionProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkDrawer.Description class={styles.description({ class: local.class })} {...others} />;
+};
+
+const Grabber: Component<ArkDrawer.GrabberProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkDrawer.Grabber class={styles.grabber({ class: local.class })} {...others} />;
+};
+
+const GrabberIndicator: Component<ArkDrawer.GrabberIndicatorProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return (
+    <ArkDrawer.GrabberIndicator
+      class={styles.grabberIndicator({ class: local.class })}
+      {...others}
+    />
+  );
+};
+
+const Context = ArkDrawer.Context;
+
+const Indent = ArkDrawer.Indent;
+const IndentBackground = ArkDrawer.IndentBackground;
+const SwipeArea = ArkDrawer.SwipeArea;
+
+export const Drawer = {
+  Root,
+  RootProvider,
+  Trigger,
+  Backdrop,
+  Positioner,
+  Content,
+  CloseTrigger,
+  Title,
+  Description,
+  Grabber,
+  GrabberIndicator,
+  Context,
+  Indent,
+  IndentBackground,
+  SwipeArea,
+};
+```
+
+`src/components/drawer/index.tsx`:
+
+```tsx
+import { Drawer as ArkDrawer } from "@ark-ui/solid/drawer";
+import { Portal } from "solid-js/web";
+import { splitProps, type Component } from "solid-js";
+import { Drawer as DrawerBase } from "./drawer.base";
+
+const DrawerContent: Component<ArkDrawer.ContentProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "children"]);
+  return (
+    <Portal>
+      <DrawerBase.Backdrop />
+      <DrawerBase.Positioner>
+        <DrawerBase.Content class={local.class} {...others}>
+          {local.children}
+          <DrawerBase.CloseTrigger>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              class="size-4"
+            >
+              <path d="M18 6L6 18" />
+              <path d="M6 6l12 12" />
+            </svg>
+          </DrawerBase.CloseTrigger>
+        </DrawerBase.Content>
+      </DrawerBase.Positioner>
+    </Portal>
+  );
+};
+
+const Drawer = DrawerBase.Root;
+const DrawerTrigger = DrawerBase.Trigger;
+const DrawerTitle = DrawerBase.Title;
+const DrawerDescription = DrawerBase.Description;
+
+const DrawerGrabber: Component<ArkDrawer.GrabberProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "children"]);
+  return (
+    <DrawerBase.Grabber class={local.class} {...others}>
+      <DrawerBase.GrabberIndicator />
+    </DrawerBase.Grabber>
+  );
+};
+
+export {
+  Drawer,
+  DrawerTrigger,
+  DrawerContent,
+  DrawerTitle,
+  DrawerDescription,
+  DrawerGrabber,
+  DrawerBase,
+};
+
+export { drawerVariants, type DrawerVariants } from "../recipes/drawer";
+```
+
+> **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.
+
+> **Dependencies:** This component imports shared recipes or sub-components from other packages. Make sure the following are also installed: [button](/docs/components/button).

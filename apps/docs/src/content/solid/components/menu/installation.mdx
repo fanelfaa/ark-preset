@@ -1,0 +1,319 @@
+## Installation
+
+### CLI
+
+Run the following command to add the component to your project:
+
+```bash
+npx @ark-preset/cli@latest add menu
+```
+
+### Manual
+
+Create the recipe file at `src/components/recipes/menu.ts`:
+
+```ts
+import { tv, type VariantProps } from "tailwind-variants";
+
+export const menuVariants = tv({
+  slots: {
+    root: "",
+    indicator: "size-4 shrink-0 transition-transform duration-200 data-[state=open]:rotate-180",
+    positioner: "z-50",
+    content:
+      "min-w-[10rem] p-2 bg-popover text-popover-foreground border border-border rounded-lg shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 focus-visible:outline-none",
+    arrow: "",
+    arrowTip: "h-2 w-2 rotate-45 border-b border-l border-border bg-popover",
+    item: "flex items-center justify-between gap-2 px-2.5 py-1.5 text-sm rounded-sm cursor-pointer transition-colors duration-150 data-[highlighted]:bg-accent data-[disabled]:opacity-50 data-[disabled]:pointer-events-none",
+    itemText: "text-sm",
+    itemIndicator: "size-4 shrink-0 hidden data-[state=checked]:block",
+    separator: "-mx-1 my-2 h-px bg-border/50",
+    contextTrigger:
+      "flex items-center gap-2 px-2.5 py-1.5 text-sm rounded-sm cursor-pointer transition-colors duration-150 data-[highlighted]:bg-accent",
+    triggerItem:
+      "flex items-center justify-between gap-2 px-2.5 py-1.5 text-sm rounded-sm cursor-pointer transition-colors duration-150 data-[highlighted]:bg-accent data-[state=open]:bg-accent",
+    checkboxItem:
+      "flex items-center gap-2 px-2.5 py-1.5 text-sm rounded-sm cursor-pointer transition-colors duration-150 data-[highlighted]:bg-accent data-[checked]:font-medium",
+    radioItem:
+      "flex items-center gap-2 px-2.5 py-1.5 text-sm rounded-sm cursor-pointer transition-colors duration-150 data-[highlighted]:bg-accent data-[checked]:font-medium",
+    itemGroup: "p-1",
+    itemGroupLabel: "px-2 py-1.5 text-xs text-muted-foreground",
+  },
+});
+
+export type MenuVariants = VariantProps<typeof menuVariants>;
+```
+
+Create the component directory and files.
+
+`src/components/menu/menu.base.tsx`:
+
+```tsx
+import { Menu as ArkMenu } from "@ark-ui/solid/menu";
+import { splitProps, type Component } from "solid-js";
+import { buttonVariants, menuVariants, type ButtonVariants } from "../recipes/menu";
+
+const styles = menuVariants();
+
+// Re-exports (no style slot required)
+const Root = ArkMenu.Root;
+const RootProvider = ArkMenu.RootProvider;
+const Trigger: Component<ArkMenu.TriggerProps & ButtonVariants> = (props) => {
+  const [local, others] = splitProps(props, ["class", "variant", "size"]);
+  return (
+    <ArkMenu.Trigger
+      class={buttonVariants({ variant: local.variant, size: local.size, class: local.class })}
+      {...others}
+    />
+  );
+};
+const RadioItemGroup = ArkMenu.RadioItemGroup;
+
+// Styled wrappers
+const Indicator: Component<ArkMenu.IndicatorProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkMenu.Indicator class={styles.indicator({ class: local.class })} {...others} />;
+};
+
+const Positioner: Component<ArkMenu.PositionerProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkMenu.Positioner class={styles.positioner({ class: local.class })} {...others} />;
+};
+
+const Arrow: Component<ArkMenu.ArrowProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkMenu.Arrow class={styles.arrow({ class: local.class })} {...others} />;
+};
+
+const ArrowTip: Component<ArkMenu.ArrowTipProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkMenu.ArrowTip class={styles.arrowTip({ class: local.class })} {...others} />;
+};
+
+const Separator: Component<ArkMenu.SeparatorProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkMenu.Separator class={styles.separator({ class: local.class })} {...others} />;
+};
+
+const ContextTrigger: Component<ArkMenu.ContextTriggerProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return (
+    <ArkMenu.ContextTrigger class={styles.contextTrigger({ class: local.class })} {...others} />
+  );
+};
+
+const TriggerItem: Component<ArkMenu.TriggerItemProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkMenu.TriggerItem class={styles.triggerItem({ class: local.class })} {...others} />;
+};
+
+const Content: Component<ArkMenu.ContentProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkMenu.Content class={styles.content({ class: local.class })} {...others} />;
+};
+
+const Item: Component<ArkMenu.ItemProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkMenu.Item class={styles.item({ class: local.class })} {...others} />;
+};
+
+const ItemText: Component<ArkMenu.ItemTextProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkMenu.ItemText class={styles.itemText({ class: local.class })} {...others} />;
+};
+
+const ItemIndicator: Component<ArkMenu.ItemIndicatorProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkMenu.ItemIndicator class={styles.itemIndicator({ class: local.class })} {...others} />;
+};
+
+const CheckboxItem: Component<ArkMenu.CheckboxItemProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkMenu.CheckboxItem class={styles.checkboxItem({ class: local.class })} {...others} />;
+};
+
+const RadioItem: Component<ArkMenu.RadioItemProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkMenu.RadioItem class={styles.radioItem({ class: local.class })} {...others} />;
+};
+
+const ItemGroup: Component<ArkMenu.ItemGroupProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkMenu.ItemGroup class={styles.itemGroup({ class: local.class })} {...others} />;
+};
+
+const ItemGroupLabel: Component<ArkMenu.ItemGroupLabelProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return (
+    <ArkMenu.ItemGroupLabel class={styles.itemGroupLabel({ class: local.class })} {...others} />
+  );
+};
+
+export const Menu = {
+  Root,
+  RootProvider,
+  Trigger,
+  RadioItemGroup,
+  Indicator,
+  Positioner,
+  Arrow,
+  ArrowTip,
+  Separator,
+  ContextTrigger,
+  TriggerItem,
+  Content,
+  Item,
+  ItemText,
+  ItemIndicator,
+  CheckboxItem,
+  RadioItem,
+  ItemGroup,
+  ItemGroupLabel,
+};
+```
+
+`src/components/menu/index.tsx`:
+
+```tsx
+import { Menu as ArkMenu } from "@ark-ui/solid/menu";
+import { Show, splitProps, type Component } from "solid-js";
+import type { ButtonVariants } from "../recipes/menu";
+import { Menu as MenuBase } from "./menu.base";
+
+const Menu = MenuBase.Root;
+
+const MenuTrigger: Component<
+  ArkMenu.TriggerProps & ButtonVariants & { hideIndicator?: boolean }
+> = (props) => {
+  const [local, others] = splitProps(props, [
+    "class",
+    "variant",
+    "size",
+    "hideIndicator",
+    "children",
+  ]);
+  const hideIndicator = () => local.hideIndicator ?? false;
+
+  return (
+    <MenuBase.Trigger
+      class={local.class}
+      variant={local.variant || "outline"}
+      size={local.size}
+      {...others}
+    >
+      {local.children}
+      <Show when={!hideIndicator()}>
+        <MenuBase.Indicator>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="size-4"
+          >
+            <path d="m6 9 6 6 6-6" />
+          </svg>
+        </MenuBase.Indicator>
+      </Show>
+    </MenuBase.Trigger>
+  );
+};
+
+const MenuContent: Component<ArkMenu.ContentProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "children"]);
+  return (
+    <MenuBase.Positioner>
+      <MenuBase.Content class={local.class} {...others}>
+        <MenuBase.Arrow />
+        {local.children}
+      </MenuBase.Content>
+    </MenuBase.Positioner>
+  );
+};
+
+const MenuItem: Component<ArkMenu.ItemProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "children"]);
+  return (
+    <MenuBase.Item class={local.class} {...others}>
+      <MenuBase.ItemText>{local.children}</MenuBase.ItemText>
+      <MenuBase.ItemIndicator>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="size-4"
+        >
+          <path d="M20 6 9 17l-5-5" />
+        </svg>
+      </MenuBase.ItemIndicator>
+    </MenuBase.Item>
+  );
+};
+
+const MenuTriggerItem: Component<ArkMenu.TriggerItemProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "children"]);
+  return (
+    <MenuBase.TriggerItem class={local.class} {...others}>
+      {local.children}
+      <MenuBase.Indicator>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="size-4"
+        >
+          <path d="m9 18 6-6-6-6" />
+        </svg>
+      </MenuBase.Indicator>
+    </MenuBase.TriggerItem>
+  );
+};
+
+const MenuSeparator: Component<ArkMenu.SeparatorProps> = (props) => {
+  return <MenuBase.Separator {...props} />;
+};
+
+const NestedMenuContent: Component<ArkMenu.ContentProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "children"]);
+  return (
+    <MenuBase.Positioner>
+      <MenuBase.Content class={local.class} {...others}>
+        {local.children}
+      </MenuBase.Content>
+    </MenuBase.Positioner>
+  );
+};
+
+export { Menu };
+export {
+  MenuTrigger,
+  MenuContent,
+  MenuItem,
+  MenuTriggerItem,
+  MenuSeparator,
+  NestedMenuContent,
+  MenuBase,
+};
+export { menuVariants, type MenuVariants } from "../recipes/menu";
+```
+
+> **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.
+
+> **Dependencies:** This component imports shared recipes or sub-components from other packages. Make sure the following are also installed: [button](/docs/components/button).
