@@ -1,0 +1,89 @@
+## Installation
+
+### CLI
+
+Run the following command to add the component to your project:
+
+```bash
+npx @ark-preset/cli@latest add alert
+```
+
+### Manual
+
+Create the recipe file at `src/components/recipes/alert.ts`:
+
+```ts
+import { tv, type VariantProps } from "tailwind-variants";
+
+export const alertVariants = tv({
+  slots: {
+    root: "relative w-full rounded-lg border border-border p-2.5 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-2.5 [&>svg]:top-2.5 [&>svg]:text-foreground [&>svg~*]:pl-7",
+    title: "mb-1 font-medium leading-none tracking-tight",
+    description: "text-sm text-muted-foreground [&_p]:leading-relaxed",
+    action: "",
+  },
+  variants: {
+    variant: {
+      default: {
+        root: "bg-background text-foreground",
+      },
+      destructive: {
+        root: "border-destructive text-destructive dark:border-destructive [&>svg]:text-destructive",
+      },
+    },
+  },
+  defaultVariants: {
+    variant: "default",
+  },
+});
+
+export type AlertVariants = VariantProps<typeof alertVariants>;
+```
+
+Create the component file at `src/components/alert/index.tsx`:
+
+```tsx
+import { splitProps, type Component } from "solid-js";
+import { alertVariants, type AlertVariants } from "../recipes/alert";
+import { ark, type HTMLArkProps } from "@ark-ui/solid/factory";
+
+const styles = alertVariants();
+
+type AlertProps = HTMLArkProps<"div"> & AlertVariants;
+
+const Alert: Component<AlertProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "variant"]);
+  return (
+    <ark.div
+      role="alert"
+      class={styles.root({ variant: local.variant, class: local.class })}
+      {...others}
+    />
+  );
+};
+
+type AlertTitleProps = HTMLArkProps<"h5">;
+
+const AlertTitle: Component<AlertTitleProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ark.h5 class={styles.title({ class: local.class })} {...others} />;
+};
+
+type AlertDescriptionProps = HTMLArkProps<"div">;
+
+const AlertDescription: Component<AlertDescriptionProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ark.div class={styles.description({ class: local.class })} {...others} />;
+};
+
+type AlertActionProps = HTMLArkProps<"div">;
+
+const AlertAction: Component<AlertActionProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ark.div class={styles.action({ class: local.class })} {...others} />;
+};
+
+export { Alert, AlertTitle, AlertDescription, AlertAction, alertVariants };
+```
+
+> **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.

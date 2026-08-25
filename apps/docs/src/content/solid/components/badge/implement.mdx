@@ -1,0 +1,59 @@
+## Installation
+
+### CLI
+
+Run the following command to add the component to your project:
+
+```bash
+npx @ark-preset/cli@latest add badge
+```
+
+### Manual
+
+Create the recipe file at `src/components/recipes/badge.ts`:
+
+```ts
+import { tv, type VariantProps } from "tailwind-variants";
+
+export const badgeVariants = tv({
+  base: "inline-flex items-center rounded-full border border-transparent px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 [a&]:cursor-pointer",
+  variants: {
+    variant: {
+      default: "bg-primary text-primary-foreground hover:bg-primary/90",
+      secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/90",
+      destructive:
+        "bg-destructive/10 text-destructive focus-visible:ring-destructive/20 hover:border-destructive/30 dark:bg-destructive/20 dark:text-destructive-foreground dark:border-destructive/50 dark:focus-visible:ring-destructive/50",
+      outline: "border-border text-foreground hover:bg-accent hover:text-accent-foreground",
+      ghost: "hover:bg-accent hover:text-accent-foreground",
+      link: "text-primary underline-offset-4 hover:underline",
+    },
+  },
+  defaultVariants: {
+    variant: "default",
+  },
+});
+
+export type BadgeVariants = VariantProps<typeof badgeVariants>;
+```
+
+Create the component file at `src/components/badge/index.tsx`:
+
+```tsx
+import { splitProps, type Component } from "solid-js";
+import { badgeVariants, type BadgeVariants } from "../recipes/badge";
+import { ark, type HTMLArkProps } from "@ark-ui/solid/factory";
+
+type BadgeProps = HTMLArkProps<"span"> & BadgeVariants;
+
+const Badge: Component<BadgeProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "variant"]);
+
+  return (
+    <ark.span class={badgeVariants({ variant: local.variant, class: local.class })} {...others} />
+  );
+};
+
+export { Badge, badgeVariants };
+```
+
+> **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.

@@ -1,0 +1,70 @@
+## Installation
+
+### CLI
+
+Run the following command to add the component to your project:
+
+```bash
+npx @ark-preset/cli@latest add spinner
+```
+
+### Manual
+
+Create the recipe file at `src/components/recipes/spinner.ts`:
+
+```ts
+import { tv, type VariantProps } from "tailwind-variants";
+
+export const spinnerVariants = tv({
+  base: "animate-spin text-muted-foreground",
+  variants: {
+    size: {
+      sm: "size-4",
+      md: "size-5",
+      lg: "size-6",
+      xl: "size-8",
+    },
+  },
+  defaultVariants: {
+    size: "md",
+  },
+});
+
+export type SpinnerVariants = VariantProps<typeof spinnerVariants>;
+```
+
+Create the component file at `src/components/spinner/index.tsx`:
+
+```tsx
+import { splitProps, type Component } from "solid-js";
+import { spinnerVariants, type SpinnerVariants } from "../recipes/spinner";
+import { ark, type HTMLArkProps } from "@ark-ui/solid/factory";
+
+type SpinnerProps = HTMLArkProps<"span"> & SpinnerVariants;
+
+const Spinner: Component<SpinnerProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "size"]);
+
+  return (
+    <ark.span
+      class={spinnerVariants({ size: local.size, class: local.class })}
+      role="status"
+      aria-label="Loading"
+      {...others}
+    >
+      <svg class="size-full" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" />
+        <path
+          class="opacity-75"
+          fill="currentColor"
+          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+        />
+      </svg>
+    </ark.span>
+  );
+};
+
+export { Spinner, spinnerVariants };
+```
+
+> **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.

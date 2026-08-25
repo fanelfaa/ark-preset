@@ -1,0 +1,146 @@
+## Installation
+
+### CLI
+
+Run the following command to add the component to your project:
+
+```bash
+npx @ark-preset/cli@latest add scroll-area
+```
+
+### Manual
+
+Create the recipe file at `src/components/recipes/scroll-area.ts`:
+
+```ts
+import { tv, type VariantProps } from "tailwind-variants";
+
+export const scrollAreaVariants = tv({
+  slots: {
+    root: "relative flex flex-col",
+    viewport:
+      "flex-1 min-h-0 w-full rounded-[inherit] overflow-scroll [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden [&::-webkit-scrollbar]:size-0",
+    scrollbar:
+      "flex select-none touch-none transition-colors group [&[data-orientation=vertical]:not([data-overflow-y])]:hidden [&[data-orientation=horizontal]:not([data-overflow-x])]:hidden",
+    thumb:
+      "relative flex-1 rounded-full bg-border/40 transition-colors duration-150 group-hover:bg-border data-[dragging]:bg-border",
+    corner: "bg-background",
+  },
+  variants: {
+    orientation: {
+      vertical: {
+        scrollbar: "w-2.5 border-l border-l-transparent p-px",
+        thumb: "",
+      },
+      horizontal: {
+        scrollbar: "flex-col h-2.5 border-t border-t-transparent p-px",
+        thumb: "",
+      },
+    },
+  },
+  defaultVariants: {
+    orientation: "vertical",
+  },
+});
+
+export type ScrollAreaVariants = VariantProps<typeof scrollAreaVariants>;
+```
+
+Create the component directory and files.
+
+`src/components/scroll-area/scroll-area.base.tsx`:
+
+```tsx
+import { scrollAreaVariants } from "../recipes/scroll-area";
+import { ScrollArea as ArkScrollArea } from "@ark-ui/solid/scroll-area";
+import { splitProps, type Component } from "solid-js";
+
+const styles = scrollAreaVariants();
+
+const ScrollAreaRoot: Component<ArkScrollArea.RootProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkScrollArea.Root class={styles.root({ class: local.class })} {...others} />;
+};
+
+const ScrollAreaViewport: Component<ArkScrollArea.ViewportProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkScrollArea.Viewport class={styles.viewport({ class: local.class })} {...others} />;
+};
+
+const ScrollAreaContent: Component<ArkScrollArea.ContentProps> = (props) => {
+  return <ArkScrollArea.Content {...props} />;
+};
+
+export interface ScrollAreaScrollbarProps extends ArkScrollArea.ScrollbarProps {
+  orientation?: "vertical" | "horizontal";
+}
+
+const ScrollAreaScrollbar: Component<ScrollAreaScrollbarProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "orientation"]);
+  return (
+    <ArkScrollArea.Scrollbar
+      class={styles.scrollbar({ class: local.class, orientation: local.orientation })}
+      orientation={local.orientation}
+      {...others}
+    />
+  );
+};
+
+const ScrollAreaThumb: Component<ArkScrollArea.ThumbProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkScrollArea.Thumb class={styles.thumb({ class: local.class })} {...others} />;
+};
+
+const ScrollAreaCorner: Component<ArkScrollArea.CornerProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkScrollArea.Corner class={styles.corner({ class: local.class })} {...others} />;
+};
+
+const ScrollAreaRootProvider = ArkScrollArea.RootProvider;
+
+export const ScrollArea = {
+  Root: ScrollAreaRoot,
+  RootProvider: ScrollAreaRootProvider,
+  Viewport: ScrollAreaViewport,
+  Content: ScrollAreaContent,
+  Scrollbar: ScrollAreaScrollbar,
+  Thumb: ScrollAreaThumb,
+  Corner: ScrollAreaCorner,
+};
+
+// Re-export types
+export type { ScrollAreaRootProps } from "@ark-ui/solid/scroll-area";
+```
+
+`src/components/scroll-area/index.tsx`:
+
+```tsx
+import { splitProps, type Component } from "solid-js";
+import { ScrollArea as ScrollAreaBase } from "./scroll-area.base";
+import { ScrollArea as ArkScrollArea } from "@ark-ui/solid/scroll-area";
+
+type ScrollAreaProps = ArkScrollArea.RootProps & {
+  orientation?: "vertical" | "horizontal";
+};
+
+const ScrollArea: Component<ScrollAreaProps> = (props) => {
+  const [local, others] = splitProps(props, ["orientation", "children", "class"]);
+  return (
+    <ScrollAreaBase.Root class={local.class} {...others}>
+      <ScrollAreaBase.Viewport>
+        <ScrollAreaBase.Content>{local.children}</ScrollAreaBase.Content>
+      </ScrollAreaBase.Viewport>
+      <ScrollAreaBase.Scrollbar orientation={local.orientation ?? "vertical"}>
+        <ScrollAreaBase.Thumb />
+      </ScrollAreaBase.Scrollbar>
+      <ScrollAreaBase.Corner />
+    </ScrollAreaBase.Root>
+  );
+};
+
+export { ScrollArea, ScrollAreaBase };
+
+export { scrollAreaVariants, type ScrollAreaVariants } from "../recipes/scroll-area";
+```
+
+> **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.
