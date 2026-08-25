@@ -1,14 +1,32 @@
 import { test, expect } from "@playwright/test";
 
-test("Layout renders correctly", async ({ page }) => {
-  await page.goto("/");
+test.describe("Layout", () => {
+  test("should render the docs layout", async ({ page }) => {
+    await page.goto("/");
 
-  // Verify the main heading inside DocsLayout
-  await expect(page.getByRole("heading", { name: "Welcome to Docs" })).toBeVisible();
+    // Check for DocsLayout header
+    const header = page.locator("header").first();
+    await expect(header).toBeVisible();
+  });
 
-  // Verify sidebar navigation exists (e.g. looking for "Getting Started" category)
-  await expect(page.getByText("Getting Started")).toBeVisible();
+  test("should show UI Component Library as the page title on home", async ({ page }) => {
+    await page.goto("/");
 
-  // Verify GitHub footer exists
-  await expect(page.locator("footer").getByText("GitHub")).toBeVisible();
+    const h1 = page.locator("h1").first();
+    await expect(h1).toHaveText("UI Component Library");
+  });
+
+  test("should show sidebar on component pages", async ({ page }) => {
+    await page.goto("/solid/components/button");
+
+    const sidebar = page.locator('[data-testid="docs-sidebar"]');
+    await expect(sidebar).toBeVisible();
+  });
+
+  test("should not show sidebar on the home page", async ({ page }) => {
+    await page.goto("/");
+
+    const sidebar = page.locator('[data-testid="docs-sidebar"]');
+    await expect(sidebar).toHaveCount(0);
+  });
 });

@@ -91,7 +91,10 @@ export const DocsLayout: Component<DocsLayoutProps> = (props) => {
         <div class="flex flex-1">
           {/* Sidebar */}
           {!props.isHome && (
-            <aside class="hidden lg:block w-64 shrink-0 border-r border-border bg-background/60 backdrop-blur-3xl sticky top-14 self-start h-[calc(100vh-3.5rem)]">
+            <aside
+              data-testid="docs-sidebar"
+              class="hidden lg:block w-64 shrink-0 border-r border-border bg-background/60 backdrop-blur-3xl sticky top-14 self-start h-[calc(100vh-3.5rem)]"
+            >
               <SidebarNav currentPath={props.currentPath} currentFramework={framework()} />
             </aside>
           )}

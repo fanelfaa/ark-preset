@@ -7,7 +7,7 @@ test("Homepage renders correctly", async ({ page }) => {
 });
 
 test("Setup page renders correctly", async ({ page }) => {
-  await page.goto("/setup");
+  await page.goto("/docs/quickstart");
   await expect(page.locator("h1")).toContainText("Quickstart");
   await expect(page.locator("text=Prerequisites")).toBeVisible();
 });

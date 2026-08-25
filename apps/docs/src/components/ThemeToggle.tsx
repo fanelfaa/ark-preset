@@ -27,6 +27,11 @@ function applyTheme(theme: "dark" | "light") {
 export function ThemeToggle() {
   const [isDark, setIsDark] = createSignal(resolveTheme() === "dark");
 
+  // Apply initial theme on mount
+  onMount(() => {
+    applyTheme(isDark() ? "dark" : "light");
+  });
+
   onMount(() => {
     const mql = window.matchMedia("(prefers-color-scheme: dark)");
     const handler = () => {

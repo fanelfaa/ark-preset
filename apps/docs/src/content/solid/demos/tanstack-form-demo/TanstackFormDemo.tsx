@@ -145,7 +145,6 @@ export default function TanstackFormDemo() {
         console.log("[dbg] onSubmit validator called");
         const r = formSchema.safeParse(values);
         console.log("[dbg] onSubmit validator success =", r.success);
-        // @ts-expect-error debug instrumentation
         return r.success ? undefined : r.error;
       },
     },

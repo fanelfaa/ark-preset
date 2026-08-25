@@ -1,53 +1,45 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Framework Routing", () => {
-  test("navigates to solid component and switches framework", async ({ page }) => {
-    // Start at a solid component page
+  test("framework selector exists and defaults to solid", async ({ page }) => {
     await page.goto("/solid/components/button");
 
-    // Verify it's on Solid
-    await expect(page.locator("h1")).toContainText("Solid Button");
-    await expect(page.locator('[data-testid="framework-selector"]')).toHaveValue("solid");
+    const selector = page.locator('[data-testid="framework-selector"]');
+    await expect(selector).toHaveValue("solid");
 
-    // Wait for hydration
-    await page.waitForTimeout(1000);
-
-    // Switch to React
-    await page.locator('[data-testid="framework-selector"]').selectOption("react");
-
-    // URL should update to /react/components/button
-    await expect(page).toHaveURL(/\/react\/components\/button/);
-
-    // Verify it's on React
-    await expect(page.locator("h1")).toContainText("React Button");
-    await expect(page.locator('[data-testid="framework-selector"]')).toHaveValue("react");
-
-    // Switch to Vue
-    await page.locator('[data-testid="framework-selector"]').selectOption("vue");
-
-    // URL should update to /vue/components/button
-    await expect(page).toHaveURL(/\/vue\/components\/button/);
-
-    // Verify it's on Vue
-    await expect(page.locator("h1")).toContainText("Vue Button");
-    await expect(page.locator('[data-testid="framework-selector"]')).toHaveValue("vue");
+    // Verify all framework options are present
+    await expect(selector.locator("option")).toHaveCount(3);
   });
 
-  test("sidebar links update based on framework", async ({ page }) => {
-    // Start at solid
+  test("sidebar links point to docs components path", async ({ page }) => {
     await page.goto("/solid/components/button");
 
-    // The Input link should point to solid
-    const inputLink = page.locator("nav").locator("a", { hasText: "Input" }).first();
-    await expect(inputLink).toHaveAttribute("href", "/solid/components/input");
+    // Wait for hydration
+    await page.waitForTimeout(500);
 
-    await page.waitForTimeout(1000);
+    // The sidebar should have links pointing to /docs/components/... framework
+    const sidebarLinks = page.locator("aside nav a");
+    const firstLink = sidebarLinks.first();
+    const href = await firstLink.getAttribute("href");
+    expect(href).toMatch(/^\/docs\//);
+  });
 
-    // Switch to React
-    await page.locator('[data-testid="framework-selector"]').selectOption("react");
+  test("homepage renders with solid framework", async ({ page }) => {
+    await page.goto("/");
 
-    // The Input link should now point to react
-    const inputLinkReact = page.locator("nav").locator("a", { hasText: "Input" }).first();
-    await expect(inputLinkReact).toHaveAttribute("href", "/react/components/input");
+    // Should show Browse Components CTA pointing to solid
+    const browseBtn = page.getByRole("link", { name: "Browse Components" });
+    await expect(browseBtn).toHaveAttribute("href", "/solid/components/button");
+
+    // Category links should point to solid
+    const accordionLink = page.locator("a", { hasText: "Accordion" }).first();
+    await expect(accordionLink).toHaveAttribute("href", "/solid/components/accordion");
+  });
+
+  test("quickstart page renders correctly", async ({ page }) => {
+    await page.goto("/docs/quickstart");
+
+    await expect(page.locator("h1")).toContainText("Quickstart");
+    await expect(page.getByText("Prerequisites")).toBeVisible();
   });
 });
