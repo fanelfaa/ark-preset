@@ -3,6 +3,7 @@ import solidJs from "@astrojs/solid-js";
 import tailwindcss from "@tailwindcss/vite";
 import mdx from "@astrojs/mdx";
 import { rehypeCustomCodeBlock } from "./src/plugins/rehype-custom-code-block.mjs";
+import { unified } from "@astrojs/markdown-remark";
 
 import { demoCodePlugin } from "./src/plugins/demo-code.ts";
 
@@ -13,7 +14,9 @@ export default defineConfig({
     plugins: [tailwindcss(), demoCodePlugin()],
   },
   markdown: {
-    rehypePlugins: [rehypeCustomCodeBlock],
+    processor: unified({
+      rehypePlugins: [rehypeCustomCodeBlock],
+    }),
     shikiConfig: {
       theme: "github-dark",
     },
