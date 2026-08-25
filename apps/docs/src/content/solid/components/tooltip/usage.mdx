@@ -1,0 +1,63 @@
+
+import ComponentPreview from "../../../../components/ComponentPreview.astro";
+import TooltipArrowDemo from "@demos/tooltip-demo/TooltipArrowDemo.tsx";
+import TooltipArrowDemoCode from "@demos/tooltip-demo/TooltipArrowDemo.tsx?code";
+import TooltipManualArrowDemo from "@demos/tooltip-demo/TooltipManualArrowDemo.tsx";
+import TooltipManualArrowDemoCode from "@demos/tooltip-demo/TooltipManualArrowDemo.tsx?code";
+import TooltipControlledDemo from "@demos/tooltip-demo/TooltipControlledDemo.tsx";
+import TooltipControlledDemoCode from "@demos/tooltip-demo/TooltipControlledDemo.tsx?code";
+
+## Usage
+
+Import the components:
+
+```tsx
+import { Tooltip, TooltipTrigger, TooltipContent } from "~/components/tooltip";
+```
+
+Basic tooltip:
+
+```tsx
+<Tooltip>
+  <TooltipTrigger>Hover me</TooltipTrigger>
+  <TooltipContent>Tooltip content</TooltipContent>
+</Tooltip>
+```
+
+## With Arrow
+
+Add an arrow pointing to the trigger element.
+
+<ComponentPreview code={TooltipArrowDemoCode}>
+  <TooltipArrowDemo client:load />
+</ComponentPreview>
+
+## Advanced Usage
+
+When the composite `Tooltip` doesn't provide enough control, import the raw primitive parts via `TooltipBase`:
+
+```tsx
+import { TooltipBase } from "~/components/tooltip";
+```
+
+Or import directly from the base file:
+
+```tsx
+import { Tooltip } from "~/components/tooltip/tooltip.base";
+```
+
+### Manual Arrow Composition
+
+For custom arrow styling or positioning, compose the parts manually using `TooltipBase`:
+
+<ComponentPreview code={TooltipManualArrowDemoCode}>
+  <TooltipManualArrowDemo client:load />
+</ComponentPreview>
+
+### Controlled Open State
+
+Use `open` and `onOpenChange` to control the tooltip visibility externally:
+
+<ComponentPreview code={TooltipControlledDemoCode}>
+  <TooltipControlledDemo client:load />
+</ComponentPreview>

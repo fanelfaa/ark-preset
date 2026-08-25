@@ -1,0 +1,42 @@
+
+## Usage
+
+Import the component:
+
+```tsx
+import { ScrollArea } from "~/components/scroll-area";
+```
+
+Basic vertical scroll:
+
+```tsx
+<ScrollArea class="h-[200px] w-[350px]" orientation="vertical">
+  <div class="p-4">
+    <p>Long content here...</p>
+  </div>
+</ScrollArea>
+```
+
+Horizontal scroll:
+
+```tsx
+<ScrollArea class="w-[350px]" orientation="horizontal">
+  <div class="flex w-[800px] p-4">
+    <p>Wide content here...</p>
+  </div>
+</ScrollArea>
+```
+
+## Advanced Usage
+
+For full control over the scroll area structure, import the primitive parts via `ScrollAreaBase`:
+
+```tsx
+import { ScrollArea, ScrollAreaBase } from "~/components/scroll-area";
+
+// ScrollAreaBase provides direct access to parts:
+// ScrollAreaBase.Root, ScrollAreaBase.Viewport, ScrollAreaBase.Content,
+// ScrollAreaBase.Scrollbar, ScrollAreaBase.Thumb, ScrollAreaBase.Corner
+```
+
+See the [Manual](#manual) installation section for example usage of the primitive parts.

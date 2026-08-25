@@ -1,0 +1,60 @@
+
+
+## Usage
+
+Import the components:
+
+```tsx
+import { createToaster, Toaster } from "~/components/toast";
+```
+
+Basic toast:
+
+```tsx
+const toaster = createToaster({
+  placement: "bottom-end",
+  timeout: 5000,
+})
+
+<button onClick={() => toaster.create({ title: 'Hello', description: 'World' })}>
+  Show Toast
+</button>
+
+<Toaster toaster={toaster} />
+```
+
+With action:
+
+```tsx
+toaster.create({
+  title: "File deleted",
+  description: "Your file has been removed.",
+  action: { label: "Undo", onClick: () => console.log("undo") },
+});
+```
+
+## Variants
+
+Use the `type` property to change the visual style.
+
+```tsx
+toaster.create({ title: "Default toast", description: "This is a default message" });
+toaster.create({ title: "Info toast", type: "info" });
+toaster.create({ title: "Success toast", type: "success" });
+toaster.create({ title: "Warning toast", type: "warning" });
+toaster.create({ title: "Error toast", type: "error" });
+```
+
+## Advanced Usage
+
+When you need more control, import raw primitive parts directly from the base file:
+
+```tsx
+import { Toast } from "~/components/toast/toast.base";
+```
+
+Or import `ToastBase` (the raw parts namespace) from the composite entry point:
+
+```tsx
+import { ToastBase } from "~/components/toast";
+```

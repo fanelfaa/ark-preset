@@ -1,0 +1,34 @@
+
+## Usage
+
+Import the components:
+
+```tsx
+import {
+  Progress,
+  ProgressLabel,
+  ProgressTrack,
+  ProgressValueText,
+} from "~/components/progress";
+```
+
+Basic usage:
+
+```tsx
+<Progress value={65} class="space-y-2">
+  <ProgressLabel>Loading</ProgressLabel>
+  <ProgressTrack />
+  <ProgressValueText />
+</Progress>
+```
+
+## Indeterminate
+
+Omit the `value` prop to render an indeterminate progress bar:
+
+```tsx
+<Progress>
+  <ProgressLabel>Loading...</ProgressLabel>
+  <ProgressTrack />
+</Progress>
+```

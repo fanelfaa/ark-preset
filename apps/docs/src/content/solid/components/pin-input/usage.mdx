@@ -1,0 +1,48 @@
+
+import ComponentPreview from '../../../../components/ComponentPreview.astro';
+import PinInputRootProviderDemo from '../../demos/pin-input-demo/PinInputRootProviderDemo.tsx';
+import PinInputRootProviderDemoCode from '../../demos/pin-input-demo/PinInputRootProviderDemo.tsx?code';
+
+## Usage
+
+Import the components:
+
+```tsx
+import { PinInput, PinInputControl, PinInputInput, PinInputLabel } from "~/components/pin-input";
+import { Index } from "solid-js";
+```
+
+Basic:
+
+```tsx
+<PinInput>
+  <PinInputLabel>Code</PinInputLabel>
+  <PinInputControl>
+    <Index each={[0, 1, 2, 3]}>{(id) => <PinInputInput index={id()} />}</Index>
+  </PinInputControl>
+</PinInput>
+```
+
+Masked (for sensitive codes):
+
+```tsx
+<PinInput placeholder="\u2022" mask>
+  <PinInputLabel>PIN</PinInputLabel>
+  <PinInputControl>
+    <Index each={[0, 1, 2, 3]}>{(id) => <PinInputInput index={id()} />}</Index>
+  </PinInputControl>
+</PinInput>
+```
+
+## Root Provider
+
+Use `PinInputRootProvider` when you need to control the pin input state externally.
+
+<ComponentPreview code={PinInputRootProviderDemoCode}>
+  <PinInputRootProviderDemo  client:load />
+</ComponentPreview>
+
+The key difference:
+
+- **`PinInput` (Root)** — manages its own state internally. Use for simple, self-contained pin inputs.
+- **`PinInputRootProvider`** — accepts a pre-created pin input context via `usePinInput`. Use when you need to read or control the pin input state from outside the component tree.

@@ -32,7 +32,7 @@ const __dirname = dirname(__filename);
 export const PROJECT_ROOT = resolve(__dirname, "../../../..");
 export const CORE_RECIPES_DIR = resolve(PROJECT_ROOT, "packages/core/src/recipes");
 export const SOLID_COMPONENTS_DIR = resolve(PROJECT_ROOT, "packages/solid/src");
-export const DOCS_DIR = resolve(PROJECT_ROOT, "apps/docs/src/content/docs");
+export const DOCS_DIR = resolve(PROJECT_ROOT, "apps/docs/src/content/solid/components");
 
 // ── Helpers ────────────────────────────────────────────────────────────
 
@@ -188,7 +188,11 @@ export function generateInstallationContent(component: string): string | null {
     sections.push(`Create the component file at \`${file.label}\`:\n`);
     const ext = extname(file.label);
     sections.push("```" + ext.slice(1));
-    sections.push(file.content.trimEnd());
+    sections.push(
+      file.content
+        .replace(/from\s+["']@ark-preset\/core["']/g, `from "../recipes/${component}"`)
+        .trimEnd(),
+    );
     sections.push("```\n");
   } else if (componentFiles.length > 1) {
     // Multi-file: detect the .base.tsx + index.tsx pattern for terser headings
@@ -208,7 +212,11 @@ export function generateInstallationContent(component: string): string | null {
       }
       const ext = extname(file.label);
       sections.push("```" + ext.slice(1));
-      sections.push(file.content.trimEnd());
+      sections.push(
+        file.content
+          .replace(/from\s+["']@ark-preset\/core["']/g, `from "../recipes/${component}"`)
+          .trimEnd(),
+      );
       sections.push("```\n");
     }
   }
@@ -247,6 +255,5 @@ export function discoverComponents(): string[] {
   return readdirSync(DOCS_DIR, { withFileTypes: true })
     .filter((e) => e.isDirectory())
     .map((e) => e.name)
-    .filter((name) => name !== "node_modules" && name !== ".git")
     .filter((name) => existsSync(resolve(CORE_RECIPES_DIR, `${name}.ts`)));
 }

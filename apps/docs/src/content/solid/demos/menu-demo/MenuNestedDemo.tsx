@@ -1,0 +1,33 @@
+import {
+  MenuTrigger,
+  MenuContent,
+  MenuTriggerItem,
+  MenuItem,
+  MenuSeparator,
+  NestedMenuContent,
+  Menu,
+} from "@ark-preset/solid";
+
+export default function MenuNestedDemo() {
+  return (
+    <div>
+      <Menu>
+        <MenuTrigger>Actions</MenuTrigger>
+        <MenuContent>
+          <MenuItem value="new">New...</MenuItem>
+          <MenuItem value="edit">Edit</MenuItem>
+          <Menu>
+            <MenuTriggerItem>Share</MenuTriggerItem>
+            <NestedMenuContent>
+              <MenuItem value="twitter">Twitter</MenuItem>
+              <MenuItem value="facebook">Facebook</MenuItem>
+              <MenuItem value="email">Email</MenuItem>
+            </NestedMenuContent>
+          </Menu>
+          <MenuSeparator />
+          <MenuItem value="delete">Delete</MenuItem>
+        </MenuContent>
+      </Menu>
+    </div>
+  );
+}

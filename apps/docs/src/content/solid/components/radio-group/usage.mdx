@@ -1,0 +1,80 @@
+
+import ComponentPreview from '../../../../components/ComponentPreview.astro';
+import RadioGroupControlledDemo from '../../demos/radio-group-demo/RadioGroupControlledDemo.tsx';
+import RadioGroupControlledDemoCode from '../../demos/radio-group-demo/RadioGroupControlledDemo.tsx?code';
+import RadioGroupDisabledDemo from '../../demos/radio-group-demo/RadioGroupDisabledDemo.tsx';
+import RadioGroupDisabledDemoCode from '../../demos/radio-group-demo/RadioGroupDisabledDemo.tsx?code';
+import RadioGroupRootProviderDemo from '../../demos/radio-group-demo/RadioGroupRootProviderDemo.tsx';
+import RadioGroupRootProviderDemoCode from '../../demos/radio-group-demo/RadioGroupRootProviderDemo.tsx?code';
+
+## Usage
+
+Import the components:
+
+```tsx
+import { RadioGroup, RadioGroupItem } from "~/components/radio-group";
+```
+
+Basic usage:
+
+```tsx
+<RadioGroup defaultValue="1" orientation="horizontal">
+  <RadioGroupItem value="1">Credit Card</RadioGroupItem>
+  <RadioGroupItem value="2">Paypal</RadioGroupItem>
+  <RadioGroupItem value="3">Debit</RadioGroupItem>
+</RadioGroup>
+```
+
+## With Label
+
+Add a label to describe the radio group.
+
+```tsx
+<RadioGroup defaultValue="1" orientation="horizontal">
+  <RadioGroupItem value="1">Credit Card</RadioGroupItem>
+  <RadioGroupItem value="2">Paypal</RadioGroupItem>
+</RadioGroup>
+```
+
+## Advanced Usage
+
+When the composite `RadioGroup` doesn't provide enough control, import the raw primitive parts from the base file directly:
+
+```tsx
+import { RadioGroup } from "~/components/radio-group/radio-group.base";
+```
+
+Or import `RadioGroupBase` (the raw parts namespace) from the composite entry point:
+
+```tsx
+import { RadioGroupBase } from "~/components/radio-group";
+```
+
+### Controlled Value
+
+Use `value` and `onValueChange` to control the selection state externally:
+
+<ComponentPreview code={RadioGroupControlledDemoCode}>
+  <RadioGroupControlledDemo  client:load />
+</ComponentPreview>
+
+### Disabled Item
+
+Individual items can be disabled using the `disabled` prop:
+
+<ComponentPreview code={RadioGroupDisabledDemoCode}>
+  <RadioGroupDisabledDemo  client:load />
+</ComponentPreview>
+
+### Root Provider
+
+Use `RadioGroupBase.RootProvider` when you need to access the radio group state outside of the component tree. This pattern uses the `useRadioGroup` hook from Ark UI to create a shared context that both the radio group and external elements can reference.
+
+<ComponentPreview code={RadioGroupRootProviderDemoCode}>
+  <RadioGroupRootProviderDemo  client:load />
+</ComponentPreview>
+
+The key difference:
+
+- **`RadioGroup` (Root)** — manages its own state internally. Use for simple, self-contained radio groups.
+- **`RadioGroupBase.RootProvider`** — accepts a pre-created radio group context via `useRadioGroup`. Use when you need to read or control the radio group state from outside the component tree.

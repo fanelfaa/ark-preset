@@ -6,8 +6,10 @@
   "scripts": {
     "build": "pnpm -r run build",
     "dev": "pnpm -r run dev",
+    "docs:dev": "pnpm --filter docs dev",
+    "docs:build": "pnpm --filter docs build",
     "typecheck": "pnpm -r run typecheck",
-    "netlify:build": "pnpm --filter @ark-preset/core build && pnpm --filter @ark-preset/solid build && pnpm --filter docs generate-routes && pnpm --filter docs build",
+    "netlify:build": "pnpm --filter @ark-preset/core build && pnpm --filter @ark-preset/solid build && pnpm --filter docs build",
     "postinstall": "lefthook install",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",

@@ -1,6 +1,6 @@
 import { defineConfig, devices } from "@playwright/test";
 
-const PORT = 4173;
+const PORT = 4321;
 const BASE_URL = `http://localhost:${PORT}`;
 
 export default defineConfig({
@@ -26,10 +26,9 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: "pnpm preview",
-    url: BASE_URL,
+    command: "npm run dev -- --port 4321",
+    port: 4321,
     reuseExistingServer: !process.env.CI,
-    timeout: 120_000,
-    cwd: "..",
+    timeout: 120 * 1000,
   },
 });

@@ -1,0 +1,31 @@
+## Usage
+
+Import the component:
+
+```tsx
+import { Input } from "~/components/input";
+```
+
+Basic input:
+
+```tsx
+<Input placeholder="Enter text..." />
+```
+
+With label:
+
+```tsx
+<Input label="Username" placeholder="Enter username" />
+```
+
+With description:
+
+```tsx
+<Input label="Email" description="We'll never share your email." placeholder="email@example.com" />
+```
+
+With error state:
+
+```tsx
+<Input label="Password" error="Password is required" type="password" />
+```

@@ -1,5 +1,9 @@
 {
   "recommendations": [
-    "typescriptteam.native-preview"
+    "typescriptteam.native-preview",
+    "oxc.oxc-vscode",
+    "bradlc.vscode-tailwindcss",
+    "unifiedjs.vscode-mdx",
+    "astro-build.astro-vscode"
   ]
 }

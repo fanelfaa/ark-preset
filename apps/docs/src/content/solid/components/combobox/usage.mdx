@@ -1,0 +1,114 @@
+import ComponentPreview from '../../../../components/ComponentPreview.astro';
+import ComboboxRootProviderDemo from '../../demos/combobox-demo/ComboboxRootProviderDemo.tsx';
+import ComboboxRootProviderDemoCode from '../../demos/combobox-demo/ComboboxRootProviderDemo.tsx?code';
+
+## Usage
+
+Import the components:
+
+```tsx
+import { useFilter } from "@ark-ui/solid";
+import { useListCollection } from "@ark-ui/solid/combobox";
+import { Index } from "solid-js";
+import { Combobox, ComboboxLabel, ComboboxInputTrigger, ComboboxContent, ComboboxItem } from "~/components/combobox";
+```
+
+Basic usage with client-side filtering:
+
+```tsx
+const filterFn = useFilter({ sensitivity: "base" });
+const { collection, filter } = useListCollection({
+  initialItems: [
+    { label: "React", value: "react" },
+    { label: "Solid.js", value: "solid" },
+  ],
+  filter: filterFn().contains,
+});
+
+<Combobox
+  collection={collection()}
+  onInputValueChange={(details) => filter(details.inputValue)}
+>
+  <ComboboxLabel>Framework</ComboboxLabel>
+  <ComboboxInputTrigger placeholder="Search..." />
+  <ComboboxContent>
+    <Index each={collection().items}>
+      {(item) => <ComboboxItem item={item()}>{item().label}</ComboboxItem>}
+    </Index>
+  </ComboboxContent>
+</Combobox>
+```
+
+### With Label
+
+Add a label to describe the combobox field.
+
+```tsx
+<Combobox
+  collection={collection()}
+  onInputValueChange={(details) => filter(details.inputValue)}
+>
+  <ComboboxLabel>Choose your framework</ComboboxLabel>
+  <ComboboxInputTrigger placeholder="Search..." />
+  <ComboboxContent>
+    <Index each={collection().items}>
+      {(item) => <ComboboxItem item={item()}>{item().label}</ComboboxItem>}
+    </Index>
+  </ComboboxContent>
+</Combobox>
+```
+
+### Root Provider
+
+Use `ComboboxRootProvider` when you need to access the combobox state outside of the component tree. This pattern uses the `useCombobox` hook from Ark UI to create a shared context that both the combobox and external elements can reference.
+
+<ComponentPreview code={ComboboxRootProviderDemoCode}>
+  <ComboboxRootProviderDemo  client:load />
+</ComponentPreview>
+
+The key difference:
+
+- **`Combobox`** — manages its own state internally. Use for simple, self-contained comboboxes.
+- **`ComboboxRootProvider`** — accepts a pre-created combobox context via `useCombobox`. Use when you need to read or control the combobox state from outside the component tree.
+
+### Error State
+
+Use the `error` prop on `ComboboxBase.Root` to show an error state. The structured `Combobox` component delegates its root styling to `ComboboxBase.Root`, so the `error` prop requires using the base component directly:
+
+```tsx
+<ComboboxBase.Root
+  collection={collection()}
+  onInputValueChange={(details) => filter(details.inputValue)}
+  error
+>
+  <ComboboxLabel>Framework</ComboboxLabel>
+  <ComboboxInputTrigger placeholder="Search..." />
+  <ComboboxContent>
+    <Index each={collection().items}>
+      {(item) => <ComboboxItem item={item()}>{item().label}</ComboboxItem>}
+    </Index>
+  </ComboboxContent>
+</ComboboxBase.Root>
+```
+
+### Composite Exports
+
+The `ComboboxInputTrigger`, `ComboboxContent`, and `ComboboxItem` components are composite exports from the barrel entry point that include inline SVG icons and Portal. Import them alongside `Combobox`:
+
+```tsx
+import { Combobox, ComboboxLabel, ComboboxInputTrigger, ComboboxContent, ComboboxItem } from "~/components/combobox";
+```
+
+### Advanced Usage
+
+When you need more control, import raw primitive parts directly from the base file:
+
+```tsx
+import { Combobox } from "~/components/combobox/combobox.base";
+```
+
+Or import `ComboboxBase` (the raw parts namespace) from the barrel entry point:
+
+```tsx
+import { ComboboxBase } from "~/components/combobox";
+```

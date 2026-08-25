@@ -52,3 +52,42 @@ body {
     animation: none;
   }
 }
+
+/* Custom Code Block FOUC prevention */
+custom-code-block {
+  display: block;
+  position: relative;
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  margin: 1rem 0;
+  overflow: hidden;
+}
+
+custom-code-block pre {
+  margin: 0;
+  padding: 1rem;
+  max-height: 200px;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
+  transition:
+    max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    padding-bottom 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+custom-code-block.expanded pre {
+  /* max-height is now handled explicitly via inline styles in JS for animation */
+  overflow: hidden;
+}
+
+.custom-code-block-preview custom-code-block {
+  border: none;
+  margin: 0;
+  border-radius: 0;
+}
+
+.prose table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+}

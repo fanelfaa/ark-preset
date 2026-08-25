@@ -1,0 +1,166 @@
+## Installation
+
+### CLI
+
+Run the following command to add the component to your project:
+
+```bash
+npx @ark-preset/cli@latest add carousel
+```
+
+### Manual
+
+Create the recipe file at `src/components/recipes/carousel.ts`:
+
+```ts
+import { tv } from "tailwind-variants";
+
+export const carouselVariants = tv({
+  slots: {
+    root: "flex flex-col relative w-full",
+    control: "flex items-center justify-between gap-2",
+    itemGroup: "flex flex-1 overflow-hidden rounded-lg",
+    item: "flex-0 flex-shrink-0 min-w-0",
+    prevTrigger:
+      "inline-flex items-center justify-center size-9 cursor-pointer rounded-md border border-input bg-background transition duration-300 motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0.5 active:duration-150 hover:bg-accent disabled:pointer-events-none disabled:opacity-50",
+    nextTrigger:
+      "inline-flex items-center justify-center size-9 cursor-pointer rounded-md border border-input bg-background transition duration-300 motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0.5 active:duration-150 hover:bg-accent disabled:pointer-events-none disabled:opacity-50",
+    indicatorGroup: "flex justify-center gap-2",
+    indicator:
+      "size-2.5 rounded-full bg-muted data-[current]:bg-foreground cursor-pointer transition-colors",
+    autoplayTrigger:
+      "inline-flex items-center justify-center size-8 rounded-full bg-background/80 transition duration-300 motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0.5 active:duration-150 hover:bg-accent",
+    progressText: "text-sm font-medium font-variant-numeric tabular-nums",
+  },
+});
+
+export type CarouselVariants = ReturnType<typeof carouselVariants>;
+```
+
+Create the component directory and files.
+
+`src/components/carousel/carousel.base.tsx`:
+
+```tsx
+import { Carousel as ArkCarousel } from "@ark-ui/solid/carousel";
+import { splitProps, type Component } from "solid-js";
+import { carouselVariants } from "../recipes/carousel";
+
+const styles = carouselVariants();
+
+const Root: Component<ArkCarousel.RootProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkCarousel.Root class={styles.root({ class: local.class })} {...others} />;
+};
+
+const RootProvider: Component<ArkCarousel.RootProviderProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkCarousel.RootProvider class={styles.root({ class: local.class })} {...others} />;
+};
+
+const Control: Component<ArkCarousel.ControlProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkCarousel.Control class={styles.control({ class: local.class })} {...others} />;
+};
+
+const ItemGroup: Component<ArkCarousel.ItemGroupProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkCarousel.ItemGroup class={styles.itemGroup({ class: local.class })} {...others} />;
+};
+
+const Item: Component<ArkCarousel.ItemProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkCarousel.Item class={styles.item({ class: local.class })} {...others} />;
+};
+
+const PrevTrigger: Component<ArkCarousel.PrevTriggerProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkCarousel.PrevTrigger class={styles.prevTrigger({ class: local.class })} {...others} />;
+};
+
+const NextTrigger: Component<ArkCarousel.NextTriggerProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkCarousel.NextTrigger class={styles.nextTrigger({ class: local.class })} {...others} />;
+};
+
+const IndicatorGroup: Component<ArkCarousel.IndicatorGroupProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return (
+    <ArkCarousel.IndicatorGroup class={styles.indicatorGroup({ class: local.class })} {...others} />
+  );
+};
+
+const Indicator: Component<ArkCarousel.IndicatorProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return <ArkCarousel.Indicator class={styles.indicator({ class: local.class })} {...others} />;
+};
+
+const AutoplayTrigger: Component<ArkCarousel.AutoplayTriggerProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return (
+    <ArkCarousel.AutoplayTrigger
+      class={styles.autoplayTrigger({ class: local.class })}
+      {...others}
+    />
+  );
+};
+
+const ProgressText: Component<ArkCarousel.ProgressTextProps> = (props) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return (
+    <ArkCarousel.ProgressText class={styles.progressText({ class: local.class })} {...others} />
+  );
+};
+
+const AutoplayIndicator = ArkCarousel.AutoplayIndicator;
+
+export const Carousel = {
+  Root,
+  RootProvider,
+  Control,
+  ItemGroup,
+  Item,
+  PrevTrigger,
+  NextTrigger,
+  IndicatorGroup,
+  Indicator,
+  AutoplayTrigger,
+  ProgressText,
+  AutoplayIndicator,
+};
+```
+
+`src/components/carousel/index.tsx`:
+
+```tsx
+import { Carousel as CarouselBase } from "./carousel.base";
+
+const Carousel = CarouselBase.Root;
+const CarouselControl = CarouselBase.Control;
+const CarouselItemGroup = CarouselBase.ItemGroup;
+const CarouselItem = CarouselBase.Item;
+const CarouselPrevTrigger = CarouselBase.PrevTrigger;
+const CarouselNextTrigger = CarouselBase.NextTrigger;
+const CarouselIndicatorGroup = CarouselBase.IndicatorGroup;
+const CarouselIndicator = CarouselBase.Indicator;
+const CarouselAutoplayTrigger = CarouselBase.AutoplayTrigger;
+const CarouselProgressText = CarouselBase.ProgressText;
+
+export {
+  Carousel,
+  CarouselControl,
+  CarouselItemGroup,
+  CarouselItem,
+  CarouselPrevTrigger,
+  CarouselNextTrigger,
+  CarouselIndicatorGroup,
+  CarouselIndicator,
+  CarouselAutoplayTrigger,
+  CarouselProgressText,
+  CarouselBase,
+};
+
+export { carouselVariants, type CarouselVariants } from "../recipes/carousel";
+```
+
+> **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.

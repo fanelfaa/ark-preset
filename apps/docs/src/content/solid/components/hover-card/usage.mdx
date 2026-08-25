@@ -1,0 +1,84 @@
+import ComponentPreview from "../../../../components/ComponentPreview.astro";
+import HoverCardControlledDemo from "@demos/hover-card-demo/HoverCardControlledDemo.tsx";
+import HoverCardControlledDemoCode from "@demos/hover-card-demo/HoverCardControlledDemo.tsx?code";
+import HoverCardDelayDemo from "@demos/hover-card-demo/HoverCardDelayDemo.tsx";
+import HoverCardDelayDemoCode from "@demos/hover-card-demo/HoverCardDelayDemo.tsx?code";
+import HoverCardPositioningDemo from "@demos/hover-card-demo/HoverCardPositioningDemo.tsx";
+import HoverCardPositioningDemoCode from "@demos/hover-card-demo/HoverCardPositioningDemo.tsx?code";
+import HoverCardRootProviderDemo from "@demos/hover-card-demo/HoverCardRootProviderDemo.tsx";
+import HoverCardRootProviderDemoCode from "@demos/hover-card-demo/HoverCardRootProviderDemo.tsx?code";
+import HoverCardArrowDemo from "@demos/hover-card-demo/HoverCardArrowDemo.tsx";
+import HoverCardArrowDemoCode from "@demos/hover-card-demo/HoverCardArrowDemo.tsx?code";
+
+## Usage
+
+Import the components:
+
+```tsx
+import { HoverCard, HoverCardTrigger, HoverCardContent } from "~/components/hover-card";
+```
+
+Basic hover card:
+
+```tsx
+<HoverCard>
+  <HoverCardTrigger>Hover me</HoverCardTrigger>
+  <HoverCardContent useArrow>
+    <div>Content displayed on hover</div>
+  </HoverCardContent>
+</HoverCard>
+```
+
+### Controlled Open State
+
+<ComponentPreview code={HoverCardControlledDemoCode}>
+  <HoverCardControlledDemo client:load />
+</ComponentPreview>
+
+Use `open` and `onOpenChange` to control the hover card visibility externally:
+
+### Custom Delay
+
+<ComponentPreview code={HoverCardDelayDemoCode}>
+  <HoverCardDelayDemo client:load />
+</ComponentPreview>
+
+Adjust the hover open and close delays:
+
+### Custom Positioning
+
+<ComponentPreview code={HoverCardPositioningDemoCode}>
+  <HoverCardPositioningDemo client:load />
+</ComponentPreview>
+
+Position the hover card at different sides:
+
+### Advanced Usage
+
+When the composite `HoverCard` does not provide enough control, import the raw primitive parts via `HoverCardBase`:
+
+```tsx
+import { HoverCardBase } from "~/components/hover-card";
+```
+
+Or import directly from the base file:
+
+```tsx
+import { HoverCard } from "~/components/hover-card/hover-card.base";
+```
+
+#### RootProvider Pattern
+
+<ComponentPreview code={HoverCardRootProviderDemoCode}>
+  <HoverCardRootProviderDemo client:load />
+</ComponentPreview>
+
+For machine-controlled usage with `useHoverCard`:
+
+#### Custom Arrow
+
+<ComponentPreview code={HoverCardArrowDemoCode}>
+  <HoverCardArrowDemo client:load />
+</ComponentPreview>
+
+For custom arrow styling or positioning, compose the parts manually using `HoverCardBase`:

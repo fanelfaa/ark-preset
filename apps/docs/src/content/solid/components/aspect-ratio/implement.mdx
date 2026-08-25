@@ -1,0 +1,56 @@
+## Installation
+
+### CLI
+
+Run the following command to add the component to your project:
+
+```bash
+npx @ark-preset/cli@latest add aspect-ratio
+```
+
+### Manual
+
+Create the recipe file at `src/components/recipes/aspect-ratio.ts`:
+
+```ts
+import { tv, type VariantProps } from "tailwind-variants";
+
+export const aspectRatioVariants = tv({
+  base: "relative w-full",
+});
+
+export type AspectRatioVariants = VariantProps<typeof aspectRatioVariants>;
+```
+
+Create the component file at `src/components/aspect-ratio/index.tsx`:
+
+```tsx
+import { splitProps, type Component, children } from "solid-js";
+import { aspectRatioVariants } from "../recipes/aspect-ratio";
+import { ark, type HTMLArkProps } from "@ark-ui/solid/factory";
+
+type AspectRatioProps = HTMLArkProps<"div"> & {
+  ratio?: number;
+};
+
+const AspectRatio: Component<AspectRatioProps> = (props) => {
+  const [local, others] = splitProps(props, ["class", "ratio", "children"]);
+  const resolvedChildren = children(() => local.children);
+
+  return (
+    <ark.div
+      class={aspectRatioVariants({ class: local.class })}
+      style={{ "padding-bottom": `${100 / (local.ratio ?? 16 / 9)}%` }}
+      {...others}
+    >
+      <ark.div class="absolute inset-0" style={{ position: "absolute", inset: 0 }}>
+        {resolvedChildren()}
+      </ark.div>
+    </ark.div>
+  );
+};
+
+export { AspectRatio, aspectRatioVariants };
+```
+
+> **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--background`, `--foreground`, `--ring`, `--border`, etc.) or override the utility classes to match your design system.

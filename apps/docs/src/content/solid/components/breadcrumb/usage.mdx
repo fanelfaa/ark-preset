@@ -1,0 +1,127 @@
+
+## Usage
+
+Import the components:
+
+```tsx
+import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+  BreadcrumbEllipsis,
+} from "@ark-preset/solid";
+```
+
+Basic breadcrumb:
+
+```tsx
+<Breadcrumb>
+  <BreadcrumbList>
+    <BreadcrumbItem>
+      <BreadcrumbLink href="/">Home</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+    </BreadcrumbItem>
+  </BreadcrumbList>
+</Breadcrumb>
+```
+
+With link and current page:
+
+```tsx
+<Breadcrumb>
+  <BreadcrumbList>
+    <BreadcrumbItem>
+      <BreadcrumbLink href="/">Home</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbLink href="/components">Components</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+    </BreadcrumbItem>
+  </BreadcrumbList>
+</Breadcrumb>
+```
+
+Long path with ellipsis:
+
+```tsx
+import {
+  Breadcrumb,
+  BreadcrumbEllipsis,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "~/components/breadcrumb"
+import { Menu, MenuBase, MenuContent, MenuItem } from "~/components/menu"
+
+<Breadcrumb>
+  <BreadcrumbList>
+    <BreadcrumbItem>
+      <BreadcrumbLink href="/">Home</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <Menu>
+        <MenuBase.Trigger class="flex size-8 items-center justify-center rounded-lg hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+          <BreadcrumbEllipsis />
+          <span class="sr-only">Toggle menu</span>
+        </MenuBase.Trigger>
+        <MenuContent>
+          <MenuItem value="docs">Documentation</MenuItem>
+          <MenuItem value="themes">Themes</MenuItem>
+          <MenuItem value="github">GitHub</MenuItem>
+        </MenuContent>
+      </Menu>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbLink href="/components">Components</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+    </BreadcrumbItem>
+  </BreadcrumbList>
+</Breadcrumb>
+```
+
+Custom separator:
+
+```tsx
+<Breadcrumb>
+  <BreadcrumbList>
+    <BreadcrumbItem>
+      <BreadcrumbLink href="/">Home</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator>/</BreadcrumbSeparator>
+    <BreadcrumbItem>
+      <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+    </BreadcrumbItem>
+  </BreadcrumbList>
+</Breadcrumb>
+```
+
+### Anatomy
+
+A breadcrumb is composed of the following parts:
+
+| Part | Element | Description |
+|------|---------|-------------|
+| `Breadcrumb` | `nav` | The root navigation container with `aria-label="breadcrumb"`. |
+| `BreadcrumbList` | `ol` | The ordered list of breadcrumb items. |
+| `BreadcrumbItem` | `li` | An individual breadcrumb item wrapper. |
+| `BreadcrumbLink` | `a` | A clickable breadcrumb link. |
+| `BreadcrumbPage` | `span` | The current page indicator (not a link). |
+| `BreadcrumbSeparator` | `li` | A separator between breadcrumb items. Default: chevron right icon. |
+| `BreadcrumbEllipsis` | `span` | A collapsed items indicator. Default: ellipsis icon. |

@@ -1,0 +1,83 @@
+
+import ComponentPreview from '../../../../components/ComponentPreview.astro';
+import SegmentGroupControlledDemo from '../../demos/segment-group-demo/SegmentGroupControlledDemo.tsx';
+import SegmentGroupControlledDemoCode from '../../demos/segment-group-demo/SegmentGroupControlledDemo.tsx?code';
+import SegmentGroupDisabledDemo from '../../demos/segment-group-demo/SegmentGroupDisabledDemo.tsx';
+import SegmentGroupDisabledDemoCode from '../../demos/segment-group-demo/SegmentGroupDisabledDemo.tsx?code';
+import SegmentGroupOutlineDemo from '../../demos/segment-group-demo/SegmentGroupOutlineDemo.tsx';
+import SegmentGroupOutlineDemoCode from '../../demos/segment-group-demo/SegmentGroupOutlineDemo.tsx?code';
+import SegmentGroupRootProviderDemo from '../../demos/segment-group-demo/SegmentGroupRootProviderDemo.tsx';
+import SegmentGroupRootProviderDemoCode from '../../demos/segment-group-demo/SegmentGroupRootProviderDemo.tsx?code';
+
+## Usage
+
+Import the component and use it inline:
+
+```tsx
+import { SegmentGroup, SegmentGroupItem } from "~/components/segment-group";
+```
+
+Basic horizontal segment group:
+
+```tsx
+<SegmentGroup defaultValue="React">
+  <SegmentGroupItem value="React">React</SegmentGroupItem>
+  <SegmentGroupItem value="Solid">Solid</SegmentGroupItem>
+  <SegmentGroupItem value="Vue">Vue</SegmentGroupItem>
+</SegmentGroup>
+```
+
+Vertical orientation:
+
+```tsx
+<SegmentGroup defaultValue="Svelte" orientation="vertical">
+  <SegmentGroupItem value="Svelte">Svelte</SegmentGroupItem>
+  <SegmentGroupItem value="Vue">Vue</SegmentGroupItem>
+</SegmentGroup>
+```
+
+## Advanced Usage
+
+When the composite `SegmentGroup` doesn't provide enough control, import the raw primitive parts from the base file directly:
+
+```tsx
+import { SegmentGroup, useSegmentGroupVariant } from "~/components/segment-group/segment-group.base";
+```
+
+Or import `SegmentGroupBase` (the raw parts namespace) from the composite entry point:
+
+```tsx
+import { SegmentGroupBase } from "~/components/segment-group";
+```
+
+### Controlled Value
+
+Use `value` and `onValueChange` to control the selection state externally:
+
+<ComponentPreview code={SegmentGroupControlledDemoCode}>
+  <SegmentGroupControlledDemo  client:load />
+</ComponentPreview>
+
+### Disabled Item
+
+Individual items can be disabled using the `disabled` prop:
+
+<ComponentPreview code={SegmentGroupDisabledDemoCode}>
+  <SegmentGroupDisabledDemo  client:load />
+</ComponentPreview>
+
+### Outline Variant
+
+Use `{`variant="outline"`}` for a bordered style:
+
+<ComponentPreview code={SegmentGroupOutlineDemoCode}>
+  <SegmentGroupOutlineDemo  client:load />
+</ComponentPreview>
+
+### RootProvider Pattern
+
+For full control over the segment group machine, use `useSegmentGroup` with `SegmentGroup.RootProvider`. This allows reading the internal state (e.g., selected value) outside the root:
+
+<ComponentPreview code={SegmentGroupRootProviderDemoCode}>
+  <SegmentGroupRootProviderDemo  client:load />
+</ComponentPreview>

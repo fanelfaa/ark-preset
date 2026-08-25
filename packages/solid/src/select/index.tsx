@@ -148,15 +148,13 @@ const SelectTrigger: Component<SelectTriggerProps> = (props) => {
     <SelectBase.Control class={local.class}>
       <SelectBase.Trigger {...others}>
         <SelectBase.ValueText placeholder={local.placeholder ?? "Select..."} />
-        <div class="flex items-center gap-1">
-          <SelectBase.ClearTrigger>
-            <XIcon />
-          </SelectBase.ClearTrigger>
-          <SelectBase.Indicator>
-            <ChevronDownIcon />
-          </SelectBase.Indicator>
-        </div>
+        <SelectBase.Indicator>
+          <ChevronDownIcon />
+        </SelectBase.Indicator>
       </SelectBase.Trigger>
+      <SelectBase.ClearTrigger class="absolute right-13">
+        <XIcon />
+      </SelectBase.ClearTrigger>
     </SelectBase.Control>
   );
 };

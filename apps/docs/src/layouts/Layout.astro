@@ -1,0 +1,40 @@
+---
+import { DocsLayout } from '../components/DocsLayout';
+import '../styles.css';
+
+interface Props {
+  currentFramework?: string;
+  isHome?: boolean;
+}
+
+const { currentFramework = 'solid', isHome = false } = Astro.props;
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script is:inline>
+      (function () {
+        if (typeof document === "undefined") return;
+        try {
+          var theme = localStorage.getItem("ui-theme");
+          if (theme === "dark") {
+            document.documentElement.classList.add("dark");
+          } else if (theme === "light") {
+            document.documentElement.classList.remove("dark");
+          } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            document.documentElement.classList.add("dark");
+          }
+        } catch {}
+      })();
+    </script>
+    <script>
+      import "../components/custom-code-block";
+    </script>
+  </head>
+  <body>
+    <DocsLayout client:load currentFramework={currentFramework} isHome={isHome} currentPath={Astro.url.pathname}>
+      <slot />
+    </DocsLayout>
+  </body>
+</html>

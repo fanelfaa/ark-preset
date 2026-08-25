@@ -1,0 +1,62 @@
+
+import ComponentPreview from '../../../../components/ComponentPreview.astro';
+import ToggleGroupSizesDemo from '../../demos/toggle-group-demo/ToggleGroupSizesDemo.tsx';
+import ToggleGroupSizesDemoCode from '../../demos/toggle-group-demo/ToggleGroupSizesDemo.tsx?code';
+import ToggleGroupRootProviderDemo from '../../demos/toggle-group-demo/ToggleGroupRootProviderDemo.tsx';
+import ToggleGroupRootProviderDemoCode from '../../demos/toggle-group-demo/ToggleGroupRootProviderDemo.tsx?code';
+
+## Sizes
+
+Use the `size` prop to change the toggle group item size.
+
+<ComponentPreview code={ToggleGroupSizesDemoCode}>
+  <ToggleGroupSizesDemo  client:load />
+</ComponentPreview>
+
+## Usage
+
+Import the component:
+
+```tsx
+import { ToggleGroup } from "~/components/toggle-group";
+```
+
+Single selection:
+
+```tsx
+<ToggleGroup defaultValue={["left"]}>
+  <ToggleGroupItem value="left"><AlignLeftIcon /></ToggleGroupItem>
+  <ToggleGroupItem value="center"><AlignCenterIcon /></ToggleGroupItem>
+  <ToggleGroupItem value="right"><AlignRightIcon /></ToggleGroupItem>
+</ToggleGroup>
+```
+
+Multiple selection:
+
+```tsx
+<ToggleGroup defaultValue={["bold"]} multiple>
+  <ToggleGroupItem value="bold"><BoldIcon /></ToggleGroupItem>
+  <ToggleGroupItem value="italic"><ItalicIcon /></ToggleGroupItem>
+</ToggleGroup>
+```
+
+## Root Provider
+
+Use `ToggleGroupBase.RootProvider` when you need to control the toggle group state externally.
+
+<ComponentPreview code={ToggleGroupRootProviderDemoCode}>
+  <ToggleGroupRootProviderDemo  client:load />
+</ComponentPreview>
+
+```tsx
+import { useToggleGroup } from "@ark-ui/solid/toggle-group";
+import { ToggleGroupBase, ToggleGroupItem } from "~/components/toggle-group";
+
+const tg = useToggleGroup({ defaultValue: ["left"] });
+
+<ToggleGroupBase.RootProvider value={tg}>
+  <ToggleGroupItem value="left"><AlignLeftIcon /></ToggleGroupItem>
+  <ToggleGroupItem value="center"><AlignCenterIcon /></ToggleGroupItem>
+  <ToggleGroupItem value="right"><AlignRightIcon /></ToggleGroupItem>
+</ToggleGroupBase.RootProvider>
+```

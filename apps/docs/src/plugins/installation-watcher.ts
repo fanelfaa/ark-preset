@@ -1,194 +1,87 @@
 /**
- * installation-watcher.ts — Vite plugin for docs
+ * installation-watcher.ts — Vite plugin for auto-generating installation docs
  *
- * ## Purpose
+ * ## What it does
  *
- * The docs site has a "Manual" install section on every component page that
- * shows the raw recipe (tailwind-variants) and Solid.js component source
- * code. This plugin keeps those code blocks in sync with the actual source
- * files in the monorepo packages.
+ * The docs site has an installation section on every component page that shows
+ * the recipe and component source code. This plugin keeps those sections in
+ * sync with the actual source files in the monorepo packages.
  *
- * Without it, a developer editing packages/core/src/recipes/button.ts would
- * need to manually copy their change into the docs page. This plugin
- * automates that — it reads the source files and regenerates
- * installation.gen.mdx whenever they change, or at build time.
+ * - **buildStart** runs on both `astro dev` and `astro build` — regenerates
+ *   all installation docs from current source.
+ * - **handleHotUpdate** fires when Vite detects a source file change in
+ *   packages/core/src/recipes/ or packages/solid/src/ — regenerates only the
+ *   affected component.
  *
- * ## Two modes
+ * ## New components
  *
- * 1. **Dev (serve)** — Watches recipe/component source directories with
- *    fs.watch and regenerates the affected installation file immediately.
- *    No chokidar dependency, uses inotify on Linux.
- *
- * 2. **Build** — On vite buildStart, regenerates ALL installation files
- *    so the production bundle always reflects the current source, even
- *    if the dev watcher was never active.
- *
- * ## Data flow
- *
- *   packages/core/src/recipes/<component>.ts  ──┐
- *                                                 ├──▶ installation.gen.mdx
- *   packages/solid/src/<component>/**.tsx     ──┘
- *
- * ## When to add a new component
- *
- * When you add a new component recipe + solid wrapper, create its docs
- * directory at apps/docs/src/content/docs/<component>/. The watcher
- * auto-discovers it on next restart, and the build hook picks it up.
+ * When adding a new component, create its docs directory and restart the dev
+ * server. The watcher discovers components by scanning the docs directory on
+ * startup; new dirs are picked up on the next server start.
  *
  * ## Shared logic
  *
- * The generation logic lives in src/shared/generate-content.ts and is
- * shared with the CLI script (scripts/generate-installation.ts).
- * Changes to the output format should be made there, not in this file.
+ * The generation logic lives in src/shared/generate-content.ts (shared with
+ * the CLI script scripts/generate-installation.ts).
  */
 
-import type { Plugin } from "vite";
-import { watch, existsSync, readdirSync, mkdirSync, writeFileSync } from "node:fs";
-import { resolve, basename } from "node:path";
+import { resolve } from "node:path";
+import { type Plugin } from "vite";
 import {
   generateInstallationContent,
-  CORE_RECIPES_DIR,
-  SOLID_COMPONENTS_DIR,
   DOCS_DIR,
+  discoverComponents,
 } from "../shared/generate-content";
+import { writeFileSync, existsSync, mkdirSync } from "node:fs";
 
-/** Discover components that have docs directories AND a recipe file in packages/core. */
-function getRecipeDocsComponents(): string[] {
-  if (!existsSync(DOCS_DIR)) return [];
-  return readdirSync(DOCS_DIR, { withFileTypes: true })
-    .filter((e) => e.isDirectory())
-    .map((e) => e.name)
-    .filter((name) => existsSync(resolve(CORE_RECIPES_DIR, `${name}.ts`)));
-}
-
-// ── Watcher state helpers ──────────────────────────────────────────────
-// Wrapped in a factory so each plugin instance gets its own isolated state.
-
-interface WatcherState {
-  watchers: ReturnType<typeof watch>[];
-  debounceTimers: Map<string, ReturnType<typeof setTimeout>>;
-}
-
-function createWatcherState(): WatcherState {
-  return { watchers: [], debounceTimers: new Map() };
-}
-
-// ── Dev-mode watchers ─────────────────────────────────────────────────
-
-/** Read current source for `component`, generate the mdx content, and write it to disk. */
-function regenerateWatcherFile(component: string) {
-  const content = generateInstallationContent(component);
-  if (!content) return;
-  const outDir = resolve(DOCS_DIR, component);
-  mkdirSync(outDir, { recursive: true });
-  writeFileSync(resolve(outDir, "installation.gen.mdx"), content, "utf-8");
-}
-
-/**
- * Debounced wrapper around regenerateWatcherFile.
- * Fires at most once per component per 150ms window.
- */
-function debouncedRegenerate(component: string, state: WatcherState) {
-  const existing = state.debounceTimers.get(component);
-  if (existing) clearTimeout(existing);
-  state.debounceTimers.set(
-    component,
-    setTimeout(() => {
-      state.debounceTimers.delete(component);
-      regenerateWatcherFile(component);
-    }, 150),
-  );
-}
-
-/** Close all existing watchers and re-initialise against the current set of docs components. */
-function restartWatchers(state: WatcherState, logger: { info: (m: string) => void }) {
-  for (const w of state.watchers) w.close();
-  state.watchers = [];
-
-  const components = getRecipeDocsComponents();
-  const componentSet = new Set(components);
-
-  // ── Recipe watcher ────────────────────────────────────────────────
-  // Listens for any .ts file change in packages/core/src/recipes/.
-  // The filename (minus .ts) must match a docs component dir name.
-  if (existsSync(CORE_RECIPES_DIR)) {
-    state.watchers.push(
-      watch(CORE_RECIPES_DIR, (_event, filename) => {
-        if (!filename || !filename.endsWith(".ts")) return;
-        const c = basename(filename, ".ts");
-        if (!componentSet.has(c)) return;
-        logger.info(`[iw] recipe changed: ${filename}`);
-        debouncedRegenerate(c, state);
-      }),
-    );
-    logger.info(`[iw] watching ${CORE_RECIPES_DIR}`);
-  }
-
-  // ── Component source watchers ─────────────────────────────────────
-  // One watcher per component directory. Each watches for .tsx changes.
-  for (const c of components) {
-    const dir = resolve(SOLID_COMPONENTS_DIR, c);
-    if (!existsSync(dir)) continue;
-    state.watchers.push(
-      watch(dir, (_event, filename) => {
-        if (!filename || !filename.endsWith(".tsx")) return;
-        logger.info(`[iw] component changed: ${c}/${filename}`);
-        debouncedRegenerate(c, state);
-      }),
-    );
-    logger.info(`[iw] watching ${dir}`);
-  }
-}
-
-// ── Plugin definition ─────────────────────────────────────────────────
-//
-// No `apply: "serve"` — this plugin runs in both dev and build modes:
-//
-//   Dev mode  → configureServer() sets up fs.watch on source directories.
-//               Incoming changes re-generate the affected installation file
-//               instantly. Vite HMR then reloads the page with fresh content.
-//
-//   Build mode → buildStart() generates ALL installation files fresh from
-//                current source, ensuring the production bundle is never stale.
-//
-
-export function installationWatcher(): Plugin {
-  const state = createWatcherState();
-
+export function installationWatcherPlugin(): Plugin {
   return {
-    name: "installation-watcher",
-
-    configureServer(server) {
-      restartWatchers(state, server.config.logger);
-    },
+    name: "vite-plugin-installation-watcher",
 
     buildStart() {
-      const components = getRecipeDocsComponents();
+      const components = discoverComponents();
       let count = 0;
-      for (const c of components) {
-        const content = generateInstallationContent(c);
-        if (!content) {
-          this.warn(`[iw] ✗ ${c} — generation failed (missing recipe or component source)`);
-          continue;
+      for (const component of components) {
+        const content = generateInstallationContent(component);
+        if (content) {
+          const compDir = resolve(DOCS_DIR, component);
+          if (!existsSync(compDir)) mkdirSync(compDir, { recursive: true });
+          writeFileSync(resolve(compDir, "installation.mdx"), content, "utf-8");
+          writeFileSync(resolve(compDir, "implement.mdx"), content, "utf-8");
+          count++;
         }
-        const outDir = resolve(DOCS_DIR, c);
-        mkdirSync(outDir, { recursive: true });
-        writeFileSync(resolve(outDir, "installation.gen.mdx"), content, "utf-8");
-        count++;
       }
-      // Use console.log for informational messages during build,
-      // since this.warn is reserved for actual warnings.
-      console.log(`[iw] ✓ regenerated ${count} installation files`);
+      console.log(`[installation-watcher] Generated docs for ${count} components`);
     },
 
-    closeBundle() {
-      // Clean up watchers and debounce timers
-      for (const w of state.watchers) w.close();
-      state.watchers = [];
-      for (const [, timer] of state.debounceTimers) {
-        clearTimeout(timer);
+    handleHotUpdate({ file, server }) {
+      if (!file.includes("packages/core/src/recipes") && !file.includes("packages/solid/src")) {
+        return;
       }
-      state.debounceTimers.clear();
+
+      let componentName = "";
+      if (file.includes("packages/core/src/recipes/")) {
+        const match = file.match(/packages\/core\/src\/recipes\/([^.]+)\.ts/);
+        if (match) componentName = match[1];
+      } else if (file.includes("packages/solid/src/")) {
+        const match = file.match(/packages\/solid\/src\/([^/]+)/);
+        if (match) {
+          componentName = match[1];
+          if (componentName.endsWith(".tsx")) componentName = componentName.replace(".tsx", "");
+        }
+      }
+
+      if (!componentName) return;
+
+      const content = generateInstallationContent(componentName);
+      if (content) {
+        const compDir = resolve(DOCS_DIR, componentName);
+        if (!existsSync(compDir)) mkdirSync(compDir, { recursive: true });
+        writeFileSync(resolve(compDir, "installation.mdx"), content, "utf-8");
+        writeFileSync(resolve(compDir, "implement.mdx"), content, "utf-8");
+        server.ws.send({ type: "full-reload", path: "*" });
+        console.log(`[installation-watcher] Regenerated docs for ${componentName}`);
+      }
     },
   };
 }
