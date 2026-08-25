@@ -521,7 +521,10 @@ export default function TanstackFormDemo() {
       />
 
       {/* DEBUG: live form values (temporary) */}
-      <form.Subscribe selector={(s) => s.values} children={(v) => <pre class="text-xs opacity-50">{JSON.stringify(v())}</pre>} />
+      <form.Subscribe
+        selector={(s) => s.values}
+        children={(v) => <pre class="text-xs opacity-50">{JSON.stringify(v())}</pre>}
+      />
     </form>
   );
 }
