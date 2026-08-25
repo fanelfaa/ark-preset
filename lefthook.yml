@@ -9,7 +9,7 @@ pre-commit:
       run: pnpm exec oxlint {staged_files}
     fmt:
       glob: "*.{js,jsx,ts,tsx,json,md}"
-      run: pnpm exec oxfmt {staged_files}
+      run: pnpm exec oxfmt --staged {staged_files}
     solid-tests:
       root: "packages/solid/"
       glob: "**/*.{ts,tsx}"
