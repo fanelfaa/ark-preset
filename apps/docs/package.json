@@ -13,16 +13,19 @@
   "dependencies": {
     "@ark-preset/solid": "workspace:*",
     "@astrojs/solid-js": "^7.0.2",
+    "@internationalized/date": "^3.12.2",
     "@playwright/test": "^1.61.0",
     "@solidjs/testing-library": "^0.8.10",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.1.18",
-    "astro": "^7.2.4",
+    "@tanstack/solid-form": "^1.33.0",
     "solid-js": "^1.9.12",
-    "tailwindcss": "^4.1.18"
+    "tailwindcss": "^4.1.18",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@astrojs/mdx": "^7.0.7"
+    "@astrojs/mdx": "^7.0.7",
+    "astro": "^7.2.6"
   },
   "engines": {
     "node": ">=22.12.0"

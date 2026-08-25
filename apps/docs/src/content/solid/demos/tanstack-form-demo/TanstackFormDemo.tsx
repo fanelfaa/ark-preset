@@ -141,9 +141,16 @@ export default function TanstackFormDemo() {
     },
     validators: {
       onBlur: formSchema,
-      onSubmit: formSchema,
+      onSubmit: (values: unknown) => {
+        console.log("[dbg] onSubmit validator called");
+        const r = formSchema.safeParse(values);
+        console.log("[dbg] onSubmit validator success =", r.success);
+        // @ts-expect-error debug instrumentation
+        return r.success ? undefined : r.error;
+      },
     },
     onSubmit: async ({ value }) => {
+      console.log("[dbg] form onSubmit called, accepted =", value.accepted);
       alert(JSON.stringify(value, null, 2));
     },
   }));
@@ -151,9 +158,17 @@ export default function TanstackFormDemo() {
   return (
     <form
       onSubmit={(e) => {
+        console.log("[dbg] native submit event");
         e.preventDefault();
         e.stopPropagation();
-        form.handleSubmit();
+        try {
+          const r = form.handleSubmit() as any;
+          if (r && typeof r.catch === "function") {
+            r.catch((err: unknown) => console.log("[dbg] handleSubmit rejected", err));
+          }
+        } catch (err) {
+          console.log("[dbg] handleSubmit threw", err);
+        }
       }}
       class="flex flex-col gap-5"
     >
@@ -479,7 +494,11 @@ export default function TanstackFormDemo() {
               name={field().name}
               checked={field().state.value}
               invalid={!!fieldError(field())}
-              onCheckedChange={(e) => field().handleChange(!!e.checked)}
+              onCheckedChange={(e) => {
+                console.log("[dbg] checkbox onCheckedChange", JSON.stringify(e));
+                field().handleChange(!!e.checked);
+                console.log("[dbg] field value now", field().state.value);
+              }}
               onBlur={field().handleBlur}
             >
               <CheckboxLabel>I accept the terms and conditions</CheckboxLabel>
@@ -500,6 +519,9 @@ export default function TanstackFormDemo() {
           </Button>
         )}
       />
+
+      {/* DEBUG: live form values (temporary) */}
+      <form.Subscribe selector={(s) => s.values} children={(v) => <pre class="text-xs opacity-50">{JSON.stringify(v())}</pre>} />
     </form>
   );
 }

@@ -13,6 +13,19 @@ export default defineConfig({
   integrations: [solidJs(), mdx()],
   vite: {
     plugins: [tailwindcss(), demoCodePlugin(), installationWatcherPlugin()],
+    optimizeDeps: {
+      // Pre-bundle deps used by Solid islands so hydration never hits a
+      // mid-session re-optimization ("Outdated Optimize Dep" -> dead islands).
+      include: [
+        "@tanstack/solid-form",
+        "zod",
+        "@internationalized/date",
+        "@ark-ui/solid",
+        "solid-js",
+        "solid-js/web",
+        "solid-js/store",
+      ],
+    },
   },
   markdown: {
     processor: unified({
