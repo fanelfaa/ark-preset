@@ -1,4 +1,4 @@
-import { type JSX, type Component, Index } from "solid-js";
+import { type JSX, type Component, Index, onMount } from "solid-js";
 import {
   ScrollArea,
   Button,
@@ -147,6 +147,44 @@ export function SidebarNav(props: {
     return path === linkHref;
   };
 
+  onMount(() => {
+    // Wait a bit for layout to settle (Astro Island hydration)
+    setTimeout(() => {
+      // Find all active links (could be desktop sidebar or drawer sidebar)
+      const activeLinks = document.querySelectorAll('a[data-active-nav="true"]');
+      
+      activeLinks.forEach((activeEl) => {
+        // Skip if not visible
+        if (activeEl.getBoundingClientRect().width === 0) return;
+        
+        // Find the scrollable container
+        let container = activeEl.parentElement;
+        while (container && container !== document.body) {
+          const style = window.getComputedStyle(container);
+          // Ark UI ScrollArea viewport has overflow: scroll
+          if (style.overflowY === 'auto' || style.overflowY === 'scroll' || container.hasAttribute('data-part')) {
+            if (container.getAttribute('data-part') === 'viewport' || style.overflowY !== 'visible') {
+              break;
+            }
+          }
+          container = container.parentElement;
+        }
+
+        if (container && container !== document.body) {
+          const containerRect = container.getBoundingClientRect();
+          const activeRect = activeEl.getBoundingClientRect();
+          
+          const scrollTop = container.scrollTop + (activeRect.top - containerRect.top) - (containerRect.height / 2) + (activeRect.height / 2);
+          
+          container.scrollTo({ top: scrollTop, behavior: "smooth" });
+        } else {
+          // Fallback
+          activeEl.scrollIntoView({ block: "center", behavior: "smooth" });
+        }
+      });
+    }, 200);
+  });
+
   return (
     <ScrollArea class="h-full">
       <nav class="p-4">
@@ -161,6 +199,7 @@ export function SidebarNav(props: {
                   {(link) => (
                     <li>
                       <a
+                        data-active-nav={isActive(link().href) ? "true" : undefined}
                         href={getHref(link().href)}
                         class={`block rounded-md px-3 py-1.5 text-sm transition-colors hover:text-foreground hover:outline-2 outline-neutral-200 ${
                           isActive(link().href)
