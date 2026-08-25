@@ -3,6 +3,7 @@
     "typescriptteam.native-preview",
     "oxc.oxc-vscode",
     "bradlc.vscode-tailwindcss",
-    "unifiedjs.vscode-mdx"
+    "unifiedjs.vscode-mdx",
+    "astro-build.astro-vscode"
   ]
 }
