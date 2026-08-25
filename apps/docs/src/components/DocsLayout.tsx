@@ -152,18 +152,25 @@ export function SidebarNav(props: {
     setTimeout(() => {
       // Find all active links (could be desktop sidebar or drawer sidebar)
       const activeLinks = document.querySelectorAll('a[data-active-nav="true"]');
-      
+
       activeLinks.forEach((activeEl) => {
         // Skip if not visible
         if (activeEl.getBoundingClientRect().width === 0) return;
-        
+
         // Find the scrollable container
         let container = activeEl.parentElement;
         while (container && container !== document.body) {
           const style = window.getComputedStyle(container);
           // Ark UI ScrollArea viewport has overflow: scroll
-          if (style.overflowY === 'auto' || style.overflowY === 'scroll' || container.hasAttribute('data-part')) {
-            if (container.getAttribute('data-part') === 'viewport' || style.overflowY !== 'visible') {
+          if (
+            style.overflowY === "auto" ||
+            style.overflowY === "scroll" ||
+            container.hasAttribute("data-part")
+          ) {
+            if (
+              container.getAttribute("data-part") === "viewport" ||
+              style.overflowY !== "visible"
+            ) {
               break;
             }
           }
@@ -173,9 +180,13 @@ export function SidebarNav(props: {
         if (container && container !== document.body) {
           const containerRect = container.getBoundingClientRect();
           const activeRect = activeEl.getBoundingClientRect();
-          
-          const scrollTop = container.scrollTop + (activeRect.top - containerRect.top) - (containerRect.height / 2) + (activeRect.height / 2);
-          
+
+          const scrollTop =
+            container.scrollTop +
+            (activeRect.top - containerRect.top) -
+            containerRect.height / 2 +
+            activeRect.height / 2;
+
           container.scrollTo({ top: scrollTop, behavior: "smooth" });
         } else {
           // Fallback

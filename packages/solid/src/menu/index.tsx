@@ -8,7 +8,13 @@ const Menu = MenuBase.Root;
 const MenuTrigger: Component<
   ArkMenu.TriggerProps & ButtonVariants & { hideIndicator?: boolean }
 > = (props) => {
-  const [local, others] = splitProps(props, ["class", "variant", "size", "hideIndicator"]);
+  const [local, others] = splitProps(props, [
+    "class",
+    "variant",
+    "size",
+    "hideIndicator",
+    "children",
+  ]);
   const hideIndicator = () => local.hideIndicator ?? false;
 
   return (
@@ -18,7 +24,7 @@ const MenuTrigger: Component<
       size={local.size}
       {...others}
     >
-      {props.children}
+      {local.children}
       <Show when={!hideIndicator()}>
         <MenuBase.Indicator>
           <svg
