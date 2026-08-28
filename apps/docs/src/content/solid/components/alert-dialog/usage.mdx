@@ -1,43 +1,20 @@
 
 import ComponentPreview from "../../../../components/ComponentPreview.astro";
+import AlertDialogBasicDemo from "@demos/alert-dialog-demo/AlertDialogBasicDemo.tsx";
+import AlertDialogBasicDemoCode from "@demos/alert-dialog-demo/AlertDialogBasicDemo.tsx?code";
 import AlertDialogDeleteDemo from "@demos/alert-dialog-demo/AlertDialogDeleteDemo.tsx";
 import AlertDialogDeleteDemoCode from "@demos/alert-dialog-demo/AlertDialogDeleteDemo.tsx?code";
 
 ## Usage
 
-Import the components:
 
-```tsx
-import {
-  AlertDialog,
-  AlertDialogTrigger,
-  AlertDialogContent,
-  AlertDialogHeader,
-  AlertDialogFooter,
-  AlertDialogTitle,
-  AlertDialogDescription,
-  AlertDialogCancel,
-  AlertDialogAction,
-} from "@ark-preset/solid";
-```
+### Basic Usage
 
-Basic usage:
+<ComponentPreview code={AlertDialogBasicDemoCode}>
+  <AlertDialogBasicDemo client:load />
+</ComponentPreview>
 
-```tsx
-<AlertDialog>
-  <AlertDialogTrigger>Open</AlertDialogTrigger>
-  <AlertDialogContent>
-    <AlertDialogHeader>
-      <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-      <AlertDialogDescription>This action cannot be undone.</AlertDialogDescription>
-    </AlertDialogHeader>
-    <AlertDialogFooter>
-      <AlertDialogCancel variant="outline">Cancel</AlertDialogCancel>
-      <AlertDialogAction variant="destructive">Delete</AlertDialogAction>
-    </AlertDialogFooter>
-  </AlertDialogContent>
-</AlertDialog>
-```
+## Advanced Usage
 
 ### Root Provider
 
@@ -52,16 +29,3 @@ The key difference:
 - **`AlertDialog`** — manages its own state internally. Use for simple, self-contained usage.
 - **`AlertDialogBase.RootProvider`** — accepts a pre-created context via `useDialog`. Use when you need to read or control the dialog state from outside the component tree. Ideal for reusable utility dialogs.
 
-### Anatomy
-
-| Part | Element | Description |
-|------|---------|-------------|
-| `AlertDialog` | — | Manages dialog state, uses `role="alertdialog"` |
-| `AlertDialogTrigger` | `button` | The button that opens the dialog |
-| `AlertDialogContent` | `div` | The dialog panel (portal to body) |
-| `AlertDialogHeader` | `div` | Header section for title and description |
-| `AlertDialogTitle` | `h2` | The dialog title |
-| `AlertDialogDescription` | `div` | Descriptive text for the dialog |
-| `AlertDialogFooter` | `div` | Footer section for action buttons |
-| `AlertDialogCancel` | `button` | Dismisses the dialog |
-| `AlertDialogAction` | `button` | Confirms the dialog action |

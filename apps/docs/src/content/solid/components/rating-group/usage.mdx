@@ -1,5 +1,6 @@
-
 import ComponentPreview from '../../../../components/ComponentPreview.astro';
+import RatingGroupBasicDemo from '../../demos/rating-group-demo/RatingGroupBasicDemo.tsx';
+import RatingGroupBasicDemoCode from '../../demos/rating-group-demo/RatingGroupBasicDemo.tsx?code';
 import RatingGroupControlledDemo from '../../demos/rating-group-demo/RatingGroupControlledDemo.tsx';
 import RatingGroupControlledDemoCode from '../../demos/rating-group-demo/RatingGroupControlledDemo.tsx?code';
 import RatingGroupHalfStarDemo from '../../demos/rating-group-demo/RatingGroupHalfStarDemo.tsx';
@@ -11,55 +12,36 @@ import RatingGroupRootProviderDemoCode from '../../demos/rating-group-demo/Ratin
 
 ## Usage
 
-Import the component and use it inline:
 
-```tsx
-import { RatingGroup, RatingGroupLabel } from "~/components/rating-group";
-```
+### Basic Usage
 
-Basic star rating with 5 stars:
-
-```tsx
-<RatingGroup count={5} defaultValue={3}>
-  <RatingGroupLabel>Rate this</RatingGroupLabel>
-</RatingGroup>
-```
+<ComponentPreview code={RatingGroupBasicDemoCode}>
+  <RatingGroupBasicDemo client:load />
+</ComponentPreview>
 
 ### Controlled
 
-<ComponentPreview code={RatingGroupControlledDemoCode}>
-  <RatingGroupControlledDemo  client:load />
-</ComponentPreview>
-
 Use `value` and `onValueChange` to control the rating value externally:
+
+<ComponentPreview code={RatingGroupControlledDemoCode}>
+  <RatingGroupControlledDemo client:load />
+</ComponentPreview>
 
 ### Half Star
 
-<ComponentPreview code={RatingGroupHalfStarDemoCode}>
-  <RatingGroupHalfStarDemo  client:load />
-</ComponentPreview>
-
 Allow `0.5` value steps by setting the `allowHalf` prop to `true`:
 
-```tsx
-<RatingGroup count={5} defaultValue={2.5} allowHalf>
-  <RatingGroupLabel>Rate this</RatingGroupLabel>
-</RatingGroup>
-```
+<ComponentPreview code={RatingGroupHalfStarDemoCode}>
+  <RatingGroupHalfStarDemo client:load />
+</ComponentPreview>
 
 ### Disabled
 
-<ComponentPreview code={RatingGroupDisabledDemoCode}>
-  <RatingGroupDisabledDemo  client:load />
-</ComponentPreview>
-
 To make the rating group disabled, set the `disabled` prop to `true`:
 
-```tsx
-<RatingGroup count={5} defaultValue={4} disabled>
-  <RatingGroupLabel>Rate this</RatingGroupLabel>
-</RatingGroup>
-```
+<ComponentPreview code={RatingGroupDisabledDemoCode}>
+  <RatingGroupDisabledDemo client:load />
+</ComponentPreview>
 
 ## Advanced Usage
 
@@ -77,8 +59,8 @@ import { RatingGroupBase } from "~/components/rating-group";
 
 ### RootProvider Pattern
 
-<ComponentPreview code={RatingGroupRootProviderDemoCode}>
-  <RatingGroupRootProviderDemo  client:load />
-</ComponentPreview>
-
 For full control over the rating group machine, use `useRatingGroup` with `RatingGroup.RootProvider`:
+
+<ComponentPreview code={RatingGroupRootProviderDemoCode}>
+  <RatingGroupRootProviderDemo client:load />
+</ComponentPreview>

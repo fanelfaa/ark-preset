@@ -1,84 +1,29 @@
-
 import ComponentPreview from '../../../../components/ComponentPreview.astro';
+import SelectBasicDemo from '../../demos/select-demo/SelectBasicDemo.tsx';
+import SelectBasicDemoCode from '../../demos/select-demo/SelectBasicDemo.tsx?code';
 import SelectRootProviderDemo from '../../demos/select-demo/SelectRootProviderDemo.tsx';
 import SelectRootProviderDemoCode from '../../demos/select-demo/SelectRootProviderDemo.tsx?code';
 import SelectMultipleDemo from '../../demos/select-demo/SelectMultipleDemo.tsx';
 import SelectMultipleDemoCode from '../../demos/select-demo/SelectMultipleDemo.tsx?code';
 import SelectSearchableDemo from '../../demos/select-demo/SelectSearchableDemo.tsx';
 import SelectSearchableDemoCode from '../../demos/select-demo/SelectSearchableDemo.tsx?code';
+import SelectErrorDemo from '../../demos/select-demo/SelectErrorDemo.tsx';
+import SelectErrorDemoCode from '../../demos/select-demo/SelectErrorDemo.tsx?code';
 
 ## Usage
 
-Import the components:
+### Basic Usage
 
-```tsx
-import { createListCollection } from "@ark-ui/solid";
-import { Index } from "solid-js";
-import {
-  Select,
-  SelectLabel,
-  SelectTrigger,
-  SelectContent,
-  SelectItem,
-} from "~/components/select";
-```
-
-Basic usage:
-
-```tsx
-const items = createListCollection({
-  items: [
-    { label: 'React', value: 'react' },
-    { label: 'Solid.js', value: 'solid' },
-  ],
-})
-
-<Select collection={items}>
-  <SelectLabel>Framework</SelectLabel>
-  <SelectTrigger placeholder="Select..." />
-  <SelectContent>
-    <Index each={items.items}>
-      {(item) => <SelectItem item={item()}>{item().label}</SelectItem>}
-    </Index>
-  </SelectContent>
-</Select>
-```
-
-### With Label
-
-Add a label to describe the select field.
-
-```tsx
-<Select collection={items}>
-  <SelectLabel>Choose your framework</SelectLabel>
-  <SelectTrigger placeholder="Select..." />
-  <SelectContent>
-    <Index each={items.items}>
-      {(item) => <SelectItem item={item()}>{item().label}</SelectItem>}
-    </Index>
-  </SelectContent>
-</Select>
-```
-
-### Root Provider
-
-Use `SelectRootProvider` when you need to access the select state outside of the component tree. This pattern uses the `useSelect` hook from Ark UI to create a shared context that both the select and external elements can reference.
-
-<ComponentPreview code={SelectRootProviderDemoCode}>
-  <SelectRootProviderDemo  client:load />
+<ComponentPreview code={SelectBasicDemoCode}>
+  <SelectBasicDemo client:load />
 </ComponentPreview>
-
-The key difference:
-
-- **`Select`** — manages its own state internally. Use for simple, self-contained selects.
-- **`SelectRootProvider`** — accepts a pre-created select context via `useSelect`. Use when you need to read or control the select state from outside the component tree.
 
 ### Multiple Selection
 
 Use the `multiple` prop to allow selecting multiple options. The `SelectTrigger` composite includes a clear button to deselect all selections.
 
 <ComponentPreview code={SelectMultipleDemoCode}>
-  <SelectMultipleDemo  client:load />
+  <SelectMultipleDemo client:load />
 </ComponentPreview>
 
 ### Searchable Selection
@@ -86,26 +31,10 @@ Use the `multiple` prop to allow selecting multiple options. The `SelectTrigger`
 Use the `searchable` prop to enable a search input inside the dropdown. Pass `onSearch` to filter the collection as the user types.
 
 <ComponentPreview code={SelectSearchableDemoCode}>
-  <SelectSearchableDemo  client:load />
+  <SelectSearchableDemo client:load />
 </ComponentPreview>
 
 The `searchable` prop works with both single and `multiple` selection modes.
-
-### Error State
-
-Use the `error` prop on `SelectBase.Root` to show an error state. The structured `Select` component delegates its root styling to `SelectBase.Root`, so the `error` prop requires using the base component directly:
-
-```tsx
-<SelectBase.Root collection={items} error>
-  <SelectLabel>Framework</SelectLabel>
-  <SelectTrigger placeholder="Select..." />
-  <SelectContent>
-    <Index each={items.items}>
-      {(item) => <SelectItem item={item()}>{item().label}</SelectItem>}
-    </Index>
-  </SelectContent>
-</SelectBase.Root>
-```
 
 ### Composite Exports
 
@@ -128,3 +57,24 @@ Or import `SelectBase` (the raw parts namespace) from the barrel entry point:
 ```tsx
 import { SelectBase } from "~/components/select";
 ```
+
+### Root Provider
+
+Use `SelectRootProvider` when you need to access the select state outside of the component tree. This pattern uses the `useSelect` hook from Ark UI to create a shared context that both the select and external elements can reference.
+
+<ComponentPreview code={SelectRootProviderDemoCode}>
+  <SelectRootProviderDemo client:load />
+</ComponentPreview>
+
+The key difference:
+
+- **`Select`** — manages its own state internally. Use for simple, self-contained selects.
+- **`SelectRootProvider`** — accepts a pre-created select context via `useSelect`. Use when you need to read or control the select state from outside the component tree.
+
+### Error State
+
+Use the `error` prop on `SelectBase.Root` to show an error state. The structured `Select` component delegates its root styling to `SelectBase.Root`, so the `error` prop requires using the base component directly:
+
+<ComponentPreview code={SelectErrorDemoCode}>
+  <SelectErrorDemo client:load />
+</ComponentPreview>

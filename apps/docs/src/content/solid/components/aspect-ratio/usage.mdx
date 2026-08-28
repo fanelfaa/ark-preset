@@ -1,25 +1,22 @@
+import ComponentPreview from "../../../../components/ComponentPreview.astro";
+import AspectRatioBasicDemo from "@demos/aspect-ratio-demo/AspectRatioBasicDemo.tsx";
+import AspectRatioBasicDemoCode from "@demos/aspect-ratio-demo/AspectRatioBasicDemo.tsx?code";
+import AspectRatioSquareDemo from "@demos/aspect-ratio-demo/AspectRatioSquareDemo.tsx";
+import AspectRatioSquareDemoCode from "@demos/aspect-ratio-demo/AspectRatioSquareDemo.tsx?code";
+
 ## Usage
 
-Import the component:
 
-```tsx
-import { AspectRatio } from "@ark-preset/solid";
-```
+### Basic Usage
 
-Basic:
+<ComponentPreview code={AspectRatioBasicDemoCode}>
+  <AspectRatioBasicDemo client:load />
+</ComponentPreview>
 
-```tsx
-<AspectRatio ratio={16 / 9}>
-  <img src="https://images.unsplash.com/photo-..." alt="Image" class="rounded-md object-cover" />
-</AspectRatio>
-```
+### Square
 
-Square:
+Use a 1:1 aspect ratio to display square content.
 
-```tsx
-<AspectRatio ratio={1 / 1}>
-  <div class="flex items-center justify-center bg-muted rounded-md">
-    Square Content
-  </div>
-</AspectRatio>
-```
+<ComponentPreview code={AspectRatioSquareDemoCode}>
+  <AspectRatioSquareDemo client:load />
+</ComponentPreview>

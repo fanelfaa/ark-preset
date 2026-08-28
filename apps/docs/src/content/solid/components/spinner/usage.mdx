@@ -1,31 +1,33 @@
+import ComponentPreview from '../../../../components/ComponentPreview.astro';
+import SpinnerBasicDemo from '../../demos/spinner-demo/SpinnerBasicDemo.tsx';
+import SpinnerBasicDemoCode from '../../demos/spinner-demo/SpinnerBasicDemo.tsx?code';
+import SpinnerSizesDemo from '../../demos/spinner-demo/SpinnerSizesDemo.tsx';
+import SpinnerSizesDemoCode from '../../demos/spinner-demo/SpinnerSizesDemo.tsx?code';
+import SpinnerWithTextDemo from '../../demos/spinner-demo/SpinnerWithTextDemo.tsx';
+import SpinnerWithTextDemoCode from '../../demos/spinner-demo/SpinnerWithTextDemo.tsx?code';
+
 ## Usage
 
-Import the component:
 
-```tsx
-import { Spinner } from "@ark-preset/solid";
-```
+### Basic Usage
 
-Basic spinner:
+<ComponentPreview code={SpinnerBasicDemoCode}>
+  <SpinnerBasicDemo client:load />
+</ComponentPreview>
 
-```tsx
-<Spinner />
-```
+### Sizes
 
-With size:
+Use the <code>size</code> prop to change the spinner size.
 
-```tsx
-<Spinner size="sm" />
-<Spinner size="md" />
-<Spinner size="lg" />
-<Spinner size="xl" />
-```
+<ComponentPreview code={SpinnerSizesDemoCode}>
+  <SpinnerSizesDemo client:load />
+</ComponentPreview>
 
-With text:
+### With Text
 
-```tsx
-<div class="flex items-center gap-2">
-  <Spinner size="sm" />
-  <span class="text-sm text-muted-foreground">Loading...</span>
-</div>
-```
+Display a text label alongside the spinner.
+
+<ComponentPreview code={SpinnerWithTextDemoCode}>
+  <SpinnerWithTextDemo client:load />
+</ComponentPreview>
+

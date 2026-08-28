@@ -1,67 +1,42 @@
-import { InlineCode, Alert, AlertTitle, AlertDescription } from "@ark-preset/solid";
+import ComponentPreview from "../../../../components/ComponentPreview.astro";
+import AlertBasicDemo from "@demos/alert-demo/AlertBasicDemo.tsx";
+import AlertBasicDemoCode from "@demos/alert-demo/AlertBasicDemo.tsx?code";
+import AlertDestructiveDemo from "@demos/alert-demo/AlertDestructiveDemo.tsx";
+import AlertDestructiveDemoCode from "@demos/alert-demo/AlertDestructiveDemo.tsx?code";
+import AlertIconDemo from "@demos/alert-demo/AlertIconDemo.tsx";
+import AlertIconDemoCode from "@demos/alert-demo/AlertIconDemo.tsx?code";
+import AlertVariantsDemo from "@demos/alert-demo/AlertVariantsDemo.tsx";
+import AlertVariantsDemoCode from "@demos/alert-demo/AlertVariantsDemo.tsx?code";
 
 ## Usage
 
-Import the components:
 
-```tsx
-import { Alert, AlertTitle, AlertDescription, AlertAction } from "@ark-preset/solid";
-```
+### Basic Usage
 
-Basic:
+<ComponentPreview code={AlertBasicDemoCode}>
+  <AlertBasicDemo client:load />
+</ComponentPreview>
 
-```tsx
-<Alert>
-  <AlertTitle>Heads up!</AlertTitle>
-  <AlertDescription>
-    You can add components to your app using the CLI.
-  </AlertDescription>
-</Alert>
-```
+### Destructive
 
-Destructive variant:
+Use the `destructive` variant for error or destructive alerts.
 
-```tsx
-<Alert variant="destructive">
-  <AlertTitle>Error</AlertTitle>
-  <AlertDescription>
-    An error occurred while processing your request.
-  </AlertDescription>
-</Alert>
-```
+<ComponentPreview code={AlertDestructiveDemoCode}>
+  <AlertDestructiveDemo client:load />
+</ComponentPreview>
 
-With icon:
+### With Icon
 
-```tsx
-<Alert>
-  <svg xmlns="..." class="size-4">{/* icon */}</svg>
-  <AlertTitle>Heads up!</AlertTitle>
-  <AlertDescription>Message</AlertDescription>
-</Alert>
-```
+Display an icon alongside the alert content.
+
+<ComponentPreview code={AlertIconDemoCode}>
+  <AlertIconDemo client:load />
+</ComponentPreview>
 
 ### Variants
 
 Use the `variant` prop to change the visual style.
 
-<div class="rounded-lg border border-border bg-background/70 backdrop-blur-3xl p-6 not-prose">
-  <div class="space-y-4">
-    <Alert>
-      <AlertTitle>Default Alert</AlertTitle>
-      <AlertDescription>This is the default alert style.</AlertDescription>
-    </Alert>
-    <Alert variant="destructive">
-      <AlertTitle>Destructive Alert</AlertTitle>
-      <AlertDescription>This is the destructive alert style.</AlertDescription>
-    </Alert>
-  </div>
-</div>
-
-### Anatomy
-
-| Part | Element | Description |
-|------|---------|-------------|
-| `Alert` | `div` | The root container with `role="alert"`. |
-| `AlertTitle` | `h5` | The title text. |
-| `AlertDescription` | `div` | The description text. |
-| `AlertAction` | `div` | Action element, positioned within the alert. |
+<ComponentPreview code={AlertVariantsDemoCode}>
+  <AlertVariantsDemo client:load />
+</ComponentPreview>

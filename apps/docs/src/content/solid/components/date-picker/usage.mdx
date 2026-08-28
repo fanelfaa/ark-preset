@@ -1,26 +1,21 @@
+import ComponentPreview from '../../../../components/ComponentPreview.astro';
+import DatePickerBasicDemo from '../../demos/date-picker-demo/DatePickerBasicDemo.tsx';
+import DatePickerBasicDemoCode from '../../demos/date-picker-demo/DatePickerBasicDemo.tsx?code';
+import DatePickerRangeDemo from '../../demos/date-picker-demo/DatePickerRangeDemo.tsx';
+import DatePickerRangeDemoCode from '../../demos/date-picker-demo/DatePickerRangeDemo.tsx?code';
+import DatePickerMultipleDemo from '../../demos/date-picker-demo/DatePickerMultipleDemo.tsx';
+import DatePickerMultipleDemoCode from '../../demos/date-picker-demo/DatePickerMultipleDemo.tsx?code';
+import DatePickerControlledDemo from '../../demos/date-picker-demo/DatePickerControlledDemo.tsx';
+import DatePickerControlledDemoCode from '../../demos/date-picker-demo/DatePickerControlledDemo.tsx?code';
+
 ## Usage
 
-Import `DatePicker`:
 
-```tsx
-import { DatePicker, DatePickerBase } from "~/components/date-picker";
-```
+### Basic Usage
 
-Basic usage:
-
-```tsx
-// label prop renders an accessible label above the control
-<DatePicker label="Birth date" />
-
-// placeholder sets the input placeholder text
-<DatePicker label="Select date" placeholder="Pick a date" />
-
-// error applies error styling to both label and control
-<DatePicker label="Birth date" error />
-
-// clearLabel customizes the clear button text (defaults to "Clear")
-<DatePicker label="Select date" clearLabel="清除" />
-```
+<ComponentPreview code={DatePickerBasicDemoCode}>
+  <DatePickerBasicDemo client:load />
+</ComponentPreview>
 
 ### Selection Modes
 
@@ -30,33 +25,25 @@ The date picker supports three selection modes via the `selectionMode` prop:
 
 Select one date at a time. This is the default mode.
 
-```tsx
-<DatePicker label="Birth date" />
-```
+<ComponentPreview code={DatePickerBasicDemoCode}>
+  <DatePickerBasicDemo client:load />
+</ComponentPreview>
 
 #### Range
 
 Select a start and end date. The control renders two inputs — one for each end of the range.
 
-```tsx
-<DatePicker
-  selectionMode="range"
-  label="Date range"
-  placeholder="Start date"
-/>
-```
+<ComponentPreview code={DatePickerRangeDemoCode}>
+  <DatePickerRangeDemo client:load />
+</ComponentPreview>
 
 #### Multiple
 
 Select multiple individual dates. The control renders selected dates as removable chips.
 
-```tsx
-<DatePicker
-  selectionMode="multiple"
-  label="Multiple dates"
-  placeholder="Select dates..."
-/>
-```
+<ComponentPreview code={DatePickerMultipleDemoCode}>
+  <DatePickerMultipleDemo client:load />
+</ComponentPreview>
 
 Use `maxSelectedDates` to limit the number of selections in multiple mode:
 
@@ -74,20 +61,6 @@ Use `maxSelectedDates` to limit the number of selections in multiple mode:
 
 Control the selected date programmatically using `value` and `onValueChange`.
 
-```tsx
-import { createSignal } from "solid-js";
-import { DatePicker } from "~/components/date-picker";
-import { CalendarDate } from "@internationalized/date";
-
-export function DatePickerControlled() {
-  const [value, setValue] = createSignal<CalendarDate[]>([]);
-
-  return (
-    <DatePicker
-      label="Select date"
-      value={value()}
-      onValueChange={(details) => setValue(details.value)}
-    />
-  );
-}
-```
+<ComponentPreview code={DatePickerControlledDemoCode}>
+  <DatePickerControlledDemo client:load />
+</ComponentPreview>

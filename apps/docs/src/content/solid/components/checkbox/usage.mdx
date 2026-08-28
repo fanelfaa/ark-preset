@@ -1,41 +1,39 @@
-
 import ComponentPreview from '../../../../components/ComponentPreview.astro';
 import CheckboxRootProviderDemo from '../../demos/checkbox-demo/CheckboxRootProviderDemo.tsx';
 import CheckboxRootProviderDemoCode from '../../demos/checkbox-demo/CheckboxRootProviderDemo.tsx?code';
+import CheckboxDisabledDemo from '../../demos/checkbox-demo/CheckboxDisabledDemo.tsx';
+import CheckboxDisabledDemoCode from '../../demos/checkbox-demo/CheckboxDisabledDemo.tsx?code';
+import CheckboxIndeterminateDemo from '../../demos/checkbox-demo/CheckboxIndeterminateDemo.tsx';
+import CheckboxIndeterminateDemoCode from '../../demos/checkbox-demo/CheckboxIndeterminateDemo.tsx?code';
+import CheckboxBasicDemo from '../../demos/checkbox-demo/CheckboxBasicDemo.tsx';
+import CheckboxBasicDemoCode from '../../demos/checkbox-demo/CheckboxBasicDemo.tsx?code';
 
 ## Usage
 
-Import the component:
 
-```tsx
-import { Checkbox, CheckboxLabel, CheckboxRootProvider } from "~/components/checkbox";
-```
+### Basic Usage
 
-Basic checkbox:
+<ComponentPreview code={CheckboxBasicDemoCode}>
+  <CheckboxBasicDemo client:load />
+</ComponentPreview>
 
-```tsx
-<Checkbox />
-```
+### Disabled
 
-With label:
+Add the <code>disabled</code> prop to disable interaction.
 
-```tsx
-<Checkbox defaultChecked>
-  <CheckboxLabel>Accept terms</CheckboxLabel>
-</Checkbox>
-```
+<ComponentPreview code={CheckboxDisabledDemoCode}>
+  <CheckboxDisabledDemo client:load />
+</ComponentPreview>
 
-Disabled:
+### Indeterminate
 
-```tsx
-<Checkbox disabled />
-```
+Set the <code>checked</code> prop to <code>"indeterminate"</code> for an indeterminate state.
 
-Indeterminate:
+<ComponentPreview code={CheckboxIndeterminateDemoCode}>
+  <CheckboxIndeterminateDemo client:load />
+</ComponentPreview>
 
-```tsx
-<Checkbox checked="indeterminate" />
-```
+## Advanced Usage
 
 ### Root Provider
 

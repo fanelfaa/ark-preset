@@ -1,81 +1,40 @@
 import ComponentPreview from "../../../../components/ComponentPreview.astro";
+import DialogBasicDemo from "@demos/dialog-demo/DialogBasicDemo.tsx";
+import DialogBasicDemoCode from "@demos/dialog-demo/DialogBasicDemo.tsx?code";
+import DialogFormDemo from "@demos/dialog-demo/DialogFormDemo.tsx";
+import DialogFormDemoCode from "@demos/dialog-demo/DialogFormDemo.tsx?code";
+import DialogControlledDemo from "@demos/dialog-demo/DialogControlledDemo.tsx";
+import DialogControlledDemoCode from "@demos/dialog-demo/DialogControlledDemo.tsx?code";
 import DialogRootProviderDemo from "@demos/dialog-demo/DialogRootProviderDemo.tsx";
 import DialogRootProviderDemoCode from "@demos/dialog-demo/DialogRootProviderDemo.tsx?code";
 
 ## Usage
 
-Import the components:
+### Basic Usage
 
-```tsx
-import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogFooter,
-} from "~/components/dialog";
-```
+A basic modal dialog with a trigger and dismissible content.
 
-Basic usage:
+<ComponentPreview code={DialogBasicDemoCode}>
+  <DialogBasicDemo client:load />
+</ComponentPreview>
 
-```tsx
-<Dialog>
-  <DialogTrigger>Open Dialog</DialogTrigger>
-  <DialogContent>
-    <DialogHeader>
-      <DialogTitle>Title</DialogTitle>
-      <DialogDescription>Description text</DialogDescription>
-    </DialogHeader>
-  </DialogContent>
-</Dialog>
-```
+### Simple Form
 
-### With Header and Footer
+Dialogs are commonly used for forms or data entry without leaving the current page.
 
-Add header and footer sections for structured dialog content.
-
-```tsx
-<Dialog>
-  <DialogTrigger>Open</DialogTrigger>
-  <DialogContent>
-    <DialogHeader>
-      <DialogTitle>Confirm Action</DialogTitle>
-      <DialogDescription>Are you sure you want to proceed?</DialogDescription>
-    </DialogHeader>
-    <DialogFooter>
-      <Button variant="outline">Cancel</Button>
-      <Button>Confirm</Button>
-    </DialogFooter>
-  </DialogContent>
-</Dialog>
-```
+<ComponentPreview code={DialogFormDemoCode}>
+  <DialogFormDemo client:load />
+</ComponentPreview>
 
 ### Controlled Open
 
 Control the dialog open state programmatically.
 
-```tsx
-import { createSignal } from "solid-js";
-import { Dialog, DialogTrigger, DialogContent, DialogTitle } from "~/components/dialog";
+<ComponentPreview code={DialogControlledDemoCode}>
+  <DialogControlledDemo client:load />
+</ComponentPreview>
 
-export function ControlledDialog() {
-  const [open, setOpen] = createSignal(false);
-
-  return (
-    <>
-      <Button onClick={() => setOpen(true)}>Open Dialog</Button>
-      <Dialog open={open()} onOpenChange={setOpen}>
-        <DialogTrigger>Trigger</DialogTrigger>
-        <DialogContent>
-          <DialogTitle>Controlled Dialog</DialogTitle>
-        </DialogContent>
-      </Dialog>
-    </>
-  );
-}
-```
+## Advanced Usage
 
 ### Root Provider
 

@@ -1,34 +1,22 @@
+import ComponentPreview from '../../../../components/ComponentPreview.astro';
+import ProgressBasicDemo from '../../demos/progress-demo/ProgressBasicDemo.tsx';
+import ProgressBasicDemoCode from '../../demos/progress-demo/ProgressBasicDemo.tsx?code';
+import ProgressIndeterminateDemo from '../../demos/progress-demo/ProgressIndeterminateDemo.tsx';
+import ProgressIndeterminateDemoCode from '../../demos/progress-demo/ProgressIndeterminateDemo.tsx?code';
 
 ## Usage
 
-Import the components:
 
-```tsx
-import {
-  Progress,
-  ProgressLabel,
-  ProgressTrack,
-  ProgressValueText,
-} from "~/components/progress";
-```
+### Basic Usage
 
-Basic usage:
+<ComponentPreview code={ProgressBasicDemoCode}>
+  <ProgressBasicDemo client:load />
+</ComponentPreview>
 
-```tsx
-<Progress value={65} class="space-y-2">
-  <ProgressLabel>Loading</ProgressLabel>
-  <ProgressTrack />
-  <ProgressValueText />
-</Progress>
-```
-
-## Indeterminate
+### Indeterminate
 
 Omit the `value` prop to render an indeterminate progress bar:
 
-```tsx
-<Progress>
-  <ProgressLabel>Loading...</ProgressLabel>
-  <ProgressTrack />
-</Progress>
-```
+<ComponentPreview code={ProgressIndeterminateDemoCode}>
+  <ProgressIndeterminateDemo client:load />
+</ComponentPreview>

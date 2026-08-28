@@ -1,76 +1,63 @@
 
 import ComponentPreview from '../../../../components/ComponentPreview.astro';
+import ToggleBasicDemo from '../../demos/toggle-demo/ToggleBasicDemo.tsx';
+import ToggleBasicDemoCode from '../../demos/toggle-demo/ToggleBasicDemo.tsx?code';
+import ToggleDefaultPressedDemo from '../../demos/toggle-demo/ToggleDefaultPressedDemo.tsx';
+import ToggleDefaultPressedDemoCode from '../../demos/toggle-demo/ToggleDefaultPressedDemo.tsx?code';
+import ToggleControlledDemo from '../../demos/toggle-demo/ToggleControlledDemo.tsx';
+import ToggleControlledDemoCode from '../../demos/toggle-demo/ToggleControlledDemo.tsx?code';
+import ToggleDisabledDemo from '../../demos/toggle-demo/ToggleDisabledDemo.tsx';
+import ToggleDisabledDemoCode from '../../demos/toggle-demo/ToggleDisabledDemo.tsx?code';
 import ToggleIndicatorDemo from '../../demos/toggle-demo/ToggleIndicatorDemo.tsx';
 import ToggleIndicatorDemoCode from '../../demos/toggle-demo/ToggleIndicatorDemo.tsx?code';
 import ToggleSizesDemo from '../../demos/toggle-demo/ToggleSizesDemo.tsx';
 import ToggleSizesDemoCode from '../../demos/toggle-demo/ToggleSizesDemo.tsx?code';
 
-## With Indicator
+## Usage
+
+
+### Basic Usage
+
+<ComponentPreview code={ToggleBasicDemoCode}>
+  <ToggleBasicDemo client:load />
+</ComponentPreview>
+
+### Default Pressed
+
+Use the <code>defaultPressed</code> prop to set the initial pressed state.
+
+<ComponentPreview code={ToggleDefaultPressedDemoCode}>
+  <ToggleDefaultPressedDemo client:load />
+</ComponentPreview>
+
+### Controlled
+
+Control the pressed state programmatically using <code>pressed</code> and <code>onPressedChange</code>.
+
+<ComponentPreview code={ToggleControlledDemoCode}>
+  <ToggleControlledDemo client:load />
+</ComponentPreview>
+
+### Disabled
+
+Add the <code>disabled</code> prop to disable interaction.
+
+<ComponentPreview code={ToggleDisabledDemoCode}>
+  <ToggleDisabledDemo client:load />
+</ComponentPreview>
+
+### With Indicator
 
 `ToggleIndicator` renders different content based on the toggle state — the `fallback` is shown when off, and the children are shown when on.
 
 <ComponentPreview code={ToggleIndicatorDemoCode}>
-  <ToggleIndicatorDemo  client:load />
+  <ToggleIndicatorDemo client:load />
 </ComponentPreview>
 
-## Sizes
+### Sizes
 
-Use the <code>size</code> prop to change the toggle size.
+Use the `size` prop to change the toggle size.
 
 <ComponentPreview code={ToggleSizesDemoCode}>
-  <ToggleSizesDemo  client:load />
+  <ToggleSizesDemo client:load />
 </ComponentPreview>
-
-## Usage
-
-Import the components:
-
-```tsx
-import { Toggle, ToggleIndicator } from "~/components/toggle";
-```
-
-Basic:
-
-```tsx
-<Toggle>
-  <BoldIcon />
-</Toggle>
-```
-
-Default pressed:
-
-```tsx
-<Toggle defaultPressed>
-  <BoldIcon />
-</Toggle>
-```
-
-Controlled:
-
-```tsx
-const [pressed, setPressed] = createSignal(false);
-
-<Toggle pressed={pressed()} onPressedChange={setPressed}>
-  <BoldIcon />
-</Toggle>
-```
-
-Disabled:
-
-```tsx
-<Toggle disabled>
-  <BoldIcon />
-</Toggle>
-```
-
-With Indicator:
-
-`ToggleIndicator` renders different content based on the toggle state — the `fallback` is shown when off, and the children are shown when on.
-
-```tsx
-<Toggle>
-  <ToggleIndicator fallback={<SunIcon />}>
-    <MoonIcon />
-  </ToggleIndicator>
-</Toggle>
-```

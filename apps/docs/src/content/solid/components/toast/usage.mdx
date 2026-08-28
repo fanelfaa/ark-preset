@@ -1,49 +1,37 @@
 
 
+import ComponentPreview from "../../../../components/ComponentPreview.astro";
+import ToastBasicDemo from "@demos/toast-demo/ToastBasicDemo.tsx";
+import ToastBasicDemoCode from "@demos/toast-demo/ToastBasicDemo.tsx?code";
+import ToastActionDemo from "@demos/toast-demo/ToastActionDemo.tsx";
+import ToastActionDemoCode from "@demos/toast-demo/ToastActionDemo.tsx?code";
+import ToastVariantsDemo from "@demos/toast-demo/ToastVariantsDemo.tsx";
+import ToastVariantsDemoCode from "@demos/toast-demo/ToastVariantsDemo.tsx?code";
+
 ## Usage
 
-Import the components:
 
-```tsx
-import { createToaster, Toaster } from "~/components/toast";
-```
+### Basic Usage
 
-Basic toast:
+<ComponentPreview code={ToastBasicDemoCode}>
+  <ToastBasicDemo client:load />
+</ComponentPreview>
 
-```tsx
-const toaster = createToaster({
-  placement: "bottom-end",
-  timeout: 5000,
-})
+### With Action
 
-<button onClick={() => toaster.create({ title: 'Hello', description: 'World' })}>
-  Show Toast
-</button>
+Add an action button to the toast using the <code>action</code> property.
 
-<Toaster toaster={toaster} />
-```
+<ComponentPreview code={ToastActionDemoCode}>
+  <ToastActionDemo client:load />
+</ComponentPreview>
 
-With action:
-
-```tsx
-toaster.create({
-  title: "File deleted",
-  description: "Your file has been removed.",
-  action: { label: "Undo", onClick: () => console.log("undo") },
-});
-```
-
-## Variants
+### Variants
 
 Use the `type` property to change the visual style.
 
-```tsx
-toaster.create({ title: "Default toast", description: "This is a default message" });
-toaster.create({ title: "Info toast", type: "info" });
-toaster.create({ title: "Success toast", type: "success" });
-toaster.create({ title: "Warning toast", type: "warning" });
-toaster.create({ title: "Error toast", type: "error" });
-```
+<ComponentPreview code={ToastVariantsDemoCode}>
+  <ToastVariantsDemo client:load />
+</ComponentPreview>
 
 ## Advanced Usage
 

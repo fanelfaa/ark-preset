@@ -1,31 +1,33 @@
+import ComponentPreview from "../../../../components/ComponentPreview.astro";
+import TextareaBasicDemo from "@demos/textarea-demo/TextareaBasicDemo.tsx";
+import TextareaBasicDemoCode from "@demos/textarea-demo/TextareaBasicDemo.tsx?code";
+import TextareaDescriptionDemo from "@demos/textarea-demo/TextareaDescriptionDemo.tsx";
+import TextareaDescriptionDemoCode from "@demos/textarea-demo/TextareaDescriptionDemo.tsx?code";
+import TextareaErrorDemo from "@demos/textarea-demo/TextareaErrorDemo.tsx";
+import TextareaErrorDemoCode from "@demos/textarea-demo/TextareaErrorDemo.tsx?code";
+
 ## Usage
 
-Import the component:
 
-```tsx
-import { Textarea } from "@ark-preset/solid";
-```
+### Basic Usage
 
-Basic textarea:
+<ComponentPreview code={TextareaBasicDemoCode}>
+  <TextareaBasicDemo client:load />
+</ComponentPreview>
 
-```tsx
-<Textarea placeholder="Enter text..." />
-```
+### With Description
 
-With label:
+Add a description below the textarea to provide additional guidance.
 
-```tsx
-<Textarea label="Bio" placeholder="Tell us about yourself" />
-```
+<ComponentPreview code={TextareaDescriptionDemoCode}>
+  <TextareaDescriptionDemo client:load />
+</ComponentPreview>
 
-With description:
+### Error State
 
-```tsx
-<Textarea label="Bio" description="Write a short introduction." placeholder="Enter your bio" />
-```
+Use the <code>error</code> prop to display an error message and indicate an invalid state.
 
-With error state:
+<ComponentPreview code={TextareaErrorDemoCode}>
+  <TextareaErrorDemo client:load />
+</ComponentPreview>
 
-```tsx
-<Textarea label="Bio" error="This field is required" />
-```

@@ -13,3 +13,17 @@
 | `BreadcrumbSeparator` | `children` | `JSX.Element` | Chevron right icon |
 | `BreadcrumbEllipsis` | `class` | `string` | — |
 | `BreadcrumbEllipsis` | `children` | `JSX.Element` | Ellipsis icon |
+
+## Anatomy
+
+A breadcrumb is composed of the following parts:
+
+| Part | Element | Description |
+|------|---------|-------------|
+| `Breadcrumb` | `nav` | The root navigation container with `aria-label="breadcrumb"`. |
+| `BreadcrumbList` | `ol` | The ordered list of breadcrumb items. |
+| `BreadcrumbItem` | `li` | An individual breadcrumb item wrapper. |
+| `BreadcrumbLink` | `a` | A clickable breadcrumb link. |
+| `BreadcrumbPage` | `span` | The current page indicator (not a link). |
+| `BreadcrumbSeparator` | `li` | A separator between breadcrumb items. Default: chevron right icon. |
+| `BreadcrumbEllipsis` | `span` | A collapsed items indicator. Default: ellipsis icon. |

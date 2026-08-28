@@ -1,55 +1,29 @@
-import ComponentPreview from "../../../../components/ComponentPreview.astro";
-import CollapsibleRootProviderDemo from "@demos/collapsible-demo/CollapsibleRootProviderDemo.tsx";
-import CollapsibleRootProviderDemoCode from "@demos/collapsible-demo/CollapsibleRootProviderDemo.tsx?code";
+import ComponentPreview from '../../../../components/ComponentPreview.astro';
+import CollapsibleBasicDemo from '../../demos/collapsible-demo/CollapsibleBasicDemo.tsx';
+import CollapsibleBasicDemoCode from '../../demos/collapsible-demo/CollapsibleBasicDemo.tsx?code';
+import CollapsibleIndicatorDemo from '../../demos/collapsible-demo/CollapsibleIndicatorDemo.tsx';
+import CollapsibleIndicatorDemoCode from '../../demos/collapsible-demo/CollapsibleIndicatorDemo.tsx?code';
+import CollapsibleRootProviderDemo from '../../demos/collapsible-demo/CollapsibleRootProviderDemo.tsx';
+import CollapsibleRootProviderDemoCode from '../../demos/collapsible-demo/CollapsibleRootProviderDemo.tsx?code';
 
 ## Usage
 
-Import the components:
 
-```tsx
-import {
-  Collapsible,
-  CollapsibleIndicator,
-  CollapsibleTrigger,
-  CollapsibleContent,
-} from "~/components/collapsible";
-```
+### Basic Usage
 
-Basic usage:
-
-```tsx
-<Collapsible>
-  <CollapsibleTrigger>
-    Click to expand
-  </CollapsibleTrigger>
-  <CollapsibleContent>
-    <div class="pt-4 text-sm">Hidden content goes here.</div>
-  </CollapsibleContent>
-</Collapsible>
-```
+<ComponentPreview code={CollapsibleBasicDemoCode}>
+  <CollapsibleBasicDemo client:load />
+</ComponentPreview>
 
 ### With Indicator
 
 The indicator rotates when the content is expanded. Use `CollapsibleIndicator` inside the trigger to show the chevron icon. The rotation is styled via the `indicator` slot in the recipe.
 
-```tsx
-import {
-  Collapsible,
-  CollapsibleIndicator,
-  CollapsibleTrigger,
-  CollapsibleContent,
-} from "~/components/collapsible";
+<ComponentPreview code={CollapsibleIndicatorDemoCode}>
+  <CollapsibleIndicatorDemo client:load />
+</ComponentPreview>
 
-<Collapsible>
-  <CollapsibleTrigger>
-    Toggle Content
-    <CollapsibleIndicator />
-  </CollapsibleTrigger>
-  <CollapsibleContent>
-    <div class="pt-4 text-sm">The indicator automatically rotates when expanded.</div>
-  </CollapsibleContent>
-</Collapsible>
-```
+## Advanced Usage
 
 ### Root Provider
 

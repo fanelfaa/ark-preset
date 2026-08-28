@@ -1,55 +1,22 @@
+import ComponentPreview from "../../../../components/ComponentPreview.astro";
+import CardBasicDemo from "@demos/card-demo/CardBasicDemo.tsx";
+import CardBasicDemoCode from "@demos/card-demo/CardBasicDemo.tsx?code";
+import CardNotificationsDemo from "@demos/card-demo/CardNotificationsDemo.tsx";
+import CardNotificationsDemoCode from "@demos/card-demo/CardNotificationsDemo.tsx?code";
 
 ## Usage
 
-Import the components:
 
-```tsx
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@ark-preset/solid";
-```
+### Basic Usage
 
-Basic card:
+<ComponentPreview code={CardBasicDemoCode}>
+  <CardBasicDemo client:load />
+</ComponentPreview>
 
-```tsx
-<Card>
-  <CardHeader>
-    <CardTitle>Card Title</CardTitle>
-    <CardDescription>Card Description</CardDescription>
-  </CardHeader>
-  <CardContent>
-    <p>Content</p>
-  </CardContent>
-  <CardFooter>
-    <p>Footer</p>
-  </CardFooter>
-</Card>
-```
+### Notifications
 
-## Anatomy
+A card example displaying notification items.
 
-A card is composed of the following parts:
-
-| Part | Element | Description |
-|------|---------|-------------|
-| `Card` | `div` | The root container. |
-| `CardHeader` | `div` | The header section, typically contains the title and description. |
-| `CardTitle` | `h3` | The title text. |
-| `CardDescription` | `p` | The description text, styled as muted foreground. |
-| `CardContent` | `div` | The main content area. |
-| `CardFooter` | `div` | The footer section, typically used for actions. |
-
-## Examples
-
-```tsx
-<Card>
-  <CardHeader>
-    <CardTitle>Notifications</CardTitle>
-    <CardDescription>You have 3 unread messages.</CardDescription>
-  </CardHeader>
-  <CardContent>
-    <p>Card Content</p>
-  </CardContent>
-  <CardFooter>
-    <a href="#">View all</a>
-  </CardFooter>
-</Card>
-```
+<ComponentPreview code={CardNotificationsDemoCode}>
+  <CardNotificationsDemo client:load />
+</ComponentPreview>

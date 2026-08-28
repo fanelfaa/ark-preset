@@ -1,4 +1,6 @@
 import ComponentPreview from '../../../../components/ComponentPreview.astro';
+import ButtonBasicDemo from '../../demos/button-demo/ButtonBasicDemo.tsx';
+import ButtonBasicDemoCode from '../../demos/button-demo/ButtonBasicDemo.tsx?code';
 import ButtonVariantsDemo from '../../demos/button-demo/ButtonVariantsDemo.tsx';
 import ButtonVariantsDemoCode from '../../demos/button-demo/ButtonVariantsDemo.tsx?code';
 import ButtonSizesDemo from '../../demos/button-demo/ButtonSizesDemo.tsx';
@@ -14,17 +16,12 @@ import ButtonLinkDemoCode from '../../demos/button-demo/ButtonLinkDemo.tsx?code'
 
 ## Usage
 
-Import the component:
 
-```tsx
-import { Button } from "~/components/button";
-```
+### Basic Usage
 
-Basic usage:
-
-```tsx
-<Button>Click me</Button>
-```
+<ComponentPreview code={ButtonBasicDemoCode}>
+  <ButtonBasicDemo client:load />
+</ComponentPreview>
 
 ### Variants
 

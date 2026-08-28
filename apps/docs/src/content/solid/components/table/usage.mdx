@@ -1,48 +1,15 @@
+import ComponentPreview from "../../../../components/ComponentPreview.astro";
+import TableBasicDemo from "@demos/table-demo/TableBasicDemo.tsx";
+import TableBasicDemoCode from "@demos/table-demo/TableBasicDemo.tsx?code";
+
 ## Usage
 
-Import the components:
 
-```tsx
-import {
-  Table,
-  TableHeader,
-  TableBody,
-  TableRow,
-  TableHead,
-  TableCell,
-  TableCaption,
-} from "@ark-preset/solid";
-```
+### Basic Usage
 
-Basic table:
-
-```tsx
-<Table>
-  <TableCaption>A list of recent invoices.</TableCaption>
-  <TableHeader>
-    <TableRow>
-      <TableHead>Invoice</TableHead>
-      <TableHead>Status</TableHead>
-      <TableHead>Method</TableHead>
-      <TableHead class="text-right">Amount</TableHead>
-    </TableRow>
-  </TableHeader>
-  <TableBody>
-    <TableRow>
-      <TableCell class="font-medium">INV001</TableCell>
-      <TableCell>Paid</TableCell>
-      <TableCell>Credit Card</TableCell>
-      <TableCell class="text-right">$250.00</TableCell>
-    </TableRow>
-    <TableRow>
-      <TableCell class="font-medium">INV002</TableCell>
-      <TableCell>Pending</TableCell>
-      <TableCell>PayPal</TableCell>
-      <TableCell class="text-right">$150.00</TableCell>
-    </TableRow>
-  </TableBody>
-</Table>
-```
+<ComponentPreview code={TableBasicDemoCode}>
+  <TableBasicDemo client:load />
+</ComponentPreview>
 
 Column alignment can be customized using the `class` prop:
 
@@ -50,17 +17,3 @@ Column alignment can be customized using the `class` prop:
 <TableHead class="text-right">Amount</TableHead>
 <TableCell class="text-right">$250.00</TableCell>
 ```
-
-## Anatomy
-
-A table is composed of the following parts:
-
-| Part | Element | Description |
-|------|---------|-------------|
-| `Table` | `table` | The root table element. |
-| `TableHeader` | `thead` | The header row group. |
-| `TableBody` | `tbody` | The body row group. |
-| `TableRow` | `tr` | A table row. |
-| `TableHead` | `th` | A header cell. |
-| `TableCell` | `td` | A data cell. |
-| `TableCaption` | `caption` | A table caption. |

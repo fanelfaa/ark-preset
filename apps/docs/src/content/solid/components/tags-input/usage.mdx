@@ -1,5 +1,7 @@
 
 import ComponentPreview from '../../../../components/ComponentPreview.astro';
+import TagsInputBasicDemo from '../../demos/tags-input-demo/TagsInputBasicDemo.tsx';
+import TagsInputBasicDemoCode from '../../demos/tags-input-demo/TagsInputBasicDemo.tsx?code';
 import TagsInputControlledDemo from '../../demos/tags-input-demo/TagsInputControlledDemo.tsx';
 import TagsInputControlledDemoCode from '../../demos/tags-input-demo/TagsInputControlledDemo.tsx?code';
 import TagsInputDisabledDemo from '../../demos/tags-input-demo/TagsInputDisabledDemo.tsx';
@@ -11,17 +13,12 @@ import TagsInputRootProviderDemoCode from '../../demos/tags-input-demo/TagsInput
 
 ## Usage
 
-Import the component and use it inline:
 
-```tsx
-import { TagsInput } from "~/components/tags-input";
-```
+### Basic Usage
 
-Basic tags input with a label:
-
-```tsx
-<TagsInput defaultValue={["React", "Solid"]} label="Frameworks" />
-```
+<ComponentPreview code={TagsInputBasicDemoCode}>
+  <TagsInputBasicDemo client:load />
+</ComponentPreview>
 
 ### Controlled Value
 

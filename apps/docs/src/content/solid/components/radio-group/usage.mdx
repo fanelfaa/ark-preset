@@ -1,5 +1,6 @@
-
 import ComponentPreview from '../../../../components/ComponentPreview.astro';
+import RadioGroupBasicDemo from '../../demos/radio-group-demo/RadioGroupBasicDemo.tsx';
+import RadioGroupBasicDemoCode from '../../demos/radio-group-demo/RadioGroupBasicDemo.tsx?code';
 import RadioGroupControlledDemo from '../../demos/radio-group-demo/RadioGroupControlledDemo.tsx';
 import RadioGroupControlledDemoCode from '../../demos/radio-group-demo/RadioGroupControlledDemo.tsx?code';
 import RadioGroupDisabledDemo from '../../demos/radio-group-demo/RadioGroupDisabledDemo.tsx';
@@ -9,32 +10,28 @@ import RadioGroupRootProviderDemoCode from '../../demos/radio-group-demo/RadioGr
 
 ## Usage
 
-Import the components:
 
-```tsx
-import { RadioGroup, RadioGroupItem } from "~/components/radio-group";
-```
+### Basic Usage
 
-Basic usage:
+<ComponentPreview code={RadioGroupBasicDemoCode}>
+  <RadioGroupBasicDemo client:load />
+</ComponentPreview>
 
-```tsx
-<RadioGroup defaultValue="1" orientation="horizontal">
-  <RadioGroupItem value="1">Credit Card</RadioGroupItem>
-  <RadioGroupItem value="2">Paypal</RadioGroupItem>
-  <RadioGroupItem value="3">Debit</RadioGroupItem>
-</RadioGroup>
-```
+### Controlled Value
 
-## With Label
+Use `value` and `onValueChange` to control the selection state externally:
 
-Add a label to describe the radio group.
+<ComponentPreview code={RadioGroupControlledDemoCode}>
+  <RadioGroupControlledDemo client:load />
+</ComponentPreview>
 
-```tsx
-<RadioGroup defaultValue="1" orientation="horizontal">
-  <RadioGroupItem value="1">Credit Card</RadioGroupItem>
-  <RadioGroupItem value="2">Paypal</RadioGroupItem>
-</RadioGroup>
-```
+### Disabled Item
+
+Individual items can be disabled using the `disabled` prop:
+
+<ComponentPreview code={RadioGroupDisabledDemoCode}>
+  <RadioGroupDisabledDemo client:load />
+</ComponentPreview>
 
 ## Advanced Usage
 
@@ -50,28 +47,12 @@ Or import `RadioGroupBase` (the raw parts namespace) from the composite entry po
 import { RadioGroupBase } from "~/components/radio-group";
 ```
 
-### Controlled Value
-
-Use `value` and `onValueChange` to control the selection state externally:
-
-<ComponentPreview code={RadioGroupControlledDemoCode}>
-  <RadioGroupControlledDemo  client:load />
-</ComponentPreview>
-
-### Disabled Item
-
-Individual items can be disabled using the `disabled` prop:
-
-<ComponentPreview code={RadioGroupDisabledDemoCode}>
-  <RadioGroupDisabledDemo  client:load />
-</ComponentPreview>
-
 ### Root Provider
 
 Use `RadioGroupBase.RootProvider` when you need to access the radio group state outside of the component tree. This pattern uses the `useRadioGroup` hook from Ark UI to create a shared context that both the radio group and external elements can reference.
 
 <ComponentPreview code={RadioGroupRootProviderDemoCode}>
-  <RadioGroupRootProviderDemo  client:load />
+  <RadioGroupRootProviderDemo client:load />
 </ComponentPreview>
 
 The key difference:

@@ -1,6 +1,12 @@
 import ComponentPreview from "../../../../components/ComponentPreview.astro";
+import AccordionBasicDemo from "@demos/accordion-demo/AccordionBasicDemo.tsx";
+import AccordionBasicDemoCode from "@demos/accordion-demo/AccordionBasicDemo.tsx?code";
+import AccordionMultipleItemsDemo from "@demos/accordion-demo/AccordionMultipleItemsDemo.tsx";
+import AccordionMultipleItemsDemoCode from "@demos/accordion-demo/AccordionMultipleItemsDemo.tsx?code";
 import AccordionMultipleDemo from "@demos/accordion-demo/AccordionMultipleDemo.tsx";
 import AccordionMultipleDemoCode from "@demos/accordion-demo/AccordionMultipleDemo.tsx?code";
+import AccordionControlledDemo from "@demos/accordion-demo/AccordionControlledDemo.tsx";
+import AccordionControlledDemoCode from "@demos/accordion-demo/AccordionControlledDemo.tsx?code";
 import AccordionRootProviderDemo from "@demos/accordion-demo/AccordionRootProviderDemo.tsx";
 import AccordionRootProviderDemoCode from "@demos/accordion-demo/AccordionRootProviderDemo.tsx?code";
 import AccordionDisabledDemo from "@demos/accordion-demo/AccordionDisabledDemo.tsx";
@@ -8,55 +14,20 @@ import AccordionDisabledDemoCode from "@demos/accordion-demo/AccordionDisabledDe
 
 ## Usage
 
-Import the components:
 
-```tsx
-import {
-  Accordion,
-  AccordionItem,
-  AccordionItemTrigger,
-  AccordionItemContent,
-  AccordionBase,
-} from "~/components/accordion";
-```
+### Basic Usage
 
-Basic usage:
+<ComponentPreview code={AccordionBasicDemoCode}>
+  <AccordionBasicDemo client:load />
+</ComponentPreview>
 
-```tsx
-<Accordion>
-  <AccordionItem value="item-1">
-    <AccordionItemTrigger>
-      Section Title
-    </AccordionItemTrigger>
-    <AccordionItemContent>
-      <div class="pb-4 text-sm">Content goes here.</div>
-    </AccordionItemContent>
-  </AccordionItem>
-</Accordion>
-```
+### Multiple Items
 
-With multiple items:
+An accordion with multiple collapsible items.
 
-```tsx
-<Accordion defaultValue={["item-1"]}>
-  <AccordionItem value="item-1">
-    <AccordionItemTrigger>
-      First Section
-    </AccordionItemTrigger>
-    <AccordionItemContent>
-      <div class="pb-4 text-sm">First content.</div>
-    </AccordionItemContent>
-  </AccordionItem>
-  <AccordionItem value="item-2">
-    <AccordionItemTrigger>
-      Second Section
-    </AccordionItemTrigger>
-    <AccordionItemContent>
-      <div class="pb-4 text-sm">Second content.</div>
-    </AccordionItemContent>
-  </AccordionItem>
-</Accordion>
-```
+<ComponentPreview code={AccordionMultipleItemsDemoCode}>
+  <AccordionMultipleItemsDemo client:load />
+</ComponentPreview>
 
 ### Multiple
 
@@ -70,32 +41,21 @@ Use the `multiple` prop to allow more than one item to be expanded at the same t
 
 Control the expanded state programmatically using `value` and `onValueChange`.
 
-```tsx
-import { createSignal } from "solid-js";
-import {
-  Accordion,
-  AccordionItem,
-  AccordionItemTrigger,
-  AccordionItemContent,
-} from "~/components/accordion";
+<ComponentPreview code={AccordionControlledDemoCode}>
+  <AccordionControlledDemo client:load />
+</ComponentPreview>
 
-export function AccordionControlled() {
-  const [value, setValue] = createSignal<string[]>([]);
+### Disabled
 
-  return (
-    <Accordion value={value()} onValueChange={(details) => setValue(details.value)}>
-      <AccordionItem value="item-1">
-        <AccordionItemTrigger>
-          Controlled Item
-        </AccordionItemTrigger>
-        <AccordionItemContent>
-          <div class="pb-4 text-sm">Current state: {value().join(", ") || "closed"}</div>
-        </AccordionItemContent>
-      </AccordionItem>
-    </Accordion>
-  );
-}
-```
+Disable individual items or the entire accordion.
+
+<ComponentPreview code={AccordionDisabledDemoCode}>
+  <AccordionDisabledDemo client:load />
+</ComponentPreview>
+
+To disable all items at once, pass `disabled` to the `{"<Accordion>"}` root.
+
+## Advanced Usage
 
 ### Root Provider
 
@@ -110,12 +70,3 @@ The key difference:
 - **`Accordion` (Root)** — manages its own state internally. Use for simple, self-contained accordions.
 - **`AccordionRootProvider`** — accepts a pre-created accordion context via `useAccordion`. Use when you need to read or control the accordion state from outside the component tree.
 
-### Disabled
-
-Disable individual items or the entire accordion.
-
-<ComponentPreview code={AccordionDisabledDemoCode}>
-  <AccordionDisabledDemo client:load />
-</ComponentPreview>
-
-To disable all items at once, pass `disabled` to the `{"<Accordion>"}` root.
