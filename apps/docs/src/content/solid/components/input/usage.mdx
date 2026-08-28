@@ -1,31 +1,34 @@
+import ComponentPreview from '../../../../components/ComponentPreview.astro';
+import InputBasicDemo from '@demos/input-demo/InputBasicDemo.tsx';
+import InputBasicDemoCode from '@demos/input-demo/InputBasicDemo.tsx?code';
+import InputDescriptionDemo from '@demos/input-demo/InputDescriptionDemo.tsx';
+import InputDescriptionDemoCode from '@demos/input-demo/InputDescriptionDemo.tsx?code';
+import InputErrorDemo from '@demos/input-demo/InputErrorDemo.tsx';
+import InputErrorDemoCode from '@demos/input-demo/InputErrorDemo.tsx?code';
+
 ## Usage
 
-Import the component:
 
-```tsx
-import { Input } from "~/components/input";
-```
+### Basic Usage
 
-Basic input:
+A basic text input field.
 
-```tsx
-<Input placeholder="Enter text..." />
-```
+<ComponentPreview code={InputBasicDemoCode}>
+  <InputBasicDemo client:load />
+</ComponentPreview>
 
-With label:
+### With Description
 
-```tsx
-<Input label="Username" placeholder="Enter username" />
-```
+Add a helper description below the input using the `description` prop.
 
-With description:
+<ComponentPreview code={InputDescriptionDemoCode}>
+  <InputDescriptionDemo client:load />
+</ComponentPreview>
 
-```tsx
-<Input label="Email" description="We'll never share your email." placeholder="email@example.com" />
-```
+### With Error State
 
-With error state:
+Display an error message below the input using the `error` prop.
 
-```tsx
-<Input label="Password" error="Password is required" type="password" />
-```
+<ComponentPreview code={InputErrorDemoCode}>
+  <InputErrorDemo client:load />
+</ComponentPreview>

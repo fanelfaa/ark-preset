@@ -1,47 +1,53 @@
+import ComponentPreview from "../../../../components/ComponentPreview.astro";
+import TypographyHeadingsDemo from "@demos/typography-demo/TypographyHeadingsDemo.tsx";
+import TypographyHeadingsDemoCode from "@demos/typography-demo/TypographyHeadingsDemo.tsx?code";
+import TypographyBodyDemo from "@demos/typography-demo/TypographyBodyDemo.tsx";
+import TypographyBodyDemoCode from "@demos/typography-demo/TypographyBodyDemo.tsx?code";
+import TypographyInlineCodeDemo from "@demos/typography-demo/TypographyInlineCodeDemo.tsx";
+import TypographyInlineCodeDemoCode from "@demos/typography-demo/TypographyInlineCodeDemo.tsx?code";
+import TypographyBlockquoteDemo from "@demos/typography-demo/TypographyBlockquoteDemo.tsx";
+import TypographyBlockquoteDemoCode from "@demos/typography-demo/TypographyBlockquoteDemo.tsx?code";
+import TypographyListDemo from "@demos/typography-demo/TypographyListDemo.tsx";
+import TypographyListDemoCode from "@demos/typography-demo/TypographyListDemo.tsx?code";
+
 ## Usage
 
-Import the component:
+### Headings
 
-```tsx
-import { H1, H2, P, Lead } from "@ark-preset/solid";
-```
+Heading components from <code>H1</code> through <code>H4</code> for structured document titles.
 
-Headings:
+<ComponentPreview code={TypographyHeadingsDemoCode}>
+  <TypographyHeadingsDemo client:load />
+</ComponentPreview>
 
-```tsx
-<H1>The Quick Brown Fox</H1>
-<H2>The Quick Brown Fox</H2>
-<H3>The Quick Brown Fox</H3>
-<H4>The Quick Brown Fox</H4>
-```
+### Body Text
 
-Body text:
+Components for paragraphs, lead text, large, small, and muted copy.
 
-```tsx
-<P>Regular paragraph text with standard styling.</P>
-<Lead>Lead paragraph for introducing content.</Lead>
-<Large>Large styled text.</Large>
-<Small>Small styled text.</Small>
-<Muted>Muted secondary text.</Muted>
-```
+<ComponentPreview code={TypographyBodyDemoCode}>
+  <TypographyBodyDemo client:load />
+</ComponentPreview>
 
-Inline elements:
+### Inline Elements
 
-```tsx
-<P>Use `InlineCode` for inline code snippets.</P>
-```
+Use the <code>InlineCode</code> component for displaying inline snippets of code.
 
-Blockquote:
+<ComponentPreview code={TypographyInlineCodeDemoCode}>
+  <TypographyInlineCodeDemo client:load />
+</ComponentPreview>
 
-```tsx
-<Blockquote>"A quote for emphasis."</Blockquote>
-```
+### Blockquote
 
-List:
+Use the <code>Blockquote</code> component for quoted text callouts.
 
-```tsx
-<List>
-  <li>First item</li>
-  <li>Second item</li>
-</List>
-```
+<ComponentPreview code={TypographyBlockquoteDemoCode}>
+  <TypographyBlockquoteDemo client:load />
+</ComponentPreview>
+
+### List
+
+Use the <code>List</code> component for formatted bulleted lists.
+
+<ComponentPreview code={TypographyListDemoCode}>
+  <TypographyListDemo client:load />
+</ComponentPreview>

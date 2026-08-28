@@ -1,23 +1,22 @@
+import ComponentPreview from '../../../../components/ComponentPreview.astro';
+import SeparatorBasicDemo from '@demos/separator-demo/SeparatorBasicDemo.tsx';
+import SeparatorBasicDemoCode from '@demos/separator-demo/SeparatorBasicDemo.tsx?code';
+import SeparatorVerticalDemo from '@demos/separator-demo/SeparatorVerticalDemo.tsx';
+import SeparatorVerticalDemoCode from '@demos/separator-demo/SeparatorVerticalDemo.tsx?code';
+
 ## Usage
 
-Import the component:
 
-```tsx
-import { Separator } from "@ark-preset/solid";
-```
+### Basic Usage
 
-Basic horizontal:
+<ComponentPreview code={SeparatorBasicDemoCode}>
+  <SeparatorBasicDemo client:load />
+</ComponentPreview>
 
-```tsx
-<Separator />
-```
+### Vertical
 
-Vertical:
+Set the <code>orientation</code> prop to <code>"vertical"</code> for a vertical separator.
 
-```tsx
-<div class="flex h-10 items-center gap-4">
-  <span>Left</span>
-  <Separator orientation="vertical" />
-  <span>Right</span>
-</div>
-```
+<ComponentPreview code={SeparatorVerticalDemoCode}>
+  <SeparatorVerticalDemo client:load />
+</ComponentPreview>

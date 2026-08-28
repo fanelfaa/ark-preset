@@ -1,5 +1,0 @@
-node_modules/
-.moon/
-dist/
-.git/
-apps/docs/src/routeTree.gen.ts

@@ -17,7 +17,7 @@ import { tv, type VariantProps } from "tailwind-variants";
 
 export const toastVariants = tv({
   slots: {
-    root: "group pointer-events-auto relative flex w-full min-w-sm max-w-sm items-center justify-between gap-x-4 overflow-hidden rounded-md outline-2 outline-border p-4 shadow-lg transition-all data-[state=open]:animate-in data-[state=closed]:animate-out data-[swipe=end]:animate-out bg-background/80 backdrop-blur-3xl",
+    root: "group pointer-events-auto relative flex w-full min-w-sm max-w-sm items-center justify-between gap-x-4 overflow-hidden rounded-md outline-2 outline-border p-4 shadow-lg bg-background/80 backdrop-blur-3xl [translate:var(--x)_var(--y)] [scale:var(--scale)] [height:var(--height)] [opacity:var(--opacity)] [z-index:var(--z-index)] will-change-[translate,opacity,scale] transition-[translate,scale,opacity,height] [transition-timing-function:cubic-bezier(0.21,1.02,0.73,1)] duration-400 data-[state=closed]:[transition-timing-function:cubic-bezier(0.06,0.71,0.55,1)]",
     title: "text-sm font-semibold",
     description: "text-sm opacity-90",
     closeTrigger:

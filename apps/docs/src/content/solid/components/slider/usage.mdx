@@ -1,37 +1,31 @@
 import ComponentPreview from '../../../../components/ComponentPreview.astro';
-import SliderRootProviderDemo from '../../demos/slider-demo/SliderRootProviderDemo.tsx';
-import SliderRootProviderDemoCode from '../../demos/slider-demo/SliderRootProviderDemo.tsx?code';
+import SliderBasicDemo from '@demos/slider-demo/SliderBasicDemo.tsx';
+import SliderBasicDemoCode from '@demos/slider-demo/SliderBasicDemo.tsx?code';
+import SliderDisabledDemo from '@demos/slider-demo/SliderDisabledDemo.tsx';
+import SliderDisabledDemoCode from '@demos/slider-demo/SliderDisabledDemo.tsx?code';
+import SliderRootProviderDemo from '@demos/slider-demo/SliderRootProviderDemo.tsx';
+import SliderRootProviderDemoCode from '@demos/slider-demo/SliderRootProviderDemo.tsx?code';
 
 ## Usage
 
-Import the components:
 
-```tsx
-import {
-  Slider,
-  SliderRootProvider,
-  SliderLabel,
-  SliderValueText,
-  SliderControl,
-  SliderThumb,
-} from "~/components/slider";
-```
+### Basic Usage
 
-Basic usage:
+<ComponentPreview code={SliderBasicDemoCode}>
+  <SliderBasicDemo client:load />
+</ComponentPreview>
 
-```tsx
-<Slider defaultValue={[50]} min={0} max={100}>
-  <div class="flex items-center justify-between gap-4">
-    <SliderLabel>Volume</SliderLabel>
-    <SliderValueText />
-  </div>
-  <SliderControl>
-    <SliderThumb index={0} />
-  </SliderControl>
-</Slider>
-```
+### Disabled
 
-## Root Provider
+Use the `disabled` prop to disable the slider.
+
+<ComponentPreview code={SliderDisabledDemoCode}>
+  <SliderDisabledDemo client:load />
+</ComponentPreview>
+
+## Advanced Usage
+
+### Root Provider
 
 Use `SliderRootProvider` when you need to access the slider state outside of the component tree. This pattern uses the `useSlider` hook from Ark UI to create a shared context that both the slider and external elements can reference.
 
@@ -43,16 +37,3 @@ The key difference:
 
 - **`Slider` (Root)** — manages its own state internally. Use for simple, self-contained sliders.
 - **`SliderRootProvider`** — accepts a pre-created slider context via `useSlider`. Use when you need to read or control the slider state from outside the component tree.
-
-## Disabled
-
-Use the `disabled` prop to disable the slider.
-
-```tsx
-<Slider defaultValue={[50]} disabled>
-  <SliderLabel>Disabled Slider</SliderLabel>
-  <SliderControl>
-    <SliderThumb index={0} />
-  </SliderControl>
-</Slider>
-```

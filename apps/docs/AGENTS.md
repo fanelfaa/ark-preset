@@ -29,7 +29,6 @@ src/content/solid/components/<name>/
 ├── usage.mdx           # Usage patterns + demos
 ├── api.mdx             # API reference link
 ├── installation.mdx    # Generated installation snippet
-├── implement.mdx       # Implementation notes
 └── demos/              # Demo components (optional)
 ```
 

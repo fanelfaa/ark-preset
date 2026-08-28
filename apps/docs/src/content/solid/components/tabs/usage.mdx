@@ -1,4 +1,6 @@
 import ComponentPreview from "../../../../components/ComponentPreview.astro";
+import TabsBasicDemo from "@demos/tabs-demo/TabsBasicDemo.tsx";
+import TabsBasicDemoCode from "@demos/tabs-demo/TabsBasicDemo.tsx?code";
 import TabsDisabledDemo from "@demos/tabs-demo/TabsDisabledDemo.tsx";
 import TabsDisabledDemoCode from "@demos/tabs-demo/TabsDisabledDemo.tsx?code";
 import TabsRootProviderDemo from "@demos/tabs-demo/TabsRootProviderDemo.tsx";
@@ -6,28 +8,20 @@ import TabsRootProviderDemoCode from "@demos/tabs-demo/TabsRootProviderDemo.tsx?
 
 ## Usage
 
-Import the components:
 
-```tsx
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "~/components/tabs";
-```
+### Basic Usage
 
-Basic usage:
+<ComponentPreview code={TabsBasicDemoCode}>
+  <TabsBasicDemo client:load />
+</ComponentPreview>
 
-```tsx
-<Tabs defaultValue="tab-1">
-  <TabsList>
-    <TabsTrigger value="tab-1">Tab One</TabsTrigger>
-    <TabsTrigger value="tab-2">Tab Two</TabsTrigger>
-  </TabsList>
-  <TabsContent value="tab-1">
-    <div class="text-sm">Content for tab one</div>
-  </TabsContent>
-  <TabsContent value="tab-2">
-    <div class="text-sm">Content for tab two</div>
-  </TabsContent>
-</Tabs>
-```
+### Disabled Tab
+
+Use the `disabled` prop on a `TabsTrigger` to disable that specific tab.
+
+<ComponentPreview code={TabsDisabledDemoCode}>
+  <TabsDisabledDemo client:load />
+</ComponentPreview>
 
 ## Advanced Usage
 
@@ -53,15 +47,7 @@ Access raw parts via `TabsBase.Root`, `TabsBase.RootProvider`, `TabsBase.List`, 
 </TabsBase.Root>
 ```
 
-## Disabled Tab
-
-Use the `disabled` prop on a `TabsTrigger` to disable that specific tab.
-
-<ComponentPreview code={TabsDisabledDemoCode}>
-  <TabsDisabledDemo client:load />
-</ComponentPreview>
-
-## Root Provider
+### Root Provider
 
 Use `TabsBase.RootProvider` when you need to access the tabs state outside of the tabs tree. This pattern uses the `useTabs` hook from Ark UI to create a shared context that both the tabs and external elements can reference.
 

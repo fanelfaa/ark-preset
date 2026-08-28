@@ -1,49 +1,36 @@
 import ComponentPreview from "../../../../components/ComponentPreview.astro";
+import MenuBasicDemo from "@demos/menu-demo/MenuBasicDemo.tsx";
+import MenuBasicDemoCode from "@demos/menu-demo/MenuBasicDemo.tsx?code";
 import MenuNestedDemo from "@demos/menu-demo/MenuNestedDemo.tsx";
 import MenuNestedDemoCode from "@demos/menu-demo/MenuNestedDemo.tsx?code";
+import MenuSeparatorDemo from "@demos/menu-demo/MenuSeparatorDemo.tsx";
+import MenuSeparatorDemoCode from "@demos/menu-demo/MenuSeparatorDemo.tsx?code";
 
 > **Note:** Make sure your project has the Tailwind CSS theme variables set up (`--accent`, `--border`, `--popover`, etc.) or override the utility classes to match your design system.
 
 ## Usage
 
-Import the components:
 
-```tsx
-import {
-  MenuTrigger,
-  MenuContent,
-  MenuItem,
-} from "~/components/menu";
-```
+### Basic Usage
 
-Basic usage:
+A basic dropdown menu with actionable items.
 
-```tsx
-import { For } from "solid-js";
-import { MenuTrigger, MenuContent, MenuItem, Menu } from "~/components/menu";
+<ComponentPreview code={MenuBasicDemoCode}>
+  <MenuBasicDemo client:load />
+</ComponentPreview>
 
-<Menu>
-  <MenuTrigger>Actions</MenuTrigger>
-  <MenuContent>
-    <For each={items}>
-      {(item) => (
-        <MenuItem value={item.value}>{item.label}</MenuItem>
-      )}
-    </For>
-  </MenuContent>
-</Menu>
-```
+### Nested Submenus
 
-Nested submenus:
+Nest menus within submenus using `NestedMenuContent` and `MenuTriggerItem`.
 
 <ComponentPreview code={MenuNestedDemoCode}>
   <MenuNestedDemo client:load />
 </ComponentPreview>
 
-With separator:
+### With Separator
 
-```tsx
-<MenuItem value="edit">Edit</MenuItem>
-<MenuSeparator />
-<MenuItem value="delete">Delete</MenuItem>
-```
+Use `MenuSeparator` to group related items within the menu.
+
+<ComponentPreview code={MenuSeparatorDemoCode}>
+  <MenuSeparatorDemo client:load />
+</ComponentPreview>

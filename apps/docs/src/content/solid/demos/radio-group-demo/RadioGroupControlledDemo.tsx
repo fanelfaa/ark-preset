@@ -12,7 +12,7 @@ export default function RadioGroupControlledDemo() {
       <p class="text-sm text-muted-foreground">Selected: {value()}</p>
       <RadioGroup
         value={value()}
-        onValueChange={(e) => setValue(e.value || "1")}
+        onValueChange={(e: any) => setValue(e.value || "1")}
         orientation="horizontal"
       >
         <Index each={paymentMethods}>

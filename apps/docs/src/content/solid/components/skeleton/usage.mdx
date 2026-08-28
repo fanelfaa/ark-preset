@@ -1,83 +1,42 @@
-import { Skeleton } from "@ark-preset/solid";
+import ComponentPreview from '../../../../components/ComponentPreview.astro';
+import SkeletonBasicDemo from '@demos/skeleton-demo/SkeletonBasicDemo.tsx';
+import SkeletonBasicDemoCode from '@demos/skeleton-demo/SkeletonBasicDemo.tsx?code';
+import SkeletonAvatarDemo from '@demos/skeleton-demo/SkeletonAvatarDemo.tsx';
+import SkeletonAvatarDemoCode from '@demos/skeleton-demo/SkeletonAvatarDemo.tsx?code';
+import SkeletonCardDemo from '@demos/skeleton-demo/SkeletonCardDemo.tsx';
+import SkeletonCardDemoCode from '@demos/skeleton-demo/SkeletonCardDemo.tsx?code';
+import SkeletonCustomizingDemo from '@demos/skeleton-demo/SkeletonCustomizingDemo.tsx';
+import SkeletonCustomizingDemoCode from '@demos/skeleton-demo/SkeletonCustomizingDemo.tsx?code';
 
 ## Usage
 
-Import the component:
 
-```tsx
-import { Skeleton } from "@ark-preset/solid";
-```
+### Basic Usage
 
-Basic:
-
-```tsx
-<Skeleton class="h-4 w-[250px]" />
-```
-
-## Examples
+<ComponentPreview code={SkeletonBasicDemoCode}>
+  <SkeletonBasicDemo client:load />
+</ComponentPreview>
 
 ### Avatar Placeholder
 
-<div class="rounded-lg border border-border bg-background/70 backdrop-blur-3xl p-6">
-  <div class="flex items-center gap-4">
-    <Skeleton class="size-10 rounded-full" />
-    <div class="flex flex-col gap-2">
-      <Skeleton class="h-4 w-[200px]" />
-      <Skeleton class="h-3 w-[160px]" />
-    </div>
-  </div>
-</div>
+Use a circular skeleton as a placeholder for an avatar while loading.
 
-```tsx
-<div class="flex items-center gap-4">
-  <Skeleton class="size-10 rounded-full" />
-  <div class="flex flex-col gap-2">
-    <Skeleton class="h-4 w-[200px]" />
-    <Skeleton class="h-3 w-[160px]" />
-  </div>
-</div>
-```
+<ComponentPreview code={SkeletonAvatarDemoCode}>
+  <SkeletonAvatarDemo client:load />
+</ComponentPreview>
 
 ### Card Skeleton
 
-<div class="rounded-lg border border-border bg-background/70 backdrop-blur-3xl p-6">
-  <div class="flex flex-col gap-3 rounded-lg border border-border p-4">
-    <Skeleton class="h-5 w-[250px]" />
-    <Skeleton class="h-4 w-full" />
-    <Skeleton class="h-4 w-[80%]" />
-    <div class="flex gap-2 pt-2">
-      <Skeleton class="h-8 w-20" />
-      <Skeleton class="h-8 w-20" />
-    </div>
-  </div>
-</div>
+Combine multiple skeleton elements to create a card loading placeholder.
 
-```tsx
-<div class="flex flex-col gap-3 rounded-lg border border-border p-4">
-  <Skeleton class="h-5 w-[250px]" />
-  <Skeleton class="h-4 w-full" />
-  <Skeleton class="h-4 w-[80%]" />
-  <div class="flex gap-2 pt-2">
-    <Skeleton class="h-8 w-20" />
-    <Skeleton class="h-8 w-20" />
-  </div>
-</div>
-```
+<ComponentPreview code={SkeletonCardDemoCode}>
+  <SkeletonCardDemo client:load />
+</ComponentPreview>
 
-## Customizing
+### Customizing
 
 The skeleton is a simple `<div>` with `animate-pulse` and `bg-muted` applied. Use `class` to control dimensions and shape:
 
-```tsx
-{/* Circle for avatars */}
-<Skeleton class="size-10 rounded-full" />
-
-{/* Text line */}
-<Skeleton class="h-4 w-[250px]" />
-
-{/* Button placeholder */}
-<Skeleton class="h-9 w-24 rounded-md" />
-
-{/* Full-width card */}
-<Skeleton class="h-32 w-full rounded-xl" />
-```
+<ComponentPreview code={SkeletonCustomizingDemoCode}>
+  <SkeletonCustomizingDemo client:load />
+</ComponentPreview>

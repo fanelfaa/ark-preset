@@ -1,83 +1,41 @@
-
 import ComponentPreview from '../../../../components/ComponentPreview.astro';
-import ColorPickerInlineDemo from '../../demos/color-picker-demo/ColorPickerInlineDemo.tsx';
-import ColorPickerInlineDemoCode from '../../demos/color-picker-demo/ColorPickerInlineDemo.tsx?code';
-import ColorPickerControlledDemo from '../../demos/color-picker-demo/ColorPickerControlledDemo.tsx';
-import ColorPickerControlledDemoCode from '../../demos/color-picker-demo/ColorPickerControlledDemo.tsx?code';
+import ColorPickerBasicDemo from '@demos/color-picker-demo/ColorPickerBasicDemo.tsx';
+import ColorPickerBasicDemoCode from '@demos/color-picker-demo/ColorPickerBasicDemo.tsx?code';
+import ColorPickerInlineDemo from '@demos/color-picker-demo/ColorPickerInlineDemo.tsx';
+import ColorPickerInlineDemoCode from '@demos/color-picker-demo/ColorPickerInlineDemo.tsx?code';
+import ColorPickerControlledDemo from '@demos/color-picker-demo/ColorPickerControlledDemo.tsx';
+import ColorPickerControlledDemoCode from '@demos/color-picker-demo/ColorPickerControlledDemo.tsx?code';
+import ColorPickerAdvancedDemo from '@demos/color-picker-demo/ColorPickerAdvancedDemo.tsx';
+import ColorPickerAdvancedDemoCode from '@demos/color-picker-demo/ColorPickerAdvancedDemo.tsx?code';
 
 ## Usage
 
-Import `ColorPicker`:
 
-```tsx
-import { ColorPicker, ColorPickerBase } from "~/components/color-picker";
-```
+### Basic Usage
 
-Basic usage:
-
-```tsx
-<ColorPicker label="Color" presets={["#ff0000", "#00ff00", "#0000ff"]} />
-```
+<ComponentPreview code={ColorPickerBasicDemoCode}>
+  <ColorPickerBasicDemo client:load />
+</ComponentPreview>
 
 ### Inline
 
 For inline rendering (no popover), use the `inline` prop:
 
 <ComponentPreview code={ColorPickerInlineDemoCode}>
-  <ColorPickerInlineDemo  client:load />
+  <ColorPickerInlineDemo client:load />
 </ComponentPreview>
 
 ### Controlled
 
 <ComponentPreview code={ColorPickerControlledDemoCode}>
-  <ColorPickerControlledDemo  client:load />
+  <ColorPickerControlledDemo client:load />
 </ComponentPreview>
 
-For fully controlled mode, use `value` and `onValueChange`:
-
-```tsx
-import { createSignal } from "solid-js";
-import { parseColor } from "@ark-ui/solid/color-picker";
-import { ColorPicker } from "~/components/color-picker";
-
-export function ColorPickerControlled() {
-  const [value, setValue] = createSignal(parseColor("#eb5e41"));
-
-  return (
-    <ColorPicker
-      label="Color"
-      value={value()}
-      onValueChange={(details) => setValue(details.value)}
-    />
-  );
-}
-```
-
-### Advanced Usage
+## Advanced Usage
 
 For advanced layouts with custom composition, import `ColorPickerBase` to access individual parts:
 
-```tsx
-import { ColorPickerBase } from "~/components/color-picker";
+<ComponentPreview code={ColorPickerAdvancedDemoCode}>
+  <ColorPickerAdvancedDemo client:load />
+</ComponentPreview>
 
-<ColorPickerBase.Root>
-  <ColorPickerBase.Label>Color</ColorPickerBase.Label>
-  <ColorPickerBase.Control>
-    <ColorPickerBase.ValueSwatch />
-    <ColorPickerBase.Trigger>{/* custom trigger icon */}</ColorPickerBase.Trigger>
-  </ColorPickerBase.Control>
-  <ColorPickerBase.Positioner>
-    <ColorPickerBase.Content>
-      <ColorPickerBase.Area>
-        <ColorPickerBase.AreaBackground />
-        <ColorPickerBase.AreaThumb />
-      </ColorPickerBase.Area>
-      <ColorPickerBase.ChannelSlider channel="hue">
-        <ColorPickerBase.ChannelSliderTrack />
-        <ColorPickerBase.ChannelSliderThumb />
-      </ColorPickerBase.ChannelSlider>
-    </ColorPickerBase.Content>
-  </ColorPickerBase.Positioner>
-  <ColorPickerBase.HiddenInput />
-</ColorPickerBase.Root>
-```

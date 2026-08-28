@@ -1,44 +1,30 @@
-
 import ComponentPreview from '../../../../components/ComponentPreview.astro';
-import ListboxMultipleDemo from '../../demos/listbox-demo/ListboxMultipleDemo.tsx';
-import ListboxMultipleDemoCode from '../../demos/listbox-demo/ListboxMultipleDemo.tsx?code';
-import ListboxHorizontalDemo from '../../demos/listbox-demo/ListboxHorizontalDemo.tsx';
-import ListboxHorizontalDemoCode from '../../demos/listbox-demo/ListboxHorizontalDemo.tsx?code';
+import ListboxBasicDemo from '@demos/listbox-demo/ListboxBasicDemo.tsx';
+import ListboxBasicDemoCode from '@demos/listbox-demo/ListboxBasicDemo.tsx?code';
+import ListboxMultipleDemo from '@demos/listbox-demo/ListboxMultipleDemo.tsx';
+import ListboxMultipleDemoCode from '@demos/listbox-demo/ListboxMultipleDemo.tsx?code';
+import ListboxHorizontalDemo from '@demos/listbox-demo/ListboxHorizontalDemo.tsx';
+import ListboxHorizontalDemoCode from '@demos/listbox-demo/ListboxHorizontalDemo.tsx?code';
+import ListboxRootProviderDemo from '@demos/listbox-demo/ListboxRootProviderDemo.tsx';
+import ListboxRootProviderDemoCode from '@demos/listbox-demo/ListboxRootProviderDemo.tsx?code';
 
 ## Usage
 
-Import the component and use it inline:
 
-```tsx
-import { createListCollection } from "@ark-ui/solid";
-import { Index } from "solid-js";
-import { Listbox, ListboxItem } from "~/components/listbox";
-```
+### Basic Usage
 
-Basic listbox:
+A basic listbox for single-item selection.
 
-```tsx
-const frameworks = createListCollection({
-  items: [
-    { label: "React", value: "react" },
-    { label: "Solid", value: "solid" },
-    { label: "Vue", value: "vue" },
-  ],
-});
-
-<Listbox collection={frameworks}>
-  <Index each={frameworks.items}>
-    {(item) => <ListboxItem item={item()}>{item().label}</ListboxItem>}
-  </Index>
-</Listbox>
-```
+<ComponentPreview code={ListboxBasicDemoCode}>
+  <ListboxBasicDemo client:load />
+</ComponentPreview>
 
 ### Multiple Selection
 
 Use `selectionMode="multiple"` to allow selecting multiple items:
 
 <ComponentPreview code={ListboxMultipleDemoCode}>
-  <ListboxMultipleDemo  client:load />
+  <ListboxMultipleDemo client:load />
 </ComponentPreview>
 
 ### Horizontal Orientation
@@ -46,10 +32,10 @@ Use `selectionMode="multiple"` to allow selecting multiple items:
 Use `orientation="horizontal"` for a horizontal layout:
 
 <ComponentPreview code={ListboxHorizontalDemoCode}>
-  <ListboxHorizontalDemo  client:load />
+  <ListboxHorizontalDemo client:load />
 </ComponentPreview>
 
-### Advanced Usage
+## Advanced Usage
 
 When the composite `Listbox` doesn't provide enough control, import the raw primitive parts from the base file directly:
 
@@ -67,30 +53,6 @@ import { ListboxBase } from "~/components/listbox";
 
 For full control over the listbox machine, use `useListbox` with `ListboxBase.RootProvider`:
 
-```tsx
-import { ListboxBase, useListboxVariant } from "~/components/listbox/listbox.base";
-import { useListbox } from "@ark-ui/solid/listbox";
-
-export function RootProviderDemo() {
-  const listbox = useListbox({ collection: frameworks });
-
-  return (
-    <ListboxBase.RootProvider value={listbox}>
-      <ListboxBase.Content>
-        <Index each={frameworks.items}>
-          {(item) => (
-            <ListboxBase.Item item={item()}>
-              <ListboxBase.ItemText>{item().label}</ListboxBase.ItemText>
-              <ListboxBase.ItemIndicator>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4">
-                  <path d="M20 6 9 17l-5-5" />
-                </svg>
-              </ListboxBase.ItemIndicator>
-            </ListboxBase.Item>
-          )}
-        </Index>
-      </ListboxBase.Content>
-    </ListboxBase.RootProvider>
-  );
-}
-```
+<ComponentPreview code={ListboxRootProviderDemoCode}>
+  <ListboxRootProviderDemo client:load />
+</ComponentPreview>

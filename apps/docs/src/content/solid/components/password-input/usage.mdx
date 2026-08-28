@@ -1,40 +1,28 @@
-
 import ComponentPreview from '../../../../components/ComponentPreview.astro';
-import PasswordInputRootProviderDemo from '../../demos/password-input-demo/PasswordInputRootProviderDemo.tsx';
-import PasswordInputRootProviderDemoCode from '../../demos/password-input-demo/PasswordInputRootProviderDemo.tsx?code';
+import PasswordInputBasicDemo from '@demos/password-input-demo/PasswordInputBasicDemo.tsx';
+import PasswordInputBasicDemoCode from '@demos/password-input-demo/PasswordInputBasicDemo.tsx?code';
+import PasswordInputRootProviderDemo from '@demos/password-input-demo/PasswordInputRootProviderDemo.tsx';
+import PasswordInputRootProviderDemoCode from '@demos/password-input-demo/PasswordInputRootProviderDemo.tsx?code';
 
 ## Usage
 
-Import the component:
 
-```tsx
-import { PasswordInput } from "~/components/password-input";
-```
+### Basic Usage
 
-Basic:
+A basic password input field with a toggle visibility button.
 
-```tsx
-<PasswordInput />
-```
+<ComponentPreview code={PasswordInputBasicDemoCode}>
+  <PasswordInputBasicDemo client:load />
+</ComponentPreview>
 
-With label:
+## Advanced Usage
 
-```tsx
-<PasswordInput label="Password" />
-```
-
-With placeholder:
-
-```tsx
-<PasswordInput label="Password" placeholder="Enter your password" />
-```
-
-## Root Provider
+### Root Provider
 
 Use `PasswordInputRootProvider` when you need to control the password input state externally.
 
 <ComponentPreview code={PasswordInputRootProviderDemoCode}>
-  <PasswordInputRootProviderDemo  client:load />
+  <PasswordInputRootProviderDemo client:load />
 </ComponentPreview>
 
 The key difference:

@@ -1,23 +1,16 @@
 import { Index } from "solid-js";
-import { SegmentGroupBase } from "@ark-preset/solid";
+import { SegmentGroup, SegmentGroupItem } from "@ark-preset/solid";
 
 const frameworks = ["React", "Solid", "Vue"];
 
 export default function SegmentGroupOutlineDemo() {
   return (
     <div>
-      <SegmentGroupBase.Root defaultValue="React" variant="outline">
-        <SegmentGroupBase.Indicator />
+      <SegmentGroup defaultValue="React" variant="outline">
         <Index each={frameworks}>
-          {(framework) => (
-            <SegmentGroupBase.Item value={framework()}>
-              <SegmentGroupBase.ItemText>{framework()}</SegmentGroupBase.ItemText>
-              <SegmentGroupBase.ItemControl />
-              <SegmentGroupBase.ItemHiddenInput />
-            </SegmentGroupBase.Item>
-          )}
+          {(framework) => <SegmentGroupItem value={framework()}>{framework()}</SegmentGroupItem>}
         </Index>
-      </SegmentGroupBase.Root>
+      </SegmentGroup>
     </div>
   );
 }

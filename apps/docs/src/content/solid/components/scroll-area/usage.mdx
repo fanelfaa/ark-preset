@@ -1,31 +1,25 @@
+import ComponentPreview from '../../../../components/ComponentPreview.astro';
+import ScrollAreaBasicDemo from '@demos/scroll-area-demo/ScrollAreaBasicDemo.tsx';
+import ScrollAreaBasicDemoCode from '@demos/scroll-area-demo/ScrollAreaBasicDemo.tsx?code';
+import ScrollAreaHorizontalDemo from '@demos/scroll-area-demo/ScrollAreaHorizontalDemo.tsx';
+import ScrollAreaHorizontalDemoCode from '@demos/scroll-area-demo/ScrollAreaHorizontalDemo.tsx?code';
 
 ## Usage
 
-Import the component:
 
-```tsx
-import { ScrollArea } from "~/components/scroll-area";
-```
+### Basic Usage
 
-Basic vertical scroll:
+<ComponentPreview code={ScrollAreaBasicDemoCode}>
+  <ScrollAreaBasicDemo client:load />
+</ComponentPreview>
 
-```tsx
-<ScrollArea class="h-[200px] w-[350px]" orientation="vertical">
-  <div class="p-4">
-    <p>Long content here...</p>
-  </div>
-</ScrollArea>
-```
+### Horizontal
 
-Horizontal scroll:
+Scroll content horizontally with custom styled scrollbars.
 
-```tsx
-<ScrollArea class="w-[350px]" orientation="horizontal">
-  <div class="flex w-[800px] p-4">
-    <p>Wide content here...</p>
-  </div>
-</ScrollArea>
-```
+<ComponentPreview code={ScrollAreaHorizontalDemoCode}>
+  <ScrollAreaHorizontalDemo client:load />
+</ComponentPreview>
 
 ## Advanced Usage
 

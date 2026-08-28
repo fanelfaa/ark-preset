@@ -1,76 +1,39 @@
+import ComponentPreview from '../../../../components/ComponentPreview.astro';
+import DrawerBasicDemo from '@demos/drawer-demo/DrawerBasicDemo.tsx';
+import DrawerBasicDemoCode from '@demos/drawer-demo/DrawerBasicDemo.tsx?code';
+import DrawerWithFormDemo from '@demos/drawer-demo/DrawerWithFormDemo.tsx';
+import DrawerWithFormDemoCode from '@demos/drawer-demo/DrawerWithFormDemo.tsx?code';
+import DrawerRootProviderDemo from '@demos/drawer-demo/DrawerRootProviderDemo.tsx';
+import DrawerRootProviderDemoCode from '@demos/drawer-demo/DrawerRootProviderDemo.tsx?code';
+
 ## Usage
 
-Import the components:
 
-```tsx
-import {
-  Drawer,
-  DrawerTrigger,
-  DrawerContent,
-  DrawerTitle,
-  DrawerDescription,
-} from "~/components/drawer";
-```
+### Basic Usage
 
-Basic usage:
+A basic drawer that slides in from the screen edge.
 
-```tsx
-<Drawer swipeDirection="start">
-  <DrawerTrigger>Open Drawer</DrawerTrigger>
-  <DrawerContent>
-    <DrawerTitle>Title</DrawerTitle>
-    <DrawerDescription>Description text</DrawerDescription>
-  </DrawerContent>
-</Drawer>
-```
+<ComponentPreview code={DrawerBasicDemoCode}>
+  <DrawerBasicDemo client:load />
+</ComponentPreview>
 
 ### With Form
 
 Combine with form elements for profile editing, settings, or data entry.
 
-```tsx
-<Drawer swipeDirection="start">
-  <DrawerTrigger>Edit Profile</DrawerTrigger>
-  <DrawerContent>
-    <div class="flex flex-col gap-1 px-4 pt-2 pb-4">
-      <DrawerTitle>Edit Profile</DrawerTitle>
-      <DrawerDescription>Update your personal information.</DrawerDescription>
-    </div>
-    <div class="flex flex-col gap-4 p-4">
-      <Input label="Name" placeholder="Your name" />
-      <Input label="Email" type="email" placeholder="your@email.com" />
-    </div>
-  </DrawerContent>
-</Drawer>
-```
+<ComponentPreview code={DrawerWithFormDemoCode}>
+  <DrawerWithFormDemo client:load />
+</ComponentPreview>
+
+## Advanced Usage
 
 ### Root Provider
 
 Use `DrawerBase.RootProvider` when you need to access the drawer state outside of the component tree. This pattern uses the `useDrawer` hook from Ark UI to create a shared context.
 
-```tsx
-import { useDrawer } from "@ark-ui/solid/drawer";
-import { DrawerContent, DrawerTrigger, DrawerTitle, DrawerDescription, DrawerBase } from "~/components/drawer";
-import { Button } from "~/components/button";
-
-export function ExternalControlExample() {
-  const drawer = useDrawer({ defaultOpen: false });
-
-  return (
-    <div>
-      <Button onClick={() => drawer().setOpen(true)}>Open Drawer</Button>
-
-      <DrawerBase.RootProvider value={drawer}>
-        <DrawerTrigger style="display:none">Hidden Trigger</DrawerTrigger>
-        <DrawerContent>
-          <DrawerTitle>Externally Controlled Drawer</DrawerTitle>
-          <DrawerDescription>This drawer is controlled via useDrawer.</DrawerDescription>
-        </DrawerContent>
-      </DrawerBase.RootProvider>
-    </div>
-  );
-}
-```
+<ComponentPreview code={DrawerRootProviderDemoCode}>
+  <DrawerRootProviderDemo client:load />
+</ComponentPreview>
 
 The key difference:
 

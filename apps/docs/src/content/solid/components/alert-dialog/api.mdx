@@ -5,3 +5,17 @@
 See the [Ark UI Dialog](https://ark-ui.com/docs/components/dialog) documentation.
 
 The `AlertDialog` automatically sets `role="alertdialog"` on the dialog content, providing proper accessibility semantics for alert dialogs.
+
+## Anatomy
+
+| Part | Element | Description |
+|------|---------|-------------|
+| `AlertDialog` | — | Manages dialog state, uses `role="alertdialog"` |
+| `AlertDialogTrigger` | `button` | The button that opens the dialog |
+| `AlertDialogContent` | `div` | The dialog panel (portal to body) |
+| `AlertDialogHeader` | `div` | Header section for title and description |
+| `AlertDialogTitle` | `h2` | The dialog title |
+| `AlertDialogDescription` | `div` | Descriptive text for the dialog |
+| `AlertDialogFooter` | `div` | Footer section for action buttons |
+| `AlertDialogCancel` | `button` | Dismisses the dialog |
+| `AlertDialogAction` | `button` | Confirms the dialog action |

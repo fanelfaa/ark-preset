@@ -1,32 +1,22 @@
+import ComponentPreview from "../../../../components/ComponentPreview.astro";
+import AvatarBasicDemo from "@demos/avatar-demo/AvatarBasicDemo.tsx";
+import AvatarBasicDemoCode from "@demos/avatar-demo/AvatarBasicDemo.tsx?code";
+import AvatarFallbackDemo from "@demos/avatar-demo/AvatarFallbackDemo.tsx";
+import AvatarFallbackDemoCode from "@demos/avatar-demo/AvatarFallbackDemo.tsx?code";
+
 ## Usage
 
-> **Note:** Make sure your project has the Tailwind CSS theme variables set up or override the utility classes to match your design system.
 
-Import the components:
+### Basic Usage
 
-```tsx
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "~/components/avatar";
-```
-
-Basic usage:
-
-```tsx
-<Avatar>
-  <AvatarFallback>JD</AvatarFallback>
-  <AvatarImage src="https://i.pravatar.cc/150?u=john" alt="John Doe" />
-</Avatar>
-```
+<ComponentPreview code={AvatarBasicDemoCode}>
+  <AvatarBasicDemo client:load />
+</ComponentPreview>
 
 ### With Fallback Only
 
 When no image is provided or the image fails to load, the fallback is shown:
 
-```tsx
-<Avatar>
-  <AvatarFallback>AB</AvatarFallback>
-</Avatar>
-```
+<ComponentPreview code={AvatarFallbackDemoCode}>
+  <AvatarFallbackDemo client:load />
+</ComponentPreview>

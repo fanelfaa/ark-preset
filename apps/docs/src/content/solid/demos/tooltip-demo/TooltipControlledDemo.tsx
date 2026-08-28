@@ -11,7 +11,7 @@ export default function TooltipControlledDemo() {
       >
         {open() ? "Close" : "Open"} tooltip
       </button>
-      <Tooltip open={open()} onOpenChange={(e) => setOpen(e.open)}>
+      <Tooltip open={open()} onOpenChange={(e: { open: boolean }) => setOpen(e.open)}>
         <TooltipTrigger>Hover or click above</TooltipTrigger>
         <TooltipContent>Controlled tooltip</TooltipContent>
       </Tooltip>

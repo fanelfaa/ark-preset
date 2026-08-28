@@ -27,8 +27,8 @@ const CODE_QUERY = "?code";
 function componentFromPath(filePath: string): string {
   // .../src/components/demos/<component>-demo/XxxDemo.tsx
   // or .../src/components/demos/<component>/XxxDemo.tsx
-  const m = filePath.match(/demos\/([^/]+)(?:-demo)?\//);
-  return m ? m[1] : "";
+  const m = filePath.match(/demos\/([^/]+)\//);
+  return m ? m[1].replace(/-demo$/, "") : "";
 }
 
 /** Rewrite the raw demo source for display inside a code block. */

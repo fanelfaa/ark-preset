@@ -35,7 +35,6 @@ import {
   SegmentGroup,
   SegmentGroupItem,
   Toggle,
-  ToggleIndicator,
   ToggleGroup,
   ToggleGroupItem,
   PasswordInput,
@@ -447,22 +446,6 @@ export default function TanstackFormDemo() {
             onPressedChange={(pressed) => field().handleChange(!!pressed)}
             onBlur={field().handleBlur}
           >
-            <ToggleIndicator>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z" />
-                <path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z" />
-              </svg>
-            </ToggleIndicator>
             Bold
           </Toggle>
         )}
@@ -494,9 +477,7 @@ export default function TanstackFormDemo() {
               checked={field().state.value}
               invalid={!!fieldError(field())}
               onCheckedChange={(e) => {
-                console.log("[dbg] checkbox onCheckedChange", JSON.stringify(e));
                 field().handleChange(!!e.checked);
-                console.log("[dbg] field value now", field().state.value);
               }}
               onBlur={field().handleBlur}
             >

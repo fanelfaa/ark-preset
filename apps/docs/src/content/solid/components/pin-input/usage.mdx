@@ -1,40 +1,33 @@
-
 import ComponentPreview from '../../../../components/ComponentPreview.astro';
-import PinInputRootProviderDemo from '../../demos/pin-input-demo/PinInputRootProviderDemo.tsx';
-import PinInputRootProviderDemoCode from '../../demos/pin-input-demo/PinInputRootProviderDemo.tsx?code';
+import PinInputBasicDemo from '@demos/pin-input-demo/PinInputBasicDemo.tsx';
+import PinInputBasicDemoCode from '@demos/pin-input-demo/PinInputBasicDemo.tsx?code';
+import PinInputMaskedDemo from '@demos/pin-input-demo/PinInputMaskedDemo.tsx';
+import PinInputMaskedDemoCode from '@demos/pin-input-demo/PinInputMaskedDemo.tsx?code';
+import PinInputRootProviderDemo from '@demos/pin-input-demo/PinInputRootProviderDemo.tsx';
+import PinInputRootProviderDemoCode from '@demos/pin-input-demo/PinInputRootProviderDemo.tsx?code';
 
 ## Usage
 
-Import the components:
 
-```tsx
-import { PinInput, PinInputControl, PinInputInput, PinInputLabel } from "~/components/pin-input";
-import { Index } from "solid-js";
-```
+### Basic Usage
 
-Basic:
+A basic multi-input field for PIN and verification codes.
 
-```tsx
-<PinInput>
-  <PinInputLabel>Code</PinInputLabel>
-  <PinInputControl>
-    <Index each={[0, 1, 2, 3]}>{(id) => <PinInputInput index={id()} />}</Index>
-  </PinInputControl>
-</PinInput>
-```
+<ComponentPreview code={PinInputBasicDemoCode}>
+  <PinInputBasicDemo client:load />
+</ComponentPreview>
 
-Masked (for sensitive codes):
+### Masked
 
-```tsx
-<PinInput placeholder="\u2022" mask>
-  <PinInputLabel>PIN</PinInputLabel>
-  <PinInputControl>
-    <Index each={[0, 1, 2, 3]}>{(id) => <PinInputInput index={id()} />}</Index>
-  </PinInputControl>
-</PinInput>
-```
+Use the `mask` prop to obscure sensitive input values.
 
-## Root Provider
+<ComponentPreview code={PinInputMaskedDemoCode}>
+  <PinInputMaskedDemo client:load />
+</ComponentPreview>
+
+## Advanced Usage
+
+### Root Provider
 
 Use `PinInputRootProvider` when you need to control the pin input state externally.
 

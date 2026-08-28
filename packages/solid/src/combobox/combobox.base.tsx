@@ -10,8 +10,13 @@ type ComboboxRootProps = ArkCombobox.RootProps<{ label: string; value: string }>
 
 const Root: Component<ComboboxRootProps> = (props) => {
   const [local, others] = splitProps(props, ["class", "error"]);
-  const localStyles = () => comboboxVariants({ error: !!local.error });
-  return <ArkCombobox.Root class={localStyles().root({ class: local.class })} {...others} />;
+  return (
+    <ArkCombobox.Root
+      class={styles.root({ class: local.class })}
+      data-error={local.error ? "" : undefined}
+      {...others}
+    />
+  );
 };
 
 type ComboboxRootProviderProps = ArkCombobox.RootProviderProps<{ label: string; value: string }>;

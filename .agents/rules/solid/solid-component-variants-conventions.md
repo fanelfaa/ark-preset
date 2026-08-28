@@ -29,6 +29,44 @@ If `variants()` takes no arguments or has no reactive dependencies, call directl
 const styles = selectVariants();
 ```
 
+### 3b. Data Attributes (alternative to reactive variants)
+
+When a variant only controls a visual state (e.g. `error`) and can be expressed as a CSS data-attribute selector, prefer setting a `data-*` attribute on the element and using `data-[attr]:` classes in the recipe. This avoids `createMemo` and keeps the recipe self-contained:
+
+```tsx
+// ✅ Recipe uses data- attribute selectors
+export const comboboxVariants = tv({
+  slots: {
+    root: "grid gap-1.5 w-full group/combobox",
+    control:
+      "... group-data-[error]/combobox:border-destructive group-data-[error]/combobox:focus-within:ring-destructive",
+  },
+});
+
+// ✅ Component sets data attribute, no createMemo needed
+const Root: Component<Props> = (props) => {
+  const [local, others] = splitProps(props, ["class", "error"]);
+  return (
+    <ArkRoot
+      class={styles.root({ class: local.class })}
+      data-error={local.error ? "" : undefined}
+      {...others}
+    />
+  );
+};
+```
+
+Use this pattern when:
+
+- The variant maps cleanly to a CSS selector (`data-[state=...]`, `data-[error]`, etc.)
+- The recipe can express all styling via data-attribute selectors without needing the variant value passed in
+- You want to avoid `createMemo` and keep the variant call static
+
+Fall back to reactive variants + `createMemo` when:
+
+- The variant value affects multiple slots differently
+- The recipe needs the actual value (not just presence/absence) to compute styles
+
 ### 4. Class Merging via Variants
 
 Use `{ class: local.class }` to merge user-supplied class with built-in variant classes:
@@ -67,14 +105,15 @@ Slots without class merging can use `styles.slot()` directly:
 
 ### 6. Reference Examples
 
-| File                            | Component     | Type                                         |
-| ------------------------------- | ------------- | -------------------------------------------- |
-| `packages/solid/src/input.tsx`  | Input         | Reactive variants (`error`) + slot memo      |
-| `packages/solid/src/button.tsx` | Button        | Reactive variants (`variant`, `size`)        |
-| `packages/solid/src/select.tsx` | SelectRoot    | Reactive variants (`error`) + slot memo      |
-| `packages/solid/src/select.tsx` | SelectLabel   | Static variants, no memo                     |
-| `packages/solid/src/select.tsx` | SelectControl | Static variants + slot memo (`controlClass`) |
-| `packages/solid/src/dialog.tsx` | DialogContent | Static variants + slot memo (`contentClass`) |
+| File                                            | Component     | Type                                         |
+| ----------------------------------------------- | ------------- | -------------------------------------------- |
+| `packages/solid/src/input.tsx`                  | Input         | Reactive variants (`error`) + slot memo      |
+| `packages/solid/src/button.tsx`                 | Button        | Reactive variants (`variant`, `size`)        |
+| `packages/solid/src/select.tsx`                 | SelectRoot    | Reactive variants (`error`) + slot memo      |
+| `packages/solid/src/select.tsx`                 | SelectLabel   | Static variants, no memo                     |
+| `packages/solid/src/select.tsx`                 | SelectControl | Static variants + slot memo (`controlClass`) |
+| `packages/solid/src/dialog.tsx`                 | DialogContent | Static variants + slot memo (`contentClass`) |
+| `packages/solid/src/combobox/combobox.base.tsx` | ComboboxRoot  | Data-attribute pattern (`data-error`)        |
 
 ### 7. Rule Summary
 

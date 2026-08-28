@@ -2,18 +2,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "@ark-preset/solid";
 
 export default function AvatarBasicDemo() {
   return (
-    <div class="flex items-center gap-4">
-      <Avatar>
-        <AvatarFallback>JD</AvatarFallback>
-        <AvatarImage src="https://i.pravatar.cc/150?u=john" alt="John Doe" />
-      </Avatar>
-      <Avatar>
-        <AvatarFallback>AB</AvatarFallback>
-        <AvatarImage src="https://i.pravatar.cc/150?u=jane" alt="Alice Brown" />
-      </Avatar>
-      <Avatar>
-        <AvatarFallback>+3</AvatarFallback>
-      </Avatar>
-    </div>
+    <Avatar>
+      <AvatarFallback>JD</AvatarFallback>
+      <AvatarImage src="https://i.pravatar.cc/150?u=john" alt="John Doe" />
+    </Avatar>
   );
 }

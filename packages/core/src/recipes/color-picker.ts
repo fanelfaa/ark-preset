@@ -10,7 +10,7 @@ export const colorPickerVariants = tv({
       "disabled:cursor-not-allowed disabled:opacity-50",
     ],
     content: [
-      "z-50 flex flex-col gap-3 rounded-lg border bg-popover p-4 shadow-md outline-none",
+      "z-50 w-64 flex flex-col gap-3 rounded-lg border bg-popover p-4 shadow-md outline-none",
       "data-[state=open]:animate-in data-[state=closed]:animate-out",
     ],
     area: "relative h-40 w-full overflow-hidden rounded-md",

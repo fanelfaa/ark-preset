@@ -7,7 +7,11 @@ export default function TagsInputControlledDemo() {
     <div class="space-y-6">
       <div>
         <p class="text-sm text-muted-foreground mb-2">Tags: {value().join(", ")}</p>
-        <TagsInput value={value()} onValueChange={(e) => setValue(e.value)} label="Frameworks" />
+        <TagsInput
+          value={value()}
+          onValueChange={(e: { value: string[] }) => setValue(e.value)}
+          label="Frameworks"
+        />
       </div>
     </div>
   );

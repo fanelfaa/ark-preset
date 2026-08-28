@@ -49,6 +49,7 @@ Monorepo UI library with Ark UI primitives, Solid.js implementations, CLI tool, 
 
 ## CONVENTIONS
 
+- **Git & Branches**: See [.agents/rules/git.md](.agents/rules/git.md) for branch naming (`feat/`, `fix/`) and Conventional Commits rules.
 - Use Ark UI primitives as base for all components
 - Style with tailwind-variants tv() function in core recipes
 - Framework wrappers (solid) delegate to Ark UI with minimal props

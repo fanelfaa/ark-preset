@@ -32,9 +32,21 @@ const DialogContent: Component<ArkDialog.ContentProps> = (props) => {
   return <ArkDialog.Content class={styles.content({ class: local.class })} {...others} />;
 };
 
-const DialogCloseTrigger: Component<ArkDialog.CloseTriggerProps> = (props) => {
+const DialogCloseTrigger: Component<ArkDialog.CloseTriggerProps & ButtonVariants> = (props) => {
+  const [local, others] = splitProps(props, ["class", "variant", "size"]);
+  return (
+    <ArkDialog.CloseTrigger
+      class={buttonVariants({ variant: local.variant, size: local.size, class: local.class })}
+      {...others}
+    />
+  );
+};
+
+const DialogIconCloseTrigger: Component<ArkDialog.CloseTriggerProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
-  return <ArkDialog.CloseTrigger class={styles.closeTrigger({ class: local.class })} {...others} />;
+  return (
+    <Dialog.UnstyledCloseTrigger class={styles.closeTrigger({ class: local.class })} {...others} />
+  );
 };
 
 const DialogTitle: Component<ArkDialog.TitleProps> = (props) => {
@@ -65,6 +77,8 @@ export const Dialog = {
   Positioner: DialogPositioner,
   Content: DialogContent,
   CloseTrigger: DialogCloseTrigger,
+  UnstyledCloseTrigger: ArkDialog.CloseTrigger,
+  IconCloseTrigger: DialogIconCloseTrigger,
   Title: DialogTitle,
   Description: DialogDescription,
   Header: DialogHeader,

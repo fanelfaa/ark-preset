@@ -1,40 +1,57 @@
-
 import ComponentPreview from '../../../../components/ComponentPreview.astro';
-import SegmentGroupControlledDemo from '../../demos/segment-group-demo/SegmentGroupControlledDemo.tsx';
-import SegmentGroupControlledDemoCode from '../../demos/segment-group-demo/SegmentGroupControlledDemo.tsx?code';
-import SegmentGroupDisabledDemo from '../../demos/segment-group-demo/SegmentGroupDisabledDemo.tsx';
-import SegmentGroupDisabledDemoCode from '../../demos/segment-group-demo/SegmentGroupDisabledDemo.tsx?code';
-import SegmentGroupOutlineDemo from '../../demos/segment-group-demo/SegmentGroupOutlineDemo.tsx';
-import SegmentGroupOutlineDemoCode from '../../demos/segment-group-demo/SegmentGroupOutlineDemo.tsx?code';
-import SegmentGroupRootProviderDemo from '../../demos/segment-group-demo/SegmentGroupRootProviderDemo.tsx';
-import SegmentGroupRootProviderDemoCode from '../../demos/segment-group-demo/SegmentGroupRootProviderDemo.tsx?code';
+import SegmentGroupBasicDemo from '@demos/segment-group-demo/SegmentGroupBasicDemo.tsx';
+import SegmentGroupBasicDemoCode from '@demos/segment-group-demo/SegmentGroupBasicDemo.tsx?code';
+import SegmentGroupVerticalDemo from '@demos/segment-group-demo/SegmentGroupVerticalDemo.tsx';
+import SegmentGroupVerticalDemoCode from '@demos/segment-group-demo/SegmentGroupVerticalDemo.tsx?code';
+import SegmentGroupControlledDemo from '@demos/segment-group-demo/SegmentGroupControlledDemo.tsx';
+import SegmentGroupControlledDemoCode from '@demos/segment-group-demo/SegmentGroupControlledDemo.tsx?code';
+import SegmentGroupDisabledDemo from '@demos/segment-group-demo/SegmentGroupDisabledDemo.tsx';
+import SegmentGroupDisabledDemoCode from '@demos/segment-group-demo/SegmentGroupDisabledDemo.tsx?code';
+import SegmentGroupOutlineDemo from '@demos/segment-group-demo/SegmentGroupOutlineDemo.tsx';
+import SegmentGroupOutlineDemoCode from '@demos/segment-group-demo/SegmentGroupOutlineDemo.tsx?code';
+import SegmentGroupRootProviderDemo from '@demos/segment-group-demo/SegmentGroupRootProviderDemo.tsx';
+import SegmentGroupRootProviderDemoCode from '@demos/segment-group-demo/SegmentGroupRootProviderDemo.tsx?code';
 
 ## Usage
 
-Import the component and use it inline:
 
-```tsx
-import { SegmentGroup, SegmentGroupItem } from "~/components/segment-group";
-```
+### Basic Usage
 
-Basic horizontal segment group:
+<ComponentPreview code={SegmentGroupBasicDemoCode}>
+  <SegmentGroupBasicDemo client:load />
+</ComponentPreview>
 
-```tsx
-<SegmentGroup defaultValue="React">
-  <SegmentGroupItem value="React">React</SegmentGroupItem>
-  <SegmentGroupItem value="Solid">Solid</SegmentGroupItem>
-  <SegmentGroupItem value="Vue">Vue</SegmentGroupItem>
-</SegmentGroup>
-```
+### Vertical
 
-Vertical orientation:
+Set the <code>orientation</code> prop to <code>"vertical"</code> for a vertical layout.
 
-```tsx
-<SegmentGroup defaultValue="Svelte" orientation="vertical">
-  <SegmentGroupItem value="Svelte">Svelte</SegmentGroupItem>
-  <SegmentGroupItem value="Vue">Vue</SegmentGroupItem>
-</SegmentGroup>
-```
+<ComponentPreview code={SegmentGroupVerticalDemoCode}>
+  <SegmentGroupVerticalDemo client:load />
+</ComponentPreview>
+
+### Controlled Value
+
+Use `value` and `onValueChange` to control the selection state externally:
+
+<ComponentPreview code={SegmentGroupControlledDemoCode}>
+  <SegmentGroupControlledDemo client:load />
+</ComponentPreview>
+
+### Disabled Item
+
+Individual items can be disabled using the `disabled` prop:
+
+<ComponentPreview code={SegmentGroupDisabledDemoCode}>
+  <SegmentGroupDisabledDemo client:load />
+</ComponentPreview>
+
+### Outline Variant
+
+Use `{`variant="outline"`}` for a bordered style:
+
+<ComponentPreview code={SegmentGroupOutlineDemoCode}>
+  <SegmentGroupOutlineDemo client:load />
+</ComponentPreview>
 
 ## Advanced Usage
 
@@ -50,34 +67,10 @@ Or import `SegmentGroupBase` (the raw parts namespace) from the composite entry 
 import { SegmentGroupBase } from "~/components/segment-group";
 ```
 
-### Controlled Value
-
-Use `value` and `onValueChange` to control the selection state externally:
-
-<ComponentPreview code={SegmentGroupControlledDemoCode}>
-  <SegmentGroupControlledDemo  client:load />
-</ComponentPreview>
-
-### Disabled Item
-
-Individual items can be disabled using the `disabled` prop:
-
-<ComponentPreview code={SegmentGroupDisabledDemoCode}>
-  <SegmentGroupDisabledDemo  client:load />
-</ComponentPreview>
-
-### Outline Variant
-
-Use `{`variant="outline"`}` for a bordered style:
-
-<ComponentPreview code={SegmentGroupOutlineDemoCode}>
-  <SegmentGroupOutlineDemo  client:load />
-</ComponentPreview>
-
 ### RootProvider Pattern
 
-For full control over the segment group machine, use `useSegmentGroup` with `SegmentGroup.RootProvider`. This allows reading the internal state (e.g., selected value) outside the root:
+For full control over the segment group machine, use `useSegmentGroup` with `SegmentGroupBase.RootProvider`. This allows reading the internal state (e.g., selected value) outside the root:
 
 <ComponentPreview code={SegmentGroupRootProviderDemoCode}>
-  <SegmentGroupRootProviderDemo  client:load />
+  <SegmentGroupRootProviderDemo client:load />
 </ComponentPreview>
