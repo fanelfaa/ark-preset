@@ -24,4 +24,4 @@ coverage
 
 graphify-out
 .graphify*
-.scratch
+.scratch.astro/
