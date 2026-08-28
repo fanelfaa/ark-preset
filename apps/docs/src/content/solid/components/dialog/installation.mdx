@@ -49,7 +49,6 @@ const styles = dialogVariants();
 
 const DialogRoot = ArkDialog.Root;
 const DialogRootProvider = ArkDialog.RootProvider;
-const DialogContext = ArkDialog.Context;
 const DialogTrigger: Component<ArkDialog.TriggerProps & ButtonVariants> = (props) => {
   const [local, others] = splitProps(props, ["class", "variant", "size"]);
   return (
@@ -87,7 +86,9 @@ const DialogCloseTrigger: Component<ArkDialog.CloseTriggerProps & ButtonVariants
 
 const DialogIconCloseTrigger: Component<ArkDialog.CloseTriggerProps> = (props) => {
   const [local, others] = splitProps(props, ["class"]);
-  return <Dialog.UnstyledCloseTrigger class={styles.closeTrigger({ class: local.class })} {...others} />;
+  return (
+    <Dialog.UnstyledCloseTrigger class={styles.closeTrigger({ class: local.class })} {...others} />
+  );
 };
 
 const DialogTitle: Component<ArkDialog.TitleProps> = (props) => {
@@ -113,7 +114,6 @@ const DialogFooter: Component<HTMLProps<"div">> = (props) => {
 export const Dialog = {
   Root: DialogRoot,
   RootProvider: DialogRootProvider,
-  Context: DialogContext,
   Trigger: DialogTrigger,
   Backdrop: DialogBackdrop,
   Positioner: DialogPositioner,
@@ -174,8 +174,6 @@ const DialogFooter = DialogBase.Footer;
 const DialogCloseTrigger = DialogBase.CloseTrigger;
 const DialogUnstyledCloseTrigger = ArkDialog.CloseTrigger;
 const DialogIconCloseTrigger = DialogBase.IconCloseTrigger;
-const DialogContext = DialogBase.Context;
-
 export {
   Dialog,
   DialogTrigger,
@@ -187,7 +185,6 @@ export {
   DialogCloseTrigger,
   DialogUnstyledCloseTrigger,
   DialogIconCloseTrigger,
-  DialogContext,
   DialogBase,
 };
 
