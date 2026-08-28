@@ -1,23 +1,20 @@
 import { Index } from "solid-js";
-import { SegmentGroupBase } from "@ark-preset/solid";
+import { SegmentGroup, SegmentGroupItem } from "@ark-preset/solid";
 
 const frameworks = ["React", "Solid", "Vue"];
 
 export default function SegmentGroupDisabledDemo() {
   return (
     <div>
-      <SegmentGroupBase.Root defaultValue="React">
-        <SegmentGroupBase.Indicator />
+      <SegmentGroup defaultValue="React">
         <Index each={frameworks}>
           {(framework) => (
-            <SegmentGroupBase.Item value={framework()} disabled={framework() === "Vue"}>
-              <SegmentGroupBase.ItemText>{framework()}</SegmentGroupBase.ItemText>
-              <SegmentGroupBase.ItemControl />
-              <SegmentGroupBase.ItemHiddenInput />
-            </SegmentGroupBase.Item>
+            <SegmentGroupItem value={framework()} disabled={framework() === "Vue"}>
+              {framework()}
+            </SegmentGroupItem>
           )}
         </Index>
-      </SegmentGroupBase.Root>
+      </SegmentGroup>
     </div>
   );
 }

@@ -6,7 +6,7 @@ export default function RatingGroupControlledDemo() {
   return (
     <div>
       <p class="text-sm text-muted-foreground mb-2">Value: {value()}</p>
-      <RatingGroup count={5} value={value()} onValueChange={(e) => setValue(e.value)} />
+      <RatingGroup count={5} value={value()} onValueChange={(e: any) => setValue(e.value)} />
     </div>
   );
 }

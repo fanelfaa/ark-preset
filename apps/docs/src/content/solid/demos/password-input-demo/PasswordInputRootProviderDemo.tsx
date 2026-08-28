@@ -14,7 +14,7 @@ export default function PasswordInputRootProviderDemo() {
         Toggle
       </Button>
 
-      <PasswordInputRootProvider value={passwordInput} />
+      <PasswordInputRootProvider value={passwordInput} placeholder="Enter your password" />
     </div>
   );
 }

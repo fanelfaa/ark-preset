@@ -11,7 +11,7 @@ export default function RatingGroupRootProviderDemo() {
       <RatingGroupBase.RootProvider value={ratingGroup}>
         <RatingGroupBase.Label>Rate this</RatingGroupBase.Label>
         <RatingGroupBase.Context>
-          {(context) => (
+          {(context: any) => (
             <RatingGroupBase.Control>
               <Index each={context().items}>
                 {(item) => (

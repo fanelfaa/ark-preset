@@ -12,7 +12,7 @@ export default function TagsInputRootProviderDemo() {
           <TagsInputBase.Label>Frameworks</TagsInputBase.Label>
           <TagsInputBase.Control>
             <TagsInputBase.Context>
-              {(api) => (
+              {(api: any) => (
                 <Index each={api().value}>
                   {(value, index) => (
                     <TagsInputBase.Item index={index} value={value()}>

@@ -3,19 +3,11 @@ import { Index } from "solid-js";
 
 export default function PinInputBasicDemo() {
   return (
-    <div class="flex flex-col gap-4">
-      <PinInput>
-        <PinInputLabel>Label</PinInputLabel>
-        <PinInputControl>
-          <Index each={[0, 1, 2, 4]}>{(id) => <PinInputInput index={id()} />}</Index>
-        </PinInputControl>
-      </PinInput>
-      <PinInput placeholder="•" mask>
-        <PinInputLabel>Masked</PinInputLabel>
-        <PinInputControl>
-          <Index each={[0, 1, 2, 4]}>{(id) => <PinInputInput index={id()} />}</Index>
-        </PinInputControl>
-      </PinInput>
-    </div>
+    <PinInput>
+      <PinInputLabel>Code</PinInputLabel>
+      <PinInputControl>
+        <Index each={[0, 1, 2, 3]}>{(id) => <PinInputInput index={id()} />}</Index>
+      </PinInputControl>
+    </PinInput>
   );
 }

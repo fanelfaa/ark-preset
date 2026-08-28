@@ -1,5 +1,5 @@
 import { Index, createSignal } from "solid-js";
-import { SegmentGroupBase } from "@ark-preset/solid";
+import { SegmentGroup, SegmentGroupItem } from "@ark-preset/solid";
 
 const frameworks = ["React", "Solid", "Vue"];
 
@@ -9,18 +9,11 @@ export default function SegmentGroupControlledDemo() {
   return (
     <div class="space-y-4">
       <p class="text-sm text-muted-foreground">Selected: {value()}</p>
-      <SegmentGroupBase.Root value={value()} onValueChange={(e) => setValue(e.value || "Solid")}>
-        <SegmentGroupBase.Indicator />
+      <SegmentGroup value={value()} onValueChange={(e: any) => setValue(e.value || "Solid")}>
         <Index each={frameworks}>
-          {(framework) => (
-            <SegmentGroupBase.Item value={framework()}>
-              <SegmentGroupBase.ItemText>{framework()}</SegmentGroupBase.ItemText>
-              <SegmentGroupBase.ItemControl />
-              <SegmentGroupBase.ItemHiddenInput />
-            </SegmentGroupBase.Item>
-          )}
+          {(framework) => <SegmentGroupItem value={framework()}>{framework()}</SegmentGroupItem>}
         </Index>
-      </SegmentGroupBase.Root>
+      </SegmentGroup>
     </div>
   );
 }
