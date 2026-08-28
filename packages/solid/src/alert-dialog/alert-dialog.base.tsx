@@ -33,9 +33,16 @@ const AlertDialogContent: Component<ArkDialog.ContentProps> = (props) => {
   return <ArkDialog.Content class={styles.content({ class: local.class })} {...others} />;
 };
 
-const AlertDialogCloseTrigger: Component<ArkDialog.CloseTriggerProps> = (props) => {
-  const [local, others] = splitProps(props, ["class"]);
-  return <ArkDialog.CloseTrigger class={styles.closeTrigger({ class: local.class })} {...others} />;
+const AlertDialogCloseTrigger: Component<
+  HTMLProps<"button"> & ArkDialog.CloseTriggerProps & ButtonVariants
+> = (props) => {
+  const [local, others] = splitProps(props, ["class", "variant", "size"]);
+  return (
+    <ArkDialog.CloseTrigger
+      class={buttonVariants({ variant: local.variant, size: local.size, class: local.class })}
+      {...others}
+    />
+  );
 };
 
 const AlertDialogTitle: Component<ArkDialog.TitleProps> = (props) => {
@@ -58,18 +65,6 @@ const AlertDialogFooter: Component<HTMLArkProps<"div">> = (props) => {
   return <ark.div class={styles.footer({ class: local.class })} {...others} />;
 };
 
-const AlertDialogCancel: Component<
-  HTMLProps<"button"> & ArkDialog.CloseTriggerProps & ButtonVariants
-> = (props) => {
-  const [local, others] = splitProps(props, ["class", "variant", "size"]);
-  return (
-    <ArkDialog.CloseTrigger
-      class={buttonVariants({ variant: local.variant, size: local.size, class: local.class })}
-      {...others}
-    />
-  );
-};
-
 const AlertDialogAction: Component<HTMLArkProps<"button"> & ButtonVariants> = (props) => {
   const [local, others] = splitProps(props, ["class", "variant", "size"]);
   return (
@@ -89,10 +84,11 @@ export const AlertDialog = {
   Positioner: AlertDialogPositioner,
   Content: AlertDialogContent,
   CloseTrigger: AlertDialogCloseTrigger,
+  UnstyledCloseTrigger: ArkDialog.CloseTrigger,
   Title: AlertDialogTitle,
   Description: AlertDialogDescription,
   Header: AlertDialogHeader,
   Footer: AlertDialogFooter,
-  Cancel: AlertDialogCancel,
+  Cancel: AlertDialogCloseTrigger,
   Action: AlertDialogAction,
 };

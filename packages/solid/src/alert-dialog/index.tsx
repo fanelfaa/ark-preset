@@ -11,21 +11,6 @@ const AlertDialogContent: Component<ArkDialog.ContentProps> = (props) => {
       <AlertDialogBase.Positioner>
         <AlertDialogBase.Content class={local.class} {...others}>
           {local.children}
-          <AlertDialogBase.CloseTrigger>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              class="size-4"
-            >
-              <path d="M18 6L6 18" />
-              <path d="M6 6l12 12" />
-            </svg>
-          </AlertDialogBase.CloseTrigger>
         </AlertDialogBase.Content>
       </AlertDialogBase.Positioner>
     </Portal>
@@ -40,6 +25,7 @@ const AlertDialogDescription = AlertDialogBase.Description;
 const AlertDialogFooter = AlertDialogBase.Footer;
 const AlertDialogCancel = AlertDialogBase.Cancel;
 const AlertDialogAction = AlertDialogBase.Action;
+const AlertDialogUnstyledCloseTrigger = ArkDialog.CloseTrigger;
 
 export {
   AlertDialog,
@@ -51,6 +37,7 @@ export {
   AlertDialogContent,
   AlertDialogCancel,
   AlertDialogAction,
+  AlertDialogUnstyledCloseTrigger,
   AlertDialogBase,
 };
 
