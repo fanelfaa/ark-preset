@@ -10,9 +10,9 @@ export const drawerVariants = tv({
     positioner:
       "fixed inset-0 z-50 flex data-[swipe-direction=left]:justify-start data-[swipe-direction=right]:justify-end data-[swipe-direction=up]:items-start data-[swipe-direction=up]:justify-center data-[swipe-direction=down]:items-end data-[swipe-direction=down]:justify-center",
     content:
-      "relative z-50 flex flex-col w-full max-w-md bg-background shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[swipe-direction=left]:data-[state=open]:slide-in-from-left data-[swipe-direction=left]:data-[state=closed]:slide-out-to-left data-[swipe-direction=right]:data-[state=open]:slide-in-from-right data-[swipe-direction=right]:data-[state=closed]:slide-out-to-right",
-    title: "text-lg font-semibold leading-none tracking-tight",
-    description: "text-sm text-muted-foreground",
+      "relative z-50 flex flex-col w-full max-w-md bg-background shadow-lg p-2 data-[state=open]:animate-in data-[state=closed]:animate-out data-[swipe-direction=left]:data-[state=open]:slide-in-from-left data-[swipe-direction=left]:data-[state=closed]:slide-out-to-left data-[swipe-direction=right]:data-[state=open]:slide-in-from-right data-[swipe-direction=right]:data-[state=closed]:slide-out-to-right",
+    title: "text-lg font-semibold tracking-tight text-left",
+    description: "text-sm text-muted-foreground text-left",
     closeTrigger:
       "absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
     grabber:

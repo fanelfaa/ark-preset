@@ -2,9 +2,9 @@ import { tv, type VariantProps } from "tailwind-variants";
 
 export const comboboxVariants = tv({
   slots: {
-    root: "grid gap-1.5 w-full",
+    root: "grid gap-1.5 w-full group/combobox",
     control:
-      "flex h-8 w-full items-center justify-between rounded-md border border-input bg-background px-2.5 py-1 text-sm ring-offset-background focus-within:outline-none focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2",
+      "flex h-8 w-full items-center justify-between rounded-md border border-input bg-background px-2.5 py-1 text-sm ring-offset-background focus-within:outline-none focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 group-data-[error]/combobox:border-destructive group-data-[error]/combobox:focus-within:ring-destructive",
     input:
       "flex flex-1 items-center justify-start bg-transparent text-base md:text-sm placeholder:text-muted-foreground outline-none disabled:cursor-not-allowed disabled:opacity-50",
     trigger:
@@ -19,16 +19,6 @@ export const comboboxVariants = tv({
     itemText: "flex-1",
     itemIndicator: "absolute right-2 flex size-4 items-center justify-center",
     empty: "py-2 text-center text-sm text-muted-foreground",
-  },
-  variants: {
-    error: {
-      true: {
-        control: "border-destructive focus-within:ring-destructive",
-      },
-    },
-  },
-  defaultVariants: {
-    error: false,
   },
 });
 
