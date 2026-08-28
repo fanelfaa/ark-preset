@@ -15,10 +15,9 @@ Applies when creating or editing documentation for UI components under `apps/doc
 
 ## Docs Site Architecture
 
-The docs site is a **Solid.js SPA with TanStack Router** (NOT Astro). Key implications:
+The docs site is a **Solid.js SPA with TanStack Router**, using Astro for MDX rendering and the `ComponentPreview` card.
 
-- **No `client:load` directive** — components render directly in MDX, no Astro island wrapping needed
-- **All components work inline** — no SSR context crash (Solid.js renders everything client-side)
+- **`client:load` required on demo components** — `ComponentPreview` is an Astro component, so Solid.js demo components inside it need `client:load` to hydrate on the client
 - **Demo wrappers are optional** — extract to a separate file only when the component is complex enough to warrant its own demo file (reused in multiple sections, has complex internal state)
 - **Path aliases**: `@demos/*` → `src/components/demos/*` (in tsconfig)
 - **MDX rendering** via `vite-plugin-solid-marked` with custom provider at `src/mdx-provider.tsx`
@@ -157,7 +156,7 @@ Rules:
 - No YAML frontmatter — start with `# Title`
 - Description is at least one sentence
 - `<DocsLink>` uses the `ArrowRightUp` icon component internally
-- Demo components render directly (`<DemoName />` — no `client:load` needed)
+- Demo components render with `client:load` (`<DemoName client:load />`)
 - Usage code block shows simplest import + usage from `@ark-preset/solid`
 
 ### `usage.mdx` — Full Usage Reference

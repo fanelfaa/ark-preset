@@ -7,7 +7,6 @@ const styles = dialogVariants();
 
 const DialogRoot = ArkDialog.Root;
 const DialogRootProvider = ArkDialog.RootProvider;
-const DialogContext = ArkDialog.Context;
 const DialogTrigger: Component<ArkDialog.TriggerProps & ButtonVariants> = (props) => {
   const [local, others] = splitProps(props, ["class", "variant", "size"]);
   return (
@@ -73,7 +72,6 @@ const DialogFooter: Component<HTMLProps<"div">> = (props) => {
 export const Dialog = {
   Root: DialogRoot,
   RootProvider: DialogRootProvider,
-  Context: DialogContext,
   Trigger: DialogTrigger,
   Backdrop: DialogBackdrop,
   Positioner: DialogPositioner,

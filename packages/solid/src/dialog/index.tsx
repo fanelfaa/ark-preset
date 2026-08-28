@@ -41,8 +41,6 @@ const DialogFooter = DialogBase.Footer;
 const DialogCloseTrigger = DialogBase.CloseTrigger;
 const DialogUnstyledCloseTrigger = ArkDialog.CloseTrigger;
 const DialogIconCloseTrigger = DialogBase.IconCloseTrigger;
-const DialogContext = DialogBase.Context;
-
 export {
   Dialog,
   DialogTrigger,
@@ -54,7 +52,6 @@ export {
   DialogCloseTrigger,
   DialogUnstyledCloseTrigger,
   DialogIconCloseTrigger,
-  DialogContext,
   DialogBase,
 };
 

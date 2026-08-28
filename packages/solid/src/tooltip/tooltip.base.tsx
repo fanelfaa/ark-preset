@@ -11,11 +11,7 @@ const Trigger: Component<ArkTooltip.TriggerProps & ButtonVariants> = (props) => 
   const [local, others] = splitProps(props, ["class", "variant", "size"]);
   return (
     <ArkTooltip.Trigger
-      class={buttonVariants({
-        variant: local.variant,
-        size: local.size,
-        class: "max-sm:select-none " + (local.class ?? ""),
-      })}
+      class={buttonVariants({ variant: local.variant, size: local.size, class: local.class })}
       {...others}
     />
   );
