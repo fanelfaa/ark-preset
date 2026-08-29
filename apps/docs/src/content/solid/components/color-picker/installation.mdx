@@ -410,7 +410,18 @@ const PickerContent: Component<{ presets?: string[]; children?: JSX.Element }> =
         <ColorPickerBase.ChannelSliderThumb />
       </ColorPickerBase.ChannelSlider>
       <ColorPickerBase.FormatSelect />
-      <ColorPickerBase.ChannelInput channel="hex" />
+      <ColorPickerBase.View format="rgba">
+        <ColorPickerBase.ChannelInput channel="red" />
+        <ColorPickerBase.ChannelInput channel="green" />
+        <ColorPickerBase.ChannelInput channel="blue" />
+        <ColorPickerBase.ChannelInput channel="alpha" />
+      </ColorPickerBase.View>
+      <ColorPickerBase.View format="hsla">
+        <ColorPickerBase.ChannelInput channel="hue" />
+        <ColorPickerBase.ChannelInput channel="saturation" />
+        <ColorPickerBase.ChannelInput channel="lightness" />
+        <ColorPickerBase.ChannelInput channel="alpha" />
+      </ColorPickerBase.View>
       <Show when={presetColors()}>
         <ColorPickerBase.SwatchGroup>
           <For each={presetColors()}>

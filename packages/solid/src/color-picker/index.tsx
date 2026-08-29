@@ -42,16 +42,20 @@ const PickerContent: Component<{ presets?: string[]; children?: JSX.Element }> =
       </ColorPickerBase.ChannelSlider>
       <ColorPickerBase.FormatSelect />
       <ColorPickerBase.View format="rgba">
-        <ColorPickerBase.ChannelInput channel="red" />
-        <ColorPickerBase.ChannelInput channel="green" />
-        <ColorPickerBase.ChannelInput channel="blue" />
-        <ColorPickerBase.ChannelInput channel="alpha" />
+        <div class="flex flex-row gap-1">
+          <ColorPickerBase.ChannelInput channel="red" />
+          <ColorPickerBase.ChannelInput channel="green" />
+          <ColorPickerBase.ChannelInput channel="blue" />
+          <ColorPickerBase.ChannelInput channel="alpha" />
+        </div>
       </ColorPickerBase.View>
       <ColorPickerBase.View format="hsla">
-        <ColorPickerBase.ChannelInput channel="hue" />
-        <ColorPickerBase.ChannelInput channel="saturation" />
-        <ColorPickerBase.ChannelInput channel="lightness" />
-        <ColorPickerBase.ChannelInput channel="alpha" />
+        <div class="flex flex-row gap-1">
+          <ColorPickerBase.ChannelInput channel="hue" />
+          <ColorPickerBase.ChannelInput channel="saturation" />
+          <ColorPickerBase.ChannelInput channel="lightness" />
+          <ColorPickerBase.ChannelInput channel="alpha" />
+        </div>
       </ColorPickerBase.View>
       <Show when={presetColors()}>
         <ColorPickerBase.SwatchGroup>
@@ -82,7 +86,7 @@ const ColorPicker: Component<ColorPickerProps> = (props) => {
         <ColorPickerBase.Label>{local.label}</ColorPickerBase.Label>
       </Show>
       <ColorPickerBase.Control>
-        <ColorPickerBase.ChannelInput channel="hex" />
+        <ColorPickerBase.ValueText />
         <ColorPickerBase.Trigger>
           <ColorPickerBase.ValueSwatch />
         </ColorPickerBase.Trigger>
