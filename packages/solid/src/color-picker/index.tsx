@@ -85,7 +85,7 @@ const ColorPicker: Component<ColorPickerProps> = (props) => {
       <Show when={local.label}>
         <ColorPickerBase.Label>{local.label}</ColorPickerBase.Label>
       </Show>
-      <ColorPickerBase.Control>
+      <ColorPickerBase.Control class="flex items-center gap-2">
         <ColorPickerBase.ValueText />
         <ColorPickerBase.Trigger>
           <ColorPickerBase.ValueSwatch />
