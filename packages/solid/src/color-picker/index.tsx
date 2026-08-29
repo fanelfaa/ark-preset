@@ -73,7 +73,6 @@ const ColorPicker: Component<ColorPickerProps> = (props) => {
       <ColorPickerBase.Control>
         <ColorPickerBase.ChannelInput channel="hex" />
         <ColorPickerBase.Trigger>
-          <ColorPickerBase.TransparencyGrid />
           <ColorPickerBase.ValueSwatch />
         </ColorPickerBase.Trigger>
       </ColorPickerBase.Control>
