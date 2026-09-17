@@ -10,7 +10,7 @@
     "docs:build": "pnpm --filter docs build",
     "typecheck": "pnpm -r run typecheck",
     "netlify:build": "pnpm --filter @ark-preset/core build && pnpm --filter @ark-preset/solid build && pnpm --filter docs build",
-    "postinstall": "lefthook install",
+    "postinstall": "lefthook install --force || true",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
     "fmt": "oxfmt",
