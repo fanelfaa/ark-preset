@@ -40,7 +40,6 @@ const PickerContent: Component<{ presets?: string[]; children?: JSX.Element }> =
         <ColorPickerBase.ChannelSliderTrack />
         <ColorPickerBase.ChannelSliderThumb />
       </ColorPickerBase.ChannelSlider>
-      <ColorPickerBase.FormatSelect />
       <ColorPickerBase.ChannelInput channel="hex" />
       <Show when={presetColors()}>
         <ColorPickerBase.SwatchGroup>

@@ -160,27 +160,6 @@ const EyeDropperTrigger: Component<ArkColorPicker.EyeDropperTriggerProps> = (pro
   );
 };
 
-// ── Format Select ────────────────────────────────────────────
-
-const FormatSelect: Component<ArkColorPicker.FormatSelectProps> = (props) => {
-  const [local, others] = splitProps(props, ["class"]);
-  return (
-    <ArkColorPicker.FormatSelect class={styles.formatSelect({ class: local.class })} {...others} />
-  );
-};
-
-// ── Format Trigger ───────────────────────────────────────────
-
-const FormatTrigger: Component<ArkColorPicker.FormatTriggerProps> = (props) => {
-  const [local, others] = splitProps(props, ["class"]);
-  return (
-    <ArkColorPicker.FormatTrigger
-      class={styles.formatTrigger({ class: local.class })}
-      {...others}
-    />
-  );
-};
-
 // ── Swatch Group ─────────────────────────────────────────────
 
 const SwatchGroup: Component<ArkColorPicker.SwatchGroupProps> = (props) => {
@@ -262,8 +241,6 @@ export const ColorPickerBase = {
   ValueSwatch,
   ValueText,
   EyeDropperTrigger,
-  FormatSelect,
-  FormatTrigger,
   SwatchGroup,
   Swatch,
   SwatchIndicator,
