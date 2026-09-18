@@ -54,9 +54,6 @@ importers:
         specifier: ^4.4.3
         version: 4.4.3
     devDependencies:
-      '@ark-preset/cli':
-        specifier: workspace:*
-        version: link:../../packages/cli
       '@astrojs/mdx':
         specifier: ^7.0.7
         version: 7.0.7(@astrojs/markdown-satteri@0.3.8)(astro@7.2.6(@astrojs/markdown-remark@7.2.4)(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@types/node@25.9.3)(jiti@2.7.0)(tsx@4.22.4)(yaml@2.9.0))
