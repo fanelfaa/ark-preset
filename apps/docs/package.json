@@ -24,6 +24,7 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "@ark-preset/cli": "workspace:*",
     "@astrojs/mdx": "^7.0.7",
     "astro": "^7.2.6"
   },
