@@ -43,7 +43,7 @@
   },
   "scripts": {
     "prepublishOnly": "pnpm run build",
-    "build": "tsup 2>&1 | grep -E '⚡️|error'",
+    "build": "tsup 2>&1 | grep -E '⚡️|error' && tsc --emitDeclarationOnly --outDir dist --rootDir src",
     "dev": "tsup --watch",
     "clean": "rm -rf dist",
     "typecheck": "tsc --noEmit"

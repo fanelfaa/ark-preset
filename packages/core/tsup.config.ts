@@ -53,7 +53,7 @@ export default defineConfig({
     "src/recipes/typography.ts",
   ],
   format: ["esm", "cjs"],
-  dts: true,
+  dts: false,
   sourcemap: true,
   clean: true,
   external: ["tailwind-variants"],
