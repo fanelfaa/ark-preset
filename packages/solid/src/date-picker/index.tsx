@@ -186,10 +186,12 @@ const SingleControl: Component<{
 }> = (props) => (
   <>
     <DatePickerBase.Input placeholder={props.placeholder} error={props.error} />
+    <DatePickerBase.ClearTrigger>
+      <XIcon class="size-4" />
+    </DatePickerBase.ClearTrigger>
     <DatePickerBase.Trigger>
       <CalendarIcon />
     </DatePickerBase.Trigger>
-    <DatePickerBase.ClearTrigger>{props.clearLabel ?? "Clear"}</DatePickerBase.ClearTrigger>
   </>
 );
 
@@ -203,11 +205,13 @@ const RangeControl: Component<{
     <DatePickerBase.Input placeholder="Start date" error={props.error} index={0} />
     <span class="text-sm text-muted-foreground select-none hidden sm:inline-block">—</span>
     <DatePickerBase.Input placeholder="End date" error={props.error} index={1} />
-    <div class="flex w-full sm:w-fit gap-1">
+    <div class="flex items-center gap-1">
+      <DatePickerBase.ClearTrigger>
+        <XIcon class="size-4" />
+      </DatePickerBase.ClearTrigger>
       <DatePickerBase.Trigger>
         <CalendarIcon />
       </DatePickerBase.Trigger>
-      <DatePickerBase.ClearTrigger>{props.clearLabel ?? "Clear"}</DatePickerBase.ClearTrigger>
     </div>
   </>
 );
@@ -255,10 +259,12 @@ const MultipleControl: Component<{
             </For>
           </Show>
         </div>
+        <DatePickerBase.ClearTrigger>
+          <XIcon class="size-4" />
+        </DatePickerBase.ClearTrigger>
         <DatePickerBase.Trigger>
           <CalendarIcon />
         </DatePickerBase.Trigger>
-        <DatePickerBase.ClearTrigger>{props.clearLabel ?? "Clear"}</DatePickerBase.ClearTrigger>
       </>
     )}
   </DatePickerBase.Context>

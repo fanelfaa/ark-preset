@@ -3,20 +3,25 @@ import { tv, type VariantProps } from "tailwind-variants";
 export const datePickerVariants = tv({
   slots: {
     root: "w-full flex flex-col gap-1.5",
-    control: "flex w-full items-center gap-1 flex-wrap",
-    input:
-      "flex-1 h-8 rounded-md border border-input bg-background px-2.5 py-1.5 text-base md:text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50",
+    control: [
+      "flex w-full items-center gap-1 h-9 flex-wrap rounded-md border border-input bg-background px-2.5 py-1.5 text-base md:text-sm ring-offset-background transition-colors",
+      "has-[:focus-visible]:outline-none has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-ring has-[:focus-visible]:ring-offset-1",
+      "has-[:disabled]:cursor-not-allowed has-[:disabled]:opacity-50",
+    ],
+    input: [
+      "flex-1 bg-transparent p-0 text-base md:text-sm ring-offset-background transition-colors w-full focus-visible:outline-none file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground",
+      "disabled:cursor-not-allowed disabled:opacity-50",
+    ],
     trigger: [
-      "flex min-h-8 min-w-8 items-center justify-center rounded-md border border-border bg-background",
-      "transition duration-300 motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0.5 active:duration-150 hover:bg-accent/50",
-      "focus-visible:outline-none focus-visible:ring-[1.5px] focus-visible:ring-ring",
+      "inline-flex items-center justify-center text-muted-foreground transition-colors shrink-0",
+      "focus-visible:outline-none",
       "disabled:cursor-not-allowed disabled:opacity-50",
       "[&>svg]:size-4",
     ],
     clearTrigger: [
-      "flex min-h-8 items-center justify-center rounded-md border border-border bg-background px-3 text-sm",
-      "transition duration-300 motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0.5 active:duration-150 hover:bg-accent/50",
-      "focus-visible:outline-none focus-visible:ring-[1.5px] focus-visible:ring-ring",
+      "inline-flex items-center justify-center text-muted-foreground transition-colors shrink-0",
+      "hover:text-foreground text-sm",
+      "focus-visible:outline-none",
       "disabled:cursor-not-allowed disabled:opacity-50",
     ],
     content: [
@@ -52,8 +57,7 @@ export const datePickerVariants = tv({
       "[&:is([data-outside-range][data-in-range])]:text-muted-foreground",
       "[&:is([data-outside-range][data-in-range])]:opacity-30",
     ],
-    selectedValue:
-      "flex flex-wrap items-center gap-1.5 flex-1 min-w-0 min-h-8 rounded-md border border-input bg-background px-2.5 py-1 text-sm",
+    selectedValue: "flex flex-wrap items-center gap-1.5 flex-1 min-w-0 bg-transparent p-0 text-sm",
     selectedValuePlaceholder: "text-sm text-muted-foreground",
     selectedValueTag: [
       "inline-flex items-center gap-1 rounded-md bg-primary/10 ps-2 pe-0.5 py-0.5 text-xs font-medium text-primary",
@@ -67,9 +71,7 @@ export const datePickerVariants = tv({
   variants: {
     error: {
       true: {
-        control: "border-destructive focus-within:ring-destructive",
-        input: "border-destructive focus-visible:ring-destructive",
-        selectedValue: "border-destructive",
+        control: "border-destructive has-[:focus-visible]:ring-destructive",
       },
     },
   },
