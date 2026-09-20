@@ -1,9 +1,9 @@
-import { P, InlineCode } from "@ark-preset/solid";
+import { Paragraph, TextInlineCode } from "@ark-preset/solid";
 
 export default function TypographyInlineCodeDemo() {
   return (
-    <P>
-      Use <InlineCode>InlineCode</InlineCode> for inline code snippets.
-    </P>
+    <Paragraph>
+      Use <TextInlineCode>InlineCode</TextInlineCode> for inline code snippets.
+    </Paragraph>
   );
 }

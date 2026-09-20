@@ -1,281 +1,233 @@
 import { render } from "@solidjs/testing-library";
+import { describe, expect, it } from "vitest";
 import {
-  H1,
-  H2,
-  H3,
-  H4,
-  P,
-  Lead,
-  Large,
-  Small,
-  Muted,
-  InlineCode,
-  Blockquote,
-  List,
+  Heading,
+  Paragraph,
+  TextLead,
+  TextLarge,
+  TextSmall,
+  TextMuted,
+  TextInlineCode,
+  TextBlockquote,
+  TextList,
   typographyVariants,
 } from "../src/typography";
 
 describe("Typography", () => {
-  describe("H1", () => {
+  describe("Heading", () => {
     it("renders children", () => {
-      const { getByText } = render(() => <H1>Heading 1</H1>);
-      expect(getByText("Heading 1")).toBeInTheDocument();
+      const { getByText } = render(() => <Heading>Heading Text</Heading>);
+      expect(getByText("Heading Text")).toBeInTheDocument();
     });
 
-    it("renders as h1 element", () => {
-      const { container } = render(() => <H1>H1</H1>);
+    it("renders as h1 element by default", () => {
+      const { container } = render(() => <Heading>H1</Heading>);
       expect(container.firstChild?.nodeName).toBe("H1");
     });
 
+    it("renders specific levels", () => {
+      const { container: h1 } = render(() => <Heading level={1}>H1</Heading>);
+      expect(h1.firstChild?.nodeName).toBe("H1");
+
+      const { container: h2 } = render(() => <Heading level={2}>H2</Heading>);
+      expect(h2.firstChild?.nodeName).toBe("H2");
+
+      const { container: h3 } = render(() => <Heading level={3}>H3</Heading>);
+      expect(h3.firstChild?.nodeName).toBe("H3");
+
+      const { container: h4 } = render(() => <Heading level={4}>H4</Heading>);
+      expect(h4.firstChild?.nodeName).toBe("H4");
+
+      const { container: h5 } = render(() => <Heading level={5}>H5</Heading>);
+      expect(h5.firstChild?.nodeName).toBe("H5");
+
+      const { container: h6 } = render(() => <Heading level={6}>H6</Heading>);
+      expect(h6.firstChild?.nodeName).toBe("H6");
+    });
+
     it("merges custom class", () => {
-      const { container } = render(() => <H1 class="my-h1">H1</H1>);
+      const { container } = render(() => <Heading class="my-h1">H1</Heading>);
       expect(container.firstChild).toHaveClass("my-h1");
     });
 
     it("forwards additional props", () => {
-      const { container } = render(() => <H1 id="h1-1">H1</H1>);
-      expect(container.firstChild).toHaveAttribute("id", "h1-1");
+      const { container } = render(() => <Heading id="heading-1">H1</Heading>);
+      expect(container.firstChild).toHaveAttribute("id", "heading-1");
     });
   });
 
-  describe("H2", () => {
+  describe("Paragraph", () => {
     it("renders children", () => {
-      const { getByText } = render(() => <H2>Heading 2</H2>);
-      expect(getByText("Heading 2")).toBeInTheDocument();
-    });
-
-    it("renders as h2 element", () => {
-      const { container } = render(() => <H2>H2</H2>);
-      expect(container.firstChild?.nodeName).toBe("H2");
-    });
-
-    it("merges custom class", () => {
-      const { container } = render(() => <H2 class="my-h2">H2</H2>);
-      expect(container.firstChild).toHaveClass("my-h2");
-    });
-
-    it("forwards additional props", () => {
-      const { container } = render(() => <H2 id="h2-1">H2</H2>);
-      expect(container.firstChild).toHaveAttribute("id", "h2-1");
-    });
-  });
-
-  describe("H3", () => {
-    it("renders children", () => {
-      const { getByText } = render(() => <H3>Heading 3</H3>);
-      expect(getByText("Heading 3")).toBeInTheDocument();
-    });
-
-    it("renders as h3 element", () => {
-      const { container } = render(() => <H3>H3</H3>);
-      expect(container.firstChild?.nodeName).toBe("H3");
-    });
-
-    it("merges custom class", () => {
-      const { container } = render(() => <H3 class="my-h3">H3</H3>);
-      expect(container.firstChild).toHaveClass("my-h3");
-    });
-
-    it("forwards additional props", () => {
-      const { container } = render(() => <H3 id="h3-1">H3</H3>);
-      expect(container.firstChild).toHaveAttribute("id", "h3-1");
-    });
-  });
-
-  describe("H4", () => {
-    it("renders children", () => {
-      const { getByText } = render(() => <H4>Heading 4</H4>);
-      expect(getByText("Heading 4")).toBeInTheDocument();
-    });
-
-    it("renders as h4 element", () => {
-      const { container } = render(() => <H4>H4</H4>);
-      expect(container.firstChild?.nodeName).toBe("H4");
-    });
-
-    it("merges custom class", () => {
-      const { container } = render(() => <H4 class="my-h4">H4</H4>);
-      expect(container.firstChild).toHaveClass("my-h4");
-    });
-
-    it("forwards additional props", () => {
-      const { container } = render(() => <H4 id="h4-1">H4</H4>);
-      expect(container.firstChild).toHaveAttribute("id", "h4-1");
-    });
-  });
-
-  describe("P", () => {
-    it("renders children", () => {
-      const { getByText } = render(() => <P>Paragraph</P>);
+      const { getByText } = render(() => <Paragraph>Paragraph</Paragraph>);
       expect(getByText("Paragraph")).toBeInTheDocument();
     });
 
     it("renders as p element", () => {
-      const { container } = render(() => <P>P</P>);
+      const { container } = render(() => <Paragraph>P</Paragraph>);
       expect(container.firstChild?.nodeName).toBe("P");
     });
 
     it("merges custom class", () => {
-      const { container } = render(() => <P class="my-p">P</P>);
+      const { container } = render(() => <Paragraph class="my-p">P</Paragraph>);
       expect(container.firstChild).toHaveClass("my-p");
     });
 
     it("forwards additional props", () => {
-      const { container } = render(() => <P id="paragraph-1">P</P>);
+      const { container } = render(() => <Paragraph id="paragraph-1">P</Paragraph>);
       expect(container.firstChild).toHaveAttribute("id", "paragraph-1");
     });
   });
 
-  describe("Lead", () => {
+  describe("TextLead", () => {
     it("renders children", () => {
-      const { getByText } = render(() => <Lead>Lead text</Lead>);
+      const { getByText } = render(() => <TextLead>Lead text</TextLead>);
       expect(getByText("Lead text")).toBeInTheDocument();
     });
 
     it("renders as p element", () => {
-      const { container } = render(() => <Lead>Lead</Lead>);
+      const { container } = render(() => <TextLead>Lead</TextLead>);
       expect(container.firstChild?.nodeName).toBe("P");
     });
 
     it("merges custom class", () => {
-      const { container } = render(() => <Lead class="my-lead">Lead</Lead>);
+      const { container } = render(() => <TextLead class="my-lead">Lead</TextLead>);
       expect(container.firstChild).toHaveClass("my-lead");
     });
 
     it("forwards additional props", () => {
-      const { container } = render(() => <Lead id="lead-1">Lead</Lead>);
+      const { container } = render(() => <TextLead id="lead-1">Lead</TextLead>);
       expect(container.firstChild).toHaveAttribute("id", "lead-1");
     });
   });
 
-  describe("Large", () => {
+  describe("TextLarge", () => {
     it("renders children", () => {
-      const { getByText } = render(() => <Large>Large text</Large>);
+      const { getByText } = render(() => <TextLarge>Large text</TextLarge>);
       expect(getByText("Large text")).toBeInTheDocument();
     });
 
     it("renders as div element", () => {
-      const { container } = render(() => <Large>Large</Large>);
+      const { container } = render(() => <TextLarge>Large</TextLarge>);
       expect(container.firstChild?.nodeName).toBe("DIV");
     });
 
     it("merges custom class", () => {
-      const { container } = render(() => <Large class="my-large">Large</Large>);
+      const { container } = render(() => <TextLarge class="my-large">Large</TextLarge>);
       expect(container.firstChild).toHaveClass("my-large");
     });
 
     it("forwards additional props", () => {
-      const { container } = render(() => <Large id="large-1">Large</Large>);
+      const { container } = render(() => <TextLarge id="large-1">Large</TextLarge>);
       expect(container.firstChild).toHaveAttribute("id", "large-1");
     });
   });
 
-  describe("Small", () => {
+  describe("TextSmall", () => {
     it("renders children", () => {
-      const { getByText } = render(() => <Small>Small text</Small>);
+      const { getByText } = render(() => <TextSmall>Small text</TextSmall>);
       expect(getByText("Small text")).toBeInTheDocument();
     });
 
     it("renders as small element", () => {
-      const { container } = render(() => <Small>Small</Small>);
+      const { container } = render(() => <TextSmall>Small</TextSmall>);
       expect(container.firstChild?.nodeName).toBe("SMALL");
     });
 
     it("merges custom class", () => {
-      const { container } = render(() => <Small class="my-small">Small</Small>);
+      const { container } = render(() => <TextSmall class="my-small">Small</TextSmall>);
       expect(container.firstChild).toHaveClass("my-small");
     });
 
     it("forwards additional props", () => {
-      const { container } = render(() => <Small id="small-1">Small</Small>);
+      const { container } = render(() => <TextSmall id="small-1">Small</TextSmall>);
       expect(container.firstChild).toHaveAttribute("id", "small-1");
     });
   });
 
-  describe("Muted", () => {
+  describe("TextMuted", () => {
     it("renders children", () => {
-      const { getByText } = render(() => <Muted>Muted text</Muted>);
+      const { getByText } = render(() => <TextMuted>Muted text</TextMuted>);
       expect(getByText("Muted text")).toBeInTheDocument();
     });
 
     it("renders as p element", () => {
-      const { container } = render(() => <Muted>Muted</Muted>);
+      const { container } = render(() => <TextMuted>Muted</TextMuted>);
       expect(container.firstChild?.nodeName).toBe("P");
     });
 
     it("merges custom class", () => {
-      const { container } = render(() => <Muted class="my-muted">Muted</Muted>);
+      const { container } = render(() => <TextMuted class="my-muted">Muted</TextMuted>);
       expect(container.firstChild).toHaveClass("my-muted");
     });
 
     it("forwards additional props", () => {
-      const { container } = render(() => <Muted id="muted-1">Muted</Muted>);
+      const { container } = render(() => <TextMuted id="muted-1">Muted</TextMuted>);
       expect(container.firstChild).toHaveAttribute("id", "muted-1");
     });
   });
 
-  describe("InlineCode", () => {
+  describe("TextInlineCode", () => {
     it("renders children", () => {
-      const { getByText } = render(() => <InlineCode>code</InlineCode>);
+      const { getByText } = render(() => <TextInlineCode>code</TextInlineCode>);
       expect(getByText("code")).toBeInTheDocument();
     });
 
     it("renders as code element", () => {
-      const { container } = render(() => <InlineCode>code</InlineCode>);
+      const { container } = render(() => <TextInlineCode>code</TextInlineCode>);
       expect(container.firstChild?.nodeName).toBe("CODE");
     });
 
     it("merges custom class", () => {
-      const { container } = render(() => <InlineCode class="my-code">code</InlineCode>);
+      const { container } = render(() => <TextInlineCode class="my-code">code</TextInlineCode>);
       expect(container.firstChild).toHaveClass("my-code");
     });
 
     it("forwards additional props", () => {
-      const { container } = render(() => <InlineCode id="code-1">code</InlineCode>);
+      const { container } = render(() => <TextInlineCode id="code-1">code</TextInlineCode>);
       expect(container.firstChild).toHaveAttribute("id", "code-1");
     });
   });
 
-  describe("Blockquote", () => {
+  describe("TextBlockquote", () => {
     it("renders children", () => {
-      const { getByText } = render(() => <Blockquote>Quote</Blockquote>);
+      const { getByText } = render(() => <TextBlockquote>Quote</TextBlockquote>);
       expect(getByText("Quote")).toBeInTheDocument();
     });
 
     it("renders as blockquote element", () => {
-      const { container } = render(() => <Blockquote>Quote</Blockquote>);
+      const { container } = render(() => <TextBlockquote>Quote</TextBlockquote>);
       expect(container.firstChild?.nodeName).toBe("BLOCKQUOTE");
     });
 
     it("merges custom class", () => {
-      const { container } = render(() => <Blockquote class="my-quote">Quote</Blockquote>);
+      const { container } = render(() => <TextBlockquote class="my-quote">Quote</TextBlockquote>);
       expect(container.firstChild).toHaveClass("my-quote");
     });
 
     it("forwards additional props", () => {
-      const { container } = render(() => <Blockquote id="quote-1">Quote</Blockquote>);
+      const { container } = render(() => <TextBlockquote id="quote-1">Quote</TextBlockquote>);
       expect(container.firstChild).toHaveAttribute("id", "quote-1");
     });
   });
 
-  describe("List", () => {
+  describe("TextList", () => {
     it("renders children", () => {
-      const { getByText } = render(() => <List>Item</List>);
+      const { getByText } = render(() => <TextList>Item</TextList>);
       expect(getByText("Item")).toBeInTheDocument();
     });
 
     it("renders as ul element", () => {
-      const { container } = render(() => <List>List</List>);
+      const { container } = render(() => <TextList>List</TextList>);
       expect(container.firstChild?.nodeName).toBe("UL");
     });
 
     it("merges custom class", () => {
-      const { container } = render(() => <List class="my-list">List</List>);
+      const { container } = render(() => <TextList class="my-list">List</TextList>);
       expect(container.firstChild).toHaveClass("my-list");
     });
 
     it("forwards additional props", () => {
-      const { container } = render(() => <List id="list-1">List</List>);
+      const { container } = render(() => <TextList id="list-1">List</TextList>);
       expect(container.firstChild).toHaveAttribute("id", "list-1");
     });
   });

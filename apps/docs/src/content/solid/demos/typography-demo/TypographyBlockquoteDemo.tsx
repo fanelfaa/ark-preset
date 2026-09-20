@@ -1,5 +1,5 @@
-import { Blockquote } from "@ark-preset/solid";
+import { TextBlockquote } from "@ark-preset/solid";
 
 export default function TypographyBlockquoteDemo() {
-  return <Blockquote>"A quote for emphasis."</Blockquote>;
+  return <TextBlockquote>"A quote for emphasis."</TextBlockquote>;
 }
