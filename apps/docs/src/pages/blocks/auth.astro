@@ -1,0 +1,57 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ComponentPreview from '../../components/ComponentPreview.astro';
+import { Heading, TextLead, TextMuted } from '@ark-preset/solid';
+import { AuthBlockCard } from '../../components/demos/blocks/auth/AuthBlockCard';
+import { AuthBlockModal } from '../../components/demos/blocks/auth/AuthBlockModal';
+import { AuthBlockSplit } from '../../components/demos/blocks/auth/AuthBlockSplit';
+
+import AuthBlockCardCode from '../../components/demos/blocks/auth/AuthBlockCard?code';
+import AuthBlockModalCode from '../../components/demos/blocks/auth/AuthBlockModal?code';
+import AuthBlockSplitCode from '../../components/demos/blocks/auth/AuthBlockSplit?code';
+---
+
+<Layout>
+  <div class="max-w-4xl mx-auto py-10 space-y-16">
+    <div>
+      <Heading level={1} class="mb-2">Authentication Blocks</Heading>
+      <TextLead class="mb-8">
+        Various examples of authentication flows using @ark-preset/solid.
+      </TextLead>
+    </div>
+
+    <section class="space-y-6">
+      <div class="space-y-2">
+        <Heading level={2}>Standard Card</Heading>
+        <TextMuted>A simple authentication card suitable for dedicated login pages.</TextMuted>
+      </div>
+      <ComponentPreview code={AuthBlockCardCode}>
+        <div class="flex justify-center">
+          <AuthBlockCard client:load />
+        </div>
+      </ComponentPreview>
+    </section>
+
+    <section class="space-y-6">
+      <div class="space-y-2">
+        <Heading level={2}>Modal / Dialog</Heading>
+        <TextMuted>Authentication form inside a modal, useful for quick access without leaving the current page.</TextMuted>
+      </div>
+      <ComponentPreview code={AuthBlockModalCode}>
+        <div class="flex justify-center">
+          <AuthBlockModal client:load />
+        </div>
+      </ComponentPreview>
+    </section>
+
+    <section class="space-y-6">
+      <div class="space-y-2">
+        <Heading level={2}>Split Screen</Heading>
+        <TextMuted>A full-width split layout often used in modern web applications.</TextMuted>
+      </div>
+      <ComponentPreview code={AuthBlockSplitCode}>
+        <AuthBlockSplit client:load />
+      </ComponentPreview>
+    </section>
+  </div>
+</Layout>
