@@ -14,7 +14,7 @@ import {
   TextSmall,
 } from "@ark-preset/solid";
 
-export const AuthBlockModal = () => {
+export default function AuthBlockModal() {
   const [email, setEmail] = createSignal("");
   const [password, setPassword] = createSignal("");
   const [error, setError] = createSignal("");
@@ -93,4 +93,4 @@ export const AuthBlockModal = () => {
       </DialogContent>
     </Dialog>
   );
-};
+}

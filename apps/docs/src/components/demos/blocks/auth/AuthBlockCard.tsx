@@ -14,7 +14,7 @@ import {
   TextMuted,
 } from "@ark-preset/solid";
 
-export const AuthBlockCard = () => {
+export default function AuthBlockCard() {
   const [email, setEmail] = createSignal("");
   const [password, setPassword] = createSignal("");
   const [error, setError] = createSignal("");
@@ -88,4 +88,4 @@ export const AuthBlockCard = () => {
       </form>
     </Card>
   );
-};
+}

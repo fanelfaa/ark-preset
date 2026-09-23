@@ -10,7 +10,7 @@ import {
   TextSmall,
 } from "@ark-preset/solid";
 
-export const AuthBlockSplit = () => {
+export default function AuthBlockSplit() {
   const [email, setEmail] = createSignal("");
   const [password, setPassword] = createSignal("");
   const [error, setError] = createSignal("");
@@ -62,7 +62,6 @@ export const AuthBlockSplit = () => {
               placeholder="m@example.com"
               value={email()}
               onInput={(e) => setEmail(e.currentTarget.value)}
-              required
               data-testid="auth-split-email"
             />
             <PasswordInput
@@ -70,7 +69,6 @@ export const AuthBlockSplit = () => {
               placeholder="........"
               value={password()}
               onInput={(e: Event) => setPassword((e.target as HTMLInputElement).value)}
-              required
               error={error() && !password() ? true : undefined}
               data-testid="auth-split-password"
             />
@@ -120,4 +118,4 @@ export const AuthBlockSplit = () => {
       </div>
     </div>
   );
-};
+}

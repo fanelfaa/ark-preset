@@ -294,7 +294,7 @@ Rules:
 
 - Import from `@ark-preset/solid` (not relative paths)
 - Default export a function (not named export)
-- Wrap in `<div class="rounded-lg border border-border p-6">` for visual consistency
+- Wrap in `<div class="rounded-lg border border-border p-6">` for visual consistency (Note: this applies to component demos, not full block demos under `demos/blocks/`)
 - Each distinct feature (basic, multiple, controlled, etc.) gets its own file
 - Import in MDX via `@demos/<name>-demo/<DemoName>.tsx` alias
 
