@@ -30,21 +30,17 @@ Use the `error` prop on `Combobox` to show an error state. This will automatical
 The `ComboboxInputTrigger`, `ComboboxContent`, and `ComboboxItem` components are composite exports from the barrel entry point that include inline SVG icons and Portal. Import them alongside `Combobox`:
 
 ```tsx
-import { Combobox, ComboboxLabel, ComboboxInputTrigger, ComboboxContent, ComboboxItem } from "~/components/combobox";
+import { Combobox, ComboboxLabel, ComboboxInputTrigger, ComboboxContent, ComboboxItem } from "~/components/ui";
 ```
 
 ## Advanced Usage
 
-When you need more control, import raw primitive parts directly from the base file:
+When you need more control, import raw primitive parts via ````tsx
+import { ComboboxBase } from "~/components/ui";
+```$2`:
 
 ```tsx
-import { Combobox } from "~/components/combobox/combobox.base";
-```
-
-Or import `ComboboxBase` (the raw parts namespace) from the barrel entry point:
-
-```tsx
-import { ComboboxBase } from "~/components/combobox";
+import { ComboboxBase } from "~/components/ui";
 ```
 
 ### Root Provider

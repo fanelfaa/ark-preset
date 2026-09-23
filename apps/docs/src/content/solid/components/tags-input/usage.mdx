@@ -46,16 +46,10 @@ Use the `invalid` prop (from Ark UI) to mark the input as invalid:
 
 ## Advanced Usage
 
-When the composite `TagsInput` doesn't provide enough control, import the raw primitive parts from the base file directly:
+When the composite component does not provide enough control, import the raw primitive parts via `TagsInputBase`:
 
 ```tsx
-import { TagsInput } from "~/components/tags-input/tags-input.base";
-```
-
-Or import `TagsInputBase` (the raw parts namespace) from the composite entry point:
-
-```tsx
-import { TagsInputBase } from "~/components/tags-input";
+import { TagsInputBase } from "~/components/ui";
 ```
 
 ### RootProvider Pattern
@@ -72,7 +66,7 @@ For custom tag rendering (e.g., custom delete icon), use `TagsInputItem`:
 
 ```tsx
 import { Index } from "solid-js";
-import { TagsInput, TagsInputItem } from "~/components/tags-input";
+import { TagsInput, TagsInputItem } from "~/components/ui";
 
 export function CustomItemDemo() {
   return (

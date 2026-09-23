@@ -301,11 +301,6 @@ export async function addComponent(
       await updateIndexFile(compIndexFile, `export * from './${dir}'`);
     }
 
-    // Also export the target directory from the parent components/index.ts
-    const parentIndexFile = path.join(path.dirname(compTargetDir), "index.ts");
-    const targetDirName = path.basename(compTargetDir);
-    await updateIndexFile(parentIndexFile, `export * from './${targetDirName}'`);
-
     for (const recipe of resolved.recipes) {
       const recipeName = recipe.replace(/\.ts$/, "");
       await updateIndexFile(recipeIndexFile, `export * from './${recipeName}'`);

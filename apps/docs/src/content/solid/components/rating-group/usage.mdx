@@ -45,16 +45,10 @@ To make the rating group disabled, set the `disabled` prop to `true`:
 
 ## Advanced Usage
 
-When the composite `RatingGroup` doesn't provide enough control, import the raw primitive parts from the base file directly:
+When the composite component does not provide enough control, import the raw primitive parts via `RatingGroupBase`:
 
 ```tsx
-import { RatingGroup, useRatingGroupVariant } from "~/components/rating-group/rating-group.base";
-```
-
-Or import `RatingGroupBase` (the raw parts namespace) from the composite entry point:
-
-```tsx
-import { RatingGroupBase } from "~/components/rating-group";
+import { RatingGroupBase } from "~/components/ui";
 ```
 
 ### RootProvider Pattern
