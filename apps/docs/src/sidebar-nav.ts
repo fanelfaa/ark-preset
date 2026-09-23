@@ -93,4 +93,11 @@ export const sidebarNav: SidebarCategory[] = [
     category: "Integration",
     links: [{ href: "/docs/integrations/form", label: "TanStack Form" }],
   },
+  {
+    category: "Blocks",
+    links: [
+      { href: "/blocks", label: "Overview" },
+      { href: "/blocks/auth", label: "Authentication" },
+    ],
+  },
 ];

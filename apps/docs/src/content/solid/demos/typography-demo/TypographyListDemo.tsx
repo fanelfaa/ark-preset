@@ -1,10 +1,10 @@
-import { List } from "@ark-preset/solid";
+import { TextList } from "@ark-preset/solid";
 
 export default function TypographyListDemo() {
   return (
-    <List>
+    <TextList>
       <li>First item</li>
       <li>Second item</li>
-    </List>
+    </TextList>
   );
 }

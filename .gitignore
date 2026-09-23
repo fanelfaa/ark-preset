@@ -26,3 +26,6 @@ graphify-out
 .graphify*
 .scratch
 .astro
+
+# AI-DLC Documentation
+aidlc-docs/
