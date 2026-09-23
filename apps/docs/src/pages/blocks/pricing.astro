@@ -1,0 +1,29 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ComponentPreview from '../../components/ComponentPreview.astro';
+import { Heading, TextLead, TextMuted } from '@ark-preset/solid';
+import PricingBlockCards from '../../components/demos/blocks/pricing/PricingBlockCards';
+
+import PricingBlockCardsCode from '../../components/demos/blocks/pricing/PricingBlockCards?code';
+---
+
+<Layout>
+  <div class="max-w-5xl mx-auto py-10 space-y-16 px-4">
+    <div>
+      <Heading level={1} class="mb-2">Pricing Blocks</Heading>
+      <TextLead class="mb-8">
+        Examples of pricing section layouts built with @ark-preset/solid.
+      </TextLead>
+    </div>
+
+    <section class="space-y-6">
+      <div class="space-y-2">
+        <Heading level={2}>Standard 3-Tier Cards</Heading>
+        <TextMuted>A classic 3-tier pricing layout with a monthly/yearly billing toggle and tooltip explanations.</TextMuted>
+      </div>
+      <ComponentPreview code={PricingBlockCardsCode}>
+        <PricingBlockCards client:load />
+      </ComponentPreview>
+    </section>
+  </div>
+</Layout>
