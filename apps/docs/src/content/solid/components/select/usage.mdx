@@ -41,21 +41,15 @@ The `searchable` prop works with both single and `multiple` selection modes.
 The `SelectTrigger`, `SelectContent`, and `SelectItem` components are composite wrappers from the barrel entry point that include inline SVG icons and Portal. `SelectTrigger` also includes a clear button when used with `multiple` selection. Import them alongside `Select`:
 
 ```tsx
-import { Select, SelectLabel, SelectTrigger, SelectContent, SelectItem } from "~/components/select";
+import { Select, SelectLabel, SelectTrigger, SelectContent, SelectItem } from "~/components/ui";
 ```
 
 ## Advanced Usage
 
-When you need more control, import raw primitive parts directly from the base file:
+When the composite `Select` does not provide enough control, import the raw primitive parts via `SelectBase`:
 
 ```tsx
-import { Select } from "~/components/select/select.base";
-```
-
-Or import `SelectBase` (the raw parts namespace) from the barrel entry point:
-
-```tsx
-import { SelectBase } from "~/components/select";
+import { SelectBase } from "~/components/ui";
 ```
 
 ### Root Provider

@@ -12,7 +12,7 @@
  * with light transformations applied so the snippet is copy-paste-ready for
  * users:
  *
- *   1. `@ark-preset/solid`   → `~/components/<component>`  (user-facing import)
+ *   1. `@ark-preset/solid`   → `~/components`  (user-facing import)
  *
  * Everything else — component names, props, JSX — is the real source, so the
  * displayed code can never drift from the rendered demo.
@@ -23,20 +23,15 @@ import { readFileSync } from "node:fs";
 
 const CODE_QUERY = "?code";
 
-/** Derive the user-facing component name from the demo file path. */
-function componentFromPath(filePath: string): string {
-  // .../src/components/demos/<component>-demo/XxxDemo.tsx
-  // or .../src/components/demos/<component>/XxxDemo.tsx
-  const m = filePath.match(/demos\/([^/]+)\//);
-  return m ? m[1].replace(/-demo$/, "") : "";
-}
-
 /** Rewrite the raw demo source for display inside a code block. */
-export function rewriteDemoSource(source: string, component: string): string {
+export function rewriteDemoSource(source: string): string {
   let out = source;
 
-  // `@ark-preset/solid` → `~/components/<component>`
-  out = out.replace(/from\s+["']@ark-preset\/solid["']/g, `from "~/components/${component}"`);
+  // `@ark-preset/solid` → `~/components/ui`
+  out = out.replace(/from\s+["']@ark-preset\/solid["']/g, `from "~/components/ui"`);
+
+  // `@ark-preset/core` → `~/components/ui/recipes`
+  out = out.replace(/from\s+["']@ark-preset\/core["']/g, `from "~/components/ui/recipes"`);
 
   return out.trim();
 }
@@ -48,12 +43,11 @@ export function demoCodePlugin(): Plugin {
     load(id) {
       if (!id.includes(CODE_QUERY)) return null;
       const filePath = id.split(CODE_QUERY)[0];
-      const component = componentFromPath(filePath);
       try {
         const source = readFileSync(filePath, "utf-8");
         // Re-extract on demo file changes in dev
         this.addWatchFile(filePath);
-        return `export default ${JSON.stringify(rewriteDemoSource(source, component))};`;
+        return `export default ${JSON.stringify(rewriteDemoSource(source))};`;
       } catch (e) {
         this.error(`[demo-code] failed to read ${filePath}: ${e}`);
       }
