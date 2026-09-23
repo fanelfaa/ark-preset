@@ -42,11 +42,11 @@ function findDemoFiles(component: string): Map<string, string> {
   return files;
 }
 
-function rewriteDemoSource(source: string, component: string): string {
+function rewriteDemoSource(source: string): string {
   let out = source;
 
-  // `@ark-preset/solid` → `~/components/<component>`
-  out = out.replace(/from\s+["']@ark-preset\/solid["']/g, `from "~/components/${component}"`);
+  // `@ark-preset/solid` → `~/components`
+  out = out.replace(/from\s+["']@ark-preset\/solid["']/g, `from "~/components"`);
 
   // Drop internal DemoWrapper import lines
   out = out.replace(/^import [^\n]*DemoWrapper[^\n]*$/gm, "");
@@ -70,7 +70,7 @@ function replaceComponentPreviewWithCode(
       return match;
     }
 
-    const rewritten = rewriteDemoSource(demoSource, component);
+    const rewritten = rewriteDemoSource(demoSource);
     return `\`\`\`tsx\n${rewritten}\n\`\`\`\n`;
   });
 }
