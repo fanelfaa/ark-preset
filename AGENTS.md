@@ -123,3 +123,7 @@ Rules:
 - If graphify-out/wiki/index.md exists, navigate it instead of reading raw files
 - For cross-module "how does X relate to Y" questions, prefer `graphify query "<question>"`, `graphify path "<A>" "<B>"`, or `graphify explain "<concept>"` over grep — these traverse the graph's EXTRACTED + INFERRED edges instead of scanning files
 - After modifying code files in this session, run `graphify update .` to keep the graph current (AST-only, no API cost)
+
+## CRITICAL RULES
+
+- **Strict User Confirmation Required**: NEVER execute `git commit`, `git push`, or create merge requests without explicit confirmation and approval from the user. Always ask the user for confirmation and summarize the changes before making any commit or push.
