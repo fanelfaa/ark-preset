@@ -1,9 +1,9 @@
 import { useDrawer } from "@ark-ui/solid/drawer";
 import {
+  DrawerRootProvider,
   DrawerContent,
   DrawerTitle,
   DrawerDescription,
-  DrawerBase,
   Button,
 } from "@ark-preset/solid";
 
@@ -14,12 +14,12 @@ export default function DrawerRootProviderDemo() {
     <div>
       <Button onClick={() => drawer().setOpen(true)}>Open Drawer</Button>
 
-      <DrawerBase.RootProvider value={drawer} lazyMount unmountOnExit>
+      <DrawerRootProvider value={drawer} lazyMount unmountOnExit>
         <DrawerContent>
           <DrawerTitle>Externally Controlled Drawer</DrawerTitle>
           <DrawerDescription>This drawer is controlled via useDrawer.</DrawerDescription>
         </DrawerContent>
-      </DrawerBase.RootProvider>
+      </DrawerRootProvider>
     </div>
   );
 }
