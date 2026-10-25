@@ -35,16 +35,10 @@ Individual items can be disabled using the `disabled` prop:
 
 ## Advanced Usage
 
-When the composite `RadioGroup` doesn't provide enough control, import the raw primitive parts from the base file directly:
+When the composite component does not provide enough control, import the raw primitive parts via `RadioGroupBase`:
 
 ```tsx
-import { RadioGroup } from "~/components/radio-group/radio-group.base";
-```
-
-Or import `RadioGroupBase` (the raw parts namespace) from the composite entry point:
-
-```tsx
-import { RadioGroupBase } from "~/components/radio-group";
+import { RadioGroupBase } from "~/components/ui";
 ```
 
 ### Root Provider

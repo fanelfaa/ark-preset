@@ -1,5 +1,9 @@
 # Git Conventions
 
+**CRITICAL RULE: NEVER COMMIT WITHOUT EXPLICIT USER CONFIRMATION.** You must always summarize your changes and ask the user for permission before running `git commit` or `git push`. Do not assume approval.
+
+# Git Conventions
+
 This project follows strict conventions for both commits and branch names to maintain a clean history and automated release processes.
 
 ## Branch Naming

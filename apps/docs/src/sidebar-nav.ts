@@ -98,6 +98,7 @@ export const sidebarNav: SidebarCategory[] = [
     links: [
       { href: "/blocks", label: "Overview" },
       { href: "/blocks/auth", label: "Authentication" },
+      { href: "/blocks/pricing", label: "Pricing" },
     ],
   },
 ];
