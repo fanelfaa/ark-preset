@@ -23,7 +23,11 @@ const { entry } = Astro.props;
 const { Content } = await render(entry);
 ---
 
-<Layout currentFramework={Astro.params.framework}>
+<Layout
+  title={`${entry.data.title} — Ark Preset UI`}
+  description={entry.data.description}
+  currentFramework={Astro.params.framework}
+>
   <Content />
   <script is:inline>
     document.addEventListener('change', (e) => {

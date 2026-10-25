@@ -2,6 +2,7 @@
 # Accepts a list of globs, a mapping of projects to relative file paths,
 # or both values.
 daemon: true
+versionConstraint: "2.4.6"
 
 projects:
   - "apps/*"

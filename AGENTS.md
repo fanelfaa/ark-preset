@@ -112,17 +112,7 @@ moon ci                        # CI pipeline
 - TypeScript version: ^5.0.0 in packages, ^6.0.2 in docs
 - Vite version: ^6 in solid, ^8 in docs
 - apps/docs/ has no AGENTS.md yet — it's documented separately
-
-## graphify
-
-This project has a graphify knowledge graph at graphify-out/.
-
-Rules:
-
-- Before answering architecture or codebase questions, read graphify-out/GRAPH_REPORT.md for god nodes and community structure
-- If graphify-out/wiki/index.md exists, navigate it instead of reading raw files
-- For cross-module "how does X relate to Y" questions, prefer `graphify query "<question>"`, `graphify path "<A>" "<B>"`, or `graphify explain "<concept>"` over grep — these traverse the graph's EXTRACTED + INFERRED edges instead of scanning files
-- After modifying code files in this session, run `graphify update .` to keep the graph current (AST-only, no API cost)
+- this project is using moonrepo, so use `moon` first to run command, before jump in to `pnpm`
 
 ## CRITICAL RULES
 
