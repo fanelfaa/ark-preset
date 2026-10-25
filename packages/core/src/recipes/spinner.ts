@@ -1,7 +1,7 @@
 import { tv, type VariantProps } from "tailwind-variants";
 
 export const spinnerVariants = tv({
-  base: "animate-spin text-muted-foreground",
+  base: "inline-block animate-spin text-muted-foreground shrink-0",
   variants: {
     size: {
       sm: "size-4",
