@@ -33,6 +33,7 @@ const DrawerContent: Component<ArkDrawer.ContentProps> = (props) => {
 };
 
 const Drawer = DrawerBase.Root;
+const DrawerRootProvider = DrawerBase.RootProvider;
 const DrawerTrigger = DrawerBase.Trigger;
 const DrawerTitle = DrawerBase.Title;
 const DrawerDescription = DrawerBase.Description;
@@ -48,6 +49,7 @@ const DrawerGrabber: Component<ArkDrawer.GrabberProps> = (props) => {
 
 export {
   Drawer,
+  DrawerRootProvider,
   DrawerTrigger,
   DrawerContent,
   DrawerTitle,
