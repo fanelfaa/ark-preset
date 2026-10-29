@@ -21,6 +21,18 @@ Scroll content horizontally with custom styled scrollbars.
   <ScrollAreaHorizontalDemo client:load />
 </ComponentPreview>
 
+### Both Orientations
+
+Allow scrolling in both vertical and horizontal directions with `orientation="both"`:
+
+```tsx
+<ScrollArea class="h-72 w-96 rounded-md border" orientation="both">
+  <div class="w-[600px] p-4">
+    {/* Content that overflows both horizontally and vertically */}
+  </div>
+</ScrollArea>
+```
+
 ## Advanced Usage
 
 For full control over the scroll area structure, import the primitive parts via `ScrollAreaBase`:
