@@ -570,6 +570,23 @@ describe("ScrollArea", () => {
     const { container } = render(() => <ScrollArea variant="scroll">Scrollable</ScrollArea>);
     expect(container.firstChild).toBeInTheDocument();
   });
+
+  it("renders with orientation='horizontal'", () => {
+    const { container } = render(() => <ScrollArea orientation="horizontal">Content</ScrollArea>);
+    expect(
+      container.querySelector('[data-part="scrollbar"][data-orientation="horizontal"]'),
+    ).toBeInTheDocument();
+  });
+
+  it("renders with orientation='both'", () => {
+    const { container } = render(() => <ScrollArea orientation="both">Content</ScrollArea>);
+    expect(
+      container.querySelector('[data-part="scrollbar"][data-orientation="vertical"]'),
+    ).toBeInTheDocument();
+    expect(
+      container.querySelector('[data-part="scrollbar"][data-orientation="horizontal"]'),
+    ).toBeInTheDocument();
+  });
 });
 
 // ------------------------------------------------------------------ //

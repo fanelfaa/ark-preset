@@ -8,7 +8,7 @@ export const scrollAreaVariants = tv({
     scrollbar:
       "flex select-none touch-none transition-colors group [&[data-orientation=vertical]:not([data-overflow-y])]:hidden [&[data-orientation=horizontal]:not([data-overflow-x])]:hidden",
     thumb:
-      "relative flex-1 rounded-full bg-border/40 transition-colors duration-150 group-hover:bg-border data-[dragging]:bg-border",
+      "relative flex-1 rounded-full bg-border transition-colors duration-150 group-hover:bg-muted-foreground/40 data-[dragging]:bg-muted-foreground/50",
     corner: "bg-background",
   },
   variants: {

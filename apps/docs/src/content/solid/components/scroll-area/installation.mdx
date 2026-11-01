@@ -23,7 +23,7 @@ export const scrollAreaVariants = tv({
     scrollbar:
       "flex select-none touch-none transition-colors group [&[data-orientation=vertical]:not([data-overflow-y])]:hidden [&[data-orientation=horizontal]:not([data-overflow-x])]:hidden",
     thumb:
-      "relative flex-1 rounded-full bg-border/40 transition-colors duration-150 group-hover:bg-border data-[dragging]:bg-border",
+      "relative flex-1 rounded-full bg-border transition-colors duration-150 group-hover:bg-muted-foreground/40 data-[dragging]:bg-muted-foreground/50",
     corner: "bg-background",
   },
   variants: {
@@ -115,30 +115,39 @@ export type { ScrollAreaRootProps } from "@ark-ui/solid/scroll-area";
 `src/components/scroll-area/index.tsx`:
 
 ```tsx
-import { splitProps, type Component } from "solid-js";
+import { Show, splitProps, type Component } from "solid-js";
 import { ScrollArea as ScrollAreaBase } from "./scroll-area.base";
 import { ScrollArea as ArkScrollArea } from "@ark-ui/solid/scroll-area";
 
 type ScrollAreaProps = ArkScrollArea.RootProps & {
-  orientation?: "vertical" | "horizontal";
+  orientation?: "vertical" | "horizontal" | "both";
 };
 
 const ScrollArea: Component<ScrollAreaProps> = (props) => {
   const [local, others] = splitProps(props, ["orientation", "children", "class"]);
+  const orientation = () => local.orientation ?? "vertical";
+
   return (
     <ScrollAreaBase.Root class={local.class} {...others}>
       <ScrollAreaBase.Viewport>
         <ScrollAreaBase.Content>{local.children}</ScrollAreaBase.Content>
       </ScrollAreaBase.Viewport>
-      <ScrollAreaBase.Scrollbar orientation={local.orientation ?? "vertical"}>
-        <ScrollAreaBase.Thumb />
-      </ScrollAreaBase.Scrollbar>
+      <Show when={orientation() === "vertical" || orientation() === "both"}>
+        <ScrollAreaBase.Scrollbar orientation="vertical">
+          <ScrollAreaBase.Thumb />
+        </ScrollAreaBase.Scrollbar>
+      </Show>
+      <Show when={orientation() === "horizontal" || orientation() === "both"}>
+        <ScrollAreaBase.Scrollbar orientation="horizontal">
+          <ScrollAreaBase.Thumb />
+        </ScrollAreaBase.Scrollbar>
+      </Show>
       <ScrollAreaBase.Corner />
     </ScrollAreaBase.Root>
   );
 };
 
-export { ScrollArea, ScrollAreaBase };
+export { ScrollArea, ScrollAreaBase, type ScrollAreaProps };
 
 export { scrollAreaVariants, type ScrollAreaVariants } from "../recipes/scroll-area";
 ```
